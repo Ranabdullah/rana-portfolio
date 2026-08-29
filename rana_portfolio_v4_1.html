@@ -1583,15 +1583,147 @@ function addGalleryItem(){
   galleryItems.unshift(g); saveData('rana_gallery_bw', galleryItems); renderBeGallery(); showToast('Image added');
 }
 
-function renderBeGallery(){
+function renderBeGallery(searchTerm){
   const c = document.getElementById('be-gallery-list');
   if(!c) return;
-  c.innerHTML = galleryItems.slice(0,25).map((g,i)=>`
-    <div class="backend-item">
-      <div><div class="backend-item-title">${g.title}</div><div class="backend-item-sub">${g.cat} · ${g.pillar}</div></div>
-      <button class="bi-btn" onclick="galleryItems.splice(${i},1);saveData('rana_gallery_bw',galleryItems);renderBeGallery();showToast('Deleted')">Delete</button>
+  const term = (searchTerm || document.getElementById('be-gallery-search')?.value || '').toLowerCase();
+  const filtered = galleryItems.filter((g, i) => {
+    if(!term) return true;
+    return (g.title||'').toLowerCase().includes(term) || (g.cat||'').toLowerCase().includes(term);
+  });
+
+  c.innerHTML = `
+    <div style="margin-bottom:18px;display:flex;gap:10px;align-items:center">
+      <input id="be-gallery-search" type="text" placeholder="Search by title or category..." value="${term}"
+        onkeyup="renderBeGallery(this.value)"
+        style="flex:1;padding:8px 14px;font-family:var(--mono);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+      <span style="font-family:var(--mono);font-size:10px;color:var(--ink4)">${filtered.length} / ${galleryItems.length} items</span>
     </div>
-  `).join('');
+  ` + filtered.map((g, fi) => {
+    const realIdx = galleryItems.indexOf(g);
+    const allImgs = (g.images && g.images.length > 0) ? g.images : [g.path];
+    const thumbs = allImgs.map((imgSrc, sIdx) => `
+      <div style="display:inline-flex;flex-direction:column;align-items:center;gap:4px;margin:4px">
+        <div style="position:relative">
+          <img src="${imgSrc}" style="width:70px;height:70px;object-fit:cover;border-radius:3px;border:1px solid var(--border);display:block">
+          <button onclick="beRemoveSubImage(${realIdx}, ${sIdx})" title="Remove this photo"
+            style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#e50914;border:none;color:#fff;font-size:10px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center">✕</button>
+        </div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--ink4);max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${imgSrc}">${imgSrc.split('/').pop()}</div>
+      </div>
+    `).join('');
+
+    const titleOpts = galleryItems.map((other, oi) =>
+      oi !== realIdx ? `<option value="${oi}">${other.title.substring(0,45)}</option>` : ''
+    ).join('');
+
+    return `
+    <div class="backend-item" style="flex-direction:column;align-items:stretch;gap:12px;padding:18px" id="beg-${realIdx}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+        <div style="flex:1">
+          <input id="be-gtitle-${realIdx}" value="${(g.title||'').replace(/"/g,'&quot;')}"
+            style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;margin-bottom:6px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <select id="be-gcat-${realIdx}" style="padding:4px 8px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+              ${['3d','environment','character','animation','product','branding'].map(cat=>`<option value="${cat}" ${g.cat===cat?'selected':''}>${cat}</option>`).join('')}
+            </select>
+            <select id="be-gpillar-${realIdx}" style="padding:4px 8px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+              <option value="Personal" ${g.pillar==='Personal'?'selected':''}>Personal</option>
+              <option value="Client" ${g.pillar==='Client'?'selected':''}>Client</option>
+            </select>
+            <button onclick="beUpdateGalleryItem(${realIdx})"
+              style="padding:4px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
+            <button onclick="galleryItems.splice(${realIdx},1);saveData('rana_gallery_v27',galleryItems);renderBeGallery();showToast('Item deleted')"
+              style="padding:4px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete All</button>
+          </div>
+        </div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--ink4);text-align:right;white-space:nowrap">
+          <div>${allImgs.length} photo${allImgs.length!==1?'s':''}</div>
+          <div style="margin-top:4px">${g.cat} · ${g.pillar}</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:2px;background:var(--bg-card);padding:10px;border-radius:4px;border:1px solid var(--border2)">
+        ${thumbs}
+        <div style="display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:70px;height:70px;border:1.5px dashed var(--border);border-radius:3px;cursor:pointer;margin:4px"
+          onclick="beAddImageToItem(${realIdx})" title="Add image path to this project">
+          <span style="font-size:20px;color:var(--ink4)">+</span>
+          <span style="font-family:var(--mono);font-size:8px;color:var(--ink4);text-align:center">Add Photo</span>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="font-family:var(--mono);font-size:10px;color:var(--ink4);white-space:nowrap">Move photo to:</span>
+        <select id="be-gmove-${realIdx}" style="flex:1;padding:4px 8px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          <option value="">Select destination project...</option>
+          ${titleOpts}
+        </select>
+        <input id="be-gmoveidx-${realIdx}" type="number" min="0" max="${allImgs.length-1}" value="0" placeholder="img #"
+          style="width:55px;padding:4px 8px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px" title="Index of photo to move (0 = first)">
+        <button onclick="beMoveImageToProject(${realIdx})"
+          style="padding:4px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer">Move →</button>
+      </div>
+    </div>
+  `;
+  }).join('');
+}
+
+function beUpdateGalleryItem(idx){
+  const g = galleryItems[idx];
+  if(!g) return;
+  g.title = document.getElementById('be-gtitle-'+idx)?.value || g.title;
+  g.cat = document.getElementById('be-gcat-'+idx)?.value || g.cat;
+  g.pillar = document.getElementById('be-gpillar-'+idx)?.value || g.pillar;
+  saveData('rana_gallery_v27', galleryItems);
+  renderBeGallery();
+  showToast('Saved: ' + g.title.substring(0,30));
+}
+
+function beRemoveSubImage(itemIdx, subIdx){
+  const g = galleryItems[itemIdx];
+  if(!g) return;
+  const allImgs = (g.images && g.images.length > 0) ? [...g.images] : [g.path];
+  if(allImgs.length <= 1){ showToast('Cannot remove last image — delete the whole item instead'); return; }
+  allImgs.splice(subIdx, 1);
+  g.images = allImgs;
+  g.path = allImgs[0];
+  saveData('rana_gallery_v27', galleryItems);
+  renderBeGallery();
+  showToast('Photo removed');
+}
+
+function beAddImageToItem(itemIdx){
+  const g = galleryItems[itemIdx];
+  if(!g) return;
+  const path = prompt('Enter image path (relative to site root):\nExample: Photos & to upload/Instagram/filename.jpg');
+  if(!path || !path.trim()) return;
+  if(!g.images || g.images.length === 0) g.images = [g.path];
+  g.images.push(path.trim());
+  saveData('rana_gallery_v27', galleryItems);
+  renderBeGallery();
+  showToast('Photo added to: ' + g.title.substring(0,30));
+}
+
+function beMoveImageToProject(fromIdx){
+  const toIdxStr = document.getElementById('be-gmove-'+fromIdx)?.value;
+  const subIdxStr = document.getElementById('be-gmoveidx-'+fromIdx)?.value;
+  if(!toIdxStr){ showToast('Select a destination project first'); return; }
+  const toIdx = parseInt(toIdxStr);
+  const subIdx = parseInt(subIdxStr) || 0;
+  const fromItem = galleryItems[fromIdx];
+  const toItem = galleryItems[toIdx];
+  if(!fromItem || !toItem) return;
+  const fromImgs = (fromItem.images && fromItem.images.length > 0) ? [...fromItem.images] : [fromItem.path];
+  if(subIdx < 0 || subIdx >= fromImgs.length){ showToast('Invalid photo index'); return; }
+  if(fromImgs.length <= 1){ showToast('Cannot move last image — it would leave project empty'); return; }
+  const [movedImg] = fromImgs.splice(subIdx, 1);
+  fromItem.images = fromImgs;
+  fromItem.path = fromImgs[0];
+  if(!toItem.images || toItem.images.length === 0) toItem.images = [toItem.path];
+  toItem.images.push(movedImg);
+  saveData('rana_gallery_v27', galleryItems);
+  renderBeGallery();
+  showToast('Moved to: ' + toItem.title.substring(0,30));
 }
 
 function addSoftware(){
