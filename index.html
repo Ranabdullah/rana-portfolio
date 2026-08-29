@@ -587,6 +587,34 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
   box-shadow: 0 6px 18px rgba(229,9,20,0.65) !important;
 }
 
+
+
+/* ==================== DYNAMIC COLOR BLOOM WHEN FLOATING DOT TOUCHES PHOTO ==================== */
+.dot-illuminated img,
+img.dot-illuminated,
+.novel-page-card.dot-illuminated .novel-page-cover img,
+.g-card.dot-illuminated img,
+.proj-card.dot-illuminated img,
+.novel-card.dot-illuminated img,
+.hero-portrait-frame.dot-illuminated img,
+.sw-item.dot-illuminated .sw-thumb,
+.sw-product-card.dot-illuminated .sw-img-banner {
+  filter: grayscale(0) contrast(1.06) brightness(1.02) !important;
+  transform: scale(1.025);
+  transition: filter 0.45s ease, transform 0.45s ease !important;
+}
+
+.dot-illuminated,
+.novel-page-card.dot-illuminated,
+.g-card.dot-illuminated,
+.proj-card.dot-illuminated,
+.novel-card.dot-illuminated,
+.hero-portrait-frame.dot-illuminated {
+  border-color: var(--dot-border, rgba(0, 229, 255, 0.6)) !important;
+  box-shadow: 0 16px 36px var(--dot-glow, rgba(0, 229, 255, 0.22)) !important;
+  transition: border-color 0.45s ease, box-shadow 0.45s ease, transform 0.45s ease !important;
+}
+
 </style>
 </head>
 <body>
@@ -1059,13 +1087,13 @@ const SOFTWARE_DATA = [{"id": 1, "name": "1-Click Product Render Setup", "cat": 
 const EXPERIENCE_DATA = [{"id": 1, "company": "IDFL International Ltd", "role": "Software Engineer", "start": "Sep 2023", "end": "Present", "tags": ["Python", "JavaScript", "Software", "3D Automation"]}, {"id": 2, "company": "Hashage Ireland", "role": "Senior Video Editor & Motion Designer", "start": "Feb 2023", "end": "Present", "tags": ["Video", "Post-Production", "Brand Strategy"]}, {"id": 3, "company": "Dublin Branding Agency", "role": "Video & Creative Specialist", "start": "Jun 2020", "end": "Present", "tags": ["Video", "Creative Direction", "Motion"]}, {"id": 4, "company": "RizPros LTD", "role": "Supply Chain Manager", "start": "Nov 2021", "end": "Aug 2023", "tags": ["Supply Chain", "Inventory Ops", "Process Automation"]}, {"id": 5, "company": "Digiworld Ireland", "role": "Digital Media Manager", "start": "Feb 2021", "end": "Aug 2022", "tags": ["Digital Media", "Content", "Marketing"]}, {"id": 6, "company": "GH Industry", "role": "Assistant Procurement Manager", "start": "May 2016", "end": "Jun 2018", "tags": ["Procurement", "Operations", "Logistics"]}, {"id": 7, "company": "UET Taxila", "role": "Graphic Design & Visualization Freelance", "start": "Jun 2012", "end": "Sep 2016", "tags": ["3D Modeling", "Graphic Design", "Illustration"]}];
 const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
 
-let novels = loadData('rana_novels_v23', NOVELS_DATA);
-let techProjects = loadData('rana_tech_v23', TECH_PROJECTS_DATA);
-let articles = loadData('rana_articles_v23', ARTICLES_DATA);
-let galleryItems = loadData('rana_gallery_v23', GALLERY_DATA);
-let software = loadData('rana_software_v23', SOFTWARE_DATA);
-let experience = loadData('rana_experience_v23', EXPERIENCE_DATA);
-let clients = loadData('rana_clients_v23', CLIENTS_DATA);
+let novels = loadData('rana_novels_v24', NOVELS_DATA);
+let techProjects = loadData('rana_tech_v24', TECH_PROJECTS_DATA);
+let articles = loadData('rana_articles_v24', ARTICLES_DATA);
+let galleryItems = loadData('rana_gallery_v24', GALLERY_DATA);
+let software = loadData('rana_software_v24', SOFTWARE_DATA);
+let experience = loadData('rana_experience_v24', EXPERIENCE_DATA);
+let clients = loadData('rana_clients_v24', CLIENTS_DATA);
 
 // CURSOR
 const cur = document.getElementById('cur');
@@ -1644,11 +1672,23 @@ setupCursorHover();
   let height = canvas.height = window.innerHeight;
   let mouse = { x: -1000, y: -1000, radius: 140 };
 
+  // Image cards tracking for collision colorization
+  let trackedCards = [];
+  function updateTrackedCards(){
+    const targets = document.querySelectorAll('.g-card, .novel-page-card, .novel-card, .proj-card, .hero-portrait-frame, .sw-item, .sw-product-card');
+    trackedCards = Array.from(targets).filter(el => el.offsetParent !== null).map(el => ({
+      el: el,
+      rect: el.getBoundingClientRect()
+    }));
+  }
+
   window.addEventListener('resize', ()=>{
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
+    updateTrackedCards();
   });
 
+  window.addEventListener('scroll', updateTrackedCards, { passive: true });
   window.addEventListener('mousemove', e=>{
     mouse.x = e.clientX;
     mouse.y = e.clientY;
@@ -1659,6 +1699,9 @@ setupCursorHover();
     mouse.y = -1000;
   });
 
+  // Re-scan when switching pages
+  document.addEventListener('click', ()=>{ setTimeout(updateTrackedCards, 150); });
+
   const colors = [
     'rgba(0, 229, 255, 0.45)',   // Electric Cyan
     'rgba(255, 64, 129, 0.45)',   // Rose / Magenta
@@ -1668,27 +1711,35 @@ setupCursorHover();
     'rgba(68, 138, 255, 0.45)'    // Electric Blue
   ];
 
-  const dotCount = Math.min(55, Math.floor(window.innerWidth / 30));
+  const dotCount = Math.min(65, Math.floor(window.innerWidth / 26));
   const dots = [];
 
   for(let i=0; i<dotCount; i++){
     dots.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      baseX: Math.random() * width,
-      baseY: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.6,
-      vy: (Math.random() - 0.5) * 0.6,
+      vx: (Math.random() - 0.5) * 0.7,
+      vy: (Math.random() - 0.5) * 0.7,
       size: Math.random() * 3.5 + 2.0,
       color: colors[Math.floor(Math.random() * colors.length)],
-      alpha: Math.random() * 0.35 + 0.15,
       angle: Math.random() * Math.PI * 2,
       speed: Math.random() * 0.015 + 0.005
     });
   }
 
+  let frameCount = 0;
+
   function renderDots(){
     ctx.clearRect(0, 0, width, height);
+    frameCount++;
+
+    // Periodically refresh bounds every 60 frames (1s) to handle dynamic content
+    if(frameCount % 60 === 0){
+      updateTrackedCards();
+    }
+
+    // Set of cards touching any dot this frame
+    const touchingCards = new Map();
 
     for(let i=0; i<dots.length; i++){
       const d = dots[i];
@@ -1696,7 +1747,7 @@ setupCursorHover();
       d.x += d.vx + Math.cos(d.angle) * 0.4;
       d.y += d.vy + Math.sin(d.angle) * 0.4;
 
-      // Wrap around edges
+      // Wrap around screen edges
       if(d.x < -20) d.x = width + 20;
       if(d.x > width + 20) d.x = -20;
       if(d.y < -20) d.y = height + 20;
@@ -1709,12 +1760,21 @@ setupCursorHover();
 
       if(dist < mouse.radius){
         const force = (mouse.radius - dist) / mouse.radius;
-        const dirX = dx / dist;
-        const dirY = dy / dist;
-        d.x -= dirX * force * 5.0;
-        d.y -= dirY * force * 5.0;
+        d.x -= (dx / dist) * force * 4.5;
+        d.y -= (dy / dist) * force * 4.5;
       }
 
+      // Check collision with any visible photo/card
+      for(let j=0; j<trackedCards.length; j++){
+        const item = trackedCards[j];
+        const r = item.rect;
+        // Expand collision boundary slightly around the photo
+        if(d.x >= r.left - 15 && d.x <= r.right + 15 && d.y >= r.top - 15 && d.y <= r.bottom + 15){
+          touchingCards.set(item.el, d.color);
+        }
+      }
+
+      // Draw particle with subtle glow
       ctx.beginPath();
       ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
       ctx.fillStyle = d.color;
@@ -1723,9 +1783,31 @@ setupCursorHover();
       ctx.fill();
     }
     ctx.shadowBlur = 0;
+
+    // Apply color bloom to cards touched by dots; revert cards moving away to B/W
+    for(let j=0; j<trackedCards.length; j++){
+      const cardEl = trackedCards[j].el;
+      if(touchingCards.has(cardEl)){
+        const glowColor = touchingCards.get(cardEl);
+        if(!cardEl.classList.contains('dot-illuminated')){
+          cardEl.classList.add('dot-illuminated');
+        }
+        cardEl.style.setProperty('--dot-glow', glowColor.replace('0.45', '0.25'));
+        cardEl.style.setProperty('--dot-border', glowColor.replace('0.45', '0.65'));
+      } else {
+        if(cardEl.classList.contains('dot-illuminated')){
+          cardEl.classList.remove('dot-illuminated');
+          cardEl.style.removeProperty('--dot-glow');
+          cardEl.style.removeProperty('--dot-border');
+        }
+      }
+    }
+
     requestAnimationFrame(renderDots);
   }
 
+  // Initial scan
+  setTimeout(updateTrackedCards, 200);
   renderDots();
 })();
 
