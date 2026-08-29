@@ -1,37 +1,26 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rana Abdullah â€” Novelist, 3D Artist & Software Engineer</title>
-<meta name="description" content="Official portfolio of Rana Abdullah â€” Novelist, 3D Artist, and Software Developer based in Dublin, Ireland. Exploring narrative fiction, 3D rendering pipelines, and technical applications.">
+<title>Rana Abdullah — Novelist, 3D Artist &amp; Software Engineer</title>
+<meta name="description" content="Official portfolio of Rana Abdullah — Novelist, 3D Artist, and Software Developer based in Dublin, Ireland. Exploring narrative fiction, 3D rendering pipelines, and technical applications.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• GLOBAL RESET & VARIABLES â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ==================== GLOBAL RESET & B&W DESIGN SYSTEM ==================== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 :root {
   --bg: #f4f5f7;
   --bg-card: #ffffff;
   --bg2: #eaedf2;
   --bg3: #f8fafc;
-  --bg-dark: #070a12;
-  --bg-dark-card: #0b0f1c;
   --ink: #11141a;
   --ink2: #2d333f;
   --ink3: #5a6474;
   --ink4: #8b95a5;
   --border: #dbe0e8;
   --border2: #e9ecf0;
-  --accent: #11141a;
-  --cyan: #00e5ff;
-  --cyan-dim: rgba(0, 229, 255, 0.12);
-  --purple: #b47fff;
-  --purple-dim: rgba(180, 127, 255, 0.12);
-  --blue: #4d7fff;
-  --blue-dim: rgba(77, 127, 255, 0.12);
-  --emerald: #34d399;
-  --amber: #fbbf24;
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'DM Sans', -apple-system, sans-serif;
   --mono: 'JetBrains Mono', 'Space Grotesk', monospace;
@@ -41,18 +30,18 @@
 html { scroll-behavior:smooth; }
 body { background:var(--bg); color:var(--ink); font-family:var(--sans); overflow-x:hidden; cursor:none; }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• CUSTOM CURSOR â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* Custom Cursor */
 .cursor { position:fixed; width:8px; height:8px; background:var(--ink); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform .12s, width .25s, height .25s, background .25s; mix-blend-mode:difference; }
 .cursor-ring { position:fixed; width:38px; height:38px; border:1px solid var(--ink); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all .35s cubic-bezier(.16,1,.3,1); mix-blend-mode:difference; }
 body:has(a:hover) .cursor, .cursor.hover { width:0; height:0; }
 body:has(a:hover) .cursor-ring, .cursor-ring.hover { width:70px; height:70px; background:rgba(0,0,0,.06); }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• NAVIGATION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* Navigation */
 nav {
   position:fixed; top:0; left:0; right:0; z-index:100;
   display:flex; align-items:center; justify-content:space-between;
-  padding:20px 48px;
-  background:rgba(244, 245, 247, 0.92);
+  padding:18px 48px;
+  background:rgba(244, 245, 247, 0.94);
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
   transition:all .3s ease;
@@ -61,7 +50,7 @@ nav {
   font-family:var(--serif); font-size:22px; font-weight:400; letter-spacing:.03em; color:var(--ink); text-decoration:none;
 }
 .nav-logo span { font-style:italic; color:var(--ink3); }
-.nav-links { display:flex; gap:28px; align-items:center; flex-wrap:wrap; }
+.nav-links { display:flex; gap:26px; align-items:center; flex-wrap:wrap; }
 .nav-links a {
   font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase;
   color:var(--ink3); text-decoration:none; transition:color .25s; cursor:none; position:relative; padding:4px 0;
@@ -72,13 +61,13 @@ nav {
 .nav-links a:hover, .nav-links a.active { color:var(--ink); }
 .nav-links a:hover::after, .nav-links a.active::after { width:100%; }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• PAGE TRANSITIONS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-.page { display:none; min-height:100vh; padding-top:76px; }
-.page.active { display:block; animation:pageReveal .5s cubic-bezier(.23,1,.32,1) both; }
-@keyframes pageReveal { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+/* Page Containers */
+.page { display:none; min-height:100vh; padding-top:72px; }
+.page.active { display:block; animation:pageReveal .45s cubic-bezier(.23,1,.32,1) both; }
+@keyframes pageReveal { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• COMMON SECTION STYLING â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-.section-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px; gap:20px; flex-wrap:wrap; }
+/* Section Header Typography */
+.section-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:44px; gap:20px; flex-wrap:wrap; }
 .section-label { font-family:var(--mono); font-size:10.5px; letter-spacing:.28em; text-transform:uppercase; color:var(--ink4); display:flex; align-items:center; gap:14px; margin-bottom:8px; }
 .section-label::before { content:''; width:32px; height:1px; background:var(--ink4); }
 .section-title { font-family:var(--serif); font-size:clamp(36px, 5vw, 64px); font-weight:300; color:var(--ink); line-height:1; }
@@ -92,15 +81,23 @@ nav {
 
 /* Buttons */
 .btn-primary {
-  font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; padding:13px 28px;
+  font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; padding:12px 26px;
   background:var(--ink); color:#fff; border:none; cursor:none; transition:all .25s; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
 }
 .btn-primary:hover { background:var(--ink2); transform:translateY(-1px); }
 .btn-outline {
-  font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; padding:13px 28px;
+  font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; padding:12px 26px;
   background:transparent; color:var(--ink); border:1px solid var(--border); cursor:none; transition:all .25s; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
 }
 .btn-outline:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+
+/* Badges */
+.badge-pill {
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; padding:4px 12px;
+  border-radius:20px; display:inline-flex; align-items:center; gap:6px;
+}
+.badge-dark { background:var(--ink); color:#ffffff; }
+.badge-outline { background:var(--bg-card); color:var(--ink2); border:1px solid var(--border); }
 
 /* Slider Controls */
 .slider-controls { display:flex; gap:10px; margin-top:28px; }
@@ -110,32 +107,41 @@ nav {
 }
 .slider-btn:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 1. HOME PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ==================== 1. HOME PAGE ==================== */
 .home-hero {
-  min-height:calc(100vh - 76px); display:grid; grid-template-columns:1.1fr 0.9fr; align-items:center;
+  min-height:calc(100vh - 72px); display:grid; grid-template-columns:1.15fr 0.85fr; align-items:center;
   padding:40px 48px; gap:64px; background:var(--bg);
 }
 .hero-eyebrow { font-family:var(--mono); font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--ink4); margin-bottom:20px; display:flex; align-items:center; gap:14px; }
 .hero-eyebrow::before { content:''; display:block; width:36px; height:1px; background:var(--ink4); }
 .hero-name { font-family:var(--serif); font-size:clamp(54px, 7.5vw, 110px); font-weight:300; line-height:.95; letter-spacing:-.02em; color:var(--ink); margin-bottom:16px; }
-.hero-title { font-family:var(--serif); font-size:clamp(16px, 2vw, 24px); font-style:italic; font-weight:300; color:var(--ink3); margin-bottom:40px; line-height:1.45; }
-.hero-cta-row { display:flex; gap:14px; flex-wrap:wrap; }
-.hero-visual-side { position:relative; height:520px; display:flex; align-items:center; justify-content:center; }
+.hero-title { font-family:var(--serif); font-size:clamp(16px, 2vw, 24px); font-style:italic; font-weight:300; color:var(--ink3); margin-bottom:36px; line-height:1.45; }
+.hero-cta-row { display:flex; gap:12px; flex-wrap:wrap; }
+.hero-visual-side { position:relative; height:500px; display:flex; align-items:center; justify-content:center; }
 .hero-portrait-frame {
-  width:360px; height:480px; position:relative; overflow:hidden; filter:grayscale(1) contrast(1.15);
-  box-shadow:25px 25px 60px rgba(0,0,0,0.08); transition:transform .4s ease, filter .35s ease;
+  width:350px; height:460px; position:relative; overflow:hidden; filter:grayscale(1) contrast(1.15);
+  box-shadow:25px 25px 60px rgba(0,0,0,0.08); transition:transform .4s ease, filter .35s ease; background:#e2e6eb;
 }
 .hero-portrait-frame:hover { filter:grayscale(0) contrast(1.05); }
 .hero-portrait-frame img { width:100%; height:100%; object-fit:cover; }
 .hero-portrait-frame::after { content:''; position:absolute; inset:0; border:1px solid var(--border); pointer-events:none; }
-.hero-portrait-number { position:absolute; top:10px; right:-24px; font-family:var(--serif); font-size:100px; font-weight:300; color:var(--border); line-height:1; z-index:-1; }
+.hero-portrait-number { position:absolute; top:10px; right:-20px; font-family:var(--serif); font-size:90px; font-weight:300; color:var(--border); line-height:1; z-index:-1; }
+
+/* Home Tech Spotlight Section (B&W) */
+.home-tech { background:var(--bg3); padding:84px 48px; border-bottom:1px solid var(--border); }
+.tech-spotlight-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px; margin-top:28px; }
+.tech-spotlight-card {
+  background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:28px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.03); transition:all .3s ease; cursor:none; display:flex; flex-direction:column; justify-content:space-between;
+}
+.tech-spotlight-card:hover { transform:translateY(-4px); box-shadow:0 14px 34px rgba(0,0,0,0.08); border-color:var(--ink); }
 
 /* Home Novels Section */
-.home-novels { background:var(--bg3); padding:90px 48px; }
+.home-novels { background:var(--bg); padding:84px 48px; }
 .novels-slider-track { overflow:hidden; position:relative; width:100%; }
-.novels-slider { display:flex; gap:28px; transition:transform .6s cubic-bezier(.16,1,.3,1); }
-.novel-card { flex:0 0 250px; cursor:none; }
-.novel-cover { width:250px; height:360px; position:relative; overflow:hidden; filter:grayscale(1) contrast(1.15); transition:filter .35s, transform .35s; background:#e2e6eb; }
+.novels-slider { display:flex; gap:26px; transition:transform .6s cubic-bezier(.16,1,.3,1); }
+.novel-card { flex:0 0 240px; cursor:none; }
+.novel-cover { width:240px; height:345px; position:relative; overflow:hidden; filter:grayscale(1) contrast(1.15); transition:filter .35s, transform .35s; background:#e2e6eb; }
 .novel-cover:hover { filter:grayscale(0) contrast(1.05); transform:translateY(-4px); }
 .novel-cover img { width:100%; height:100%; object-fit:cover; }
 .novel-cover::after { content:''; position:absolute; inset:0; border:1px solid var(--border); pointer-events:none; }
@@ -144,57 +150,44 @@ nav {
 .novel-name { font-family:var(--serif); font-size:19px; font-weight:400; color:var(--ink); margin-bottom:4px; }
 .novel-sub { font-family:var(--sans); font-size:12px; color:var(--ink3); line-height:1.4; }
 
-/* Home Tech Spotlight Section */
-.home-tech { background:var(--bg-dark); color:#e0e6ed; padding:90px 48px; position:relative; overflow:hidden; }
-.home-tech .section-title { color:#ffffff; }
-.home-tech .section-title em { color:#5fe8ff; }
-.home-tech .section-label { color:#8b95a5; }
-.home-tech .section-label::before { background:#8b95a5; }
-.home-tech .section-link { color:#5fe8ff; }
-.tech-spotlight-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:24px; margin-top:32px; }
-.tech-spotlight-card {
-  background:var(--bg-dark-card); border:1px solid rgba(0, 229, 255, 0.16); border-radius:14px; padding:28px;
-  box-shadow:0 12px 35px rgba(0,0,0,0.5); transition:all .3s ease; position:relative; overflow:hidden; cursor:none;
-}
-.tech-spotlight-card:hover { transform:translateY(-4px); border-color:rgba(0, 229, 255, 0.4); box-shadow:0 18px 45px rgba(0,229,255,0.1); }
-.tech-spotlight-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, #00e5ff, transparent); }
-
-/* Home Software Section */
-.home-software { background:var(--bg2); padding:90px 0; }
-.software-inner { display:grid; grid-template-columns:320px 1fr; gap:0; min-height:460px; }
-.software-left { padding:50px 48px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; border-right:1px solid var(--border); }
+/* Home Software Section (B&W) */
+.home-software { background:var(--bg2); padding:84px 0; }
+.software-inner { display:grid; grid-template-columns:320px 1fr; gap:0; min-height:440px; }
+.software-left { padding:48px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; border-right:1px solid var(--border); }
 .software-left-label { font-family:var(--mono); font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--ink4); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
 .software-left-label::before { content:''; width:24px; height:1px; background:var(--ink4); }
-.software-big { font-family:var(--serif); font-size:clamp(32px, 3.8vw, 50px); font-weight:300; line-height:1.1; color:var(--ink); margin-bottom:12px; }
+.software-big { font-family:var(--serif); font-size:clamp(32px, 3.8vw, 48px); font-weight:300; line-height:1.1; color:var(--ink); margin-bottom:12px; }
 .software-desc { font-family:var(--sans); font-size:13px; color:var(--ink3); line-height:1.65; margin-bottom:28px; }
 .software-right { overflow:hidden; position:relative; background:var(--bg3); }
 .sw-vertical-slider { display:flex; flex-direction:column; gap:0; }
-.sw-item { padding:24px 44px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:1fr auto; align-items:center; gap:20px; transition:background .25s; cursor:none; }
+.sw-item { padding:22px 40px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:80px 1fr auto; align-items:center; gap:20px; transition:background .25s; cursor:none; }
 .sw-item:hover { background:var(--bg-card); }
-.sw-item-meta { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+.sw-thumb { width:80px; height:60px; object-fit:cover; border:1px solid var(--border); filter:grayscale(1); transition:filter .25s; background:#e2e6eb; }
+.sw-item:hover .sw-thumb { filter:grayscale(0); }
+.sw-item-meta { display:flex; align-items:center; gap:10px; margin-bottom:4px; }
 .sw-cat { font-family:var(--mono); font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); padding:2px 7px; border:1px solid var(--border); border-radius:3px; }
-.sw-name { font-family:var(--serif); font-size:19px; font-weight:400; color:var(--ink); margin-bottom:4px; }
-.sw-desc { font-family:var(--sans); font-size:12px; color:var(--ink3); line-height:1.5; }
-.sw-price { font-family:var(--serif); font-size:20px; font-weight:300; color:var(--ink); white-space:nowrap; }
+.sw-name { font-family:var(--serif); font-size:18px; font-weight:400; color:var(--ink); margin-bottom:2px; }
+.sw-desc { font-family:var(--sans); font-size:12px; color:var(--ink3); line-height:1.45; }
+.sw-price { font-family:var(--serif); font-size:18px; font-weight:300; color:var(--ink); white-space:nowrap; }
 
 /* Home Projects Slider */
-.home-projects { background:var(--bg); padding:90px 48px; }
+.home-projects { background:var(--bg); padding:84px 48px; }
 .projects-slider-wrap { position:relative; overflow:hidden; }
 .projects-grid { display:flex; gap:22px; transition:transform .6s cubic-bezier(.16,1,.3,1); }
-.proj-card { flex:0 0 320px; cursor:none; }
-.proj-img { width:100%; height:230px; overflow:hidden; position:relative; filter:grayscale(1) contrast(1.1); transition:filter .35s, transform .35s; background:#e2e6eb; }
+.proj-card { flex:0 0 310px; cursor:none; }
+.proj-img { width:100%; height:220px; overflow:hidden; position:relative; filter:grayscale(1) contrast(1.1); transition:filter .35s, transform .35s; background:#e2e6eb; }
 .proj-img:hover { filter:grayscale(0) contrast(1); transform:scale(1.02); }
 .proj-img img { width:100%; height:100%; object-fit:cover; }
 .proj-info { padding:14px 0; }
 .proj-cat { font-family:var(--mono); font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:6px; }
-.proj-name { font-family:var(--serif); font-size:19px; font-weight:400; color:var(--ink); margin-bottom:4px; }
+.proj-name { font-family:var(--serif); font-size:18px; font-weight:400; color:var(--ink); margin-bottom:4px; }
 .proj-desc { font-family:var(--sans); font-size:12px; color:var(--ink3); line-height:1.5; }
 
 /* Home Articles Section */
-.home-articles { background:var(--bg3); padding:90px 48px; }
-.articles-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:28px; }
+.home-articles { background:var(--bg3); padding:84px 48px; }
+.articles-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:26px; }
 .article-card {
-  background:var(--bg-card); border:1px solid var(--border); padding:32px; border-radius:8px; cursor:none;
+  background:var(--bg-card); border:1px solid var(--border); padding:32px; border-radius:6px; cursor:none;
   transition:all .25s ease; display:flex; flex-direction:column; justify-content:space-between;
 }
 .article-card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,0,0,0.06); border-color:var(--ink); }
@@ -205,21 +198,21 @@ nav {
   font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink);
   display:inline-flex; align-items:center; gap:6px; text-decoration:none;
 }
-.article-btn::after { content:'â†’'; transition:transform .2s; }
+.article-btn::after { content:'→'; transition:transform .2s; }
 .article-card:hover .article-btn::after { transform:translateX(4px); }
 
 /* Expertise Grid */
-.home-expertise { background:var(--bg2); padding:90px 48px; }
-.expertise-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-top:40px; }
-.exp-item { padding:36px 26px; background:var(--bg2); transition:background .25s; }
+.home-expertise { background:var(--bg2); padding:84px 48px; }
+.expertise-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-top:36px; }
+.exp-item { padding:34px 24px; background:var(--bg2); transition:background .25s; }
 .exp-item:hover { background:var(--bg-card); }
-.exp-num { font-family:var(--serif); font-size:44px; font-weight:300; color:var(--ink4); margin-bottom:10px; line-height:1; }
+.exp-num { font-family:var(--serif); font-size:42px; font-weight:300; color:var(--ink4); margin-bottom:10px; line-height:1; }
 .exp-name { font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink); margin-bottom:8px; font-weight:600; }
 .exp-desc { font-family:var(--sans); font-size:12.5px; color:var(--ink3); line-height:1.6; }
 
 /* Footer */
-footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; grid-template-columns:1fr auto; gap:36px; align-items:center; }
-.footer-name { font-family:var(--serif); font-size:30px; font-weight:300; letter-spacing:.02em; }
+footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; grid-template-columns:1fr auto; gap:36px; align-items:center; }
+.footer-name { font-family:var(--serif); font-size:28px; font-weight:300; letter-spacing:.02em; }
 .footer-sub { font-family:var(--sans); font-size:12px; color:rgba(255,255,255,0.5); margin-top:6px; }
 .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
 .footer-links a {
@@ -228,9 +221,9 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
 }
 .footer-links a:hover { color:#fff; }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 2. NOVELS PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-.novels-hero { padding:70px 48px 50px; background:var(--bg3); border-bottom:1px solid var(--border); }
-.novels-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:44px 30px; padding:60px 48px; background:var(--bg); }
+/* ==================== 2. NOVELS PAGE ==================== */
+.novels-hero { padding:64px 48px 44px; background:var(--bg3); border-bottom:1px solid var(--border); }
+.novels-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:40px 28px; padding:54px 48px; background:var(--bg); }
 .nv-card { cursor:none; }
 .nv-cover { width:100%; aspect-ratio:2/3; overflow:hidden; position:relative; filter:grayscale(1) contrast(1.15); transition:filter .4s, transform .4s; margin-bottom:16px; background:#e2e6eb; }
 .nv-cover:hover { filter:grayscale(0) contrast(1.05); transform:translateY(-4px); }
@@ -245,168 +238,157 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
 }
 .nv-btn:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
 
-/* Novel Reading Modal */
+/* Reading Modal */
 .nv-modal { display:none; position:fixed; inset:0; z-index:500; background:var(--bg3); }
 .nv-modal.open { display:flex; flex-direction:column; }
-.nv-modal-bar { padding:18px 48px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:var(--bg-card); }
+.nv-modal-bar { padding:16px 48px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:var(--bg-card); }
 .nv-modal-inner { flex:1; display:grid; grid-template-columns:360px 1fr; overflow:hidden; }
-.nv-modal-cover { background:var(--bg2); display:flex; align-items:center; justify-content:center; padding:50px 36px; border-right:1px solid var(--border); }
-.nv-modal-cover img { max-width:240px; max-height:380px; object-fit:cover; filter:grayscale(1) contrast(1.15); box-shadow:25px 25px 70px rgba(0,0,0,0.15); }
-.nv-modal-content { padding:50px 64px; overflow-y:auto; background:var(--bg); }
+.nv-modal-cover { background:var(--bg2); display:flex; align-items:center; justify-content:center; padding:48px 36px; border-right:1px solid var(--border); }
+.nv-modal-cover img { max-width:240px; max-height:380px; object-fit:cover; filter:grayscale(1) contrast(1.15); box-shadow:25px 25px 70px rgba(0,0,0,0.12); }
+.nv-modal-content { padding:48px 60px; overflow-y:auto; background:var(--bg); }
 .nv-modal-close {
   width:40px; height:40px; border:1px solid var(--border); background:transparent; cursor:none; font-size:17px;
   color:var(--ink3); transition:all .25s; display:flex; align-items:center; justify-content:center;
 }
 .nv-modal-close:hover { background:var(--ink); color:#fff; }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 3. TECHNICAL PROJECTS PAGE (3D GLOW) â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-.tech-page-scene {
-  background:radial-gradient(ellipse at 50% -10%, #0d1430 0%, #05070d 55%), linear-gradient(160deg,#05070d 0%,#070a16 100%);
-  color:#e0e6ed; padding:60px 24px 80px; min-height:calc(100vh - 76px);
-}
+/* ==================== 3. TECHNICAL PROJECTS PAGE (CLEAN B&W) ==================== */
+.tech-page-scene { background:var(--bg); color:var(--ink); padding:54px 48px 80px; }
 .tech-hero-banner {
-  max-width:880px; margin:0 auto 40px; position:relative; overflow:hidden; text-align:center;
-  padding:54px 24px 40px; background:radial-gradient(ellipse at 50% 0%, #10142a 0%, #05070d 60%), linear-gradient(135deg,#05070d 0%,#0a0f22 55%,#05070d 100%);
-  border-radius:18px; border:1px solid rgba(0,229,255,0.18); box-shadow:0 20px 60px rgba(0,0,0,0.6), inset 0 0 80px rgba(0,229,255,0.03);
+  max-width:920px; margin:0 auto 40px; text-align:center; padding:48px 24px 36px;
+  background:var(--bg-card); border-radius:12px; border:1px solid var(--border); box-shadow:0 8px 30px rgba(0,0,0,0.03);
 }
-.tech-cards-container { max-width:880px; margin:0 auto; }
-.dls-card-holder { perspective:1200px; margin-bottom:34px; }
+.tech-hero-banner h1 { font-family:var(--serif); font-size:clamp(34px, 4.8vw, 52px); font-weight:300; color:var(--ink); margin-bottom:12px; }
+.tech-hero-banner p { color:var(--ink3); font-size:14.5px; max-width:620px; margin:0 auto; line-height:1.75; }
+.tech-cards-container { max-width:920px; margin:0 auto; }
+.dls-card-holder { perspective:1200px; margin-bottom:28px; }
 .dls-card {
-  background:linear-gradient(180deg, #0b0f1c, #0a0e1a); border:1px solid rgba(0, 229, 255, 0.16); border-radius:18px;
-  padding:32px; box-shadow:0 16px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.02) inset; position:relative;
-  overflow:hidden; transform-style:preserve-3d; transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  background:var(--bg-card); border:1px solid var(--border); border-radius:12px;
+  padding:32px; box-shadow:0 8px 28px rgba(0,0,0,0.04); position:relative;
+  transition:all .3s ease; cursor:none;
 }
 .dls-card:hover {
-  transform:perspective(1200px) rotateX(2.5deg) rotateY(-3.5deg) scale3d(1.012,1.012,1.012);
-  box-shadow:0 28px 65px rgba(0,0,0,.6), 0 0 50px rgba(0,229,255,.12); border-color:rgba(0, 229, 255, 0.35);
+  transform:translateY(-3px); box-shadow:0 18px 45px rgba(0,0,0,0.08); border-color:var(--ink);
 }
-.dls-card [data-layer="1"] { transform:translateZ(24px); }
-.dls-card [data-layer="2"] { transform:translateZ(12px); }
-
-.feature-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px 16px; }
-.feature-item { color:#9aa5ba; font-size:13.5px; display:flex; align-items:center; gap:8px; }
+.feature-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:10px 18px; }
+.feature-item { color:var(--ink3); font-size:13px; display:flex; align-items:center; gap:8px; line-height:1.5; }
+.feature-item::before { content:'—'; color:var(--ink4); }
 .tech-tags-wrap { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
 .tech-tag {
-  font-family:var(--mono); font-size:11px; padding:3px 10px; border-radius:4px; background:#0e1526;
-  border:1px solid rgba(0, 229, 255, 0.22); color:#5fe8ff;
+  font-family:var(--mono); font-size:10.5px; padding:3px 9px; border-radius:3px; background:var(--bg);
+  border:1px solid var(--border); color:var(--ink2);
 }
-.tech-tag.purple { border-color:rgba(180, 127, 255, 0.3); color:#c9a8ff; }
-.tech-tag.blue { border-color:rgba(77, 127, 255, 0.3); color:#a8bdff; }
-.tech-tag.dim { border-color:rgba(255, 255, 255, 0.1); color:#8b96ab; }
-
-.badge-status {
-  font-family:var(--mono); font-size:12px; font-weight:600; padding:4px 14px; border-radius:30px;
-  white-space:nowrap; display:inline-flex; align-items:center; gap:6px;
+.dls-btn {
+  font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:10px 22px;
+  border-radius:4px; text-decoration:none; display:inline-flex; align-items:center; gap:6px; cursor:none; transition:all .2s;
 }
-.badge-cyan { background:rgba(0, 229, 255, 0.1); color:#5fe8ff; border:1px solid rgba(0, 229, 255, 0.4); }
-.badge-purple { background:rgba(180, 127, 255, 0.1); color:#c9a8ff; border:1px solid rgba(180, 127, 255, 0.4); }
-.badge-blue { background:rgba(77, 127, 255, 0.1); color:#a8bdff; border:1px solid rgba(77, 127, 255, 0.4); }
-.badge-emerald { background:rgba(52, 211, 153, 0.1); color:#34d399; border:1px solid rgba(52, 211, 153, 0.4); }
-.badge-amber { background:rgba(251, 191, 36, 0.1); color:#fbbf24; border:1px solid rgba(251, 191, 36, 0.4); }
+.dls-btn-primary { background:var(--ink); color:#fff; border:1px solid var(--ink); }
+.dls-btn-primary:hover { background:var(--ink2); }
+.dls-btn-outline { background:var(--bg-card); color:var(--ink); border:1px solid var(--border); }
+.dls-btn-outline:hover { border-color:var(--ink); background:var(--bg); }
 
-.dls-btn { transition:transform .18s ease, box-shadow .18s ease, filter .18s ease; cursor:none; }
-.dls-btn:hover { transform:translateY(-2px); filter:brightness(1.12); }
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 4. GALLERY PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-.gallery-hero { padding:70px 48px 40px; background:var(--bg3); border-bottom:1px solid var(--border); }
-.gallery-filters { display:flex; gap:10px; padding:24px 48px; background:var(--bg); overflow-x:auto; flex-wrap:wrap; border-bottom:1px solid var(--border2); }
+/* ==================== 4. GALLERY PAGE ==================== */
+.gallery-hero { padding:64px 48px 36px; background:var(--bg3); border-bottom:1px solid var(--border); }
+.gallery-filters { display:flex; gap:10px; padding:22px 48px; background:var(--bg); overflow-x:auto; flex-wrap:wrap; border-bottom:1px solid var(--border2); }
 .gf-btn {
-  font-family:var(--mono); font-size:10.5px; letter-spacing:.15em; text-transform:uppercase; padding:8px 18px;
-  background:var(--bg-card); border:1px solid var(--border); color:var(--ink3); cursor:none; transition:all .25s; border-radius:4px;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.15em; text-transform:uppercase; padding:7px 16px;
+  background:var(--bg-card); border:1px solid var(--border); color:var(--ink3); cursor:none; transition:all .25s; border-radius:3px;
 }
 .gf-btn.on, .gf-btn:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
-.gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; padding:48px; background:var(--bg); }
+.gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:24px; padding:48px; background:var(--bg); }
 .g-card {
   background:var(--bg-card); border:1px solid var(--border); overflow:hidden; cursor:none; transition:all .3s ease;
 }
-.g-card:hover { transform:translateY(-4px); box-shadow:0 16px 36px rgba(0,0,0,0.08); border-color:var(--ink); }
-.g-card img { width:100%; height:230px; object-fit:cover; filter:grayscale(1) contrast(1.1); transition:all .4s ease; }
-.g-card:hover img { filter:grayscale(0) contrast(1); transform:scale(1.03); }
+.g-card:hover { transform:translateY(-3px); box-shadow:0 14px 34px rgba(0,0,0,0.08); border-color:var(--ink); }
+.g-card img { width:100%; height:220px; object-fit:cover; filter:grayscale(1) contrast(1.1); transition:all .4s ease; background:#e2e6eb; }
+.g-card:hover img { filter:grayscale(0) contrast(1); transform:scale(1.02); }
 .g-card-info { padding:14px 18px; }
 .g-cat-label { font-family:var(--mono); font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:4px; }
 .g-title { font-family:var(--serif); font-size:18px; font-weight:400; color:var(--ink); }
 
 /* Lightbox */
-.lightbox { display:none; position:fixed; inset:0; z-index:900; background:rgba(7,10,18,0.94); backdrop-filter:blur(16px); }
+.lightbox { display:none; position:fixed; inset:0; z-index:900; background:rgba(17,20,26,0.95); backdrop-filter:blur(16px); }
 .lightbox.open { display:flex; align-items:center; justify-content:center; }
 .lb-img-wrap { max-width:85vw; max-height:85vh; position:relative; text-align:center; }
 .lb-img-wrap img { max-width:100%; max-height:78vh; object-fit:contain; box-shadow:0 25px 60px rgba(0,0,0,0.8); border:1px solid rgba(255,255,255,0.1); }
-.lb-close { position:absolute; top:-46px; right:0; background:transparent; border:none; color:#fff; font-size:26px; cursor:none; }
+.lb-close { position:absolute; top:-44px; right:0; background:transparent; border:none; color:#fff; font-size:26px; cursor:none; }
 .lb-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.2); color:#fff; width:44px; height:44px; display:flex; align-items:center; justify-content:center; cursor:none; font-size:18px; }
-.lb-prev { left:-60px; }
-.lb-next { right:-60px; }
+.lb-prev { left:-56px; }
+.lb-next { right:-56px; }
 .lb-caption { font-family:var(--sans); font-size:13px; color:#c0c8d8; margin-top:14px; }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 5. SOFTWARE PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-.software-hero { padding:70px 48px 40px; background:var(--bg3); border-bottom:1px solid var(--border); }
-.software-cat-section { padding:60px 48px; border-bottom:1px solid var(--border); }
-.sw-section-label { font-family:var(--serif); font-size:32px; font-weight:300; color:var(--ink); margin-bottom:32px; }
+/* ==================== 5. SOFTWARE PAGE (B&W) ==================== */
+.software-hero { padding:64px 48px 36px; background:var(--bg3); border-bottom:1px solid var(--border); }
+.software-cat-section { padding:54px 48px; border-bottom:1px solid var(--border); }
+.sw-section-label { font-family:var(--serif); font-size:32px; font-weight:300; color:var(--ink); margin-bottom:28px; }
 .sw-products-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px; }
 .sw-product-card {
-  background:var(--bg-card); border:1px solid var(--border); padding:28px; border-radius:6px; display:flex;
-  flex-direction:column; justify-content:space-between; min-height:220px; transition:all .25s ease;
+  background:var(--bg-card); border:1px solid var(--border); padding:24px; border-radius:6px; display:flex;
+  flex-direction:column; justify-content:space-between; transition:all .25s ease; cursor:none;
 }
 .sw-product-card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,0,0,0.06); border-color:var(--ink); }
-.sw-product-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.sw-img-banner { width:100%; height:160px; object-fit:cover; border-radius:4px; margin-bottom:16px; filter:grayscale(1); transition:filter .3s; background:#e2e6eb; }
+.sw-product-card:hover .sw-img-banner { filter:grayscale(0); }
+.sw-product-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
 .sw-product-type { font-family:var(--mono); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); padding:3px 8px; border:1px solid var(--border); border-radius:3px; }
-.sw-product-price { font-family:var(--serif); font-size:20px; font-weight:400; color:var(--ink); }
+.sw-product-price { font-family:var(--serif); font-size:19px; font-weight:400; color:var(--ink); }
 .sw-product-name { font-family:var(--serif); font-size:21px; font-weight:400; color:var(--ink); margin-bottom:8px; }
-.sw-product-desc { font-family:var(--sans); font-size:13px; color:var(--ink3); line-height:1.65; margin-bottom:20px; }
+.sw-product-desc { font-family:var(--sans); font-size:13px; color:var(--ink3); line-height:1.65; margin-bottom:18px; }
 .sw-product-link { font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink); text-decoration:none; display:inline-flex; align-items:center; gap:6px; }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 6. ARTICLES PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-.articles-hero { padding:70px 48px 40px; background:var(--bg3); border-bottom:1px solid var(--border); }
-.articles-page-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:32px; padding:60px 48px; background:var(--bg); }
+/* ==================== 6. ARTICLES PAGE (B&W) ==================== */
+.articles-hero { padding:64px 48px 36px; background:var(--bg3); border-bottom:1px solid var(--border); }
+.articles-page-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:28px; padding:54px 48px; background:var(--bg); }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 7. ABOUT PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-.about-hero { padding:70px 48px 60px; background:var(--bg3); border-bottom:1px solid var(--border); }
+/* ==================== 7. ABOUT PAGE ==================== */
+.about-hero { padding:64px 48px 54px; background:var(--bg3); border-bottom:1px solid var(--border); }
 .about-hero-grid { display:grid; grid-template-columns:1.2fr 0.8fr; gap:60px; margin-top:32px; }
 .about-bio { font-family:var(--sans); font-size:14.5px; color:var(--ink2); line-height:1.85; }
-.about-stats { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-.about-stat { background:var(--bg-card); border:1px solid var(--border); padding:24px; border-radius:6px; }
-.about-stat-num { font-family:var(--serif); font-size:42px; font-weight:300; color:var(--ink); line-height:1; margin-bottom:6px; }
+.about-stats { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.about-stat { background:var(--bg-card); border:1px solid var(--border); padding:22px; border-radius:6px; }
+.about-stat-num { font-family:var(--serif); font-size:40px; font-weight:300; color:var(--ink); line-height:1; margin-bottom:6px; }
 .about-stat-label { font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); }
-.experience-section, .clients-section { padding:70px 48px; border-bottom:1px solid var(--border); }
-.exp-list { margin-top:36px; display:flex; flex-direction:column; gap:0; }
-.exp-row { display:grid; grid-template-columns:220px 1fr; gap:32px; padding:24px 0; border-bottom:1px solid var(--border); }
+.experience-section, .clients-section { padding:64px 48px; border-bottom:1px solid var(--border); }
+.exp-list { margin-top:32px; display:flex; flex-direction:column; gap:0; }
+.exp-row { display:grid; grid-template-columns:220px 1fr; gap:32px; padding:22px 0; border-bottom:1px solid var(--border); }
 .exp-dates { font-family:var(--mono); font-size:11px; letter-spacing:.12em; color:var(--ink4); }
 .exp-company { font-family:var(--serif); font-size:20px; font-weight:400; color:var(--ink); margin-bottom:4px; }
 .exp-role { font-family:var(--sans); font-size:13.5px; color:var(--ink2); margin-bottom:10px; }
 .exp-tags { display:flex; gap:6px; flex-wrap:wrap; }
 .exp-tag { font-family:var(--mono); font-size:9.5px; padding:2px 8px; border:1px solid var(--border); color:var(--ink3); border-radius:3px; background:var(--bg-card); }
-.clients-grid { display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; }
+.clients-grid { display:flex; flex-wrap:wrap; gap:10px; margin-top:30px; }
 .client-tag { font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding:8px 16px; border:1px solid var(--border); background:var(--bg-card); color:var(--ink2); border-radius:4px; }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 8. BACKEND PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-.backend-page { padding:60px 48px; background:var(--bg); }
-.backend-header { margin-bottom:36px; }
-.backend-header h1 { font-family:var(--serif); font-size:42px; font-weight:300; color:var(--ink); }
-.backend-tabs { display:flex; gap:10px; margin-bottom:32px; flex-wrap:wrap; }
-.bt { font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; padding:9px 20px; background:var(--bg-card); border:1px solid var(--border); color:var(--ink3); cursor:none; border-radius:4px; }
+/* ==================== 8. BACKEND PAGE ==================== */
+.backend-page { padding:54px 48px; background:var(--bg); }
+.backend-header { margin-bottom:32px; }
+.backend-header h1 { font-family:var(--serif); font-size:38px; font-weight:300; color:var(--ink); }
+.backend-tabs { display:flex; gap:10px; margin-bottom:28px; flex-wrap:wrap; }
+.bt { font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; padding:8px 18px; background:var(--bg-card); border:1px solid var(--border); color:var(--ink3); cursor:none; border-radius:3px; }
 .bt.on, .bt:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
 .backend-panel { display:none; }
-.backend-panel.on { display:grid; grid-template-columns:1fr 1.2fr; gap:40px; }
-.backend-form { background:var(--bg-card); border:1px solid var(--border); padding:32px; border-radius:6px; }
-.form-group { margin-bottom:18px; }
-.form-label { display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); margin-bottom:6px; }
-.form-input, .form-textarea { width:100%; padding:10px 14px; font-family:var(--sans); font-size:13.5px; border:1px solid var(--border); border-radius:4px; background:var(--bg); color:var(--ink); }
-.form-textarea { min-height:100px; resize:vertical; }
-.submit-btn { font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; padding:12px 24px; background:var(--ink); color:#fff; border:none; cursor:none; width:100%; border-radius:4px; }
-.backend-items { display:flex; flex-direction:column; gap:10px; max-height:600px; overflow-y:auto; }
-.backend-item { background:var(--bg-card); border:1px solid var(--border); padding:16px 20px; display:flex; justify-content:space-between; align-items:center; border-radius:4px; }
-.backend-item-title { font-family:var(--serif); font-size:17px; color:var(--ink); }
+.backend-panel.on { display:grid; grid-template-columns:1fr 1.2fr; gap:36px; }
+.backend-form { background:var(--bg-card); border:1px solid var(--border); padding:28px; border-radius:6px; }
+.form-group { margin-bottom:16px; }
+.form-label { display:block; font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); margin-bottom:6px; }
+.form-input, .form-textarea { width:100%; padding:10px 12px; font-family:var(--sans); font-size:13.5px; border:1px solid var(--border); border-radius:4px; background:var(--bg); color:var(--ink); }
+.form-textarea { min-height:90px; resize:vertical; }
+.submit-btn { font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; padding:11px 22px; background:var(--ink); color:#fff; border:none; cursor:none; width:100%; border-radius:4px; }
+.backend-items { display:flex; flex-direction:column; gap:10px; max-height:550px; overflow-y:auto; }
+.backend-item { background:var(--bg-card); border:1px solid var(--border); padding:14px 18px; display:flex; justify-content:space-between; align-items:center; border-radius:4px; }
+.backend-item-title { font-family:var(--serif); font-size:16px; color:var(--ink); }
 .backend-item-sub { font-family:var(--mono); font-size:10px; color:var(--ink4); }
-.bi-btn { font-family:var(--mono); font-size:10px; padding:4px 10px; border:1px solid var(--border); background:transparent; color:#e11d48; cursor:none; border-radius:3px; }
+.bi-btn { font-family:var(--mono); font-size:10px; padding:3px 9px; border:1px solid var(--border); background:transparent; color:#e11d48; cursor:none; border-radius:3px; }
 .toast { position:fixed; bottom:28px; right:28px; background:var(--ink); color:#fff; padding:12px 24px; font-family:var(--mono); font-size:11px; border-radius:4px; opacity:0; pointer-events:none; transition:opacity .3s; z-index:9999; }
 .toast.show { opacity:1; }
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
-  nav { padding:16px 24px; }
-  .nav-links { gap:16px; }
-  .home-hero { grid-template-columns:1fr; padding:30px 24px; }
+  nav { padding:14px 24px; }
+  .nav-links { gap:14px; }
+  .home-hero { grid-template-columns:1fr; padding:28px 24px; }
   .hero-visual-side { height:auto; }
-  .hero-portrait-frame { width:100%; max-width:320px; height:420px; margin:0 auto; }
+  .hero-portrait-frame { width:100%; max-width:300px; height:390px; margin:0 auto; }
   .software-inner { grid-template-columns:1fr; }
   .software-left { border-right:none; border-bottom:1px solid var(--border); }
   .expertise-grid { grid-template-columns:1fr 1fr; }
@@ -414,8 +396,8 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
   .backend-panel.on { grid-template-columns:1fr; }
   .nv-modal-inner { grid-template-columns:1fr; }
   .nv-modal-cover { display:none; }
-  .nv-modal-content { padding:30px 24px; }
-  .home-novels, .home-tech, .home-projects, .home-articles, .home-expertise, footer, .novels-hero, .novels-grid, .gallery-hero, .gallery-filters, .gallery-grid, .software-hero, .software-cat-section, .articles-hero, .articles-page-grid, .about-hero, .experience-section, .clients-section, .backend-page { padding-left:24px; padding-right:24px; }
+  .nv-modal-content { padding:28px 20px; }
+  .home-novels, .home-tech, .home-projects, .home-articles, .home-expertise, footer, .novels-hero, .novels-grid, .gallery-hero, .gallery-filters, .gallery-grid, .software-hero, .software-cat-section, .articles-hero, .articles-page-grid, .about-hero, .experience-section, .clients-section, .backend-page, .tech-page-scene { padding-left:24px; padding-right:24px; }
 }
 </style>
 </head>
@@ -436,29 +418,29 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
     <a href="#" onclick="showPage('software');return false" id="nav-software">Software</a>
     <a href="#" onclick="showPage('articles');return false" id="nav-articles">Articles</a>
     <a href="#" onclick="showPage('about');return false" id="nav-about">About</a>
-    <a href="#" onclick="showPage('backend');return false" id="nav-backend">âš™ Backend</a>
+    <a href="#" onclick="showPage('backend');return false" id="nav-backend">[ Backend ]</a>
   </div>
 </nav>
 
-<!-- TOAST NOTIFICATION -->
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 1. HOME PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ==================== 1. HOME PAGE ==================== -->
 <div class="page active" id="page-home">
 
   <!-- HERO -->
   <section class="home-hero">
     <div class="hero-text-side">
-      <div class="hero-eyebrow">Creative Director & Technologist</div>
+      <div class="hero-eyebrow">Creative Director &amp; Technologist</div>
       <h1 class="hero-name">
         <span>Rana</span><br>
         <span style="font-style:italic;color:var(--ink3)">Abdullah</span>
       </h1>
-      <p class="hero-title">Novelist Â· 3D Artist Â· Software Engineer<br>Blending literary narrative, light, and robust code.</p>
+      <p class="hero-title">Novelist · 3D Artist · Software Engineer<br>Blending literary narrative, light, and robust code.</p>
       <div class="hero-cta-row">
-        <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false">Technical Projects âš¡</a>
-        <a class="btn-outline" href="#" onclick="showPage('novels');return false">Written Novels ðŸ“–</a>
-        <a class="btn-outline" href="#" onclick="showPage('gallery');return false">3D Gallery ðŸŽ¨</a>
+        <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false">Technical Projects →</a>
+        <a class="btn-outline" href="#" onclick="showPage('novels');return false">Written Novels</a>
+        <a class="btn-outline" href="#" onclick="showPage('gallery');return false">3D Gallery</a>
       </div>
     </div>
     <div class="hero-visual-side">
@@ -471,14 +453,14 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
 
   <div class="section-divider"></div>
 
-  <!-- TECHNICAL PROJECTS SPOTLIGHT -->
+  <!-- TECHNICAL PROJECTS SPOTLIGHT (CLEAN B&W) -->
   <section class="home-tech">
     <div class="section-header">
       <div>
-        <div class="section-label">Engineering & Web Systems</div>
+        <div class="section-label">Engineering &amp; Web Systems</div>
         <h2 class="section-title">Technical <em>Projects</em></h2>
       </div>
-      <a class="section-link" href="#" onclick="showPage('technical-projects');return false">Explore all 9 projects â†’</a>
+      <a class="section-link" href="#" onclick="showPage('technical-projects');return false">Explore all 9 projects →</a>
     </div>
     <div class="tech-spotlight-grid" id="homeTechSpotlight">
       <!-- Injected by JS -->
@@ -492,9 +474,9 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
     <div class="section-header">
       <div>
         <div class="section-label">Literary Work</div>
-        <h2 class="section-title">Novels & <em>Stories</em></h2>
+        <h2 class="section-title">Novels &amp; <em>Stories</em></h2>
       </div>
-      <a class="section-link" href="#" onclick="showPage('novels');return false">View all novels â†’</a>
+      <a class="section-link" href="#" onclick="showPage('novels');return false">View all novels →</a>
     </div>
     <div class="novels-slider-track">
       <div class="novels-slider" id="novelSlider">
@@ -502,8 +484,8 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
       </div>
     </div>
     <div class="slider-controls">
-      <button class="slider-btn" onclick="slideNovels(-1)">â†</button>
-      <button class="slider-btn" onclick="slideNovels(1)">â†’</button>
+      <button class="slider-btn" onclick="slideNovels(-1)">←</button>
+      <button class="slider-btn" onclick="slideNovels(1)">→</button>
     </div>
   </section>
 
@@ -513,7 +495,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
   <section class="home-software">
     <div class="software-inner">
       <div class="software-left">
-        <div class="software-left-label">Tools & Products</div>
+        <div class="software-left-label">Tools &amp; Products</div>
         <div class="software-big">Software &amp;<br><em style="font-style:italic;color:var(--ink3)">Add-ons</em></div>
         <p class="software-desc">Professional Blender add-ons and automation pipelines built from over a decade of 3D workflow expertise.</p>
         <a class="btn-outline" href="#" onclick="showPage('software');return false">Explore Software</a>
@@ -532,10 +514,10 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
   <section class="home-projects">
     <div class="section-header">
       <div>
-        <div class="section-label">3D Art & Visualization</div>
+        <div class="section-label">3D Art &amp; Visualization</div>
         <h2 class="section-title">Visual <em>Works</em></h2>
       </div>
-      <a class="section-link" href="#" onclick="showPage('gallery');return false">View full gallery â†’</a>
+      <a class="section-link" href="#" onclick="showPage('gallery');return false">View full gallery →</a>
     </div>
     <div class="projects-slider-wrap">
       <div class="projects-grid" id="projGrid">
@@ -543,21 +525,21 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
       </div>
     </div>
     <div class="slider-controls">
-      <button class="slider-btn" onclick="slideProjects(-1)">â†</button>
-      <button class="slider-btn" onclick="slideProjects(1)">â†’</button>
+      <button class="slider-btn" onclick="slideProjects(-1)">←</button>
+      <button class="slider-btn" onclick="slideProjects(1)">→</button>
     </div>
   </section>
 
   <div class="section-divider"></div>
 
-  <!-- ARTICLES / BLOG SECTION -->
+  <!-- ARTICLES SECTION -->
   <section class="home-articles">
     <div class="section-header">
       <div>
         <div class="section-label">Articles &amp; Thought Leadership</div>
         <h2 class="section-title">Essays &amp; <em>Insights</em></h2>
       </div>
-      <a class="section-link" href="#" onclick="showPage('articles');return false">Read all articles â†’</a>
+      <a class="section-link" href="#" onclick="showPage('articles');return false">Read all articles →</a>
     </div>
     <div class="articles-grid" id="homeArticlesGrid">
       <!-- Injected by JS -->
@@ -601,7 +583,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
   <footer>
     <div>
       <div class="footer-name">Rana Abdullah</div>
-      <div class="footer-sub">Dublin, Ireland Â· Open for high-impact creative &amp; technical collaborations</div>
+      <div class="footer-sub">Dublin, Ireland · Open for high-impact creative &amp; technical collaborations</div>
     </div>
     <div class="footer-links">
       <a href="https://www.linkedin.com/in/rana-abdullah-52246a87" target="_blank">LinkedIn</a>
@@ -611,7 +593,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
   </footer>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 2. NOVELS PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ==================== 2. NOVELS PAGE ==================== -->
 <div class="page" id="page-novels">
   <div class="novels-hero">
     <div class="section-label">Literary Catalogue</div>
@@ -629,7 +611,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
 <div class="nv-modal" id="nvModal">
   <div class="nv-modal-bar">
     <span class="section-label" style="margin:0">Literary Excerpt Reader</span>
-    <button class="nv-modal-close" onclick="closeNovelModal()">âœ•</button>
+    <button class="nv-modal-close" onclick="closeNovelModal()">✕</button>
   </div>
   <div class="nv-modal-inner">
     <div class="nv-modal-cover">
@@ -645,30 +627,30 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
   </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 3. TECHNICAL PROJECTS PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ==================== 3. TECHNICAL PROJECTS PAGE (B&W) ==================== -->
 <div class="page" id="page-technical-projects">
   <div class="tech-page-scene">
     <div class="tech-hero-banner">
-      <div style="font-family:var(--mono);font-size:11px;letter-spacing:.35em;color:#5fe8ff;margin-bottom:10px;text-transform:uppercase">DREAMSLABSTUDIO // TECHNICAL SUITE</div>
-      <h1 style="color:#ffffff;font-size:clamp(32px, 4.5vw, 44px);font-weight:700;letter-spacing:-.01em;margin-bottom:12px;text-shadow:0 0 30px rgba(0,229,255,0.25)">Technical Projects</h1>
-      <p style="color:#9aa5ba;font-size:15px;max-width:580px;margin:0 auto;line-height:1.7">
+      <div style="font-family:var(--mono);font-size:11px;letter-spacing:.28em;color:var(--ink4);margin-bottom:8px;text-transform:uppercase">TECHNICAL ENGINEERING SUITE</div>
+      <h1>Technical Projects</h1>
+      <p>
         Production-ready web applications, AI healthcare engines, desktop utilities, multi-track historical engines, and enterprise software systems.
       </p>
-      <div style="display:flex;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap">
-        <span class="badge-status badge-cyan">Electron Desktop</span>
-        <span class="badge-status badge-blue">Full-Stack Next.js 14</span>
-        <span class="badge-status badge-purple">AI &amp; Speech Engines</span>
-        <span class="badge-status badge-emerald">Cloudflare Edge</span>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:20px;flex-wrap:wrap">
+        <span class="badge-pill badge-dark">Electron Desktop</span>
+        <span class="badge-pill badge-outline">Next.js 14</span>
+        <span class="badge-pill badge-outline">AI &amp; Speech</span>
+        <span class="badge-pill badge-outline">Cloudflare Edge</span>
       </div>
     </div>
 
     <div class="tech-cards-container" id="techCardsGrid">
-      <!-- Injected by JS with 3D cards -->
+      <!-- Injected by JS -->
     </div>
   </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 4. GALLERY PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ==================== 4. GALLERY PAGE ==================== -->
 <div class="page" id="page-gallery">
   <div class="gallery-hero">
     <div class="section-label">Visual Portfolio</div>
@@ -691,16 +673,16 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-  <button class="lb-close" onclick="closeLightbox()">âœ•</button>
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
   <div class="lb-img-wrap">
-    <button class="lb-nav lb-prev" onclick="lbNav(-1)">â†</button>
+    <button class="lb-nav lb-prev" onclick="lbNav(-1)">←</button>
     <img id="lbImg" src="" alt="Gallery Preview">
-    <button class="lb-nav lb-next" onclick="lbNav(1)">â†’</button>
+    <button class="lb-nav lb-next" onclick="lbNav(1)">→</button>
     <div class="lb-caption" id="lbCaption"></div>
   </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 5. SOFTWARE PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ==================== 5. SOFTWARE PAGE ==================== -->
 <div class="page" id="page-software">
   <div class="software-hero">
     <div class="section-label">Tools &amp; Pipelines</div>
@@ -711,7 +693,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
   </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 6. ARTICLES PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ==================== 6. ARTICLES PAGE ==================== -->
 <div class="page" id="page-articles">
   <div class="articles-hero">
     <div class="section-label">Publications &amp; Thought Pieces</div>
@@ -722,7 +704,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
   </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 7. ABOUT PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ==================== 7. ABOUT PAGE ==================== -->
 <div class="page" id="page-about">
   <div class="about-hero">
     <div class="section-label">Biography &amp; Background</div>
@@ -730,7 +712,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
     <div class="about-hero-grid">
       <div>
         <p class="about-bio">
-          Rana Abdullah is a multidisciplinary creative technologist based in Dublin, Ireland â€” a novelist, 3D artist, software developer, and brand strategist whose work bridges deep narrative storytelling and high-performance technical execution.<br><br>
+          Rana Abdullah is a multidisciplinary creative technologist based in Dublin, Ireland — a novelist, 3D artist, software developer, and brand strategist whose work bridges deep narrative storytelling and high-performance technical execution.<br><br>
           With over a decade of hands-on experience spanning 3D visualization, literary fiction, workflow automation tools, and commercial media production for international clients, every project begins with a defining question: <em>what does this need to feel like, and how does it function at its absolute best?</em><br><br>
           Author of eight novels and novellas. Creator of widely deployed Blender workflow add-ons and full-stack web applications.
         </p>
@@ -763,7 +745,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
   <footer>
     <div>
       <div class="footer-name">Rana Abdullah</div>
-      <div class="footer-sub">Dublin, Ireland Â· Available for projects</div>
+      <div class="footer-sub">Dublin, Ireland · Available for projects</div>
     </div>
     <div class="footer-links">
       <a href="https://www.linkedin.com/in/rana-abdullah-52246a87" target="_blank">LinkedIn</a>
@@ -773,7 +755,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
   </footer>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• 8. BACKEND PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ==================== 8. BACKEND PAGE ==================== -->
 <div class="page" id="page-backend">
   <div class="backend-page">
     <div class="backend-header">
@@ -794,7 +776,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
       <div class="backend-form">
         <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Novel</h3>
         <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="b-novel-title" placeholder="Novel title"></div>
-        <div class="form-group"><label class="form-label">Genre &amp; Type</label><input class="form-input" id="b-novel-genre" placeholder="e.g. Psychological Thriller Â· Novel"></div>
+        <div class="form-group"><label class="form-label">Genre &amp; Type</label><input class="form-input" id="b-novel-genre" placeholder="e.g. Psychological Thriller · Novel"></div>
         <div class="form-group"><label class="form-label">Tagline</label><input class="form-input" id="b-novel-tagline" placeholder="Short compelling tagline"></div>
         <div class="form-group"><label class="form-label">Description / Excerpt</label><textarea class="form-textarea" id="b-novel-desc" placeholder="Full summary and opening excerpt..."></textarea></div>
         <div class="form-group"><label class="form-label">Cover Path</label><input class="form-input" id="b-novel-cover" placeholder="Novels/Title/cover.png"></div>
@@ -809,7 +791,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
         <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Technical Project</h3>
         <div class="form-group"><label class="form-label">Project Title</label><input class="form-input" id="b-tech-title" placeholder="Project Name"></div>
         <div class="form-group"><label class="form-label">Subtitle</label><input class="form-input" id="b-tech-sub" placeholder="e.g. Full-Stack SaaS Engine"></div>
-        <div class="form-group"><label class="form-label">Status</label><input class="form-input" id="b-tech-status" placeholder="âœ… Live / ðŸš€ Production-Ready"></div>
+        <div class="form-group"><label class="form-label">Status</label><input class="form-input" id="b-tech-status" placeholder="Live / Production-Ready"></div>
         <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="b-tech-desc" placeholder="Comprehensive project description..."></textarea></div>
         <button class="submit-btn" onclick="addTechProject()">Add Project</button>
       </div>
@@ -848,7 +830,7 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
         <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Experience</h3>
         <div class="form-group"><label class="form-label">Company</label><input class="form-input" id="b-exp-company" placeholder="Company name"></div>
         <div class="form-group"><label class="form-label">Role</label><input class="form-input" id="b-exp-role" placeholder="Job title"></div>
-        <div class="form-group"><label class="form-label">Start â€” End</label><input class="form-input" id="b-exp-dates" placeholder="Sep 2023 â€” Present"></div>
+        <div class="form-group"><label class="form-label">Start — End</label><input class="form-input" id="b-exp-dates" placeholder="Sep 2023 — Present"></div>
         <button class="submit-btn" onclick="addExperience()">Add Experience</button>
       </div>
       <div class="backend-items" id="be-exp-list"></div>
@@ -866,27 +848,26 @@ footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; gri
   </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• JAVASCRIPT LOGIC â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ==================== JAVASCRIPT LOGIC ==================== -->
 <script>
-// DATA STORAGE
 function loadData(key, def){ try{const d=localStorage.getItem(key);return d?JSON.parse(d):def}catch(e){return def} }
 function saveData(key, val){ try{localStorage.setItem(key,JSON.stringify(val))}catch(e){} }
 
-const NOVELS_DATA = [{"id": 1, "title": "Ten Days in Heaven", "genre": "Psychological Thriller", "type": "Novel", "tagline": "Memory is not a record. It is a weapon.", "desc": "Amason Lincoln wakes to find himself at the center of three missing persons cases, one arson investigation, and a financial anomaly â€” with no memory of the last ten days. A taut, literary thriller exploring the fault lines of memory, identity, and the dangerous wars fought within oneself.", "excerpt": "PART ONE: THE FRACTURE\n\nChapter 1: Guns and Ghosts\n\nThey were not asking what I did. They were asking what I remember. That distinction mattered more than the guns.\n\nI was on the floor of my own living room, hands zip-tied behind my back, three different firearms aimed at various parts of my body. The man in the gray suit crouched before me with the patient, empty expression of someone who has asked the same question to a great many people and is entirely prepared to wait as long as necessary. He had very clean shoes.\n\n\"Mr. Lincoln,\" he said. No accent. No warmth. No hostility. A voice engineered to convey nothing. \"Walk me through the last ten days.\"\n\nTen days. I looked at the guns. I looked at the window where the December sky was beginning to lighten, and I thought: ten days ago was December sixteenth. I know exactly where I was on December sixteenth. I was eating instant noodles and watching a documentary about migratory birds.\n\n\"You were reported missing for nine days,\" the man said. \"You reappeared at this address approximately six hours ago. There are currently three missing persons cases connected to your name, one arson investigation, and what appears to be a significant financial anomaly in accounts belonging to a man named Gerald Whitmore.\"\n\nWhat I understood was simpler and more frightening: when I tried to remember the last ten days, fragments arrived, clear and sensory, but they didn't connect. Pieces of different puzzles forced into the same box. I remembered my grandmother's laugh. I remembered smoke. I remembered a woman named Alina across a cafÃ© table in December light.", "cover": "Novels/Ten Days in Heaven/20260407_1207_Image Generation_simple_compose_01knksznadeb291cpy5nqgw13c.png"}, {"id": 2, "title": "The Last Beacon", "genre": "Speculative Fiction", "type": "Novel", "tagline": "To carry something is to change it.", "desc": "In a fractured future across post-collapse Europe, couriers navigate scarred landscapes carrying corrupted data pods, sacred relics, and memories of a civilization that forgot how to speak without destroying.", "excerpt": "PART ONE: THE CEILING\n\nBarcelona, 2263. Before the road.\n\n1. Green\n\nThe first thing is a ceiling. Pale grey. Water-stained in the northeast corner where a dead light fitting has been dark long enough to forget what light was. He lies on his back and looks at it for a while, not thinking about anything in particular, because thinking in particular would require a context for the thoughts and he has no context yet. He has been alive for six hours.\n\nThere is a number running in his skull. Not a display, not an indicator â€” a presence, the way you are aware of your own heartbeat without making a decision to be. The number is 847. He does not know what it counts. He does know, without knowing how he knows, that it is running in one direction only, and that the direction is down.\n\nHe has no name. He has a signal pointing 340 kilometres northeast, steady as a compass, and a number counting toward something he cannot yet see, and a journal on the planning table with a dark blue cover and one hundred and eighty blank pages, and the ceiling, and the floor.\n\nHe presses his right palm flat against the floor. Cold composite. Slightly textured. He presses harder. The floor pushes back.", "cover": "Novels/The Last Beacon/The Last Beacon.png"}, {"id": 3, "title": "The Veil of Shadows", "genre": "Epic Fantasy", "type": "Novel", "tagline": "They say silence is peace. But I've seen what festers in silence.", "desc": "Cael's journey through the Trial of Frost â€” an outcast warrior who learns to forge resilience from silence, weaponize ancient shadows, and reclaim his ancestral voice in a world commanded by frost kings.", "excerpt": "PREFACE\n\nFor the unseen ones â€” the broken who kept walking, the silenced who kept listening, and the children who learnt to turn shadows into shields.\n\n\"They say silence is peace. But I've seen what festers in silence. I've heard what it hides.\" â€” Carved on the mountain stones of the Northern Reach.\n\nI never meant to write a story about pain. But I kept coming back to it â€” not as an enemy, but as a forge. The Trial of Frost does not break a man; it strips him of everything he assumed was essential until only bone and vow remain.\n\nWhen Cael stepped onto the frozen ridge at sunrise, the wind carried no mercy. Below him lay three leagues of jagged black ice. Above him, the iron sky. He drew his breath, cold like needles in his throat, and stepped forward into the mist.", "cover": "Novels/The Veil of Shadows/ChatGPT Image May 4, 2026, 11_41_39 PM.png"}, {"id": 4, "title": "What the Buffalo Carry", "genre": "Literary Fiction", "type": "Novella", "tagline": "The first stories we are told become the rooms we live in.", "desc": "A seven-year-old boy counts stars from a dusty rooftop while listening to his great-grandmother's stories of the migrating buffalo â€” an intimate exploration of inheritance, generational memory, and cultural weight.", "excerpt": "PART ONE: THE ROOF\n\nChapter One: Uncle Moon\n\nThe night my great-grandmother first told me about the buffalo, the sky was doing something I had never seen it do before. It was not black, and it was not blue. It was the color of a bruised plum, swollen with clouds that had travelled all the way from the northern mountains without dropping a single bead of rain.\n\nWe sat on the rooftop on rope cots that creaked every time one of us shifted our weight. She was ninety-one, though she claimed ninety-four when she wanted people to listen and eighty-eight when she wanted to climb the stairs unassisted.\n\n\"Look up, boy,\" she said, tapping her cane against the clay parapet. \"You see that empty patch between the three bright stars? That is where the herd runs. They carry the memories people were too frightened to keep.\"\n\nI looked up until my neck ached. I could not see any buffalo. But I could hear the wind moving through the electric wires above our street, humming like a low bell.", "cover": "Novels/What the Buffalo Carry/What the Buffalo Carry.png"}, {"id": 5, "title": "The Quiet Reset", "genre": "Self-Development", "type": "Non-Fiction", "tagline": "Ten days to rebuild what you've been neglecting.", "desc": "A pragmatic, lived-experience 10-day blueprint for overcoming overthinking, reclaiming phone focus, building effortless morning friction, and managing energy over raw hours.", "excerpt": "DAYS 1â€“2: STOP OVERTHINKING\n\nThere is a version of you that never starts. Not because you are lazy â€” you are not. Not because you do not care â€” you care enormously. You sit with your task. You think about it from every angle. You imagine starting. You plan how you would start if you were going to start. And then, somehow, the day ends and the thing is still there, exactly as you left it, waiting.\n\nOverthinking is not a personality trait; it is a fear of imperfection masked as diligence. In these ten days, we dismantle the perfection trap by introducing high-velocity, low-stakes action protocols.\n\nRule 1: If an action takes under two minutes, execute immediately.\nRule 2: Never deliberate on a decision with low reversibility cost for longer than sixty seconds.", "cover": "Novels/The Quiet Reset/The Quiet Reset.jpg"}, {"id": 6, "title": "The Record Survives", "genre": "Historical Fiction", "type": "Novel", "tagline": "Witnessing matters. Because what is recorded outlives what is destroyed.", "desc": "A sweeping historical novel following an archivist across wartime Europe who preserves clandestine letters, forgotten blueprints, and suppressed voices from being erased by totalitarian regimes.", "excerpt": "ACT 1: THE HIDDEN ROOM\n\nChapter One: A Wise Man Feareth\n\nHe was nine, and the attic was the safest room in the house: forgotten, obscure, inert. It held its breath, and so did he. Not clean silence. Silence thick with dust, cedar resin, and the dry tang of old paper turning yellow under thirty summers of uninsulated heat.\n\n\"Witnessing matters,\" his uncle had written in the margins of the ledger. \"Because if you look at something and then record that you looked, you've done something to it â€” something that changes what it is.\"\n\nBetween two rafters beneath the eastern gable lay a tin biscuit box. Inside: eighty-four letters wrapped in oiled cloth, twelve blueprint negatives on glass, and a pocket watch that ticked only when held upside down. If the soldiers searched the cellar, they would find coal. If they searched the pantry, they would find salt. But they would not look up.", "cover": "Novels/The Record Survives/The Record Survives.png"}, {"id": 7, "title": "Children of Pain", "genre": "Literary Drama", "type": "Novel", "tagline": "Some wounds do not heal into scars; they heal into armor.", "desc": "A piercing family saga exploring three generations of migrants navigating industrial shifts, grief, unexpressed tenderness, and the silent covenants made to protect the next generation.", "excerpt": "PROLOGUE: THE FOUNDRY SHIFT\n\nThe iron did not care who poured it. In the winter of 1974, the floor of the northern foundry remained twenty degrees below freezing until the first furnace tapped at six in the morning.\n\nRashid stood at the ladle with his coat buttoned to the chin. His knuckles were permanently stained grey with carbon dust. When his daughter was born three thousand miles away, he received the news via a five-word telegram delivered by the foreman during a lunch break.\n\nHe folded the paper twice, slipped it beneath the band of his wool cap against his forehead, and picked up his tongs. He worked twelve hours without speaking. That evening, he bought a single loaf of white bread and walked through the sleet back to the brick tenement.", "cover": "Novels/Children of Pain/Children of Pain.jpg"}, {"id": 8, "title": "Shavings", "genre": "Literary Fiction", "type": "Novella", "tagline": "The art of what gets planed away in pursuit of form.", "desc": "An intimate novella exploring a master woodworker and his estranged apprentice as they restore an 18th-century pipe organ in an isolated coastal cathedral before winter sets in.", "excerpt": "CHAPTER ONE: THE PLANE\n\nThe cedar curls fell like parchment ribbons onto the stone flags of the nave. With every stroke of the hand plane, the timber gave up a scent that was half forest, half cathedral incense.\n\n\"Listen to the blade,\" Master Brennan said without looking up from the joinery table. \"If it chatters, your angle is proud. If it bites too deep, you are thinking about yourself instead of the grain.\"\n\nJulian adjusted his grip on the rosewood tote. His palms were blistered from three days of squaring balks of seasoned pine. High in the clerestory, the Atlantic gale rattled the leaded glass, but down here on the choir floor, the only sound was the steady whisper of steel shaving wood down to the thousandth of an inch.", "cover": "Novels/Shavings/shavings_cover.png"}];
-const TECH_PROJECTS_DATA = [{"id": "launcher", "title": "DreamsLab Cyber Launcher", "subtitle": "Chrome Multi-Profile Link Vault", "status": "âœ… Live", "statusType": "cyan", "icon": "ðŸ”—", "desc": "A standalone Windows desktop app that acts as an encrypted personal link vault with full multi-account Chrome profile management. Save your important links, notes and account context per Google profile â€” then launch any Chrome account in one click. The vault is protected with AES-256-GCM encryption, so your data is always private.", "features": ["ðŸ” AES-256-GCM encrypted vault", "ðŸ‘¤ 13+ Chrome profile support", "ðŸ”— Links + Notes per account", "âš¡ 1-click Chrome profile launch", "â˜ï¸ GitHub Gist cloud sync", "ðŸŒ Web + Desktop app versions"], "tech": [{"name": "Electron", "type": "cyan"}, {"name": "Node.js", "type": "cyan"}, {"name": "AES-256-GCM", "type": "purple"}, {"name": "Web Crypto API", "type": "purple"}, {"name": "Chrome API", "type": "blue"}, {"name": "Windows", "type": "blue"}, {"name": "GitHub Pages", "type": "dim"}], "hasLinks": true, "downloadUrl": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe", "webUrl": "https://abdullahinayat24-lang.github.io/link-launcher/", "githubUrl": "https://github.com/abdullahinayat24-lang/link-launcher"}, {"id": "mythos", "title": "Mythos Encyclopedia", "subtitle": "Global Gods, Myths & Folklore Platform", "status": "ðŸ“± Mobile & Web App", "statusType": "purple", "icon": "âš¡", "desc": "A deep cross-platform encyclopedia cataloging 50+ world mythologies and thousands of deities from Greek, Norse, and Egyptian to Hindu, Celtic, Aztec, Japanese, African, and urban folklore. Features rich mythological dossiers, daily deity notifications, interactive world mythology atlas, sacred objects collection, and a 4-tier mythology quiz with global leaderboards.", "features": ["ðŸ›ï¸ 50+ Pantheons & thousands of deities", "ðŸ—ºï¸ Interactive World Mythology Atlas", "ðŸ”” Daily Deity notifications & Story of the Day", "âš”ï¸ Sacred Objects & Mythological Relics", "ðŸ† 4-Level Quiz Engine with Leaderboards", "ðŸ“¡ Full Offline Caching & Local Storage"], "tech": [{"name": "Ionic / Capacitor", "type": "purple"}, {"name": "Vue.js / Vite", "type": "purple"}, {"name": "TypeScript", "type": "cyan"}, {"name": "SQLite / LocalStorage", "type": "cyan"}, {"name": "Wikipedia REST API", "type": "blue"}, {"name": "Android SDK", "type": "blue"}], "hasLinks": false}, {"id": "timeline", "title": "World History & Mythology Timeline", "subtitle": "Chronological Multi-Track Engine (10,000 BCE â€“ 1800 CE)", "status": "ðŸŒ Web Platform", "statusType": "cyan", "icon": "ðŸ“œ", "desc": "An interactive, high-contrast, multi-track chronological timeline connecting global civilizations, founding epics, and legendary writers across 12 millennia. Features independent box zoom controls, Google Photos style epoch scrubber, continuous regional vertical history spines, middle-mouse drag panning, in-window story reader with multi-act chapters, and AI Text-to-Speech narration.", "features": ["â³ 10,000 BCE to 1800 CE Continuous Timeline", "ðŸ” Independent Card Zoom (0.65x to 1.5x)", "ðŸ§­ Google Photos Style Date Scrubber", "ðŸ“– In-Window Story Reader with Multi-Act Breakdown", "ðŸŽ™ï¸ AI Voice Narration (Text-to-Speech)", "ðŸ¤– Automated Web Story Harvester Crawler"], "tech": [{"name": "JavaScript (ES6+)", "type": "cyan"}, {"name": "HTML5 Canvas / DOM", "type": "cyan"}, {"name": "CSS Grid Layout", "type": "blue"}, {"name": "Python Web Crawler", "type": "purple"}, {"name": "Wikimedia REST API", "type": "purple"}, {"name": "Cloudflare Pages", "type": "dim"}], "hasLinks": false}, {"id": "psych", "title": "Psychology Lecture Knowledge Platform", "subtitle": "Multilingual ASR, Diarization & Semantic Topic Graph", "status": "ðŸš€ Production-Ready Full-Stack", "statusType": "blue", "icon": "ðŸ§ ", "desc": "An end-to-end academic lecture capture and knowledge exploration platform. Features a real-time chunked audio recording pipeline with fault-tolerant uploads, speaker diarization (pyannote), multilingual speech-to-text (Whisper), AI-generated structured lecture analyses with teacher approval workflows, interactive topic relation graphs, student confusion tracking ('I didn't understand'), and strict server-side RBAC.", "features": ["ðŸŽ™ï¸ Fault-Tolerant Chunked Audio Recording", "ðŸ‘¥ Speaker Diarization & Audio Streaming", "ðŸ¤– AI Lecture Synthesis & Teacher Approval Flow", "ðŸ•¸ï¸ Semantic Topic Graph & Occurrence Timelines", "â“ Private Student Confusion & Q&A Tracker", "ðŸ”’ Server-Enforced RBAC & Ownership Security"], "tech": [{"name": "Next.js 14 (App Router)", "type": "blue"}, {"name": "TypeScript", "type": "blue"}, {"name": "PostgreSQL / Prisma ORM", "type": "purple"}, {"name": "NextAuth (JWT & RBAC)", "type": "cyan"}, {"name": "Whisper ASR", "type": "cyan"}, {"name": "pyannote Diarization", "type": "cyan"}, {"name": "Ollama / Claude API", "type": "purple"}], "hasLinks": false}, {"id": "onboardflow", "title": "OnboardFlow", "subtitle": "Client Onboarding Automation SaaS for Agencies", "status": "ðŸ’¼ Full-Stack SaaS", "statusType": "emerald", "icon": "âš¡", "desc": "A production-ready agency client onboarding SaaS that turns signed clients into project-ready clients automatically. Eliminates chaotic email threads and manual intake forms with a single branded, intelligent onboarding link. Features token-based zero-login client wizard, dynamic questionnaire builder, deliverables checklist, contract uploader, AI-powered project brief generation (Claude 3.5 Sonnet / GPT-4o), shareable handoff packages, and automated reminder crons.", "features": ["ðŸ”— Zero-Login Token Wizard (/onboard/[token])", "ðŸ“ Dynamic Drag-and-Drop Questionnaire Builder", "ðŸ¤– AI Executive Brief Generation (Claude / GPT-4o)", "ðŸ“¦ Shareable Client Handoff Package & PDF Export", "ðŸŽ¨ White-Label Agency Branding & Color Engine", "â° Automated Inactivity Nudge & Reminder Cron"], "tech": [{"name": "Next.js 14", "type": "blue"}, {"name": "TypeScript", "type": "blue"}, {"name": "Supabase Auth & Database", "type": "purple"}, {"name": "Tailwind CSS", "type": "cyan"}, {"name": "Anthropic Claude 3.5", "type": "purple"}, {"name": "Resend API", "type": "cyan"}, {"name": "Vercel Cron", "type": "dim"}], "hasLinks": false}, {"id": "medicare", "title": "MediCare AI Companion", "subtitle": "Ireland HPRA Rx & OTC Multi-Disease Scheduler", "status": "ðŸ©º Healthcare Web App", "statusType": "amber", "icon": "ðŸ’Š", "desc": "Clinical healthcare companion and medication management system engineered specifically for Ireland's HPRA drug classification (POM Prescription-Only Medicine vs OTC Over-The-Counter). Features multi-disease automated dosing schedules, drug-drug interaction alerts, personalized dietary and exercise guidelines, one-click PDF prescription export, and verified medical citations directly linked to PubMed literature.", "features": ["ðŸ‡®ðŸ‡ª Ireland HPRA POM vs OTC Drug Classification", "â° Multi-Disease Synchronized Dosing Schedules", "âš ï¸ Real-Time Drug Interaction & Contraindication Checks", "ðŸ©º Gemini AI Clinical Care & Wellness Assistant", "ðŸ“„ Instant Print-Ready Schedule & PDF Export", "ðŸ“š Verified PubMed Biomedical Research Citations"], "tech": [{"name": "Vanilla JS (ES6+)", "type": "cyan"}, {"name": "HTML5 / CSS3", "type": "blue"}, {"name": "Gemini AI API", "type": "purple"}, {"name": "Ireland HPRA Drug Registry", "type": "cyan"}, {"name": "PubMed BioC API", "type": "blue"}, {"name": "Plus Jakarta Sans", "type": "dim"}], "hasLinks": false}, {"id": "ledger", "title": "Ledger Command Deck", "subtitle": "Glassmorphic Personal Life Operating System & Finances", "status": "ðŸ–¥ï¸ Live Dashboard", "statusType": "cyan", "icon": "ðŸ“Š", "desc": "A futuristic personal command deck and life OS built with electric blue and crimson glassmorphic aesthetics. Unifies double-entry financial ledger tracking with cash-flow analytics, habit formation monitoring, TV series and season episode trackers, structured knowledge taxonomy across psychology, philosophy, and history, markdown scratchpads, and custom theme switchers.", "features": ["ðŸ’³ Double-Entry Financial Ledger & Cash Analytics", "ðŸ“ˆ Daily Habit Streaks & Momentum Tracking", "ðŸŽ¬ TV Series, Seasons & Episode Tracker", "ðŸ—‚ï¸ Knowledge Topic Hierarchy & Deep Notes", "ðŸŽ¨ Cyberpunk Glassmorphism & Custom Palettes", "ðŸ’¾ 100% Client-Side LocalStorage / IndexedDB Privacy"], "tech": [{"name": "Vanilla JavaScript", "type": "cyan"}, {"name": "CSS Custom Properties", "type": "blue"}, {"name": "Glassmorphism UI", "type": "blue"}, {"name": "HTML5 Canvas", "type": "purple"}, {"name": "IndexedDB / LocalStorage", "type": "dim"}], "hasLinks": false}, {"id": "vapes", "title": "Vapes Quantity Stock Manager", "subtitle": "Bilingual Retail Inventory & Stock Intelligence System", "status": "ðŸ›’ Retail Cloud App", "statusType": "purple", "icon": "ðŸ“¦", "desc": "Fast, high-density retail stock management and inventory tracking web application featuring full bilingual English and Urdu Nastaliq support. Built for high-volume retail environments with real-time stock counters, rapid batch item intake, low-inventory threshold notifications, category and brand filters, instant search, and export capabilities.", "features": ["ðŸŒ Full English & Urdu Nastaliq Bilingual Interface", "âš¡ Real-Time Stock Increment / Decrement Pipeline", "ðŸš¨ Automated Low-Stock & Reorder Alerts", "ðŸ·ï¸ Rapid Batch Intake & Barcode / SKU Tagging", "ðŸ” Instant Sub-Second Search & Multi-Filter Matrix", "ðŸŒ“ Dark / Light High-Contrast Retail Themes"], "tech": [{"name": "Vanilla JavaScript", "type": "purple"}, {"name": "CSS3 Design System", "type": "cyan"}, {"name": "DM Mono", "type": "cyan"}, {"name": "Noto Nastaliq Urdu", "type": "blue"}, {"name": "Cloudflare Pages", "type": "dim"}], "hasLinks": false}, {"id": "repair", "title": "IDFL Repair Price Matrix", "subtitle": "Multi-Device Hardware Repair Quoting System", "status": "ðŸ› ï¸ Live Quoting Engine", "statusType": "cyan", "icon": "ðŸ”§", "desc": "Comprehensive enterprise hardware repair price estimation and quoting system built for IDFL. Provides instant sub-second search across hundreds of smartphone, tablet, laptop, and gaming console models, dynamic component pricing breakdowns (OLED screens, batteries, charging ports, liquid damage, logic boards), margin and labor calculation, and glassmorphic UI.", "features": ["ðŸ“± 500+ Device Models (iPhone, Samsung, iPad, Mac, Consoles)", "ðŸ’° Component-Level Pricing Matrix (Screen, Battery, Board)", "âš™ï¸ Automated Labor & Profit Margin Calculation", "ðŸ” Instant Sub-Second Fuzzy Search Filter", "ðŸ’± Multi-Currency & Tax Estimation Engine", "ðŸ’Ž Responsive Glassmorphic Dark / Light Architecture"], "tech": [{"name": "Vanilla JS", "type": "cyan"}, {"name": "Space Grotesk", "type": "blue"}, {"name": "IBM Plex Mono", "type": "blue"}, {"name": "Responsive CSS3 Grid", "type": "purple"}, {"name": "Cloudflare Pages", "type": "dim"}], "hasLinks": false}];
+const NOVELS_DATA = [{"id": 1, "title": "Ten Days in Heaven", "genre": "Psychological Thriller", "type": "Novel", "tagline": "Memory is not a record. It is a weapon.", "desc": "Amason Lincoln wakes to find himself at the center of three missing persons cases, one arson investigation, and a financial anomaly — with no memory of the last ten days. A taut, literary thriller exploring the fault lines of memory, identity, and the dangerous wars fought within oneself.", "excerpt": "PART ONE: THE FRACTURE\n\nChapter 1: Guns and Ghosts\n\nThey were not asking what I did. They were asking what I remember. That distinction mattered more than the guns.\n\nI was on the floor of my own living room, hands zip-tied behind my back, three different firearms aimed at various parts of my body. The man in the gray suit crouched before me with the patient, empty expression of someone who has asked the same question to a great many people and is entirely prepared to wait as long as necessary. He had very clean shoes.\n\n\"Mr. Lincoln,\" he said. No accent. No warmth. No hostility. A voice engineered to convey nothing. \"Walk me through the last ten days.\"\n\nTen days. I looked at the guns. I looked at the window where the December sky was beginning to lighten, and I thought: ten days ago was December sixteenth. I know exactly where I was on December sixteenth. I was eating instant noodles and watching a documentary about migratory birds.\n\n\"You were reported missing for nine days,\" the man said. \"You reappeared at this address approximately six hours ago. There are currently three missing persons cases connected to your name, one arson investigation, and what appears to be a significant financial anomaly in accounts belonging to a man named Gerald Whitmore.\"\n\nWhat I understood was simpler and more frightening: when I tried to remember the last ten days, fragments arrived, clear and sensory, but they didn't connect. Pieces of different puzzles forced into the same box. I remembered my grandmother's laugh. I remembered smoke. I remembered a woman named Alina across a café table in December light.", "cover": "Novels/Ten Days in Heaven/20260407_1207_Image Generation_simple_compose_01knksznadeb291cpy5nqgw13c.png"}, {"id": 2, "title": "The Last Beacon", "genre": "Speculative Fiction", "type": "Novel", "tagline": "To carry something is to change it.", "desc": "In a fractured future across post-collapse Europe, couriers navigate scarred landscapes carrying corrupted data pods, sacred relics, and memories of a civilization that forgot how to speak without destroying.", "excerpt": "PART ONE: THE CEILING\n\nBarcelona, 2263. Before the road.\n\n1. Green\n\nThe first thing is a ceiling. Pale grey. Water-stained in the northeast corner where a dead light fitting has been dark long enough to forget what light was. He lies on his back and looks at it for a while, not thinking about anything in particular, because thinking in particular would require a context for the thoughts and he has no context yet. He has been alive for six hours.\n\nThere is a number running in his skull. Not a display, not an indicator — a presence, the way you are aware of your own heartbeat without making a decision to be. The number is 847. He does not know what it counts. He does know, without knowing how he knows, that it is running in one direction only, and that the direction is down.\n\nHe has no name. He has a signal pointing 340 kilometres northeast, steady as a compass, and a number counting toward something he cannot yet see, and a journal on the planning table with a dark blue cover and one hundred and eighty blank pages, and the ceiling, and the floor.\n\nHe presses his right palm flat against the floor. Cold composite. Slightly textured. He presses harder. The floor pushes back.", "cover": "Novels/The Last Beacon/The Last Beacon.png"}, {"id": 3, "title": "The Veil of Shadows", "genre": "Epic Fantasy", "type": "Novel", "tagline": "They say silence is peace. But I've seen what festers in silence.", "desc": "Cael's journey through the Trial of Frost — an outcast warrior who learns to forge resilience from silence, weaponize ancient shadows, and reclaim his ancestral voice in a world commanded by frost kings.", "excerpt": "PREFACE\n\nFor the unseen ones — the broken who kept walking, the silenced who kept listening, and the children who learnt to turn shadows into shields.\n\n\"They say silence is peace. But I've seen what festers in silence. I've heard what it hides.\" — Carved on the mountain stones of the Northern Reach.\n\nI never meant to write a story about pain. But I kept coming back to it — not as an enemy, but as a forge. The Trial of Frost does not break a man; it strips him of everything he assumed was essential until only bone and vow remain.\n\nWhen Cael stepped onto the frozen ridge at sunrise, the wind carried no mercy. Below him lay three leagues of jagged black ice. Above him, the iron sky. He drew his breath, cold like needles in his throat, and stepped forward into the mist.", "cover": "Novels/The Veil of Shadows/ChatGPT Image May 4, 2026, 11_41_39 PM.png"}, {"id": 4, "title": "What the Buffalo Carry", "genre": "Literary Fiction", "type": "Novella", "tagline": "The first stories we are told become the rooms we live in.", "desc": "A seven-year-old boy counts stars from a dusty rooftop while listening to his great-grandmother's stories of the migrating buffalo — an intimate exploration of inheritance, generational memory, and cultural weight.", "excerpt": "PART ONE: THE ROOF\n\nChapter One: Uncle Moon\n\nThe night my great-grandmother first told me about the buffalo, the sky was doing something I had never seen it do before. It was not black, and it was not blue. It was the color of a bruised plum, swollen with clouds that had travelled all the way from the northern mountains without dropping a single bead of rain.\n\nWe sat on the rooftop on rope cots that creaked every time one of us shifted our weight. She was ninety-one, though she claimed ninety-four when she wanted people to listen and eighty-eight when she wanted to climb the stairs unassisted.\n\n\"Look up, boy,\" she said, tapping her cane against the clay parapet. \"You see that empty patch between the three bright stars? That is where the herd runs. They carry the memories people were too frightened to keep.\"\n\nI looked up until my neck ached. I could not see any buffalo. But I could hear the wind moving through the electric wires above our street, humming like a low bell.", "cover": "Novels/What the Buffalo Carry/What the Buffalo Carry.png"}, {"id": 5, "title": "The Quiet Reset", "genre": "Self-Development", "type": "Non-Fiction", "tagline": "Ten days to rebuild what you've been neglecting.", "desc": "A pragmatic, lived-experience 10-day blueprint for overcoming overthinking, reclaiming phone focus, building effortless morning friction, and managing energy over raw hours.", "excerpt": "DAYS 1–2: STOP OVERTHINKING\n\nThere is a version of you that never starts. Not because you are lazy — you are not. Not because you do not care — you care enormously. You sit with your task. You think about it from every angle. You imagine starting. You plan how you would start if you were going to start. And then, somehow, the day ends and the thing is still there, exactly as you left it, waiting.\n\nOverthinking is not a personality trait; it is a fear of imperfection masked as diligence. In these ten days, we dismantle the perfection trap by introducing high-velocity, low-stakes action protocols.\n\nRule 1: If an action takes under two minutes, execute immediately.\nRule 2: Never deliberate on a decision with low reversibility cost for longer than sixty seconds.", "cover": "Novels/The Quiet Reset/The Quiet Reset.jpg"}, {"id": 6, "title": "The Record Survives", "genre": "Historical Fiction", "type": "Novel", "tagline": "Witnessing matters. Because what is recorded outlives what is destroyed.", "desc": "A sweeping historical novel following an archivist across wartime Europe who preserves clandestine letters, forgotten blueprints, and suppressed voices from being erased by totalitarian regimes.", "excerpt": "ACT 1: THE HIDDEN ROOM\n\nChapter One: A Wise Man Feareth\n\nHe was nine, and the attic was the safest room in the house: forgotten, obscure, inert. It held its breath, and so did he. Not clean silence. Silence thick with dust, cedar resin, and the dry tang of old paper turning yellow under thirty summers of uninsulated heat.\n\n\"Witnessing matters,\" his uncle had written in the margins of the ledger. \"Because if you look at something and then record that you looked, you've done something to it — something that changes what it is.\"\n\nBetween two rafters beneath the eastern gable lay a tin biscuit box. Inside: eighty-four letters wrapped in oiled cloth, twelve blueprint negatives on glass, and a pocket watch that ticked only when held upside down. If the soldiers searched the cellar, they would find coal. If they searched the pantry, they would find salt. But they would not look up.", "cover": "Novels/The Record Survives/The Record Survives.png"}, {"id": 7, "title": "Children of Pain", "genre": "Literary Drama", "type": "Novel", "tagline": "Some wounds do not heal into scars; they heal into armor.", "desc": "A piercing family saga exploring three generations of migrants navigating industrial shifts, grief, unexpressed tenderness, and the silent covenants made to protect the next generation.", "excerpt": "PROLOGUE: THE FOUNDRY SHIFT\n\nThe iron did not care who poured it. In the winter of 1974, the floor of the northern foundry remained twenty degrees below freezing until the first furnace tapped at six in the morning.\n\nRashid stood at the ladle with his coat buttoned to the chin. His knuckles were permanently stained grey with carbon dust. When his daughter was born three thousand miles away, he received the news via a five-word telegram delivered by the foreman during a lunch break.\n\nHe folded the paper twice, slipped it beneath the band of his wool cap against his forehead, and picked up his tongs. He worked twelve hours without speaking. That evening, he bought a single loaf of white bread and walked through the sleet back to the brick tenement.", "cover": "Novels/Children of Pain/Children of Pain.jpg"}, {"id": 8, "title": "Shavings", "genre": "Literary Fiction", "type": "Novella", "tagline": "The art of what gets planed away in pursuit of form.", "desc": "An intimate novella exploring a master woodworker and his estranged apprentice as they restore an 18th-century pipe organ in an isolated coastal cathedral before winter sets in.", "excerpt": "CHAPTER ONE: THE PLANE\n\nThe cedar curls fell like parchment ribbons onto the stone flags of the nave. With every stroke of the hand plane, the timber gave up a scent that was half forest, half cathedral incense.\n\n\"Listen to the blade,\" Master Brennan said without looking up from the joinery table. \"If it chatters, your angle is proud. If it bites too deep, you are thinking about yourself instead of the grain.\"\n\nJulian adjusted his grip on the rosewood tote. His palms were blistered from three days of squaring balks of seasoned pine. High in the clerestory, the Atlantic gale rattled the leaded glass, but down here on the choir floor, the only sound was the steady whisper of steel shaving wood down to the thousandth of an inch.", "cover": "Novels/Shavings/shavings_cover.png"}];
+const TECH_PROJECTS_DATA = [{"id": "launcher", "title": "DreamsLab Cyber Launcher", "subtitle": "Chrome Multi-Profile Link Vault", "status": "Live", "badgeClass": "badge-dark", "num": "01", "desc": "A standalone Windows desktop app that acts as an encrypted personal link vault with full multi-account Chrome profile management. Save your important links, notes and account context per Google profile, then launch any Chrome account in one click. Protected with AES-256-GCM encryption.", "features": ["AES-256-GCM encrypted vault", "13+ Chrome profile support", "Links and notes per account", "1-click Chrome profile launch", "GitHub Gist cloud sync", "Web and desktop app versions"], "tech": ["Electron", "Node.js", "AES-256-GCM", "Web Crypto API", "Chrome API", "Windows", "GitHub Pages"], "hasLinks": true, "downloadUrl": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe", "webUrl": "https://abdullahinayat24-lang.github.io/link-launcher/", "githubUrl": "https://github.com/abdullahinayat24-lang/link-launcher"}, {"id": "mythos", "title": "Mythos Encyclopedia", "subtitle": "Global Gods, Myths & Folklore Platform", "status": "Mobile & Web App", "badgeClass": "badge-outline", "num": "02", "desc": "A deep cross-platform encyclopedia cataloging 50+ world mythologies and thousands of deities from Greek, Norse, and Egyptian to Hindu, Celtic, Aztec, Japanese, African, and urban folklore. Features rich mythological dossiers, daily deity notifications, interactive world mythology atlas, sacred objects collection, and a 4-tier mythology quiz with global leaderboards.", "features": ["50+ Pantheons and thousands of deities", "Interactive World Mythology Atlas", "Daily Deity notifications & Story of the Day", "Sacred Objects and Mythological Relics", "4-Level Quiz Engine with Leaderboards", "Full Offline Caching & Local Storage"], "tech": ["Ionic / Capacitor", "Vue.js / Vite", "TypeScript", "SQLite", "Wikipedia REST API", "Android SDK"], "hasLinks": false}, {"id": "timeline", "title": "World History & Mythology Timeline", "subtitle": "Chronological Multi-Track Engine (10,000 BCE – 1800 CE)", "status": "Web Platform", "badgeClass": "badge-outline", "num": "03", "desc": "An interactive, high-contrast, multi-track chronological timeline connecting global civilizations, founding epics, and legendary writers across 12 millennia. Features independent box zoom controls, Google Photos style epoch scrubber, continuous regional vertical history spines, middle-mouse drag panning, in-window story reader with multi-act chapters, and AI Text-to-Speech narration.", "features": ["10,000 BCE to 1800 CE Continuous Timeline", "Independent Card Zoom (0.65x to 1.5x)", "Google Photos Style Date Scrubber", "In-Window Story Reader with Multi-Act Breakdown", "AI Voice Narration (Text-to-Speech)", "Automated Web Story Harvester Crawler"], "tech": ["JavaScript (ES6+)", "HTML5 Canvas / DOM", "CSS Grid", "Python Crawler", "Wikimedia REST API", "Cloudflare Pages"], "hasLinks": false}, {"id": "psych", "title": "Psychology Lecture Knowledge Platform", "subtitle": "Multilingual ASR, Diarization & Semantic Topic Graph", "status": "Production-Ready", "badgeClass": "badge-dark", "num": "04", "desc": "An end-to-end academic lecture capture and knowledge exploration platform. Features a real-time chunked audio recording pipeline with fault-tolerant uploads, speaker diarization (pyannote), multilingual speech-to-text (Whisper), AI-generated structured lecture analyses with teacher approval workflows, interactive topic relation graphs, student confusion tracking, and strict server-side RBAC.", "features": ["Fault-Tolerant Chunked Audio Recording", "Speaker Diarization & Audio Streaming", "AI Lecture Synthesis & Teacher Approval Flow", "Semantic Topic Graph & Occurrence Timelines", "Private Student Confusion & Q&A Tracker", "Server-Enforced RBAC & Ownership Security"], "tech": ["Next.js 14 (App Router)", "TypeScript", "PostgreSQL", "Prisma ORM", "NextAuth", "Whisper ASR", "pyannote", "Claude API"], "hasLinks": false}, {"id": "onboardflow", "title": "OnboardFlow", "subtitle": "Client Onboarding Automation SaaS for Agencies", "status": "Full-Stack SaaS", "badgeClass": "badge-outline", "num": "05", "desc": "A production-ready agency client onboarding SaaS that turns signed clients into project-ready clients automatically. Eliminates chaotic email threads and manual intake forms with a single branded, intelligent onboarding link. Features token-based zero-login client wizard, dynamic questionnaire builder, deliverables checklist, contract uploader, AI-powered project brief generation (Claude 3.5 Sonnet / GPT-4o), shareable handoff packages, and automated reminder crons.", "features": ["Zero-Login Token Wizard (/onboard/[token])", "Dynamic Drag-and-Drop Questionnaire Builder", "AI Executive Brief Generation (Claude / GPT-4o)", "Shareable Client Handoff Package & PDF Export", "White-Label Agency Branding & Color Engine", "Automated Inactivity Nudge & Reminder Cron"], "tech": ["Next.js 14", "TypeScript", "Supabase Auth & DB", "Tailwind CSS", "Anthropic Claude 3.5", "Resend API", "Vercel Cron"], "hasLinks": false}, {"id": "medicare", "title": "MediCare AI Companion", "subtitle": "Ireland HPRA Rx & OTC Multi-Disease Scheduler", "status": "Healthcare Web App", "badgeClass": "badge-outline", "num": "06", "desc": "Clinical healthcare companion and medication management system engineered specifically for Ireland's HPRA drug classification (POM Prescription-Only Medicine vs OTC Over-The-Counter). Features multi-disease automated dosing schedules, drug-drug interaction alerts, personalized dietary and exercise guidelines, one-click PDF prescription export, and verified medical citations directly linked to PubMed literature.", "features": ["Ireland HPRA POM vs OTC Drug Classification", "Multi-Disease Synchronized Dosing Schedules", "Real-Time Drug Interaction & Contraindication Checks", "Gemini AI Clinical Care & Wellness Assistant", "Instant Print-Ready Schedule & PDF Export", "Verified PubMed Biomedical Research Citations"], "tech": ["Vanilla JS (ES6+)", "HTML5 / CSS3", "Gemini AI API", "Ireland HPRA Drug Registry", "PubMed BioC API"], "hasLinks": false}, {"id": "ledger", "title": "Ledger Command Deck", "subtitle": "Glassmorphic Personal Life Operating System & Finances", "status": "Live Dashboard", "badgeClass": "badge-dark", "num": "07", "desc": "A personal command deck and life OS built with precision glassmorphic aesthetics. Unifies double-entry financial ledger tracking with cash-flow analytics, habit formation monitoring, TV series and season episode trackers, structured knowledge taxonomy across psychology, philosophy, and history, markdown scratchpads, and custom theme switchers.", "features": ["Double-Entry Financial Ledger & Cash Analytics", "Daily Habit Streaks & Momentum Tracking", "TV Series, Seasons & Episode Tracker", "Knowledge Topic Hierarchy & Deep Notes", "Glassmorphism UI & Custom Palettes", "100% Client-Side LocalStorage / IndexedDB Privacy"], "tech": ["Vanilla JavaScript", "CSS Custom Properties", "Glassmorphism UI", "HTML5 Canvas", "IndexedDB / LocalStorage"], "hasLinks": false}, {"id": "vapes", "title": "Vapes Quantity Stock Manager", "subtitle": "Bilingual Retail Inventory & Stock Intelligence System", "status": "Retail Cloud App", "badgeClass": "badge-outline", "num": "08", "desc": "Fast, high-density retail stock management and inventory tracking web application featuring full bilingual English and Urdu Nastaliq support. Built for high-volume retail environments with real-time stock counters, rapid batch item intake, low-inventory threshold notifications, category and brand filters, instant search, and export capabilities.", "features": ["Full English & Urdu Nastaliq Bilingual Interface", "Real-Time Stock Increment / Decrement Pipeline", "Automated Low-Stock & Reorder Alerts", "Rapid Batch Intake & Barcode / SKU Tagging", "Instant Sub-Second Search & Multi-Filter Matrix", "Dark / Light High-Contrast Retail Themes"], "tech": ["Vanilla JavaScript", "CSS3 Design System", "DM Mono", "Noto Nastaliq Urdu", "Cloudflare Pages"], "hasLinks": false}, {"id": "repair", "title": "IDFL Repair Price Matrix", "subtitle": "Multi-Device Hardware Repair Quoting System", "status": "Live Quoting Engine", "badgeClass": "badge-outline", "num": "09", "desc": "Comprehensive enterprise hardware repair price estimation and quoting system built for IDFL. Provides instant sub-second search across hundreds of smartphone, tablet, laptop, and gaming console models, dynamic component pricing breakdowns (OLED screens, batteries, charging ports, liquid damage, logic boards), margin and labor calculation, and glassmorphic UI.", "features": ["500+ Device Models (iPhone, Samsung, iPad, Mac, Consoles)", "Component-Level Pricing Matrix (Screen, Battery, Board)", "Automated Labor & Profit Margin Calculation", "Instant Sub-Second Fuzzy Search Filter", "Multi-Currency & Tax Estimation Engine", "Responsive Glassmorphic Dark / Light Architecture"], "tech": ["Vanilla JS", "Space Grotesk", "IBM Plex Mono", "Responsive CSS3 Grid", "Cloudflare Pages"], "hasLinks": false}];
 const ARTICLES_DATA = [{"id": 1, "title": "Project Concept: Contract Killers", "category": "Game Design & Tactics", "date": "May 3, 2026", "tagline": "A top-down real-time tactics game about running a secret contract-killing organization.", "desc": "Contract Killers is a top-down real-time tactics and strategy game inspired by Commandos, cyberpunk-themed tactical games, and stealth-based assassination mechanics. The player runs a secret organization that accepts missions for money, managing specialists across high-stakes infiltration objectives.", "url": "HTML/blog-contract-killers.html", "tags": ["Unreal Engine", "Tactics", "Low-Poly", "Story Branching"]}, {"id": 2, "title": "Why Every Aspiring Game Developer Should Start Small", "category": "Development Philosophy", "date": "Jun 3, 2026", "tagline": "A short reflection on scope, prototypes, and finishing what you start.", "desc": "Many people dream of creating the next big game with massive open worlds. However, starting small allows developers to focus on core mechanics, finish rapidly, build confidence, and discover gameplay viability before investing months or years into complex systems.", "url": "HTML/blog-start-small.html", "tags": ["Game Dev", "Philosophy", "Prototyping", "Scope Control"]}, {"id": 3, "title": "Why I Started Writing and Creating Games and Apps", "category": "Creative Origins", "date": "May 31, 2026", "tagline": "On curiosity, early influences, and why this portfolio exists.", "desc": "From playing classic PC games in childhood to discovering HTML and CSS, exploring the fascination with how interactive worlds work behind the scenes. An essay on why blending narrative fiction, 3D art, and software development forms a unified creative drive.", "url": "HTML/blog-why-i-started-writing.html", "tags": ["Creative Journey", "Origins", "Cross-Disciplinary", "Technology"]}];
-const GALLERY_DATA = [{"title": "Japanese Traditional Estate", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Japanese Building/Japanese (1).png", "desc": "Atmospheric traditional Japanese architecture"}, {"title": "Japanese Courtyard Pavilion", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Japanese Building/Japanese (2).png", "desc": "Wood and tile architectural details"}, {"title": "Hobbit Dwelling Study", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Hobbit House.png", "desc": "Organic fantasy earth-sheltered home"}, {"title": "Egyptian Deity Composition", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Egyptian Mythology/All Work (14).png", "desc": "Anubis and Egyptian mythological scale study"}, {"title": "Egyptian Temple Hall", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Egyptian Mythology/All Work (2).png", "desc": "Mythological statues in monumental temple"}, {"title": "Minimalist Stone Bathroom", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Bathroom/All Work (16).jpg", "desc": "Matte natural stone architectural interior"}, {"title": "Morning Light Bedroom", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Bedroom/All Work (11).jpg", "desc": "Soft diffuse lighting and linen shaders"}, {"title": "Photorealistic Automotive Exterior", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Car/All Work (10).png", "desc": "Specular curvature and studio lighting"}, {"title": "Gothic Cathedral Light Study", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Church/All Work (19).jpg", "desc": "Volumetric sunlight through stained glass"}, {"title": "Commercial Product Visualization", "cat": "product", "pillar": "Client", "path": "Photos & to upload/Product Render/All Work (3).png", "desc": "Automated studio lighting pipeline render"}, {"title": "Contemporary Residential Living", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Living Room/All Work (35).jpg", "desc": "Modern furniture and warm interior composition"}, {"title": "Minimalist Kitchen Space", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Kitchen/All Work (30).jpg", "desc": "Clean cabinetry and stainless steel textures"}, {"title": "Sci-Fi Command Chamber", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Scifi/All Work (49).jpg", "desc": "Speculative sci-fi interior with glowing conduits"}, {"title": "Subsurface Deep Sea Atmosphere", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Underwater/All Work (27).png", "desc": "Underwater illumination and caustics simulation"}, {"title": "Viking Hall Longhouse", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Viking/All Work (65).png", "desc": "Norse timber textures and hearth lighting"}, {"title": "Abstract Figurative Sculpture", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Sculptures/All Work (81).jpg", "desc": "Monochrome sculptural study"}, {"title": "Client Brand Visual & Identity", "cat": "logo", "pillar": "Client", "path": "Photos & to upload/Logo/All Work (59).png", "desc": "Brand identity and typography design"}, {"title": "Urban Street Scene", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Streets/Street (1).jpg", "desc": "Night rain street reflections and neon glow"}, {"title": "Isometric Room Concept", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Isometric/1.jpg", "desc": "Stylized isometric room model"}, {"title": "Architectural Facade", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Exterior/All Work (136).jpg", "desc": "Exterior facade lighting and materials"}, {"title": "Commercial Beverage Render", "cat": "product", "pillar": "Client", "path": "Photos & to upload/All Work (38).png", "desc": "Condensation and glass refraction render"}, {"title": "Fantasy Valley Vista", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Nature/All Work (66).jpg", "desc": "Expansive landscape and mountain mist"}, {"title": "Architectural Staircase Helix", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Stairs/All Work (44).jpg", "desc": "Geometric concrete spiral staircase"}, {"title": "Underground Tunnel Complex", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Underground/7.jpg", "desc": "Subterranean corridor and moody fixtures"}];
-const SOFTWARE_DATA = [{"id": 1, "name": "Pro Camera Tools", "cat": "Blender Add-on", "price": "$23.99", "desc": "Professional cinematic camera toolkit for Blender. Depth of field presets, focal distance rigs, realistic lens simulation, sensor presets, and render-ready camera rigs.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (10).png"}, {"id": 2, "name": "1-Click Product Render", "cat": "Blender Add-on", "price": "$23.49", "desc": "Automated product rendering pipeline for Blender. Studio lighting rigs, multi-HDRI management, turntable camera paths, backdrop generators, and 1-click commercial batch export.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (3).png"}, {"id": 3, "name": "1-Click LOD Generator", "cat": "Blender Add-on", "price": "$14.49", "desc": "Automatic Level of Detail generator for game development and real-time pipelines. Smart mesh decimation preserving UV boundaries, vertex colors, and materials for Unity and Unreal.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (12).png"}, {"id": 4, "name": "Unity Bridge Exporter", "cat": "Blender Add-on", "price": "$13.99", "desc": "One-click seamless FBX asset export and material binding pipeline from Blender directly into active Unity project directories.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (14).png"}, {"id": 5, "name": "Stable Dropper Physics Tool", "cat": "Blender Add-on", "price": "$13.99", "desc": "Physics-based asset scattering and gravity settling tool for natural clutter and environment dressing without manual positioning.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (23).jpg"}, {"id": 6, "name": "Smart Scene Optimizer", "cat": "Blender Add-on", "price": "$13.99", "desc": "Advanced memory and geometry analyzer that cleans redundant textures, purges orphan data blocks, and reduces viewport lag by up to 60%.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (33).jpg"}, {"id": 7, "name": "Staff Rota Management Tool", "cat": "Web Application", "price": "Free / SaaS", "desc": "Browser-based staff scheduling and shift allocation application built for small businesses, restaurants, and retail stores.", "link": "#", "img": ""}, {"id": 8, "name": "Supply Chain Quantity Tracker", "cat": "Web Application", "price": "Internal Tool", "desc": "Rapid stock count and batch inventory balance tracker created during supply chain operations management at RizPros LTD.", "link": "#", "img": ""}];
+const GALLERY_DATA = [{"title": "Japanese Traditional Estate", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Japanese Building/All Work (7).png", "desc": "Atmospheric wooden pavilion and courtyard"}, {"title": "Japanese Estate Pavilion", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Japanese Building/All Work (9).png", "desc": "Tile roof architectural detail study"}, {"title": "Japanese Tea House Study", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Japanese Building/All Work (26).jpg", "desc": "Wood textures and soft morning illumination"}, {"title": "Hobbit Dwelling Concept", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Hobbit House.png", "desc": "Organic fantasy earth-sheltered home"}, {"title": "Egyptian Deity Composition", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Egyptian Mythology/All Work (102).jpg", "desc": "Anubis and Egyptian mythological scale study"}, {"title": "Egyptian Temple Monolith", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Egyptian Mythology/All Work (103).jpg", "desc": "Sacred mythological statues in ancient hall"}, {"title": "Pharaonic Sanctum", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Egyptian Mythology/All Work (104).jpg", "desc": "Temple hieroglyphs and volumetric lighting"}, {"title": "Ancient Relic Study", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Egyptian Mythology/All Work (105).jpg", "desc": "Mythological artifact and sandstone textures"}, {"title": "Eskimo Pizza Brand Environment", "cat": "3d", "pillar": "Client", "path": "Photos & to upload/Client/Eskimo/Final/1.png", "desc": "Client commercial restaurant 3D architectural visualization"}, {"title": "Eskimo Restaurant Dining Suite", "cat": "3d", "pillar": "Client", "path": "Photos & to upload/Client/Eskimo/Final/2.png", "desc": "Interior architectural lighting and materials"}, {"title": "Eskimo Commercial Service Counter", "cat": "3d", "pillar": "Client", "path": "Photos & to upload/Client/Eskimo/Final/3.png", "desc": "Client hospitality visual design"}, {"title": "Eskimo Architectural Interior", "cat": "3d", "pillar": "Client", "path": "Photos & to upload/Client/Eskimo/Final/5.png", "desc": "Photorealistic restaurant interior rendering"}, {"title": "IDFL Kiosk Architectural Visual", "cat": "3d", "pillar": "Client", "path": "Photos & to upload/Client/IDFL/IDFL Kiosk/Final1.jpg", "desc": "Retail kiosk store design and hardware layout"}, {"title": "IDFL Retail Environment", "cat": "3d", "pillar": "Client", "path": "Photos & to upload/Client/IDFL/IDFL Kiosk/Final 2.jpg", "desc": "Commercial retail lighting and glass textures"}, {"title": "RizPros Operations Visual", "cat": "3d", "pillar": "Client", "path": "Photos & to upload/Client/Rizpros/Image_0010008.png", "desc": "Supply chain logistics and inventory infrastructure"}, {"title": "RizPros Warehouse Staging", "cat": "3d", "pillar": "Client", "path": "Photos & to upload/Client/Rizpros/4.png", "desc": "Commercial supply facility operations design"}, {"title": "Get Connected Store Interior", "cat": "3d", "pillar": "Client", "path": "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823536846267_1538841423_1.webp", "desc": "Modern telecommunications retail visualization"}, {"title": "Get Connected Customer Lounge", "cat": "3d", "pillar": "Client", "path": "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823553459052_1538841423_2.webp", "desc": "Retail showroom lighting and cabinetry"}, {"title": "Commercial Perfume Visualization", "cat": "product", "pillar": "Client", "path": "Photos & to upload/Product Render/Perfume (1).png", "desc": "Photorealistic glass refraction and studio lighting"}, {"title": "Luxury Fragrance Product Render", "cat": "product", "pillar": "Client", "path": "Photos & to upload/Product Render/Perfume (2).png", "desc": "Automated studio lighting pipeline render"}, {"title": "Cosmetic Product Staging", "cat": "product", "pillar": "Client", "path": "Photos & to upload/Product Render/Perfume (3).png", "desc": "Physical shaders and studio backdrop"}, {"title": "Contemporary Living Space", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Living Room/Living Room (1).jpg", "desc": "Warm interior daylighting and fabric textures"}, {"title": "Modern Residential Interior", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Living Room/Final1.png", "desc": "Clean architectural furniture and lighting"}, {"title": "Minimalist Kitchen Space", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Kitchen/All Work (160).jpg", "desc": "Clean cabinetry and stainless steel textures"}, {"title": "Kitchen Island Perspective", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Kitchen/All Work (167).jpg", "desc": "Natural lighting and stone counter finishes"}, {"title": "Stone Bathroom Interior", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Bathroom/All Work (2).jpg", "desc": "Matte natural stone architectural bathroom"}, {"title": "Morning Light Bedroom", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Bedroom/All Work (67).jpg", "desc": "Soft diffuse lighting and linen shaders"}, {"title": "Architectural Facade Study", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Exterior/All Work (128).jpg", "desc": "Exterior facade lighting and materials"}, {"title": "Modern Exterior Villa", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Exterior/All Work (134).jpg", "desc": "Contemporary residential facade"}, {"title": "Geometric Staircase Helix", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Stairs/All Work (44).jpg", "desc": "Geometric concrete spiral staircase"}, {"title": "Urban Rain Street Scene", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Streets/Street (1).jpg", "desc": "Night street reflections and atmospheric illumination"}, {"title": "Historic Street Corridor", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Streets/Street (2).jpg", "desc": "Cobblestone textures and perspective depth"}, {"title": "Viking Hall Longhouse", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Viking/All Work (65).png", "desc": "Norse timber textures and hearth lighting"}, {"title": "Norse Fortress Hall", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Viking/All Work (62).png", "desc": "Historical timber construction and lighting"}, {"title": "Sci-Fi Command Chamber", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Scifi/All Work (6).png", "desc": "Speculative sci-fi interior with glowing conduits"}, {"title": "Sci-Fi Orbital Hub", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Scifi/All Work (11).png", "desc": "Hard-surface modeling and atmospheric glow"}, {"title": "Sci-Fi Laboratory Interior", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Scifi/All Work (45).png", "desc": "Modular sci-fi environmental assets"}, {"title": "Subsurface Deep Sea Atmosphere", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Underwater/All Work (27).png", "desc": "Underwater illumination and caustics simulation"}, {"title": "Underground Metro Tunnel", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Underground/7.jpg", "desc": "Subterranean corridor and moody fixtures"}, {"title": "Fantasy Mountain Valley", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Nature/All Work (16).png", "desc": "Expansive landscape and atmospheric mist"}, {"title": "Autumn Woodland Vista", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Nature/All Work (39).png", "desc": "Volumetric sunlight through forest canopy"}, {"title": "Alpine Wilderness Study", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Nature/All Work (41).png", "desc": "Foliage simulation and terrain shaders"}, {"title": "Abstract Figurative Sculpture", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Sculptures/All Work (52).png", "desc": "Monochrome sculptural character study"}, {"title": "Classical Heroic Sculpture", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Sculptures/All Work (55).PNG", "desc": "Digital clay anatomy and drapery study"}, {"title": "Surreal Geometric Dreamscape", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Surrealism/All Work (34).png", "desc": "Surreal architectural forms and clean light"}, {"title": "Surrealist Horizon Study", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Surrealism/All Work (36).png", "desc": "Metaphysical landscape and geometric shadows"}, {"title": "Brand Identity Visual", "cat": "logo", "pillar": "Client", "path": "Photos & to upload/Logo/All Work (17).png", "desc": "Commercial typography and mark design"}, {"title": "Brand Emblem Concept", "cat": "logo", "pillar": "Client", "path": "Photos & to upload/Logo/2.PNG", "desc": "Vector identity and corporate symbol"}, {"title": "Anatomical Sketch Study", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Sketch/All Work (2).jpeg", "desc": "Traditional and digital drawing technique study"}, {"title": "Atmospheric Sketch Concept", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Sketch/All Work (63).jpg", "desc": "Expressive compositional value drawing"}];
+const SOFTWARE_DATA = [{"id": 1, "name": "Pro Camera Tools", "cat": "Blender Add-on", "price": "$23.99", "desc": "Professional cinematic camera toolkit for Blender. Depth of field presets, focal distance rigs, realistic lens simulation, sensor presets, and render-ready camera rigs.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (10).png"}, {"id": 2, "name": "1-Click Product Render", "cat": "Blender Add-on", "price": "$23.49", "desc": "Automated product rendering pipeline for Blender. Studio lighting rigs, multi-HDRI management, turntable camera paths, backdrop generators, and 1-click commercial batch export.", "link": "https://blendermarket.com", "img": "Photos & to upload/Product Render/Perfume (1).png"}, {"id": 3, "name": "1-Click LOD Generator", "cat": "Blender Add-on", "price": "$14.49", "desc": "Automatic Level of Detail generator for game development and real-time pipelines. Smart mesh decimation preserving UV boundaries, vertex colors, and materials for Unity and Unreal.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (12).jpg"}, {"id": 4, "name": "Unity Bridge Exporter", "cat": "Blender Add-on", "price": "$13.99", "desc": "One-click seamless FBX asset export and material binding pipeline from Blender directly into active Unity project directories.", "link": "https://blendermarket.com", "img": "Photos & to upload/Scifi/All Work (6).png"}, {"id": 5, "name": "Stable Dropper Physics Tool", "cat": "Blender Add-on", "price": "$13.99", "desc": "Physics-based asset scattering and gravity settling tool for natural clutter and environment dressing without manual positioning.", "link": "https://blendermarket.com", "img": "Photos & to upload/Japanese Building/All Work (7).png"}, {"id": 6, "name": "Smart Scene Optimizer", "cat": "Blender Add-on", "price": "$13.99", "desc": "Advanced memory and geometry analyzer that cleans redundant textures, purges orphan data blocks, and reduces viewport lag by up to 60%.", "link": "https://blendermarket.com", "img": "Photos & to upload/Scifi/All Work (11).png"}, {"id": 7, "name": "Staff Rota Management Tool", "cat": "Web Application", "price": "Production Tool", "desc": "Browser-based staff scheduling and shift allocation application built for small businesses, restaurants, and retail stores with automated hour tallying and shift swapping.", "link": "#", "img": "Photos & to upload/Client/IDFL/IDFL Kiosk/Final1.jpg"}, {"id": 8, "name": "Supply Chain Quantity Tracker", "cat": "Web Application", "price": "Internal SaaS", "desc": "Rapid stock count and batch inventory balance tracker created during supply chain operations management at RizPros LTD for high-velocity warehousing.", "link": "#", "img": "Photos & to upload/Client/Rizpros/Image_0010008.png"}];
 const EXPERIENCE_DATA = [{"id": 1, "company": "IDFL International Ltd", "role": "Software Engineer", "start": "Sep 2023", "end": "Present", "tags": ["Python", "JavaScript", "Software", "3D Automation"]}, {"id": 2, "company": "Hashage Ireland", "role": "Senior Video Editor & Motion Designer", "start": "Feb 2023", "end": "Present", "tags": ["Video", "Post-Production", "Brand Strategy"]}, {"id": 3, "company": "Dublin Branding Agency", "role": "Video & Creative Specialist", "start": "Jun 2020", "end": "Present", "tags": ["Video", "Creative Direction", "Motion"]}, {"id": 4, "company": "RizPros LTD", "role": "Supply Chain Manager", "start": "Nov 2021", "end": "Aug 2023", "tags": ["Supply Chain", "Inventory Ops", "Process Automation"]}, {"id": 5, "company": "Digiworld Ireland", "role": "Digital Media Manager", "start": "Feb 2021", "end": "Aug 2022", "tags": ["Digital Media", "Content", "Marketing"]}, {"id": 6, "company": "GH Industry", "role": "Assistant Procurement Manager", "start": "May 2016", "end": "Jun 2018", "tags": ["Procurement", "Operations", "Logistics"]}, {"id": 7, "company": "UET Taxila", "role": "Graphic Design & Visualization Freelance", "start": "Jun 2012", "end": "Sep 2016", "tags": ["3D Modeling", "Graphic Design", "Illustration"]}];
 const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
 
-let novels = loadData('rana_novels_v4', NOVELS_DATA);
-let techProjects = loadData('rana_tech_v4', TECH_PROJECTS_DATA);
-let articles = loadData('rana_articles_v4', ARTICLES_DATA);
-let galleryItems = loadData('rana_gallery_v4', GALLERY_DATA);
-let software = loadData('rana_software_v4', SOFTWARE_DATA);
-let experience = loadData('rana_experience_v4', EXPERIENCE_DATA);
-let clients = loadData('rana_clients_v4', CLIENTS_DATA);
+let novels = loadData('rana_novels_bw', NOVELS_DATA);
+let techProjects = loadData('rana_tech_bw', TECH_PROJECTS_DATA);
+let articles = loadData('rana_articles_bw', ARTICLES_DATA);
+let galleryItems = loadData('rana_gallery_bw', GALLERY_DATA);
+let software = loadData('rana_software_bw', SOFTWARE_DATA);
+let experience = loadData('rana_experience_bw', EXPERIENCE_DATA);
+let clients = loadData('rana_clients_bw', CLIENTS_DATA);
 
 // CURSOR
 const cur = document.getElementById('cur');
@@ -929,20 +910,20 @@ function renderPage(name){
 // 1. HOME RENDERING
 let novelSlideIdx=0, projSlideIdx=0;
 function renderHome(){
-  // Home Tech Spotlight
+  // Home Tech Spotlight (B&W)
   const hTech = document.getElementById('homeTechSpotlight');
   if(hTech){
     hTech.innerHTML = techProjects.slice(0,3).map(p=>`
       <div class="tech-spotlight-card" onclick="showPage('technical-projects')">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <span style="font-size:24px">${p.icon}</span>
-          <span class="badge-status badge-${p.statusType||'cyan'}">${p.status}</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <span style="font-family:var(--mono);font-size:11px;color:var(--ink4)">[ ${p.num} ]</span>
+          <span class="badge-pill ${p.badgeClass}">${p.status}</span>
         </div>
-        <h3 style="color:#fff;font-size:20px;font-weight:700;margin-bottom:4px;font-family:var(--display)">${p.title}</h3>
-        <div style="font-family:var(--mono);font-size:11px;color:#8b95a5;margin-bottom:12px">${p.subtitle}</div>
-        <p style="font-size:13px;color:#9aa5ba;line-height:1.6;margin-bottom:16px">${p.desc.substring(0,130)}â€¦</p>
+        <h3 style="color:var(--ink);font-size:21px;font-weight:400;margin-bottom:4px;font-family:var(--serif)">${p.title}</h3>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:12px">${p.subtitle}</div>
+        <p style="font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:16px">${p.desc.substring(0,130)}…</p>
         <div class="tech-tags-wrap">
-          ${(p.tech||[]).slice(0,4).map(t=>`<span class="tech-tag ${t.type||''}">${t.name}</span>`).join('')}
+          ${(p.tech||[]).slice(0,4).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
         </div>
       </div>
     `).join('');
@@ -957,7 +938,7 @@ function renderHome(){
           <img src="${n.cover}" alt="${n.title}" onerror="this.style.display='none'">
         </div>
         <div class="novel-info">
-          <div class="novel-genre">${n.genre} Â· ${n.type}</div>
+          <div class="novel-genre">${n.genre} · ${n.type}</div>
           <div class="novel-name">${n.title}</div>
           <div class="novel-sub">${n.tagline}</div>
         </div>
@@ -970,12 +951,13 @@ function renderHome(){
   if(swS){
     swS.innerHTML = software.slice(0,5).map(s=>`
       <div class="sw-item" onclick="showPage('software')">
+        <img class="sw-thumb" src="${s.img}" alt="${s.name}" onerror="this.style.display='none'">
         <div>
           <div class="sw-item-meta">
             <span class="sw-cat">${s.cat}</span>
           </div>
           <div class="sw-name">${s.name}</div>
-          <div class="sw-desc">${s.desc.substring(0,90)}â€¦</div>
+          <div class="sw-desc">${s.desc.substring(0,85)}…</div>
         </div>
         <div class="sw-price">${s.price}</div>
       </div>
@@ -991,7 +973,7 @@ function renderHome(){
           <img src="${g.path}" alt="${g.title}" onerror="this.style.display='none'">
         </div>
         <div class="proj-info">
-          <div class="proj-cat">${g.pillar} Â· ${g.cat}</div>
+          <div class="proj-cat">${g.pillar} · ${g.cat}</div>
           <div class="proj-name">${g.title}</div>
           <div class="proj-desc">${g.desc}</div>
         </div>
@@ -1005,7 +987,7 @@ function renderHome(){
     haGrid.innerHTML = articles.map(a=>`
       <div class="article-card" onclick="window.location.href='${a.url}'">
         <div>
-          <div class="article-meta">${a.category} Â· ${a.date}</div>
+          <div class="article-meta">${a.category} · ${a.date}</div>
           <h3 class="article-title">${a.title}</h3>
           <p class="article-desc">${a.desc}</p>
         </div>
@@ -1017,7 +999,7 @@ function renderHome(){
 
 function slideNovels(dir){
   const s = document.getElementById('novelSlider');
-  const cardW = 278;
+  const cardW = 266;
   const max = Math.max(0, novels.length - 3);
   novelSlideIdx = Math.max(0, Math.min(max, novelSlideIdx + dir));
   s.style.transform = `translateX(-${novelSlideIdx * cardW}px)`;
@@ -1025,7 +1007,7 @@ function slideNovels(dir){
 
 function slideProjects(dir){
   const s = document.getElementById('projGrid');
-  const cardW = 342;
+  const cardW = 332;
   const max = Math.max(0, galleryItems.length - 3);
   projSlideIdx = Math.max(0, Math.min(max, projSlideIdx + dir));
   s.style.transform = `translateX(-${projSlideIdx * cardW}px)`;
@@ -1040,10 +1022,10 @@ function renderNovels(){
       <div class="nv-cover">
         <img src="${n.cover}" alt="${n.title}" onerror="this.style.display='none'">
       </div>
-      <div class="nv-genre">${n.genre} Â· ${n.type}</div>
+      <div class="nv-genre">${n.genre} · ${n.type}</div>
       <div class="nv-title">${n.title}</div>
       <div class="nv-tagline">${n.tagline}</div>
-      <span class="nv-btn">Read Excerpt â†’</span>
+      <span class="nv-btn">Read Excerpt →</span>
     </div>
   `).join('');
 }
@@ -1051,7 +1033,7 @@ function renderNovels(){
 function openNovelModal(idx){
   const n = novels[idx];
   document.getElementById('modalCoverImg').src = n.cover;
-  document.getElementById('modalGenre').textContent = n.genre + ' Â· ' + n.type;
+  document.getElementById('modalGenre').textContent = n.genre + ' · ' + n.type;
   document.getElementById('modalTitle').textContent = n.title;
   document.getElementById('modalSub').textContent = n.tagline;
   document.getElementById('modalBody').textContent = n.excerpt || n.desc;
@@ -1064,55 +1046,43 @@ function closeNovelModal(){
   document.body.style.overflow = '';
 }
 
-// 3. TECHNICAL PROJECTS PAGE
+// 3. TECHNICAL PROJECTS PAGE (CLEAN B&W)
 function renderTechProjects(){
   const c = document.getElementById('techCardsGrid');
   if(!c) return;
   c.innerHTML = techProjects.map(p=>`
     <div class="dls-card-holder">
       <div class="dls-card" id="card-${p.id}">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#00e5ff,transparent)"></div>
-        
-        <div data-layer="1" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:18px">
-          <div style="display:flex;align-items:center;gap:16px">
-            <div style="width:50px;height:50px;background:rgba(0,229,255,0.12);border:1px solid rgba(0,229,255,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px">
-              ${p.icon}
-            </div>
-            <div>
-              <h2 style="color:#fff;font-size:22px;margin:0 0 4px;font-weight:700;font-family:var(--display)">${p.title}</h2>
-              <div style="font-family:var(--mono);font-size:12px;color:#8b95a5">${p.subtitle}</div>
-            </div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+          <div>
+            <div style="font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:4px">[ ${p.num} ]</div>
+            <h2 style="font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);margin:0 0 4px">${p.title}</h2>
+            <div style="font-family:var(--mono);font-size:12px;color:var(--ink3)">${p.subtitle}</div>
           </div>
-          <span class="badge-status badge-${p.statusType||'cyan'}">${p.status}</span>
+          <span class="badge-pill ${p.badgeClass}">${p.status}</span>
         </div>
 
-        <p data-layer="1" style="color:#b7c0d4;font-size:14.5px;line-height:1.75;margin-bottom:20px">${p.desc}</p>
+        <p style="color:var(--ink2);font-size:14px;line-height:1.75;margin-bottom:20px">${p.desc}</p>
 
-        <div data-layer="1" style="background:rgba(0,229,255,0.03);border:1px solid rgba(0,229,255,0.1);border-radius:12px;padding:16px 20px;margin-bottom:20px">
-          <div style="font-family:var(--mono);font-size:11px;color:#c9a8ff;letter-spacing:.1em;margin-bottom:12px">KEY FEATURES</div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:16px 20px;margin-bottom:20px">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:10px">KEY FEATURES</div>
           <div class="feature-grid">
             ${(p.features||[]).map(f=>`<div class="feature-item">${f}</div>`).join('')}
           </div>
         </div>
 
-        <div data-layer="1" style="margin-bottom:${p.hasLinks ? '24px' : '6px'}">
-          <div style="font-family:var(--mono);font-size:11px;color:#c9a8ff;letter-spacing:.1em;margin-bottom:10px">TECH STACK</div>
+        <div style="margin-bottom:${p.hasLinks ? '22px' : '4px'}">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px">TECH STACK</div>
           <div class="tech-tags-wrap">
-            ${(p.tech||[]).map(t=>`<span class="tech-tag ${t.type||''}">${t.name}</span>`).join('')}
+            ${(p.tech||[]).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
           </div>
         </div>
 
         ${p.hasLinks ? `
-        <div data-layer="2" style="display:flex;gap:12px;flex-wrap:wrap">
-          <a href="${p.downloadUrl}" class="dls-btn" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#00c2e0,#0080ff);color:#04121a;padding:11px 22px;border-radius:6px;text-decoration:none;font-weight:700;font-size:13.5px">
-            â¬‡ Download for Windows
-          </a>
-          <a href="${p.webUrl}" target="_blank" class="dls-btn" style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,229,255,0.06);color:#5fe8ff;border:1px solid rgba(0,229,255,0.4);padding:11px 22px;border-radius:6px;text-decoration:none;font-weight:600;font-size:13.5px">
-            ðŸŒ Open Web App
-          </a>
-          <a href="${p.githubUrl}" target="_blank" class="dls-btn" style="display:inline-flex;align-items:center;gap:8px;background:rgba(180,127,255,0.05);color:#c9a8ff;border:1px solid rgba(180,127,255,0.35);padding:11px 22px;border-radius:6px;text-decoration:none;font-size:13.5px">
-            ðŸ“‚ GitHub
-          </a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;padding-top:8px">
+          <a href="${p.downloadUrl}" class="dls-btn dls-btn-primary">Download for Windows</a>
+          <a href="${p.webUrl}" target="_blank" class="dls-btn dls-btn-outline">Open Web App →</a>
+          <a href="${p.githubUrl}" target="_blank" class="dls-btn dls-btn-outline">GitHub Repo →</a>
         </div>` : ''}
       </div>
     </div>
@@ -1130,7 +1100,7 @@ function renderGallery(filter){
     <div class="g-card" onclick="openLightbox(${i})">
       <img src="${g.path}" alt="${g.title}" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
       <div class="g-card-info">
-        <div class="g-cat-label">${g.cat} Â· ${g.pillar}</div>
+        <div class="g-cat-label">${g.cat} · ${g.pillar}</div>
         <div class="g-title">${g.title}</div>
       </div>
     </div>
@@ -1148,7 +1118,7 @@ function openLightbox(i){
   lbIdx = i;
   const g = lbImages[i];
   document.getElementById('lbImg').src = g.path;
-  document.getElementById('lbCaption').textContent = g.title + ' â€” ' + (g.desc || '');
+  document.getElementById('lbCaption').textContent = g.title + ' — ' + (g.desc || '');
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1170,7 +1140,7 @@ function lbNav(dir){
   openLightbox(lbIdx);
 }
 
-// 5. SOFTWARE PAGE
+// 5. SOFTWARE PAGE (B&W WITH IMAGES)
 function renderSoftware(){
   const c = document.getElementById('softwareContent');
   if(!c) return;
@@ -1192,6 +1162,7 @@ function swCard(s){
   return `
     <div class="sw-product-card">
       <div>
+        ${s.img ? `<img class="sw-img-banner" src="${s.img}" alt="${s.name}" onerror="this.style.display='none'">` : ''}
         <div class="sw-product-meta">
           <span class="sw-product-type">${s.cat}</span>
           <span class="sw-product-price">${s.price}</span>
@@ -1199,7 +1170,7 @@ function swCard(s){
         <div class="sw-product-name">${s.name}</div>
         <div class="sw-product-desc">${s.desc}</div>
       </div>
-      ${s.link && s.link !== '#' ? `<a class="sw-product-link" href="${s.link}" target="_blank">View Product â†’</a>` : `<span class="sw-product-link" style="opacity:.45">Available in Pipeline</span>`}
+      ${s.link && s.link !== '#' ? `<a class="sw-product-link" href="${s.link}" target="_blank">View Product →</a>` : `<span class="sw-product-link" style="color:var(--ink4)">Active Production Tool</span>`}
     </div>
   `;
 }
@@ -1211,11 +1182,11 @@ function renderArticles(){
   c.innerHTML = articles.map(a=>`
     <div class="article-card" onclick="window.location.href='${a.url}'">
       <div>
-        <div class="article-meta">${a.category} Â· ${a.date}</div>
+        <div class="article-meta">${a.category} · ${a.date}</div>
         <h3 class="article-title">${a.title}</h3>
         <p class="article-desc">${a.desc}</p>
         <div class="tech-tags-wrap" style="margin-bottom:20px">
-          ${(a.tags||[]).map(t=>`<span class="tech-tag dim">${t}</span>`).join('')}
+          ${(a.tags||[]).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
         </div>
       </div>
       <a class="article-btn" href="${a.url}">Read Article</a>
@@ -1229,7 +1200,7 @@ function renderAbout(){
   if(el){
     el.innerHTML = experience.map(e=>`
       <div class="exp-row">
-        <div class="exp-dates">${e.start} â€” ${e.end}</div>
+        <div class="exp-dates">${e.start} — ${e.end}</div>
         <div>
           <div class="exp-company">${e.company}</div>
           <div class="exp-role">${e.role}</div>
@@ -1262,7 +1233,6 @@ function showToast(msg){
   setTimeout(()=>t.classList.remove('show'), 2500);
 }
 
-// Backend Handlers
 function addNovel(){
   const title = document.getElementById('b-novel-title').value.trim();
   if(!title){ showToast('Title required'); return; }
@@ -1276,7 +1246,7 @@ function addNovel(){
     excerpt: document.getElementById('b-novel-desc').value,
     cover: document.getElementById('b-novel-cover').value || 'Novels/Ten Days in Heaven/20260407_1207_Image Generation_simple_compose_01knksznadeb291cpy5nqgw13c.png'
   };
-  novels.unshift(n); saveData('rana_novels_v4', novels); renderBeNovels(); showToast('Novel added');
+  novels.unshift(n); saveData('rana_novels_bw', novels); renderBeNovels(); showToast('Novel added');
 }
 
 function renderBeNovels(){
@@ -1284,8 +1254,8 @@ function renderBeNovels(){
   if(!c) return;
   c.innerHTML = novels.map((n,i)=>`
     <div class="backend-item">
-      <div><div class="backend-item-title">${n.title}</div><div class="backend-item-sub">${n.genre} Â· ${n.type}</div></div>
-      <button class="bi-btn" onclick="novels.splice(${i},1);saveData('rana_novels_v4',novels);renderBeNovels();showToast('Deleted')">Delete</button>
+      <div><div class="backend-item-title">${n.title}</div><div class="backend-item-sub">${n.genre} · ${n.type}</div></div>
+      <button class="bi-btn" onclick="novels.splice(${i},1);saveData('rana_novels_bw',novels);renderBeNovels();showToast('Deleted')">Delete</button>
     </div>
   `).join('');
 }
@@ -1297,15 +1267,15 @@ function addTechProject(){
     id: 'proj-' + Date.now(),
     title,
     subtitle: document.getElementById('b-tech-sub').value,
-    status: document.getElementById('b-tech-status').value || 'âœ… Live',
-    statusType: 'cyan',
-    icon: 'âš¡',
+    status: document.getElementById('b-tech-status').value || 'Live',
+    badgeClass: 'badge-outline',
+    num: '0' + (techProjects.length + 1),
     desc: document.getElementById('b-tech-desc').value,
     features: ['Custom features configured'],
-    tech: [{name:'JavaScript',type:'cyan'}],
+    tech: ['JavaScript'],
     hasLinks: false
   };
-  techProjects.unshift(p); saveData('rana_tech_v4', techProjects); renderBeTech(); showToast('Project added');
+  techProjects.unshift(p); saveData('rana_tech_bw', techProjects); renderBeTech(); showToast('Project added');
 }
 
 function renderBeTech(){
@@ -1314,7 +1284,7 @@ function renderBeTech(){
   c.innerHTML = techProjects.map((p,i)=>`
     <div class="backend-item">
       <div><div class="backend-item-title">${p.title}</div><div class="backend-item-sub">${p.subtitle}</div></div>
-      <button class="bi-btn" onclick="techProjects.splice(${i},1);saveData('rana_tech_v4',techProjects);renderBeTech();showToast('Deleted')">Delete</button>
+      <button class="bi-btn" onclick="techProjects.splice(${i},1);saveData('rana_tech_bw',techProjects);renderBeTech();showToast('Deleted')">Delete</button>
     </div>
   `).join('');
 }
@@ -1329,7 +1299,7 @@ function addGalleryItem(){
     path: document.getElementById('b-gal-path').value,
     desc: title
   };
-  galleryItems.unshift(g); saveData('rana_gallery_v4', galleryItems); renderBeGallery(); showToast('Image added');
+  galleryItems.unshift(g); saveData('rana_gallery_bw', galleryItems); renderBeGallery(); showToast('Image added');
 }
 
 function renderBeGallery(){
@@ -1337,8 +1307,8 @@ function renderBeGallery(){
   if(!c) return;
   c.innerHTML = galleryItems.slice(0,25).map((g,i)=>`
     <div class="backend-item">
-      <div><div class="backend-item-title">${g.title}</div><div class="backend-item-sub">${g.cat} Â· ${g.pillar}</div></div>
-      <button class="bi-btn" onclick="galleryItems.splice(${i},1);saveData('rana_gallery_v4',galleryItems);renderBeGallery();showToast('Deleted')">Delete</button>
+      <div><div class="backend-item-title">${g.title}</div><div class="backend-item-sub">${g.cat} · ${g.pillar}</div></div>
+      <button class="bi-btn" onclick="galleryItems.splice(${i},1);saveData('rana_gallery_bw',galleryItems);renderBeGallery();showToast('Deleted')">Delete</button>
     </div>
   `).join('');
 }
@@ -1352,9 +1322,10 @@ function addSoftware(){
     cat: document.getElementById('b-sw-cat').value || 'Blender Add-on',
     price: document.getElementById('b-sw-price').value || '$19.99',
     desc: document.getElementById('b-sw-desc').value,
-    link: '#'
+    link: '#',
+    img: ''
   };
-  software.unshift(s); saveData('rana_software_v4', software); renderBeSoftware(); showToast('Product added');
+  software.unshift(s); saveData('rana_software_bw', software); renderBeSoftware(); showToast('Product added');
 }
 
 function renderBeSoftware(){
@@ -1362,8 +1333,8 @@ function renderBeSoftware(){
   if(!c) return;
   c.innerHTML = software.map((s,i)=>`
     <div class="backend-item">
-      <div><div class="backend-item-title">${s.name}</div><div class="backend-item-sub">${s.cat} Â· ${s.price}</div></div>
-      <button class="bi-btn" onclick="software.splice(${i},1);saveData('rana_software_v4',software);renderBeSoftware();showToast('Deleted')">Delete</button>
+      <div><div class="backend-item-title">${s.name}</div><div class="backend-item-sub">${s.cat} · ${s.price}</div></div>
+      <button class="bi-btn" onclick="software.splice(${i},1);saveData('rana_software_bw',software);renderBeSoftware();showToast('Deleted')">Delete</button>
     </div>
   `).join('');
 }
@@ -1375,11 +1346,11 @@ function addExperience(){
     id: Date.now(),
     company,
     role: document.getElementById('b-exp-role').value,
-    start: document.getElementById('b-exp-dates').value.split('â€”')[0] || '2023',
-    end: document.getElementById('b-exp-dates').value.split('â€”')[1] || 'Present',
+    start: document.getElementById('b-exp-dates').value.split('—')[0] || '2023',
+    end: document.getElementById('b-exp-dates').value.split('—')[1] || 'Present',
     tags: ['Software', 'Engineering']
   };
-  experience.unshift(e); saveData('rana_experience_v4', experience); renderBeExp(); showToast('Experience added');
+  experience.unshift(e); saveData('rana_experience_bw', experience); renderBeExp(); showToast('Experience added');
 }
 
 function renderBeExp(){
@@ -1388,7 +1359,7 @@ function renderBeExp(){
   c.innerHTML = experience.map((e,i)=>`
     <div class="backend-item">
       <div><div class="backend-item-title">${e.company}</div><div class="backend-item-sub">${e.role}</div></div>
-      <button class="bi-btn" onclick="experience.splice(${i},1);saveData('rana_experience_v4',experience);renderBeExp();showToast('Deleted')">Delete</button>
+      <button class="bi-btn" onclick="experience.splice(${i},1);saveData('rana_experience_bw',experience);renderBeExp();showToast('Deleted')">Delete</button>
     </div>
   `).join('');
 }
@@ -1396,7 +1367,7 @@ function renderBeExp(){
 function addClient(){
   const name = document.getElementById('b-client-name').value.trim();
   if(!name){ showToast('Name required'); return; }
-  clients.push(name); saveData('rana_clients_v4', clients); renderBeClients();
+  clients.push(name); saveData('rana_clients_bw', clients); renderBeClients();
   document.getElementById('b-client-name').value = ''; showToast('Client added');
 }
 
@@ -1406,7 +1377,7 @@ function renderBeClients(){
   c.innerHTML = clients.map((cl,i)=>`
     <div class="backend-item">
       <div class="backend-item-title">${cl}</div>
-      <button class="bi-btn" onclick="clients.splice(${i},1);saveData('rana_clients_v4',clients);renderBeClients();showToast('Removed')">Remove</button>
+      <button class="bi-btn" onclick="clients.splice(${i},1);saveData('rana_clients_bw',clients);renderBeClients();showToast('Removed')">Remove</button>
     </div>
   `).join('');
 }
@@ -1429,8 +1400,8 @@ if(heroFrame){
   document.addEventListener('mousemove', e => {
     const r = heroFrame.getBoundingClientRect();
     const cx = r.left + r.width/2, cy = r.top + r.height/2;
-    const dx = (e.clientX - cx) / window.innerWidth * 14;
-    const dy = (e.clientY - cy) / window.innerHeight * 10;
+    const dx = (e.clientX - cx) / window.innerWidth * 12;
+    const dy = (e.clientY - cy) / window.innerHeight * 8;
     heroFrame.style.transform = `perspective(800px) rotateY(${dx}deg) rotateX(${-dy}deg)`;
   });
 }
@@ -1441,4 +1412,3 @@ setupCursorHover();
 </script>
 </body>
 </html>
-
