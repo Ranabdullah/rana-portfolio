@@ -876,11 +876,11 @@ const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "W
 function loadData(key, def){ try{const d=localStorage.getItem(key);return d?JSON.parse(d):def}catch(e){return def} }
 function saveData(key, val){ try{localStorage.setItem(key,JSON.stringify(val))}catch(e){} }
 
-let novels = loadData('rana_novels_v7', NOVELS_DATA);
+let novels = loadData('rana_novels_v8', NOVELS_DATA);
 let techProjects = loadData('rana_tech_v6', TECH_PROJECTS_DATA);
 let articles = loadData('rana_articles_v5', ARTICLES_DATA);
 let galleryItems = loadData('rana_gallery_v6', GALLERY_DATA);
-let software = loadData('rana_software_v7', SOFTWARE_DATA);
+let software = loadData('rana_software_v8', SOFTWARE_DATA);
 let experience = loadData('rana_experience_v5', EXPERIENCE_DATA);
 let clients = loadData('rana_clients_v5', CLIENTS_DATA);
 
@@ -1264,7 +1264,7 @@ function addNovel(){
     excerpt: document.getElementById('b-novel-desc').value,
     cover: document.getElementById('b-novel-cover').value || 'Novels/Ten Days in Heaven/20260407_1207_Image Generation_simple_compose_01knksznadeb291cpy5nqgw13c.png'
   };
-  novels.unshift(n); saveData('rana_novels_v7', novels); renderBeNovels(); showToast('Novel added');
+  novels.unshift(n); saveData('rana_novels_v8', novels); renderBeNovels(); showToast('Novel added');
 }
 
 function renderBeNovels(){
@@ -1273,7 +1273,7 @@ function renderBeNovels(){
   c.innerHTML = novels.map((n,i)=>`
     <div class="backend-item">
       <div><div class="backend-item-title">${n.title}</div><div class="backend-item-sub">${n.genre} · ${n.type}</div></div>
-      <button class="bi-btn" onclick="novels.splice(${i},1);saveData('rana_novels_v7',novels);renderBeNovels();showToast('Deleted')">Delete</button>
+      <button class="bi-btn" onclick="novels.splice(${i},1);saveData('rana_novels_v8',novels);renderBeNovels();showToast('Deleted')">Delete</button>
     </div>
   `).join('');
 }
@@ -1343,7 +1343,7 @@ function addSoftware(){
     link: '#',
     img: 'Photos & to upload/Product Render/Perfume (2).png'
   };
-  software.unshift(s); saveData('rana_software_v7', software); renderBeSoftware(); showToast('Product added');
+  software.unshift(s); saveData('rana_software_v8', software); renderBeSoftware(); showToast('Product added');
 }
 
 function renderBeSoftware(){
@@ -1352,7 +1352,7 @@ function renderBeSoftware(){
   c.innerHTML = software.map((s,i)=>`
     <div class="backend-item">
       <div><div class="backend-item-title">${s.name}</div><div class="backend-item-sub">${s.cat} · ${s.price}</div></div>
-      <button class="bi-btn" onclick="software.splice(${i},1);saveData('rana_software_v7',software);renderBeSoftware();showToast('Deleted')">Delete</button>
+      <button class="bi-btn" onclick="software.splice(${i},1);saveData('rana_software_v8',software);renderBeSoftware();showToast('Deleted')">Delete</button>
     </div>
   `).join('');
 }
