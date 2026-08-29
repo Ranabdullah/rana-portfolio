@@ -30,6 +30,26 @@
 html { scroll-behavior:smooth; }
 body { background:var(--bg); color:var(--ink); font-family:var(--sans); overflow-x:hidden; cursor:none; }
 
+/* ==================== INTERACTIVE COLORIZATION & B/W TRANSITIONS ==================== */
+.g-card img, .novel-cover img, .novel-page-cover img, .hero-portrait-frame img,
+.proj-img img, .sw-thumb, .sw-img-banner, .nv-cover img {
+  filter: grayscale(1) contrast(1.08) brightness(0.98);
+  transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+  will-change: filter, transform;
+}
+
+.g-card:hover img, .novel-cover:hover img, .novel-page-card:hover img, .hero-portrait-frame:hover img,
+.proj-card:hover img, .sw-item:hover .sw-thumb, .sw-product-card:hover .sw-img-banner, .nv-cover:hover img {
+  filter: grayscale(0) contrast(1.06) brightness(1.02) !important;
+  transform: scale(1.03);
+}
+
+.g-card, .novel-card, .novel-page-card, .proj-card, .hero-portrait-frame {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+
+
 /* Custom Cursor */
 .cursor {
   position:fixed; width:10px; height:10px; background:#0f1115; border-radius:50%; pointer-events:none; z-index:9999;
@@ -410,6 +430,8 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
 </style>
 </head>
 <body>
+<!-- INTERACTIVE COLORFUL BACKGROUND PARTICLES -->
+<canvas id="bgDotsCanvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:0;opacity:0.85"></canvas>
 
 <!-- CURSOR -->
 <div class="cursor" id="cur"></div>
@@ -877,13 +899,13 @@ const SOFTWARE_DATA = [{"id": 1, "name": "1-Click Product Render Setup", "cat": 
 const EXPERIENCE_DATA = [{"id": 1, "company": "IDFL International Ltd", "role": "Software Engineer", "start": "Sep 2023", "end": "Present", "tags": ["Python", "JavaScript", "Software", "3D Automation"]}, {"id": 2, "company": "Hashage Ireland", "role": "Senior Video Editor & Motion Designer", "start": "Feb 2023", "end": "Present", "tags": ["Video", "Post-Production", "Brand Strategy"]}, {"id": 3, "company": "Dublin Branding Agency", "role": "Video & Creative Specialist", "start": "Jun 2020", "end": "Present", "tags": ["Video", "Creative Direction", "Motion"]}, {"id": 4, "company": "RizPros LTD", "role": "Supply Chain Manager", "start": "Nov 2021", "end": "Aug 2023", "tags": ["Supply Chain", "Inventory Ops", "Process Automation"]}, {"id": 5, "company": "Digiworld Ireland", "role": "Digital Media Manager", "start": "Feb 2021", "end": "Aug 2022", "tags": ["Digital Media", "Content", "Marketing"]}, {"id": 6, "company": "GH Industry", "role": "Assistant Procurement Manager", "start": "May 2016", "end": "Jun 2018", "tags": ["Procurement", "Operations", "Logistics"]}, {"id": 7, "company": "UET Taxila", "role": "Graphic Design & Visualization Freelance", "start": "Jun 2012", "end": "Sep 2016", "tags": ["3D Modeling", "Graphic Design", "Illustration"]}];
 const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
 
-let novels = loadData('rana_novels_v19', NOVELS_DATA);
-let techProjects = loadData('rana_tech_v19', TECH_PROJECTS_DATA);
-let articles = loadData('rana_articles_v19', ARTICLES_DATA);
-let galleryItems = loadData('rana_gallery_v19', GALLERY_DATA);
-let software = loadData('rana_software_v19', SOFTWARE_DATA);
-let experience = loadData('rana_experience_v19', EXPERIENCE_DATA);
-let clients = loadData('rana_clients_v19', CLIENTS_DATA);
+let novels = loadData('rana_novels_v20', NOVELS_DATA);
+let techProjects = loadData('rana_tech_v20', TECH_PROJECTS_DATA);
+let articles = loadData('rana_articles_v20', ARTICLES_DATA);
+let galleryItems = loadData('rana_gallery_v20', GALLERY_DATA);
+let software = loadData('rana_software_v20', SOFTWARE_DATA);
+let experience = loadData('rana_experience_v20', EXPERIENCE_DATA);
+let clients = loadData('rana_clients_v20', CLIENTS_DATA);
 
 // CURSOR
 const cur = document.getElementById('cur');
@@ -1451,6 +1473,127 @@ if(heroFrame){
 // INIT
 renderHome();
 setupCursorHover();
+
+
+// ==================== 1. COLORFUL BACKGROUND PARTICLES ====================
+(function initBackgroundDots(){
+  const canvas = document.getElementById('bgDotsCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+  let mouse = { x: -1000, y: -1000, radius: 140 };
+
+  window.addEventListener('resize', ()=>{
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  window.addEventListener('mousemove', e=>{
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  window.addEventListener('mouseleave', ()=>{
+    mouse.x = -1000;
+    mouse.y = -1000;
+  });
+
+  const colors = [
+    'rgba(0, 229, 255, 0.45)',   // Electric Cyan
+    'rgba(255, 64, 129, 0.45)',   // Rose / Magenta
+    'rgba(255, 179, 0, 0.45)',    // Warm Amber
+    'rgba(105, 240, 174, 0.45)',  // Mint Emerald
+    'rgba(179, 136, 255, 0.45)',  // Celestial Violet
+    'rgba(68, 138, 255, 0.45)'    // Electric Blue
+  ];
+
+  const dotCount = Math.min(55, Math.floor(window.innerWidth / 30));
+  const dots = [];
+
+  for(let i=0; i<dotCount; i++){
+    dots.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      baseX: Math.random() * width,
+      baseY: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+      size: Math.random() * 3.5 + 2.0,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      alpha: Math.random() * 0.35 + 0.15,
+      angle: Math.random() * Math.PI * 2,
+      speed: Math.random() * 0.015 + 0.005
+    });
+  }
+
+  function renderDots(){
+    ctx.clearRect(0, 0, width, height);
+
+    for(let i=0; i<dots.length; i++){
+      const d = dots[i];
+      d.angle += d.speed;
+      d.x += d.vx + Math.cos(d.angle) * 0.4;
+      d.y += d.vy + Math.sin(d.angle) * 0.4;
+
+      // Wrap around edges
+      if(d.x < -20) d.x = width + 20;
+      if(d.x > width + 20) d.x = -20;
+      if(d.y < -20) d.y = height + 20;
+      if(d.y > height + 20) d.y = -20;
+
+      // Mouse repulsion & interaction
+      const dx = mouse.x - d.x;
+      const dy = mouse.y - d.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+
+      if(dist < mouse.radius){
+        const force = (mouse.radius - dist) / mouse.radius;
+        const dirX = dx / dist;
+        const dirY = dy / dist;
+        d.x -= dirX * force * 5.0;
+        d.y -= dirY * force * 5.0;
+      }
+
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
+      ctx.fillStyle = d.color;
+      ctx.shadowBlur = 12;
+      ctx.shadowColor = d.color;
+      ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(renderDots);
+  }
+
+  renderDots();
+})();
+
+// ==================== 2. RANDOM ACCENT GLOW ON CARD HOVER ====================
+function setupRandomColorHover(){
+  const glowColors = [
+    'rgba(0, 229, 255, 0.28)',
+    'rgba(255, 64, 129, 0.28)',
+    'rgba(255, 179, 0, 0.28)',
+    'rgba(105, 240, 174, 0.28)',
+    'rgba(179, 136, 255, 0.28)',
+    'rgba(68, 138, 255, 0.28)'
+  ];
+
+  const cards = document.querySelectorAll('.g-card, .novel-card, .novel-page-card, .proj-card, .hero-portrait-frame');
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', ()=>{
+      const randomColor = glowColors[Math.floor(Math.random() * glowColors.length)];
+      card.style.boxShadow = `0 18px 45px ${randomColor}, 0 4px 12px rgba(0,0,0,0.08)`;
+      card.style.borderColor = randomColor.replace('0.28', '0.65');
+    });
+    card.addEventListener('mouseleave', ()=>{
+      card.style.boxShadow = '';
+      card.style.borderColor = '';
+    });
+  });
+}
+
 </script>
 </body>
 </html>
