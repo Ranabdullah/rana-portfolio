@@ -1,0 +1,10 @@
+﻿.git/
+*.py
+scratch/
+novels_content.txt
+*.mov
+*.mp4
+*.avi
+*.pdf
+*.zip
+*.tar.gz
