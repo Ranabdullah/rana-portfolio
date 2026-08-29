@@ -861,9 +861,9 @@ const SOFTWARE_DATA = [{"id": 1, "name": "1-Click Product Render Setup", "cat": 
 const EXPERIENCE_DATA = [{"id": 1, "company": "IDFL International Ltd", "role": "Software Engineer", "start": "Sep 2023", "end": "Present", "tags": ["Python", "JavaScript", "Software", "3D Automation"]}, {"id": 2, "company": "Hashage Ireland", "role": "Senior Video Editor & Motion Designer", "start": "Feb 2023", "end": "Present", "tags": ["Video", "Post-Production", "Brand Strategy"]}, {"id": 3, "company": "Dublin Branding Agency", "role": "Video & Creative Specialist", "start": "Jun 2020", "end": "Present", "tags": ["Video", "Creative Direction", "Motion"]}, {"id": 4, "company": "RizPros LTD", "role": "Supply Chain Manager", "start": "Nov 2021", "end": "Aug 2023", "tags": ["Supply Chain", "Inventory Ops", "Process Automation"]}, {"id": 5, "company": "Digiworld Ireland", "role": "Digital Media Manager", "start": "Feb 2021", "end": "Aug 2022", "tags": ["Digital Media", "Content", "Marketing"]}, {"id": 6, "company": "GH Industry", "role": "Assistant Procurement Manager", "start": "May 2016", "end": "Jun 2018", "tags": ["Procurement", "Operations", "Logistics"]}, {"id": 7, "company": "UET Taxila", "role": "Graphic Design & Visualization Freelance", "start": "Jun 2012", "end": "Sep 2016", "tags": ["3D Modeling", "Graphic Design", "Illustration"]}];
 const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
 
-let novels = loadData('rana_novels_bw_v3', NOVELS_DATA);
+let novels = NOVELS_DATA;
 let techProjects = loadData('rana_tech_bw', TECH_PROJECTS_DATA);
-let articles = loadData('rana_articles_bw_v3', ARTICLES_DATA);
+let articles = ARTICLES_DATA;
 let galleryItems = loadData('rana_gallery_bw', GALLERY_DATA);
 let software = loadData('rana_software_bw', SOFTWARE_DATA);
 let experience = loadData('rana_experience_bw', EXPERIENCE_DATA);
@@ -985,13 +985,13 @@ function renderHome(){
   const haGrid = document.getElementById('homeArticlesGrid');
   if(haGrid){
     haGrid.innerHTML = articles.map(a=>`
-      <div class="article-card" onclick="a.external ? window.open('${a.url}','_blank') : (window.location.href='${a.url}')">
+      <div class="article-card" onclick="openArticle('${a.url}', ${a.external ? 'true' : 'false'})">
         <div>
           <div class="article-meta">${a.category} · ${a.date}</div>
           <h3 class="article-title">${a.title}</h3>
           <p class="article-desc">${a.desc}</p>
         </div>
-        <a class="article-btn" href="${a.url}">Read Article</a>
+        <a class="article-btn" href="${a.url}" ${a.external ? 'target="_blank" rel="noopener"' : ''}>Read Article &rarr;</a>
       </div>
     `).join('');
   }
@@ -1180,7 +1180,7 @@ function renderArticles(){
   const c = document.getElementById('articlesPageGrid');
   if(!c) return;
   c.innerHTML = articles.map(a=>`
-    <div class="article-card" onclick="a.external ? window.open('${a.url}','_blank') : (window.location.href='${a.url}')">
+    <div class="article-card" onclick="openArticle('${a.url}', ${a.external ? 'true' : 'false'})">
       <div>
         <div class="article-meta">${a.category} · ${a.date}</div>
         <h3 class="article-title">${a.title}</h3>
@@ -1189,7 +1189,7 @@ function renderArticles(){
           ${(a.tags||[]).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
         </div>
       </div>
-      <a class="article-btn" href="${a.url}">Read Article</a>
+      <a class="article-btn" href="${a.url}" ${a.external ? 'target="_blank" rel="noopener"' : ''}>Read Article &rarr;</a>
     </div>
   `).join('');
 }
@@ -1406,9 +1406,17 @@ if(heroFrame){
   });
 }
 
-// INIT
+// INIT - clear stale article/novel cache so fresh data always shows
+['rana_articles_bw','rana_articles_bw_v2','rana_articles_bw_v3',
+ 'rana_novels_bw','rana_novels_bw_v2','rana_novels_bw_v3'].forEach(k=>localStorage.removeItem(k));
 renderHome();
 setupCursorHover();
+
+// Helper for article links (external = Medium, internal = local page)
+function openArticle(url, isExternal){
+  if(isExternal){ window.open(url, '_blank', 'noopener'); }
+  else { window.location.href = url; }
+}
 </script>
 </body>
 </html>
