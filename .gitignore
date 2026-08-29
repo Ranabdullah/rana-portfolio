@@ -1,8 +1,13 @@
-﻿# Video files and large binaries (>50MB)
+﻿# Large videos and files over 25MB (Cloudflare limit)
 *.mp4
 *.mov
 *.avi
 *.mkv
+*.pdf
+*.exe
 *.zip
 *.tar.gz
-*.exe
+
+# Specific large images over 25MB
+Photos & to upload/All Work (12).png
+Photos & to upload/Scifi/All Work (18).jpg
