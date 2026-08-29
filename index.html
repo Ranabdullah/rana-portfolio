@@ -557,6 +557,36 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
   .nv-modal-content { padding:28px 20px; }
   .home-novels, .home-tech, .home-projects, .home-articles, .home-expertise, footer, .novels-hero, .novels-grid, .gallery-hero, .gallery-filters, .gallery-grid, .software-hero, .software-cat-section, .articles-hero, .articles-page-grid, .about-hero, .experience-section, .clients-section, .backend-page, .tech-page-scene { padding-left:24px; padding-right:24px; }
 }
+
+
+/* ==================== CLICKABLE YOUTUBE VIDEO BADGE ==================== */
+.g-video-badge {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  background: #e50914 !important;
+  color: #ffffff !important;
+  font-family: var(--mono) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  padding: 5px 11px !important;
+  border-radius: 4px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  z-index: 15 !important;
+  box-shadow: 0 3px 12px rgba(229,9,20,0.45) !important;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+.g-video-badge:hover {
+  background: #ff1f2d !important;
+  transform: scale(1.08) translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(229,9,20,0.65) !important;
+}
+
 </style>
 </head>
 <body>
@@ -1029,13 +1059,13 @@ const SOFTWARE_DATA = [{"id": 1, "name": "1-Click Product Render Setup", "cat": 
 const EXPERIENCE_DATA = [{"id": 1, "company": "IDFL International Ltd", "role": "Software Engineer", "start": "Sep 2023", "end": "Present", "tags": ["Python", "JavaScript", "Software", "3D Automation"]}, {"id": 2, "company": "Hashage Ireland", "role": "Senior Video Editor & Motion Designer", "start": "Feb 2023", "end": "Present", "tags": ["Video", "Post-Production", "Brand Strategy"]}, {"id": 3, "company": "Dublin Branding Agency", "role": "Video & Creative Specialist", "start": "Jun 2020", "end": "Present", "tags": ["Video", "Creative Direction", "Motion"]}, {"id": 4, "company": "RizPros LTD", "role": "Supply Chain Manager", "start": "Nov 2021", "end": "Aug 2023", "tags": ["Supply Chain", "Inventory Ops", "Process Automation"]}, {"id": 5, "company": "Digiworld Ireland", "role": "Digital Media Manager", "start": "Feb 2021", "end": "Aug 2022", "tags": ["Digital Media", "Content", "Marketing"]}, {"id": 6, "company": "GH Industry", "role": "Assistant Procurement Manager", "start": "May 2016", "end": "Jun 2018", "tags": ["Procurement", "Operations", "Logistics"]}, {"id": 7, "company": "UET Taxila", "role": "Graphic Design & Visualization Freelance", "start": "Jun 2012", "end": "Sep 2016", "tags": ["3D Modeling", "Graphic Design", "Illustration"]}];
 const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
 
-let novels = loadData('rana_novels_v21', NOVELS_DATA);
-let techProjects = loadData('rana_tech_v21', TECH_PROJECTS_DATA);
-let articles = loadData('rana_articles_v21', ARTICLES_DATA);
-let galleryItems = loadData('rana_gallery_v21', GALLERY_DATA);
-let software = loadData('rana_software_v21', SOFTWARE_DATA);
-let experience = loadData('rana_experience_v21', EXPERIENCE_DATA);
-let clients = loadData('rana_clients_v21', CLIENTS_DATA);
+let novels = loadData('rana_novels_v22', NOVELS_DATA);
+let techProjects = loadData('rana_tech_v22', TECH_PROJECTS_DATA);
+let articles = loadData('rana_articles_v22', ARTICLES_DATA);
+let galleryItems = loadData('rana_gallery_v22', GALLERY_DATA);
+let software = loadData('rana_software_v22', SOFTWARE_DATA);
+let experience = loadData('rana_experience_v22', EXPERIENCE_DATA);
+let clients = loadData('rana_clients_v22', CLIENTS_DATA);
 
 // CURSOR
 const cur = document.getElementById('cur');
@@ -1288,10 +1318,13 @@ function renderGallery(filter){
     <div class="g-card" onclick="openLightbox(${i})" style="position:relative">
       <div style="position:relative;overflow:hidden">
         <img src="${g.path}" alt="${g.title}" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
-        ${g.youtubeUrl ? `<span style="position:absolute;top:10px;right:10px;background:rgba(229,9,20,0.92);color:#fff;font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.3)">▶ Video</span>` : ''}
+        ${g.youtubeUrl ? `<a href="${g.youtubeUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="g-video-badge">▶ Video ↗</a>` : ''}
       </div>
       <div class="g-card-info">
-        <div class="g-cat-label">${g.cat} · ${g.pillar}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <div class="g-cat-label">${g.cat} · ${g.pillar}</div>
+          ${g.youtubeUrl ? `<a href="${g.youtubeUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-family:var(--mono);font-size:10.5px;color:#e50914;text-decoration:none;font-weight:600">Watch ↗</a>` : ''}
+        </div>
         <div class="g-title">${g.title}</div>
       </div>
     </div>
