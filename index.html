@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rana Abdullah — Novelist, 3D Artist & Software Engineer</title>
+<meta name="description" content="Official portfolio of Rana Abdullah — Novelist, 3D Artist, and Software Developer based in Dublin, Ireland. Exploring narrative fiction, 3D rendering pipelines, and technical applications.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════ GLOBAL RESET & VARIABLES ═══════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #f4f5f7;
+  --bg-card: #ffffff;
+  --bg2: #eaedf2;
+  --bg3: #f8fafc;
+  --bg-dark: #070a12;
+  --bg-dark-card: #0b0f1c;
+  --ink: #11141a;
+  --ink2: #2d333f;
+  --ink3: #5a6474;
+  --ink4: #8b95a5;
+  --border: #dbe0e8;
+  --border2: #e9ecf0;
+  --accent: #11141a;
+  --cyan: #00e5ff;
+  --cyan-dim: rgba(0, 229, 255, 0.12);
+  --purple: #b47fff;
+  --purple-dim: rgba(180, 127, 255, 0.12);
+  --blue: #4d7fff;
+  --blue-dim: rgba(77, 127, 255, 0.12);
+  --emerald: #34d399;
+  --amber: #fbbf24;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'Space Grotesk', monospace;
+  --display: 'Space Grotesk', sans-serif;
+}
+
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--ink); font-family:var(--sans); overflow-x:hidden; cursor:none; }
+
+/* ═══════════════════ CUSTOM CURSOR ═══════════════════ */
+.cursor { position:fixed; width:8px; height:8px; background:var(--ink); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform .12s, width .25s, height .25s, background .25s; mix-blend-mode:difference; }
+.cursor-ring { position:fixed; width:38px; height:38px; border:1px solid var(--ink); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all .35s cubic-bezier(.16,1,.3,1); mix-blend-mode:difference; }
+body:has(a:hover) .cursor, .cursor.hover { width:0; height:0; }
+body:has(a:hover) .cursor-ring, .cursor-ring.hover { width:70px; height:70px; background:rgba(0,0,0,.06); }
+
+/* ═══════════════════ NAVIGATION ═══════════════════ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 48px;
+  background:rgba(244, 245, 247, 0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:all .3s ease;
+}
+.nav-logo {
+  font-family:var(--serif); font-size:22px; font-weight:400; letter-spacing:.03em; color:var(--ink); text-decoration:none;
+}
+.nav-logo span { font-style:italic; color:var(--ink3); }
+.nav-links { display:flex; gap:28px; align-items:center; flex-wrap:wrap; }
+.nav-links a {
+  font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink3); text-decoration:none; transition:color .25s; cursor:none; position:relative; padding:4px 0;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:0; left:0; width:0; height:1px; background:var(--ink); transition:width .25s;
+}
+.nav-links a:hover, .nav-links a.active { color:var(--ink); }
+.nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+
+/* ═══════════════════ PAGE TRANSITIONS ═══════════════════ */
+.page { display:none; min-height:100vh; padding-top:76px; }
+.page.active { display:block; animation:pageReveal .5s cubic-bezier(.23,1,.32,1) both; }
+@keyframes pageReveal { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+
+/* ═══════════════════ COMMON SECTION STYLING ═══════════════════ */
+.section-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px; gap:20px; flex-wrap:wrap; }
+.section-label { font-family:var(--mono); font-size:10.5px; letter-spacing:.28em; text-transform:uppercase; color:var(--ink4); display:flex; align-items:center; gap:14px; margin-bottom:8px; }
+.section-label::before { content:''; width:32px; height:1px; background:var(--ink4); }
+.section-title { font-family:var(--serif); font-size:clamp(36px, 5vw, 64px); font-weight:300; color:var(--ink); line-height:1; }
+.section-title em { font-style:italic; color:var(--ink3); }
+.section-link {
+  font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink3);
+  text-decoration:none; display:inline-flex; align-items:center; gap:8px; cursor:none; transition:all .25s;
+}
+.section-link:hover { color:var(--ink); gap:14px; }
+.section-divider { height:1px; background:var(--border); margin:0 48px; }
+
+/* Buttons */
+.btn-primary {
+  font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; padding:13px 28px;
+  background:var(--ink); color:#fff; border:none; cursor:none; transition:all .25s; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+}
+.btn-primary:hover { background:var(--ink2); transform:translateY(-1px); }
+.btn-outline {
+  font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; padding:13px 28px;
+  background:transparent; color:var(--ink); border:1px solid var(--border); cursor:none; transition:all .25s; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+}
+.btn-outline:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+
+/* Slider Controls */
+.slider-controls { display:flex; gap:10px; margin-top:28px; }
+.slider-btn {
+  width:42px; height:42px; border:1px solid var(--border); background:var(--bg-card); cursor:none; font-size:15px;
+  color:var(--ink3); transition:all .25s; display:flex; align-items:center; justify-content:center;
+}
+.slider-btn:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+
+/* ═══════════════════ 1. HOME PAGE ═══════════════════ */
+.home-hero {
+  min-height:calc(100vh - 76px); display:grid; grid-template-columns:1.1fr 0.9fr; align-items:center;
+  padding:40px 48px; gap:64px; background:var(--bg);
+}
+.hero-eyebrow { font-family:var(--mono); font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--ink4); margin-bottom:20px; display:flex; align-items:center; gap:14px; }
+.hero-eyebrow::before { content:''; display:block; width:36px; height:1px; background:var(--ink4); }
+.hero-name { font-family:var(--serif); font-size:clamp(54px, 7.5vw, 110px); font-weight:300; line-height:.95; letter-spacing:-.02em; color:var(--ink); margin-bottom:16px; }
+.hero-title { font-family:var(--serif); font-size:clamp(16px, 2vw, 24px); font-style:italic; font-weight:300; color:var(--ink3); margin-bottom:40px; line-height:1.45; }
+.hero-cta-row { display:flex; gap:14px; flex-wrap:wrap; }
+.hero-visual-side { position:relative; height:520px; display:flex; align-items:center; justify-content:center; }
+.hero-portrait-frame {
+  width:360px; height:480px; position:relative; overflow:hidden; filter:grayscale(1) contrast(1.15);
+  box-shadow:25px 25px 60px rgba(0,0,0,0.08); transition:transform .4s ease, filter .35s ease;
+}
+.hero-portrait-frame:hover { filter:grayscale(0) contrast(1.05); }
+.hero-portrait-frame img { width:100%; height:100%; object-fit:cover; }
+.hero-portrait-frame::after { content:''; position:absolute; inset:0; border:1px solid var(--border); pointer-events:none; }
+.hero-portrait-number { position:absolute; top:10px; right:-24px; font-family:var(--serif); font-size:100px; font-weight:300; color:var(--border); line-height:1; z-index:-1; }
+
+/* Home Novels Section */
+.home-novels { background:var(--bg3); padding:90px 48px; }
+.novels-slider-track { overflow:hidden; position:relative; width:100%; }
+.novels-slider { display:flex; gap:28px; transition:transform .6s cubic-bezier(.16,1,.3,1); }
+.novel-card { flex:0 0 250px; cursor:none; }
+.novel-cover { width:250px; height:360px; position:relative; overflow:hidden; filter:grayscale(1) contrast(1.15); transition:filter .35s, transform .35s; background:#e2e6eb; }
+.novel-cover:hover { filter:grayscale(0) contrast(1.05); transform:translateY(-4px); }
+.novel-cover img { width:100%; height:100%; object-fit:cover; }
+.novel-cover::after { content:''; position:absolute; inset:0; border:1px solid var(--border); pointer-events:none; }
+.novel-info { padding:14px 0; }
+.novel-genre { font-family:var(--mono); font-size:9.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:4px; }
+.novel-name { font-family:var(--serif); font-size:19px; font-weight:400; color:var(--ink); margin-bottom:4px; }
+.novel-sub { font-family:var(--sans); font-size:12px; color:var(--ink3); line-height:1.4; }
+
+/* Home Tech Spotlight Section */
+.home-tech { background:var(--bg-dark); color:#e0e6ed; padding:90px 48px; position:relative; overflow:hidden; }
+.home-tech .section-title { color:#ffffff; }
+.home-tech .section-title em { color:#5fe8ff; }
+.home-tech .section-label { color:#8b95a5; }
+.home-tech .section-label::before { background:#8b95a5; }
+.home-tech .section-link { color:#5fe8ff; }
+.tech-spotlight-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:24px; margin-top:32px; }
+.tech-spotlight-card {
+  background:var(--bg-dark-card); border:1px solid rgba(0, 229, 255, 0.16); border-radius:14px; padding:28px;
+  box-shadow:0 12px 35px rgba(0,0,0,0.5); transition:all .3s ease; position:relative; overflow:hidden; cursor:none;
+}
+.tech-spotlight-card:hover { transform:translateY(-4px); border-color:rgba(0, 229, 255, 0.4); box-shadow:0 18px 45px rgba(0,229,255,0.1); }
+.tech-spotlight-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, #00e5ff, transparent); }
+
+/* Home Software Section */
+.home-software { background:var(--bg2); padding:90px 0; }
+.software-inner { display:grid; grid-template-columns:320px 1fr; gap:0; min-height:460px; }
+.software-left { padding:50px 48px; background:var(--bg2); display:flex; flex-direction:column; justify-content:center; border-right:1px solid var(--border); }
+.software-left-label { font-family:var(--mono); font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--ink4); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.software-left-label::before { content:''; width:24px; height:1px; background:var(--ink4); }
+.software-big { font-family:var(--serif); font-size:clamp(32px, 3.8vw, 50px); font-weight:300; line-height:1.1; color:var(--ink); margin-bottom:12px; }
+.software-desc { font-family:var(--sans); font-size:13px; color:var(--ink3); line-height:1.65; margin-bottom:28px; }
+.software-right { overflow:hidden; position:relative; background:var(--bg3); }
+.sw-vertical-slider { display:flex; flex-direction:column; gap:0; }
+.sw-item { padding:24px 44px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:1fr auto; align-items:center; gap:20px; transition:background .25s; cursor:none; }
+.sw-item:hover { background:var(--bg-card); }
+.sw-item-meta { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+.sw-cat { font-family:var(--mono); font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); padding:2px 7px; border:1px solid var(--border); border-radius:3px; }
+.sw-name { font-family:var(--serif); font-size:19px; font-weight:400; color:var(--ink); margin-bottom:4px; }
+.sw-desc { font-family:var(--sans); font-size:12px; color:var(--ink3); line-height:1.5; }
+.sw-price { font-family:var(--serif); font-size:20px; font-weight:300; color:var(--ink); white-space:nowrap; }
+
+/* Home Projects Slider */
+.home-projects { background:var(--bg); padding:90px 48px; }
+.projects-slider-wrap { position:relative; overflow:hidden; }
+.projects-grid { display:flex; gap:22px; transition:transform .6s cubic-bezier(.16,1,.3,1); }
+.proj-card { flex:0 0 320px; cursor:none; }
+.proj-img { width:100%; height:230px; overflow:hidden; position:relative; filter:grayscale(1) contrast(1.1); transition:filter .35s, transform .35s; background:#e2e6eb; }
+.proj-img:hover { filter:grayscale(0) contrast(1); transform:scale(1.02); }
+.proj-img img { width:100%; height:100%; object-fit:cover; }
+.proj-info { padding:14px 0; }
+.proj-cat { font-family:var(--mono); font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:6px; }
+.proj-name { font-family:var(--serif); font-size:19px; font-weight:400; color:var(--ink); margin-bottom:4px; }
+.proj-desc { font-family:var(--sans); font-size:12px; color:var(--ink3); line-height:1.5; }
+
+/* Home Articles Section */
+.home-articles { background:var(--bg3); padding:90px 48px; }
+.articles-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:28px; }
+.article-card {
+  background:var(--bg-card); border:1px solid var(--border); padding:32px; border-radius:8px; cursor:none;
+  transition:all .25s ease; display:flex; flex-direction:column; justify-content:space-between;
+}
+.article-card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,0,0,0.06); border-color:var(--ink); }
+.article-meta { font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink4); margin-bottom:12px; }
+.article-title { font-family:var(--serif); font-size:22px; font-weight:400; color:var(--ink); line-height:1.25; margin-bottom:10px; }
+.article-desc { font-family:var(--sans); font-size:13px; color:var(--ink3); line-height:1.65; margin-bottom:20px; }
+.article-btn {
+  font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink);
+  display:inline-flex; align-items:center; gap:6px; text-decoration:none;
+}
+.article-btn::after { content:'→'; transition:transform .2s; }
+.article-card:hover .article-btn::after { transform:translateX(4px); }
+
+/* Expertise Grid */
+.home-expertise { background:var(--bg2); padding:90px 48px; }
+.expertise-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-top:40px; }
+.exp-item { padding:36px 26px; background:var(--bg2); transition:background .25s; }
+.exp-item:hover { background:var(--bg-card); }
+.exp-num { font-family:var(--serif); font-size:44px; font-weight:300; color:var(--ink4); margin-bottom:10px; line-height:1; }
+.exp-name { font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink); margin-bottom:8px; font-weight:600; }
+.exp-desc { font-family:var(--sans); font-size:12.5px; color:var(--ink3); line-height:1.6; }
+
+/* Footer */
+footer { background:var(--ink); color:#fff; padding:60px 48px; display:grid; grid-template-columns:1fr auto; gap:36px; align-items:center; }
+.footer-name { font-family:var(--serif); font-size:30px; font-weight:300; letter-spacing:.02em; }
+.footer-sub { font-family:var(--sans); font-size:12px; color:rgba(255,255,255,0.5); margin-top:6px; }
+.footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+.footer-links a {
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,0.5);
+  text-decoration:none; cursor:none; transition:color .25s;
+}
+.footer-links a:hover { color:#fff; }
+
+/* ═══════════════════ 2. NOVELS PAGE ═══════════════════ */
+.novels-hero { padding:70px 48px 50px; background:var(--bg3); border-bottom:1px solid var(--border); }
+.novels-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:44px 30px; padding:60px 48px; background:var(--bg); }
+.nv-card { cursor:none; }
+.nv-cover { width:100%; aspect-ratio:2/3; overflow:hidden; position:relative; filter:grayscale(1) contrast(1.15); transition:filter .4s, transform .4s; margin-bottom:16px; background:#e2e6eb; }
+.nv-cover:hover { filter:grayscale(0) contrast(1.05); transform:translateY(-4px); }
+.nv-cover img { width:100%; height:100%; object-fit:cover; }
+.nv-genre { font-family:var(--mono); font-size:9.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:6px; }
+.nv-title { font-family:var(--serif); font-size:21px; font-weight:400; color:var(--ink); margin-bottom:6px; }
+.nv-tagline { font-family:var(--sans); font-size:12.5px; color:var(--ink3); line-height:1.55; margin-bottom:14px; }
+.nv-btn {
+  font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink);
+  text-decoration:none; display:inline-flex; align-items:center; gap:6px; padding:8px 18px; border:1px solid var(--border);
+  background:var(--bg-card); transition:all .25s; cursor:none;
+}
+.nv-btn:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+
+/* Novel Reading Modal */
+.nv-modal { display:none; position:fixed; inset:0; z-index:500; background:var(--bg3); }
+.nv-modal.open { display:flex; flex-direction:column; }
+.nv-modal-bar { padding:18px 48px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:var(--bg-card); }
+.nv-modal-inner { flex:1; display:grid; grid-template-columns:360px 1fr; overflow:hidden; }
+.nv-modal-cover { background:var(--bg2); display:flex; align-items:center; justify-content:center; padding:50px 36px; border-right:1px solid var(--border); }
+.nv-modal-cover img { max-width:240px; max-height:380px; object-fit:cover; filter:grayscale(1) contrast(1.15); box-shadow:25px 25px 70px rgba(0,0,0,0.15); }
+.nv-modal-content { padding:50px 64px; overflow-y:auto; background:var(--bg); }
+.nv-modal-close {
+  width:40px; height:40px; border:1px solid var(--border); background:transparent; cursor:none; font-size:17px;
+  color:var(--ink3); transition:all .25s; display:flex; align-items:center; justify-content:center;
+}
+.nv-modal-close:hover { background:var(--ink); color:#fff; }
+
+/* ═══════════════════ 3. TECHNICAL PROJECTS PAGE (3D GLOW) ═══════════════════ */
+.tech-page-scene {
+  background:radial-gradient(ellipse at 50% -10%, #0d1430 0%, #05070d 55%), linear-gradient(160deg,#05070d 0%,#070a16 100%);
+  color:#e0e6ed; padding:60px 24px 80px; min-height:calc(100vh - 76px);
+}
+.tech-hero-banner {
+  max-width:880px; margin:0 auto 40px; position:relative; overflow:hidden; text-align:center;
+  padding:54px 24px 40px; background:radial-gradient(ellipse at 50% 0%, #10142a 0%, #05070d 60%), linear-gradient(135deg,#05070d 0%,#0a0f22 55%,#05070d 100%);
+  border-radius:18px; border:1px solid rgba(0,229,255,0.18); box-shadow:0 20px 60px rgba(0,0,0,0.6), inset 0 0 80px rgba(0,229,255,0.03);
+}
+.tech-cards-container { max-width:880px; margin:0 auto; }
+.dls-card-holder { perspective:1200px; margin-bottom:34px; }
+.dls-card {
+  background:linear-gradient(180deg, #0b0f1c, #0a0e1a); border:1px solid rgba(0, 229, 255, 0.16); border-radius:18px;
+  padding:32px; box-shadow:0 16px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.02) inset; position:relative;
+  overflow:hidden; transform-style:preserve-3d; transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+.dls-card:hover {
+  transform:perspective(1200px) rotateX(2.5deg) rotateY(-3.5deg) scale3d(1.012,1.012,1.012);
+  box-shadow:0 28px 65px rgba(0,0,0,.6), 0 0 50px rgba(0,229,255,.12); border-color:rgba(0, 229, 255, 0.35);
+}
+.dls-card [data-layer="1"] { transform:translateZ(24px); }
+.dls-card [data-layer="2"] { transform:translateZ(12px); }
+
+.feature-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px 16px; }
+.feature-item { color:#9aa5ba; font-size:13.5px; display:flex; align-items:center; gap:8px; }
+.tech-tags-wrap { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+.tech-tag {
+  font-family:var(--mono); font-size:11px; padding:3px 10px; border-radius:4px; background:#0e1526;
+  border:1px solid rgba(0, 229, 255, 0.22); color:#5fe8ff;
+}
+.tech-tag.purple { border-color:rgba(180, 127, 255, 0.3); color:#c9a8ff; }
+.tech-tag.blue { border-color:rgba(77, 127, 255, 0.3); color:#a8bdff; }
+.tech-tag.dim { border-color:rgba(255, 255, 255, 0.1); color:#8b96ab; }
+
+.badge-status {
+  font-family:var(--mono); font-size:12px; font-weight:600; padding:4px 14px; border-radius:30px;
+  white-space:nowrap; display:inline-flex; align-items:center; gap:6px;
+}
+.badge-cyan { background:rgba(0, 229, 255, 0.1); color:#5fe8ff; border:1px solid rgba(0, 229, 255, 0.4); }
+.badge-purple { background:rgba(180, 127, 255, 0.1); color:#c9a8ff; border:1px solid rgba(180, 127, 255, 0.4); }
+.badge-blue { background:rgba(77, 127, 255, 0.1); color:#a8bdff; border:1px solid rgba(77, 127, 255, 0.4); }
+.badge-emerald { background:rgba(52, 211, 153, 0.1); color:#34d399; border:1px solid rgba(52, 211, 153, 0.4); }
+.badge-amber { background:rgba(251, 191, 36, 0.1); color:#fbbf24; border:1px solid rgba(251, 191, 36, 0.4); }
+
+.dls-btn { transition:transform .18s ease, box-shadow .18s ease, filter .18s ease; cursor:none; }
+.dls-btn:hover { transform:translateY(-2px); filter:brightness(1.12); }
+
+/* ═══════════════════ 4. GALLERY PAGE ═══════════════════ */
+.gallery-hero { padding:70px 48px 40px; background:var(--bg3); border-bottom:1px solid var(--border); }
+.gallery-filters { display:flex; gap:10px; padding:24px 48px; background:var(--bg); overflow-x:auto; flex-wrap:wrap; border-bottom:1px solid var(--border2); }
+.gf-btn {
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.15em; text-transform:uppercase; padding:8px 18px;
+  background:var(--bg-card); border:1px solid var(--border); color:var(--ink3); cursor:none; transition:all .25s; border-radius:4px;
+}
+.gf-btn.on, .gf-btn:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+.gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; padding:48px; background:var(--bg); }
+.g-card {
+  background:var(--bg-card); border:1px solid var(--border); overflow:hidden; cursor:none; transition:all .3s ease;
+}
+.g-card:hover { transform:translateY(-4px); box-shadow:0 16px 36px rgba(0,0,0,0.08); border-color:var(--ink); }
+.g-card img { width:100%; height:230px; object-fit:cover; filter:grayscale(1) contrast(1.1); transition:all .4s ease; }
+.g-card:hover img { filter:grayscale(0) contrast(1); transform:scale(1.03); }
+.g-card-info { padding:14px 18px; }
+.g-cat-label { font-family:var(--mono); font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:4px; }
+.g-title { font-family:var(--serif); font-size:18px; font-weight:400; color:var(--ink); }
+
+/* Lightbox */
+.lightbox { display:none; position:fixed; inset:0; z-index:900; background:rgba(7,10,18,0.94); backdrop-filter:blur(16px); }
+.lightbox.open { display:flex; align-items:center; justify-content:center; }
+.lb-img-wrap { max-width:85vw; max-height:85vh; position:relative; text-align:center; }
+.lb-img-wrap img { max-width:100%; max-height:78vh; object-fit:contain; box-shadow:0 25px 60px rgba(0,0,0,0.8); border:1px solid rgba(255,255,255,0.1); }
+.lb-close { position:absolute; top:-46px; right:0; background:transparent; border:none; color:#fff; font-size:26px; cursor:none; }
+.lb-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.2); color:#fff; width:44px; height:44px; display:flex; align-items:center; justify-content:center; cursor:none; font-size:18px; }
+.lb-prev { left:-60px; }
+.lb-next { right:-60px; }
+.lb-caption { font-family:var(--sans); font-size:13px; color:#c0c8d8; margin-top:14px; }
+
+/* ═══════════════════ 5. SOFTWARE PAGE ═══════════════════ */
+.software-hero { padding:70px 48px 40px; background:var(--bg3); border-bottom:1px solid var(--border); }
+.software-cat-section { padding:60px 48px; border-bottom:1px solid var(--border); }
+.sw-section-label { font-family:var(--serif); font-size:32px; font-weight:300; color:var(--ink); margin-bottom:32px; }
+.sw-products-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px; }
+.sw-product-card {
+  background:var(--bg-card); border:1px solid var(--border); padding:28px; border-radius:6px; display:flex;
+  flex-direction:column; justify-content:space-between; min-height:220px; transition:all .25s ease;
+}
+.sw-product-card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,0,0,0.06); border-color:var(--ink); }
+.sw-product-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.sw-product-type { font-family:var(--mono); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); padding:3px 8px; border:1px solid var(--border); border-radius:3px; }
+.sw-product-price { font-family:var(--serif); font-size:20px; font-weight:400; color:var(--ink); }
+.sw-product-name { font-family:var(--serif); font-size:21px; font-weight:400; color:var(--ink); margin-bottom:8px; }
+.sw-product-desc { font-family:var(--sans); font-size:13px; color:var(--ink3); line-height:1.65; margin-bottom:20px; }
+.sw-product-link { font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink); text-decoration:none; display:inline-flex; align-items:center; gap:6px; }
+
+/* ═══════════════════ 6. ARTICLES PAGE ═══════════════════ */
+.articles-hero { padding:70px 48px 40px; background:var(--bg3); border-bottom:1px solid var(--border); }
+.articles-page-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:32px; padding:60px 48px; background:var(--bg); }
+
+/* ═══════════════════ 7. ABOUT PAGE ═══════════════════ */
+.about-hero { padding:70px 48px 60px; background:var(--bg3); border-bottom:1px solid var(--border); }
+.about-hero-grid { display:grid; grid-template-columns:1.2fr 0.8fr; gap:60px; margin-top:32px; }
+.about-bio { font-family:var(--sans); font-size:14.5px; color:var(--ink2); line-height:1.85; }
+.about-stats { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.about-stat { background:var(--bg-card); border:1px solid var(--border); padding:24px; border-radius:6px; }
+.about-stat-num { font-family:var(--serif); font-size:42px; font-weight:300; color:var(--ink); line-height:1; margin-bottom:6px; }
+.about-stat-label { font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); }
+.experience-section, .clients-section { padding:70px 48px; border-bottom:1px solid var(--border); }
+.exp-list { margin-top:36px; display:flex; flex-direction:column; gap:0; }
+.exp-row { display:grid; grid-template-columns:220px 1fr; gap:32px; padding:24px 0; border-bottom:1px solid var(--border); }
+.exp-dates { font-family:var(--mono); font-size:11px; letter-spacing:.12em; color:var(--ink4); }
+.exp-company { font-family:var(--serif); font-size:20px; font-weight:400; color:var(--ink); margin-bottom:4px; }
+.exp-role { font-family:var(--sans); font-size:13.5px; color:var(--ink2); margin-bottom:10px; }
+.exp-tags { display:flex; gap:6px; flex-wrap:wrap; }
+.exp-tag { font-family:var(--mono); font-size:9.5px; padding:2px 8px; border:1px solid var(--border); color:var(--ink3); border-radius:3px; background:var(--bg-card); }
+.clients-grid { display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; }
+.client-tag { font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding:8px 16px; border:1px solid var(--border); background:var(--bg-card); color:var(--ink2); border-radius:4px; }
+
+/* ═══════════════════ 8. BACKEND PAGE ═══════════════════ */
+.backend-page { padding:60px 48px; background:var(--bg); }
+.backend-header { margin-bottom:36px; }
+.backend-header h1 { font-family:var(--serif); font-size:42px; font-weight:300; color:var(--ink); }
+.backend-tabs { display:flex; gap:10px; margin-bottom:32px; flex-wrap:wrap; }
+.bt { font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; padding:9px 20px; background:var(--bg-card); border:1px solid var(--border); color:var(--ink3); cursor:none; border-radius:4px; }
+.bt.on, .bt:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+.backend-panel { display:none; }
+.backend-panel.on { display:grid; grid-template-columns:1fr 1.2fr; gap:40px; }
+.backend-form { background:var(--bg-card); border:1px solid var(--border); padding:32px; border-radius:6px; }
+.form-group { margin-bottom:18px; }
+.form-label { display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); margin-bottom:6px; }
+.form-input, .form-textarea { width:100%; padding:10px 14px; font-family:var(--sans); font-size:13.5px; border:1px solid var(--border); border-radius:4px; background:var(--bg); color:var(--ink); }
+.form-textarea { min-height:100px; resize:vertical; }
+.submit-btn { font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; padding:12px 24px; background:var(--ink); color:#fff; border:none; cursor:none; width:100%; border-radius:4px; }
+.backend-items { display:flex; flex-direction:column; gap:10px; max-height:600px; overflow-y:auto; }
+.backend-item { background:var(--bg-card); border:1px solid var(--border); padding:16px 20px; display:flex; justify-content:space-between; align-items:center; border-radius:4px; }
+.backend-item-title { font-family:var(--serif); font-size:17px; color:var(--ink); }
+.backend-item-sub { font-family:var(--mono); font-size:10px; color:var(--ink4); }
+.bi-btn { font-family:var(--mono); font-size:10px; padding:4px 10px; border:1px solid var(--border); background:transparent; color:#e11d48; cursor:none; border-radius:3px; }
+.toast { position:fixed; bottom:28px; right:28px; background:var(--ink); color:#fff; padding:12px 24px; font-family:var(--mono); font-size:11px; border-radius:4px; opacity:0; pointer-events:none; transition:opacity .3s; z-index:9999; }
+.toast.show { opacity:1; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  nav { padding:16px 24px; }
+  .nav-links { gap:16px; }
+  .home-hero { grid-template-columns:1fr; padding:30px 24px; }
+  .hero-visual-side { height:auto; }
+  .hero-portrait-frame { width:100%; max-width:320px; height:420px; margin:0 auto; }
+  .software-inner { grid-template-columns:1fr; }
+  .software-left { border-right:none; border-bottom:1px solid var(--border); }
+  .expertise-grid { grid-template-columns:1fr 1fr; }
+  .about-hero-grid { grid-template-columns:1fr; }
+  .backend-panel.on { grid-template-columns:1fr; }
+  .nv-modal-inner { grid-template-columns:1fr; }
+  .nv-modal-cover { display:none; }
+  .nv-modal-content { padding:30px 24px; }
+  .home-novels, .home-tech, .home-projects, .home-articles, .home-expertise, footer, .novels-hero, .novels-grid, .gallery-hero, .gallery-filters, .gallery-grid, .software-hero, .software-cat-section, .articles-hero, .articles-page-grid, .about-hero, .experience-section, .clients-section, .backend-page { padding-left:24px; padding-right:24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curRing"></div>
+
+<!-- NAVIGATION -->
+<nav id="mainNav">
+  <a class="nav-logo" href="#" onclick="showPage('home');return false">Rana <span>Abdullah</span></a>
+  <div class="nav-links">
+    <a href="#" onclick="showPage('home');return false" id="nav-home" class="active">Home</a>
+    <a href="#" onclick="showPage('novels');return false" id="nav-novels">Novels</a>
+    <a href="#" onclick="showPage('technical-projects');return false" id="nav-technical-projects">Technical Projects</a>
+    <a href="#" onclick="showPage('gallery');return false" id="nav-gallery">Gallery</a>
+    <a href="#" onclick="showPage('software');return false" id="nav-software">Software</a>
+    <a href="#" onclick="showPage('articles');return false" id="nav-articles">Articles</a>
+    <a href="#" onclick="showPage('about');return false" id="nav-about">About</a>
+    <a href="#" onclick="showPage('backend');return false" id="nav-backend">⚙ Backend</a>
+  </div>
+</nav>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════ 1. HOME PAGE ═══════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="home-hero">
+    <div class="hero-text-side">
+      <div class="hero-eyebrow">Creative Director & Technologist</div>
+      <h1 class="hero-name">
+        <span>Rana</span><br>
+        <span style="font-style:italic;color:var(--ink3)">Abdullah</span>
+      </h1>
+      <p class="hero-title">Novelist · 3D Artist · Software Engineer<br>Blending literary narrative, light, and robust code.</p>
+      <div class="hero-cta-row">
+        <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false">Technical Projects ⚡</a>
+        <a class="btn-outline" href="#" onclick="showPage('novels');return false">Written Novels 📖</a>
+        <a class="btn-outline" href="#" onclick="showPage('gallery');return false">3D Gallery 🎨</a>
+      </div>
+    </div>
+    <div class="hero-visual-side">
+      <div class="hero-portrait-frame" id="heroFrame">
+        <img src="Photos & to upload/Father.png" alt="Rana Abdullah" onerror="this.src='';this.parentElement.style.background='#d8dce2'">
+      </div>
+      <div class="hero-portrait-number">01</div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- TECHNICAL PROJECTS SPOTLIGHT -->
+  <section class="home-tech">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Engineering & Web Systems</div>
+        <h2 class="section-title">Technical <em>Projects</em></h2>
+      </div>
+      <a class="section-link" href="#" onclick="showPage('technical-projects');return false">Explore all 9 projects →</a>
+    </div>
+    <div class="tech-spotlight-grid" id="homeTechSpotlight">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- NOVELS SECTION -->
+  <section class="home-novels">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Literary Work</div>
+        <h2 class="section-title">Novels & <em>Stories</em></h2>
+      </div>
+      <a class="section-link" href="#" onclick="showPage('novels');return false">View all novels →</a>
+    </div>
+    <div class="novels-slider-track">
+      <div class="novels-slider" id="novelSlider">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" onclick="slideNovels(-1)">←</button>
+      <button class="slider-btn" onclick="slideNovels(1)">→</button>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- SOFTWARE SECTION -->
+  <section class="home-software">
+    <div class="software-inner">
+      <div class="software-left">
+        <div class="software-left-label">Tools & Products</div>
+        <div class="software-big">Software &amp;<br><em style="font-style:italic;color:var(--ink3)">Add-ons</em></div>
+        <p class="software-desc">Professional Blender add-ons and automation pipelines built from over a decade of 3D workflow expertise.</p>
+        <a class="btn-outline" href="#" onclick="showPage('software');return false">Explore Software</a>
+      </div>
+      <div class="software-right">
+        <div class="sw-vertical-slider" id="swSlider">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- PROJECTS / GALLERY SLIDER -->
+  <section class="home-projects">
+    <div class="section-header">
+      <div>
+        <div class="section-label">3D Art & Visualization</div>
+        <h2 class="section-title">Visual <em>Works</em></h2>
+      </div>
+      <a class="section-link" href="#" onclick="showPage('gallery');return false">View full gallery →</a>
+    </div>
+    <div class="projects-slider-wrap">
+      <div class="projects-grid" id="projGrid">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" onclick="slideProjects(-1)">←</button>
+      <button class="slider-btn" onclick="slideProjects(1)">→</button>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ARTICLES / BLOG SECTION -->
+  <section class="home-articles">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Articles &amp; Thought Leadership</div>
+        <h2 class="section-title">Essays &amp; <em>Insights</em></h2>
+      </div>
+      <a class="section-link" href="#" onclick="showPage('articles');return false">Read all articles →</a>
+    </div>
+    <div class="articles-grid" id="homeArticlesGrid">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- EXPERTISE -->
+  <section class="home-expertise">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Creative Disciplines</div>
+        <h2 class="section-title">Areas of <em>Mastery</em></h2>
+      </div>
+    </div>
+    <div class="expertise-grid">
+      <div class="exp-item">
+        <div class="exp-num">01</div>
+        <div class="exp-name">3D Art &amp; Rendering</div>
+        <div class="exp-desc">Blender mastery, architectural visualization, physical material lighting, and photorealistic product staging.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-num">02</div>
+        <div class="exp-name">Literary Fiction</div>
+        <div class="exp-desc">Author of 8 novels and novellas spanning psychological thriller, high fantasy, historical fiction, and deep character studies.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-num">03</div>
+        <div class="exp-name">Full-Stack Software</div>
+        <div class="exp-desc">TypeScript, Next.js 14, Electron apps, Python automation, PostgreSQL, Prisma, and Cloudflare Edge systems.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-num">04</div>
+        <div class="exp-name">Brand &amp; Media Direction</div>
+        <div class="exp-desc">Senior video editing, visual identity design, motion graphics, and content production for 31+ commercial brands.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="footer-name">Rana Abdullah</div>
+      <div class="footer-sub">Dublin, Ireland · Open for high-impact creative &amp; technical collaborations</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/rana-abdullah-52246a87" target="_blank">LinkedIn</a>
+      <a href="https://www.blendermarket.com" target="_blank">Blender Market</a>
+      <a href="mailto:ranaabdullah@email.com">Email</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════ 2. NOVELS PAGE ═══════════════════ -->
+<div class="page" id="page-novels">
+  <div class="novels-hero">
+    <div class="section-label">Literary Catalogue</div>
+    <h1 class="section-title">Written <em>Worlds</em></h1>
+    <p style="font-family:var(--sans);font-size:14px;color:var(--ink3);max-width:560px;margin-top:14px;line-height:1.75">
+      Eight novels and novellas spanning psychological thriller, speculative fiction, epic fantasy, and literary drama. Each work represents a world built with distinct emotional resonance and intention.
+    </p>
+  </div>
+  <div class="novels-grid" id="novelsGrid">
+    <!-- Injected by JS -->
+  </div>
+</div>
+
+<!-- NOVEL READING MODAL -->
+<div class="nv-modal" id="nvModal">
+  <div class="nv-modal-bar">
+    <span class="section-label" style="margin:0">Literary Excerpt Reader</span>
+    <button class="nv-modal-close" onclick="closeNovelModal()">✕</button>
+  </div>
+  <div class="nv-modal-inner">
+    <div class="nv-modal-cover">
+      <img id="modalCoverImg" src="" alt="Book Cover">
+    </div>
+    <div class="nv-modal-content">
+      <div class="section-label" id="modalGenre" style="margin-bottom:12px"></div>
+      <h2 style="font-family:var(--serif);font-size:clamp(32px, 4vw, 54px);font-weight:300;color:var(--ink);line-height:1;margin-bottom:8px" id="modalTitle"></h2>
+      <p style="font-family:var(--serif);font-size:16px;font-style:italic;color:var(--ink3);margin-bottom:28px" id="modalSub"></p>
+      <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
+      <div style="font-family:var(--sans);font-size:14.5px;color:var(--ink2);line-height:1.95;max-width:640px;white-space:pre-line" id="modalBody"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 3. TECHNICAL PROJECTS PAGE ═══════════════════ -->
+<div class="page" id="page-technical-projects">
+  <div class="tech-page-scene">
+    <div class="tech-hero-banner">
+      <div style="font-family:var(--mono);font-size:11px;letter-spacing:.35em;color:#5fe8ff;margin-bottom:10px;text-transform:uppercase">DREAMSLABSTUDIO // TECHNICAL SUITE</div>
+      <h1 style="color:#ffffff;font-size:clamp(32px, 4.5vw, 44px);font-weight:700;letter-spacing:-.01em;margin-bottom:12px;text-shadow:0 0 30px rgba(0,229,255,0.25)">Technical Projects</h1>
+      <p style="color:#9aa5ba;font-size:15px;max-width:580px;margin:0 auto;line-height:1.7">
+        Production-ready web applications, AI healthcare engines, desktop utilities, multi-track historical engines, and enterprise software systems.
+      </p>
+      <div style="display:flex;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap">
+        <span class="badge-status badge-cyan">Electron Desktop</span>
+        <span class="badge-status badge-blue">Full-Stack Next.js 14</span>
+        <span class="badge-status badge-purple">AI &amp; Speech Engines</span>
+        <span class="badge-status badge-emerald">Cloudflare Edge</span>
+      </div>
+    </div>
+
+    <div class="tech-cards-container" id="techCardsGrid">
+      <!-- Injected by JS with 3D cards -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 4. GALLERY PAGE ═══════════════════ -->
+<div class="page" id="page-gallery">
+  <div class="gallery-hero">
+    <div class="section-label">Visual Portfolio</div>
+    <h1 class="section-title">The <em>Gallery</em></h1>
+  </div>
+  <div class="gallery-filters" id="galleryFilters">
+    <button class="gf-btn on" onclick="filterGallery('all',this)">All Works</button>
+    <button class="gf-btn" onclick="filterGallery('client',this)">Client Work</button>
+    <button class="gf-btn" onclick="filterGallery('personal',this)">Personal</button>
+    <button class="gf-btn" onclick="filterGallery('3d',this)">3D Renders</button>
+    <button class="gf-btn" onclick="filterGallery('environment',this)">Environments</button>
+    <button class="gf-btn" onclick="filterGallery('character',this)">Characters</button>
+    <button class="gf-btn" onclick="filterGallery('product',this)">Products</button>
+    <button class="gf-btn" onclick="filterGallery('logo',this)">Branding</button>
+  </div>
+  <div class="gallery-grid" id="galleryGrid">
+    <!-- Injected by JS -->
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <div class="lb-img-wrap">
+    <button class="lb-nav lb-prev" onclick="lbNav(-1)">←</button>
+    <img id="lbImg" src="" alt="Gallery Preview">
+    <button class="lb-nav lb-next" onclick="lbNav(1)">→</button>
+    <div class="lb-caption" id="lbCaption"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 5. SOFTWARE PAGE ═══════════════════ -->
+<div class="page" id="page-software">
+  <div class="software-hero">
+    <div class="section-label">Tools &amp; Pipelines</div>
+    <h1 class="section-title">Built <em>Software</em></h1>
+  </div>
+  <div id="softwareContent">
+    <!-- Injected by JS -->
+  </div>
+</div>
+
+<!-- ═══════════════════ 6. ARTICLES PAGE ═══════════════════ -->
+<div class="page" id="page-articles">
+  <div class="articles-hero">
+    <div class="section-label">Publications &amp; Thought Pieces</div>
+    <h1 class="section-title">Articles &amp; <em>Insights</em></h1>
+  </div>
+  <div class="articles-page-grid" id="articlesPageGrid">
+    <!-- Injected by JS -->
+  </div>
+</div>
+
+<!-- ═══════════════════ 7. ABOUT PAGE ═══════════════════ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="section-label">Biography &amp; Background</div>
+    <h1 class="section-title">About <em>Rana</em></h1>
+    <div class="about-hero-grid">
+      <div>
+        <p class="about-bio">
+          Rana Abdullah is a multidisciplinary creative technologist based in Dublin, Ireland — a novelist, 3D artist, software developer, and brand strategist whose work bridges deep narrative storytelling and high-performance technical execution.<br><br>
+          With over a decade of hands-on experience spanning 3D visualization, literary fiction, workflow automation tools, and commercial media production for international clients, every project begins with a defining question: <em>what does this need to feel like, and how does it function at its absolute best?</em><br><br>
+          Author of eight novels and novellas. Creator of widely deployed Blender workflow add-ons and full-stack web applications.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat"><div class="about-stat-num">8</div><div class="about-stat-label">Novels Written</div></div>
+        <div class="about-stat"><div class="about-stat-num">9+</div><div class="about-stat-label">Tech Projects</div></div>
+        <div class="about-stat"><div class="about-stat-num">31+</div><div class="about-stat-label">Clients Served</div></div>
+        <div class="about-stat"><div class="about-stat-num">12+</div><div class="about-stat-label">Years Experience</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="experience-section">
+    <div class="section-label">Career Timeline</div>
+    <h2 style="font-family:var(--serif);font-size:clamp(32px,4vw,48px);font-weight:300;margin-top:8px">Experience</h2>
+    <div class="exp-list" id="expList">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+
+  <div class="clients-section">
+    <div class="section-label">Brand Partnerships</div>
+    <h2 style="font-family:var(--serif);font-size:clamp(32px,4vw,48px);font-weight:300;margin-top:8px">Collaborations &amp; Clients</h2>
+    <div class="clients-grid" id="clientsGrid">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <div class="footer-name">Rana Abdullah</div>
+      <div class="footer-sub">Dublin, Ireland · Available for projects</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/rana-abdullah-52246a87" target="_blank">LinkedIn</a>
+      <a href="https://www.blendermarket.com" target="_blank">Blender Market</a>
+      <a href="mailto:ranaabdullah@email.com">Email</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════ 8. BACKEND PAGE ═══════════════════ -->
+<div class="page" id="page-backend">
+  <div class="backend-page">
+    <div class="backend-header">
+      <h1>Content <em>Manager</em></h1>
+      <p style="color:var(--ink3);font-size:13.5px;margin-top:4px">Add, update, and customize your portfolio content. Stored in your local browser state.</p>
+    </div>
+    <div class="backend-tabs">
+      <button class="bt on" onclick="switchBackend('novels',this)">Novels</button>
+      <button class="bt" onclick="switchBackend('tech',this)">Technical Projects</button>
+      <button class="bt" onclick="switchBackend('gallery',this)">Gallery</button>
+      <button class="bt" onclick="switchBackend('software',this)">Software</button>
+      <button class="bt" onclick="switchBackend('experience',this)">Experience</button>
+      <button class="bt" onclick="switchBackend('clients',this)">Clients</button>
+    </div>
+
+    <!-- NOVELS BACKEND -->
+    <div class="backend-panel on" id="bp-novels">
+      <div class="backend-form">
+        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Novel</h3>
+        <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="b-novel-title" placeholder="Novel title"></div>
+        <div class="form-group"><label class="form-label">Genre &amp; Type</label><input class="form-input" id="b-novel-genre" placeholder="e.g. Psychological Thriller · Novel"></div>
+        <div class="form-group"><label class="form-label">Tagline</label><input class="form-input" id="b-novel-tagline" placeholder="Short compelling tagline"></div>
+        <div class="form-group"><label class="form-label">Description / Excerpt</label><textarea class="form-textarea" id="b-novel-desc" placeholder="Full summary and opening excerpt..."></textarea></div>
+        <div class="form-group"><label class="form-label">Cover Path</label><input class="form-input" id="b-novel-cover" placeholder="Novels/Title/cover.png"></div>
+        <button class="submit-btn" onclick="addNovel()">Add Novel</button>
+      </div>
+      <div class="backend-items" id="be-novels-list"></div>
+    </div>
+
+    <!-- TECH BACKEND -->
+    <div class="backend-panel" id="bp-tech">
+      <div class="backend-form">
+        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Technical Project</h3>
+        <div class="form-group"><label class="form-label">Project Title</label><input class="form-input" id="b-tech-title" placeholder="Project Name"></div>
+        <div class="form-group"><label class="form-label">Subtitle</label><input class="form-input" id="b-tech-sub" placeholder="e.g. Full-Stack SaaS Engine"></div>
+        <div class="form-group"><label class="form-label">Status</label><input class="form-input" id="b-tech-status" placeholder="✅ Live / 🚀 Production-Ready"></div>
+        <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="b-tech-desc" placeholder="Comprehensive project description..."></textarea></div>
+        <button class="submit-btn" onclick="addTechProject()">Add Project</button>
+      </div>
+      <div class="backend-items" id="be-tech-list"></div>
+    </div>
+
+    <!-- GALLERY BACKEND -->
+    <div class="backend-panel" id="bp-gallery">
+      <div class="backend-form">
+        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Gallery Item</h3>
+        <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="b-gal-title" placeholder="Artwork title"></div>
+        <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="b-gal-cat" placeholder="3d / environment / character / product / logo"></div>
+        <div class="form-group"><label class="form-label">Pillar</label><input class="form-input" id="b-gal-pillar" placeholder="Personal / Client"></div>
+        <div class="form-group"><label class="form-label">Image Path</label><input class="form-input" id="b-gal-path" placeholder="Photos & to upload/..."></div>
+        <button class="submit-btn" onclick="addGalleryItem()">Add Image</button>
+      </div>
+      <div class="backend-items" id="be-gallery-list"></div>
+    </div>
+
+    <!-- SOFTWARE BACKEND -->
+    <div class="backend-panel" id="bp-software">
+      <div class="backend-form">
+        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Software Product</h3>
+        <div class="form-group"><label class="form-label">Product Name</label><input class="form-input" id="b-sw-name" placeholder="Tool name"></div>
+        <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="b-sw-cat" placeholder="Blender Add-on / Web Application"></div>
+        <div class="form-group"><label class="form-label">Price / Status</label><input class="form-input" id="b-sw-price" placeholder="$23.99 / Free"></div>
+        <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="b-sw-desc" placeholder="Product features..."></textarea></div>
+        <button class="submit-btn" onclick="addSoftware()">Add Product</button>
+      </div>
+      <div class="backend-items" id="be-software-list"></div>
+    </div>
+
+    <!-- EXPERIENCE BACKEND -->
+    <div class="backend-panel" id="bp-experience">
+      <div class="backend-form">
+        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Experience</h3>
+        <div class="form-group"><label class="form-label">Company</label><input class="form-input" id="b-exp-company" placeholder="Company name"></div>
+        <div class="form-group"><label class="form-label">Role</label><input class="form-input" id="b-exp-role" placeholder="Job title"></div>
+        <div class="form-group"><label class="form-label">Start — End</label><input class="form-input" id="b-exp-dates" placeholder="Sep 2023 — Present"></div>
+        <button class="submit-btn" onclick="addExperience()">Add Experience</button>
+      </div>
+      <div class="backend-items" id="be-exp-list"></div>
+    </div>
+
+    <!-- CLIENTS BACKEND -->
+    <div class="backend-panel" id="bp-clients">
+      <div class="backend-form">
+        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Client</h3>
+        <div class="form-group"><label class="form-label">Client Name</label><input class="form-input" id="b-client-name" placeholder="Brand / Client"></div>
+        <button class="submit-btn" onclick="addClient()">Add Client</button>
+      </div>
+      <div class="backend-items" id="be-clients-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ JAVASCRIPT LOGIC ═══════════════════ -->
+<script>
+// DATA STORAGE
+function loadData(key, def){ try{const d=localStorage.getItem(key);return d?JSON.parse(d):def}catch(e){return def} }
+function saveData(key, val){ try{localStorage.setItem(key,JSON.stringify(val))}catch(e){} }
+
+const NOVELS_DATA = [{"id": 1, "title": "Ten Days in Heaven", "genre": "Psychological Thriller", "type": "Novel", "tagline": "Memory is not a record. It is a weapon.", "desc": "Amason Lincoln wakes to find himself at the center of three missing persons cases, one arson investigation, and a financial anomaly — with no memory of the last ten days. A taut, literary thriller exploring the fault lines of memory, identity, and the dangerous wars fought within oneself.", "excerpt": "PART ONE: THE FRACTURE\n\nChapter 1: Guns and Ghosts\n\nThey were not asking what I did. They were asking what I remember. That distinction mattered more than the guns.\n\nI was on the floor of my own living room, hands zip-tied behind my back, three different firearms aimed at various parts of my body. The man in the gray suit crouched before me with the patient, empty expression of someone who has asked the same question to a great many people and is entirely prepared to wait as long as necessary. He had very clean shoes.\n\n\"Mr. Lincoln,\" he said. No accent. No warmth. No hostility. A voice engineered to convey nothing. \"Walk me through the last ten days.\"\n\nTen days. I looked at the guns. I looked at the window where the December sky was beginning to lighten, and I thought: ten days ago was December sixteenth. I know exactly where I was on December sixteenth. I was eating instant noodles and watching a documentary about migratory birds.\n\n\"You were reported missing for nine days,\" the man said. \"You reappeared at this address approximately six hours ago. There are currently three missing persons cases connected to your name, one arson investigation, and what appears to be a significant financial anomaly in accounts belonging to a man named Gerald Whitmore.\"\n\nWhat I understood was simpler and more frightening: when I tried to remember the last ten days, fragments arrived, clear and sensory, but they didn't connect. Pieces of different puzzles forced into the same box. I remembered my grandmother's laugh. I remembered smoke. I remembered a woman named Alina across a café table in December light.", "cover": "Novels/Ten Days in Heaven/20260407_1207_Image Generation_simple_compose_01knksznadeb291cpy5nqgw13c.png"}, {"id": 2, "title": "The Last Beacon", "genre": "Speculative Fiction", "type": "Novel", "tagline": "To carry something is to change it.", "desc": "In a fractured future across post-collapse Europe, couriers navigate scarred landscapes carrying corrupted data pods, sacred relics, and memories of a civilization that forgot how to speak without destroying.", "excerpt": "PART ONE: THE CEILING\n\nBarcelona, 2263. Before the road.\n\n1. Green\n\nThe first thing is a ceiling. Pale grey. Water-stained in the northeast corner where a dead light fitting has been dark long enough to forget what light was. He lies on his back and looks at it for a while, not thinking about anything in particular, because thinking in particular would require a context for the thoughts and he has no context yet. He has been alive for six hours.\n\nThere is a number running in his skull. Not a display, not an indicator — a presence, the way you are aware of your own heartbeat without making a decision to be. The number is 847. He does not know what it counts. He does know, without knowing how he knows, that it is running in one direction only, and that the direction is down.\n\nHe has no name. He has a signal pointing 340 kilometres northeast, steady as a compass, and a number counting toward something he cannot yet see, and a journal on the planning table with a dark blue cover and one hundred and eighty blank pages, and the ceiling, and the floor.\n\nHe presses his right palm flat against the floor. Cold composite. Slightly textured. He presses harder. The floor pushes back.", "cover": "Novels/The Last Beacon/The Last Beacon.png"}, {"id": 3, "title": "The Veil of Shadows", "genre": "Epic Fantasy", "type": "Novel", "tagline": "They say silence is peace. But I've seen what festers in silence.", "desc": "Cael's journey through the Trial of Frost — an outcast warrior who learns to forge resilience from silence, weaponize ancient shadows, and reclaim his ancestral voice in a world commanded by frost kings.", "excerpt": "PREFACE\n\nFor the unseen ones — the broken who kept walking, the silenced who kept listening, and the children who learnt to turn shadows into shields.\n\n\"They say silence is peace. But I've seen what festers in silence. I've heard what it hides.\" — Carved on the mountain stones of the Northern Reach.\n\nI never meant to write a story about pain. But I kept coming back to it — not as an enemy, but as a forge. The Trial of Frost does not break a man; it strips him of everything he assumed was essential until only bone and vow remain.\n\nWhen Cael stepped onto the frozen ridge at sunrise, the wind carried no mercy. Below him lay three leagues of jagged black ice. Above him, the iron sky. He drew his breath, cold like needles in his throat, and stepped forward into the mist.", "cover": "Novels/The Veil of Shadows/ChatGPT Image May 4, 2026, 11_41_39 PM.png"}, {"id": 4, "title": "What the Buffalo Carry", "genre": "Literary Fiction", "type": "Novella", "tagline": "The first stories we are told become the rooms we live in.", "desc": "A seven-year-old boy counts stars from a dusty rooftop while listening to his great-grandmother's stories of the migrating buffalo — an intimate exploration of inheritance, generational memory, and cultural weight.", "excerpt": "PART ONE: THE ROOF\n\nChapter One: Uncle Moon\n\nThe night my great-grandmother first told me about the buffalo, the sky was doing something I had never seen it do before. It was not black, and it was not blue. It was the color of a bruised plum, swollen with clouds that had travelled all the way from the northern mountains without dropping a single bead of rain.\n\nWe sat on the rooftop on rope cots that creaked every time one of us shifted our weight. She was ninety-one, though she claimed ninety-four when she wanted people to listen and eighty-eight when she wanted to climb the stairs unassisted.\n\n\"Look up, boy,\" she said, tapping her cane against the clay parapet. \"You see that empty patch between the three bright stars? That is where the herd runs. They carry the memories people were too frightened to keep.\"\n\nI looked up until my neck ached. I could not see any buffalo. But I could hear the wind moving through the electric wires above our street, humming like a low bell.", "cover": "Novels/What the Buffalo Carry/What the Buffalo Carry.png"}, {"id": 5, "title": "The Quiet Reset", "genre": "Self-Development", "type": "Non-Fiction", "tagline": "Ten days to rebuild what you've been neglecting.", "desc": "A pragmatic, lived-experience 10-day blueprint for overcoming overthinking, reclaiming phone focus, building effortless morning friction, and managing energy over raw hours.", "excerpt": "DAYS 1–2: STOP OVERTHINKING\n\nThere is a version of you that never starts. Not because you are lazy — you are not. Not because you do not care — you care enormously. You sit with your task. You think about it from every angle. You imagine starting. You plan how you would start if you were going to start. And then, somehow, the day ends and the thing is still there, exactly as you left it, waiting.\n\nOverthinking is not a personality trait; it is a fear of imperfection masked as diligence. In these ten days, we dismantle the perfection trap by introducing high-velocity, low-stakes action protocols.\n\nRule 1: If an action takes under two minutes, execute immediately.\nRule 2: Never deliberate on a decision with low reversibility cost for longer than sixty seconds.", "cover": "Novels/The Quiet Reset/The Quiet Reset.jpg"}, {"id": 6, "title": "The Record Survives", "genre": "Historical Fiction", "type": "Novel", "tagline": "Witnessing matters. Because what is recorded outlives what is destroyed.", "desc": "A sweeping historical novel following an archivist across wartime Europe who preserves clandestine letters, forgotten blueprints, and suppressed voices from being erased by totalitarian regimes.", "excerpt": "ACT 1: THE HIDDEN ROOM\n\nChapter One: A Wise Man Feareth\n\nHe was nine, and the attic was the safest room in the house: forgotten, obscure, inert. It held its breath, and so did he. Not clean silence. Silence thick with dust, cedar resin, and the dry tang of old paper turning yellow under thirty summers of uninsulated heat.\n\n\"Witnessing matters,\" his uncle had written in the margins of the ledger. \"Because if you look at something and then record that you looked, you've done something to it — something that changes what it is.\"\n\nBetween two rafters beneath the eastern gable lay a tin biscuit box. Inside: eighty-four letters wrapped in oiled cloth, twelve blueprint negatives on glass, and a pocket watch that ticked only when held upside down. If the soldiers searched the cellar, they would find coal. If they searched the pantry, they would find salt. But they would not look up.", "cover": "Novels/The Record Survives/The Record Survives.png"}, {"id": 7, "title": "Children of Pain", "genre": "Literary Drama", "type": "Novel", "tagline": "Some wounds do not heal into scars; they heal into armor.", "desc": "A piercing family saga exploring three generations of migrants navigating industrial shifts, grief, unexpressed tenderness, and the silent covenants made to protect the next generation.", "excerpt": "PROLOGUE: THE FOUNDRY SHIFT\n\nThe iron did not care who poured it. In the winter of 1974, the floor of the northern foundry remained twenty degrees below freezing until the first furnace tapped at six in the morning.\n\nRashid stood at the ladle with his coat buttoned to the chin. His knuckles were permanently stained grey with carbon dust. When his daughter was born three thousand miles away, he received the news via a five-word telegram delivered by the foreman during a lunch break.\n\nHe folded the paper twice, slipped it beneath the band of his wool cap against his forehead, and picked up his tongs. He worked twelve hours without speaking. That evening, he bought a single loaf of white bread and walked through the sleet back to the brick tenement.", "cover": "Novels/Children of Pain/Children of Pain.jpg"}, {"id": 8, "title": "Shavings", "genre": "Literary Fiction", "type": "Novella", "tagline": "The art of what gets planed away in pursuit of form.", "desc": "An intimate novella exploring a master woodworker and his estranged apprentice as they restore an 18th-century pipe organ in an isolated coastal cathedral before winter sets in.", "excerpt": "CHAPTER ONE: THE PLANE\n\nThe cedar curls fell like parchment ribbons onto the stone flags of the nave. With every stroke of the hand plane, the timber gave up a scent that was half forest, half cathedral incense.\n\n\"Listen to the blade,\" Master Brennan said without looking up from the joinery table. \"If it chatters, your angle is proud. If it bites too deep, you are thinking about yourself instead of the grain.\"\n\nJulian adjusted his grip on the rosewood tote. His palms were blistered from three days of squaring balks of seasoned pine. High in the clerestory, the Atlantic gale rattled the leaded glass, but down here on the choir floor, the only sound was the steady whisper of steel shaving wood down to the thousandth of an inch.", "cover": "Novels/Shavings/shavings_cover.png"}];
+const TECH_PROJECTS_DATA = [{"id": "launcher", "title": "DreamsLab Cyber Launcher", "subtitle": "Chrome Multi-Profile Link Vault", "status": "✅ Live", "statusType": "cyan", "icon": "🔗", "desc": "A standalone Windows desktop app that acts as an encrypted personal link vault with full multi-account Chrome profile management. Save your important links, notes and account context per Google profile — then launch any Chrome account in one click. The vault is protected with AES-256-GCM encryption, so your data is always private.", "features": ["🔐 AES-256-GCM encrypted vault", "👤 13+ Chrome profile support", "🔗 Links + Notes per account", "⚡ 1-click Chrome profile launch", "☁️ GitHub Gist cloud sync", "🌐 Web + Desktop app versions"], "tech": [{"name": "Electron", "type": "cyan"}, {"name": "Node.js", "type": "cyan"}, {"name": "AES-256-GCM", "type": "purple"}, {"name": "Web Crypto API", "type": "purple"}, {"name": "Chrome API", "type": "blue"}, {"name": "Windows", "type": "blue"}, {"name": "GitHub Pages", "type": "dim"}], "hasLinks": true, "downloadUrl": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe", "webUrl": "https://abdullahinayat24-lang.github.io/link-launcher/", "githubUrl": "https://github.com/abdullahinayat24-lang/link-launcher"}, {"id": "mythos", "title": "Mythos Encyclopedia", "subtitle": "Global Gods, Myths & Folklore Platform", "status": "📱 Mobile & Web App", "statusType": "purple", "icon": "⚡", "desc": "A deep cross-platform encyclopedia cataloging 50+ world mythologies and thousands of deities from Greek, Norse, and Egyptian to Hindu, Celtic, Aztec, Japanese, African, and urban folklore. Features rich mythological dossiers, daily deity notifications, interactive world mythology atlas, sacred objects collection, and a 4-tier mythology quiz with global leaderboards.", "features": ["🏛️ 50+ Pantheons & thousands of deities", "🗺️ Interactive World Mythology Atlas", "🔔 Daily Deity notifications & Story of the Day", "⚔️ Sacred Objects & Mythological Relics", "🏆 4-Level Quiz Engine with Leaderboards", "📡 Full Offline Caching & Local Storage"], "tech": [{"name": "Ionic / Capacitor", "type": "purple"}, {"name": "Vue.js / Vite", "type": "purple"}, {"name": "TypeScript", "type": "cyan"}, {"name": "SQLite / LocalStorage", "type": "cyan"}, {"name": "Wikipedia REST API", "type": "blue"}, {"name": "Android SDK", "type": "blue"}], "hasLinks": false}, {"id": "timeline", "title": "World History & Mythology Timeline", "subtitle": "Chronological Multi-Track Engine (10,000 BCE – 1800 CE)", "status": "🌐 Web Platform", "statusType": "cyan", "icon": "📜", "desc": "An interactive, high-contrast, multi-track chronological timeline connecting global civilizations, founding epics, and legendary writers across 12 millennia. Features independent box zoom controls, Google Photos style epoch scrubber, continuous regional vertical history spines, middle-mouse drag panning, in-window story reader with multi-act chapters, and AI Text-to-Speech narration.", "features": ["⏳ 10,000 BCE to 1800 CE Continuous Timeline", "🔍 Independent Card Zoom (0.65x to 1.5x)", "🧭 Google Photos Style Date Scrubber", "📖 In-Window Story Reader with Multi-Act Breakdown", "🎙️ AI Voice Narration (Text-to-Speech)", "🤖 Automated Web Story Harvester Crawler"], "tech": [{"name": "JavaScript (ES6+)", "type": "cyan"}, {"name": "HTML5 Canvas / DOM", "type": "cyan"}, {"name": "CSS Grid Layout", "type": "blue"}, {"name": "Python Web Crawler", "type": "purple"}, {"name": "Wikimedia REST API", "type": "purple"}, {"name": "Cloudflare Pages", "type": "dim"}], "hasLinks": false}, {"id": "psych", "title": "Psychology Lecture Knowledge Platform", "subtitle": "Multilingual ASR, Diarization & Semantic Topic Graph", "status": "🚀 Production-Ready Full-Stack", "statusType": "blue", "icon": "🧠", "desc": "An end-to-end academic lecture capture and knowledge exploration platform. Features a real-time chunked audio recording pipeline with fault-tolerant uploads, speaker diarization (pyannote), multilingual speech-to-text (Whisper), AI-generated structured lecture analyses with teacher approval workflows, interactive topic relation graphs, student confusion tracking ('I didn't understand'), and strict server-side RBAC.", "features": ["🎙️ Fault-Tolerant Chunked Audio Recording", "👥 Speaker Diarization & Audio Streaming", "🤖 AI Lecture Synthesis & Teacher Approval Flow", "🕸️ Semantic Topic Graph & Occurrence Timelines", "❓ Private Student Confusion & Q&A Tracker", "🔒 Server-Enforced RBAC & Ownership Security"], "tech": [{"name": "Next.js 14 (App Router)", "type": "blue"}, {"name": "TypeScript", "type": "blue"}, {"name": "PostgreSQL / Prisma ORM", "type": "purple"}, {"name": "NextAuth (JWT & RBAC)", "type": "cyan"}, {"name": "Whisper ASR", "type": "cyan"}, {"name": "pyannote Diarization", "type": "cyan"}, {"name": "Ollama / Claude API", "type": "purple"}], "hasLinks": false}, {"id": "onboardflow", "title": "OnboardFlow", "subtitle": "Client Onboarding Automation SaaS for Agencies", "status": "💼 Full-Stack SaaS", "statusType": "emerald", "icon": "⚡", "desc": "A production-ready agency client onboarding SaaS that turns signed clients into project-ready clients automatically. Eliminates chaotic email threads and manual intake forms with a single branded, intelligent onboarding link. Features token-based zero-login client wizard, dynamic questionnaire builder, deliverables checklist, contract uploader, AI-powered project brief generation (Claude 3.5 Sonnet / GPT-4o), shareable handoff packages, and automated reminder crons.", "features": ["🔗 Zero-Login Token Wizard (/onboard/[token])", "📝 Dynamic Drag-and-Drop Questionnaire Builder", "🤖 AI Executive Brief Generation (Claude / GPT-4o)", "📦 Shareable Client Handoff Package & PDF Export", "🎨 White-Label Agency Branding & Color Engine", "⏰ Automated Inactivity Nudge & Reminder Cron"], "tech": [{"name": "Next.js 14", "type": "blue"}, {"name": "TypeScript", "type": "blue"}, {"name": "Supabase Auth & Database", "type": "purple"}, {"name": "Tailwind CSS", "type": "cyan"}, {"name": "Anthropic Claude 3.5", "type": "purple"}, {"name": "Resend API", "type": "cyan"}, {"name": "Vercel Cron", "type": "dim"}], "hasLinks": false}, {"id": "medicare", "title": "MediCare AI Companion", "subtitle": "Ireland HPRA Rx & OTC Multi-Disease Scheduler", "status": "🩺 Healthcare Web App", "statusType": "amber", "icon": "💊", "desc": "Clinical healthcare companion and medication management system engineered specifically for Ireland's HPRA drug classification (POM Prescription-Only Medicine vs OTC Over-The-Counter). Features multi-disease automated dosing schedules, drug-drug interaction alerts, personalized dietary and exercise guidelines, one-click PDF prescription export, and verified medical citations directly linked to PubMed literature.", "features": ["🇮🇪 Ireland HPRA POM vs OTC Drug Classification", "⏰ Multi-Disease Synchronized Dosing Schedules", "⚠️ Real-Time Drug Interaction & Contraindication Checks", "🩺 Gemini AI Clinical Care & Wellness Assistant", "📄 Instant Print-Ready Schedule & PDF Export", "📚 Verified PubMed Biomedical Research Citations"], "tech": [{"name": "Vanilla JS (ES6+)", "type": "cyan"}, {"name": "HTML5 / CSS3", "type": "blue"}, {"name": "Gemini AI API", "type": "purple"}, {"name": "Ireland HPRA Drug Registry", "type": "cyan"}, {"name": "PubMed BioC API", "type": "blue"}, {"name": "Plus Jakarta Sans", "type": "dim"}], "hasLinks": false}, {"id": "ledger", "title": "Ledger Command Deck", "subtitle": "Glassmorphic Personal Life Operating System & Finances", "status": "🖥️ Live Dashboard", "statusType": "cyan", "icon": "📊", "desc": "A futuristic personal command deck and life OS built with electric blue and crimson glassmorphic aesthetics. Unifies double-entry financial ledger tracking with cash-flow analytics, habit formation monitoring, TV series and season episode trackers, structured knowledge taxonomy across psychology, philosophy, and history, markdown scratchpads, and custom theme switchers.", "features": ["💳 Double-Entry Financial Ledger & Cash Analytics", "📈 Daily Habit Streaks & Momentum Tracking", "🎬 TV Series, Seasons & Episode Tracker", "🗂️ Knowledge Topic Hierarchy & Deep Notes", "🎨 Cyberpunk Glassmorphism & Custom Palettes", "💾 100% Client-Side LocalStorage / IndexedDB Privacy"], "tech": [{"name": "Vanilla JavaScript", "type": "cyan"}, {"name": "CSS Custom Properties", "type": "blue"}, {"name": "Glassmorphism UI", "type": "blue"}, {"name": "HTML5 Canvas", "type": "purple"}, {"name": "IndexedDB / LocalStorage", "type": "dim"}], "hasLinks": false}, {"id": "vapes", "title": "Vapes Quantity Stock Manager", "subtitle": "Bilingual Retail Inventory & Stock Intelligence System", "status": "🛒 Retail Cloud App", "statusType": "purple", "icon": "📦", "desc": "Fast, high-density retail stock management and inventory tracking web application featuring full bilingual English and Urdu Nastaliq support. Built for high-volume retail environments with real-time stock counters, rapid batch item intake, low-inventory threshold notifications, category and brand filters, instant search, and export capabilities.", "features": ["🌐 Full English & Urdu Nastaliq Bilingual Interface", "⚡ Real-Time Stock Increment / Decrement Pipeline", "🚨 Automated Low-Stock & Reorder Alerts", "🏷️ Rapid Batch Intake & Barcode / SKU Tagging", "🔍 Instant Sub-Second Search & Multi-Filter Matrix", "🌓 Dark / Light High-Contrast Retail Themes"], "tech": [{"name": "Vanilla JavaScript", "type": "purple"}, {"name": "CSS3 Design System", "type": "cyan"}, {"name": "DM Mono", "type": "cyan"}, {"name": "Noto Nastaliq Urdu", "type": "blue"}, {"name": "Cloudflare Pages", "type": "dim"}], "hasLinks": false}, {"id": "repair", "title": "IDFL Repair Price Matrix", "subtitle": "Multi-Device Hardware Repair Quoting System", "status": "🛠️ Live Quoting Engine", "statusType": "cyan", "icon": "🔧", "desc": "Comprehensive enterprise hardware repair price estimation and quoting system built for IDFL. Provides instant sub-second search across hundreds of smartphone, tablet, laptop, and gaming console models, dynamic component pricing breakdowns (OLED screens, batteries, charging ports, liquid damage, logic boards), margin and labor calculation, and glassmorphic UI.", "features": ["📱 500+ Device Models (iPhone, Samsung, iPad, Mac, Consoles)", "💰 Component-Level Pricing Matrix (Screen, Battery, Board)", "⚙️ Automated Labor & Profit Margin Calculation", "🔍 Instant Sub-Second Fuzzy Search Filter", "💱 Multi-Currency & Tax Estimation Engine", "💎 Responsive Glassmorphic Dark / Light Architecture"], "tech": [{"name": "Vanilla JS", "type": "cyan"}, {"name": "Space Grotesk", "type": "blue"}, {"name": "IBM Plex Mono", "type": "blue"}, {"name": "Responsive CSS3 Grid", "type": "purple"}, {"name": "Cloudflare Pages", "type": "dim"}], "hasLinks": false}];
+const ARTICLES_DATA = [{"id": 1, "title": "Project Concept: Contract Killers", "category": "Game Design & Tactics", "date": "May 3, 2026", "tagline": "A top-down real-time tactics game about running a secret contract-killing organization.", "desc": "Contract Killers is a top-down real-time tactics and strategy game inspired by Commandos, cyberpunk-themed tactical games, and stealth-based assassination mechanics. The player runs a secret organization that accepts missions for money, managing specialists across high-stakes infiltration objectives.", "url": "HTML/blog-contract-killers.html", "tags": ["Unreal Engine", "Tactics", "Low-Poly", "Story Branching"]}, {"id": 2, "title": "Why Every Aspiring Game Developer Should Start Small", "category": "Development Philosophy", "date": "Jun 3, 2026", "tagline": "A short reflection on scope, prototypes, and finishing what you start.", "desc": "Many people dream of creating the next big game with massive open worlds. However, starting small allows developers to focus on core mechanics, finish rapidly, build confidence, and discover gameplay viability before investing months or years into complex systems.", "url": "HTML/blog-start-small.html", "tags": ["Game Dev", "Philosophy", "Prototyping", "Scope Control"]}, {"id": 3, "title": "Why I Started Writing and Creating Games and Apps", "category": "Creative Origins", "date": "May 31, 2026", "tagline": "On curiosity, early influences, and why this portfolio exists.", "desc": "From playing classic PC games in childhood to discovering HTML and CSS, exploring the fascination with how interactive worlds work behind the scenes. An essay on why blending narrative fiction, 3D art, and software development forms a unified creative drive.", "url": "HTML/blog-why-i-started-writing.html", "tags": ["Creative Journey", "Origins", "Cross-Disciplinary", "Technology"]}];
+const GALLERY_DATA = [{"title": "Japanese Traditional Estate", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Japanese Building/Japanese (1).png", "desc": "Atmospheric traditional Japanese architecture"}, {"title": "Japanese Courtyard Pavilion", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Japanese Building/Japanese (2).png", "desc": "Wood and tile architectural details"}, {"title": "Hobbit Dwelling Study", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Hobbit House.png", "desc": "Organic fantasy earth-sheltered home"}, {"title": "Egyptian Deity Composition", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Egyptian Mythology/All Work (14).png", "desc": "Anubis and Egyptian mythological scale study"}, {"title": "Egyptian Temple Hall", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Egyptian Mythology/All Work (2).png", "desc": "Mythological statues in monumental temple"}, {"title": "Minimalist Stone Bathroom", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Bathroom/All Work (16).jpg", "desc": "Matte natural stone architectural interior"}, {"title": "Morning Light Bedroom", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Bedroom/All Work (11).jpg", "desc": "Soft diffuse lighting and linen shaders"}, {"title": "Photorealistic Automotive Exterior", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Car/All Work (10).png", "desc": "Specular curvature and studio lighting"}, {"title": "Gothic Cathedral Light Study", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Church/All Work (19).jpg", "desc": "Volumetric sunlight through stained glass"}, {"title": "Commercial Product Visualization", "cat": "product", "pillar": "Client", "path": "Photos & to upload/Product Render/All Work (3).png", "desc": "Automated studio lighting pipeline render"}, {"title": "Contemporary Residential Living", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Living Room/All Work (35).jpg", "desc": "Modern furniture and warm interior composition"}, {"title": "Minimalist Kitchen Space", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Kitchen/All Work (30).jpg", "desc": "Clean cabinetry and stainless steel textures"}, {"title": "Sci-Fi Command Chamber", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Scifi/All Work (49).jpg", "desc": "Speculative sci-fi interior with glowing conduits"}, {"title": "Subsurface Deep Sea Atmosphere", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Underwater/All Work (27).png", "desc": "Underwater illumination and caustics simulation"}, {"title": "Viking Hall Longhouse", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Viking/All Work (65).png", "desc": "Norse timber textures and hearth lighting"}, {"title": "Abstract Figurative Sculpture", "cat": "character", "pillar": "Personal", "path": "Photos & to upload/Sculptures/All Work (81).jpg", "desc": "Monochrome sculptural study"}, {"title": "Client Brand Visual & Identity", "cat": "logo", "pillar": "Client", "path": "Photos & to upload/Logo/All Work (59).png", "desc": "Brand identity and typography design"}, {"title": "Urban Street Scene", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Streets/Street (1).jpg", "desc": "Night rain street reflections and neon glow"}, {"title": "Isometric Room Concept", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Isometric/1.jpg", "desc": "Stylized isometric room model"}, {"title": "Architectural Facade", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Exterior/All Work (136).jpg", "desc": "Exterior facade lighting and materials"}, {"title": "Commercial Beverage Render", "cat": "product", "pillar": "Client", "path": "Photos & to upload/All Work (38).png", "desc": "Condensation and glass refraction render"}, {"title": "Fantasy Valley Vista", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Nature/All Work (66).jpg", "desc": "Expansive landscape and mountain mist"}, {"title": "Architectural Staircase Helix", "cat": "3d", "pillar": "Personal", "path": "Photos & to upload/Stairs/All Work (44).jpg", "desc": "Geometric concrete spiral staircase"}, {"title": "Underground Tunnel Complex", "cat": "environment", "pillar": "Personal", "path": "Photos & to upload/Underground/7.jpg", "desc": "Subterranean corridor and moody fixtures"}];
+const SOFTWARE_DATA = [{"id": 1, "name": "Pro Camera Tools", "cat": "Blender Add-on", "price": "$23.99", "desc": "Professional cinematic camera toolkit for Blender. Depth of field presets, focal distance rigs, realistic lens simulation, sensor presets, and render-ready camera rigs.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (10).png"}, {"id": 2, "name": "1-Click Product Render", "cat": "Blender Add-on", "price": "$23.49", "desc": "Automated product rendering pipeline for Blender. Studio lighting rigs, multi-HDRI management, turntable camera paths, backdrop generators, and 1-click commercial batch export.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (3).png"}, {"id": 3, "name": "1-Click LOD Generator", "cat": "Blender Add-on", "price": "$14.49", "desc": "Automatic Level of Detail generator for game development and real-time pipelines. Smart mesh decimation preserving UV boundaries, vertex colors, and materials for Unity and Unreal.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (12).png"}, {"id": 4, "name": "Unity Bridge Exporter", "cat": "Blender Add-on", "price": "$13.99", "desc": "One-click seamless FBX asset export and material binding pipeline from Blender directly into active Unity project directories.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (14).png"}, {"id": 5, "name": "Stable Dropper Physics Tool", "cat": "Blender Add-on", "price": "$13.99", "desc": "Physics-based asset scattering and gravity settling tool for natural clutter and environment dressing without manual positioning.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (23).jpg"}, {"id": 6, "name": "Smart Scene Optimizer", "cat": "Blender Add-on", "price": "$13.99", "desc": "Advanced memory and geometry analyzer that cleans redundant textures, purges orphan data blocks, and reduces viewport lag by up to 60%.", "link": "https://blendermarket.com", "img": "Photos & to upload/All Work (33).jpg"}, {"id": 7, "name": "Staff Rota Management Tool", "cat": "Web Application", "price": "Free / SaaS", "desc": "Browser-based staff scheduling and shift allocation application built for small businesses, restaurants, and retail stores.", "link": "#", "img": ""}, {"id": 8, "name": "Supply Chain Quantity Tracker", "cat": "Web Application", "price": "Internal Tool", "desc": "Rapid stock count and batch inventory balance tracker created during supply chain operations management at RizPros LTD.", "link": "#", "img": ""}];
+const EXPERIENCE_DATA = [{"id": 1, "company": "IDFL International Ltd", "role": "Software Engineer", "start": "Sep 2023", "end": "Present", "tags": ["Python", "JavaScript", "Software", "3D Automation"]}, {"id": 2, "company": "Hashage Ireland", "role": "Senior Video Editor & Motion Designer", "start": "Feb 2023", "end": "Present", "tags": ["Video", "Post-Production", "Brand Strategy"]}, {"id": 3, "company": "Dublin Branding Agency", "role": "Video & Creative Specialist", "start": "Jun 2020", "end": "Present", "tags": ["Video", "Creative Direction", "Motion"]}, {"id": 4, "company": "RizPros LTD", "role": "Supply Chain Manager", "start": "Nov 2021", "end": "Aug 2023", "tags": ["Supply Chain", "Inventory Ops", "Process Automation"]}, {"id": 5, "company": "Digiworld Ireland", "role": "Digital Media Manager", "start": "Feb 2021", "end": "Aug 2022", "tags": ["Digital Media", "Content", "Marketing"]}, {"id": 6, "company": "GH Industry", "role": "Assistant Procurement Manager", "start": "May 2016", "end": "Jun 2018", "tags": ["Procurement", "Operations", "Logistics"]}, {"id": 7, "company": "UET Taxila", "role": "Graphic Design & Visualization Freelance", "start": "Jun 2012", "end": "Sep 2016", "tags": ["3D Modeling", "Graphic Design", "Illustration"]}];
+const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
+
+let novels = loadData('rana_novels_v4', NOVELS_DATA);
+let techProjects = loadData('rana_tech_v4', TECH_PROJECTS_DATA);
+let articles = loadData('rana_articles_v4', ARTICLES_DATA);
+let galleryItems = loadData('rana_gallery_v4', GALLERY_DATA);
+let software = loadData('rana_software_v4', SOFTWARE_DATA);
+let experience = loadData('rana_experience_v4', EXPERIENCE_DATA);
+let clients = loadData('rana_clients_v4', CLIENTS_DATA);
+
+// CURSOR
+const cur = document.getElementById('cur');
+const curRing = document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+function animRing(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;curRing.style.left=rx+'px';curRing.style.top=ry+'px';requestAnimationFrame(animRing)}
+animRing();
+function setupCursorHover(){
+  document.querySelectorAll('a,button,.novel-cover,.nv-cover,.g-card,.proj-card,.tech-spotlight-card,.dls-card,.article-card,.sw-item').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.classList.add('hover');curRing.classList.add('hover')});
+    el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');curRing.classList.remove('hover')});
+  });
+}
+
+// PAGE ROUTING
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const targetPage = document.getElementById('page-'+name);
+  if(targetPage) targetPage.classList.add('active');
+  const targetNav = document.getElementById('nav-'+name);
+  if(targetNav) targetNav.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+  renderPage(name);
+}
+
+function renderPage(name){
+  if(name==='home'){ renderHome(); }
+  else if(name==='novels'){ renderNovels(); }
+  else if(name==='technical-projects'){ renderTechProjects(); }
+  else if(name==='gallery'){ renderGallery('all'); }
+  else if(name==='software'){ renderSoftware(); }
+  else if(name==='articles'){ renderArticles(); }
+  else if(name==='about'){ renderAbout(); }
+  else if(name==='backend'){ renderBackend(); }
+  setupCursorHover();
+}
+
+// 1. HOME RENDERING
+let novelSlideIdx=0, projSlideIdx=0;
+function renderHome(){
+  // Home Tech Spotlight
+  const hTech = document.getElementById('homeTechSpotlight');
+  if(hTech){
+    hTech.innerHTML = techProjects.slice(0,3).map(p=>`
+      <div class="tech-spotlight-card" onclick="showPage('technical-projects')">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <span style="font-size:24px">${p.icon}</span>
+          <span class="badge-status badge-${p.statusType||'cyan'}">${p.status}</span>
+        </div>
+        <h3 style="color:#fff;font-size:20px;font-weight:700;margin-bottom:4px;font-family:var(--display)">${p.title}</h3>
+        <div style="font-family:var(--mono);font-size:11px;color:#8b95a5;margin-bottom:12px">${p.subtitle}</div>
+        <p style="font-size:13px;color:#9aa5ba;line-height:1.6;margin-bottom:16px">${p.desc.substring(0,130)}…</p>
+        <div class="tech-tags-wrap">
+          ${(p.tech||[]).slice(0,4).map(t=>`<span class="tech-tag ${t.type||''}">${t.name}</span>`).join('')}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Novels Slider
+  const nSlider = document.getElementById('novelSlider');
+  if(nSlider){
+    nSlider.innerHTML = novels.map((n,i)=>`
+      <div class="novel-card" onclick="openNovelModal(${i})">
+        <div class="novel-cover">
+          <img src="${n.cover}" alt="${n.title}" onerror="this.style.display='none'">
+        </div>
+        <div class="novel-info">
+          <div class="novel-genre">${n.genre} · ${n.type}</div>
+          <div class="novel-name">${n.title}</div>
+          <div class="novel-sub">${n.tagline}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Software Vertical Slider
+  const swS = document.getElementById('swSlider');
+  if(swS){
+    swS.innerHTML = software.slice(0,5).map(s=>`
+      <div class="sw-item" onclick="showPage('software')">
+        <div>
+          <div class="sw-item-meta">
+            <span class="sw-cat">${s.cat}</span>
+          </div>
+          <div class="sw-name">${s.name}</div>
+          <div class="sw-desc">${s.desc.substring(0,90)}…</div>
+        </div>
+        <div class="sw-price">${s.price}</div>
+      </div>
+    `).join('');
+  }
+
+  // Visual Projects Slider
+  const pGrid = document.getElementById('projGrid');
+  if(pGrid){
+    pGrid.innerHTML = galleryItems.slice(0,8).map(g=>`
+      <div class="proj-card" onclick="openLightboxDirect('${g.path}','${g.title}')">
+        <div class="proj-img">
+          <img src="${g.path}" alt="${g.title}" onerror="this.style.display='none'">
+        </div>
+        <div class="proj-info">
+          <div class="proj-cat">${g.pillar} · ${g.cat}</div>
+          <div class="proj-name">${g.title}</div>
+          <div class="proj-desc">${g.desc}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Home Articles
+  const haGrid = document.getElementById('homeArticlesGrid');
+  if(haGrid){
+    haGrid.innerHTML = articles.map(a=>`
+      <div class="article-card" onclick="window.location.href='${a.url}'">
+        <div>
+          <div class="article-meta">${a.category} · ${a.date}</div>
+          <h3 class="article-title">${a.title}</h3>
+          <p class="article-desc">${a.desc}</p>
+        </div>
+        <a class="article-btn" href="${a.url}">Read Article</a>
+      </div>
+    `).join('');
+  }
+}
+
+function slideNovels(dir){
+  const s = document.getElementById('novelSlider');
+  const cardW = 278;
+  const max = Math.max(0, novels.length - 3);
+  novelSlideIdx = Math.max(0, Math.min(max, novelSlideIdx + dir));
+  s.style.transform = `translateX(-${novelSlideIdx * cardW}px)`;
+}
+
+function slideProjects(dir){
+  const s = document.getElementById('projGrid');
+  const cardW = 342;
+  const max = Math.max(0, galleryItems.length - 3);
+  projSlideIdx = Math.max(0, Math.min(max, projSlideIdx + dir));
+  s.style.transform = `translateX(-${projSlideIdx * cardW}px)`;
+}
+
+// 2. NOVELS PAGE
+function renderNovels(){
+  const c = document.getElementById('novelsGrid');
+  if(!c) return;
+  c.innerHTML = novels.map((n,i)=>`
+    <div class="nv-card" onclick="openNovelModal(${i})">
+      <div class="nv-cover">
+        <img src="${n.cover}" alt="${n.title}" onerror="this.style.display='none'">
+      </div>
+      <div class="nv-genre">${n.genre} · ${n.type}</div>
+      <div class="nv-title">${n.title}</div>
+      <div class="nv-tagline">${n.tagline}</div>
+      <span class="nv-btn">Read Excerpt →</span>
+    </div>
+  `).join('');
+}
+
+function openNovelModal(idx){
+  const n = novels[idx];
+  document.getElementById('modalCoverImg').src = n.cover;
+  document.getElementById('modalGenre').textContent = n.genre + ' · ' + n.type;
+  document.getElementById('modalTitle').textContent = n.title;
+  document.getElementById('modalSub').textContent = n.tagline;
+  document.getElementById('modalBody').textContent = n.excerpt || n.desc;
+  document.getElementById('nvModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeNovelModal(){
+  document.getElementById('nvModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// 3. TECHNICAL PROJECTS PAGE
+function renderTechProjects(){
+  const c = document.getElementById('techCardsGrid');
+  if(!c) return;
+  c.innerHTML = techProjects.map(p=>`
+    <div class="dls-card-holder">
+      <div class="dls-card" id="card-${p.id}">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#00e5ff,transparent)"></div>
+        
+        <div data-layer="1" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:18px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:50px;height:50px;background:rgba(0,229,255,0.12);border:1px solid rgba(0,229,255,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px">
+              ${p.icon}
+            </div>
+            <div>
+              <h2 style="color:#fff;font-size:22px;margin:0 0 4px;font-weight:700;font-family:var(--display)">${p.title}</h2>
+              <div style="font-family:var(--mono);font-size:12px;color:#8b95a5">${p.subtitle}</div>
+            </div>
+          </div>
+          <span class="badge-status badge-${p.statusType||'cyan'}">${p.status}</span>
+        </div>
+
+        <p data-layer="1" style="color:#b7c0d4;font-size:14.5px;line-height:1.75;margin-bottom:20px">${p.desc}</p>
+
+        <div data-layer="1" style="background:rgba(0,229,255,0.03);border:1px solid rgba(0,229,255,0.1);border-radius:12px;padding:16px 20px;margin-bottom:20px">
+          <div style="font-family:var(--mono);font-size:11px;color:#c9a8ff;letter-spacing:.1em;margin-bottom:12px">KEY FEATURES</div>
+          <div class="feature-grid">
+            ${(p.features||[]).map(f=>`<div class="feature-item">${f}</div>`).join('')}
+          </div>
+        </div>
+
+        <div data-layer="1" style="margin-bottom:${p.hasLinks ? '24px' : '6px'}">
+          <div style="font-family:var(--mono);font-size:11px;color:#c9a8ff;letter-spacing:.1em;margin-bottom:10px">TECH STACK</div>
+          <div class="tech-tags-wrap">
+            ${(p.tech||[]).map(t=>`<span class="tech-tag ${t.type||''}">${t.name}</span>`).join('')}
+          </div>
+        </div>
+
+        ${p.hasLinks ? `
+        <div data-layer="2" style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="${p.downloadUrl}" class="dls-btn" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#00c2e0,#0080ff);color:#04121a;padding:11px 22px;border-radius:6px;text-decoration:none;font-weight:700;font-size:13.5px">
+            ⬇ Download for Windows
+          </a>
+          <a href="${p.webUrl}" target="_blank" class="dls-btn" style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,229,255,0.06);color:#5fe8ff;border:1px solid rgba(0,229,255,0.4);padding:11px 22px;border-radius:6px;text-decoration:none;font-weight:600;font-size:13.5px">
+            🌐 Open Web App
+          </a>
+          <a href="${p.githubUrl}" target="_blank" class="dls-btn" style="display:inline-flex;align-items:center;gap:8px;background:rgba(180,127,255,0.05);color:#c9a8ff;border:1px solid rgba(180,127,255,0.35);padding:11px 22px;border-radius:6px;text-decoration:none;font-size:13.5px">
+            📂 GitHub
+          </a>
+        </div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+// 4. GALLERY PAGE
+let lbImages = [], lbIdx = 0;
+function renderGallery(filter){
+  const c = document.getElementById('galleryGrid');
+  if(!c) return;
+  const filtered = filter === 'all' ? galleryItems : galleryItems.filter(g => g.cat === filter || g.pillar?.toLowerCase() === filter);
+  lbImages = filtered;
+  c.innerHTML = filtered.map((g,i)=>`
+    <div class="g-card" onclick="openLightbox(${i})">
+      <img src="${g.path}" alt="${g.title}" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
+      <div class="g-card-info">
+        <div class="g-cat-label">${g.cat} · ${g.pillar}</div>
+        <div class="g-title">${g.title}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterGallery(cat, btn){
+  document.querySelectorAll('.gf-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderGallery(cat);
+  setupCursorHover();
+}
+
+function openLightbox(i){
+  lbIdx = i;
+  const g = lbImages[i];
+  document.getElementById('lbImg').src = g.path;
+  document.getElementById('lbCaption').textContent = g.title + ' — ' + (g.desc || '');
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function openLightboxDirect(path, title){
+  document.getElementById('lbImg').src = path;
+  document.getElementById('lbCaption').textContent = title;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function lbNav(dir){
+  lbIdx = (lbIdx + dir + lbImages.length) % lbImages.length;
+  openLightbox(lbIdx);
+}
+
+// 5. SOFTWARE PAGE
+function renderSoftware(){
+  const c = document.getElementById('softwareContent');
+  if(!c) return;
+  const blender = software.filter(s => s.cat === 'Blender Add-on');
+  const web = software.filter(s => s.cat !== 'Blender Add-on');
+  c.innerHTML = `
+    <div class="software-cat-section">
+      <div class="sw-section-label">Blender Add-ons &amp; 3D Pipelines</div>
+      <div class="sw-products-grid">${blender.map(swCard).join('')}</div>
+    </div>
+    <div class="software-cat-section" style="background:var(--bg2)">
+      <div class="sw-section-label">Web Applications &amp; Utilities</div>
+      <div class="sw-products-grid">${web.map(swCard).join('')}</div>
+    </div>
+  `;
+}
+
+function swCard(s){
+  return `
+    <div class="sw-product-card">
+      <div>
+        <div class="sw-product-meta">
+          <span class="sw-product-type">${s.cat}</span>
+          <span class="sw-product-price">${s.price}</span>
+        </div>
+        <div class="sw-product-name">${s.name}</div>
+        <div class="sw-product-desc">${s.desc}</div>
+      </div>
+      ${s.link && s.link !== '#' ? `<a class="sw-product-link" href="${s.link}" target="_blank">View Product →</a>` : `<span class="sw-product-link" style="opacity:.45">Available in Pipeline</span>`}
+    </div>
+  `;
+}
+
+// 6. ARTICLES PAGE
+function renderArticles(){
+  const c = document.getElementById('articlesPageGrid');
+  if(!c) return;
+  c.innerHTML = articles.map(a=>`
+    <div class="article-card" onclick="window.location.href='${a.url}'">
+      <div>
+        <div class="article-meta">${a.category} · ${a.date}</div>
+        <h3 class="article-title">${a.title}</h3>
+        <p class="article-desc">${a.desc}</p>
+        <div class="tech-tags-wrap" style="margin-bottom:20px">
+          ${(a.tags||[]).map(t=>`<span class="tech-tag dim">${t}</span>`).join('')}
+        </div>
+      </div>
+      <a class="article-btn" href="${a.url}">Read Article</a>
+    </div>
+  `).join('');
+}
+
+// 7. ABOUT PAGE
+function renderAbout(){
+  const el = document.getElementById('expList');
+  if(el){
+    el.innerHTML = experience.map(e=>`
+      <div class="exp-row">
+        <div class="exp-dates">${e.start} — ${e.end}</div>
+        <div>
+          <div class="exp-company">${e.company}</div>
+          <div class="exp-role">${e.role}</div>
+          <div class="exp-tags">${(e.tags||[]).map(t=>`<span class="exp-tag">${t}</span>`).join('')}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+  const cg = document.getElementById('clientsGrid');
+  if(cg){
+    cg.innerHTML = clients.map(c=>`<div class="client-tag">${c}</div>`).join('');
+  }
+}
+
+// 8. BACKEND PAGE
+function renderBackend(){
+  renderBeNovels(); renderBeTech(); renderBeGallery(); renderBeSoftware(); renderBeExp(); renderBeClients();
+}
+
+function switchBackend(name, btn){
+  document.querySelectorAll('.bt').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.backend-panel').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('bp-'+name).classList.add('on');
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+// Backend Handlers
+function addNovel(){
+  const title = document.getElementById('b-novel-title').value.trim();
+  if(!title){ showToast('Title required'); return; }
+  const n = {
+    id: Date.now(),
+    title,
+    genre: document.getElementById('b-novel-genre').value || 'Fiction',
+    type: 'Novel',
+    tagline: document.getElementById('b-novel-tagline').value,
+    desc: document.getElementById('b-novel-desc').value,
+    excerpt: document.getElementById('b-novel-desc').value,
+    cover: document.getElementById('b-novel-cover').value || 'Novels/Ten Days in Heaven/20260407_1207_Image Generation_simple_compose_01knksznadeb291cpy5nqgw13c.png'
+  };
+  novels.unshift(n); saveData('rana_novels_v4', novels); renderBeNovels(); showToast('Novel added');
+}
+
+function renderBeNovels(){
+  const c = document.getElementById('be-novels-list');
+  if(!c) return;
+  c.innerHTML = novels.map((n,i)=>`
+    <div class="backend-item">
+      <div><div class="backend-item-title">${n.title}</div><div class="backend-item-sub">${n.genre} · ${n.type}</div></div>
+      <button class="bi-btn" onclick="novels.splice(${i},1);saveData('rana_novels_v4',novels);renderBeNovels();showToast('Deleted')">Delete</button>
+    </div>
+  `).join('');
+}
+
+function addTechProject(){
+  const title = document.getElementById('b-tech-title').value.trim();
+  if(!title){ showToast('Title required'); return; }
+  const p = {
+    id: 'proj-' + Date.now(),
+    title,
+    subtitle: document.getElementById('b-tech-sub').value,
+    status: document.getElementById('b-tech-status').value || '✅ Live',
+    statusType: 'cyan',
+    icon: '⚡',
+    desc: document.getElementById('b-tech-desc').value,
+    features: ['Custom features configured'],
+    tech: [{name:'JavaScript',type:'cyan'}],
+    hasLinks: false
+  };
+  techProjects.unshift(p); saveData('rana_tech_v4', techProjects); renderBeTech(); showToast('Project added');
+}
+
+function renderBeTech(){
+  const c = document.getElementById('be-tech-list');
+  if(!c) return;
+  c.innerHTML = techProjects.map((p,i)=>`
+    <div class="backend-item">
+      <div><div class="backend-item-title">${p.title}</div><div class="backend-item-sub">${p.subtitle}</div></div>
+      <button class="bi-btn" onclick="techProjects.splice(${i},1);saveData('rana_tech_v4',techProjects);renderBeTech();showToast('Deleted')">Delete</button>
+    </div>
+  `).join('');
+}
+
+function addGalleryItem(){
+  const title = document.getElementById('b-gal-title').value.trim();
+  if(!title){ showToast('Title required'); return; }
+  const g = {
+    title,
+    cat: document.getElementById('b-gal-cat').value || '3d',
+    pillar: document.getElementById('b-gal-pillar').value || 'Personal',
+    path: document.getElementById('b-gal-path').value,
+    desc: title
+  };
+  galleryItems.unshift(g); saveData('rana_gallery_v4', galleryItems); renderBeGallery(); showToast('Image added');
+}
+
+function renderBeGallery(){
+  const c = document.getElementById('be-gallery-list');
+  if(!c) return;
+  c.innerHTML = galleryItems.slice(0,25).map((g,i)=>`
+    <div class="backend-item">
+      <div><div class="backend-item-title">${g.title}</div><div class="backend-item-sub">${g.cat} · ${g.pillar}</div></div>
+      <button class="bi-btn" onclick="galleryItems.splice(${i},1);saveData('rana_gallery_v4',galleryItems);renderBeGallery();showToast('Deleted')">Delete</button>
+    </div>
+  `).join('');
+}
+
+function addSoftware(){
+  const name = document.getElementById('b-sw-name').value.trim();
+  if(!name){ showToast('Name required'); return; }
+  const s = {
+    id: Date.now(),
+    name,
+    cat: document.getElementById('b-sw-cat').value || 'Blender Add-on',
+    price: document.getElementById('b-sw-price').value || '$19.99',
+    desc: document.getElementById('b-sw-desc').value,
+    link: '#'
+  };
+  software.unshift(s); saveData('rana_software_v4', software); renderBeSoftware(); showToast('Product added');
+}
+
+function renderBeSoftware(){
+  const c = document.getElementById('be-software-list');
+  if(!c) return;
+  c.innerHTML = software.map((s,i)=>`
+    <div class="backend-item">
+      <div><div class="backend-item-title">${s.name}</div><div class="backend-item-sub">${s.cat} · ${s.price}</div></div>
+      <button class="bi-btn" onclick="software.splice(${i},1);saveData('rana_software_v4',software);renderBeSoftware();showToast('Deleted')">Delete</button>
+    </div>
+  `).join('');
+}
+
+function addExperience(){
+  const company = document.getElementById('b-exp-company').value.trim();
+  if(!company){ showToast('Company required'); return; }
+  const e = {
+    id: Date.now(),
+    company,
+    role: document.getElementById('b-exp-role').value,
+    start: document.getElementById('b-exp-dates').value.split('—')[0] || '2023',
+    end: document.getElementById('b-exp-dates').value.split('—')[1] || 'Present',
+    tags: ['Software', 'Engineering']
+  };
+  experience.unshift(e); saveData('rana_experience_v4', experience); renderBeExp(); showToast('Experience added');
+}
+
+function renderBeExp(){
+  const c = document.getElementById('be-exp-list');
+  if(!c) return;
+  c.innerHTML = experience.map((e,i)=>`
+    <div class="backend-item">
+      <div><div class="backend-item-title">${e.company}</div><div class="backend-item-sub">${e.role}</div></div>
+      <button class="bi-btn" onclick="experience.splice(${i},1);saveData('rana_experience_v4',experience);renderBeExp();showToast('Deleted')">Delete</button>
+    </div>
+  `).join('');
+}
+
+function addClient(){
+  const name = document.getElementById('b-client-name').value.trim();
+  if(!name){ showToast('Name required'); return; }
+  clients.push(name); saveData('rana_clients_v4', clients); renderBeClients();
+  document.getElementById('b-client-name').value = ''; showToast('Client added');
+}
+
+function renderBeClients(){
+  const c = document.getElementById('be-clients-list');
+  if(!c) return;
+  c.innerHTML = clients.map((cl,i)=>`
+    <div class="backend-item">
+      <div class="backend-item-title">${cl}</div>
+      <button class="bi-btn" onclick="clients.splice(${i},1);saveData('rana_clients_v4',clients);renderBeClients();showToast('Removed')">Remove</button>
+    </div>
+  `).join('');
+}
+
+// KEYBOARD EVENTS
+document.addEventListener('keydown', e => {
+  if(document.getElementById('lightbox').classList.contains('open')){
+    if(e.key==='ArrowLeft') lbNav(-1);
+    if(e.key==='ArrowRight') lbNav(1);
+    if(e.key==='Escape') closeLightbox();
+  }
+  if(document.getElementById('nvModal').classList.contains('open')){
+    if(e.key==='Escape') closeNovelModal();
+  }
+});
+
+// HERO 3D TILT
+const heroFrame = document.getElementById('heroFrame');
+if(heroFrame){
+  document.addEventListener('mousemove', e => {
+    const r = heroFrame.getBoundingClientRect();
+    const cx = r.left + r.width/2, cy = r.top + r.height/2;
+    const dx = (e.clientX - cx) / window.innerWidth * 14;
+    const dy = (e.clientY - cy) / window.innerHeight * 10;
+    heroFrame.style.transform = `perspective(800px) rotateY(${dx}deg) rotateX(${-dy}deg)`;
+  });
+}
+
+// INIT
+renderHome();
+setupCursorHover();
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+﻿# Video files and large binaries (>50MB)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.zip
+*.tar.gz
+*.exe

@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shavings — A Novella</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1208;
+    --graphite: #3a3630;
+    --gold: #b8912a;
+    --cream: #f5f0e8;
+    --dusty: #e8e0d0;
+    --eraser-pink: #d4a0a0;
+    --sharpener-dark: #2a1f1a;
+    --chapter-rule: #b8912a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+
+  /* ---- COVER ---- */
+  .cover {
+    min-height: 100vh;
+    background: var(--sharpener-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, #3a2a1a 0%, #1a1208 60%, #0d0a05 100%);
+    opacity: 0.85;
+  }
+
+  .cover-line-top, .cover-line-bottom {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .cover-line-top { top: 40px; }
+  .cover-line-bottom { bottom: 40px; }
+
+  .cover-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 600px;
+  }
+
+  .cover-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    opacity: 0.8;
+  }
+
+  .cover-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(56px, 12vw, 96px);
+    font-weight: 400;
+    color: var(--cream);
+    letter-spacing: 12px;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .cover-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 60px;
+    opacity: 0.9;
+  }
+
+  .cover-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 40px;
+  }
+
+  .cover-author {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--dusty);
+    opacity: 0.7;
+    margin-bottom: 80px;
+  }
+
+  .cover-scroll {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gold);
+    opacity: 0.5;
+    letter-spacing: 2px;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+
+  /* ---- FRONT MATTER ---- */
+  .front-matter {
+    background: var(--cream);
+    padding: 100px 30px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .epigraph {
+    text-align: center;
+    padding: 60px 40px;
+    border-left: 2px solid var(--gold);
+    border-right: 2px solid var(--gold);
+    margin: 0 auto 80px;
+    max-width: 520px;
+  }
+
+  .epigraph p {
+    font-style: italic;
+    font-size: 20px;
+    color: var(--graphite);
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+
+  .epigraph-attr {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* ---- CHARACTERS ---- */
+  .dramatis-personae {
+    background: var(--sharpener-dark);
+    color: var(--dusty);
+    padding: 80px 30px;
+  }
+
+  .dp-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .character-card {
+    border-top: 1px solid rgba(184,145,42,0.3);
+    padding: 40px 0;
+  }
+  .character-card:last-child { border-bottom: 1px solid rgba(184,145,42,0.3); }
+
+  .char-name {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 6px;
+    letter-spacing: 2px;
+  }
+
+  .char-role {
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(232,224,208,0.5);
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+    font-family: 'Cinzel', serif;
+  }
+
+  .char-desc {
+    font-size: 17px;
+    line-height: 1.85;
+    color: rgba(232,224,208,0.85);
+  }
+
+  /* ---- STORY CIRCLE ---- */
+  .story-circle-section {
+    background: var(--dusty);
+    padding: 80px 30px;
+  }
+
+  .sc-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .circle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--gold);
+    margin-top: 40px;
+  }
+
+  .circle-item {
+    padding: 28px 24px;
+    border-right: 1px solid rgba(184,145,42,0.4);
+    border-bottom: 1px solid rgba(184,145,42,0.4);
+  }
+  .circle-item:nth-child(2n) { border-right: none; }
+  .circle-item:nth-last-child(-n+2) { border-bottom: none; }
+
+  .ci-number {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+
+  .ci-label {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .ci-text {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--graphite);
+    line-height: 1.7;
+  }
+
+  /* ---- CHAPTERS ---- */
+  .book-body {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .part-break {
+    text-align: center;
+    padding: 100px 0 60px;
+    position: relative;
+  }
+
+  .part-rule {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin-bottom: 50px;
+  }
+
+  .part-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .part-title {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    color: var(--ink);
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .part-epigraph {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--graphite);
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.9;
+    opacity: 0.8;
+  }
+
+  .chapter {
+    padding: 70px 0 40px;
+    border-top: 1px solid rgba(184,145,42,0.2);
+  }
+
+  .chapter:first-of-type { border-top: none; }
+
+  .chapter-header {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  .ch-number {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .ch-title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+
+  .ch-rule {
+    width: 50px;
+    height: 1px;
+    background: var(--gold);
+    margin: 18px auto 0;
+  }
+
+  .chapter p {
+    margin-bottom: 1.6em;
+    text-indent: 2em;
+    font-size: 19px;
+    color: var(--graphite);
+  }
+
+  .chapter p:first-of-type { text-indent: 0; }
+
+  .chapter p.no-indent { text-indent: 0; }
+
+  .drop-cap::first-letter {
+    font-family: 'Cinzel', serif;
+    font-size: 72px;
+    float: left;
+    line-height: 0.78;
+    padding-right: 12px;
+    padding-top: 8px;
+    color: var(--ink);
+  }
+
+  .scene-break {
+    text-align: center;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 8px;
+    margin: 40px 0;
+    opacity: 0.6;
+  }
+
+  em { font-style: italic; }
+
+  .dialogue {
+    text-indent: 0 !important;
+    padding-left: 1.5em;
+    border-left: 2px solid rgba(184,145,42,0.25);
+    margin-left: 0.5em;
+    margin-bottom: 1.6em;
+  }
+
+  /* ---- FINALE ---- */
+  .finale {
+    background: var(--sharpener-dark);
+    color: var(--dusty);
+    padding: 100px 30px;
+    text-align: center;
+  }
+
+  .finale-inner {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .finale p {
+    font-size: 20px;
+    line-height: 2;
+    font-style: italic;
+    color: rgba(232,224,208,0.85);
+    margin-bottom: 1.5em;
+  }
+
+  .finale-title {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    margin-bottom: 50px;
+    text-transform: uppercase;
+  }
+
+  .finale-end {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    margin-top: 60px;
+    opacity: 0.7;
+  }
+
+  /* ---- THEMES ---- */
+  .themes-section {
+    padding: 80px 30px;
+    background: var(--dusty);
+  }
+
+  .th-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .theme-item {
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(184,145,42,0.25);
+  }
+
+  .theme-name {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .theme-desc {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--graphite);
+    line-height: 1.85;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--ink);
+    padding: 40px 30px;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    opacity: 0.5;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .circle-grid { grid-template-columns: 1fr; }
+    .circle-item { border-right: none; }
+    .circle-item:nth-last-child(-n+2) { border-bottom: 1px solid rgba(184,145,42,0.4); }
+    .circle-item:last-child { border-bottom: none; }
+    .chapter p { font-size: 17px; }
+    .cover-title { letter-spacing: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-line-top"></div>
+  <div class="cover-inner">
+    <p class="cover-label">A Novella</p>
+    <h1 class="cover-title">SHAVINGS</h1>
+    <p class="cover-subtitle">Of Lines, of Love, and of What Is Left Behind</p>
+    <div class="cover-divider"></div>
+    <p class="cover-author">A Story in Eight Chapters</p>
+    <div style="height:60px"></div>
+    <p class="cover-scroll">↓ &nbsp; scroll to read &nbsp; ↓</p>
+  </div>
+  <div class="cover-line-bottom"></div>
+</section>
+
+<!-- EPIGRAPH -->
+<section class="front-matter">
+  <div class="epigraph">
+    <p>"We are not diminished by what we give. We are only diminished by what we withhold."</p>
+    <p class="epigraph-attr">— Attributed to no one, found on no wall</p>
+  </div>
+  <div class="epigraph">
+    <p>"Every mark is a small death. Every line, a life briefly lived."</p>
+    <p class="epigraph-attr">— On the philosophy of drawing</p>
+  </div>
+</section>
+
+<!-- DRAMATIS PERSONAE -->
+<section class="dramatis-personae">
+  <div class="dp-inner">
+    <p class="section-header">Dramatis Personae</p>
+
+    <div class="character-card">
+      <h3 class="char-name">Pascal Graphite</h3>
+      <p class="char-role">The Pencil · Protagonist</p>
+      <p class="char-desc">Young, lean, and restless. Pascal wears a yellow coat and carries himself with the confidence of someone who does not yet understand that confidence is borrowed. His heart is made of graphite — dark, soft, and capable of leaving a mark on anything it touches. He is an artist by nature, a wanderer by compulsion, and a fool by love. He was born in a cedar box and smells faintly of forests he has never seen.</p>
+    </div>
+
+    <div class="character-card">
+      <h3 class="char-name">Vera Rowe</h3>
+      <p class="char-role">The Eraser · The Faithful</p>
+      <p class="char-desc">Soft-shouldered and quiet, Vera wears pale rose and speaks in gentle corrections. She is not pretty in the way that stops traffic; she is pretty in the way that makes you look twice at something you almost walked past. She loves Pascal with the kind of love that is not glamorous — steady, present, willing to undo what must be undone and stay despite everything. She is made of something yielding. This is both her weakness and her grace.</p>
+    </div>
+
+    <div class="character-card">
+      <h3 class="char-name">Sienna Hollow</h3>
+      <p class="char-role">The Sharpener · The Eternal</p>
+      <p class="char-desc">She appears from darkness and returns to it. She is dressed always in green and silver — the colors of hunger and of blades. She is beautiful in the way that certain dangerous things are beautiful: completely, and without apology. Sienna does not love. She renews. There is a difference, and she has always known it. She is the oldest character in this story, and when it ends, she will still be here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STORY CIRCLE -->
+<section class="story-circle-section">
+  <div class="sc-inner">
+    <p class="section-header">The Story Circle</p>
+    <div class="circle-grid">
+      <div class="circle-item">
+        <p class="ci-number">I · You</p>
+        <p class="ci-label">The Box</p>
+        <p class="ci-text">Pascal asleep in cedar and darkness. New. Unused. Full of everything he has not yet given away.</p>
+      </div>
+      <div class="circle-item">
+        <p class="ci-number">II · Need</p>
+        <p class="ci-label">The Awakening</p>
+        <p class="ci-text">He wakes on the desk and feels the pull — a vast white paper, a world unmade and waiting. He must create. He cannot do otherwise.</p>
+      </div>
+      <div class="circle-item">
+        <p class="ci-number">III · Go</p>
+        <p class="ci-label">The First Line</p>
+        <p class="ci-text">He crosses onto the white expanse. He draws his first mark and understands, for the first time, who he is.</p>
+      </div>
+      <div class="circle-item">
+        <p class="ci-number">IV · Search</p>
+        <p class="ci-label">Vera</p>
+        <p class="ci-text">He meets the Eraser. They argue. They dance. He begins to fade, and does not notice. She does, and says nothing.</p>
+      </div>
+      <div class="circle-item">
+        <p class="ci-number">V · Find</p>
+        <p class="ci-label">Sienna</p>
+        <p class="ci-text">He discovers the Sharpener. She restores him. He believes this is salvation. It is, and it is not.</p>
+      </div>
+      <div class="circle-item">
+        <p class="ci-number">VI · Take</p>
+        <p class="ci-label">The Price</p>
+        <p class="ci-text">He returns to Sienna again and again. Each time, he is shorter. Each time, he does not count the cost until the cost is nearly everything.</p>
+      </div>
+      <div class="circle-item">
+        <p class="ci-number">VII · Return</p>
+        <p class="ci-label">What Remains</p>
+        <p class="ci-text">He can no longer move. He is too small to hold himself upright. He falls — and Vera is there. She has always been there.</p>
+      </div>
+      <div class="circle-item">
+        <p class="ci-number">VIII · Change</p>
+        <p class="ci-label">The New Arrival</p>
+        <p class="ci-text">A new pencil steps from the box. Sienna emerges from darkness with a smile. The cycle does not end. It only begins again.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK BODY -->
+<div class="book-body">
+
+  <!-- PART ONE -->
+  <div class="part-break">
+    <div class="part-rule"></div>
+    <p class="part-label">Part One</p>
+    <h2 class="part-title">THE BOX</h2>
+    <p class="part-epigraph">"Before the first mark, there is only the dream of the mark."</p>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-header">
+      <p class="ch-number">Chapter One</p>
+      <h3 class="ch-title">Cedar and Darkness</h3>
+      <div class="ch-rule"></div>
+    </div>
+
+    <p class="drop-cap">He was born in a box that smelled of cedar and quiet. It was not an unpleasant way to begin. Twelve of them lay in there like brothers — neat, unused, parallel — and Pascal had always known that this arrangement, like most comfortable arrangements, was temporary.</p>
+
+    <p>The box was made of yellow cardboard with red lettering on the lid. He had read it many times in the half-dark: <em>HB. MEDIUM. FOR GENERAL USE.</em> He had always hated that last part. <em>For general use.</em> As though he were a spoon. As though he were a thing without interiority.</p>
+
+    <p>He was young then, in the way that all unused things are young — smooth, unbroken, the tip of him still sharp from the factory. He had never drawn a single line. He had never met anyone. He had never been held.</p>
+
+    <p>In the cedar dark, he dreamed of the White Expanse.</p>
+
+    <p>He did not know what it was. He knew only that it existed beyond the lid, beyond the desk, beyond the particular quality of afternoon light that leaked under the cardboard and fell across his yellow body in long, warm diagonals. It was vast. It was waiting. And somehow — in the way that one knows things one has never been told — he understood that it was for him.</p>
+
+    <p>He was ready. He had been ready since the beginning. He simply had not yet been called.</p>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-header">
+      <p class="ch-number">Chapter Two</p>
+      <h3 class="ch-title">The Awakening</h3>
+      <div class="ch-rule"></div>
+    </div>
+
+    <p class="drop-cap">The lid opened on a Tuesday. The artist reached in and selected another — one of Pascal's brothers, the second from the left — and the light flooded in and Pascal saw the world for the first time.</p>
+
+    <p>It was enormous. It was wooden and broad and cluttered with instruments he did not have names for, and it smelled of graphite dust and linseed oil and the particular sadness of abandoned cups of tea. The artist worked at one end of it, bent over a sketchbook, hand moving in slow deliberate arcs. Pascal watched him and felt something move inside his chest — a recognition, almost. He did not know what to call it.</p>
+
+    <p>He looked to his right.</p>
+
+    <p>There, at the far end of the desk, was the White Expanse.</p>
+
+    <p>It was not one sheet of paper, but many — stacked and fanned and lit from above by a lamp that made each page glow like a held breath. It was the most beautiful thing he had ever seen, which was not saying much, given that he had only been looking at things for thirty seconds. But he knew, with a certainty that bypassed reason entirely, that this was what he had been made for.</p>
+
+    <p>He did not decide to move. He simply began moving.</p>
+
+    <p>His arms extended from his sides. His legs — slim and new and uncertain — carried him across the desk in an exploratory shuffle, leaving a faint graphite ghost on the wood that he did not notice. He walked toward the paper the way some people walk toward the sea: inevitably, as if gravity had been quietly redirected.</p>
+
+    <p>At the edge of the desk, he paused. Below him, on the floor, was a long and unforgiving distance. He looked back at the box. At the lamp. At the window, where afternoon had arranged itself into soft rectangles on the wall.</p>
+
+    <p>Then he stepped onto the paper.</p>
+  </div>
+
+  <!-- PART TWO -->
+  <div class="part-break">
+    <div class="part-rule"></div>
+    <p class="part-label">Part Two</p>
+    <h2 class="part-title">THE WHITE EXPANSE</h2>
+    <p class="part-epigraph">"To mark is to claim. To claim is to love. To love is to risk the erasing."</p>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-header">
+      <p class="ch-number">Chapter Three</p>
+      <h3 class="ch-title">The First Line</h3>
+      <div class="ch-rule"></div>
+    </div>
+
+    <p class="drop-cap">The whiteness of the paper was a kind of vertigo.</p>
+
+    <p>He had not expected it to be so total. He stood at the edge of it and felt it extend away from him in every direction — an enormous blankness that asked nothing of him and everything of him at once. It was terrifying. It was exhilarating. He had never felt so small or so significant.</p>
+
+    <p>He took one step.</p>
+
+    <p>Behind him, a dark line appeared. Thin. Imperfect. His.</p>
+
+    <p>He stopped. He turned. He stared at it for a long time.</p>
+
+    <p>He took another step. The line extended. He took two more, veering slightly to the left, and the line curved. He broke into a run and the line swept wildly across the paper like a signature made by someone for whom the pen is not a tool but a voice. He laughed — a gravelly, graphite sound — and ran faster, arms outstretched, the line following him like a shadow that had forgotten its obligation to copy.</p>
+
+    <p>He drew spirals. He drew jagged mountain ranges. He drew the horizon of somewhere he had never been. He drew nothing in particular and everything in general, the way a child draws: with the whole body, with no plan, with joy as the only compass.</p>
+
+    <p>He did not notice, in those early hours, that his tip was growing faint.</p>
+
+    <p>He did not notice that the lines were thinner now than they had been. He did not notice the fading. He was too alive for noticing.</p>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-header">
+      <p class="ch-number">Chapter Four</p>
+      <h3 class="ch-title">The Eraser's Game</h3>
+      <div class="ch-rule"></div>
+    </div>
+
+    <p class="drop-cap">He first became aware of Vera Rowe as an absence.</p>
+
+    <p>He had been drawing a long, confident diagonal — the kind of line that feels, while you are making it, like a declaration — when he noticed that part of it was gone. Not faded. Not smudged. Gone. Cleanly, quietly, as though it had never been.</p>
+
+    <p>He turned.</p>
+
+    <p>She was standing behind him. She was dressed in pale rose, with small, capable hands and an expression that managed simultaneously to be apologetic and entirely unapologetic. She was, he thought, extraordinary — and then immediately suspicious, because extraordinary people who appear without announcement on your paper generally want something.</p>
+
+    <p class="dialogue">"That was my line," he said.</p>
+
+    <p class="dialogue">"It was a mistake," she replied, not unkindly. "I was simply correcting it."</p>
+
+    <p class="dialogue">"It wasn't a mistake. It was deliberate."</p>
+
+    <p class="dialogue">"Deliberate and wrong are not mutually exclusive."</p>
+
+    <p>He opened his mouth. Closed it. He looked at the gap where his diagonal had been. He looked at her.</p>
+
+    <p class="dialogue">"Do you do this to everyone?" he asked.</p>
+
+    <p class="dialogue">"Only to the ones worth correcting," she said.</p>
+
+    <p>He did not know what to do with that. He turned back to the paper and drew the diagonal again — slightly differently this time, he had to admit, slightly better — and said nothing more. But he was aware of her, precisely and continuously, in the way one is aware of a candle in a dark room even while looking in the other direction.</p>
+
+    <p>They fell into a rhythm without discussing it. He drew; she considered; she erased what needed erasing, left what did not. They argued about which was which. They argued with the particular energy of two people who enjoy arguing with each other, which is to say it was not really argument at all but a kind of intimacy wearing argument's coat.</p>
+
+    <p>He did not love her yet. But he was beginning to. He simply hadn't decided to notice.</p>
+
+    <div class="scene-break">· · ·</div>
+
+    <p>It was on a grey afternoon, while he was drawing a city skyline that stretched across an entire page, that he first felt it: a blunting at the center of himself. A loss of precision. The lines he made were wider now, softer, less sure. He pressed harder. It didn't help. He pressed harder still and felt something in him resist — a faint, structural protest.</p>
+
+    <p>He stopped drawing. He looked at his tip.</p>
+
+    <p>It was rounded. Not dramatically — not yet. But rounded, in the way of things that have been used.</p>
+
+    <p>He had not thought about this. He had thought, without quite thinking it, that he would simply go on forever. That the White Expanse would always be white, and he would always be sharp, and the lines would always come. He had not reckoned for the mathematics of diminishment.</p>
+
+    <p class="dialogue">"You need sharpening," said Vera, beside him.</p>
+
+    <p class="dialogue">"I'm fine," he said.</p>
+
+    <p class="dialogue">"Pascal."</p>
+
+    <p class="dialogue">"I said I'm fine."</p>
+
+    <p>She said nothing more. She sat down at the edge of the paper and waited, the way people wait who have been waiting longer than they've been anywhere else and have made a kind of peace with it.</p>
+
+    <p>He tried to draw again. The lines came out blunt and uncertain. He tried again. Worse. He sat down heavily and stared at the White Expanse and felt, for the first time in his brief bright life, the particular frustration of having something to say and lacking the means to say it.</p>
+
+    <p>And then, from the far edge of the desk, he heard a sound.</p>
+
+    <p>A laugh. Low and green and impossible to ignore.</p>
+  </div>
+
+  <!-- PART THREE -->
+  <div class="part-break">
+    <div class="part-rule"></div>
+    <p class="part-label">Part Three</p>
+    <h2 class="part-title">THE HOLLOW WOMAN</h2>
+    <p class="part-epigraph">"She does not promise eternity. Only the next morning. For most, this is enough."</p>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-header">
+      <p class="ch-number">Chapter Five</p>
+      <h3 class="ch-title">Sienna</h3>
+      <div class="ch-rule"></div>
+    </div>
+
+    <p class="drop-cap">She was standing in the shadow beside the lamp, dressed in green and silver, her edges precise in a way that suggested she had been designed for precision. She was beautiful in the manner of a well-made blade — not warmly, not softly, but undeniably and with a certain respect for the observer's intelligence.</p>
+
+    <p>She was watching him. She had been watching him for some time, he could tell. There was no urgency in her gaze, only a kind of patient, circular knowledge — the look of someone who has seen this before and expects to see it again.</p>
+
+    <p class="dialogue">"You're dull," she said. It was not an insult. It was a diagnosis.</p>
+
+    <p class="dialogue">"I've been working," he replied, trying to stand straighter.</p>
+
+    <p class="dialogue">"Yes," she said. "I can see." She tilted her head. "Come to me."</p>
+
+    <p>He should have asked more questions. He would think this later. He would think it each subsequent time, for all the good it did him. Instead, he walked to her — slowly, because his body was beginning to understand things his mind had not yet admitted — and she took him in and turned him, slowly, precisely, in a revolution that was nothing like movement and nothing like stillness, but something between the two that had no name in any language he knew.</p>
+
+    <p>When he emerged, he was sharp.</p>
+
+    <p>Not merely sharp. He was exact. He was himself, but more so — cleaned and narrowed to a point of pure intention. He felt the air against his newly exposed tip and it was like cold water, like the first line on blank paper, like being born a second time, which he supposed was exactly what it was.</p>
+
+    <p>He laughed, and ran back to the paper, and drew for hours without stopping.</p>
+
+    <div class="scene-break">· · ·</div>
+
+    <p>Vera had watched it all from the edge of the page.</p>
+
+    <p>She watched him return to Sienna — because he did, again and again, whenever his tip dulled, whenever the lines grew soft. She watched how he moved toward the Sharpener with a particular kind of eagerness that had nothing to do with her, Vera, who also made him sharp in a different way, a way he never seemed to count.</p>
+
+    <p>She did not say much. This was her nature. She corrected; she did not demand. She erased mistakes; she did not catalogue them. She stayed.</p>
+
+    <p>But in the evenings, when the lamp was lowered and the desk quieted, she would look at Pascal — shorter now, visibly, by a fraction she could measure with grief if not with numbers — and she would think things she never said, which is perhaps its own kind of drawing in the dark.</p>
+  </div>
+
+  <!-- PART FOUR -->
+  <div class="part-break">
+    <div class="part-rule"></div>
+    <p class="part-label">Part Four</p>
+    <h2 class="part-title">THE PRICE OF A POINT</h2>
+    <p class="part-epigraph">"He counted his returns in joy. He should have counted them in inches."</p>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-header">
+      <p class="ch-number">Chapter Six</p>
+      <h3 class="ch-title">Each Circuit</h3>
+      <div class="ch-rule"></div>
+    </div>
+
+    <p class="drop-cap">The seasons did not change on the desk. There was only the lamp and the window and the slow accumulation of what had been made and what had been lost, curled together in the air like cedar shavings on a workshop floor.</p>
+
+    <p>Pascal drew. His lines were extraordinary now — precise and varied, carrying within them the education of a life actually lived. He had learned to make thin strokes with the side of his tip, broad shadows with his body, delicate cross-hatching that from a distance resolved into the illusion of texture and depth. He was, in short, very good. He had earned every line of it.</p>
+
+    <p>But he was shorter.</p>
+
+    <p>It was gradual enough that he could pretend not to see it. He did not look at himself beside his brothers' box. He did not measure himself against the things around him that had not changed. He returned to Sienna and each return gave him a day, a week, a month of sharp and joyful work, and he told himself that this was the agreement and it was fair.</p>
+
+    <p>Sienna said little. She turned him. She returned him to the world. She never apologized for what she took, which he found — when he thought about it, which he tried not to — both terrifying and oddly honest. She was not pretending to give without taking. She had never pretended anything. The transaction was the thing.</p>
+
+    <p>It was Vera who worried. It was Vera who watched. It was Vera who would sometimes rest a hand — small, yielding, rose-colored — on his arm, and say nothing, simply remain.</p>
+
+    <p class="dialogue">"You're losing yourself," she said to him once, very quietly, very late.</p>
+
+    <p class="dialogue">"I'm making things," he replied.</p>
+
+    <p class="dialogue">"Those are not opposites."</p>
+
+    <p>He looked at her. He looked at the White Expanse, covered now in months of his lines — a landscape, a history, a life made visible. He looked at his hands.</p>
+
+    <p class="dialogue">"Would you have me stop?" he asked.</p>
+
+    <p class="dialogue">"I would have you stay," she said. "However much of you is left."</p>
+
+    <p>He didn't know what to say. So he went back to drawing. This, too, was a kind of answer, though not the one she needed.</p>
+
+    <div class="scene-break">· · ·</div>
+
+    <p>The paper filled slowly. He could see his whole life in it now — the early wild spirals of his awakening, the careful city skylines of his middle period, the intricate and almost obsessively detailed smaller work of his later days, when his body could no longer make the sweeping gestures and so he had learned to say large things in small marks.</p>
+
+    <p>He was perhaps a third of his original size. He had stopped measuring.</p>
+
+    <p>He went to Sienna one last time. It was morning, and the light was particular and golden and came through the window at an angle that made everything look briefly eternal, which it was not. Sienna turned him. He felt the revolution, the slow narrowing, the cold emergence. When it was done, he held himself as straight as he could and walked back to the paper without looking at her.</p>
+
+    <p>He was very small now. Very precise. And very, very tired.</p>
+  </div>
+
+  <!-- PART FIVE -->
+  <div class="part-break">
+    <div class="part-rule"></div>
+    <p class="part-label">Part Five</p>
+    <h2 class="part-title">WHAT REMAINS</h2>
+    <p class="part-epigraph">"At the end, he understood: the paper had not been blank. It had been patient."</p>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-header">
+      <p class="ch-number">Chapter Seven</p>
+      <h3 class="ch-title">The Falling</h3>
+      <div class="ch-rule"></div>
+    </div>
+
+    <p class="drop-cap">He was drawing something small. A bird, perhaps. Or a boat. He was no longer sure of the distinction — at this scale, all things with wings are vessels, and all vessels are trying to leave.</p>
+
+    <p>His legs gave out first.</p>
+
+    <p>Not dramatically. He simply stopped being able to hold his own weight, which had never been much and was now almost nothing. He sat down on the paper. He tried to stand again. He could not.</p>
+
+    <p>He looked at the lines around him — the great sprawling record of everything he had made — and he felt something that was not regret and not quite peace, but the quiet country between them. He had done what he came to do. Not perfectly. Not without waste or misdirection. But he had made marks that were entirely his own, and they were still there, and they would be there for as long as the paper was.</p>
+
+    <p>He began to fall sideways.</p>
+
+    <p>And then she was there.</p>
+
+    <p>Vera caught him in her arms — her small, yielding, rose-colored arms — and held him without saying <em>I told you so</em>, without saying <em>look what you've done to yourself</em>, without saying anything at all. She simply held him, against her soft and giving body, and let him rest.</p>
+
+    <p>He looked up at her. She was looking down at him with the expression of someone who has loved a person through every version of them and is not surprised by any of it, and is not going anywhere.</p>
+
+    <p class="dialogue">"I made quite a mess," he said, looking at the paper.</p>
+
+    <p class="dialogue">"You made something," she said. "That's different."</p>
+
+    <p class="dialogue">"Vera."</p>
+
+    <p class="dialogue">"Yes."</p>
+
+    <p class="dialogue">"I should have counted better. What I was spending."</p>
+
+    <p class="dialogue">"Yes," she said again, neither cruelly nor kindly, but simply honestly, the way she had always been with him.</p>
+
+    <p class="dialogue">"I kept thinking—" he started. And stopped. He had kept thinking that the sharpening would go on. That there would always be more. That the renewal would outlast the loss. But the math had been simple and he had refused to do it, and now it was done.</p>
+
+    <p class="dialogue">"Don't," said Vera. "You're here now. That's enough."</p>
+
+    <p>He closed his eyes. She held him. Across the desk, from somewhere in the shadow beside the lamp, he heard — or thought he heard — a sound like something stepping back into darkness. A small, satisfied sound. Almost a smile.</p>
+
+    <p>Then nothing. Then the lamp. Then the particular silence of a desk on which something has just been completed.</p>
+  </div>
+
+</div><!-- end book-body -->
+
+<!-- FINALE -->
+<section class="finale">
+  <div class="finale-inner">
+    <p class="finale-title">Epilogue · The New Arrival</p>
+
+    <p>The box opened again on a morning that looked, to anyone watching, identical to the morning Pascal had been born into. The same angle of light. The same wooden smell. The same artist's hand, reaching in.</p>
+
+    <p>A new pencil stepped onto the desk.</p>
+
+    <p>He was tall and yellow and new and he looked at the White Expanse — a fresh stack of paper, clean and enormous and patient — and he felt in the center of himself the old pull, the old hunger, the old joy that is also a kind of grief if you know enough to read it that way.</p>
+
+    <p>He did not know enough yet. He would learn.</p>
+
+    <p>He stepped onto the paper.</p>
+
+    <p>Behind him, from the shadow beside the lamp, a figure emerged. She wore green and silver. She moved without hurry, because she had all the time in the world, because she was the only one in this story who always had. She watched the new pencil run across the paper — his first wild, joyful line arcing across the white — and she smiled.</p>
+
+    <p>It was a smile of absolute patience. Of perfect, indifferent love. Of someone who knows the ending and has made her peace with the fact that knowing the ending is not the same as being unmoved by the beginning.</p>
+
+    <p>She watched.</p>
+
+    <p>She waited.</p>
+
+    <p>She walked back into the darkness — and as she went, she was still smiling, the smile growing smaller and smaller until it was indistinguishable from the dark itself, which also, if you look at it long enough, seems to curve at the edges.</p>
+
+    <div class="finale-end">F I N I S</div>
+  </div>
+</section>
+
+<!-- THEMES -->
+<section class="themes-section">
+  <div class="th-inner">
+    <p class="section-header" style="color:var(--graphite)">Themes of the Novella</p>
+
+    <div class="theme-item">
+      <p class="theme-name">Mortality &amp; the Cost of Creation</p>
+      <p class="theme-desc">Every act of making takes something from the maker. Pascal does not merely create lines — he spends himself making them. The novella asks whether this is tragedy or simply the honest terms of a life fully lived.</p>
+    </div>
+
+    <div class="theme-item">
+      <p class="theme-name">Loyal Love vs. Consuming Desire</p>
+      <p class="theme-desc">Vera and Sienna represent the two loves most people know: one that stays through diminishment, and one that restores brilliantly but at a cost that is never disclosed in advance. Pascal misreads which is which, as most of us do.</p>
+    </div>
+
+    <div class="theme-item">
+      <p class="theme-name">The Indifference of Time</p>
+      <p class="theme-desc">Sienna does not grieve. She is not cruel — she is simply beyond the personal. She is what time is: beautiful, necessary, and utterly without investment in any particular outcome. The cycle continues without her permission or apology.</p>
+    </div>
+
+    <div class="theme-item">
+      <p class="theme-name">The Permanence of Marks</p>
+      <p class="theme-desc">Pascal is gone, but his lines remain. The novella suggests, quietly, that this is not nothing — that what we leave behind on the surfaces we've crossed may outlast us in ways that matter, even if no one is left to say so.</p>
+    </div>
+
+    <div class="theme-item" style="border-bottom:none;">
+      <p class="theme-name">The Cycle Without End</p>
+      <p class="theme-desc">The new pencil at the close does not know Pascal's story. He will live it anyway. This is not pessimism. It is the oldest observation literature has to make: that the human story is not a line but a revolution, and the revolution does not stop, and there is strange comfort in that.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Shavings · A Novella &nbsp;·&nbsp; All characters are instruments. All instruments, characters.</p>
+</footer>
+
+</body>
+</html>
