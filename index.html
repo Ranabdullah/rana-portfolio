@@ -595,7 +595,6 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
 
 
 /* ==================== DYNAMIC COLOR BLOOM WHEN FLOATING DOT TOUCHES PHOTO ==================== */
-/* ── Home page novel-card dot illumination ── */
 .novel-card.novel-card/* ── Performance: image rendering optimization ── */
 img { image-rendering: auto; }
 .g-card img, .novel-card img, .novel-page-cover img {
@@ -603,99 +602,189 @@ img { image-rendering: auto; }
 }
 
 /* ── BACKEND LOGIN GATE ─────────────────────────────── */
-#be-login-gate {
-  position: fixed; inset: 0; z-index: 9999;
-  background: var(--bg);
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 0;
+.be-login-lock {
+  font-size: 28px; margin-bottom: 20px; opacity: 0.4;
 }
-#be-login-gate.hidden { display: none; }
+
+/* tech-spotlight-card: no img, colorize the whole card background */
+.tech-spotlight-card/* Card border glow on illuminate */
+.g-card
+/* ==================== UNIFIED SLOW INK-IN-WATER COLORIZATION ==================== */
+.g-card img,
+.novel-cover,
+.novel-cover img,
+.novel-page-cover,
+.novel-page-cover img,
+.hero-portrait-frame,
+.hero-portrait-frame img,
+.novel-card img,
+.novel-card .novel-cover,
+.novel-card .novel-cover img,
+.proj-card img,
+.proj-img,
+.proj-img img,
+.sw-thumb,
+.sw-img-banner,
+.nv-cover,
+.nv-cover img,
+.tech-spotlight-card {
+  filter: grayscale(1) contrast(1.06) brightness(0.96) !important;
+  transition: filter 3.0s cubic-bezier(0.1, 0.7, 0.1, 1),
+              box-shadow 2.2s cubic-bezier(0.1, 0.7, 0.1, 1),
+              border-color 1.8s cubic-bezier(0.1, 0.7, 0.1, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: filter, transform;
+}
+
+.g-card:hover img,
+.novel-cover:hover,
+.novel-cover:hover img,
+.novel-page-card:hover img,
+.novel-page-card:hover .novel-page-cover img,
+.hero-portrait-frame:hover,
+.hero-portrait-frame:hover img,
+.novel-card:hover img,
+.novel-card:hover .novel-cover,
+.novel-card:hover .novel-cover img,
+.proj-card:hover img,
+.proj-card:hover .proj-img,
+.proj-card:hover .proj-img img,
+.sw-item:hover .sw-thumb,
+.sw-product-card:hover .sw-img-banner,
+.nv-cover:hover,
+.nv-cover:hover img,
+.tech-spotlight-card:hover,
+.in-color-spotlight,
+.in-color-spotlight img,
+.g-card.in-color-spotlight img,
+.novel-card.in-color-spotlight,
+.novel-card.in-color-spotlight .novel-cover,
+.novel-card.in-color-spotlight .novel-cover img,
+.novel-card.in-color-spotlight img,
+.novel-page-card.in-color-spotlight,
+.novel-page-card.in-color-spotlight img,
+.novel-page-card.in-color-spotlight .novel-page-cover,
+.novel-page-card.in-color-spotlight .novel-page-cover img,
+.proj-card.in-color-spotlight,
+.proj-card.in-color-spotlight img,
+.proj-card.in-color-spotlight .proj-img,
+.proj-card.in-color-spotlight .proj-img img,
+.hero-portrait-frame.in-color-spotlight,
+.hero-portrait-frame.in-color-spotlight img,
+.sw-item.in-color-spotlight .sw-thumb,
+.sw-product-card.in-color-spotlight .sw-img-banner,
+.tech-spotlight-card.in-color-spotlight,
+.dot-illuminated,
+.dot-illuminated img,
+.g-card.dot-illuminated img,
+.novel-card.dot-illuminated,
+.novel-card.dot-illuminated .novel-cover,
+.novel-card.dot-illuminated .novel-cover img,
+.novel-card.dot-illuminated img,
+.novel-page-card.dot-illuminated,
+.novel-page-card.dot-illuminated img,
+.novel-page-card.dot-illuminated .novel-page-cover img,
+.proj-card.dot-illuminated,
+.proj-card.dot-illuminated img,
+.proj-card.dot-illuminated .proj-img,
+.proj-card.dot-illuminated .proj-img img,
+.hero-portrait-frame.dot-illuminated,
+.hero-portrait-frame.dot-illuminated img,
+.sw-item.dot-illuminated .sw-thumb,
+.sw-product-card.dot-illuminated .sw-img-banner,
+.tech-spotlight-card.dot-illuminated {
+  filter: grayscale(0) contrast(1.05) brightness(1.02) !important;
+  transition: filter 3.0s cubic-bezier(0.1, 0.7, 0.1, 1),
+              box-shadow 2.2s cubic-bezier(0.1, 0.7, 0.1, 1),
+              border-color 1.8s cubic-bezier(0.1, 0.7, 0.1, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.g-card.in-color-spotlight,
+.novel-card.in-color-spotlight,
+.novel-page-card.in-color-spotlight,
+.proj-card.in-color-spotlight,
+.hero-portrait-frame.in-color-spotlight,
+.sw-item.in-color-spotlight,
+.sw-product-card.in-color-spotlight,
+.tech-spotlight-card.in-color-spotlight,
+.g-card.dot-illuminated,
+.novel-card.dot-illuminated,
+.novel-page-card.dot-illuminated,
+.proj-card.dot-illuminated,
+.hero-portrait-frame.dot-illuminated,
+.sw-item.dot-illuminated,
+.sw-product-card.dot-illuminated,
+.tech-spotlight-card.dot-illuminated {
+  border-color: var(--card-border, var(--dot-border, rgba(0, 229, 255, 0.55))) !important;
+  box-shadow: 0 16px 45px var(--card-glow, var(--dot-glow, rgba(0, 229, 255, 0.22))) !important;
+}
+
+/* ==================== BACKEND AUTHENTICATION GATE ==================== */
+#be-login-gate {
+  padding: 40px 24px;
+  display: flex; align-items: center; justify-content: center;
+}
+#be-login-gate.hidden { display: none !important; }
 .be-login-box {
-  width: 360px;
+  width: 100%; max-width: 400px;
+  background: var(--bg-card, #ffffff);
   border: 1px solid var(--border);
-  padding: 48px 40px 40px;
-  background: var(--bg-card);
-  position: relative;
+  padding: 44px 36px 36px;
+  border-radius: 4px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.08);
+  text-align: center;
 }
 .be-login-box h2 {
   font-family: var(--serif); font-size: 26px; font-weight: 300;
   color: var(--ink); margin-bottom: 6px;
 }
 .be-login-box .be-login-sub {
-  font-family: var(--mono); font-size: 10px; color: var(--ink4);
-  margin-bottom: 32px; letter-spacing: 0.06em;
+  font-family: var(--mono); font-size: 10.5px; color: var(--ink4);
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px;
 }
 .be-login-field {
-  display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;
+  text-align: left; margin-bottom: 16px;
 }
 .be-login-field label {
-  font-family: var(--mono); font-size: 10px; color: var(--ink4);
-  letter-spacing: 0.08em; text-transform: uppercase;
+  display: block; font-family: var(--mono); font-size: 10px;
+  color: var(--ink3); letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 6px;
 }
 .be-login-field input {
-  padding: 10px 14px;
-  font-family: var(--mono); font-size: 13px;
-  border: 1px solid var(--border);
-  background: var(--bg); color: var(--ink);
-  border-radius: 3px; outline: none;
+  width: 100%; padding: 10px 12px;
+  font-family: var(--sans); font-size: 13px;
+  border: 1px solid var(--border); background: var(--bg);
+  color: var(--ink); border-radius: 3px; outline: none;
   transition: border-color 0.2s;
+  box-sizing: border-box;
 }
-.be-login-field input:focus { border-color: var(--ink3); }
+.be-login-field input:focus {
+  border-color: var(--ink);
+}
 .be-login-btn {
-  width: 100%; margin-top: 8px;
-  padding: 12px;
+  width: 100%; margin-top: 10px; padding: 12px;
   font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
-  background: var(--ink); color: var(--bg);
-  border: none; cursor: pointer;
-  transition: opacity 0.2s;
+  background: var(--ink); color: #fff; border: none; border-radius: 3px;
+  cursor: pointer; transition: opacity 0.2s;
 }
-.be-login-btn:hover { opacity: 0.82; }
+.be-login-btn:hover { opacity: 0.85; }
 .be-login-err {
   font-family: var(--mono); font-size: 11px; color: #e50914;
-  margin-top: 12px; min-height: 16px; text-align: center;
+  margin-top: 14px; min-height: 16px;
 }
-.be-login-lock {
-  font-size: 28px; margin-bottom: 20px; opacity: 0.4;
+.be-login-cancel {
+  display: inline-block; margin-top: 16px; font-family: var(--mono);
+  font-size: 11px; color: var(--ink4); text-decoration: none; cursor: pointer;
 }
+.be-login-cancel:hover { color: var(--ink); }
+.be-signout-btn {
+  padding: 6px 14px; font-family: var(--mono); font-size: 11px;
+  background: transparent; color: var(--ink3); border: 1px solid var(--border);
+  border-radius: 3px; cursor: pointer; transition: all 0.2s;
+}
+.be-signout-btn:hover { color: #e50914; border-color: #e50914; }
 
-/* ── SCROLL SPOTLIGHT: colour fills in slowly ─────────────────── */
-.dot-illuminated img,
-.g-card.dot-illuminated img,
-.novel-card.dot-illuminated img,
-.novel-card.dot-illuminated .novel-cover img,
-.novel-page-card.dot-illuminated img,
-.novel-page-card.dot-illuminated .novel-page-cover img,
-.proj-card.dot-illuminated img,
-.proj-card.dot-illuminated .proj-img img,
-.hero-portrait-frame.dot-illuminated img,
-.sw-item.dot-illuminated .sw-thumb,
-.sw-product-card.dot-illuminated .sw-img-banner {
-  filter: grayscale(0) contrast(1.04) brightness(1.0) !important;
-  transform: scale(1.015);
-  /* Keep transition here too so reverse (color → B&W) is also slow */
-  transition: filter 2.8s cubic-bezier(0.0, 0.55, 0.45, 1.0),
-              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-/* tech-spotlight-card: no img, colorize the whole card background */
-.tech-spotlight-card.dot-illuminated {
-  border-color: var(--dot-border, rgba(0,229,255,0.55)) !important;
-  box-shadow: 0 0 32px var(--dot-glow, rgba(0,229,255,0.18)) !important;
-  transition: border-color 2.0s ease, box-shadow 2.0s ease !important;
-}
-
-/* Card border glow on illuminate */
-.g-card.dot-illuminated,
-.novel-card.dot-illuminated,
-.novel-page-card.dot-illuminated,
-.proj-card.dot-illuminated,
-.sw-item.dot-illuminated,
-.sw-product-card.dot-illuminated,
-.hero-portrait-frame.dot-illuminated {
-  border-color: var(--dot-border, rgba(0,229,255,0.5)) !important;
-  box-shadow: 0 12px 40px var(--dot-glow, rgba(0,229,255,0.18)) !important;
-  transition: border-color 1.5s ease, box-shadow 1.5s ease !important;
-}
 </style>
 </head>
 <body>
@@ -1062,10 +1151,34 @@ img { image-rendering: auto; }
 
 <!-- ==================== 8. BACKEND PAGE ==================== -->
 <div class="page" id="page-backend">
+
+<!-- BACKEND SECURITY AUTHENTICATION GATE -->
+<div id="be-login-gate">
+  <div class="be-login-box">
+    <div style="font-size:32px;margin-bottom:14px;opacity:0.65">&#128274;</div>
+    <h2>Admin Access</h2>
+    <div class="be-login-sub">RANA PORTFOLIO &middot; CONTENT MANAGER</div>
+    <div class="be-login-field">
+      <label>Email Address</label>
+      <input type="email" id="be-email" autocomplete="off" placeholder="">
+    </div>
+    <div class="be-login-field">
+      <label>Password</label>
+      <input type="password" id="be-pass" autocomplete="new-password" placeholder=""
+        onkeydown="if(event.key==='Enter') beLogin()">
+    </div>
+    <button class="be-login-btn" onclick="beLogin()">SIGN IN</button>
+    <div class="be-login-err" id="be-login-err"></div>
+    <a class="be-login-cancel" onclick="showPage('home')">&larr; Return to Portfolio</a>
+  </div>
+</div>
+
+<div id="backend-authorized-view" style="display:none">
+
   <div class="backend-page">
-    <div class="backend-header">
+    <div class="backend-header" style="display:flex;justify-content:space-between;align-items:flex-start"><div>
       <h1>Content <em>Manager</em></h1>
-      <p style="color:var(--ink3);font-size:13.5px;margin-top:4px">Add, update, and customize your portfolio content. Stored in your local browser state.</p>
+      <p style="color:var(--ink3);font-size:13.5px;margin-top:4px">Add, update, and customize your portfolio content. Stored in your local browser state.</p></div><button class="be-signout-btn" onclick="beSignOut()">&#128274; Sign Out</button>
     </div>
     <div class="backend-tabs">
       <button class="bt on" onclick="switchBackend('novels',this)">Novels &amp; Books</button>
@@ -1154,6 +1267,8 @@ img { image-rendering: auto; }
 </div>
 
 <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+
+</div><!-- end backend-authorized-view -->
 <script>
 function loadData(key, def){ try{const d=localStorage.getItem(key);return d?JSON.parse(d):def}catch(e){return def} }
 function saveData(key, val){ try{localStorage.setItem(key,JSON.stringify(val))}catch(e){} }
@@ -1166,13 +1281,13 @@ const SOFTWARE_DATA = [{"id": 1, "name": "1-Click Product Render Setup", "cat": 
 const EXPERIENCE_DATA = [{"id": 1, "company": "IDFL International Ltd", "role": "Software Engineer", "start": "Sep 2023", "end": "Present", "tags": ["Python", "JavaScript", "Software", "3D Automation"]}, {"id": 2, "company": "Hashage Ireland", "role": "Senior Video Editor & Motion Designer", "start": "Feb 2023", "end": "Present", "tags": ["Video", "Post-Production", "Brand Strategy"]}, {"id": 3, "company": "Dublin Branding Agency", "role": "Video & Creative Specialist", "start": "Jun 2020", "end": "Present", "tags": ["Video", "Creative Direction", "Motion"]}, {"id": 4, "company": "RizPros LTD", "role": "Supply Chain Manager", "start": "Nov 2021", "end": "Aug 2023", "tags": ["Supply Chain", "Inventory Ops", "Process Automation"]}, {"id": 5, "company": "Digiworld Ireland", "role": "Digital Media Manager", "start": "Feb 2021", "end": "Aug 2022", "tags": ["Digital Media", "Content", "Marketing"]}, {"id": 6, "company": "GH Industry", "role": "Assistant Procurement Manager", "start": "May 2016", "end": "Jun 2018", "tags": ["Procurement", "Operations", "Logistics"]}, {"id": 7, "company": "UET Taxila", "role": "Graphic Design & Visualization Freelance", "start": "Jun 2012", "end": "Sep 2016", "tags": ["3D Modeling", "Graphic Design", "Illustration"]}];
 const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
 
-let novels = loadData('rana_novels_v31', NOVELS_DATA);
-let techProjects = loadData('rana_tech_v31', TECH_PROJECTS_DATA);
-let articles = loadData('rana_articles_v31', ARTICLES_DATA);
-let galleryItems = loadData('rana_gallery_v31', GALLERY_DATA);
-let software = loadData('rana_software_v31', SOFTWARE_DATA);
-let experience = loadData('rana_experience_v31', EXPERIENCE_DATA);
-let clients = loadData('rana_clients_v31', CLIENTS_DATA);
+let novels = loadData('rana_novels_v33', NOVELS_DATA);
+let techProjects = loadData('rana_tech_v33', TECH_PROJECTS_DATA);
+let articles = loadData('rana_articles_v33', ARTICLES_DATA);
+let galleryItems = loadData('rana_gallery_v33', GALLERY_DATA);
+let software = loadData('rana_software_v33', SOFTWARE_DATA);
+let experience = loadData('rana_experience_v33', EXPERIENCE_DATA);
+let clients = loadData('rana_clients_v33', CLIENTS_DATA);
 
 // CURSOR
 const cur = document.getElementById('cur');
@@ -1190,8 +1305,6 @@ function setupCursorHover(){
 
 // PAGE ROUTING
 function showPage(name){
-  if(window._spotSetup){ clearTimeout(window._spotSetup); }
-  window._spotSetup = setTimeout(function(){ if(window.refreshSpotlight) window.refreshSpotlight(); }, 280);
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
   const targetPage = document.getElementById('page-'+name);
@@ -1200,6 +1313,14 @@ function showPage(name){
   if(targetNav) targetNav.classList.add('active');
   window.scrollTo({top:0, behavior:'smooth'});
   renderPage(name);
+
+  if(name === 'backend'){
+    beCheckAuthOnNav();
+  }
+
+  setTimeout(function(){
+    if(window.refreshColorSpotlight) window.refreshColorSpotlight();
+  }, 180);
 }
 
 function renderPage(name){
@@ -2044,73 +2165,7 @@ setupCursorHover();
 
 
 // ==================== 1. COLORFUL BACKGROUND PARTICLES ====================
-(function initScrollSpotlight(){
-  const palette = [
-    '#00e5ff', '#ff4081', '#ffb300',
-    '#69f0ae', '#b388ff', '#448aff'
-  ];
 
-  const SEL = '.g-card, .novel-card, .novel-page-card, .proj-card, ' +
-    '.hero-portrait-frame, .sw-item, .sw-product-card, .tech-spotlight-card';
-
-  function illuminate(card){
-    let col = card.dataset.spotColor;
-    if(!col){
-      col = palette[Math.floor(Math.random() * palette.length)];
-      card.dataset.spotColor = col;
-    }
-    card.classList.add('dot-illuminated');
-    card.style.setProperty('--dot-glow', col + '38');
-    card.style.setProperty('--dot-border', col);
-  }
-
-  function deiluminate(card){
-    card.classList.remove('dot-illuminated');
-    card.style.removeProperty('--dot-glow');
-    card.style.removeProperty('--dot-border');
-  }
-
-  let observer = null;
-
-  window.refreshSpotlight = function(){
-    if(observer) observer.disconnect();
-
-    observer = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ illuminate(e.target); }
-        else { deiluminate(e.target); }
-      });
-    }, {
-      threshold: [0, 0.05, 0.1],
-      rootMargin: '0px 0px 0px 0px'
-    });
-
-    document.querySelectorAll(SEL).forEach(function(el){
-      // Only observe elements that are actually visible
-      if(el.offsetParent !== null || el.closest('.page.on') !== null){
-        observer.observe(el);
-      }
-    });
-  };
-
-  // Initial setup after first render
-  setTimeout(window.refreshSpotlight, 500);
-
-  // Re-scan on resize
-  window.addEventListener('resize', function(){
-    clearTimeout(window._spotResize);
-    window._spotResize = setTimeout(window.refreshSpotlight, 300);
-  }, { passive: true });
-
-  // MutationObserver: catch new cards added to DOM (dynamic renders)
-  if(window.MutationObserver){
-    var mo = new MutationObserver(function(){
-      clearTimeout(window._spotMut);
-      window._spotMut = setTimeout(window.refreshSpotlight, 300);
-    });
-    mo.observe(document.body, { childList: true, subtree: true });
-  }
-})();
 
 // ==================== 2. RANDOM ACCENT GLOW ON CARD HOVER ====================
 function setupRandomColorHover(){
@@ -2139,7 +2194,8 @@ function setupRandomColorHover(){
 
 
 // ── BACKEND AUTH ──────────────────────────────────────────────────────
-const _CRED_HASH = '011302dd0741042d9e4af684ce621e05f6f693efb65ffe62db7a736454a7c257';
+// ==================== SECURE BACKEND AUTHENTICATION ====================
+const _CRED_HASH = '0cfe517587641ac7128436f278329274333a7915358dae4bc0bb23f07bf09f60';
 
 async function _sha256(str){
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
@@ -2147,29 +2203,174 @@ async function _sha256(str){
 }
 
 async function beLogin(){
-  const email = (document.getElementById('be-email')?.value || '').trim();
-  const pass  = document.getElementById('be-pass')?.value || '';
+  const email = (document.getElementById('be-email')?.value || '').trim().toLowerCase();
+  const pass  = (document.getElementById('be-pass')?.value || '').trim();
   const errEl = document.getElementById('be-login-err');
-  if(!email || !pass){ errEl.textContent = 'Please enter both fields.'; return; }
-  const hash = await _sha256(email + pass);
+  if(!email || !pass){ if(errEl) errEl.textContent = 'Please enter email and password.'; return; }
+  
+  const hash = await _sha256(email + ':' + pass);
   if(hash === _CRED_HASH){
     sessionStorage.setItem('_beAuth', '1');
-    document.getElementById('be-login-gate').classList.add('hidden');
-    errEl.textContent = '';
+    const gate = document.getElementById('be-login-gate');
+    if(gate) gate.classList.add('hidden');
+    const authView = document.getElementById('backend-authorized-view');
+    if(authView) authView.style.display = 'block';
+    if(errEl) errEl.textContent = '';
+    renderBackend();
+    showToast('Signed in successfully');
   } else {
-    errEl.textContent = 'Incorrect email or password.';
-    document.getElementById('be-pass').value = '';
+    if(errEl) errEl.textContent = 'Incorrect email or password.';
+    const passInput = document.getElementById('be-pass');
+    if(passInput) passInput.value = '';
   }
 }
 
-function beCheckAuth(){
+function beSignOut(){
+  sessionStorage.removeItem('_beAuth');
+  const authView = document.getElementById('backend-authorized-view');
+  if(authView) authView.style.display = 'none';
   const gate = document.getElementById('be-login-gate');
-  if(!gate) return;
-  if(sessionStorage.getItem('_beAuth') === '1'){
-    gate.classList.add('hidden');
+  if(gate){
+    gate.classList.remove('hidden');
+    const emailInput = document.getElementById('be-email');
+    const passInput = document.getElementById('be-pass');
+    if(emailInput) emailInput.value = '';
+    if(passInput) passInput.value = '';
+  }
+  showToast('Signed out');
+}
+
+function beCheckAuthOnNav(){
+  const gate = document.getElementById('be-login-gate');
+  const authView = document.getElementById('backend-authorized-view');
+  const isAuth = sessionStorage.getItem('_beAuth') === '1';
+  
+  if(isAuth){
+    if(gate) gate.classList.add('hidden');
+    if(authView) authView.style.display = 'block';
+  } else {
+    if(gate){
+      gate.classList.remove('hidden');
+      const emailInput = document.getElementById('be-email');
+      const passInput = document.getElementById('be-pass');
+      if(emailInput) emailInput.value = '';
+      if(passInput) passInput.value = '';
+      const errEl = document.getElementById('be-login-err');
+      if(errEl) errEl.textContent = '';
+    }
+    if(authView) authView.style.display = 'none';
   }
 }
-// ─────────────────────────────────────────────────────────────────────
+
+// ==================== SLOW INK-IN-WATER SCROLL COLORIZATION ====================
+(function initInkColorization(){
+  const palette = [
+    'rgba(0, 229, 255, 0.24)',
+    'rgba(255, 64, 129, 0.24)',
+    'rgba(255, 179, 0, 0.24)',
+    'rgba(105, 240, 174, 0.24)',
+    'rgba(179, 136, 255, 0.24)',
+    'rgba(68, 138, 255, 0.24)'
+  ];
+  const borderPalette = [
+    'rgba(0, 229, 255, 0.55)',
+    'rgba(255, 64, 129, 0.55)',
+    'rgba(255, 179, 0, 0.55)',
+    'rgba(105, 240, 174, 0.55)',
+    'rgba(179, 136, 255, 0.55)',
+    'rgba(68, 138, 255, 0.55)'
+  ];
+
+  const CARD_SELECTOR = '.g-card, .novel-card, .novel-page-card, .proj-card, .hero-portrait-frame, .sw-item, .sw-product-card, .tech-spotlight-card';
+
+  function assignColor(card){
+    if(!card.dataset.inkGlow){
+      const idx = Math.floor(Math.random() * palette.length);
+      card.dataset.inkGlow = palette[idx];
+      card.dataset.inkBorder = borderPalette[idx];
+    }
+  }
+
+  function activateCard(card){
+    assignColor(card);
+    card.classList.add('in-color-spotlight');
+    card.style.setProperty('--card-glow', card.dataset.inkGlow);
+    card.style.setProperty('--card-border', card.dataset.inkBorder);
+  }
+
+  function deactivateCard(card){
+    card.classList.remove('in-color-spotlight');
+    card.style.removeProperty('--card-glow');
+    card.style.removeProperty('--card-border');
+  }
+
+  function updateVisibleCards(){
+    const vWidth = window.innerWidth || document.documentElement.clientWidth;
+    const vHeight = window.innerHeight || document.documentElement.clientHeight;
+    
+    const cards = document.querySelectorAll(CARD_SELECTOR);
+    cards.forEach(card => {
+      // Check if inside active page
+      const pageParent = card.closest('.page');
+      if(pageParent && !pageParent.classList.contains('active') && pageParent.id !== 'page-home'){
+        deactivateCard(card);
+        return;
+      }
+      
+      const r = card.getBoundingClientRect();
+      const isVisible = (
+        r.top < vHeight + 60 &&
+        r.bottom > -60 &&
+        r.left < vWidth + 60 &&
+        r.right > -60
+      );
+
+      if(isVisible){
+        activateCard(card);
+      } else {
+        deactivateCard(card);
+      }
+    });
+  }
+
+  window.refreshColorSpotlight = updateVisibleCards;
+
+  let ticking = false;
+  function onScrollOrMove(){
+    if(!ticking){
+      requestAnimationFrame(() => {
+        updateVisibleCards();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScrollOrMove, { passive: true });
+  window.addEventListener('resize', onScrollOrMove, { passive: true });
+  window.addEventListener('touchmove', onScrollOrMove, { passive: true });
+  window.addEventListener('wheel', onScrollOrMove, { passive: true });
+
+  function attachSliderListeners(){
+    document.querySelectorAll('#novelSlider, #projGrid, #swSlider, .gallery-grid, .novels-grid').forEach(slider => {
+      slider.removeEventListener('scroll', onScrollOrMove);
+      slider.addEventListener('scroll', onScrollOrMove, { passive: true });
+    });
+  }
+
+  setTimeout(() => { updateVisibleCards(); attachSliderListeners(); }, 120);
+  setTimeout(() => { updateVisibleCards(); attachSliderListeners(); }, 400);
+  setTimeout(() => { updateVisibleCards(); attachSliderListeners(); }, 900);
+
+  if(window.MutationObserver){
+    const mo = new MutationObserver(() => {
+      onScrollOrMove();
+      attachSliderListeners();
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+})();
+
 </script>
 </body>
 </html>
