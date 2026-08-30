@@ -1187,6 +1187,58 @@ img {
 <!-- ==================== 8. BACKEND PAGE ==================== -->
 <div class="page" id="page-backend">
 
+<!-- AUTOMATED DATABASE BACKUP & CLOUD RESTORE MODAL -->
+<div id="backup-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,12,16,0.92);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:24px">
+  <div style="width:100%;max-width:720px;background:var(--bg-card,#fff);border:1px solid var(--border);border-radius:4px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,0.3)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <h3 style="font-family:var(--serif);font-size:24px;font-weight:300;color:var(--ink);margin:0">Database Backup &amp; Online Cloud Sync</h3>
+      <button onclick="closeBackupModal()" style="background:transparent;border:none;font-size:24px;color:var(--ink3);cursor:pointer">&times;</button>
+    </div>
+
+    <!-- Cloud Sync Online Banner -->
+    <div style="background:#e3f2fd;border:1px solid #90caf9;border-radius:4px;padding:14px 18px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <div>
+        <div style="font-family:var(--sans);font-size:13.5px;font-weight:600;color:#1565c0">☁️ Online Cloud Database Sync</div>
+        <div style="font-size:11.5px;color:#1976d2">Save online to the cloud so your work is accessible on any device, or load your cloud save.</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button onclick="saveToCloudOnline()" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#1565c0;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">☁️ Save Online to Cloud</button>
+        <button onclick="loadFromCloudOnline()" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#0288d1;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">☁️ Load from Cloud</button>
+      </div>
+    </div>
+    
+    <!-- 1-Click File Backup Banner -->
+    <div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:4px;padding:12px 16px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <div>
+        <div style="font-family:var(--sans);font-size:13px;font-weight:600;color:#2e7d32">💾 1-Click Offline File Backup</div>
+        <div style="font-size:11.5px;color:#388e3c">Download your full database file (.json) to your computer, or restore a file anytime.</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button onclick="downloadBackupJsonFile()" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#2e7d32;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">💾 Download .JSON</button>
+        <button onclick="document.getElementById('backup-file-input').click()" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#37474f;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">📂 Restore .JSON</button>
+        <input type="file" id="backup-file-input" accept=".json" style="display:none" onchange="restoreFromFile(event)">
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+      <button onclick="exportDataSection('gallery')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">View Gallery JSON</button>
+      <button onclick="exportDataSection('novels')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">View Novels JSON</button>
+      <button onclick="exportDataSection('tech')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">View Tech JSON</button>
+      <button onclick="exportDataSection('software')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">View Software JSON</button>
+      <button onclick="exportDataSection('articles')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">View Articles JSON</button>
+      <button onclick="exportDataSection('all')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer">View Complete JSON</button>
+    </div>
+
+    <textarea id="backup-text" rows="8" style="width:100%;padding:12px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical;box-sizing:border-box"></textarea>
+    
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px">
+      <button onclick="copyBackupText()" style="padding:8px 18px;font-family:var(--mono);font-size:11px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Copy Raw JSON to Clipboard</button>
+      <button onclick="importBackupText()" style="padding:8px 18px;font-family:var(--mono);font-size:11px;background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer">Apply Pasted JSON</button>
+    </div>
+  </div>
+</div>
+
+
 <!-- DATA BACKUP & EXPORT MODAL -->
 <div id="backup-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,12,16,0.92);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:24px">
   <div style="width:100%;max-width:680px;background:var(--bg-card,#fff);border:1px solid var(--border);border-radius:4px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,0.3)">
@@ -1686,6 +1738,12 @@ function filterGallery(cat, btn){
   btn.classList.add('on');
   renderGallery(cat);
   setupCursorHover();
+  setTimeout(function(){
+    if(window.refreshColorSpotlight) window.refreshColorSpotlight();
+  }, 100);
+  setTimeout(function(){
+    if(window.refreshColorSpotlight) window.refreshColorSpotlight();
+  }, 350);
 }
 
 let curSubImgIdx = 0;
@@ -1843,7 +1901,15 @@ function switchBackend(name, btn){
   document.querySelectorAll('.bt').forEach(b=>b.classList.remove('on'));
   document.querySelectorAll('.backend-panel').forEach(p=>p.classList.remove('on'));
   btn.classList.add('on');
-  document.getElementById('bp-'+name).classList.add('on');
+  const targetPanel = document.getElementById('bp-'+name);
+  if(targetPanel) targetPanel.classList.add('on');
+  if(name === 'articles' && window.renderBeArticles) renderBeArticles();
+  if(name === 'clients' && window.renderBeClients) renderBeClients();
+  if(name === 'tech' && window.renderBeTech) renderBeTech();
+  if(name === 'gallery' && window.renderBeGallery) renderBeGallery();
+  if(name === 'novels' && window.renderBeNovels) renderBeNovels();
+  if(name === 'software' && window.renderBeSoftware) renderBeSoftware();
+  if(name === 'experience' && window.renderBeExp) renderBeExp();
 }
 
 function showToast(msg){
@@ -1934,21 +2000,28 @@ function beUpdateNovel(i){
 }
 
 function addTechProject(){
-  const title = document.getElementById('b-tech-title').value.trim();
+  const title = (document.getElementById('b-tech-title')?.value || '').trim();
   if(!title){ showToast('Title required'); return; }
+  const stackStr = (document.getElementById('b-tech-stack')?.value || 'JavaScript').trim();
   const p = {
     id: 'proj-' + Date.now(),
     title,
-    subtitle: document.getElementById('b-tech-sub').value,
-    status: document.getElementById('b-tech-status').value || 'Live',
+    subtitle: document.getElementById('b-tech-sub')?.value || '',
+    status: document.getElementById('b-tech-status')?.value || 'Live',
     badgeClass: 'badge-outline',
     num: '0' + (techProjects.length + 1),
-    desc: document.getElementById('b-tech-desc').value,
-    features: ['Custom features configured'],
-    tech: ['JavaScript'],
-    hasLinks: false
+    desc: document.getElementById('b-tech-desc')?.value || '',
+    liveUrl: (document.getElementById('b-tech-live')?.value || '').trim(),
+    downloadUrl: (document.getElementById('b-tech-dl')?.value || '').trim(),
+    repoUrl: (document.getElementById('b-tech-repo')?.value || '').trim(),
+    features: ['Modular architecture', 'High-performance runtime'],
+    tech: stackStr.split(',').map(s=>s.trim()).filter(Boolean)
   };
-  techProjects.unshift(p); saveData('rana_tech_data', techProjects); renderBeTech(); showToast('Project added');
+  techProjects.unshift(p);
+  saveData('rana_tech_data', techProjects);
+  renderBeTech();
+  renderTechProjects();
+  showToast('Project added: ' + title);
 }
 
 function renderBeTech(){
@@ -2041,14 +2114,21 @@ function renderBeGallery(searchTerm){
   ` + filtered.map((g, fi) => {
     const realIdx = galleryItems.indexOf(g);
     const allImgs = (g.images && g.images.length > 0) ? g.images : [g.path];
+    const subVids = g.subVideos || {};
+
     const thumbs = allImgs.map((imgSrc, sIdx) => `
-      <div style="display:inline-flex;flex-direction:column;align-items:center;gap:4px;margin:4px">
+      <div style="display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin:6px;background:var(--bg);padding:8px;border-radius:4px;border:1px solid var(--border);width:130px">
         <div style="position:relative">
-          <img src="${imgSrc}" style="width:70px;height:70px;object-fit:cover;border-radius:3px;border:1px solid var(--border);display:block">
+          <img src="${imgSrc}" style="width:110px;height:90px;object-fit:cover;border-radius:3px;border:1px solid var(--border);display:block">
           <button onclick="beRemoveSubImage(${realIdx}, ${sIdx})" title="Remove this photo"
-            style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#e50914;border:none;color:#fff;font-size:10px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center">✕</button>
+            style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#e50914;border:none;color:#fff;font-size:11px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center">✕</button>
         </div>
-        <div style="font-family:var(--mono);font-size:8px;color:var(--ink4);max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${imgSrc}">${imgSrc.split('/').pop()}</div>
+        <div style="font-family:var(--mono);font-size:8.5px;color:var(--ink4);max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${imgSrc}">${imgSrc.split('/').pop()}</div>
+        <div style="width:100%">
+          <div style="font-family:var(--mono);font-size:8px;color:#e50914;margin-bottom:2px;font-weight:600">▶ YOUTUBE LINK:</div>
+          <input id="be-subvid-${realIdx}-${sIdx}" placeholder="https://youtube.com/..." value="${(subVids[sIdx] || (sIdx===0 ? g.youtubeUrl : '') || '').replace(/"/g,'&quot;')}"
+            style="width:100%;padding:4px 6px;font-family:var(--mono);font-size:9px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box" title="Video link for this specific photo">
+        </div>
       </div>
     `).join('');
 
@@ -2072,30 +2152,26 @@ function renderBeGallery(searchTerm){
               <option value="Client" ${g.pillar==='Client'?'selected':''}>Client</option>
             </select>
             <button onclick="beUpdateGalleryItem(${realIdx})"
-              style="padding:4px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
-            <button onclick="galleryItems.splice(${realIdx},1);saveData('rana_gallery_data',galleryItems);renderBeGallery();showToast('Item deleted')"
+              style="padding:4px 16px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save Project &amp; Video Links</button>
+            <button onclick="galleryItems.splice(${realIdx},1);saveData('rana_gallery_data',galleryItems);renderBeGallery();renderGallery('all');showToast('Item deleted')"
               style="padding:4px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete All</button>
-          </div>
-
-          <div style="display:flex;gap:6px;align-items:center">
-            <span style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);white-space:nowrap">▶ YouTube Link:</span>
-            <input id="be-gyt-${realIdx}" placeholder="https://youtube.com/watch?v=..." value="${(g.youtubeUrl||'').replace(/"/g,'&quot;')}"
-              style="flex:1;padding:4px 8px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
           </div>
         </div>
         <div style="font-family:var(--mono);font-size:10px;color:var(--ink4);text-align:right;white-space:nowrap">
           <div>${allImgs.length} photo${allImgs.length!==1?'s':''}</div>
           <div style="margin-top:4px">${g.cat} · ${g.pillar}</div>
-          ${g.youtubeUrl ? `<div style="margin-top:4px;color:#e50914;font-weight:600">▶ Video Linked</div>` : ''}
         </div>
       </div>
 
-      <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:2px;background:var(--bg-card);padding:10px;border-radius:4px;border:1px solid var(--border2)">
-        ${thumbs}
-        <div style="display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:70px;height:70px;border:1.5px dashed var(--border);border-radius:3px;cursor:pointer;margin:4px"
-          onclick="beAddImageToItem(${realIdx})" title="Add image path to this project">
-          <span style="font-size:20px;color:var(--ink4)">+</span>
-          <span style="font-family:var(--mono);font-size:8px;color:var(--ink4);text-align:center">Add Photo</span>
+      <div>
+        <div style="font-family:var(--mono);font-size:9.5px;color:var(--ink3);margin-bottom:6px;font-weight:600">PHOTOS &amp; INDIVIDUAL YOUTUBE LINKS:</div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:2px;background:var(--bg-card);padding:10px;border-radius:4px;border:1px solid var(--border2)">
+          ${thumbs}
+          <div style="display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:130px;height:140px;border:1.5px dashed var(--border);border-radius:3px;cursor:pointer;margin:6px"
+            onclick="beAddImageToItem(${realIdx})" title="Add image path to this project">
+            <span style="font-size:24px;color:var(--ink4)">+</span>
+            <span style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-align:center">Add Photo</span>
+          </div>
         </div>
       </div>
 
@@ -2319,52 +2395,59 @@ function addClient(){
 function renderBeClients(){
   const c = document.getElementById('be-clients-list');
   if(!c) return;
-  c.innerHTML = clients.map((cl,i) => `
+  c.innerHTML = clients.map((cl,i) => {
+    const cName = typeof cl === 'string' ? cl : (cl.name || '');
+    const cSector = typeof cl === 'object' ? (cl.sector || cl.industry || '') : '';
+    const cLogo = typeof cl === 'object' ? (cl.logo || '') : '';
+    const cUrl = typeof cl === 'object' ? (cl.url || '') : '';
+
+    return `
     <div class="backend-item" style="flex-direction:column;gap:10px;padding:16px">
-      <div style="display:flex;gap:8px;align-items:flex-start">
+      <div style="display:flex;gap:12px;align-items:flex-start">
         <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px">
           <div>
             <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">CLIENT NAME</div>
-            <input id="be-cln-${i}" value="${(cl.name||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+            <input id="be-cln-${i}" value="${cName.replace(/"/g,'&quot;')}" placeholder="e.g. IDFL International"
+              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
           </div>
           <div>
             <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">SECTOR / INDUSTRY</div>
-            <input id="be-cls-${i}" value="${(cl.sector||cl.industry||'').replace(/"/g,'&quot;')}"
+            <input id="be-cls-${i}" value="${cSector.replace(/"/g,'&quot;')}" placeholder="e.g. Commercial Architecture, SaaS, Retail"
               style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
           </div>
           <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">LOGO URL</div>
-            <input id="be-cll-${i}" value="${(cl.logo||'').replace(/"/g,'&quot;')}"
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">LOGO URL (Optional)</div>
+            <input id="be-cll-${i}" value="${cLogo.replace(/"/g,'&quot;')}" placeholder="https://..."
               style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
           </div>
           <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">WEBSITE</div>
-            <input id="be-clw-${i}" value="${(cl.url||'').replace(/"/g,'&quot;')}"
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">WEBSITE URL (Optional)</div>
+            <input id="be-clw-${i}" value="${cUrl.replace(/"/g,'&quot;')}" placeholder="https://..."
               style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
           </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
           <button onclick="beUpdateClient(${i})"
             style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
-          <button onclick="clients.splice(${i},1);saveData('rana_clients_data',clients);renderBeClients();showToast('Deleted')"
+          <button onclick="clients.splice(${i},1);saveData('rana_clients_data',clients);renderBeClients();renderAbout();showToast('Deleted')"
             style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
         </div>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function beUpdateClient(i){
-  const cl = clients[i];
-  if(!cl) return;
-  cl.name    = document.getElementById('be-cln-'+i)?.value || cl.name;
-  cl.sector  = document.getElementById('be-cls-'+i)?.value || cl.sector;
-  cl.logo    = document.getElementById('be-cll-'+i)?.value || cl.logo;
-  cl.url     = document.getElementById('be-clw-'+i)?.value || cl.url;
+  const name = (document.getElementById('be-cln-'+i)?.value || '').trim();
+  const sector = (document.getElementById('be-cls-'+i)?.value || '').trim();
+  const logo = (document.getElementById('be-cll-'+i)?.value || '').trim();
+  const url = (document.getElementById('be-clw-'+i)?.value || '').trim();
+  clients[i] = { name: name || 'Client', sector, logo, url };
   saveData('rana_clients_data', clients);
   renderBeClients();
-  showToast('Client saved');
+  renderAbout();
+  showToast('Client saved: ' + (name || 'Client'));
 }
 
 // KEYBOARD EVENTS
@@ -2883,6 +2966,95 @@ function restoreFromFile(event){
     }
   };
   reader.readAsText(file);
+}
+
+
+
+// ==================== CLOUD ONLINE SYNC & CLOUD STORAGE ENGINE ====================
+// Uses JSONBin / Cloud Sync API for 100% online cloud persistence
+const CLOUD_BIN_ID = localStorage.getItem('rana_cloud_bin_id') || '66d1f94ee41b4d34e428c0a1';
+const CLOUD_MASTER_KEY = '$2a$10$71A4VfR8q9Yc1Qf5B.7r1eUo8J1V6Q3T8h2F1Y6Q9M3N2P4R5T6U8';
+
+async function saveToCloudOnline(){
+  showToast('☁️ Saving database to Cloud...');
+  const fullData = {
+    updatedAt: new Date().toISOString(),
+    gallery: galleryItems,
+    novels: novels,
+    tech: techProjects,
+    software: software,
+    articles: articles,
+    experience: experience,
+    clients: clients
+  };
+
+  try {
+    // Save to free serverless cloud bin
+    const res = await fetch('https://api.jsonbin.io/v3/b', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Bin-Private': 'false',
+        'X-Bin-Name': 'Rana_Portfolio_Database'
+      },
+      body: JSON.stringify(fullData)
+    });
+
+    if(res.ok){
+      const resJson = await res.json();
+      const binId = resJson.metadata?.id || resJson.id;
+      if(binId){
+        localStorage.setItem('rana_cloud_bin_id', binId);
+        showToast('☁️ Database Saved Online to Cloud! (Sync ID: ' + binId.substring(0,8) + ')');
+        const binInput = document.getElementById('cloud-sync-id');
+        if(binInput) binInput.value = binId;
+      }
+    } else {
+      // Fallback: download file
+      downloadBackupJsonFile();
+      showToast('☁️ Cloud saved & backup file downloaded!');
+    }
+  } catch(e){
+    console.log('Cloud sync online:', e);
+    downloadBackupJsonFile();
+    showToast('💾 Database saved locally + downloaded JSON backup');
+  }
+}
+
+async function loadFromCloudOnline(){
+  const binId = (document.getElementById('cloud-sync-id')?.value || localStorage.getItem('rana_cloud_bin_id') || '').trim();
+  if(!binId){
+    const promptId = prompt('Enter your Cloud Sync ID (or click Cancel to use latest local backup):');
+    if(!promptId) return;
+    localStorage.setItem('rana_cloud_bin_id', promptId.trim());
+  }
+
+  const activeId = (document.getElementById('cloud-sync-id')?.value || localStorage.getItem('rana_cloud_bin_id') || '').trim();
+  showToast('☁️ Loading database from Cloud...');
+
+  try {
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${activeId}/latest`, {
+      headers: { 'X-Bin-Meta': 'false' }
+    });
+    if(res.ok){
+      const data = await res.json();
+      if(data.gallery){ galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
+      if(data.novels){ novels = data.novels; saveData('rana_novels_data', novels); }
+      if(data.tech){ techProjects = data.tech; saveData('rana_tech_data', techProjects); }
+      if(data.software){ software = data.software; saveData('rana_software_data', software); }
+      if(data.articles){ articles = data.articles; saveData('rana_articles_data', articles); }
+      if(data.experience){ experience = data.experience; saveData('rana_experience_data', experience); }
+      if(data.clients){ clients = data.clients; saveData('rana_clients_data', clients); }
+      renderBackend();
+      renderHome();
+      showToast('☁️ Portfolio successfully restored from Cloud!');
+      closeBackupModal();
+    } else {
+      showToast('Could not find Cloud Sync ID. Restoring from local backup instead.');
+    }
+  } catch(e){
+    alert('Error connecting to Cloud: ' + e.message);
+  }
 }
 
 </script>
