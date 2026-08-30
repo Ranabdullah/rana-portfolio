@@ -805,6 +805,84 @@ img {
   contain: paint;
 }
 
+
+
+/* ==================== UNIFIED CLEAN CARDS & SPOTLIGHT GLOW ==================== */
+/* 1. Novels Home Slider Card */
+.novel-card {
+  flex: 0 0 240px;
+  background: var(--bg-card, #ffffff) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  padding: 14px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.02) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
+  cursor: pointer !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+}
+.novel-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.06), 0 0 16px rgba(0, 229, 255, 0.15) !important;
+  border-color: var(--ink3) !important;
+}
+.novel-cover {
+  width: 100% !important;
+  height: 240px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 6px !important;
+  margin-bottom: 12px !important;
+  background: #f0f2f5 !important;
+}
+.novel-cover img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 6px !important;
+  display: block !important;
+}
+.novel-info {
+  padding: 0 !important;
+}
+
+/* 2. Visual Works Gallery Cards */
+.g-card {
+  background: var(--bg-card, #ffffff) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.02) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+}
+.g-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.06), 0 0 16px rgba(0, 229, 255, 0.15) !important;
+  border-color: var(--ink3) !important;
+}
+.g-card img {
+  width: 100% !important;
+  height: 220px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* 3. Refined Atmospheric Spotlight Glow (Subtle & Elegant Halo, No Block Streaks) */
+.g-card.in-color-spotlight,
+.novel-card.in-color-spotlight,
+.novel-page-card.in-color-spotlight,
+.proj-card.in-color-spotlight,
+.hero-portrait-frame.in-color-spotlight,
+.sw-item.in-color-spotlight,
+.sw-product-card.in-color-spotlight,
+.tech-spotlight-card.in-color-spotlight {
+  border-color: var(--card-border, rgba(0, 229, 255, 0.5)) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04), 0 0 18px var(--card-glow, rgba(0, 229, 255, 0.16)) !important;
+}
+
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -1532,20 +1610,26 @@ function renderHome(){
   // Home Tech Spotlight (B&W)
   const hTech = document.getElementById('homeTechSpotlight');
   if(hTech){
-    hTech.innerHTML = techProjects.slice(0,3).map(p=>`
-      <div class="tech-spotlight-card" onclick="showPage('technical-projects')">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-          <span style="font-family:var(--mono);font-size:11px;color:var(--ink4)">[ ${p.num} ]</span>
-          <span class="badge-pill ${p.badgeClass}">${p.status}</span>
+    hTech.innerHTML = techProjects.slice(0,3).map(p=>{
+      const hasLive = Boolean(p.liveUrl && p.liveUrl.trim());
+      return `
+        <div class="tech-spotlight-card" onclick="showPage('technical-projects')">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <span style="font-family:var(--mono);font-size:11px;color:var(--ink4)">[ ${p.num} ]</span>
+            <span class="badge-pill ${p.badgeClass}">${p.status}</span>
+          </div>
+          <h3 style="color:var(--ink);font-size:21px;font-weight:400;margin-bottom:4px;font-family:var(--serif)">${p.title}</h3>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:12px">${p.subtitle}</div>
+          <p style="font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:16px">${(p.desc||'').substring(0,130)}...</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+            <div class="tech-tags-wrap">
+              ${(p.tech||[]).slice(0,3).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
+            </div>
+            ${hasLive ? `<span style="font-family:var(--mono);font-size:10px;color:var(--ink);text-decoration:underline">View Live &rarr;</span>` : ''}
+          </div>
         </div>
-        <h3 style="color:var(--ink);font-size:21px;font-weight:400;margin-bottom:4px;font-family:var(--serif)">${p.title}</h3>
-        <div style="font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:12px">${p.subtitle}</div>
-        <p style="font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:16px">${p.desc.substring(0,130)}…</p>
-        <div class="tech-tags-wrap">
-          ${(p.tech||[]).slice(0,4).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
-        </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
   // Novels Slider
@@ -1557,9 +1641,9 @@ function renderHome(){
           <img src="${n.cover}" alt="${n.title}" loading="lazy" decoding="async" onerror="this.style.display='none'">
         </div>
         <div class="novel-info">
-          <div class="novel-genre">${n.genre} · ${n.type}</div>
-          <div class="novel-name">${n.title}</div>
-          <div class="novel-sub">${n.tagline}</div>
+          <div class="novel-genre" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">${n.genre || 'Book'} · ${n.year || 'Published'}</div>
+          <div class="novel-name" style="font-family:var(--serif);font-size:16px;font-weight:400;color:var(--ink);margin:0 0 4px;line-height:1.25">${n.title}</div>
+          <div class="novel-sub" style="font-size:11.5px;color:var(--ink2);line-height:1.5;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${n.tagline || n.desc || ''}</div>
         </div>
       </div>
     `).join('');
@@ -1571,65 +1655,29 @@ function renderHome(){
     swS.innerHTML = software.slice(0,5).map(s=>`
       <div class="sw-item" onclick="showPage('software')">
         <img class="sw-thumb" src="${s.img}" alt="${s.name}" loading="lazy" decoding="async" onerror="this.style.display='none'">
-        <div>
-          <div class="sw-item-meta">
-            <span class="sw-cat">${s.cat}</span>
-          </div>
+        <div class="sw-info">
           <div class="sw-name">${s.name}</div>
-          <div class="sw-desc">${s.desc.substring(0,85)}…</div>
-        </div>
-        <div class="sw-price">${s.price}</div>
-      </div>
-    `).join('');
-  }
-
-  // Visual Projects Slider
-  const pGrid = document.getElementById('projGrid');
-  if(pGrid){
-    pGrid.innerHTML = galleryItems.slice(0,8).map(g=>`
-      <div class="proj-card" onclick="openLightboxDirect('${g.path}','${g.title}')">
-        <div class="proj-img">
-          <img src="${g.path}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.style.display='none'">
-        </div>
-        <div class="proj-info">
-          <div class="proj-cat">${g.pillar} · ${g.cat}</div>
-          <div class="proj-name">${g.title}</div>
-          <div class="proj-desc">${g.desc}</div>
+          <div class="sw-desc">${s.desc}</div>
+          <div class="sw-meta">${s.platform} &middot; <span class="sw-tag">${s.price}</span></div>
         </div>
       </div>
     `).join('');
   }
 
-  // Home Articles
-  const haGrid = document.getElementById('homeArticlesGrid');
-  if(haGrid){
-    haGrid.innerHTML = articles.map(a=>`
-      <div class="article-card" onclick="if('${a.url}'.startsWith('http')){window.open('${a.url}','_blank')}else{location.href='${a.url}'}">
-        <div>
-          <div class="article-meta">${a.category} · ${a.date}</div>
-          <h3 class="article-title">${a.title}</h3>
-          <p class="article-desc">${a.desc}</p>
+  // Visual Works 3D Slider
+  const gSlider = document.getElementById('gallerySlider');
+  if(gSlider){
+    gSlider.innerHTML = galleryItems.slice(0,8).map((g,i)=>`
+      <div class="g-card" onclick="showPage('gallery')" style="flex:0 0 280px">
+        <img src="${g.path}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.style.display='none'">
+        <div class="g-card-info" style="padding:14px 16px">
+          <div class="g-cat" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">${g.pillar} &middot; ${g.cat}</div>
+          <div class="g-title" style="font-family:var(--serif);font-size:15.5px;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:4px">${g.title}</div>
+          <div class="g-desc" style="font-size:11.5px;color:var(--ink3);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${g.desc || ''}</div>
         </div>
-        <a class="article-btn" href="${a.url}" target="${a.url.startsWith('http')?'_blank':'_self'}">Read Article &rarr;</a>
       </div>
     `).join('');
   }
-}
-
-function slideNovels(dir){
-  const s = document.getElementById('novelSlider');
-  const cardW = 266;
-  const max = Math.max(0, novels.length - 3);
-  novelSlideIdx = Math.max(0, Math.min(max, novelSlideIdx + dir));
-  s.style.transform = `translateX(-${novelSlideIdx * cardW}px)`;
-}
-
-function slideProjects(dir){
-  const s = document.getElementById('projGrid');
-  const cardW = 332;
-  const max = Math.max(0, galleryItems.length - 3);
-  projSlideIdx = Math.max(0, Math.min(max, projSlideIdx + dir));
-  s.style.transform = `translateX(-${projSlideIdx * cardW}px)`;
 }
 
 // 2. NOVELS PAGE
@@ -2048,39 +2096,54 @@ function renderBeTech(){
   const c = document.getElementById('be-tech-list');
   if(!c) return;
   c.innerHTML = techProjects.map((p,i) => `
-    <div class="backend-item" style="flex-direction:column;gap:12px;padding:16px">
+    <div class="backend-item" style="flex-direction:column;gap:12px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:12px">
       <div style="display:flex;gap:12px;align-items:flex-start">
-        <div style="flex:1;display:grid;grid-template-columns:2fr 1fr;gap:8px">
+        <div style="flex:1;display:grid;grid-template-columns:2fr 1fr;gap:10px">
           <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">PROJECT TITLE</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">PROJECT TITLE</div>
             <input id="be-tp-t-${i}" value="${(p.title||'').replace(/"/g,'&quot;')}"
               style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
           </div>
           <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">STATUS</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">STATUS</div>
             <select id="be-tp-s-${i}" style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
               ${['Live', 'In Development', 'Beta', 'Production'].map(st=>`<option value="${st}" ${p.status===st?'selected':''}>${st}</option>`).join('')}
             </select>
           </div>
           <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">SUBTITLE</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">SUBTITLE</div>
             <input id="be-tp-sub-${i}" value="${(p.subtitle||'').replace(/"/g,'&quot;')}"
               style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
           </div>
           <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">TECH STACK (comma-separated)</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">TECH STACK</div>
             <input id="be-tp-tech-${i}" value="${(p.tech||[]).join(', ')}"
               style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
           </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;color:#1565c0;margin-bottom:4px;font-weight:600">LIVE DEMO / WEB LINK (Optional)</div>
+            <input id="be-tp-live-${i}" value="${(p.liveUrl||'').replace(/"/g,'&quot;')}" placeholder="https://..."
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;color:#2e7d32;margin-bottom:4px;font-weight:600">DOWNLOAD / APP LINK (Optional)</div>
+            <input id="be-tp-dl-${i}" value="${(p.downloadUrl||'').replace(/"/g,'&quot;')}" placeholder="https://..."
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
           <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">DESCRIPTION</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:4px;font-weight:600">GITHUB REPOSITORY (Optional)</div>
+            <input id="be-tp-repo-${i}" value="${(p.repoUrl||'').replace(/"/g,'&quot;')}" placeholder="https://github.com/..."
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
+          <div style="grid-column:1/-1">
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">DESCRIPTION</div>
             <textarea id="be-tp-d-${i}" rows="2" style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical">${p.desc||''}</textarea>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
           <button onclick="beUpdateTech(${i})"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
-          <button onclick="techProjects.splice(${i},1);saveData('rana_tech_data',techProjects);renderBeTech();showToast('Project deleted')"
+            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save</button>
+          <button onclick="techProjects.splice(${i},1);saveData('rana_tech_data',techProjects);renderBeTech();renderTechProjects();showToast('Project deleted')"
             style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
         </div>
       </div>
