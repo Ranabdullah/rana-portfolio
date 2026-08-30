@@ -854,17 +854,18 @@ img {
       </div>
     </div>
     <div class="hero-visual-side">
-      <div class="hero-portrait-frame" id="heroFrame" style="position:relative;overflow:hidden;perspective:1000px">
-        <img id="heroPortraitImg" src="Photos & to upload/rana_portrait_official.jpg" alt="Rana Abdullah" loading="eager" decoding="async" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;transition:transform 0.15s ease-out, filter 3.0s cubic-bezier(0.1, 0.7, 0.1, 1)">
-        <!-- 3D Gaussian Splatting Point-Cloud Particle Canvas -->
-        <canvas id="heroSplatCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;opacity:0.85"></canvas>
-        <!-- 3D Viewport HUD Overlay -->
-        <div class="splat-hud" style="position:absolute;top:12px;left:12px;z-index:3;display:flex;align-items:center;gap:6px;background:rgba(17,20,26,0.82);backdrop-filter:blur(8px);padding:4px 10px;border-radius:3px;border:1px solid rgba(255,255,255,0.12)">
-          <span style="width:6px;height:6px;border-radius:50%;background:#00e5ff;box-shadow:0 0 8px #00e5ff;animation:pulse 2s infinite"></span>
-          <span style="font-family:var(--mono);font-size:9px;color:#fff;letter-spacing:0.06em;font-weight:600">3D GAUSSIAN SPLAT</span>
+      <div class="hero-portrait-frame" id="heroFrame" style="position:relative;overflow:hidden;background:#0d0f14;border:1px solid rgba(255,255,255,0.12);box-shadow:0 30px 80px rgba(0,0,0,0.22);border-radius:4px;cursor:crosshair">
+        <!-- 3D Generative Abstract Morphing Canvas -->
+        <canvas id="heroAbstractCanvas" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+        
+        <!-- Minimal HUD Elements -->
+        <div style="position:absolute;top:14px;left:14px;z-index:4;display:flex;align-items:center;gap:7px;background:rgba(13,15,20,0.85);backdrop-filter:blur(8px);padding:5px 12px;border-radius:3px;border:1px solid rgba(255,255,255,0.15)">
+          <span id="heroColorIndicator" style="width:7px;height:7px;border-radius:50%;background:#ffffff;box-shadow:0 0 8px #ffffff;transition:background 0.5s, box-shadow 0.5s"></span>
+          <span style="font-family:var(--mono);font-size:9.5px;color:#fff;letter-spacing:0.08em;font-weight:600">GENERATIVE ABSTRACT 3D</span>
         </div>
-        <div class="splat-coords" id="splatCoords" style="position:absolute;bottom:12px;right:12px;z-index:3;font-family:var(--mono);font-size:8.5px;color:rgba(255,255,255,0.7);background:rgba(17,20,26,0.75);backdrop-filter:blur(6px);padding:3px 8px;border-radius:2px;border:1px solid rgba(255,255,255,0.1)">
-          ROT: 0° / 0° &middot; 24.5k SPLATS
+        
+        <div id="heroPhaseLabel" style="position:absolute;bottom:14px;right:14px;z-index:4;font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.65);background:rgba(13,15,20,0.8);backdrop-filter:blur(6px);padding:4px 10px;border-radius:2px;border:1px solid rgba(255,255,255,0.1)">
+          MODE: MONOCHROME
         </div>
       </div>
       <div class="hero-portrait-number">01</div>
@@ -2591,52 +2592,40 @@ window.addEventListener('keydown', function(e){
 });
 
 
-// ==================== 3D GAUSSIAN SPLATTING HERO PORTRAIT ENGINE ====================
-(function init3DGaussianSplatHero(){
+
+
+
+// ==================== 3D GENERATIVE ABSTRACT B&W ⇄ COLOR ENGINE ====================
+(function init3DAbstractMorphHero(){
   const frame = document.getElementById('heroFrame');
-  const canvas = document.getElementById('heroSplatCanvas');
-  const img = document.getElementById('heroPortraitImg');
-  const coordsEl = document.getElementById('splatCoords');
+  const canvas = document.getElementById('heroAbstractCanvas');
+  const indicator = document.getElementById('heroColorIndicator');
+  const phaseLabel = document.getElementById('heroPhaseLabel');
   if(!frame || !canvas) return;
 
   const ctx = canvas.getContext('2d');
-  let w = canvas.width = frame.clientWidth || 360;
-  let h = canvas.height = frame.clientHeight || 460;
+  let w = 0, h = 0;
 
-  window.addEventListener('resize', () => {
-    if(!frame) return;
-    w = canvas.width = frame.clientWidth;
-    h = canvas.height = frame.clientHeight;
-  });
-
-  // Generate 3D Gaussian Splat Point-Cloud Particles
-  const SPLAT_COUNT = 120;
-  const splats = [];
-  const colors = ['#00e5ff', '#ff4081', '#ffb300', '#69f0ae', '#b388ff', '#ffffff'];
-
-  for(let i = 0; i < SPLAT_COUNT; i++){
-    splats.push({
-      x: (Math.random() - 0.5) * 260,
-      y: (Math.random() - 0.5) * 360,
-      z: Math.random() * 200 - 100,
-      size: Math.random() * 3.5 + 1.2,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      alpha: Math.random() * 0.6 + 0.2,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      vz: (Math.random() - 0.5) * 0.3
-    });
+  function resize(){
+    if(!frame || !canvas) return;
+    w = canvas.width = frame.clientWidth || 460;
+    h = canvas.height = frame.clientHeight || 560;
   }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // 3D Parametric Ribbons & Harmonic Wave Torus
+  const NUM_RINGS = 32;
+  const POINTS_PER_RING = 48;
+  let time = 0;
 
   let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
   let isHovered = false;
 
   frame.addEventListener('mousemove', (e) => {
     const rect = frame.getBoundingClientRect();
-    const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-    const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-    mouse.targetX = nx;
-    mouse.targetY = ny;
+    mouse.targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    mouse.targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
     isHovered = true;
   });
 
@@ -2646,77 +2635,163 @@ window.addEventListener('keydown', function(e){
     isHovered = false;
   });
 
-  function renderSplat(){
+  // Floating ambient dust particles
+  const PARTICLES = [];
+  for(let i = 0; i < 60; i++){
+    PARTICLES.push({
+      x: (Math.random() - 0.5) * 400,
+      y: (Math.random() - 0.5) * 500,
+      z: (Math.random() - 0.5) * 300,
+      size: Math.random() * 2 + 0.8,
+      hueOffset: Math.random() * 360,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      vz: (Math.random() - 0.5) * 0.3
+    });
+  }
+
+  function render(){
+    if(w === 0 || h === 0) resize();
     ctx.clearRect(0, 0, w, h);
 
-    // Smooth lerp
-    mouse.x += (mouse.targetX - mouse.x) * 0.08;
-    mouse.y += (mouse.targetY - mouse.y) * 0.08;
+    // Deep dark atmospheric background
+    const bgGrad = ctx.createRadialGradient(w/2, h/2, 10, w/2, h/2, Math.max(w, h)*0.75);
+    bgGrad.addColorStop(0, '#141822');
+    bgGrad.addColorStop(1, '#080a0e');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, w, h);
 
-    // Apply 3D Perspective Tilt to Image
-    if(img){
-      const rotY = mouse.x * 12;
-      const rotX = -mouse.y * 12;
-      img.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(${isHovered ? 1.03 : 1}, ${isHovered ? 1.03 : 1}, 1)`;
-      if(coordsEl){
-        coordsEl.textContent = `ROT: ${rotY.toFixed(1)}° / ${rotX.toFixed(1)}° · 24.5k SPLATS`;
+    time += isHovered ? 0.022 : 0.012;
+
+    // Smooth mouse lerp
+    mouse.x += (mouse.targetX - mouse.x) * 0.06;
+    mouse.y += (mouse.targetY - mouse.y) * 0.06;
+
+    // ── COLOR MORPHING CYCLE (B&W ⇄ COLOR ⇄ B&W) ─────────────────────────
+    // Sine wave cycle: period ~14 seconds
+    // 0 = pure black and white, 1 = maximum vibrant spectral color
+    const cycle = (Math.sin(time * 0.35) + 1) / 2; // 0 to 1
+    // Apply smoothstep for richer contrast between phases
+    const colorSaturation = cycle * cycle * (3 - 2 * cycle);
+
+    if(indicator){
+      if(colorSaturation > 0.65){
+        indicator.style.background = '#00e5ff';
+        indicator.style.boxShadow = '0 0 10px #00e5ff';
+      } else if(colorSaturation > 0.25){
+        indicator.style.background = '#ffb300';
+        indicator.style.boxShadow = '0 0 8px #ffb300';
+      } else {
+        indicator.style.background = '#ffffff';
+        indicator.style.boxShadow = '0 0 6px #ffffff';
+      }
+    }
+
+    if(phaseLabel){
+      if(colorSaturation < 0.15){
+        phaseLabel.textContent = 'SPECTRUM: MONOCHROME (0%)';
+      } else if(colorSaturation > 0.85){
+        phaseLabel.textContent = 'SPECTRUM: FULL CHROMATIC (100%)';
+      } else {
+        const pct = Math.round(colorSaturation * 100);
+        phaseLabel.textContent = `SPECTRUM: MORPHING (${pct}%)`;
       }
     }
 
     const cx = w / 2;
     const cy = h / 2;
+    const rotX = -mouse.y * 0.6 + Math.sin(time * 0.4) * 0.15;
+    const rotY = mouse.x * 0.8 + time * 0.25;
 
-    // Draw 3D Depth Points & Gaussian Splatting Cloud
-    for(let i = 0; i < splats.length; i++){
-      const p = splats[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.z += p.vz;
+    // ── DRAW 3D AMBIENT PARTICLES ──────────────────────────────────────────
+    for(let i = 0; i < PARTICLES.length; i++){
+      const p = PARTICLES[i];
+      p.x += p.vx; p.y += p.vy; p.z += p.vz;
+      if(p.x > 200) p.x = -200; if(p.x < -200) p.x = 200;
+      if(p.y > 260) p.y = -260; if(p.y < -260) p.y = 260;
+      if(p.z > 160) p.z = -160; if(p.z < -160) p.z = 160;
 
-      if(p.x > 140) p.x = -140;
-      if(p.x < -140) p.x = 140;
-      if(p.y > 190) p.y = -190;
-      if(p.y < -190) p.y = 190;
-      if(p.z > 100) p.z = -100;
-      if(p.z < -100) p.z = 100;
+      // 3D rotation
+      const cosY = Math.cos(rotY*0.5), sinY = Math.sin(rotY*0.5);
+      const cosX = Math.cos(rotX*0.5), sinX = Math.sin(rotX*0.5);
+      const x1 = p.x * cosY + p.z * sinY;
+      const z1 = -p.x * sinY + p.z * cosY;
+      const y2 = p.y * cosX - z1 * sinX;
+      const z2 = p.y * sinX + z1 * cosX;
 
-      // 3D Rotation transform
-      const radY = mouse.x * 0.5;
-      const radX = -mouse.y * 0.5;
+      const fov = 350;
+      const scale = fov / (fov + z2 + 100);
+      if(scale > 0){
+        const px = cx + x1 * scale;
+        const py = cy + y2 * scale;
+        
+        // Color interpolation from pure monochrome white to spectral hue
+        const hue = (p.hueOffset + time * 40) % 360;
+        const satPct = Math.round(colorSaturation * 85);
+        const lightPct = Math.round(65 + (1 - colorSaturation) * 25);
+        const col = `hsla(${hue}, ${satPct}%, ${lightPct}%, ${Math.min(0.8, scale * 0.7)})`;
 
-      // Rotate around Y
-      const x1 = p.x * Math.cos(radY) + p.z * Math.sin(radY);
-      const z1 = -p.x * Math.sin(radY) + p.z * Math.cos(radY);
-
-      // Rotate around X
-      const y2 = p.y * Math.cos(radX) - z1 * Math.sin(radX);
-      const z2 = p.y * Math.sin(radX) + z1 * Math.cos(radX);
-
-      // Perspective projection
-      const fov = 300;
-      const scale = fov / (fov + z2);
-      const px = cx + x1 * scale;
-      const py = cy + y2 * scale;
-
-      if(scale > 0 && px >= 0 && px <= w && py >= 0 && py <= h){
-        const alpha = Math.max(0.1, Math.min(0.85, (scale - 0.5) * p.alpha));
-        // Draw Gaussian Splat Ellipse
         ctx.beginPath();
         ctx.arc(px, py, p.size * scale, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = isHovered ? alpha * 1.3 : alpha * 0.6;
-        ctx.shadowBlur = isHovered ? 12 : 4;
-        ctx.shadowColor = p.color;
+        ctx.fillStyle = col;
         ctx.fill();
-        ctx.shadowBlur = 0;
       }
     }
-    ctx.globalAlpha = 1.0;
 
-    requestAnimationFrame(renderSplat);
+    // ── DRAW 3D PARAMETRIC ABSTRACT SCULPTURE RIBBONS ─────────────────────
+    for(let r = 0; r < NUM_RINGS; r++){
+      const u = (r / NUM_RINGS) * Math.PI * 2;
+      const ringRadius = 110 + Math.sin(u * 3 + time * 1.2) * 28;
+      
+      ctx.beginPath();
+      let firstPoint = null;
+
+      for(let p = 0; p <= POINTS_PER_RING; p++){
+        const v = (p / POINTS_PER_RING) * Math.PI * 2;
+        const tubeRadius = 38 + Math.cos(v * 4 + time * 1.5 + u) * 14;
+
+        // 3D Torus knot / harmonic wave coordinates
+        const rawX = (ringRadius + tubeRadius * Math.cos(v)) * Math.cos(u * 2);
+        const rawY = (ringRadius + tubeRadius * Math.cos(v)) * Math.sin(u * 2);
+        const rawZ = tubeRadius * Math.sin(v) + Math.sin(u * 4 + time) * 35;
+
+        // Apply 3D rotation
+        const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+        const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+
+        const x1 = rawX * cosY + rawZ * sinY;
+        const z1 = -rawX * sinY + rawZ * cosY;
+        const y2 = rawY * cosX - z1 * sinX;
+        const z2 = rawY * sinX + z1 * cosX;
+
+        const fov = 420;
+        const scale = fov / (fov + z2 + 80);
+        const px = cx + x1 * scale;
+        const py = cy + y2 * scale;
+
+        if(p === 0){
+          ctx.moveTo(px, py);
+          firstPoint = { px, py };
+        } else {
+          ctx.lineTo(px, py);
+        }
+      }
+
+      // Color mapping: interpolate from Pure B&W (silver/slate/white) to Neon Spectrum
+      const ringHue = (r * (360 / NUM_RINGS) + time * 50) % 360;
+      const sat = Math.round(colorSaturation * 90);
+      const lum = Math.round(48 + Math.sin(u + time) * 18 + (1 - colorSaturation) * 22);
+      const alpha = 0.45 + Math.sin(u * 2 + time) * 0.25;
+
+      ctx.strokeStyle = `hsla(${ringHue}, ${sat}%, ${lum}%, ${alpha})`;
+      ctx.lineWidth = 1.3 + (1 - colorSaturation) * 0.6;
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(render);
   }
 
-  renderSplat();
+  render();
 })();
 
 </script>
