@@ -32,10 +32,13 @@ body { background:var(--bg); color:var(--ink); font-family:var(--sans); overflow
 
 /* ==================== INTERACTIVE COLORIZATION & B/W TRANSITIONS ==================== */
 .g-card img, .novel-cover img, .novel-page-cover img, .hero-portrait-frame img,
-.novel-card img, .novel-card .novel-cover img, .tech-spotlight-card img,
+.novel-card img, .novel-card .novel-cover img,
 .proj-img img, .sw-thumb, .sw-img-banner, .nv-cover img {
-  filter: grayscale(1) contrast(1.08) brightness(0.98);
-  transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+  filter: grayscale(1) contrast(1.05) brightness(0.97);
+  /* Slow fill: 2.8s — colour seeps in, not snaps */
+  transition: filter 2.8s cubic-bezier(0.0, 0.55, 0.45, 1.0),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s ease;
   will-change: filter, transform;
 }
 
@@ -592,48 +595,106 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
 
 
 /* ==================== DYNAMIC COLOR BLOOM WHEN FLOATING DOT TOUCHES PHOTO ==================== */
-.dot-illuminated img,
-img.dot-illuminated,
-.novel-page-card.dot-illuminated .novel-page-cover img,
-.g-card.dot-illuminated img,
-.proj-card.dot-illuminated img,
-.novel-card.dot-illuminated img,
-.hero-portrait-frame.dot-illuminated img,
-.sw-item.dot-illuminated .sw-thumb,
-.sw-product-card.dot-illuminated .sw-img-banner {
-  filter: grayscale(0) contrast(1.06) brightness(1.02) !important;
-  transform: scale(1.025);
-  transition: filter 0.45s ease, transform 0.45s ease !important;
-}
-
-.dot-illuminated,
-.novel-page-card.dot-illuminated,
-.g-card.dot-illuminated,
-.proj-card.dot-illuminated,
-.novel-card.dot-illuminated,
-.hero-portrait-frame.dot-illuminated {
-  border-color: var(--dot-border, rgba(0, 229, 255, 0.6)) !important;
-  box-shadow: 0 16px 36px var(--dot-glow, rgba(0, 229, 255, 0.22)) !important;
-  transition: border-color 0.45s ease, box-shadow 0.45s ease, transform 0.45s ease !important;
-}
-
-
 /* ── Home page novel-card dot illumination ── */
-.novel-card.dot-illuminated .novel-cover img {
-  filter: grayscale(0) contrast(1.06) brightness(1.02) !important;
-  transform: scale(1.025);
-  transition: filter 0.45s ease, transform 0.45s ease !important;
-}
-.novel-card.dot-illuminated {
-  border-color: var(--dot-border, rgba(0, 229, 255, 0.6)) !important;
-  box-shadow: 0 16px 36px var(--dot-glow, rgba(0, 229, 255, 0.22)) !important;
-  transition: border-color 0.45s ease, box-shadow 0.45s ease !important;
-}
-
-/* ── Performance: image rendering optimization ── */
+.novel-card.novel-card/* ── Performance: image rendering optimization ── */
 img { image-rendering: auto; }
 .g-card img, .novel-card img, .novel-page-cover img {
   content-visibility: auto;
+}
+
+/* ── BACKEND LOGIN GATE ─────────────────────────────── */
+#be-login-gate {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 0;
+}
+#be-login-gate.hidden { display: none; }
+.be-login-box {
+  width: 360px;
+  border: 1px solid var(--border);
+  padding: 48px 40px 40px;
+  background: var(--bg-card);
+  position: relative;
+}
+.be-login-box h2 {
+  font-family: var(--serif); font-size: 26px; font-weight: 300;
+  color: var(--ink); margin-bottom: 6px;
+}
+.be-login-box .be-login-sub {
+  font-family: var(--mono); font-size: 10px; color: var(--ink4);
+  margin-bottom: 32px; letter-spacing: 0.06em;
+}
+.be-login-field {
+  display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;
+}
+.be-login-field label {
+  font-family: var(--mono); font-size: 10px; color: var(--ink4);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.be-login-field input {
+  padding: 10px 14px;
+  font-family: var(--mono); font-size: 13px;
+  border: 1px solid var(--border);
+  background: var(--bg); color: var(--ink);
+  border-radius: 3px; outline: none;
+  transition: border-color 0.2s;
+}
+.be-login-field input:focus { border-color: var(--ink3); }
+.be-login-btn {
+  width: 100%; margin-top: 8px;
+  padding: 12px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
+  background: var(--ink); color: var(--bg);
+  border: none; cursor: pointer;
+  transition: opacity 0.2s;
+}
+.be-login-btn:hover { opacity: 0.82; }
+.be-login-err {
+  font-family: var(--mono); font-size: 11px; color: #e50914;
+  margin-top: 12px; min-height: 16px; text-align: center;
+}
+.be-login-lock {
+  font-size: 28px; margin-bottom: 20px; opacity: 0.4;
+}
+
+/* ── SCROLL SPOTLIGHT: colour fills in slowly ─────────────────── */
+.dot-illuminated img,
+.g-card.dot-illuminated img,
+.novel-card.dot-illuminated img,
+.novel-card.dot-illuminated .novel-cover img,
+.novel-page-card.dot-illuminated img,
+.novel-page-card.dot-illuminated .novel-page-cover img,
+.proj-card.dot-illuminated img,
+.proj-card.dot-illuminated .proj-img img,
+.hero-portrait-frame.dot-illuminated img,
+.sw-item.dot-illuminated .sw-thumb,
+.sw-product-card.dot-illuminated .sw-img-banner {
+  filter: grayscale(0) contrast(1.04) brightness(1.0) !important;
+  transform: scale(1.015);
+  /* Keep transition here too so reverse (color → B&W) is also slow */
+  transition: filter 2.8s cubic-bezier(0.0, 0.55, 0.45, 1.0),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* tech-spotlight-card: no img, colorize the whole card background */
+.tech-spotlight-card.dot-illuminated {
+  border-color: var(--dot-border, rgba(0,229,255,0.55)) !important;
+  box-shadow: 0 0 32px var(--dot-glow, rgba(0,229,255,0.18)) !important;
+  transition: border-color 2.0s ease, box-shadow 2.0s ease !important;
+}
+
+/* Card border glow on illuminate */
+.g-card.dot-illuminated,
+.novel-card.dot-illuminated,
+.novel-page-card.dot-illuminated,
+.proj-card.dot-illuminated,
+.sw-item.dot-illuminated,
+.sw-product-card.dot-illuminated,
+.hero-portrait-frame.dot-illuminated {
+  border-color: var(--dot-border, rgba(0,229,255,0.5)) !important;
+  box-shadow: 0 12px 40px var(--dot-glow, rgba(0,229,255,0.18)) !important;
+  transition: border-color 1.5s ease, box-shadow 1.5s ease !important;
 }
 </style>
 </head>
@@ -1105,13 +1166,13 @@ const SOFTWARE_DATA = [{"id": 1, "name": "1-Click Product Render Setup", "cat": 
 const EXPERIENCE_DATA = [{"id": 1, "company": "IDFL International Ltd", "role": "Software Engineer", "start": "Sep 2023", "end": "Present", "tags": ["Python", "JavaScript", "Software", "3D Automation"]}, {"id": 2, "company": "Hashage Ireland", "role": "Senior Video Editor & Motion Designer", "start": "Feb 2023", "end": "Present", "tags": ["Video", "Post-Production", "Brand Strategy"]}, {"id": 3, "company": "Dublin Branding Agency", "role": "Video & Creative Specialist", "start": "Jun 2020", "end": "Present", "tags": ["Video", "Creative Direction", "Motion"]}, {"id": 4, "company": "RizPros LTD", "role": "Supply Chain Manager", "start": "Nov 2021", "end": "Aug 2023", "tags": ["Supply Chain", "Inventory Ops", "Process Automation"]}, {"id": 5, "company": "Digiworld Ireland", "role": "Digital Media Manager", "start": "Feb 2021", "end": "Aug 2022", "tags": ["Digital Media", "Content", "Marketing"]}, {"id": 6, "company": "GH Industry", "role": "Assistant Procurement Manager", "start": "May 2016", "end": "Jun 2018", "tags": ["Procurement", "Operations", "Logistics"]}, {"id": 7, "company": "UET Taxila", "role": "Graphic Design & Visualization Freelance", "start": "Jun 2012", "end": "Sep 2016", "tags": ["3D Modeling", "Graphic Design", "Illustration"]}];
 const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
 
-let novels = loadData('rana_novels_v30', NOVELS_DATA);
-let techProjects = loadData('rana_tech_v30', TECH_PROJECTS_DATA);
-let articles = loadData('rana_articles_v30', ARTICLES_DATA);
-let galleryItems = loadData('rana_gallery_v30', GALLERY_DATA);
-let software = loadData('rana_software_v30', SOFTWARE_DATA);
-let experience = loadData('rana_experience_v30', EXPERIENCE_DATA);
-let clients = loadData('rana_clients_v30', CLIENTS_DATA);
+let novels = loadData('rana_novels_v31', NOVELS_DATA);
+let techProjects = loadData('rana_tech_v31', TECH_PROJECTS_DATA);
+let articles = loadData('rana_articles_v31', ARTICLES_DATA);
+let galleryItems = loadData('rana_gallery_v31', GALLERY_DATA);
+let software = loadData('rana_software_v31', SOFTWARE_DATA);
+let experience = loadData('rana_experience_v31', EXPERIENCE_DATA);
+let clients = loadData('rana_clients_v31', CLIENTS_DATA);
 
 // CURSOR
 const cur = document.getElementById('cur');
@@ -1848,17 +1909,13 @@ setupCursorHover();
 
 // ==================== 1. COLORFUL BACKGROUND PARTICLES ====================
 (function initScrollSpotlight(){
-  // Assign a random accent color to each card once, reuse on illuminate
   const palette = [
-    '#00e5ff',  // Electric Cyan
-    '#ff4081',  // Rose Magenta
-    '#ffb300',  // Warm Amber
-    '#69f0ae',  // Mint Emerald
-    '#b388ff',  // Celestial Violet
-    '#448aff'   // Sapphire Blue
+    '#00e5ff', '#ff4081', '#ffb300',
+    '#69f0ae', '#b388ff', '#448aff'
   ];
 
-  const cardSelector = '.g-card, .novel-card, .novel-page-card, .proj-card, .hero-portrait-frame, .sw-item, .sw-product-card, .tech-spotlight-card';
+  const cardSelector = '.g-card, .novel-card, .novel-page-card, .proj-card, ' +
+    '.hero-portrait-frame, .sw-item, .sw-product-card, .tech-spotlight-card';
 
   function assignColors(){
     document.querySelectorAll(cardSelector).forEach(card => {
@@ -1871,7 +1928,7 @@ setupCursorHover();
   function illuminate(card){
     const col = card.dataset.spotColor || palette[0];
     card.classList.add('dot-illuminated');
-    card.style.setProperty('--dot-glow', col + '40');
+    card.style.setProperty('--dot-glow', col + '38');
     card.style.setProperty('--dot-border', col);
   }
 
@@ -1882,29 +1939,42 @@ setupCursorHover();
   }
 
   let observer;
+  let setupTimer;
 
   function setupObserver(){
     if(observer) observer.disconnect();
-
     assignColors();
 
-    // rootMargin: top=-10% bottom=-10% means only the middle 80% of viewport triggers
+    // threshold 0.05 = fires as soon as 5% of card enters viewport
+    // rootMargin '-5% 0px -5% 0px' = small dead-zone at very edges
     observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if(e.isIntersecting){ illuminate(e.target); }
         else { deiluminate(e.target); }
       });
-    }, { threshold: 0.15, rootMargin: '-8% 0px -8% 0px' });
+    }, { threshold: 0.05, rootMargin: '-5% 0px -5% 0px' });
 
-    document.querySelectorAll(cardSelector).forEach(card => observer.observe(card));
+    document.querySelectorAll(cardSelector).forEach(el => observer.observe(el));
   }
 
-  // Setup on load
-  setTimeout(setupObserver, 400);
+  // Initial setup after render
+  setTimeout(setupObserver, 350);
 
-  // Re-setup whenever a new page renders (nav clicks, etc.)
-  document.addEventListener('click', () => setTimeout(setupObserver, 300));
-  window.addEventListener('resize', () => setTimeout(setupObserver, 200));
+  // Re-scan when new cards are rendered (page nav) using MutationObserver
+  // This avoids blocking click handlers (fixes INP)
+  if(window.MutationObserver){
+    const mo = new MutationObserver(() => {
+      clearTimeout(setupTimer);
+      setupTimer = setTimeout(setupObserver, 300);
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+
+  // Also re-scan on resize
+  window.addEventListener('resize', () => {
+    clearTimeout(setupTimer);
+    setupTimer = setTimeout(setupObserver, 200);
+  }, { passive: true });
 })();
 
 // ==================== 2. RANDOM ACCENT GLOW ON CARD HOVER ====================
@@ -1932,6 +2002,39 @@ function setupRandomColorHover(){
   });
 }
 
+
+// ── BACKEND AUTH ──────────────────────────────────────────────────────
+const _CRED_HASH = '011302dd0741042d9e4af684ce621e05f6f693efb65ffe62db7a736454a7c257';
+
+async function _sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function beLogin(){
+  const email = (document.getElementById('be-email')?.value || '').trim();
+  const pass  = document.getElementById('be-pass')?.value || '';
+  const errEl = document.getElementById('be-login-err');
+  if(!email || !pass){ errEl.textContent = 'Please enter both fields.'; return; }
+  const hash = await _sha256(email + pass);
+  if(hash === _CRED_HASH){
+    sessionStorage.setItem('_beAuth', '1');
+    document.getElementById('be-login-gate').classList.add('hidden');
+    errEl.textContent = '';
+  } else {
+    errEl.textContent = 'Incorrect email or password.';
+    document.getElementById('be-pass').value = '';
+  }
+}
+
+function beCheckAuth(){
+  const gate = document.getElementById('be-login-gate');
+  if(!gate) return;
+  if(sessionStorage.getItem('_beAuth') === '1'){
+    gate.classList.add('hidden');
+  }
+}
+// ─────────────────────────────────────────────────────────────────────
 </script>
 </body>
 </html>
