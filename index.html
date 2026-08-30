@@ -883,6 +883,43 @@ img {
   box-shadow: 0 8px 24px rgba(0,0,0,0.04), 0 0 18px var(--card-glow, rgba(0, 229, 255, 0.16)) !important;
 }
 
+
+
+/* ==================== CLEAN PROJ-CARD & HOME ARTICLES STYLING ==================== */
+.proj-card {
+  flex: 0 0 280px !important;
+  background: var(--bg-card, #ffffff) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.02) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
+  cursor: pointer !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+}
+.proj-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.06), 0 0 16px rgba(0, 229, 255, 0.15) !important;
+  border-color: var(--ink3) !important;
+}
+.proj-img {
+  width: 100% !important;
+  height: 220px !important;
+  overflow: hidden !important;
+  background: #f0f2f5 !important;
+}
+.proj-img img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+.proj-info {
+  padding: 14px 18px !important;
+}
+
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -1607,7 +1644,7 @@ function renderPage(name){
 // 1. HOME RENDERING
 let novelSlideIdx=0, projSlideIdx=0;
 function renderHome(){
-  // Home Tech Spotlight (B&W)
+  // 1. Home Tech Spotlight
   const hTech = document.getElementById('homeTechSpotlight');
   if(hTech){
     hTech.innerHTML = techProjects.slice(0,3).map(p=>{
@@ -1632,7 +1669,7 @@ function renderHome(){
     }).join('');
   }
 
-  // Novels Slider
+  // 2. Novels Slider
   const nSlider = document.getElementById('novelSlider');
   if(nSlider){
     nSlider.innerHTML = novels.map((n,i)=>`
@@ -1649,32 +1686,52 @@ function renderHome(){
     `).join('');
   }
 
-  // Software Vertical Slider
+  // 3. Software Vertical Slider
   const swS = document.getElementById('swSlider');
   if(swS){
     swS.innerHTML = software.slice(0,5).map(s=>`
       <div class="sw-item" onclick="showPage('software')">
         <img class="sw-thumb" src="${s.img}" alt="${s.name}" loading="lazy" decoding="async" onerror="this.style.display='none'">
-        <div class="sw-info">
+        <div>
+          <div class="sw-item-meta">
+            <span class="sw-cat">${s.cat || 'Tools'}</span>
+          </div>
           <div class="sw-name">${s.name}</div>
-          <div class="sw-desc">${s.desc}</div>
-          <div class="sw-meta">${s.platform} &middot; <span class="sw-tag">${s.price}</span></div>
+          <div class="sw-desc">${(s.desc||'').substring(0,85)}...</div>
+        </div>
+        <div class="sw-price">${s.price || 'Free'}</div>
+      </div>
+    `).join('');
+  }
+
+  // 4. Visual Projects Slider (projGrid)
+  const pGrid = document.getElementById('projGrid');
+  if(pGrid){
+    pGrid.innerHTML = galleryItems.slice(0,8).map((g, gi)=>`
+      <div class="proj-card" onclick="openLightbox(${gi})">
+        <div class="proj-img">
+          <img src="${g.path}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.style.display='none'">
+        </div>
+        <div class="proj-info">
+          <div class="proj-cat" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">${g.pillar} &middot; ${g.cat}</div>
+          <div class="proj-name" style="font-family:var(--serif);font-size:15.5px;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:4px">${g.title}</div>
+          <div class="proj-desc" style="font-size:11.5px;color:var(--ink3);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${g.desc || ''}</div>
         </div>
       </div>
     `).join('');
   }
 
-  // Visual Works 3D Slider
-  const gSlider = document.getElementById('gallerySlider');
-  if(gSlider){
-    gSlider.innerHTML = galleryItems.slice(0,8).map((g,i)=>`
-      <div class="g-card" onclick="showPage('gallery')" style="flex:0 0 280px">
-        <img src="${g.path}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.style.display='none'">
-        <div class="g-card-info" style="padding:14px 16px">
-          <div class="g-cat" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">${g.pillar} &middot; ${g.cat}</div>
-          <div class="g-title" style="font-family:var(--serif);font-size:15.5px;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:4px">${g.title}</div>
-          <div class="g-desc" style="font-size:11.5px;color:var(--ink3);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${g.desc || ''}</div>
+  // 5. Home Essays & Insights (homeArticlesGrid)
+  const haGrid = document.getElementById('homeArticlesGrid');
+  if(haGrid){
+    haGrid.innerHTML = articles.slice(0,4).map(a=>`
+      <div class="article-card" onclick="if('${a.url}'.startsWith('http')){window.open('${a.url}','_blank')}else{location.href='${a.url}'}">
+        <div>
+          <div class="article-meta" style="font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:8px">${a.category || a.cat || 'Essay'} · ${a.date || '2026'} · ${a.readTime || '5 min read'}</div>
+          <h3 class="article-title" style="font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin:0 0 8px;line-height:1.3">${a.title}</h3>
+          <p class="article-desc" style="font-size:12.5px;color:var(--ink2);line-height:1.6;margin:0 0 16px">${a.desc || ''}</p>
         </div>
+        <a class="article-btn" href="${a.url}" target="${a.url.startsWith('http')?'_blank':'_self'}" style="font-family:var(--mono);font-size:11px;color:var(--ink);text-decoration:none;font-weight:600">Read Article &rarr;</a>
       </div>
     `).join('');
   }
