@@ -639,8 +639,6 @@ img { image-rendering: auto; }
 </head>
 <body>
 <!-- INTERACTIVE COLORFUL BACKGROUND PARTICLES -->
-<canvas id="bgDotsCanvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:0;opacity:0.75;will-change:transform"></canvas>
-
 <!-- CURSOR -->
 <div class="cursor" id="cur"></div>
 <div class="cursor-ring" id="curRing"></div>
@@ -1107,13 +1105,13 @@ const SOFTWARE_DATA = [{"id": 1, "name": "1-Click Product Render Setup", "cat": 
 const EXPERIENCE_DATA = [{"id": 1, "company": "IDFL International Ltd", "role": "Software Engineer", "start": "Sep 2023", "end": "Present", "tags": ["Python", "JavaScript", "Software", "3D Automation"]}, {"id": 2, "company": "Hashage Ireland", "role": "Senior Video Editor & Motion Designer", "start": "Feb 2023", "end": "Present", "tags": ["Video", "Post-Production", "Brand Strategy"]}, {"id": 3, "company": "Dublin Branding Agency", "role": "Video & Creative Specialist", "start": "Jun 2020", "end": "Present", "tags": ["Video", "Creative Direction", "Motion"]}, {"id": 4, "company": "RizPros LTD", "role": "Supply Chain Manager", "start": "Nov 2021", "end": "Aug 2023", "tags": ["Supply Chain", "Inventory Ops", "Process Automation"]}, {"id": 5, "company": "Digiworld Ireland", "role": "Digital Media Manager", "start": "Feb 2021", "end": "Aug 2022", "tags": ["Digital Media", "Content", "Marketing"]}, {"id": 6, "company": "GH Industry", "role": "Assistant Procurement Manager", "start": "May 2016", "end": "Jun 2018", "tags": ["Procurement", "Operations", "Logistics"]}, {"id": 7, "company": "UET Taxila", "role": "Graphic Design & Visualization Freelance", "start": "Jun 2012", "end": "Sep 2016", "tags": ["3D Modeling", "Graphic Design", "Illustration"]}];
 const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
 
-let novels = loadData('rana_novels_v29', NOVELS_DATA);
-let techProjects = loadData('rana_tech_v29', TECH_PROJECTS_DATA);
-let articles = loadData('rana_articles_v29', ARTICLES_DATA);
-let galleryItems = loadData('rana_gallery_v29', GALLERY_DATA);
-let software = loadData('rana_software_v29', SOFTWARE_DATA);
-let experience = loadData('rana_experience_v29', EXPERIENCE_DATA);
-let clients = loadData('rana_clients_v29', CLIENTS_DATA);
+let novels = loadData('rana_novels_v30', NOVELS_DATA);
+let techProjects = loadData('rana_tech_v30', TECH_PROJECTS_DATA);
+let articles = loadData('rana_articles_v30', ARTICLES_DATA);
+let galleryItems = loadData('rana_gallery_v30', GALLERY_DATA);
+let software = loadData('rana_software_v30', SOFTWARE_DATA);
+let experience = loadData('rana_experience_v30', EXPERIENCE_DATA);
+let clients = loadData('rana_clients_v30', CLIENTS_DATA);
 
 // CURSOR
 const cur = document.getElementById('cur');
@@ -1849,15 +1847,9 @@ setupCursorHover();
 
 
 // ==================== 1. COLORFUL BACKGROUND PARTICLES ====================
-(function initBackgroundDots(){
-  const canvas = document.getElementById('bgDotsCanvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let width = canvas.width = window.innerWidth;
-  let height = canvas.height = window.innerHeight;
-
-  // ── SINGLE ORBITING DOT CONFIG ──────────────────────────────────────
-  const colors = [
+(function initScrollSpotlight(){
+  // Assign a random accent color to each card once, reuse on illuminate
+  const palette = [
     '#00e5ff',  // Electric Cyan
     '#ff4081',  // Rose Magenta
     '#ffb300',  // Warm Amber
@@ -1866,178 +1858,53 @@ setupCursorHover();
     '#448aff'   // Sapphire Blue
   ];
 
-  let colorIdx = 0;
-  let colorTimer = 0;
-  const COLOR_CHANGE_INTERVAL = 240; // frames between color morphs
+  const cardSelector = '.g-card, .novel-card, .novel-page-card, .proj-card, .hero-portrait-frame, .sw-item, .sw-product-card, .tech-spotlight-card';
 
-  // The single main dot — large, soft, glowing
-  const dot = {
-    x: Math.random() * width,
-    y: Math.random() * height,
-    vx: 1.8,
-    vy: 1.2,
-    size: 18,          // visible glow orb size
-    touchRadius: 120,  // collision detection radius (larger than visual)
-    color: colors[0],
-    nextColor: colors[1],
-    morphProgress: 0   // 0 -> 1 color morph
-  };
-
-  // Small ambient satellite dots (decorative, non-interactive)
-  const satellites = [];
-  const satCount = Math.min(14, Math.floor(width / 100));
-  for(let i = 0; i < satCount; i++){
-    satellites.push({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.55,
-      vy: (Math.random() - 0.5) * 0.55,
-      size: Math.random() * 2.2 + 1.0,
-      color: colors[Math.floor(Math.random() * colors.length)] + '70',
-      angle: Math.random() * Math.PI * 2,
-      speed: Math.random() * 0.012 + 0.004
+  function assignColors(){
+    document.querySelectorAll(cardSelector).forEach(card => {
+      if(!card.dataset.spotColor){
+        card.dataset.spotColor = palette[Math.floor(Math.random() * palette.length)];
+      }
     });
   }
 
-  // Image card tracking for illumination
-  let trackedCards = [];
-  function updateTrackedCards(){
-    const selectors = '.g-card, .novel-card, .novel-page-card, .proj-card, .hero-portrait-frame, .sw-item, .sw-product-card, .tech-spotlight-card';
-    trackedCards = Array.from(document.querySelectorAll(selectors))
-      .filter(el => el.offsetParent !== null)
-      .map(el => ({ el, rect: el.getBoundingClientRect() }));
+  function illuminate(card){
+    const col = card.dataset.spotColor || palette[0];
+    card.classList.add('dot-illuminated');
+    card.style.setProperty('--dot-glow', col + '40');
+    card.style.setProperty('--dot-border', col);
   }
 
-  // Mouse repulsion for the main dot
-  let mouse = { x: -9999, y: -9999 };
-  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-  window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-    updateTrackedCards();
-  });
-  window.addEventListener('scroll', updateTrackedCards, { passive: true });
-  document.addEventListener('click', () => {
-    if(window.requestIdleCallback){ requestIdleCallback(updateTrackedCards); }
-    else { setTimeout(updateTrackedCards, 200); }
-  });
-
-  // Lerp helper
-  function lerpColor(a, b, t){
-    const ah = a.replace('#',''), bh = b.replace('#','');
-    const ar = parseInt(ah.slice(0,2),16), ag = parseInt(ah.slice(2,4),16), ab_ = parseInt(ah.slice(4,6),16);
-    const br = parseInt(bh.slice(0,2),16), bg = parseInt(bh.slice(2,4),16), bb = parseInt(bh.slice(4,6),16);
-    const r = Math.round(ar + (br-ar)*t);
-    const g = Math.round(ag + (bg-ag)*t);
-    const b_ = Math.round(ab_ + (bb-ab_)*t);
-    return `rgb(${r},${g},${b_})`;
+  function deiluminate(card){
+    card.classList.remove('dot-illuminated');
+    card.style.removeProperty('--dot-glow');
+    card.style.removeProperty('--dot-border');
   }
 
-  let frame = 0;
+  let observer;
 
-  function render(){
-    ctx.clearRect(0, 0, width, height);
-    frame++;
+  function setupObserver(){
+    if(observer) observer.disconnect();
 
-    // Refresh card positions every 60 frames
-    if(frame % 120 === 0) updateTrackedCards();
+    assignColors();
 
-    // ── COLOR MORPHING ───────────────────────────────────────────────
-    colorTimer++;
-    if(colorTimer >= COLOR_CHANGE_INTERVAL){
-      colorTimer = 0;
-      colorIdx = (colorIdx + 1) % colors.length;
-      dot.nextColor = colors[(colorIdx + 1) % colors.length];
-      dot.morphProgress = 0;
-    }
-    dot.morphProgress = Math.min(1, dot.morphProgress + 0.008);
-    dot.color = lerpColor(colors[colorIdx], dot.nextColor, dot.morphProgress);
+    // rootMargin: top=-10% bottom=-10% means only the middle 80% of viewport triggers
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){ illuminate(e.target); }
+        else { deiluminate(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '-8% 0px -8% 0px' });
 
-    // ── MAIN DOT PHYSICS ─────────────────────────────────────────────
-    dot.x += dot.vx;
-    dot.y += dot.vy;
-
-    // Bounce off walls smoothly
-    if(dot.x < dot.size){ dot.x = dot.size; dot.vx = Math.abs(dot.vx); }
-    if(dot.x > width - dot.size){ dot.x = width - dot.size; dot.vx = -Math.abs(dot.vx); }
-    if(dot.y < dot.size){ dot.y = dot.size; dot.vy = Math.abs(dot.vy); }
-    if(dot.y > height - dot.size){ dot.y = height - dot.size; dot.vy = -Math.abs(dot.vy); }
-
-    // Gentle mouse repulsion from main dot
-    const mdx = mouse.x - dot.x, mdy = mouse.y - dot.y;
-    const mdist = Math.sqrt(mdx*mdx + mdy*mdy);
-    if(mdist < 180 && mdist > 0){
-      const force = (180 - mdist) / 180;
-      dot.vx -= (mdx / mdist) * force * 0.25;
-      dot.vy -= (mdy / mdist) * force * 0.25;
-    }
-    // Speed cap
-    const speed = Math.sqrt(dot.vx*dot.vx + dot.vy*dot.vy);
-    if(speed > 2.8){ dot.vx *= 2.8/speed; dot.vy *= 2.8/speed; }
-    if(speed < 1.0){ dot.vx *= 1.0/speed; dot.vy *= 1.0/speed; }
-
-    // ── DRAW MAIN DOT (large soft glow orb) ─────────────────────────
-    const grad = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, dot.size * 4);
-    grad.addColorStop(0, dot.color + 'cc');
-    grad.addColorStop(0.35, dot.color + '55');
-    grad.addColorStop(1, dot.color + '00');
-    ctx.beginPath();
-    ctx.arc(dot.x, dot.y, dot.size * 4, 0, Math.PI * 2);
-    ctx.fillStyle = grad;
-    ctx.fill();
-    // Hard core
-    ctx.beginPath();
-    ctx.arc(dot.x, dot.y, dot.size, 0, Math.PI * 2);
-    ctx.fillStyle = dot.color;
-    ctx.shadowBlur = 28;
-    ctx.shadowColor = dot.color;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-
-    // ── SATELLITE DOTS ───────────────────────────────────────────────
-    for(let i = 0; i < satellites.length; i++){
-      const s = satellites[i];
-      s.angle += s.speed;
-      s.x += s.vx + Math.cos(s.angle) * 0.3;
-      s.y += s.vy + Math.sin(s.angle) * 0.3;
-      if(s.x < -10) s.x = width + 10;
-      if(s.x > width + 10) s.x = -10;
-      if(s.y < -10) s.y = height + 10;
-      if(s.y > height + 10) s.y = -10;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-      ctx.fillStyle = s.color;
-      ctx.fill();
-    }
-
-    // ── PHOTO CARD ILLUMINATION ──────────────────────────────────────
-    for(let j = 0; j < trackedCards.length; j++){
-      const item = trackedCards[j];
-      const r = item.rect;
-      const inRange = dot.x >= r.left - dot.touchRadius && dot.x <= r.right + dot.touchRadius
-                   && dot.y >= r.top - dot.touchRadius && dot.y <= r.bottom + dot.touchRadius;
-
-      if(inRange){
-        if(!item.el.classList.contains('dot-illuminated')){
-          item.el.classList.add('dot-illuminated');
-        }
-        item.el.style.setProperty('--dot-glow', dot.color + '40');
-        item.el.style.setProperty('--dot-border', dot.color);
-      } else {
-        if(item.el.classList.contains('dot-illuminated')){
-          item.el.classList.remove('dot-illuminated');
-          item.el.style.removeProperty('--dot-glow');
-          item.el.style.removeProperty('--dot-border');
-        }
-      }
-    }
-
-    requestAnimationFrame(render);
+    document.querySelectorAll(cardSelector).forEach(card => observer.observe(card));
   }
 
-  setTimeout(updateTrackedCards, 600);
-  render();
+  // Setup on load
+  setTimeout(setupObserver, 400);
+
+  // Re-setup whenever a new page renders (nav clicks, etc.)
+  document.addEventListener('click', () => setTimeout(setupObserver, 300));
+  window.addEventListener('resize', () => setTimeout(setupObserver, 200));
 })();
 
 // ==================== 2. RANDOM ACCENT GLOW ON CARD HOVER ====================
