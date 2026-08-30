@@ -39,7 +39,7 @@ body { background:var(--bg); color:var(--ink); font-family:var(--sans); overflow
   transition: filter 2.8s cubic-bezier(0.0, 0.55, 0.45, 1.0),
               transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.5s ease;
-  will-change: filter, transform;
+  
 }
 
 .g-card:hover img, .novel-cover:hover img, .novel-page-card:hover img, .hero-portrait-frame:hover img,
@@ -633,7 +633,7 @@ img { image-rendering: auto; }
               box-shadow 2.2s cubic-bezier(0.1, 0.7, 0.1, 1),
               border-color 1.8s cubic-bezier(0.1, 0.7, 0.1, 1),
               transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  will-change: filter, transform;
+  
 }
 
 .g-card:hover img,
@@ -784,6 +784,26 @@ img { image-rendering: auto; }
   border-radius: 3px; cursor: pointer; transition: all 0.2s;
 }
 .be-signout-btn:hover { color: #e50914; border-color: #e50914; }
+
+
+/* ==================== HIGH PERFORMANCE OPTIMIZATIONS ==================== */
+/* Fast hardware-accelerated rendering with zero GPU layer bloating */
+.g-card, .novel-page-card, .novel-card, .proj-card, .sw-product-card, .tech-spotlight-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 340px;
+}
+
+/* Off-screen pages skip rendering entirely until active */
+.page:not(.active) {
+  display: none !important;
+  content-visibility: hidden;
+}
+
+/* Smooth image rendering without blocking compositor */
+img {
+  content-visibility: auto;
+  contain: paint;
+}
 
 </style>
 </head>
@@ -1281,13 +1301,13 @@ const SOFTWARE_DATA = [{"id": 1, "name": "1-Click Product Render Setup", "cat": 
 const EXPERIENCE_DATA = [{"id": 1, "company": "IDFL International Ltd", "role": "Software Engineer", "start": "Sep 2023", "end": "Present", "tags": ["Python", "JavaScript", "Software", "3D Automation"]}, {"id": 2, "company": "Hashage Ireland", "role": "Senior Video Editor & Motion Designer", "start": "Feb 2023", "end": "Present", "tags": ["Video", "Post-Production", "Brand Strategy"]}, {"id": 3, "company": "Dublin Branding Agency", "role": "Video & Creative Specialist", "start": "Jun 2020", "end": "Present", "tags": ["Video", "Creative Direction", "Motion"]}, {"id": 4, "company": "RizPros LTD", "role": "Supply Chain Manager", "start": "Nov 2021", "end": "Aug 2023", "tags": ["Supply Chain", "Inventory Ops", "Process Automation"]}, {"id": 5, "company": "Digiworld Ireland", "role": "Digital Media Manager", "start": "Feb 2021", "end": "Aug 2022", "tags": ["Digital Media", "Content", "Marketing"]}, {"id": 6, "company": "GH Industry", "role": "Assistant Procurement Manager", "start": "May 2016", "end": "Jun 2018", "tags": ["Procurement", "Operations", "Logistics"]}, {"id": 7, "company": "UET Taxila", "role": "Graphic Design & Visualization Freelance", "start": "Jun 2012", "end": "Sep 2016", "tags": ["3D Modeling", "Graphic Design", "Illustration"]}];
 const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
 
-let novels = loadData('rana_novels_v33', NOVELS_DATA);
-let techProjects = loadData('rana_tech_v33', TECH_PROJECTS_DATA);
-let articles = loadData('rana_articles_v33', ARTICLES_DATA);
-let galleryItems = loadData('rana_gallery_v33', GALLERY_DATA);
-let software = loadData('rana_software_v33', SOFTWARE_DATA);
-let experience = loadData('rana_experience_v33', EXPERIENCE_DATA);
-let clients = loadData('rana_clients_v33', CLIENTS_DATA);
+let novels = loadData('rana_novels_v34', NOVELS_DATA);
+let techProjects = loadData('rana_tech_v34', TECH_PROJECTS_DATA);
+let articles = loadData('rana_articles_v34', ARTICLES_DATA);
+let galleryItems = loadData('rana_gallery_v34', GALLERY_DATA);
+let software = loadData('rana_software_v34', SOFTWARE_DATA);
+let experience = loadData('rana_experience_v34', EXPERIENCE_DATA);
+let clients = loadData('rana_clients_v34', CLIENTS_DATA);
 
 // CURSOR
 const cur = document.getElementById('cur');
@@ -1363,7 +1383,7 @@ function renderHome(){
     nSlider.innerHTML = novels.map((n,i)=>`
       <div class="novel-card" onclick="openNovelModal(${i})">
         <div class="novel-cover">
-          <img src="${n.cover}" alt="${n.title}" onerror="this.style.display='none'">
+          <img src="${n.cover}" alt="${n.title}" loading="lazy" decoding="async" onerror="this.style.display='none'">
         </div>
         <div class="novel-info">
           <div class="novel-genre">${n.genre} · ${n.type}</div>
@@ -1379,7 +1399,7 @@ function renderHome(){
   if(swS){
     swS.innerHTML = software.slice(0,5).map(s=>`
       <div class="sw-item" onclick="showPage('software')">
-        <img class="sw-thumb" src="${s.img}" alt="${s.name}" onerror="this.style.display='none'">
+        <img class="sw-thumb" src="${s.img}" alt="${s.name}" loading="lazy" decoding="async" onerror="this.style.display='none'">
         <div>
           <div class="sw-item-meta">
             <span class="sw-cat">${s.cat}</span>
@@ -1398,7 +1418,7 @@ function renderHome(){
     pGrid.innerHTML = galleryItems.slice(0,8).map(g=>`
       <div class="proj-card" onclick="openLightboxDirect('${g.path}','${g.title}')">
         <div class="proj-img">
-          <img src="${g.path}" alt="${g.title}" onerror="this.style.display='none'">
+          <img src="${g.path}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.style.display='none'">
         </div>
         <div class="proj-info">
           <div class="proj-cat">${g.pillar} · ${g.cat}</div>
@@ -1448,7 +1468,7 @@ function renderNovels(){
   c.innerHTML = novels.map((n,i)=>`
     <div class="novel-page-card" onclick="openNovelModal(${i})">
       <div class="novel-page-cover">
-        <img src="${n.cover}" alt="${n.title}" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
+        <img src="${n.cover}" alt="${n.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
         ${n.amazonUrl ? `<span style="position:absolute;top:10px;right:10px;background:rgba(17,20,26,0.92);color:#fff;font-family:var(--mono);font-size:9px;padding:3px 7px;border-radius:3px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,0.3)">Amazon UK ↗</span>` : ''}
       </div>
       <div class="novel-page-genre">${n.genre} · ${n.type}</div>
@@ -1547,7 +1567,7 @@ function renderGallery(filter){
   c.innerHTML = filtered.map((g,i)=>`
     <div class="g-card" onclick="openLightbox(${i})" style="position:relative">
       <div style="position:relative;overflow:hidden">
-        <img src="${g.path}" alt="${g.title}" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
+        <img src="${g.path}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
         ${(g.images && g.images.length > 1) ? `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.85);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.3)">⊞ ${g.images.length} Photos</span>` : ''}
         ${g.youtubeUrl ? `<a href="${g.youtubeUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="g-video-badge">▶ Video ↗</a>` : ''}
       </div>
@@ -1645,7 +1665,7 @@ function swCard(s){
   return `
     <div class="sw-product-card">
       <div>
-        ${s.img ? `<img class="sw-img-banner" src="${s.img}" alt="${s.name}" onerror="this.style.display='none'">` : ''}
+        ${s.img ? `<img class="sw-img-banner" src="${s.img}" alt="${s.name}" loading="lazy" decoding="async" onerror="this.style.display='none'">` : ''}
         <div class="sw-product-meta">
           <span class="sw-product-type">${s.cat}</span>
           <span class="sw-product-price">${s.price}</span>
@@ -2262,7 +2282,7 @@ function beCheckAuthOnNav(){
   }
 }
 
-// ==================== SLOW INK-IN-WATER SCROLL COLORIZATION ====================
+// ==================== ULTRA-OPTIMIZED INK-IN-WATER COLORIZATION ====================
 (function initInkColorization(){
   const palette = [
     'rgba(0, 229, 255, 0.24)',
@@ -2293,79 +2313,58 @@ function beCheckAuthOnNav(){
 
   function activateCard(card){
     assignColor(card);
-    card.classList.add('in-color-spotlight');
-    card.style.setProperty('--card-glow', card.dataset.inkGlow);
-    card.style.setProperty('--card-border', card.dataset.inkBorder);
-  }
-
-  function deactivateCard(card){
-    card.classList.remove('in-color-spotlight');
-    card.style.removeProperty('--card-glow');
-    card.style.removeProperty('--card-border');
-  }
-
-  function updateVisibleCards(){
-    const vWidth = window.innerWidth || document.documentElement.clientWidth;
-    const vHeight = window.innerHeight || document.documentElement.clientHeight;
-    
-    const cards = document.querySelectorAll(CARD_SELECTOR);
-    cards.forEach(card => {
-      // Check if inside active page
-      const pageParent = card.closest('.page');
-      if(pageParent && !pageParent.classList.contains('active') && pageParent.id !== 'page-home'){
-        deactivateCard(card);
-        return;
-      }
-      
-      const r = card.getBoundingClientRect();
-      const isVisible = (
-        r.top < vHeight + 60 &&
-        r.bottom > -60 &&
-        r.left < vWidth + 60 &&
-        r.right > -60
-      );
-
-      if(isVisible){
-        activateCard(card);
-      } else {
-        deactivateCard(card);
-      }
-    });
-  }
-
-  window.refreshColorSpotlight = updateVisibleCards;
-
-  let ticking = false;
-  function onScrollOrMove(){
-    if(!ticking){
-      requestAnimationFrame(() => {
-        updateVisibleCards();
-        ticking = false;
-      });
-      ticking = true;
+    if(!card.classList.contains('in-color-spotlight')){
+      card.classList.add('in-color-spotlight');
+      card.style.setProperty('--card-glow', card.dataset.inkGlow);
+      card.style.setProperty('--card-border', card.dataset.inkBorder);
     }
   }
 
-  window.addEventListener('scroll', onScrollOrMove, { passive: true });
-  window.addEventListener('resize', onScrollOrMove, { passive: true });
-  window.addEventListener('touchmove', onScrollOrMove, { passive: true });
-  window.addEventListener('wheel', onScrollOrMove, { passive: true });
-
-  function attachSliderListeners(){
-    document.querySelectorAll('#novelSlider, #projGrid, #swSlider, .gallery-grid, .novels-grid').forEach(slider => {
-      slider.removeEventListener('scroll', onScrollOrMove);
-      slider.addEventListener('scroll', onScrollOrMove, { passive: true });
-    });
+  function deactivateCard(card){
+    if(card.classList.contains('in-color-spotlight')){
+      card.classList.remove('in-color-spotlight');
+      card.style.removeProperty('--card-glow');
+      card.style.removeProperty('--card-border');
+    }
   }
 
-  setTimeout(() => { updateVisibleCards(); attachSliderListeners(); }, 120);
-  setTimeout(() => { updateVisibleCards(); attachSliderListeners(); }, 400);
-  setTimeout(() => { updateVisibleCards(); attachSliderListeners(); }, 900);
+  let observer = null;
 
-  if(window.MutationObserver){
+  function setupObserver(){
+    if(observer) observer.disconnect();
+
+    if('IntersectionObserver' in window){
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            activateCard(e.target);
+          } else {
+            deactivateCard(e.target);
+          }
+        });
+      }, {
+        rootMargin: '60px 0px 60px 0px',
+        threshold: 0.02
+      });
+
+      document.querySelectorAll(CARD_SELECTOR).forEach(card => {
+        observer.observe(card);
+      });
+    }
+  }
+
+  window.refreshColorSpotlight = setupObserver;
+
+  // Throttled quick setup after renders
+  setTimeout(setupObserver, 150);
+  setTimeout(setupObserver, 600);
+
+  // Re-observe when cards dynamically mount (e.g. category filters, novel search)
+  if('MutationObserver' in window){
+    let mutTimer = null;
     const mo = new MutationObserver(() => {
-      onScrollOrMove();
-      attachSliderListeners();
+      clearTimeout(mutTimer);
+      mutTimer = setTimeout(setupObserver, 200);
     });
     mo.observe(document.body, { childList: true, subtree: true });
   }
