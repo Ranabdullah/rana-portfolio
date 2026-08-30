@@ -839,36 +839,33 @@ img {
 <div class="page active" id="page-home">
 
   <!-- HERO -->
-  <section class="home-hero">
-    <div class="hero-text-side">
-      <div class="hero-eyebrow">Creative Director &amp; Technologist</div>
-      <h1 class="hero-name">
+  <!-- HERO SECTION (CLEAN WHITE FULL BACKGROUND 3D GENERATIVE ABSTRACT CANVAS) -->
+  <section class="home-hero" style="position:relative;overflow:hidden;min-height:580px;display:flex;align-items:center;padding:70px 48px;background:var(--bg,#f8f9fa)">
+    <!-- Full-Background 3D Generative Abstract Canvas on Crisp Light Canvas -->
+    <canvas id="heroAbstractBgCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0.95"></canvas>
+    
+    <!-- Hero Text Foreground (High Contrast & Legibility) -->
+    <div class="hero-text-side" style="position:relative;z-index:3;max-width:640px">
+      <div class="hero-eyebrow" style="font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px;display:flex;align-items:center;gap:8px">
+        <span id="heroColorIndicator" style="width:7px;height:7px;border-radius:50%;background:#00e5ff;box-shadow:0 0 8px #00e5ff;display:inline-block;transition:all 0.5s"></span>
+        <span>Creative Director &amp; Technologist</span>
+      </div>
+      <h1 class="hero-name" style="font-family:var(--serif);font-size:clamp(46px, 6vw, 78px);font-weight:300;line-height:1.06;color:var(--ink);margin-bottom:18px">
         <span>Rana</span><br>
-        <span style="font-style:italic;color:var(--ink3)">Abdullah</span>
+        <span style="font-style:italic;color:var(--ink2)">Abdullah</span>
       </h1>
-      <p class="hero-title">Novelist · 3D Artist · Software Engineer<br>Blending literary narrative, light, and robust code.</p>
-      <div class="hero-cta-row">
-        <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false">Technical Projects →</a>
+      <p class="hero-title" style="font-family:var(--sans);font-size:16px;line-height:1.65;color:var(--ink2);margin-bottom:28px;max-width:520px">
+        Novelist &middot; 3D Artist &middot; Software Engineer<br>
+        <span style="color:var(--ink3);font-size:14px">Blending literary narrative, generative light, and robust architectural code.</span>
+      </p>
+      <div class="hero-cta-row" style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false">Technical Projects &rarr;</a>
         <a class="btn-outline" href="#" onclick="showPage('novels');return false">Novels &amp; Books</a>
         <a class="btn-outline" href="#" onclick="showPage('gallery');return false">3D Gallery</a>
       </div>
-    </div>
-    <div class="hero-visual-side">
-      <div class="hero-portrait-frame" id="heroFrame" style="position:relative;overflow:hidden;background:#0d0f14;border:1px solid rgba(255,255,255,0.12);box-shadow:0 30px 80px rgba(0,0,0,0.22);border-radius:4px;cursor:crosshair">
-        <!-- 3D Generative Abstract Morphing Canvas -->
-        <canvas id="heroAbstractCanvas" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
-        
-        <!-- Minimal HUD Elements -->
-        <div style="position:absolute;top:14px;left:14px;z-index:4;display:flex;align-items:center;gap:7px;background:rgba(13,15,20,0.85);backdrop-filter:blur(8px);padding:5px 12px;border-radius:3px;border:1px solid rgba(255,255,255,0.15)">
-          <span id="heroColorIndicator" style="width:7px;height:7px;border-radius:50%;background:#ffffff;box-shadow:0 0 8px #ffffff;transition:background 0.5s, box-shadow 0.5s"></span>
-          <span style="font-family:var(--mono);font-size:9.5px;color:#fff;letter-spacing:0.08em;font-weight:600">GENERATIVE ABSTRACT 3D</span>
-        </div>
-        
-        <div id="heroPhaseLabel" style="position:absolute;bottom:14px;right:14px;z-index:4;font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.65);background:rgba(13,15,20,0.8);backdrop-filter:blur(6px);padding:4px 10px;border-radius:2px;border:1px solid rgba(255,255,255,0.1)">
-          MODE: MONOCHROME
-        </div>
+      <div id="heroPhaseLabel" style="margin-top:22px;font-family:var(--mono);font-size:9.5px;color:var(--ink4);letter-spacing:0.08em">
+        SPECTRUM: GENERATIVE 3D &middot; B&amp;W &harr; CHROMATIC
       </div>
-      <div class="hero-portrait-number">01</div>
     </div>
   </section>
 
@@ -1251,6 +1248,7 @@ img {
       <button class="bt" onclick="switchBackend('software',this)">Software</button>
       <button class="bt" onclick="switchBackend('experience',this)">Experience</button>
       <button class="bt" onclick="switchBackend('clients',this)">Clients</button>
+      <button class="bt" onclick="switchBackend('articles',this)">Articles &amp; Essays</button>
     </div>
 
     <!-- NOVELS BACKEND -->
@@ -2595,58 +2593,54 @@ window.addEventListener('keydown', function(e){
 
 
 
-// ==================== 3D GENERATIVE ABSTRACT B&W ⇄ COLOR ENGINE ====================
-(function init3DAbstractMorphHero(){
-  const frame = document.getElementById('heroFrame');
-  const canvas = document.getElementById('heroAbstractCanvas');
+
+
+
+
+// ==================== FULL-BACKGROUND 3D GENERATIVE ABSTRACT ENGINE ====================
+(function initHeroFullBgAbstract(){
+  const hero = document.querySelector('.home-hero');
+  const canvas = document.getElementById('heroAbstractBgCanvas');
   const indicator = document.getElementById('heroColorIndicator');
   const phaseLabel = document.getElementById('heroPhaseLabel');
-  if(!frame || !canvas) return;
+  if(!hero || !canvas) return;
 
   const ctx = canvas.getContext('2d');
   let w = 0, h = 0;
 
   function resize(){
-    if(!frame || !canvas) return;
-    w = canvas.width = frame.clientWidth || 460;
-    h = canvas.height = frame.clientHeight || 560;
+    if(!hero || !canvas) return;
+    w = canvas.width = hero.clientWidth || window.innerWidth;
+    h = canvas.height = hero.clientHeight || 580;
   }
   resize();
   window.addEventListener('resize', resize);
 
-  // 3D Parametric Ribbons & Harmonic Wave Torus
-  const NUM_RINGS = 32;
-  const POINTS_PER_RING = 48;
+  const NUM_RINGS = 36;
+  const POINTS_PER_RING = 52;
   let time = 0;
 
-  let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
-  let isHovered = false;
+  let mouse = { x: 0.35, y: 0, targetX: 0.35, targetY: 0 };
 
-  frame.addEventListener('mousemove', (e) => {
-    const rect = frame.getBoundingClientRect();
-    mouse.targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-    mouse.targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-    isHovered = true;
+  window.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    if(e.clientY >= rect.top - 100 && e.clientY <= rect.bottom + 100){
+      mouse.targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      mouse.targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    }
   });
 
-  frame.addEventListener('mouseleave', () => {
-    mouse.targetX = 0;
-    mouse.targetY = 0;
-    isHovered = false;
-  });
-
-  // Floating ambient dust particles
   const PARTICLES = [];
-  for(let i = 0; i < 60; i++){
+  for(let i = 0; i < 75; i++){
     PARTICLES.push({
-      x: (Math.random() - 0.5) * 400,
-      y: (Math.random() - 0.5) * 500,
-      z: (Math.random() - 0.5) * 300,
-      size: Math.random() * 2 + 0.8,
+      x: (Math.random() - 0.5) * 700,
+      y: (Math.random() - 0.5) * 600,
+      z: (Math.random() - 0.5) * 400,
+      size: Math.random() * 2.4 + 0.8,
       hueOffset: Math.random() * 360,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      vz: (Math.random() - 0.5) * 0.3
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      vz: (Math.random() - 0.5) * 0.25
     });
   }
 
@@ -2654,64 +2648,51 @@ window.addEventListener('keydown', function(e){
     if(w === 0 || h === 0) resize();
     ctx.clearRect(0, 0, w, h);
 
-    // Deep dark atmospheric background
-    const bgGrad = ctx.createRadialGradient(w/2, h/2, 10, w/2, h/2, Math.max(w, h)*0.75);
-    bgGrad.addColorStop(0, '#141822');
-    bgGrad.addColorStop(1, '#080a0e');
-    ctx.fillStyle = bgGrad;
-    ctx.fillRect(0, 0, w, h);
+    const cx = w * 0.68;
+    const cy = h * 0.5;
 
-    time += isHovered ? 0.022 : 0.012;
+    time += 0.013;
 
-    // Smooth mouse lerp
-    mouse.x += (mouse.targetX - mouse.x) * 0.06;
-    mouse.y += (mouse.targetY - mouse.y) * 0.06;
+    mouse.x += (mouse.targetX - mouse.x) * 0.05;
+    mouse.y += (mouse.targetY - mouse.y) * 0.05;
 
-    // ── COLOR MORPHING CYCLE (B&W ⇄ COLOR ⇄ B&W) ─────────────────────────
-    // Sine wave cycle: period ~14 seconds
-    // 0 = pure black and white, 1 = maximum vibrant spectral color
-    const cycle = (Math.sin(time * 0.35) + 1) / 2; // 0 to 1
-    // Apply smoothstep for richer contrast between phases
+    const cycle = (Math.sin(time * 0.35) + 1) / 2;
     const colorSaturation = cycle * cycle * (3 - 2 * cycle);
 
     if(indicator){
-      if(colorSaturation > 0.65){
+      if(colorSaturation > 0.6){
         indicator.style.background = '#00e5ff';
         indicator.style.boxShadow = '0 0 10px #00e5ff';
-      } else if(colorSaturation > 0.25){
-        indicator.style.background = '#ffb300';
-        indicator.style.boxShadow = '0 0 8px #ffb300';
+      } else if(colorSaturation > 0.2){
+        indicator.style.background = '#ff4081';
+        indicator.style.boxShadow = '0 0 8px #ff4081';
       } else {
-        indicator.style.background = '#ffffff';
-        indicator.style.boxShadow = '0 0 6px #ffffff';
+        indicator.style.background = '#11141a';
+        indicator.style.boxShadow = 'none';
       }
     }
 
     if(phaseLabel){
-      if(colorSaturation < 0.15){
-        phaseLabel.textContent = 'SPECTRUM: MONOCHROME (0%)';
-      } else if(colorSaturation > 0.85){
-        phaseLabel.textContent = 'SPECTRUM: FULL CHROMATIC (100%)';
+      if(colorSaturation < 0.12){
+        phaseLabel.textContent = 'SPECTRUM: MONOCHROME SILVER & GRAPHITE';
+      } else if(colorSaturation > 0.88){
+        phaseLabel.textContent = 'SPECTRUM: VIVID CHROMATIC DISPERSION (100%)';
       } else {
         const pct = Math.round(colorSaturation * 100);
-        phaseLabel.textContent = `SPECTRUM: MORPHING (${pct}%)`;
+        phaseLabel.textContent = `SPECTRUM: CHROMATIC MORPH (${pct}%)`;
       }
     }
 
-    const cx = w / 2;
-    const cy = h / 2;
-    const rotX = -mouse.y * 0.6 + Math.sin(time * 0.4) * 0.15;
-    const rotY = mouse.x * 0.8 + time * 0.25;
+    const rotX = -mouse.y * 0.5 + Math.sin(time * 0.35) * 0.18;
+    const rotY = mouse.x * 0.7 + time * 0.22;
 
-    // ── DRAW 3D AMBIENT PARTICLES ──────────────────────────────────────────
     for(let i = 0; i < PARTICLES.length; i++){
       const p = PARTICLES[i];
       p.x += p.vx; p.y += p.vy; p.z += p.vz;
-      if(p.x > 200) p.x = -200; if(p.x < -200) p.x = 200;
-      if(p.y > 260) p.y = -260; if(p.y < -260) p.y = 260;
-      if(p.z > 160) p.z = -160; if(p.z < -160) p.z = 160;
+      if(p.x > 380) p.x = -380; if(p.x < -380) p.x = 380;
+      if(p.y > 300) p.y = -300; if(p.y < -300) p.y = 300;
+      if(p.z > 200) p.z = -200; if(p.z < -200) p.z = 200;
 
-      // 3D rotation
       const cosY = Math.cos(rotY*0.5), sinY = Math.sin(rotY*0.5);
       const cosX = Math.cos(rotX*0.5), sinX = Math.sin(rotX*0.5);
       const x1 = p.x * cosY + p.z * sinY;
@@ -2719,43 +2700,38 @@ window.addEventListener('keydown', function(e){
       const y2 = p.y * cosX - z1 * sinX;
       const z2 = p.y * sinX + z1 * cosX;
 
-      const fov = 350;
-      const scale = fov / (fov + z2 + 100);
+      const fov = 450;
+      const scale = fov / (fov + z2 + 150);
       if(scale > 0){
         const px = cx + x1 * scale;
         const py = cy + y2 * scale;
         
-        // Color interpolation from pure monochrome white to spectral hue
-        const hue = (p.hueOffset + time * 40) % 360;
-        const satPct = Math.round(colorSaturation * 85);
-        const lightPct = Math.round(65 + (1 - colorSaturation) * 25);
-        const col = `hsla(${hue}, ${satPct}%, ${lightPct}%, ${Math.min(0.8, scale * 0.7)})`;
+        const hue = (p.hueOffset + time * 45) % 360;
+        const sat = Math.round(colorSaturation * 90);
+        const lum = Math.round(35 + (1 - colorSaturation) * 15);
+        const alpha = Math.min(0.7, scale * (0.35 + colorSaturation * 0.35));
 
         ctx.beginPath();
         ctx.arc(px, py, p.size * scale, 0, Math.PI * 2);
-        ctx.fillStyle = col;
+        ctx.fillStyle = `hsla(${hue}, ${sat}%, ${lum}%, ${alpha})`;
         ctx.fill();
       }
     }
 
-    // ── DRAW 3D PARAMETRIC ABSTRACT SCULPTURE RIBBONS ─────────────────────
     for(let r = 0; r < NUM_RINGS; r++){
       const u = (r / NUM_RINGS) * Math.PI * 2;
-      const ringRadius = 110 + Math.sin(u * 3 + time * 1.2) * 28;
+      const ringRadius = 135 + Math.sin(u * 3 + time * 1.1) * 35;
       
       ctx.beginPath();
-      let firstPoint = null;
 
       for(let p = 0; p <= POINTS_PER_RING; p++){
         const v = (p / POINTS_PER_RING) * Math.PI * 2;
-        const tubeRadius = 38 + Math.cos(v * 4 + time * 1.5 + u) * 14;
+        const tubeRadius = 45 + Math.cos(v * 4 + time * 1.4 + u) * 16;
 
-        // 3D Torus knot / harmonic wave coordinates
         const rawX = (ringRadius + tubeRadius * Math.cos(v)) * Math.cos(u * 2);
         const rawY = (ringRadius + tubeRadius * Math.cos(v)) * Math.sin(u * 2);
-        const rawZ = tubeRadius * Math.sin(v) + Math.sin(u * 4 + time) * 35;
+        const rawZ = tubeRadius * Math.sin(v) + Math.sin(u * 4 + time) * 40;
 
-        // Apply 3D rotation
         const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
         const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
 
@@ -2764,27 +2740,25 @@ window.addEventListener('keydown', function(e){
         const y2 = rawY * cosX - z1 * sinX;
         const z2 = rawY * sinX + z1 * cosX;
 
-        const fov = 420;
-        const scale = fov / (fov + z2 + 80);
+        const fov = 480;
+        const scale = fov / (fov + z2 + 100);
         const px = cx + x1 * scale;
         const py = cy + y2 * scale;
 
         if(p === 0){
           ctx.moveTo(px, py);
-          firstPoint = { px, py };
         } else {
           ctx.lineTo(px, py);
         }
       }
 
-      // Color mapping: interpolate from Pure B&W (silver/slate/white) to Neon Spectrum
-      const ringHue = (r * (360 / NUM_RINGS) + time * 50) % 360;
-      const sat = Math.round(colorSaturation * 90);
-      const lum = Math.round(48 + Math.sin(u + time) * 18 + (1 - colorSaturation) * 22);
-      const alpha = 0.45 + Math.sin(u * 2 + time) * 0.25;
+      const ringHue = (r * (360 / NUM_RINGS) + time * 55) % 360;
+      const sat = Math.round(colorSaturation * 92);
+      const lum = Math.round(25 + colorSaturation * 25 + Math.sin(u + time) * 12);
+      const alpha = 0.35 + colorSaturation * 0.35 + Math.sin(u * 2 + time) * 0.15;
 
       ctx.strokeStyle = `hsla(${ringHue}, ${sat}%, ${lum}%, ${alpha})`;
-      ctx.lineWidth = 1.3 + (1 - colorSaturation) * 0.6;
+      ctx.lineWidth = 1.4 + (1 - colorSaturation) * 0.6;
       ctx.stroke();
     }
 
@@ -2793,6 +2767,123 @@ window.addEventListener('keydown', function(e){
 
   render();
 })();
+
+
+
+// ==================== BACKUP & EXPORT MODAL HANDLERS ====================
+function openBackupModal(){
+  const m = document.getElementById('backup-modal');
+  if(m){ m.style.display = 'flex'; exportDataSection('gallery'); }
+}
+function closeBackupModal(){
+  const m = document.getElementById('backup-modal');
+  if(m) m.style.display = 'none';
+}
+function exportDataSection(section){
+  const txt = document.getElementById('backup-text');
+  if(!txt) return;
+  if(section === 'gallery') txt.value = JSON.stringify(galleryItems, null, 2);
+  else if(section === 'novels') txt.value = JSON.stringify(novels, null, 2);
+  else if(section === 'tech') txt.value = JSON.stringify(techProjects, null, 2);
+  else if(section === 'software') txt.value = JSON.stringify(software, null, 2);
+  else if(section === 'articles') txt.value = JSON.stringify(articles, null, 2);
+  else if(section === 'all'){
+    txt.value = JSON.stringify({
+      backupDate: new Date().toISOString(),
+      gallery: galleryItems,
+      novels: novels,
+      tech: techProjects,
+      software: software,
+      articles: articles,
+      experience: experience,
+      clients: clients
+    }, null, 2);
+  }
+}
+function copyBackupText(){
+  const txt = document.getElementById('backup-text');
+  if(txt){
+    txt.select();
+    navigator.clipboard.writeText(txt.value);
+    showToast('Copied data to clipboard');
+  }
+}
+function importBackupText(){
+  const txt = document.getElementById('backup-text');
+  if(!txt || !txt.value.trim()) return;
+  try {
+    const data = JSON.parse(txt.value.trim());
+    if(Array.isArray(data)){
+      if(data[0] && data[0].path){ galleryItems = data; saveData('rana_gallery_data', galleryItems); renderBeGallery(); renderGallery('all'); }
+      else if(data[0] && data[0].genre){ novels = data; saveData('rana_novels_data', novels); renderBeNovels(); renderNovels(); }
+      else if(data[0] && data[0].subtitle){ techProjects = data; saveData('rana_tech_data', techProjects); renderBeTech(); renderTechProjects(); }
+      else if(data[0] && data[0].price){ software = data; saveData('rana_software_data', software); renderBeSoftware(); }
+      else if(data[0] && (data[0].readTime || data[0].category)){ articles = data; saveData('rana_articles_data', articles); renderBeArticles(); renderArticles(); }
+    } else if(typeof data === 'object'){
+      if(data.gallery){ galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
+      if(data.novels){ novels = data.novels; saveData('rana_novels_data', novels); }
+      if(data.tech){ techProjects = data.tech; saveData('rana_tech_data', techProjects); }
+      if(data.software){ software = data.software; saveData('rana_software_data', software); }
+      if(data.articles){ articles = data.articles; saveData('rana_articles_data', articles); }
+      if(data.experience){ experience = data.experience; saveData('rana_experience_data', experience); }
+      if(data.clients){ clients = data.clients; saveData('rana_clients_data', clients); }
+      renderBackend();
+      renderHome();
+    }
+    showToast('Data imported and restored successfully!');
+  } catch(e){
+    alert('Invalid JSON data. Please check what you pasted.');
+  }
+}
+
+function downloadBackupJsonFile(){
+  const fullDatabase = {
+    backupDate: new Date().toISOString(),
+    gallery: galleryItems,
+    novels: novels,
+    tech: techProjects,
+    software: software,
+    articles: articles,
+    experience: experience,
+    clients: clients
+  };
+  const str = JSON.stringify(fullDatabase, null, 2);
+  const blob = new Blob([str], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `rana_portfolio_backup_${new Date().toISOString().split('T')[0]}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Backup file downloaded successfully!');
+}
+
+function restoreFromFile(event){
+  const file = event.target.files?.[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try {
+      const data = JSON.parse(e.target.result);
+      if(data.gallery){ galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
+      if(data.novels){ novels = data.novels; saveData('rana_novels_data', novels); }
+      if(data.tech){ techProjects = data.tech; saveData('rana_tech_data', techProjects); }
+      if(data.software){ software = data.software; saveData('rana_software_data', software); }
+      if(data.articles){ articles = data.articles; saveData('rana_articles_data', articles); }
+      if(data.experience){ experience = data.experience; saveData('rana_experience_data', experience); }
+      if(data.clients){ clients = data.clients; saveData('rana_clients_data', clients); }
+      renderBackend();
+      renderHome();
+      showToast('All portfolio data restored from file!');
+      closeBackupModal();
+    } catch(err){
+      alert('Error reading backup file: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
 
 </script>
 </body>
