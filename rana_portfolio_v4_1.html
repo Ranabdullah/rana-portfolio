@@ -1375,6 +1375,26 @@ img {
         <div class="form-group"><label class="form-label">Client Name</label><input class="form-input" id="b-client-name" placeholder="Brand / Client"></div>
         <button class="submit-btn" onclick="addClient()">Add Client</button>
       </div>
+
+    <!-- ARTICLES BACKEND PANEL -->
+    <div class="backend-panel" id="bp-articles">
+      <div class="backend-form" style="margin-bottom:28px">
+        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:20px">Add Published Article / Essay</h3>
+        <div class="form-grid" style="display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:12px">
+          <div><label class="form-label">Article Title</label><input class="form-input" id="b-art-title" placeholder="Title of essay..."></div>
+          <div><label class="form-label">Category</label><input class="form-input" id="b-art-cat" placeholder="Personal Essay, Tech, Philosophy..."></div>
+        </div>
+        <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+          <div><label class="form-label">Date</label><input class="form-input" id="b-art-date" placeholder="August 2026"></div>
+          <div><label class="form-label">Read Time</label><input class="form-input" id="b-art-time" placeholder="7 min read"></div>
+          <div><label class="form-label">Article / Medium URL</label><input class="form-input" id="b-art-url" placeholder="https://medium.com/..."></div>
+        </div>
+        <div class="form-group" style="margin-bottom:14px"><label class="form-label">Excerpt / Summary</label><textarea class="form-input" id="b-art-desc" rows="2" placeholder="Brief summary..."></textarea></div>
+        <button class="form-btn" onclick="addArticle()">Add Article</button>
+      </div>
+      <div class="backend-list" id="be-articles-list"></div>
+    </div>
+
       <div class="backend-items" id="be-clients-list"></div>
     </div>
   </div>
@@ -3055,6 +3075,48 @@ async function loadFromCloudOnline(){
   } catch(e){
     alert('Error connecting to Cloud: ' + e.message);
   }
+}
+
+
+
+// ==================== ARTICLES BACKEND CRUD HANDLERS ====================
+function addArticle(){
+  const title = (document.getElementById('b-art-title')?.value || '').trim();
+  if(!title){ showToast('Title required'); return; }
+  const a = {
+    id: Date.now(),
+    title: title,
+    category: document.getElementById('b-art-cat')?.value || 'Essay',
+    cat: document.getElementById('b-art-cat')?.value || 'Essay',
+    date: document.getElementById('b-art-date')?.value || '2026',
+    readTime: document.getElementById('b-art-time')?.value || '5 min read',
+    url: document.getElementById('b-art-url')?.value || '#',
+    desc: document.getElementById('b-art-desc')?.value || '',
+    tags: ['Writing', 'Literature']
+  };
+  articles.unshift(a);
+  saveData('rana_articles_data', articles);
+  renderBeArticles();
+  renderArticles();
+  const inpT = document.getElementById('b-art-title');
+  if(inpT) inpT.value = '';
+  showToast('Article published: ' + title);
+}
+
+function beUpdateArticle(i){
+  const a = articles[i];
+  if(!a) return;
+  a.title    = document.getElementById('be-art-t-'+i)?.value || a.title;
+  a.category = document.getElementById('be-art-c-'+i)?.value || a.category;
+  a.cat      = a.category;
+  a.readTime = document.getElementById('be-art-rt-'+i)?.value || a.readTime;
+  a.url      = document.getElementById('be-art-u-'+i)?.value || a.url;
+  a.date     = document.getElementById('be-art-d-'+i)?.value || a.date;
+  a.desc     = document.getElementById('be-art-desc-'+i)?.value || a.desc;
+  saveData('rana_articles_data', articles);
+  renderBeArticles();
+  renderArticles();
+  showToast('Saved: ' + a.title.substring(0,30));
 }
 
 </script>
