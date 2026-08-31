@@ -1682,9 +1682,11 @@ body.theme-dark .submit-btn {
   color: var(--card-accent, #ffd740) !important;
 }
 
+
+
 /* ==================== 100% FLAWLESS LIGHT OVER DARK & DARK OVER LIGHT CONTRAST ENGINE ==================== */
 
-/* 1. LIGHT THEME (White / Day Study): Crisp Dark Text & Elements on Light Canvas */
+/* 1. LIGHT THEME (White / Day Study): Pure High-Contrast Dark-Over-Light Everywhere */
 body.theme-light {
   --bg: #f5f6f8 !important;
   --bg-card: #ffffff !important;
@@ -1699,12 +1701,40 @@ body.theme-light {
   --nav-bg: rgba(245, 246, 248, 0.95) !important;
 }
 
-body.theme-light h1, body.theme-light h2, body.theme-light h3, body.theme-light h4, body.theme-light h5, body.theme-light h6 {
-  color: #11141a !important;
+body.theme-light h1, body.theme-light h2, body.theme-light h3, body.theme-light h4, body.theme-light h5, body.theme-light h6,
+body.theme-light .novel-name,
+body.theme-light .novel-title,
+body.theme-light .novel-page-title,
+body.theme-light .nv-title,
+body.theme-light .g-title,
+body.theme-light .proj-title,
+body.theme-light .tech-spotlight-title,
+body.theme-light .tech-spotlight-card h3,
+body.theme-light .dls-card h2,
+body.theme-light .article-title,
+body.theme-light .article-card h3,
+body.theme-light .sw-product-name {
+  color: #11141a !important; /* 100% Dark Over Light: Never light yellow or washed-out on white cards */
+  font-family: var(--serif) !important;
+  font-weight: 600 !important;
 }
-body.theme-light p, body.theme-light span, body.theme-light div {
-  color: inherit;
+
+body.theme-light .novel-page-genre,
+body.theme-light .novel-genre,
+body.theme-light .article-meta,
+body.theme-light .sw-product-type,
+body.theme-light .g-cat {
+  color: #6b7280 !important;
+  font-weight: 600 !important;
 }
+
+body.theme-light .novel-sub,
+body.theme-light .novel-page-tagline,
+body.theme-light .article-desc,
+body.theme-light .sw-product-desc {
+  color: #4b5563 !important;
+}
+
 body.theme-light .btn-primary, body.theme-light .submit-btn, body.theme-light .novel-amz-btn {
   background: #11141a !important;
   color: #ffffff !important;
@@ -1728,7 +1758,7 @@ body.theme-light .backend-item button:not([style*="color:#e50914"]):not([style*=
   border: 1px solid #11141a !important;
 }
 
-/* 2. EVENING THEME (Blue Dusk Study): Crisp Light Text & Elements on Rich Navy Canvas */
+/* 2. EVENING THEME (Blue Dusk Study): Light-Over-Dark Twilight Palette */
 body.theme-evening {
   --bg: #0b132b !important;
   --bg-card: #1c2541 !important;
@@ -1743,8 +1773,22 @@ body.theme-evening {
   --nav-bg: rgba(11, 19, 43, 0.95) !important;
 }
 
-body.theme-evening h1, body.theme-evening h2, body.theme-evening h3, body.theme-evening h4, body.theme-evening h5, body.theme-evening h6 {
-  color: #f0f4f8 !important;
+body.theme-evening h1, body.theme-evening h2, body.theme-evening h3, body.theme-evening h4, body.theme-evening h5, body.theme-evening h6,
+body.theme-evening .novel-name,
+body.theme-evening .novel-title,
+body.theme-evening .novel-page-title,
+body.theme-evening .nv-title,
+body.theme-evening .g-title,
+body.theme-evening .proj-title,
+body.theme-evening .tech-spotlight-title,
+body.theme-evening .tech-spotlight-card h3,
+body.theme-evening .dls-card h2,
+body.theme-evening .article-title,
+body.theme-evening .article-card h3,
+body.theme-evening .sw-product-name {
+  color: var(--card-accent, #f0f4f8) !important;
+  font-family: var(--serif) !important;
+  font-weight: 600 !important;
 }
 body.theme-evening .btn-primary, body.theme-evening .submit-btn, body.theme-evening .novel-amz-btn {
   background: #ffd166 !important;
@@ -1770,7 +1814,7 @@ body.theme-evening .backend-item button:not([style*="color:#e50914"]):not([style
   font-weight: 700 !important;
 }
 
-/* 3. DARK THEME (Black Nocturnal Study): Ultra-Crisp High Contrast White Text on Jet Black Canvas */
+/* 3. DARK THEME (Black Nocturnal Study): Ultra-Crisp Luminous Light-Over-Dark */
 body.theme-dark {
   --bg: #07080b !important;
   --bg-card: #111318 !important;
@@ -1785,8 +1829,22 @@ body.theme-dark {
   --nav-bg: rgba(7, 8, 11, 0.95) !important;
 }
 
-body.theme-dark h1, body.theme-dark h2, body.theme-dark h3, body.theme-dark h4, body.theme-dark h5, body.theme-dark h6 {
-  color: #ffffff !important;
+body.theme-dark h1, body.theme-dark h2, body.theme-dark h3, body.theme-dark h4, body.theme-dark h5, body.theme-dark h6,
+body.theme-dark .novel-name,
+body.theme-dark .novel-title,
+body.theme-dark .novel-page-title,
+body.theme-dark .nv-title,
+body.theme-dark .g-title,
+body.theme-dark .proj-title,
+body.theme-dark .tech-spotlight-title,
+body.theme-dark .tech-spotlight-card h3,
+body.theme-dark .dls-card h2,
+body.theme-dark .article-title,
+body.theme-dark .article-card h3,
+body.theme-dark .sw-product-name {
+  color: var(--card-accent, #ffffff) !important;
+  font-family: var(--serif) !important;
+  font-weight: 600 !important;
 }
 body.theme-dark .btn-primary, body.theme-dark .submit-btn, body.theme-dark .novel-amz-btn {
   background: #ffffff !important;
