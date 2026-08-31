@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T21:19:11.660Z",
+  "updatedAt": "2026-08-31T21:20:40.426Z",
   "gallery": [
     {
       "title": "Children's Creative Studio & Art Illustration Study",
@@ -165,7 +165,7 @@
       "youtubeUrl": ""
     },
     {
-      "title": "Desert Megacity & Sci-Fi Heavy Reconnaissance Vessel",
+      "title": "Sci-Fi Heavy Reconnaissance Vessel",
       "pillar": "Personal",
       "cat": "3d",
       "desc": "Massive monolithic desert metropolis and orbital transport vessel navigating atmospheric sand haze and harsh desert sunlight.",
@@ -174,7 +174,8 @@
         "Photos & to upload/Scifi/All Work (175).jpg",
         "Photos & to upload/Scifi/All Work (18).jpg",
         "Photos & to upload/Plane/25542788_1949128395101535_7558624210513976664_o.jpg"
-      ]
+      ],
+      "youtubeUrl": ""
     },
     {
       "title": "Photorealistic Forest Biome & Woodland Sanctuary (UE5)",
