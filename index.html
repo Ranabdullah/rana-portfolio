@@ -1543,50 +1543,135 @@ body.theme-dark .submit-btn {
 
 
 
-/* ==================== TRUE 360-DEGREE OMNIDIRECTIONAL GLOW AURA ==================== */
-/* Track and container padding so top, bottom, left, and right glow never get clipped */
+
+
+/* ==================== VIBRANT 360-DEGREE OMNIDIRECTIONAL AURA & CHROMATIC TITLES ==================== */
+/* Track and container padding so top, bottom, left, and right glow breathe freely in 360 degrees */
 .novels-slider-track,
 .projects-slider-wrap,
 .home-gallery-slider-wrap {
   position: relative;
   overflow: hidden !important;
-  padding: 36px 20px 42px !important;
-  margin: -36px -20px -42px !important;
+  padding: 38px 24px 46px !important;
+  margin: -38px -24px -46px !important;
 }
 
 .novels-slider,
 .projects-grid,
 .home-gallery-grid {
-  padding: 4px 6px !important;
+  padding: 6px 8px !important;
 }
 
 .gallery-grid,
 .tech-spotlight-grid,
 .dls-card-holder,
 .sw-products-grid,
-.novels-grid {
+.novels-grid,
+.articles-grid,
+.expertise-grid {
   padding-top: 24px !important;
-  padding-bottom: 36px !important;
+  padding-bottom: 40px !important;
 }
 
-/* 360-Degree Radial Outer Aura in ALL directions (Up, Down, Left, Right) */
-.g-card, .novel-card, .novel-page-card, .proj-card, .sw-product-card, .tech-spotlight-card, .dls-card {
+/* Master 360-Degree Aura applied to ALL cards across the entire website */
+.g-card,
+.novel-card,
+.novel-page-card,
+.proj-card,
+.sw-product-card,
+.tech-spotlight-card,
+.dls-card,
+.article-card,
+.expertise-grid > div,
+.exp-item {
   position: relative;
-  border: 1.5px solid var(--card-border, rgba(0, 229, 255, 0.7)) !important;
-  box-shadow: 0 0 16px 2px var(--card-glow, rgba(0, 229, 255, 0.35)),
-              0 0 32px 6px var(--card-glow-ambient, rgba(0, 229, 255, 0.18)),
-              0 0 56px 12px var(--card-glow-soft, rgba(0, 229, 255, 0.09)),
-              0 10px 30px rgba(0, 0, 0, 0.45) !important;
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease !important;
+  border: 1.5px solid var(--card-border, rgba(0, 229, 255, 0.85)) !important;
+  /* Solid, Rich, Non-Washed-Out Resting 360° Omnidirectional Glow */
+  box-shadow: 0 0 18px 2px var(--card-glow, rgba(0, 229, 255, 0.42)),
+              0 0 38px 8px var(--card-glow-ambient, rgba(0, 229, 255, 0.22)),
+              0 0 64px 16px var(--card-glow-soft, rgba(0, 229, 255, 0.12)),
+              0 10px 32px rgba(0, 0, 0, 0.5) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border-radius: 8px !important;
 }
 
-.g-card:hover, .novel-card:hover, .novel-page-card:hover, .proj-card:hover, .sw-product-card:hover, .tech-spotlight-card:hover, .dls-card:hover {
+/* On Hover: Intense, Luminous Bloom Effect */
+.g-card:hover,
+.novel-card:hover,
+.novel-page-card:hover,
+.proj-card:hover,
+.sw-product-card:hover,
+.tech-spotlight-card:hover,
+.dls-card:hover,
+.article-card:hover,
+.expertise-grid > div:hover,
+.exp-item:hover {
   transform: translateY(-6px) !important;
-  border-color: var(--card-border, rgba(0, 229, 255, 0.95)) !important;
-  box-shadow: 0 0 24px 4px var(--card-glow, rgba(0, 229, 255, 0.5)),
-              0 0 48px 10px var(--card-glow-ambient, rgba(0, 229, 255, 0.3)),
-              0 0 80px 18px var(--card-glow-soft, rgba(0, 229, 255, 0.16)),
-              0 18px 45px rgba(0, 0, 0, 0.6) !important;
+  border-color: var(--card-border, rgba(0, 229, 255, 1)) !important;
+  box-shadow: 0 0 28px 5px var(--card-glow, rgba(0, 229, 255, 0.65)),
+              0 0 58px 14px var(--card-glow-ambient, rgba(0, 229, 255, 0.38)),
+              0 0 95px 24px var(--card-glow-soft, rgba(0, 229, 255, 0.22)),
+              0 20px 50px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Card Images: Vivid, high-saturation rendering */
+.g-card img,
+.novel-card img,
+.novel-page-card img,
+.proj-card img,
+.sw-product-card img,
+.tech-spotlight-card img {
+  filter: contrast(1.08) brightness(1.03) saturate(1.1) !important;
+  transition: transform 0.4s ease, filter 0.4s ease !important;
+}
+
+.g-card:hover img,
+.novel-card:hover img,
+.novel-page-card:hover img,
+.proj-card:hover img,
+.sw-product-card:hover img {
+  filter: contrast(1.12) brightness(1.06) saturate(1.18) !important;
+  transform: scale(1.025);
+}
+
+/* Chromatic Titles matching each card's theme aura */
+.novel-title,
+.novel-page-title,
+.nv-title,
+.g-title,
+.proj-title,
+.tech-spotlight-title,
+.article-title,
+.sw-product-name {
+  color: var(--card-accent, var(--ink)) !important;
+  font-family: var(--serif) !important;
+  font-weight: 600 !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Software & Add-ons: Reduced distance between Title, Price & Platform */
+.sw-product-meta {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 4px !important;
+  gap: 8px !important;
+}
+.sw-product-name {
+  font-size: 19px !important;
+  margin-bottom: 6px !important;
+}
+.sw-product-desc {
+  margin-bottom: 12px !important;
+  line-height: 1.5 !important;
+}
+.sw-product-price {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: var(--card-accent, #00e5ff) !important;
 }
 </style>
 
@@ -4549,9 +4634,7 @@ function renderAbout(){
 }
 
 // 8. BACKEND PAGE
-function renderBackend(){
-  renderBeNovels(); renderBeTech(); renderBeGallery(); renderBeSoftware(); renderBeExp(); renderBeClients();
-}
+
 
 function switchBackend(name, btn){
   document.querySelectorAll('.bt').forEach(b=>b.classList.remove('on'));
@@ -4590,88 +4673,342 @@ function addNovel(){
   novels.unshift(n); saveData('rana_novels_data', novels); renderBeNovels(); showToast('Novel added');
 }
 
+// ==================== MASTER COMPLETE BACKEND CONTROLLER ====================
+
+// 1. NOVELS BACKEND
+// ==================== AUTH & SECURITY ====================
+const AUTH_HASH = '0cfe517587641ac7128436f278329274333a7915358dae4bc0bb23f07bf09f60';
+
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function beLogin(){
+  const emailInp = document.getElementById('be-email');
+  const passInp = document.getElementById('be-pass');
+  const email = (emailInp?.value || '').trim().toLowerCase();
+  const pass = passInp?.value || '';
+  const err = document.getElementById('be-login-err');
+
+  requestAnimationFrame(async () => {
+    const combined = email + ':' + pass;
+    const hash = await sha256(combined);
+
+    if(hash === AUTH_HASH){
+      sessionStorage.setItem('rana_be_auth', 'true');
+      const gate = document.getElementById('be-login-gate');
+      const auth = document.getElementById('backend-authorized-view');
+      if(gate) gate.style.display = 'none';
+      if(auth) auth.style.display = 'block';
+      if(err) err.textContent = '';
+      
+      const activeTab = document.querySelector('.bt.on') || document.querySelector('.bt');
+      if(activeTab){
+        activeTab.click();
+      } else {
+        renderBeGallery();
+      }
+      showToast('Signed in successfully');
+    } else {
+      if(err) err.textContent = 'Invalid credentials. Access denied.';
+    }
+  });
+}
+window.beLogin = beLogin;
+
+function beSignOut(){
+  sessionStorage.removeItem('rana_be_auth');
+  document.getElementById('backend-authorized-view').style.display = 'none';
+  document.getElementById('be-login-gate').style.display = 'flex';
+  const emailInp = document.getElementById('be-email');
+  const passInp = document.getElementById('be-pass');
+  if(emailInp) emailInp.value = '';
+  if(passInp) passInp.value = '';
+  showToast('Signed out');
+}
+window.beSignOut = beSignOut;
+
+function beCheckAuthOnNav(){
+  const isAuth = sessionStorage.getItem('rana_be_auth') === 'true';
+  const gate = document.getElementById('be-login-gate');
+  const auth = document.getElementById('backend-authorized-view');
+  if(gate && auth){
+    if(isAuth){
+      gate.style.display = 'none';
+      auth.style.display = 'block';
+      renderBackend();
+    } else {
+      gate.style.display = 'flex';
+      auth.style.display = 'none';
+    }
+  }
+}
+window.beCheckAuthOnNav = beCheckAuthOnNav;
+
+function renderBackend(){
+  const activeTab = document.querySelector('.bt.on');
+  if(activeTab){
+    const match = activeTab.getAttribute('onclick')?.match(/switchBackend\(['"]([^'"]+)['"]/);
+    const tabName = match ? match[1] : 'gallery';
+    if(tabName === 'gallery') renderBeGallery();
+    else if(tabName === 'novels') renderBeNovels();
+    else if(tabName === 'tech') renderBeTech();
+    else if(tabName === 'software') renderBeSoftware();
+    else if(tabName === 'experience') renderBeExp();
+    else if(tabName === 'clients') renderBeClients();
+    else if(tabName === 'articles') renderBeArticles();
+  } else {
+    renderBeGallery();
+  }
+}
+window.renderBackend = renderBackend;
+
+function switchBackend(name, btn){
+  document.querySelectorAll('.bt').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.backend-panel').forEach(p=>p.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  const targetPanel = document.getElementById('bp-'+name);
+  if(targetPanel) targetPanel.classList.add('on');
+  if(name === 'gallery') renderBeGallery();
+  else if(name === 'novels') renderBeNovels();
+  else if(name === 'tech') renderBeTech();
+  else if(name === 'software') renderBeSoftware();
+  else if(name === 'experience') renderBeExp();
+  else if(name === 'clients') renderBeClients();
+  else if(name === 'articles') renderBeArticles();
+}
+window.switchBackend = switchBackend;
+
+// 1. NOVELS BACKEND
 function renderBeNovels(){
   const c = document.getElementById('be-novels-list');
   if(!c) return;
   c.innerHTML = novels.map((n,i) => `
-    <div class="backend-item" style="flex-direction:column;gap:10px;padding:16px">
+    <div class="backend-item" style="flex-direction:column;gap:12px;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:12px">
       <div style="display:flex;gap:12px">
-        ${n.cover ? `<img src="${n.cover}" style="width:56px;height:80px;object-fit:cover;border-radius:2px;flex-shrink:0;border:1px solid var(--border)">` : ''}
+        ${n.cover ? `<img src="${n.cover}" style="width:56px;height:80px;object-fit:cover;border-radius:3px;flex-shrink:0;border:1px solid var(--border)">` : ''}
         <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px">
           <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">TITLE</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">TITLE</div>
             <input id="be-nt-${i}" value="${(n.title||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+              style="width:100%;padding:6px 10px;font-family:var(--serif);font-size:16px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
           </div>
           <div>
             <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">GENRE</div>
-            <input id="be-ng-${i}" value="${(n.genre||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+            <input id="be-ng-${i}" value="${(n.genre||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
           </div>
           <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">TYPE</div>
-            <select id="be-ntype-${i}" style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-              ${['Novel','Novella','Short Story','Non-Fiction'].map(t=>`<option value="${t}" ${n.type===t?'selected':''}>${t}</option>`).join('')}
-            </select>
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">AMAZON LINK</div>
-            <input id="be-na-${i}" value="${(n.amazonUrl||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px" placeholder="https://amazon.com/...">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">COVER IMAGE PATH</div>
-            <input id="be-nc-${i}" value="${(n.cover||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">TAGLINE</div>
-            <input id="be-ntag-${i}" value="${(n.tagline||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">YEAR / STATUS</div>
+            <input id="be-ny-${i}" value="${(n.year||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
           </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
-          <button onclick="beUpdateNovel(${i})"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
-          <button onclick="novels.splice(${i},1);saveData('rana_novels_data',novels);renderBeNovels();showToast('Novel deleted')"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
-        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">COVER IMAGE PATH</div>
+        <input id="be-nc-${i}" value="${(n.cover||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">LOGLINE / SYNOPSIS</div>
+        <textarea id="be-nl-${i}" rows="2" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">${n.logline||''}</textarea>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <button onclick="beDeleteNovel(${i})" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer;font-weight:600">Delete Book</button>
+        <button onclick="beUpdateNovel(${i})" style="padding:6px 18px;font-family:var(--mono);font-size:10.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700">Save Changes</button>
       </div>
     </div>
   `).join('');
 }
+window.renderBeNovels = renderBeNovels;
 
 function beUpdateNovel(i){
-  const n = novels[i];
-  if(!n) return;
-  n.title     = document.getElementById('be-nt-'+i)?.value || n.title;
-  n.genre     = document.getElementById('be-ng-'+i)?.value || n.genre;
-  n.type      = document.getElementById('be-ntype-'+i)?.value || n.type;
-  n.amazonUrl = document.getElementById('be-na-'+i)?.value || '';
-  n.cover     = document.getElementById('be-nc-'+i)?.value || n.cover;
-  n.tagline   = document.getElementById('be-ntag-'+i)?.value || n.tagline;
+  if(!novels[i]) return;
+  const t = document.getElementById(`be-nt-${i}`)?.value;
+  const g = document.getElementById(`be-ng-${i}`)?.value;
+  const y = document.getElementById(`be-ny-${i}`)?.value;
+  const c = document.getElementById(`be-nc-${i}`)?.value;
+  const l = document.getElementById(`be-nl-${i}`)?.value;
+  if(t) novels[i].title = t.trim();
+  if(g) novels[i].genre = g.trim();
+  if(y) novels[i].year = y.trim();
+  if(c) novels[i].cover = c.trim();
+  if(l) novels[i].logline = l.trim();
   saveData('rana_novels_data', novels);
   renderBeNovels();
-  showToast('Novel saved: ' + n.title.substring(0,25));
+  renderNovels();
+  renderHome();
+  scheduleGitHubAutoSync();
+  showToast(`Updated "${novels[i].title}"`);
 }
+window.beUpdateNovel = beUpdateNovel;
 
+function beDeleteNovel(i){
+  if(!novels[i]) return;
+  if(confirm(`Delete novel "${novels[i].title}"?`)){
+    novels.splice(i, 1);
+    saveData('rana_novels_data', novels);
+    renderBeNovels();
+    renderNovels();
+    renderHome();
+    scheduleGitHubAutoSync();
+    showToast('Deleted novel');
+  }
+}
+window.beDeleteNovel = beDeleteNovel;
 
+function addNovel(){
+  const title = (document.getElementById('b-title')?.value || '').trim();
+  const genre = (document.getElementById('b-genre')?.value || '').trim();
+  const year = (document.getElementById('b-year')?.value || '').trim();
+  const cover = (document.getElementById('b-cover')?.value || '').trim();
+  const logline = (document.getElementById('b-logline')?.value || '').trim();
 
-function addGalleryItem(){
-  const title = document.getElementById('b-gal-title').value.trim();
-  if(!title){ showToast('Title required'); return; }
-  const g = {
+  if(!title){
+    alert('Please provide a Book Title.');
+    return;
+  }
+
+  novels.unshift({ title, genre, year, cover, logline });
+  saveData('rana_novels_data', novels);
+  renderBeNovels();
+  renderNovels();
+  renderHome();
+  scheduleGitHubAutoSync();
+  showToast(`Novel published: "${title}"`);
+
+  ['b-title','b-genre','b-year','b-cover','b-logline'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+}
+window.addNovel = addNovel;
+
+// 2. TECHNICAL PROJECTS BACKEND
+function renderBeTech(){
+  const c = document.getElementById('be-tech-list');
+  if(!c) return;
+  c.innerHTML = techProjects.map((tp, i) => `
+    <div class="backend-item" style="flex-direction:column;gap:12px;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:12px">
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:10px">
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">PROJECT TITLE</div>
+          <input id="be-tech-title-${i}" value="${(tp.title||'').replace(/"/g,'&quot;')}"
+            style="width:100%;padding:6px 10px;font-family:var(--serif);font-size:16px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">STATUS</div>
+          <input id="be-tech-status-${i}" value="${(tp.status||'Live').replace(/"/g,'&quot;')}"
+            style="width:100%;padding:6px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">TECH STACK (comma separated)</div>
+        <input id="be-tech-tags-${i}" value="${(Array.isArray(tp.tags)?tp.tags.join(', '):(tp.tags||'')).replace(/"/g,'&quot;')}"
+          style="width:100%;padding:6px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">LIVE URL</div>
+          <input id="be-tech-live-${i}" value="${(tp.liveUrl||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">GITHUB URL</div>
+          <input id="be-tech-gh-${i}" value="${(tp.githubUrl||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">DESCRIPTION</div>
+        <textarea id="be-tech-desc-${i}" rows="2" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">${tp.desc||''}</textarea>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <button onclick="beDeleteTech(${i})" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer;font-weight:600">Delete Project</button>
+        <button onclick="beUpdateTech(${i})" style="padding:6px 18px;font-family:var(--mono);font-size:10.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700">Save Changes</button>
+      </div>
+    </div>
+  `).join('');
+}
+window.renderBeTech = renderBeTech;
+
+function beUpdateTech(i){
+  const title = document.getElementById('be-tech-title-'+i)?.value;
+  const status = document.getElementById('be-tech-status-'+i)?.value;
+  const tags = document.getElementById('be-tech-tags-'+i)?.value;
+  const desc = document.getElementById('be-tech-desc-'+i)?.value;
+  const live = document.getElementById('be-tech-live-'+i)?.value;
+  const gh = document.getElementById('be-tech-gh-'+i)?.value;
+
+  if(techProjects[i]){
+    if(title) techProjects[i].title = title.trim();
+    if(status) techProjects[i].status = status.trim();
+    if(tags) techProjects[i].tags = tags.split(',').map(t=>t.trim()).filter(Boolean);
+    if(desc) techProjects[i].desc = desc.trim();
+    if(live !== undefined) techProjects[i].liveUrl = live.trim();
+    if(gh !== undefined) techProjects[i].githubUrl = gh.trim();
+  }
+  saveData('rana_tech_data', techProjects);
+  renderBeTech();
+  renderTechProjects();
+  renderHome();
+  scheduleGitHubAutoSync();
+  showToast('Tech project updated');
+}
+window.beUpdateTech = beUpdateTech;
+
+function beDeleteTech(i){
+  if(!techProjects[i]) return;
+  if(confirm(`Delete technical project "${techProjects[i].title}"?`)){
+    techProjects.splice(i, 1);
+    saveData('rana_tech_data', techProjects);
+    renderBeTech();
+    renderTechProjects();
+    renderHome();
+    scheduleGitHubAutoSync();
+    showToast('Deleted tech project');
+  }
+}
+window.beDeleteTech = beDeleteTech;
+
+function addTechProject(){
+  const title = (document.getElementById('b-tech-title')?.value || '').trim();
+  const desc = (document.getElementById('b-tech-desc')?.value || '').trim();
+  const tags = (document.getElementById('b-tech-tags')?.value || '').trim().split(',').map(t=>t.trim()).filter(Boolean);
+  const liveUrl = (document.getElementById('b-tech-live')?.value || '').trim();
+  const githubUrl = (document.getElementById('b-tech-gh')?.value || '').trim();
+
+  if(!title){
+    alert('Please enter a project title');
+    return;
+  }
+
+  techProjects.unshift({
     title,
-    cat: document.getElementById('b-gal-cat').value || '3d',
-    pillar: document.getElementById('b-gal-pillar').value || 'Personal',
-    path: document.getElementById('b-gal-path').value,
-    desc: title
-  };
-  galleryItems.unshift(g); saveData('rana_gallery_data', galleryItems); renderBeGallery(); showToast('Image added');
-}
+    desc,
+    tags: tags.length ? tags : ['Web Development', 'Full-Stack'],
+    liveUrl,
+    githubUrl
+  });
 
-// ==================== MASTER GALLERY ENGINE: REORDER & PHOTO MOVING ====================
-// ==================== 3D GALLERY BACKEND ENGINE & REORDERING ====================
+  saveData('rana_tech_data', techProjects);
+  renderBeTech();
+  renderTechProjects();
+  renderHome();
+  scheduleGitHubAutoSync();
+  showToast('Added project: ' + title);
+
+  const inpT = document.getElementById('b-tech-title');
+  const inpD = document.getElementById('b-tech-desc');
+  const inpTg = document.getElementById('b-tech-tags');
+  const inpL = document.getElementById('b-tech-live');
+  const inpG = document.getElementById('b-tech-gh');
+  if(inpT) inpT.value = '';
+  if(inpD) inpD.value = '';
+  if(inpTg) inpTg.value = '';
+  if(inpL) inpL.value = '';
+  if(inpG) inpG.value = '';
+}
+window.addTechProject = addTechProject;
+
+// 3. 3D GALLERY BACKEND
 function beMoveProject(fromIdx, direction){
   const toIdx = fromIdx + direction;
   if(toIdx < 0 || toIdx >= galleryItems.length) return;
@@ -4698,7 +5035,6 @@ function beMoveSubImageOrder(itemIdx, subIdx, direction){
   g.images = imgs;
   g.path = imgs[0];
 
-  // Also swap subVideos if defined
   if(g.subVideos){
     const v1 = g.subVideos[subIdx];
     const v2 = g.subVideos[toIdx];
@@ -4789,7 +5125,6 @@ function beUpdateGalleryItem(realIdx){
   if(pillarSel) g.pillar = pillarSel.value;
   if(descInp) g.desc = descInp.value.trim();
 
-  // Save subVideos from inputs
   const allImgs = (g.images && g.images.length > 0) ? g.images : (g.path ? [g.path] : []);
   g.subVideos = g.subVideos || {};
   allImgs.forEach((_, sIdx) => {
@@ -4857,7 +5192,7 @@ function addGalleryItem(){
 }
 window.addGalleryItem = addGalleryItem;
 
-// ==================== FAST DEDICATED PHOTO TRANSFER ENGINE ====================
+// FAST DEDICATED PHOTO TRANSFER ENGINE
 let transferSourceProjIdx = null;
 let transferSourcePhotoIdx = null;
 
@@ -4953,7 +5288,6 @@ function beMoveImageToProject(fromProjIdx, photoIdx, toProjIdx){
 }
 window.beMoveImageToProject = beMoveImageToProject;
 
-// ==================== MASTER RENDER BE GALLERY ====================
 function renderBeGallery(searchTerm){
   const c = document.getElementById('be-gallery-list');
   if(!c) return;
@@ -5011,7 +5345,7 @@ function renderBeGallery(searchTerm){
             style="width:100%;padding:4px 6px;font-family:var(--mono);font-size:9px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box">
         </div>
 
-        <!-- DEDICATED TRANSFER BUTTON -->
+        <!-- DEDICATED TRANSFER BUTTON ON EVERY PHOTO (SINGLE OR MULTI) -->
         <button onclick="beOpenTransferModal(${realIdx}, ${sIdx})" title="Move this photo into another project"
           style="width:100%;margin-top:4px;padding:6px 4px;font-family:var(--mono);font-size:9.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px">
           &#10140; Move Photo
@@ -5112,161 +5446,371 @@ function renderBeGallery(searchTerm){
 }
 window.renderBeGallery = renderBeGallery;
 
-
-
-// ==================== AUTH & SECURITY ====================
-const AUTH_HASH = '0cfe517587641ac7128436f278329274333a7915358dae4bc0bb23f07bf09f60';
-
-async function sha256(str){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+// 4. SOFTWARE & ADDONS BACKEND
+function renderBeSoftware(){
+  const c = document.getElementById('be-software-list');
+  if(!c) return;
+  c.innerHTML = software.map((s,i) => `
+    <div class="backend-item" style="flex-direction:column;gap:12px;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:12px">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px">
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">SOFTWARE NAME</div>
+          <input id="be-soft-t-${i}" value="${(s.name||s.title||'').replace(/"/g,'&quot;')}"
+            style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">CATEGORY</div>
+          <input id="be-soft-plat-${i}" value="${(s.cat||s.platform||'Tool').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">PRICE</div>
+          <input id="be-soft-p-${i}" value="${(s.price||'Free').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">DOWNLOAD / PRODUCT LINK</div>
+        <input id="be-soft-u-${i}" value="${(s.link||s.url||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">DESCRIPTION</div>
+        <textarea id="be-soft-d-${i}" rows="2" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">${s.desc||''}</textarea>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <button onclick="beDeleteSoftware(${i})" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer;font-weight:600">Delete Software</button>
+        <button onclick="beUpdateSoftware(${i})" style="padding:6px 18px;font-family:var(--mono);font-size:10.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700">Save Changes</button>
+      </div>
+    </div>
+  `).join('');
 }
+window.renderBeSoftware = renderBeSoftware;
 
-// ==================== TECH PROJECTS BACKEND ENGINE ====================
-function beUpdateTech(i){
-  const title = document.getElementById('be-tech-title-'+i)?.value;
-  const tags = document.getElementById('be-tech-tags-'+i)?.value;
-  const desc = document.getElementById('be-tech-desc-'+i)?.value;
-  const live = document.getElementById('be-tech-live-'+i)?.value;
-  const gh = document.getElementById('be-tech-gh-'+i)?.value;
+function beUpdateSoftware(i){
+  if(!software[i]) return;
+  const name = document.getElementById(`be-soft-t-${i}`)?.value;
+  const cat = document.getElementById(`be-soft-plat-${i}`)?.value;
+  const price = document.getElementById(`be-soft-p-${i}`)?.value;
+  const link = document.getElementById(`be-soft-u-${i}`)?.value;
+  const desc = document.getElementById(`be-soft-d-${i}`)?.value;
 
-  if(techProjects[i]){
-    if(title) techProjects[i].title = title;
-    if(tags) techProjects[i].tags = tags.split(',').map(t=>t.trim()).filter(Boolean);
-    if(desc) techProjects[i].desc = desc;
-    if(live !== undefined) techProjects[i].liveUrl = live;
-    if(gh !== undefined) techProjects[i].githubUrl = gh;
-  }
-  saveData('rana_tech_data', techProjects);
-  renderBeTech();
-  renderTechProjects();
+  if(name) { software[i].name = name.trim(); software[i].title = name.trim(); }
+  if(cat) { software[i].cat = cat.trim(); software[i].platform = cat.trim(); }
+  if(price) software[i].price = price.trim();
+  if(link !== undefined) { software[i].link = link.trim(); software[i].url = link.trim(); }
+  if(desc) software[i].desc = desc.trim();
+
+  saveData('rana_software_data', software);
+  renderBeSoftware();
+  renderSoftware();
   renderHome();
   scheduleGitHubAutoSync();
-  showToast('Tech project updated');
+  showToast(`Updated "${software[i].name || software[i].title}"`);
 }
-window.beUpdateTech = beUpdateTech;
+window.beUpdateSoftware = beUpdateSoftware;
 
-function addTechProject(){
-  const title = (document.getElementById('b-tech-title')?.value || '').trim();
-  const desc = (document.getElementById('b-tech-desc')?.value || '').trim();
-  const tags = (document.getElementById('b-tech-tags')?.value || '').trim().split(',').map(t=>t.trim()).filter(Boolean);
-  const liveUrl = (document.getElementById('b-tech-live')?.value || '').trim();
-  const githubUrl = (document.getElementById('b-tech-gh')?.value || '').trim();
+function beDeleteSoftware(i){
+  if(!software[i]) return;
+  if(confirm(`Delete software "${software[i].name || software[i].title}"?`)){
+    software.splice(i, 1);
+    saveData('rana_software_data', software);
+    renderBeSoftware();
+    renderSoftware();
+    renderHome();
+    scheduleGitHubAutoSync();
+    showToast('Deleted software');
+  }
+}
+window.beDeleteSoftware = beDeleteSoftware;
 
-  if(!title){
-    alert('Please enter a project title');
+function addSoftware(){
+  const name = (document.getElementById('b-soft-title')?.value || '').trim();
+  const cat = (document.getElementById('b-soft-plat')?.value || '').trim() || 'Blender Addon';
+  const price = (document.getElementById('b-soft-price')?.value || '').trim() || 'Free';
+  const link = (document.getElementById('b-soft-url')?.value || '').trim();
+  const desc = (document.getElementById('b-soft-desc')?.value || '').trim();
+
+  if(!name){
+    alert('Please enter a software name');
     return;
   }
 
-  techProjects.unshift({
-    title,
-    desc,
-    tags: tags.length ? tags : ['Web Development', 'Full-Stack'],
-    liveUrl,
-    githubUrl
-  });
-
-  saveData('rana_tech_data', techProjects);
-  renderBeTech();
-  renderTechProjects();
+  software.unshift({ name, title: name, cat, platform: cat, price, link, url: link, desc });
+  saveData('rana_software_data', software);
+  renderBeSoftware();
+  renderSoftware();
   renderHome();
   scheduleGitHubAutoSync();
-  showToast('Added project: ' + title);
+  showToast(`Added software: "${name}"`);
 
-  const inpT = document.getElementById('b-tech-title');
-  const inpD = document.getElementById('b-tech-desc');
-  const inpTg = document.getElementById('b-tech-tags');
-  const inpL = document.getElementById('b-tech-live');
-  const inpG = document.getElementById('b-tech-gh');
-  if(inpT) inpT.value = '';
-  if(inpD) inpD.value = '';
-  if(inpTg) inpTg.value = '';
-  if(inpL) inpL.value = '';
-  if(inpG) inpG.value = '';
+  ['b-soft-title','b-soft-plat','b-soft-price','b-soft-url','b-soft-desc'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
 }
-window.addTechProject = addTechProject;
+window.addSoftware = addSoftware;
 
-// ==================== ARTICLES & ESSAYS BACKEND ENGINE ====================
-function beUpdateArticle(i){
-  const title = document.getElementById('be-art-title-'+i)?.value;
-  const subtitle = document.getElementById('be-art-sub-'+i)?.value;
-  const date = document.getElementById('be-art-date-'+i)?.value;
-  const pub = document.getElementById('be-art-pub-'+i)?.value;
-  const read = document.getElementById('be-art-read-'+i)?.value;
-  const excerpt = document.getElementById('be-art-exc-'+i)?.value;
-  const body = document.getElementById('be-art-body-'+i)?.value;
-  const link = document.getElementById('be-art-link-'+i)?.value;
+// 5. CAREER & EXPERIENCE BACKEND
+function renderBeExp(){
+  const c = document.getElementById('be-exp-list');
+  if(!c) return;
+  c.innerHTML = experience.map((e,i) => `
+    <div class="backend-item" style="padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:10px;display:flex;gap:12px;align-items:center">
+      <div style="flex:1;display:grid;grid-template-columns:1.5fr 1.5fr 1fr 1fr;gap:8px">
+        <div><input id="be-exp-comp-${i}" value="${(e.company||'').replace(/"/g,'&quot;')}" placeholder="Company" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+        <div><input id="be-exp-role-${i}" value="${(e.role||'').replace(/"/g,'&quot;')}" placeholder="Role" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+        <div><input id="be-exp-start-${i}" value="${(e.start||'').replace(/"/g,'&quot;')}" placeholder="Start" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+        <div><input id="be-exp-end-${i}" value="${(e.end||'').replace(/"/g,'&quot;')}" placeholder="End" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button onclick="beUpdateExp(${i})" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700">Save</button>
+        <button onclick="beDeleteExp(${i})" style="padding:6px 8px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">&times;</button>
+      </div>
+    </div>
+  `).join('');
+}
+window.renderBeExp = renderBeExp;
 
-  if(articles[i]){
-    if(title) articles[i].title = title;
-    if(subtitle !== undefined) articles[i].subtitle = subtitle;
-    if(date !== undefined) articles[i].date = date;
-    if(pub !== undefined) articles[i].publication = pub;
-    if(read !== undefined) articles[i].readTime = read;
-    if(excerpt !== undefined) articles[i].excerpt = excerpt;
-    if(body !== undefined) articles[i].body = body;
-    if(link !== undefined) articles[i].link = link;
+function beUpdateExp(i){
+  if(!experience[i]) return;
+  experience[i].company = document.getElementById(`be-exp-comp-${i}`)?.value.trim() || experience[i].company;
+  experience[i].role = document.getElementById(`be-exp-role-${i}`)?.value.trim() || experience[i].role;
+  experience[i].start = document.getElementById(`be-exp-start-${i}`)?.value.trim() || experience[i].start;
+  experience[i].end = document.getElementById(`be-exp-end-${i}`)?.value.trim() || experience[i].end;
+  saveData('rana_experience_data', experience);
+  renderBeExp();
+  renderAbout();
+  scheduleGitHubAutoSync();
+  showToast('Updated experience');
+}
+window.beUpdateExp = beUpdateExp;
+
+function beDeleteExp(i){
+  if(!experience[i]) return;
+  if(confirm('Delete this career role?')){
+    experience.splice(i, 1);
+    saveData('rana_experience_data', experience);
+    renderBeExp();
+    renderAbout();
+    scheduleGitHubAutoSync();
+    showToast('Deleted role');
   }
+}
+window.beDeleteExp = beDeleteExp;
+
+function addExperience(){
+  const company = (document.getElementById('b-exp-comp')?.value || '').trim();
+  const role = (document.getElementById('b-exp-role')?.value || '').trim();
+  const start = (document.getElementById('b-exp-start')?.value || '').trim();
+  const end = (document.getElementById('b-exp-end')?.value || '').trim() || 'Present';
+
+  if(!company || !role){
+    alert('Please enter both Company and Role');
+    return;
+  }
+
+  experience.unshift({ company, role, start, end });
+  saveData('rana_experience_data', experience);
+  renderBeExp();
+  renderAbout();
+  scheduleGitHubAutoSync();
+  showToast('Added experience');
+
+  ['b-exp-comp','b-exp-role','b-exp-start','b-exp-end'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+}
+window.addExperience = addExperience;
+
+// 6. CLIENTS & BRANDS BACKEND
+function renderBeClients(){
+  const c = document.getElementById('be-clients-list');
+  if(!c) return;
+  c.innerHTML = clients.map((cl,i) => {
+    const name = typeof cl === 'object' ? cl.name : cl;
+    const sector = typeof cl === 'object' ? (cl.sector || 'Commercial Project') : 'Client Partner';
+    const url = typeof cl === 'object' ? (cl.url || '') : '';
+
+    return `
+    <div class="backend-item" style="padding:12px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <div style="flex:1;display:grid;grid-template-columns:1.5fr 1.5fr 1fr;gap:10px;align-items:center">
+        <div><input id="be-cl-name-${i}" value="${name.replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+        <div><input id="be-cl-sec-${i}" value="${sector.replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+        <div><input id="be-cl-url-${i}" value="${url.replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:6px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button onclick="beUpdateClient(${i})" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700">Save</button>
+        <button onclick="beDeleteClient(${i})" style="padding:6px 8px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">&times;</button>
+      </div>
+    </div>
+    `;
+  }).join('');
+}
+window.renderBeClients = renderBeClients;
+
+function beUpdateClient(i){
+  const nameVal = document.getElementById('be-cl-name-'+i)?.value;
+  const secVal = document.getElementById('be-cl-sec-'+i)?.value;
+  const urlVal = document.getElementById('be-cl-url-'+i)?.value;
+  if(typeof clients[i] === 'object'){
+    clients[i].name = nameVal || clients[i].name;
+    clients[i].sector = secVal || clients[i].sector;
+    clients[i].url = urlVal || clients[i].url;
+  } else {
+    clients[i] = nameVal || clients[i];
+  }
+  saveData('rana_clients_data', clients);
+  renderBeClients();
+  renderAbout();
+  scheduleGitHubAutoSync();
+  showToast('Client updated');
+}
+window.beUpdateClient = beUpdateClient;
+
+function beDeleteClient(i){
+  if(!clients[i]) return;
+  const name = typeof clients[i] === 'object' ? clients[i].name : clients[i];
+  if(confirm(`Delete client "${name}"?`)){
+    clients.splice(i, 1);
+    saveData('rana_clients_data', clients);
+    renderBeClients();
+    renderAbout();
+    scheduleGitHubAutoSync();
+    showToast('Deleted client');
+  }
+}
+window.beDeleteClient = beDeleteClient;
+
+function addClient(){
+  const name = (document.getElementById('b-client-name')?.value || '').trim();
+  const sector = (document.getElementById('b-client-sector')?.value || '').trim() || 'Client Partner';
+  const url = (document.getElementById('b-client-url')?.value || '').trim();
+
+  if(!name){
+    alert('Please enter a client name');
+    return;
+  }
+
+  clients.unshift({ name, sector, url });
+  saveData('rana_clients_data', clients);
+  renderBeClients();
+  renderAbout();
+  scheduleGitHubAutoSync();
+  showToast('Added client: ' + name);
+
+  ['b-client-name','b-client-sector','b-client-url'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+}
+window.addClient = addClient;
+
+// 7. ARTICLES & ESSAYS BACKEND
+function renderBeArticles(){
+  const c = document.getElementById('be-articles-list');
+  if(!c) return;
+  c.innerHTML = articles.map((a,i) => `
+    <div class="backend-item" style="flex-direction:column;gap:12px;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:12px">
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">ARTICLE TITLE</div>
+        <input id="be-art-title-${i}" value="${(a.title||'').replace(/"/g,'&quot;')}"
+          style="width:100%;padding:6px 10px;font-family:var(--serif);font-size:16px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">CATEGORY</div>
+          <input id="be-art-cat-${i}" value="${(a.category||a.cat||'Essay').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">DATE</div>
+          <input id="be-art-date-${i}" value="${(a.date||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">READ TIME</div>
+          <input id="be-art-time-${i}" value="${(a.readTime||a.time||'5 min read').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">ARTICLE / MEDIUM LINK</div>
+        <input id="be-art-url-${i}" value="${(a.url||a.link||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">EXCERPT / SUMMARY</div>
+        <textarea id="be-art-desc-${i}" rows="2" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;box-sizing:border-box">${a.desc||a.excerpt||''}</textarea>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <button onclick="beDeleteArticle(${i})" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer;font-weight:600">Delete Article</button>
+        <button onclick="beUpdateArticle(${i})" style="padding:6px 18px;font-family:var(--mono);font-size:10.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700">Save Changes</button>
+      </div>
+    </div>
+  `).join('');
+}
+window.renderBeArticles = renderBeArticles;
+
+function beUpdateArticle(i){
+  if(!articles[i]) return;
+  const title = document.getElementById(`be-art-title-${i}`)?.value;
+  const cat = document.getElementById(`be-art-cat-${i}`)?.value;
+  const date = document.getElementById(`be-art-date-${i}`)?.value;
+  const time = document.getElementById(`be-art-time-${i}`)?.value;
+  const url = document.getElementById(`be-art-url-${i}`)?.value;
+  const desc = document.getElementById(`be-art-desc-${i}`)?.value;
+
+  if(title) articles[i].title = title.trim();
+  if(cat) { articles[i].category = cat.trim(); articles[i].cat = cat.trim(); }
+  if(date) articles[i].date = date.trim();
+  if(time) { articles[i].readTime = time.trim(); articles[i].time = time.trim(); }
+  if(url !== undefined) { articles[i].url = url.trim(); articles[i].link = url.trim(); }
+  if(desc) { articles[i].desc = desc.trim(); articles[i].excerpt = desc.trim(); }
+
   saveData('rana_articles_data', articles);
   renderBeArticles();
   renderArticles();
   scheduleGitHubAutoSync();
-  showToast('Article updated');
+  showToast(`Updated "${articles[i].title}"`);
 }
 window.beUpdateArticle = beUpdateArticle;
 
+function beDeleteArticle(i){
+  if(!articles[i]) return;
+  if(confirm(`Delete article "${articles[i].title}"?`)){
+    articles.splice(i, 1);
+    saveData('rana_articles_data', articles);
+    renderBeArticles();
+    renderArticles();
+    scheduleGitHubAutoSync();
+    showToast('Deleted article');
+  }
+}
+window.beDeleteArticle = beDeleteArticle;
+
 function addArticle(){
   const title = (document.getElementById('b-art-title')?.value || '').trim();
-  const subtitle = (document.getElementById('b-art-sub')?.value || '').trim();
+  const category = (document.getElementById('b-art-cat')?.value || '').trim() || 'Essay';
   const date = (document.getElementById('b-art-date')?.value || '').trim() || new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'});
-  const publication = (document.getElementById('b-art-pub')?.value || '').trim() || 'Substack';
-  const readTime = (document.getElementById('b-art-read')?.value || '').trim() || '5 min read';
-  const excerpt = (document.getElementById('b-art-exc')?.value || '').trim();
-  const body = (document.getElementById('b-art-body')?.value || '').trim();
-  const link = (document.getElementById('b-art-link')?.value || '').trim();
+  const readTime = (document.getElementById('b-art-time')?.value || '').trim() || '5 min read';
+  const url = (document.getElementById('b-art-url')?.value || '').trim();
+  const desc = (document.getElementById('b-art-desc')?.value || '').trim();
 
   if(!title){
     alert('Please enter an article title');
     return;
   }
 
-  articles.unshift({
-    title,
-    subtitle,
-    date,
-    publication,
-    readTime,
-    excerpt,
-    body,
-    link
-  });
-
+  articles.unshift({ title, category, cat: category, date, readTime, time: readTime, url, link: url, desc, excerpt: desc });
   saveData('rana_articles_data', articles);
   renderBeArticles();
   renderArticles();
   scheduleGitHubAutoSync();
-  showToast('Article published: ' + title);
+  showToast(`Published article: "${title}"`);
 
-  const inpT = document.getElementById('b-art-title');
-  const inpS = document.getElementById('b-art-sub');
-  const inpD = document.getElementById('b-art-date');
-  const inpP = document.getElementById('b-art-pub');
-  const inpR = document.getElementById('b-art-read');
-  const inpE = document.getElementById('b-art-exc');
-  const inpB = document.getElementById('b-art-body');
-  const inpL = document.getElementById('b-art-link');
-  if(inpT) inpT.value = '';
-  if(inpS) inpS.value = '';
-  if(inpD) inpD.value = '';
-  if(inpP) inpP.value = '';
-  if(inpR) inpR.value = '';
-  if(inpE) inpE.value = '';
-  if(inpB) inpB.value = '';
-  if(inpL) inpL.value = '';
+  ['b-art-title','b-art-cat','b-art-date','b-art-time','b-art-url','b-art-desc'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
 }
 window.addArticle = addArticle;
 
-// ==================== CLOUD DATABASE BACKUP & RESTORE ====================
+// CLOUD DATABASE BACKUP & RESTORE ENGINES
 function downloadDataJson(){
   const fullBackup = {
     updatedAt: new Date().toISOString(),
@@ -5289,6 +5833,8 @@ function downloadDataJson(){
   showToast('Downloaded complete JSON backup file');
 }
 window.downloadDataJson = downloadDataJson;
+function downloadBackupJsonFile(){ return downloadDataJson(); }
+window.downloadBackupJsonFile = downloadBackupJsonFile;
 
 function restoreDataJson(e){
   const file = e.target.files[0];
@@ -5315,263 +5861,22 @@ function restoreDataJson(e){
   reader.readAsText(file);
 }
 window.restoreDataJson = restoreDataJson;
+function restoreFromFile(e){ return restoreDataJson(e); }
+window.restoreFromFile = restoreFromFile;
 
 async function saveDataToCloud(){
   return saveAllDataToGitHub();
 }
 window.saveDataToCloud = saveDataToCloud;
+async function saveToCloudOnline(){ return saveDataToCloud(); }
+window.saveToCloudOnline = saveToCloudOnline;
 
 async function loadDataFromCloud(){
   return pullDataFromGitHub();
 }
 window.loadDataFromCloud = loadDataFromCloud;
-
-// Aliases for compatibility
-function downloadBackupJsonFile(){ return downloadDataJson(); }
-window.downloadBackupJsonFile = downloadBackupJsonFile;
-
-function restoreFromFile(e){ return restoreDataJson(e); }
-window.restoreFromFile = restoreFromFile;
-
-async function saveToCloudOnline(){ return saveDataToCloud(); }
-window.saveToCloudOnline = saveToCloudOnline;
-
 async function loadFromCloudOnline(){ return loadDataFromCloud(); }
 window.loadFromCloudOnline = loadFromCloudOnline;
-async function beLogin(){
-  const email = (document.getElementById('be-email')?.value || '').trim().toLowerCase();
-  const pass = document.getElementById('be-pass')?.value || '';
-  const err = document.getElementById('be-login-err');
-
-  const combined = email + ':' + pass;
-  const hash = await sha256(combined);
-
-  if(hash === AUTH_HASH){
-    sessionStorage.setItem('rana_be_auth', 'true');
-    document.getElementById('be-login-gate').style.display = 'none';
-    document.getElementById('backend-authorized-view').style.display = 'block';
-    if(err) err.textContent = '';
-    renderBackend();
-    showToast('Signed in successfully');
-  } else {
-    if(err) err.textContent = 'Invalid credentials. Access denied.';
-  }
-}
-
-function beSignOut(){
-  sessionStorage.removeItem('rana_be_auth');
-  document.getElementById('backend-authorized-view').style.display = 'none';
-  document.getElementById('be-login-gate').style.display = 'flex';
-  const emailInp = document.getElementById('be-email');
-  const passInp = document.getElementById('be-pass');
-  if(emailInp) emailInp.value = '';
-  if(passInp) passInp.value = '';
-  showToast('Signed out');
-}
-
-function beCheckAuthOnNav(){
-  const isAuth = sessionStorage.getItem('rana_be_auth') === 'true';
-  const gate = document.getElementById('be-login-gate');
-  const view = document.getElementById('backend-authorized-view');
-  if(isAuth){
-    if(gate) gate.style.display = 'none';
-    if(view) view.style.display = 'block';
-    renderBackend();
-  } else {
-    if(gate) gate.style.display = 'flex';
-    if(view) view.style.display = 'none';
-  }
-}
-
-// ==================== SOFTWARE BACKEND CRUD HANDLERS ====================
-function renderBeSoftware(){
-  const c = document.getElementById('be-software-list');
-  if(!c) return;
-  c.innerHTML = software.map((s,i) => `
-    <div class="backend-item" style="flex-direction:column;gap:10px;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:12px">
-      <div style="display:flex;gap:10px;align-items:flex-start">
-        <div style="flex:1;display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px">
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">TITLE</div>
-            <input id="be-soft-t-${i}" value="${(s.title||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">PLATFORM</div>
-            <input id="be-soft-p-${i}" value="${(s.plat||s.platform||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">PRICE</div>
-            <input id="be-soft-pr-${i}" value="${(s.price||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:#1565c0;margin-bottom:4px;font-weight:600">URL / DOWNLOAD LINK</div>
-            <input id="be-soft-u-${i}" value="${(s.url||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">DESCRIPTION</div>
-            <textarea id="be-soft-d-${i}" rows="2" style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical">${s.desc||''}</textarea>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
-          <button onclick="beUpdateSoftware(${i})"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save</button>
-          <button onclick="software.splice(${i},1);saveData('rana_software_data',software);renderBeSoftware();renderSoftware();showToast('Software deleted')"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function addSoftware(){
-  const title = (document.getElementById('b-soft-title')?.value || '').trim();
-  if(!title){ showToast('Title required'); return; }
-  const s = {
-    title,
-    plat: document.getElementById('b-soft-plat')?.value || 'Windows',
-    platform: document.getElementById('b-soft-plat')?.value || 'Windows',
-    price: document.getElementById('b-soft-price')?.value || 'Free',
-    url: document.getElementById('b-soft-url')?.value || '#',
-    desc: document.getElementById('b-soft-desc')?.value || ''
-  };
-  software.push(s);
-  saveData('rana_software_data', software);
-  renderBeSoftware();
-  renderSoftware();
-  const inpT = document.getElementById('b-soft-title');
-  if(inpT) inpT.value = '';
-  showToast('Software added: ' + title);
-}
-
-function beUpdateSoftware(i){
-  const s = software[i];
-  if(!s) return;
-  s.title = document.getElementById('be-soft-t-'+i)?.value || s.title;
-  s.plat  = document.getElementById('be-soft-p-'+i)?.value || s.plat;
-  s.platform = s.plat;
-  s.price = document.getElementById('be-soft-pr-'+i)?.value || s.price;
-  s.url   = document.getElementById('be-soft-u-'+i)?.value || s.url;
-  s.desc  = document.getElementById('be-soft-d-'+i)?.value || s.desc;
-  saveData('rana_software_data', software);
-  renderBeSoftware();
-  renderSoftware();
-  showToast('Saved: ' + s.title.substring(0,30));
-}
-
-// ==================== EXPERIENCE BACKEND CRUD HANDLERS ====================
-function renderBeExp(){
-  const c = document.getElementById('be-exp-list');
-  if(!c) return;
-  c.innerHTML = experience.map((e,i) => `
-    <div class="backend-item" style="padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:10px;display:flex;gap:10px;align-items:center">
-      <div style="flex:1;display:grid;grid-template-columns:1.5fr 1.5fr 1fr 1fr;gap:8px">
-        <div><input id="be-exp-comp-${i}" value="${(e.company||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
-        <div><input id="be-exp-role-${i}" value="${(e.role||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
-        <div><input id="be-exp-s-${i}" value="${(e.start||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
-        <div><input id="be-exp-e-${i}" value="${(e.end||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
-      </div>
-      <div style="display:flex;gap:6px">
-        <button onclick="beUpdateExp(${i})" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
-        <button onclick="experience.splice(${i},1);saveData('rana_experience_data',experience);renderBeExp();renderAbout();showToast('Experience deleted')" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function addExperience(){
-  const comp = (document.getElementById('b-exp-comp')?.value || '').trim();
-  if(!comp){ showToast('Company name required'); return; }
-  const e = {
-    company: comp,
-    role: document.getElementById('b-exp-role')?.value || '',
-    start: document.getElementById('b-exp-start')?.value || '2022',
-    end: document.getElementById('b-exp-end')?.value || 'Present'
-  };
-  experience.push(e);
-  saveData('rana_experience_data', experience);
-  renderBeExp();
-  renderAbout();
-  const inpC = document.getElementById('b-exp-comp');
-  if(inpC) inpC.value = '';
-  showToast('Experience added: ' + comp);
-}
-
-function beUpdateExp(i){
-  const e = experience[i];
-  if(!e) return;
-  e.company = document.getElementById('be-exp-comp-'+i)?.value || e.company;
-  e.role    = document.getElementById('be-exp-role-'+i)?.value || e.role;
-  e.start   = document.getElementById('be-exp-s-'+i)?.value || e.start;
-  e.end     = document.getElementById('be-exp-e-'+i)?.value || e.end;
-  saveData('rana_experience_data', experience);
-  renderBeExp();
-  renderAbout();
-  showToast('Saved: ' + e.company);
-}
-
-// ==================== CLIENTS BACKEND CRUD HANDLERS ====================
-function renderBeClients(){
-  const c = document.getElementById('be-clients-list');
-  if(!c) return;
-  c.innerHTML = clients.map((cl,i) => {
-    const name = typeof cl === 'object' ? cl.name : cl;
-    const sector = typeof cl === 'object' ? (cl.sector || 'Commercial Project') : 'Client Partner';
-    const url = typeof cl === 'object' ? (cl.url || '') : '';
-
-    return `
-    <div class="backend-item" style="padding:12px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:12px">
-      <div style="flex:1;display:grid;grid-template-columns:1.5fr 1.5fr 1fr;gap:10px;align-items:center">
-        <div><input id="be-cl-name-${i}" value="${name.replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;font-weight:600"></div>
-        <div><input id="be-cl-sec-${i}" value="${sector.replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
-        <div><input id="be-cl-url-${i}" value="${url.replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:6px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
-      </div>
-      <div style="display:flex;gap:6px;flex-shrink:0">
-        <button onclick="beUpdateClient(${i})" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
-        <button onclick="clients.splice(${i},1);saveData('rana_clients_data',clients);renderBeClients();renderAbout();showToast('Client deleted')" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
-      </div>
-    </div>
-    `;
-  }).join('');
-}
-
-function addClient(){
-  const name = (document.getElementById('b-client-name')?.value || '').trim();
-  if(!name){ showToast('Client name required'); return; }
-  const cl = {
-    name,
-    sector: document.getElementById('b-client-sector')?.value || 'Commercial Client',
-    url: document.getElementById('b-client-url')?.value || ''
-  };
-  clients.push(cl);
-  saveData('rana_clients_data', clients);
-  renderBeClients();
-  renderAbout();
-  const inpN = document.getElementById('b-client-name');
-  if(inpN) inpN.value = '';
-  showToast('Client added: ' + name);
-}
-
-function beUpdateClient(i){
-  const nameVal = document.getElementById('be-cl-name-'+i)?.value;
-  const secVal = document.getElementById('be-cl-sec-'+i)?.value;
-  const urlVal = document.getElementById('be-cl-url-'+i)?.value;
-  if(typeof clients[i] === 'object'){
-    clients[i].name = nameVal || clients[i].name;
-    clients[i].sector = secVal || clients[i].sector;
-    clients[i].url = urlVal || clients[i].url;
-  } else {
-    clients[i] = nameVal || clients[i];
-  }
-  saveData('rana_clients_data', clients);
-  renderBeClients();
-  renderAbout();
-  scheduleGitHubAutoSync();
-  showToast('Client updated');
-}
 
 // ==================== MASTER 3-COLOR THEME & HERO ENGINE ====================
 const GLOBAL_THEMES = {
@@ -5741,18 +6046,21 @@ if(document.readyState === 'loading'){
 
 
 
-// ==================== TRUE 360-DEGREE CHROMATIC RAINBOW PALETTES ====================
+
+
+
+// ==================== MASTER TRUE 360-DEGREE CHROMATIC RAINBOW PALETTES ====================
 (function initTrue360Glow(){
   const palette = [
-    { border: 'rgba(0, 229, 255, 0.8)', glow: 'rgba(0, 229, 255, 0.38)', ambient: 'rgba(0, 229, 255, 0.2)', soft: 'rgba(0, 229, 255, 0.1)' },   // Cyan
-    { border: 'rgba(0, 230, 118, 0.8)', glow: 'rgba(0, 230, 118, 0.38)', ambient: 'rgba(0, 230, 118, 0.2)', soft: 'rgba(0, 230, 118, 0.1)' },   // Emerald
-    { border: 'rgba(179, 136, 255, 0.8)', glow: 'rgba(179, 136, 255, 0.38)', ambient: 'rgba(179, 136, 255, 0.2)', soft: 'rgba(179, 136, 255, 0.1)' }, // Purple
-    { border: 'rgba(255, 215, 64, 0.8)', glow: 'rgba(255, 215, 64, 0.38)', ambient: 'rgba(255, 215, 64, 0.2)', soft: 'rgba(255, 215, 64, 0.1)' },  // Gold
-    { border: 'rgba(255, 64, 129, 0.8)', glow: 'rgba(255, 64, 129, 0.38)', ambient: 'rgba(255, 64, 129, 0.2)', soft: 'rgba(255, 64, 129, 0.1)' },  // Pink
-    { border: 'rgba(68, 138, 255, 0.8)', glow: 'rgba(68, 138, 255, 0.38)', ambient: 'rgba(68, 138, 255, 0.2)', soft: 'rgba(68, 138, 255, 0.1)' }   // Blue
+    { border: 'rgba(0, 229, 255, 0.9)', glow: 'rgba(0, 229, 255, 0.45)', ambient: 'rgba(0, 229, 255, 0.25)', soft: 'rgba(0, 229, 255, 0.12)', accent: '#00e5ff' },   // Electric Cyan
+    { border: 'rgba(0, 230, 118, 0.9)', glow: 'rgba(0, 230, 118, 0.45)', ambient: 'rgba(0, 230, 118, 0.25)', soft: 'rgba(0, 230, 118, 0.12)', accent: '#00e676' },   // Emerald Mint
+    { border: 'rgba(179, 136, 255, 0.9)', glow: 'rgba(179, 136, 255, 0.45)', ambient: 'rgba(179, 136, 255, 0.25)', soft: 'rgba(179, 136, 255, 0.12)', accent: '#b388ff' }, // Amethyst Violet
+    { border: 'rgba(255, 215, 64, 0.9)', glow: 'rgba(255, 215, 64, 0.45)', ambient: 'rgba(255, 215, 64, 0.25)', soft: 'rgba(255, 215, 64, 0.12)', accent: '#ffd740' },  // Golden Amber
+    { border: 'rgba(255, 64, 129, 0.9)', glow: 'rgba(255, 64, 129, 0.45)', ambient: 'rgba(255, 64, 129, 0.25)', soft: 'rgba(255, 64, 129, 0.12)', accent: '#ff4081' },  // Vivid Coral/Pink
+    { border: 'rgba(68, 138, 255, 0.9)', glow: 'rgba(68, 138, 255, 0.45)', ambient: 'rgba(68, 138, 255, 0.25)', soft: 'rgba(68, 138, 255, 0.12)', accent: '#448aff' }   // Cobalt Sapphire
   ];
 
-  const CARD_SELECTOR = '.g-card, .novel-card, .novel-page-card, .proj-card, .sw-product-card, .tech-spotlight-card, .dls-card';
+  const CARD_SELECTOR = '.g-card, .novel-card, .novel-page-card, .proj-card, .sw-product-card, .tech-spotlight-card, .dls-card, .article-card, .expertise-grid > div, .exp-item';
 
   function apply360GlowToCards(){
     document.querySelectorAll(CARD_SELECTOR).forEach((card, i) => {
@@ -5761,6 +6069,7 @@ if(document.readyState === 'loading'){
       card.style.setProperty('--card-glow', col.glow);
       card.style.setProperty('--card-glow-ambient', col.ambient);
       card.style.setProperty('--card-glow-soft', col.soft);
+      card.style.setProperty('--card-accent', col.accent);
     });
   }
 
