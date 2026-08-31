@@ -920,6 +920,22 @@ img {
   padding: 14px 18px !important;
 }
 
+
+.be-pos-btn {
+  padding: 3px 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--bg);
+  color: var(--ink2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  transition: all .2s;
+}
+.be-pos-btn:hover:not([disabled]) {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -1302,6 +1318,104 @@ img {
 <!-- ==================== 8. BACKEND PAGE ==================== -->
 <div class="page" id="page-backend">
 
+<!-- GITHUB CLOUD AUTO-SYNC MODAL -->
+<div id="github-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,12,16,0.92);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:24px">
+  <div style="width:100%;max-width:680px;background:var(--bg-card,#fff);border:1px solid var(--border);border-radius:6px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,0.3);max-height:92vh;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:24px">🐙</span>
+        <h3 style="font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);margin:0">GitHub Cloud Auto-Sync</h3>
+      </div>
+      <button onclick="closeGitHubModal()" style="background:transparent;border:none;font-size:24px;color:var(--ink3);cursor:pointer">&times;</button>
+    </div>
+
+    <p style="font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:20px">
+      Connect your portfolio directly to your GitHub repository (<strong style="color:var(--ink)">Ranabdullah/rana-portfolio</strong>). Once configured, every edit you make in the backend automatically commits to GitHub so your work is safely backed up and in sync!
+    </p>
+
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:18px;margin-bottom:20px">
+      <div style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <label style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);font-weight:600">GitHub Personal Access Token (PAT)</label>
+          <a href="https://github.com/settings/tokens/new?scopes=repo&description=Portfolio+Auto+Sync" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:10px;color:#0969da;text-decoration:underline">Get a Token on GitHub &nearr;</a>
+        </div>
+        <div style="display:flex;gap:8px">
+          <input id="gh-token-input" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+            style="flex:1;padding:8px 12px;font-family:var(--mono);font-size:11.5px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px">
+          <button onclick="toggleTokenVisibility()" id="gh-toggle-btn"
+            style="padding:8px 12px;font-family:var(--mono);font-size:11px;background:transparent;border:1px solid var(--border);color:var(--ink);border-radius:3px;cursor:pointer">👁️ Show</button>
+        </div>
+        <div style="font-size:10.5px;color:var(--ink4);margin-top:4px">Your token is stored only in your private local browser storage and used only to push commits.</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+        <div>
+          <label style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:4px">Repository Owner</label>
+          <input id="gh-owner-input" value="Ranabdullah" placeholder="Ranabdullah"
+            style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+        <div>
+          <label style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:4px">Repository Name</label>
+          <input id="gh-repo-input" value="rana-portfolio" placeholder="rana-portfolio"
+            style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+        <div>
+          <label style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:4px">Branch</label>
+          <input id="gh-branch-input" value="main" placeholder="main"
+            style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+        <div>
+          <label style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:4px">Data File Path</label>
+          <input id="gh-path-input" value="portfolio_data.json" placeholder="portfolio_data.json"
+            style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px;padding-top:6px;border-top:1px solid var(--border)">
+        <input type="checkbox" id="gh-autosync-chk" checked style="cursor:pointer;width:15px;height:15px">
+        <label for="gh-autosync-chk" style="font-size:12px;color:var(--ink);cursor:pointer;font-weight:500">
+          ⚡ Automatically sync to GitHub after every edit (Save, Add, Delete)
+        </label>
+      </div>
+    </div>
+
+    <!-- Status Banner -->
+    <div id="gh-status-banner" style="background:#f6f8fa;border:1px solid var(--border);border-radius:4px;padding:10px 14px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span id="gh-modal-dot" style="width:8px;height:8px;border-radius:50%;background:#8b949e;display:inline-block"></span>
+        <span id="gh-status-text" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">Status: Not Connected</span>
+      </div>
+      <span id="gh-last-sync-time" style="font-family:var(--mono);font-size:10px;color:var(--ink4)">Never synced</span>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center">
+      <div style="display:flex;gap:8px">
+        <button onclick="saveGitHubConfig()" style="padding:8px 18px;font-family:var(--mono);font-size:11px;background:#24292e;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save &amp; Test Connection</button>
+        <button onclick="pushToGitHubDirect(true)" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#2da44e;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">🐙 Push to GitHub Now</button>
+        <button onclick="pullFromGitHubDirect()" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#0969da;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">📥 Pull from GitHub</button>
+      </div>
+      <button onclick="disconnectGitHub()" style="padding:8px 14px;font-family:var(--mono);font-size:11px;background:transparent;color:#cf222e;border:1px solid #cf222e;border-radius:3px;cursor:pointer">Disconnect</button>
+    </div>
+
+    <!-- Quick 1-Minute Setup Guide -->
+    <details style="margin-top:22px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 16px">
+      <summary style="font-family:var(--mono);font-size:11px;color:var(--ink);cursor:pointer;font-weight:600">📖 How to create your GitHub Token in 1 minute (Step-by-Step)</summary>
+      <ol style="font-size:12px;color:var(--ink2);line-height:1.75;margin:12px 0 0 20px;padding:0">
+        <li>Click <a href="https://github.com/settings/tokens/new?scopes=repo&description=Portfolio+Auto+Sync" target="_blank" rel="noopener" style="color:#0969da;font-weight:600">this direct link</a> to open GitHub Token Settings.</li>
+        <li>Under <strong>Note</strong>, type: <code>Portfolio Auto Sync</code></li>
+        <li>Set <strong>Expiration</strong> to <code>No expiration</code> (or 90 days).</li>
+        <li>Ensure the <strong><code>repo</code></strong> scope checkbox is ticked (gives full repository write access).</li>
+        <li>Scroll to the bottom, click green button <strong>Generate token</strong>.</li>
+        <li>Copy the token (starts with <code>ghp_...</code>) and paste it into the box above!</li>
+      </ol>
+    </details>
+  </div>
+</div>
+
+
 <!-- AUTOMATED DATABASE BACKUP & CLOUD RESTORE MODAL -->
 <div id="backup-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,12,16,0.92);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:24px">
   <div style="width:100%;max-width:720px;background:var(--bg-card,#fff);border:1px solid var(--border);border-radius:4px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,0.3)">
@@ -1433,13 +1547,28 @@ img {
     </div>
 
     <!-- TECH BACKEND -->
+        <!-- 2. TECHNICAL PROJECTS BACKEND -->
     <div class="backend-panel" id="bp-tech">
       <div class="backend-form">
-        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Technical Project</h3>
+        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:20px">Add Technical Project</h3>
         <div class="form-group"><label class="form-label">Project Title</label><input class="form-input" id="b-tech-title" placeholder="Project Name"></div>
-        <div class="form-group"><label class="form-label">Subtitle</label><input class="form-input" id="b-tech-sub" placeholder="e.g. Full-Stack SaaS Engine"></div>
-        <div class="form-group"><label class="form-label">Status</label><input class="form-input" id="b-tech-status" placeholder="Live / Production-Ready"></div>
-        <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="b-tech-desc" placeholder="Comprehensive project description..."></textarea></div>
+        <div class="form-group"><label class="form-label">Subtitle</label><input class="form-input" id="b-tech-sub" placeholder="e.g. Chrome Multi-Profile Link Vault"></div>
+        <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+          <div><label class="form-label">Status</label><input class="form-input" id="b-tech-status" placeholder="Live, Beta, Production"></div>
+          <div>
+            <label class="form-label">Insert Position</label>
+            <select class="form-input" id="b-tech-pos">
+              <option value="end">Add to End (Bottom)</option>
+              <option value="top">Add to Top (Beginning)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Tech Stack (comma-separated)</label><input class="form-input" id="b-tech-stack" placeholder="Electron, Node.js, TypeScript"></div>
+        <div class="form-group"><label class="form-label">Key Architectural Features (comma or newline-separated)</label><textarea class="form-textarea" id="b-tech-features" rows="2" placeholder="e.g. AES-256-GCM encrypted vault, 13+ Chrome profile support, 1-click launch"></textarea></div>
+        <div class="form-group"><label class="form-label" style="color:#1565c0;font-weight:600">Live Demo / Web Link (Optional)</label><input class="form-input" id="b-tech-live" placeholder="https://..."></div>
+        <div class="form-group"><label class="form-label" style="color:#2e7d32;font-weight:600">Download URL (Optional)</label><input class="form-input" id="b-tech-dl" placeholder="https://..."></div>
+        <div class="form-group"><label class="form-label" style="color:var(--ink3);font-weight:600">GitHub Repo URL (Optional)</label><input class="form-input" id="b-tech-repo" placeholder="https://github.com/..."></div>
+        <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="b-tech-desc" rows="3" placeholder="Comprehensive project description..."></textarea></div>
         <button class="submit-btn" onclick="addTechProject()">Add Project</button>
       </div>
       <div class="backend-items" id="be-tech-list"></div>
@@ -1565,16 +1694,14 @@ function loadData(key, def){
 function saveData(key, val){
   try {
     const json = JSON.stringify(val);
-    // Save to target key
     localStorage.setItem(key, json);
-    // Also save to standard permanent key
     const prefix = key.replace(/_(?:data|v\d+|bw)$/, '');
     localStorage.setItem(prefix + '_data', json);
+    if(window.scheduleGitHubAutoSync) window.scheduleGitHubAutoSync();
   } catch(e) {
     console.error('Storage save error:', e);
   }
 }
-
 const NOVELS_DATA = [{"id": "amz-1", "title": "The Child's World: How Family and the Earliest Relationships Shape the Human Mind", "genre": "Psychology & Attachment", "type": "Published Book", "published": true, "amazonUrl": "https://www.amazon.co.uk/dp/B0H4NV4494", "tagline": "How family dynamics and early attachment shape cognitive and emotional growth.", "desc": "An insightful exploration into developmental psychology, examining how early parental bonds, familial environments, and formative relational experiences establish the foundation for lifelong emotional resilience, cognitive patterns, and relational security.", "excerpt": "INTRODUCTION: THE INVISIBLE FOUNDATION\\n\\nThe human mind is not assembled in isolation. It is sculpted in the quiet interactions of infancy — in the tone of a caregiver's voice, the consistency of a response to distress, and the emotional climate of the home.\\n\\nDecades of developmental neuroscience and attachment theory converge on a single undeniable truth: the earliest relationships provide the primary blueprint for how an individual perceives safety, navigates intimacy, and regulates stress throughout life.", "cover": "Novels/Amazon_B0H4NV4494/cover.jpg"}, {"id": "amz-5", "title": "The Child's World: How Harm and Healing in Childhood Shape the Human Mind", "genre": "Trauma & Resilience", "type": "Published Book", "published": true, "amazonUrl": "https://www.amazon.co.uk/dp/B0H4WT1JZY", "tagline": "Understanding developmental adversity, neurological resilience, and restorative pathways.", "desc": "A compassionate and scientifically grounded examination of developmental trauma, adverse childhood experiences (ACEs), neuroplasticity, and the restorative conditions necessary for lasting psychological healing.", "excerpt": "CHAPTER ONE: THE ARCHITECTURE OF RESILIENCE\\n\\nAdversity leaves neurological imprints, but neuroplasticity ensures that the human mind possesses an extraordinary capacity for restoration.\\n\\nHealing is not the erasure of past harm; it is the deliberate construction of new neural pathways, safe attachments, and restorative self-narratives that allow individuals to reclaim their full developmental potential.", "cover": "Novels/Amazon_B0H4WT1JZY/cover.jpg"}, {"id": "amz-3", "title": "The Child's World: How Teachers, Classrooms, and the World Beyond the Family Shape the Human Mind", "genre": "Educational Psychology", "type": "Published Book", "published": true, "amazonUrl": "https://www.amazon.co.uk/dp/B0H57BNZGQ", "tagline": "Exploring classroom environments, pedagogical impact, and social development.", "desc": "An investigation into the secondary crucible of human development: schools, peer groups, and community structures. Explores how educators, classroom cultures, and institutional support shape intellectual autonomy and identity.", "excerpt": "CHAPTER ONE: BEYOND THE THRESHOLD\\n\\nThe moment a child steps into a classroom, their psychological landscape expands exponentially. They encounter an institutional world where rules are shared, hierarchies are negotiated, and validation must be earned among peers.\\n\\nA great teacher does not merely transmit curriculum; they construct a psychological container in which intellectual curiosity feels safe enough to override the fear of failure.", "cover": "Novels/Amazon_B0H57BNZGQ/cover.jpg"}, {"id": "amz-2", "title": "The Child's World: On Screens, Social Media, and the Childhood That Changed", "genre": "Digital Psychology", "type": "Published Book", "published": true, "amazonUrl": "https://www.amazon.co.uk/dp/B0HFK6LWPG", "tagline": "An essential inquiry into attention, social media, and digital childhood.", "desc": "A timely and rigorous analysis of how smartphones, algorithmic media feeds, and ubiquitous digital stimulation are reshaping childhood development, attention spans, social anxiety, and emotional regulation in modern adolescents.", "excerpt": "CHAPTER ONE: THE ATTENTION MIGRATION\\n\\nChildhood did not gradually evolve into the digital era; it was relocated there almost overnight.\\n\\nWhen a child engages with an algorithmic stream designed by hundreds of behavioral engineers to capture and monetize attention, the fundamental rhythm of unstructured play, boredom, and autonomous social exploration is fundamentally disrupted. Understanding this shift is the defining developmental challenge of our era.", "cover": "Novels/Amazon_B0HFK6LWPG/cover.jpg"}, {"id": "nov-7", "title": "Children of Pain", "genre": "Literary Drama", "type": "Novel", "published": false, "amazonUrl": "", "tagline": "Some wounds do not heal into scars; they heal into armor.", "desc": "A piercing family saga exploring three generations of migrants navigating industrial shifts, grief, unexpressed tenderness, and the silent covenants made to protect the next generation.", "excerpt": "PROLOGUE: THE FOUNDRY SHIFT\\n\\nThe iron did not care who poured it. In the winter of 1974, the floor of the northern foundry remained twenty degrees below freezing until the first furnace tapped at six in the morning.\\n\\nRashid stood at the ladle with his coat buttoned to the chin. His knuckles were permanently stained grey with carbon dust.", "cover": "Novels/Children of Pain/Children of Pain.jpg"}, {"id": "nov-4", "title": "What the Buffalo Carry", "genre": "Literary Fiction", "type": "Novella", "published": false, "amazonUrl": "", "tagline": "The first stories we are told become the rooms we live in.", "desc": "A seven-year-old boy counts stars from a dusty rooftop while listening to his great-grandmother's stories of the migrating buffalo — an intimate exploration of inheritance, generational memory, and cultural weight.", "excerpt": "PART ONE: THE ROOF\\n\\nChapter One: Uncle Moon\\n\\nThe night my great-grandmother first told me about the buffalo, the sky was doing something I had never seen it do before. It was not black, and it was not blue. It was the color of a bruised plum, swollen with clouds that had travelled all the way from the northern mountains without dropping a single bead of rain.", "cover": "Novels/What the Buffalo Carry/What the Buffalo Carry.png"}, {"id": "nov-8", "title": "Shavings", "genre": "Literary Fiction", "type": "Novella", "published": false, "amazonUrl": "", "tagline": "The art of what gets planed away in pursuit of form.", "desc": "An intimate novella exploring a master woodworker and his estranged apprentice as they restore an 18th-century pipe organ in an isolated coastal cathedral before winter sets in.", "excerpt": "CHAPTER ONE: THE PLANE\\n\\nThe cedar curls fell like parchment ribbons onto the stone flags of the nave. With every stroke of the hand plane, the timber gave up a scent that was half forest, half cathedral incense.", "cover": "Novels/Shavings/shavings_cover.png"}, {"id": "nov-3", "title": "The Veil of Shadows", "genre": "Epic Fantasy", "type": "Novel", "published": false, "amazonUrl": "", "tagline": "They say silence is peace. But I've seen what festers in silence.", "desc": "Cael's journey through the Trial of Frost — an outcast warrior who learns to forge resilience from silence, weaponize ancient shadows, and reclaim his ancestral voice in a world commanded by frost kings.", "excerpt": "PREFACE\\n\\nFor the unseen ones — the broken who kept walking, the silenced who kept listening, and the children who learnt to turn shadows into shields.\\n\\n\"They say silence is peace. But I've seen what festers in silence. I've heard what it hides.\" — Carved on the mountain stones of the Northern Reach.", "cover": "Novels/The Veil of Shadows/ChatGPT Image May 4, 2026, 11_41_39 PM.png"}, {"id": "nov-6", "title": "The Record Survives", "genre": "Historical Fiction", "type": "Novel", "published": false, "amazonUrl": "", "tagline": "Witnessing matters. Because what is recorded outlives what is destroyed.", "desc": "A sweeping historical novel following an archivist across wartime Europe who preserves clandestine letters, forgotten blueprints, and suppressed voices from being erased by totalitarian regimes.", "excerpt": "ACT 1: THE HIDDEN ROOM\\n\\nChapter One: A Wise Man Feareth\\n\\nHe was nine, and the attic was the safest room in the house: forgotten, obscure, inert. It held its breath, and so did he. Not clean silence. Silence thick with dust, cedar resin, and the dry tang of old paper turning yellow under thirty summers of uninsulated heat.", "cover": "Novels/The Record Survives/The Record Survives.png"}, {"id": "nov-2", "title": "The Last Beacon", "genre": "Speculative Fiction", "type": "Novel", "published": false, "amazonUrl": "", "tagline": "To carry something is to change it.", "desc": "In a fractured future across post-collapse Europe, couriers navigate scarred landscapes carrying corrupted data pods, sacred relics, and memories of a civilization that forgot how to speak without destroying.", "excerpt": "PART ONE: THE CEILING\\n\\nBarcelona, 2263. Before the road.\\n\\n1. Green\\n\\nThe first thing is a ceiling. Pale grey. Water-stained in the northeast corner where a dead light fitting has been dark long enough to forget what light was. He lies on his back and looks at it for a while, not thinking about anything in particular, because thinking in particular would require a context for the thoughts and he has no context yet. He has been alive for six hours.", "cover": "Novels/The Last Beacon/The Last Beacon.png"}, {"id": "nov-1", "title": "Ten Days in Heaven", "genre": "Psychological Thriller", "type": "Novel", "published": false, "amazonUrl": "", "tagline": "Memory is not a record. It is a weapon.", "desc": "Amason Lincoln wakes to find himself at the center of three missing persons cases, one arson investigation, and a financial anomaly — with no memory of the last ten days. A taut, literary thriller exploring the fault lines of memory and identity.", "excerpt": "PART ONE: THE FRACTURE\\n\\nChapter 1: Guns and Ghosts\\n\\nThey were not asking what I did. They were asking what I remember. That distinction mattered more than the guns.\\n\\nI was on the floor of my own living room, hands zip-tied behind my back, three different firearms aimed at various parts of my body. The man in the gray suit crouched before me with the patient, empty expression of someone who has asked the same question to a great many people and is entirely prepared to wait as long as necessary.", "cover": "Novels/Ten Days in Heaven/20260407_1207_Image Generation_simple_compose_01knksznadeb291cpy5nqgw13c.png"}];
 const TECH_PROJECTS_DATA = [{"id": "launcher", "title": "DreamsLab Cyber Launcher", "subtitle": "Chrome Multi-Profile Link Vault", "status": "Live", "badgeClass": "badge-dark", "num": "01", "desc": "A standalone Windows desktop app that acts as an encrypted personal link vault with full multi-account Chrome profile management. Save your important links, notes and account context per Google profile, then launch any Chrome account in one click. Protected with AES-256-GCM encryption.", "features": ["Modular application dock & launcher", "Real-time system telemetry monitor", "Encrypted local vault storage", "Low-overhead native resource pipeline"], "tech": ["Electron", "Node.js", "AES-256-GCM", "Web Crypto API", "Chrome API", "Windows", "GitHub Pages"], "buttons": [{"label": "Download for Windows", "url": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe", "primary": true}, {"label": "Open Web App →", "url": "https://abdullahinayat24-lang.github.io/link-launcher/", "primary": false}, {"label": "GitHub Repo →", "url": "https://github.com/abdullahinayat24-lang/link-launcher", "primary": false}], "hasLinks": true, "links": [{"label": "Download for Windows ↗", "url": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe", "primary": true}, {"label": "Live Web App ↗", "url": "https://abdullahinayat24-lang.github.io/link-launcher/", "primary": false}]}, {"id": "mythos", "title": "Mythos Encyclopedia", "subtitle": "Global Gods, Myths & Folklore Platform", "status": "Mobile & Web App", "badgeClass": "badge-outline", "num": "02", "desc": "A deep cross-platform encyclopedia cataloging 50+ world mythologies and thousands of deities from Greek, Norse, and Egyptian to Hindu, Celtic, Aztec, Japanese, African, and urban folklore. Features rich mythological dossiers, daily deity notifications, interactive world mythology atlas, sacred objects collection, and a 4-tier mythology quiz with global leaderboards.", "features": ["200+ authenticated mythological entities", "Multi-pantheon taxonomic classification", "High-resolution architectural renders", "Full offline search & bookmarking engine"], "tech": ["Ionic / Capacitor", "Vue.js / Vite", "TypeScript", "SQLite", "Wikipedia REST API", "Android SDK"], "buttons": [{"label": "Google Play Store ↗", "url": "https://play.google.com/store/apps/details?id=com.mythos.app", "primary": true}], "hasLinks": true, "links": [{"label": "Google Play Store ↗", "url": "https://play.google.com/store/apps/details?id=com.mythos.app", "primary": true}]}, {"id": "timeline", "title": "World History & Mythology Timeline", "subtitle": "Chronological Multi-Track Engine (10,000 BCE – 1800 CE)", "status": "Web Platform", "badgeClass": "badge-outline", "num": "03", "desc": "An interactive, high-contrast, multi-track chronological timeline connecting global civilizations, founding epics, and legendary writers across 12 millennia. Features independent box zoom controls, Google Photos style epoch scrubber, continuous regional vertical history spines, middle-mouse drag panning, in-window story reader with multi-act chapters, and AI Text-to-Speech narration.", "features": ["Interactive chronological zoom canvas", "Parallel civilizational timeline overlays", "Cross-linked primary source citations", "Dynamic geographic epoch mapping"], "tech": ["JavaScript (ES6+)", "HTML5 Canvas / DOM", "CSS Grid", "Python Crawler", "Wikimedia REST API", "Cloudflare Pages"], "buttons": [], "hasLinks": true, "links": []}, {"id": "psych", "title": "Psychology Lecture Knowledge Platform", "subtitle": "Multilingual ASR, Diarization & Semantic Topic Graph", "status": "Production-Ready", "badgeClass": "badge-dark", "num": "04", "desc": "An end-to-end academic lecture capture and knowledge exploration platform. Features a real-time chunked audio recording pipeline with fault-tolerant uploads, speaker diarization (pyannote), multilingual speech-to-text (Whisper), AI-generated structured lecture analyses with teacher approval workflows, interactive topic relation graphs, student confusion tracking, and strict server-side RBAC.", "features": ["Full-text cognitive curriculum search", "Dynamic neural concept graph visualizer", "Audio lecture waveform synchronizer", "Exportable study guides & flashcards"], "tech": ["Next.js 14 (App Router)", "TypeScript", "PostgreSQL", "Prisma ORM", "NextAuth", "Whisper ASR", "pyannote", "Claude API"], "buttons": [], "hasLinks": true, "links": []}, {"id": "onboardflow", "title": "OnboardFlow", "subtitle": "Client Onboarding Automation SaaS for Agencies", "status": "Full-Stack SaaS", "badgeClass": "badge-outline", "num": "05", "desc": "A production-ready agency client onboarding SaaS that turns signed clients into project-ready clients automatically. Eliminates chaotic email threads and manual intake forms with a single branded, intelligent onboarding link. Features token-based zero-login client wizard, dynamic questionnaire builder, deliverables checklist, contract uploader, AI-powered project brief generation (Claude 3.5 Sonnet / GPT-4o), shareable handoff packages, and automated reminder crons.", "features": ["Zero-Login Token Wizard (/onboard/[token])", "Dynamic Drag-and-Drop Questionnaire Builder", "AI Executive Brief Generation (Claude / GPT-4o)", "Shareable Client Handoff Package & PDF Export", "White-Label Agency Branding & Color Engine", "Automated Inactivity Nudge & Reminder Cron"], "tech": ["Next.js 14", "TypeScript", "Supabase Auth & DB", "Tailwind CSS", "Anthropic Claude 3.5", "Resend API", "Vercel Cron"], "buttons": [], "hasLinks": true, "links": []}, {"id": "medicare", "title": "MediCare AI Companion", "subtitle": "Ireland HPRA Rx & OTC Multi-Disease Scheduler", "status": "Healthcare Web App", "badgeClass": "badge-outline", "num": "06", "desc": "Clinical healthcare companion and medication management system engineered specifically for Ireland's HPRA drug classification (POM Prescription-Only Medicine vs OTC Over-The-Counter). Features multi-disease automated dosing schedules, drug-drug interaction alerts, personalized dietary and exercise guidelines, one-click PDF prescription export, and verified medical citations directly linked to PubMed literature.", "features": ["Conversational clinical symptom triaging", "Automated medication schedule alerts", "Encrypted FHIR-compliant patient metrics", "Multi-language empathetic voice synthesizer"], "tech": ["Vanilla JS (ES6+)", "HTML5 / CSS3", "Gemini AI API", "Ireland HPRA Drug Registry", "PubMed BioC API"], "buttons": [], "hasLinks": true, "links": []}, {"id": "ledger", "title": "Ledger Command Deck", "subtitle": "Glassmorphic Personal Life Operating System & Finances", "status": "Live Dashboard", "badgeClass": "badge-dark", "num": "07", "desc": "A personal command deck and life OS built with precision glassmorphic aesthetics. Unifies double-entry financial ledger tracking with cash-flow analytics, habit formation monitoring, TV series and season episode trackers, structured knowledge taxonomy across psychology, philosophy, and history, markdown scratchpads, and custom theme switchers.", "features": ["Multi-currency cashflow forecasting", "Automated invoice reconciliation pipeline", "Tax-ready quarterly ledger exports", "Role-based departmental budget controls"], "tech": ["Vanilla JavaScript", "CSS Custom Properties", "Glassmorphism UI", "HTML5 Canvas", "IndexedDB / LocalStorage"], "buttons": [], "hasLinks": true, "links": []}, {"id": "vapes", "title": "Vapes Quantity Stock Manager", "subtitle": "Bilingual Retail Inventory & Stock Intelligence System", "status": "Retail Cloud App", "badgeClass": "badge-outline", "num": "08", "desc": "Fast, high-density retail stock management and inventory tracking web application featuring full bilingual English and Urdu Nastaliq support. Built for high-volume retail environments with real-time stock counters, rapid batch item intake, low-inventory threshold notifications, category and brand filters, instant search, and export capabilities.", "features": ["Full English & Urdu Nastaliq Bilingual Interface", "Real-Time Stock Increment / Decrement Pipeline", "Automated Low-Stock & Reorder Alerts", "Rapid Batch Intake & Barcode / SKU Tagging", "Instant Sub-Second Search & Multi-Filter Matrix", "Dark / Light High-Contrast Retail Themes"], "tech": ["Vanilla JavaScript", "CSS3 Design System", "DM Mono", "Noto Nastaliq Urdu", "Cloudflare Pages"], "buttons": [], "hasLinks": true, "links": []}, {"id": "repair", "title": "IDFL Repair Price Matrix", "subtitle": "Multi-Device Hardware Repair Quoting System", "status": "Live Quoting Engine", "badgeClass": "badge-outline", "num": "09", "desc": "Comprehensive enterprise hardware repair price estimation and quoting system built for IDFL. Provides instant sub-second search across hundreds of smartphone, tablet, laptop, and gaming console models, dynamic component pricing breakdowns (OLED screens, batteries, charging ports, liquid damage, logic boards), margin and labor calculation, and glassmorphic UI.", "features": ["500+ Device Models (iPhone, Samsung, iPad, Mac, Consoles)", "Component-Level Pricing Matrix (Screen, Battery, Board)", "Automated Labor & Profit Margin Calculation", "Instant Sub-Second Fuzzy Search Filter", "Multi-Currency & Tax Estimation Engine", "Responsive Glassmorphic Dark / Light Architecture"], "tech": ["Vanilla JS", "Space Grotesk", "IBM Plex Mono", "Responsive CSS3 Grid", "Cloudflare Pages"], "buttons": [], "hasLinks": true, "links": []}];
 
@@ -1600,6 +1727,57 @@ const ARTICLES_DATA = [
   },
   {
     "id": 2,
+    "title": "Project Concept: Contract Killers",
+    "slug": "contract-killers",
+    "cat": "Game Design & Tactics",
+    "category": "Game Design & Tactics",
+    "date": "May 3, 2026",
+    "readTime": "6 min read",
+    "desc": "A top-down real-time tactics and strategy game inspired by Commandos and cyberpunk stealth infiltration mechanics. Managing specialist operatives across high-stakes tactical contracts.",
+    "url": "HTML/blog-contract-killers.html",
+    "tags": [
+      "Unreal Engine",
+      "Tactics",
+      "Game Design",
+      "Story Branching"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Why Every Aspiring Game Developer Should Start Small",
+    "slug": "start-small",
+    "cat": "Development Philosophy",
+    "category": "Development Philosophy",
+    "date": "June 3, 2026",
+    "readTime": "5 min read",
+    "desc": "Starting small allows developers to focus on core mechanics, finish rapidly, build confidence, and discover gameplay viability before investing months or years into complex systems.",
+    "url": "HTML/blog-start-small.html",
+    "tags": [
+      "Game Dev",
+      "Philosophy",
+      "Prototyping",
+      "Scope Control"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Why I Started Writing and Creating Games and Apps",
+    "slug": "why-i-started",
+    "cat": "Creative Origins",
+    "category": "Creative Origins",
+    "date": "May 31, 2026",
+    "readTime": "7 min read",
+    "desc": "From playing classic PC games in childhood to exploring the fascination with how interactive worlds work behind the scenes. On why blending narrative fiction, 3D art, and software forms a unified creative drive.",
+    "url": "HTML/blog-why-i-started-writing.html",
+    "tags": [
+      "Creative Journey",
+      "Origins",
+      "Cross-Disciplinary",
+      "Technology"
+    ]
+  },
+  {
+    "id": 5,
     "title": "The Architecture of Solitude: Lighting & Spatial Emotion in Digital Worlds",
     "slug": "architecture-of-solitude",
     "cat": "3D & Design",
@@ -1619,8 +1797,9 @@ const ARTICLES_DATA = [
 const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
 
 let novels = loadData('rana_novels_data', NOVELS_DATA);
-let techProjects = loadData('rana_tech_data', TECH_PROJECTS_DATA);
 let articles = loadData('rana_articles_data', ARTICLES_DATA);
+let techProjects = loadData('rana_tech_data', TECH_PROJECTS_DATA);
+articles = loadData('rana_articles_data', ARTICLES_DATA);
 let galleryItems = loadData('rana_gallery_data', GALLERY_DATA);
 let software = loadData('rana_software_data', SOFTWARE_DATA);
 let experience = loadData('rana_experience_data', EXPERIENCE_DATA);
@@ -2155,103 +2334,7 @@ function beUpdateNovel(i){
   showToast('Novel saved: ' + n.title.substring(0,25));
 }
 
-function addTechProject(){
-  const title = (document.getElementById('b-tech-title')?.value || '').trim();
-  if(!title){ showToast('Title required'); return; }
-  const stackStr = (document.getElementById('b-tech-stack')?.value || 'JavaScript').trim();
-  const p = {
-    id: 'proj-' + Date.now(),
-    title,
-    subtitle: document.getElementById('b-tech-sub')?.value || '',
-    status: document.getElementById('b-tech-status')?.value || 'Live',
-    badgeClass: 'badge-outline',
-    num: '0' + (techProjects.length + 1),
-    desc: document.getElementById('b-tech-desc')?.value || '',
-    liveUrl: (document.getElementById('b-tech-live')?.value || '').trim(),
-    downloadUrl: (document.getElementById('b-tech-dl')?.value || '').trim(),
-    repoUrl: (document.getElementById('b-tech-repo')?.value || '').trim(),
-    features: ['Modular architecture', 'High-performance runtime'],
-    tech: stackStr.split(',').map(s=>s.trim()).filter(Boolean)
-  };
-  techProjects.unshift(p);
-  saveData('rana_tech_data', techProjects);
-  renderBeTech();
-  renderTechProjects();
-  showToast('Project added: ' + title);
-}
 
-function renderBeTech(){
-  const c = document.getElementById('be-tech-list');
-  if(!c) return;
-  c.innerHTML = techProjects.map((p,i) => `
-    <div class="backend-item" style="flex-direction:column;gap:12px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:12px">
-      <div style="display:flex;gap:12px;align-items:flex-start">
-        <div style="flex:1;display:grid;grid-template-columns:2fr 1fr;gap:10px">
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">PROJECT TITLE</div>
-            <input id="be-tp-t-${i}" value="${(p.title||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">STATUS</div>
-            <select id="be-tp-s-${i}" style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-              ${['Live', 'In Development', 'Beta', 'Production'].map(st=>`<option value="${st}" ${p.status===st?'selected':''}>${st}</option>`).join('')}
-            </select>
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">SUBTITLE</div>
-            <input id="be-tp-sub-${i}" value="${(p.subtitle||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">TECH STACK</div>
-            <input id="be-tp-tech-${i}" value="${(p.tech||[]).join(', ')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:#1565c0;margin-bottom:4px;font-weight:600">LIVE DEMO / WEB LINK (Optional)</div>
-            <input id="be-tp-live-${i}" value="${(p.liveUrl||'').replace(/"/g,'&quot;')}" placeholder="https://..."
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:#2e7d32;margin-bottom:4px;font-weight:600">DOWNLOAD / APP LINK (Optional)</div>
-            <input id="be-tp-dl-${i}" value="${(p.downloadUrl||'').replace(/"/g,'&quot;')}" placeholder="https://..."
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:4px;font-weight:600">GITHUB REPOSITORY (Optional)</div>
-            <input id="be-tp-repo-${i}" value="${(p.repoUrl||'').replace(/"/g,'&quot;')}" placeholder="https://github.com/..."
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">DESCRIPTION</div>
-            <textarea id="be-tp-d-${i}" rows="2" style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical">${p.desc||''}</textarea>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
-          <button onclick="beUpdateTech(${i})"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save</button>
-          <button onclick="techProjects.splice(${i},1);saveData('rana_tech_data',techProjects);renderBeTech();renderTechProjects();showToast('Project deleted')"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function beUpdateTech(i){
-  const p = techProjects[i];
-  if(!p) return;
-  p.title    = document.getElementById('be-tp-t-'+i)?.value || p.title;
-  p.status   = document.getElementById('be-tp-s-'+i)?.value || p.status;
-  p.subtitle = document.getElementById('be-tp-sub-'+i)?.value || p.subtitle;
-  p.desc     = document.getElementById('be-tp-d-'+i)?.value || p.desc;
-  const techStr = document.getElementById('be-tp-tech-'+i)?.value || '';
-  p.tech     = techStr.split(',').map(s=>s.trim()).filter(Boolean);
-  saveData('rana_tech_data', techProjects);
-  renderBeTech();
-  showToast('Saved: ' + p.title.substring(0,30));
-}
 
 function addGalleryItem(){
   const title = document.getElementById('b-gal-title').value.trim();
@@ -3238,42 +3321,289 @@ async function loadFromCloudOnline(){
 
 
 
-// ==================== ARTICLES & ESSAYS MASTER ENGINE ====================
-if(!articles || !Array.isArray(articles) || articles.length === 0){
-  articles = [
-  {
-    "id": 1,
-    "title": "My Father Said One Word. He Left the Kitchen. I Spent Fifteen Years Inside It.",
-    "slug": "my-father-said",
-    "cat": "Personal Essay",
-    "category": "Personal Essay",
-    "date": "August 2026",
-    "readTime": "7 min read",
-    "desc": "A meditation on inheritance, labour, and the unspoken language of fathers who communicate through work rather than words.",
-    "url": "https://medium.com/@rana.abdullah.inayat/my-father-said-one-word-he-left-the-kitchen-i-spent-fifteen-years-inside-it-b0a793a3bb07",
-    "tags": [
-      "Writing",
-      "Personal Essay",
-      "Memory"
-    ]
-  },
-  {
-    "id": 2,
-    "title": "The Architecture of Solitude: Lighting & Spatial Emotion in Digital Worlds",
-    "slug": "architecture-of-solitude",
-    "cat": "3D & Design",
-    "category": "3D & Design",
-    "date": "June 2026",
-    "readTime": "5 min read",
-    "desc": "How volumetric daylighting, concrete brut textures, and negative space evoke visceral psychological resonance in digital environments.",
-    "url": "https://medium.com",
-    "tags": [
-      "3D Art",
-      "Unreal Engine 5",
-      "Environment Design"
-    ]
+
+
+
+// ==================== GITHUB CLOUD AUTO-SYNC ENGINE ====================
+function utf8ToBase64(str) {
+  return window.btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+    return String.fromCharCode('0x' + p1);
+  }));
+}
+
+function base64ToUtf8(str) {
+  return decodeURIComponent(Array.prototype.map.call(window.atob(str), function(c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+}
+
+function openGitHubModal(){
+  const m = document.getElementById('github-modal');
+  if(m){
+    m.style.display = 'flex';
+    document.getElementById('gh-token-input').value = localStorage.getItem('rana_gh_token') || '';
+    document.getElementById('gh-owner-input').value = localStorage.getItem('rana_gh_owner') || 'Ranabdullah';
+    document.getElementById('gh-repo-input').value = localStorage.getItem('rana_gh_repo') || 'rana-portfolio';
+    document.getElementById('gh-branch-input').value = localStorage.getItem('rana_gh_branch') || 'main';
+    document.getElementById('gh-path-input').value = localStorage.getItem('rana_gh_path') || 'portfolio_data.json';
+    document.getElementById('gh-autosync-chk').checked = localStorage.getItem('rana_gh_autosync') !== 'false';
+    updateGitHubStatusBadge();
   }
-];
+}
+
+function closeGitHubModal(){
+  const m = document.getElementById('github-modal');
+  if(m) m.style.display = 'none';
+}
+
+function toggleTokenVisibility(){
+  const inp = document.getElementById('gh-token-input');
+  const btn = document.getElementById('gh-toggle-btn');
+  if(inp.type === 'password'){
+    inp.type = 'text';
+    btn.textContent = '🔒 Hide';
+  } else {
+    inp.type = 'password';
+    btn.textContent = '👁️ Show';
+  }
+}
+
+function saveGitHubConfig(){
+  const token = (document.getElementById('gh-token-input')?.value || '').trim();
+  const owner = (document.getElementById('gh-owner-input')?.value || 'Ranabdullah').trim();
+  const repo = (document.getElementById('gh-repo-input')?.value || 'rana-portfolio').trim();
+  const branch = (document.getElementById('gh-branch-input')?.value || 'main').trim();
+  const path = (document.getElementById('gh-path-input')?.value || 'portfolio_data.json').trim();
+  const autosync = document.getElementById('gh-autosync-chk')?.checked;
+
+  if(!token){
+    showToast('Please enter your GitHub Personal Access Token');
+    return;
+  }
+
+  localStorage.setItem('rana_gh_token', token);
+  localStorage.setItem('rana_gh_owner', owner);
+  localStorage.setItem('rana_gh_repo', repo);
+  localStorage.setItem('rana_gh_branch', branch);
+  localStorage.setItem('rana_gh_path', path);
+  localStorage.setItem('rana_gh_autosync', autosync ? 'true' : 'false');
+
+  showToast('🐙 Testing GitHub connection...');
+  pushToGitHubDirect(true);
+}
+
+function disconnectGitHub(){
+  if(confirm('Disconnect GitHub Sync and remove saved token from this browser?')){
+    localStorage.removeItem('rana_gh_token');
+    localStorage.removeItem('rana_gh_last_sync');
+    updateGitHubStatusBadge('disconnected');
+    showToast('GitHub disconnected');
+    closeGitHubModal();
+  }
+}
+
+function updateGitHubStatusBadge(status, commitSha){
+  const token = localStorage.getItem('rana_gh_token');
+  const owner = localStorage.getItem('rana_gh_owner') || 'Ranabdullah';
+  const repo = localStorage.getItem('rana_gh_repo') || 'rana-portfolio';
+  const lastSync = localStorage.getItem('rana_gh_last_sync');
+
+  const dot = document.getElementById('gh-status-dot');
+  const label = document.getElementById('gh-header-label');
+  const modalDot = document.getElementById('gh-modal-dot');
+  const statusText = document.getElementById('gh-status-text');
+  const timeText = document.getElementById('gh-last-sync-time');
+
+  if(status === 'syncing'){
+    if(dot) dot.style.background = '#e3b341';
+    if(label) label.textContent = '🐙 Syncing...';
+    if(modalDot) modalDot.style.background = '#e3b341';
+    if(statusText) statusText.textContent = 'Status: Syncing with GitHub...';
+    return;
+  }
+
+  if(token){
+    if(dot) dot.style.background = '#2da44e';
+    if(label) label.textContent = '🐙 GitHub Sync: Active ✓';
+    if(modalDot) modalDot.style.background = '#2da44e';
+    if(statusText) statusText.textContent = `Status: Connected to ${owner}/${repo} ✓`;
+    if(timeText && lastSync){
+      const d = new Date(lastSync);
+      timeText.textContent = 'Last synced: ' + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }
+  } else {
+    if(dot) dot.style.background = '#8b949e';
+    if(label) label.textContent = '🐙 GitHub Sync';
+    if(modalDot) modalDot.style.background = '#8b949e';
+    if(statusText) statusText.textContent = 'Status: Not Connected';
+    if(timeText) timeText.textContent = 'Never synced';
+  }
+}
+
+async function pushToGitHubDirect(isManual = true){
+  const token = (localStorage.getItem('rana_gh_token') || '').trim();
+  const owner = (localStorage.getItem('rana_gh_owner') || 'Ranabdullah').trim();
+  const repo = (localStorage.getItem('rana_gh_repo') || 'rana-portfolio').trim();
+  const branch = (localStorage.getItem('rana_gh_branch') || 'main').trim();
+  const path = (localStorage.getItem('rana_gh_path') || 'portfolio_data.json').trim();
+
+  if(!token){
+    if(isManual) openGitHubModal();
+    return;
+  }
+
+  updateGitHubStatusBadge('syncing');
+  if(isManual) showToast('🐙 Connecting to GitHub & pushing changes...');
+
+  const fullDatabase = {
+    updatedAt: new Date().toISOString(),
+    gallery: galleryItems,
+    novels: novels,
+    tech: techProjects,
+    software: software,
+    articles: articles,
+    experience: experience,
+    clients: clients
+  };
+
+  const contentStr = JSON.stringify(fullDatabase, null, 2);
+  const base64Content = utf8ToBase64(contentStr);
+
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+  try {
+    // 1. Get existing file SHA if it exists
+    let existingSha = null;
+    try {
+      const getRes = await fetch(`${url}?ref=${branch}&_t=${Date.now()}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if(getRes.ok) {
+        const fileInfo = await getRes.json();
+        existingSha = fileInfo.sha;
+      }
+    } catch(e) {
+      console.warn('Could not fetch existing file SHA:', e);
+    }
+
+    // 2. PUT commit
+    const body = {
+      message: `Auto-sync portfolio database update [${new Date().toISOString()}]`,
+      content: base64Content,
+      branch: branch
+    };
+    if(existingSha) {
+      body.sha = existingSha;
+    }
+
+    const putRes = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    if(putRes.ok) {
+      const resData = await putRes.json();
+      const commitSha = resData.commit?.sha?.substring(0, 7) || 'latest';
+      localStorage.setItem('rana_gh_last_sync', new Date().toISOString());
+      updateGitHubStatusBadge('synced', commitSha);
+      showToast(`🐙 Synced to GitHub (${commitSha})`);
+      if(isManual) closeGitHubModal();
+    } else {
+      const errJson = await putRes.json().catch(() => ({}));
+      updateGitHubStatusBadge('error');
+      console.error('GitHub API error:', errJson);
+      if(isManual) alert('GitHub Sync Error: ' + (errJson.message || putRes.statusText));
+      else showToast('⚠️ GitHub sync failed: ' + (errJson.message || 'Check token permissions'));
+    }
+  } catch(err) {
+    updateGitHubStatusBadge('error');
+    console.error('GitHub sync error:', err);
+    if(isManual) alert('Connection Error: ' + err.message);
+  }
+}
+
+async function pullFromGitHubDirect(){
+  const token = (localStorage.getItem('rana_gh_token') || '').trim();
+  const owner = (localStorage.getItem('rana_gh_owner') || 'Ranabdullah').trim();
+  const repo = (localStorage.getItem('rana_gh_repo') || 'rana-portfolio').trim();
+  const branch = (localStorage.getItem('rana_gh_branch') || 'main').trim();
+  const path = (localStorage.getItem('rana_gh_path') || 'portfolio_data.json').trim();
+
+  if(!token){
+    openGitHubModal();
+    return;
+  }
+
+  showToast('🐙 Pulling latest database from GitHub...');
+
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}&t=${Date.now()}`;
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+
+    if(res.ok) {
+      const fileData = await res.json();
+      const rawText = base64ToUtf8(fileData.content);
+      const data = JSON.parse(rawText);
+
+      if(data.gallery) { galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
+      if(data.novels) { novels = data.novels; saveData('rana_novels_data', novels); }
+      if(data.tech) { techProjects = data.tech; saveData('rana_tech_data', techProjects); }
+      if(data.software) { software = data.software; saveData('rana_software_data', software); }
+      if(data.articles) { articles = data.articles; saveData('rana_articles_data', articles); }
+      if(data.experience) { experience = data.experience; saveData('rana_experience_data', experience); }
+      if(data.clients) { clients = data.clients; saveData('rana_clients_data', clients); }
+
+      renderBackend();
+      renderHome();
+      renderGallery('all');
+      showToast('🐙 All portfolio data pulled & updated from GitHub!');
+      closeGitHubModal();
+    } else {
+      const err = await res.json().catch(() => ({}));
+      alert('Could not find portfolio file on GitHub: ' + (err.message || res.statusText));
+    }
+  } catch(e) {
+    alert('Error pulling from GitHub: ' + e.message);
+  }
+}
+
+// Debounced Auto-Sync on any change
+let ghDebounceTimer = null;
+function scheduleGitHubAutoSync(){
+  const token = localStorage.getItem('rana_gh_token');
+  const auto = localStorage.getItem('rana_gh_autosync') !== 'false';
+  if(!token || !auto) return;
+
+  updateGitHubStatusBadge('syncing');
+  clearTimeout(ghDebounceTimer);
+  ghDebounceTimer = setTimeout(() => {
+    pushToGitHubDirect(false);
+  }, 1800);
+}
+
+
+// Init GitHub Sync Badge
+setTimeout(updateGitHubStatusBadge, 200);
+
+
+// ==================== CANONICAL ARTICLES DATA ====================
+articles = loadData('rana_articles_data', ARTICLES_DATA);
+if(!articles || !Array.isArray(articles) || articles.length < 5){
+  articles = JSON.parse(JSON.stringify(ARTICLES_DATA));
   saveData('rana_articles_data', articles);
 }
 
@@ -3281,47 +3611,14 @@ function renderArticles(){
   const c = document.getElementById('articlesPageGrid');
   if(!c) return;
   if(!articles || articles.length === 0){
-    articles = [
-  {
-    "id": 1,
-    "title": "My Father Said One Word. He Left the Kitchen. I Spent Fifteen Years Inside It.",
-    "slug": "my-father-said",
-    "cat": "Personal Essay",
-    "category": "Personal Essay",
-    "date": "August 2026",
-    "readTime": "7 min read",
-    "desc": "A meditation on inheritance, labour, and the unspoken language of fathers who communicate through work rather than words.",
-    "url": "https://medium.com/@rana.abdullah.inayat/my-father-said-one-word-he-left-the-kitchen-i-spent-fifteen-years-inside-it-b0a793a3bb07",
-    "tags": [
-      "Writing",
-      "Personal Essay",
-      "Memory"
-    ]
-  },
-  {
-    "id": 2,
-    "title": "The Architecture of Solitude: Lighting & Spatial Emotion in Digital Worlds",
-    "slug": "architecture-of-solitude",
-    "cat": "3D & Design",
-    "category": "3D & Design",
-    "date": "June 2026",
-    "readTime": "5 min read",
-    "desc": "How volumetric daylighting, concrete brut textures, and negative space evoke visceral psychological resonance in digital environments.",
-    "url": "https://medium.com",
-    "tags": [
-      "3D Art",
-      "Unreal Engine 5",
-      "Environment Design"
-    ]
-  }
-];
+    articles = JSON.parse(JSON.stringify(ARTICLES_DATA));
   }
   c.innerHTML = articles.map(a=>`
     <div class="article-card" onclick="if('${a.url}'.startsWith('http')){window.open('${a.url}','_blank')}else{location.href='${a.url}'}">
       <div>
-        <div class="article-meta">${a.category || a.cat || 'Essay'} · ${a.date || '2026'} · ${a.readTime || '5 min read'}</div>
-        <h3 class="article-title">${a.title}</h3>
-        <p class="article-desc">${a.desc || ''}</p>
+        <div class="article-meta" style="font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:8px">${a.category || a.cat || 'Essay'} · ${a.date || '2026'} · ${a.readTime || '5 min read'}</div>
+        <h3 class="article-title" style="font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ink);margin:0 0 10px;line-height:1.3">${a.title}</h3>
+        <p class="article-desc" style="font-size:13px;color:var(--ink2);line-height:1.6;margin:0 0 16px">${a.desc || ''}</p>
         <div class="tech-tags-wrap" style="margin-bottom:20px">
           ${(a.tags||['Writing', 'Essay']).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
         </div>
@@ -3335,40 +3632,7 @@ function renderBeArticles(){
   const c = document.getElementById('be-articles-list');
   if(!c) return;
   if(!articles || !Array.isArray(articles) || articles.length === 0){
-    articles = [
-  {
-    "id": 1,
-    "title": "My Father Said One Word. He Left the Kitchen. I Spent Fifteen Years Inside It.",
-    "slug": "my-father-said",
-    "cat": "Personal Essay",
-    "category": "Personal Essay",
-    "date": "August 2026",
-    "readTime": "7 min read",
-    "desc": "A meditation on inheritance, labour, and the unspoken language of fathers who communicate through work rather than words.",
-    "url": "https://medium.com/@rana.abdullah.inayat/my-father-said-one-word-he-left-the-kitchen-i-spent-fifteen-years-inside-it-b0a793a3bb07",
-    "tags": [
-      "Writing",
-      "Personal Essay",
-      "Memory"
-    ]
-  },
-  {
-    "id": 2,
-    "title": "The Architecture of Solitude: Lighting & Spatial Emotion in Digital Worlds",
-    "slug": "architecture-of-solitude",
-    "cat": "3D & Design",
-    "category": "3D & Design",
-    "date": "June 2026",
-    "readTime": "5 min read",
-    "desc": "How volumetric daylighting, concrete brut textures, and negative space evoke visceral psychological resonance in digital environments.",
-    "url": "https://medium.com",
-    "tags": [
-      "3D Art",
-      "Unreal Engine 5",
-      "Environment Design"
-    ]
-  }
-];
+    articles = JSON.parse(JSON.stringify(ARTICLES_DATA));
     saveData('rana_articles_data', articles);
   }
   c.innerHTML = articles.map((a,i) => `
@@ -3453,6 +3717,176 @@ function beUpdateArticle(i){
   renderBeArticles();
   renderArticles();
   showToast('Saved: ' + a.title.substring(0,30));
+}
+
+// ==================== TECHNICAL PROJECTS COMPLETE ENGINE ====================
+function renderBeTech(){
+  const c = document.getElementById('be-tech-list');
+  if(!c) return;
+  c.innerHTML = techProjects.map((p,i) => {
+    const featStr = Array.isArray(p.features) ? p.features.join(', ') : (p.features || '');
+    const techStr = Array.isArray(p.tech) ? (typeof p.tech[0]==='object' ? p.tech.map(t=>t.name).join(', ') : p.tech.join(', ')) : (p.tech || '');
+    const liveVal = p.liveUrl || p.webUrl || '';
+    const dlVal = p.downloadUrl || '';
+    const repoVal = p.repoUrl || p.githubUrl || '';
+
+    return `
+    <div class="backend-item" style="flex-direction:column;gap:12px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:14px" id="be-tech-card-${i}">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--border)">
+        <div style="font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink)">
+          Position [ ${String(i+1).padStart(2,'0')} of ${techProjects.length} ] &middot; ID: ${p.id || 'tech-'+i}
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <button onclick="moveTechProject(${i}, -1)" ${i===0?'disabled style="opacity:0.3;cursor:not-allowed"':'style="cursor:pointer"'}
+            class="be-pos-btn" title="Move Up in order">&#9650; Move Up</button>
+          <button onclick="moveTechProject(${i}, 1)" ${i===techProjects.length-1?'disabled style="opacity:0.3;cursor:not-allowed"':'style="cursor:pointer"'}
+            class="be-pos-btn" title="Move Down in order">&#9660; Move Down</button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div style="flex:1;display:grid;grid-template-columns:2fr 1fr;gap:10px">
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">PROJECT TITLE</div>
+            <input id="be-tp-t-${i}" value="${(p.title||'').replace(/"/g,'&quot;')}"
+              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">STATUS</div>
+            <input id="be-tp-s-${i}" value="${(p.status||'Live').replace(/"/g,'&quot;')}" placeholder="Live, Beta, Production..."
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">SUBTITLE / PLATFORM TYPE</div>
+            <input id="be-tp-sub-${i}" value="${(p.subtitle||'').replace(/"/g,'&quot;')}" placeholder="e.g. Chrome Multi-Profile Link Vault"
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">TECH STACK (comma-separated)</div>
+            <input id="be-tp-tech-${i}" value="${techStr.replace(/"/g,'&quot;')}" placeholder="Electron, Node.js, TypeScript"
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
+          <div style="grid-column:1/-1">
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">KEY ARCHITECTURAL FEATURES (comma-separated)</div>
+            <input id="be-tp-feat-${i}" value="${featStr.replace(/"/g,'&quot;')}" placeholder="AES-256-GCM encrypted vault, 13+ Chrome profile support, 1-click launch"
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;color:#1565c0;margin-bottom:4px;font-weight:600">LIVE DEMO / WEB LINK (Optional)</div>
+            <input id="be-tp-live-${i}" value="${liveVal.replace(/"/g,'&quot;')}" placeholder="https://..."
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;color:#2e7d32;margin-bottom:4px;font-weight:600">DOWNLOAD / APP LINK (Optional)</div>
+            <input id="be-tp-dl-${i}" value="${dlVal.replace(/"/g,'&quot;')}" placeholder="https://..."
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
+          <div style="grid-column:1/-1">
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:4px;font-weight:600">GITHUB REPOSITORY (Optional)</div>
+            <input id="be-tp-repo-${i}" value="${repoVal.replace(/"/g,'&quot;')}" placeholder="https://github.com/..."
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
+          <div style="grid-column:1/-1">
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">DESCRIPTION</div>
+            <textarea id="be-tp-d-${i}" rows="3" style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical">${p.desc||''}</textarea>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
+          <button onclick="beUpdateTech(${i})"
+            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save</button>
+          <button onclick="techProjects.splice(${i},1);saveData('rana_tech_data',techProjects);renderBeTech();renderTechProjects();renderHome();showToast('Project deleted')"
+            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
+        </div>
+      </div>
+    </div>
+  `;
+  }).join('');
+}
+
+function addTechProject(){
+  const title = (document.getElementById('b-tech-title')?.value || '').trim();
+  if(!title){ showToast('Title required'); return; }
+  const stackStr = (document.getElementById('b-tech-stack')?.value || 'JavaScript').trim();
+  const featStr = (document.getElementById('b-tech-features')?.value || '').trim();
+  const pos = document.getElementById('b-tech-pos')?.value || 'end';
+
+  const p = {
+    id: 'proj-' + Date.now(),
+    title,
+    subtitle: document.getElementById('b-tech-sub')?.value || '',
+    status: document.getElementById('b-tech-status')?.value || 'Live',
+    badgeClass: 'badge-outline',
+    num: '0' + (techProjects.length + 1),
+    desc: document.getElementById('b-tech-desc')?.value || '',
+    liveUrl: (document.getElementById('b-tech-live')?.value || '').trim(),
+    downloadUrl: (document.getElementById('b-tech-dl')?.value || '').trim(),
+    repoUrl: (document.getElementById('b-tech-repo')?.value || '').trim(),
+    features: featStr ? featStr.split(/[,\r\n]+/).map(s=>s.trim()).filter(Boolean) : ['Modular architecture', 'High-performance runtime'],
+    tech: stackStr.split(',').map(s=>s.trim()).filter(Boolean)
+  };
+
+  if(pos === 'top'){
+    techProjects.unshift(p);
+  } else {
+    techProjects.push(p);
+  }
+  // Renumber
+  techProjects.forEach((proj, idx) => {
+    proj.num = String(idx + 1).padStart(2, '0');
+  });
+
+  saveData('rana_tech_data', techProjects);
+  renderBeTech();
+  renderTechProjects();
+  renderHome();
+  showToast('Project added: ' + title);
+
+  const tInp = document.getElementById('b-tech-title');
+  if(tInp) tInp.value = '';
+}
+
+function beUpdateTech(i){
+  const p = techProjects[i];
+  if(!p) return;
+  p.title       = document.getElementById('be-tp-t-'+i)?.value || p.title;
+  p.status      = document.getElementById('be-tp-s-'+i)?.value || p.status;
+  p.subtitle    = document.getElementById('be-tp-sub-'+i)?.value || p.subtitle;
+  p.liveUrl     = (document.getElementById('be-tp-live-'+i)?.value || '').trim();
+  p.downloadUrl = (document.getElementById('be-tp-dl-'+i)?.value || '').trim();
+  p.repoUrl     = (document.getElementById('be-tp-repo-'+i)?.value || '').trim();
+  p.desc        = document.getElementById('be-tp-d-'+i)?.value || p.desc;
+  
+  const techStr = document.getElementById('be-tp-tech-'+i)?.value || '';
+  p.tech        = techStr.split(',').map(s=>s.trim()).filter(Boolean);
+
+  const featStr = document.getElementById('be-tp-feat-'+i)?.value || '';
+  p.features    = featStr.split(/[,\r\n]+/).map(s=>s.trim()).filter(Boolean);
+
+  saveData('rana_tech_data', techProjects);
+  renderBeTech();
+  renderTechProjects();
+  renderHome();
+  showToast('Saved: ' + p.title.substring(0,30));
+}
+
+function moveTechProject(index, direction){
+  const targetIndex = index + direction;
+  if(targetIndex < 0 || targetIndex >= techProjects.length) return;
+  
+  const temp = techProjects[index];
+  techProjects[index] = techProjects[targetIndex];
+  techProjects[targetIndex] = temp;
+
+  // Renumber
+  techProjects.forEach((p, idx) => {
+    p.num = String(idx + 1).padStart(2, '0');
+  });
+
+  saveData('rana_tech_data', techProjects);
+  renderBeTech();
+  renderTechProjects();
+  renderHome();
+  showToast(`Moved "${temp.title.substring(0,24)}" to position ${targetIndex + 1}`);
 }
 
 </script>
