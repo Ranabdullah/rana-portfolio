@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T21:44:51.203Z",
+  "updatedAt": "2026-08-31T21:45:06.388Z",
   "gallery": [
     {
       "title": "Children's Creative Studio & Art Illustration Study",
@@ -153,7 +153,7 @@
       ]
     },
     {
-      "title": "Character Study: Facial Structure, Gesture & Kinetic Figure Dynamics",
+      "title": "The Kinetic Figure: Character Studies in Anatomy, Gesture, and Form",
       "pillar": "Personal",
       "cat": "character",
       "desc": "Traditional hand-drawn anatomical studies examining dynamic silhouette weight distribution, skull plane transitions, and gestural momentum.",
@@ -162,7 +162,9 @@
         "Photos & to upload/Sketch/11053043_919157774801703_4563455775003564932_n.jpg",
         "Photos & to upload/Sketch/11202825_919018721482275_3884168732202231454_o.jpg",
         "Photos & to upload/Sketch/12.jpg"
-      ]
+      ],
+      "subVideos": {},
+      "youtubeUrl": ""
     },
     {
       "title": "Desert Megacity & Sci-Fi Heavy Reconnaissance Vessel",
