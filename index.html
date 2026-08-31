@@ -1812,7 +1812,7 @@ body.theme-dark .be-login-btn:hover {
     <div class="section-label">Tools &amp; Pipelines</div>
     <h1 class="section-title">Built <em>Software</em></h1>
   </div>
-  <div id="softwareContent">
+  <div id="softwareContainer">
     <!-- Injected by JS -->
   </div>
 </div>
@@ -4377,7 +4377,7 @@ function lbNav(dir){
 
 // 5. SOFTWARE PAGE (B&W WITH IMAGES)
 function renderSoftware(){
-  const c = document.getElementById('softwareContainer');
+  const c = document.getElementById('softwareContainer') || document.getElementById('softwareContent');
   if(!c) return;
   c.innerHTML = `
     <div class="software-cat-section" style="padding:48px;background:var(--bg)">
