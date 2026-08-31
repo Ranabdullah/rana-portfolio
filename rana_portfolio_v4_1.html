@@ -5020,170 +5020,38 @@ window.addEventListener('keydown', function(e){
 
 
 // ==================== FULL-BACKGROUND 3D GENERATIVE ABSTRACT ENGINE ====================
-// ==================== INTERACTIVE CURSOR TIME-OF-DAY HERO ENGINE ====================
-let heroMode = 'cursor'; // 'cursor' | 'light' | 'evening' | 'dark'
-let heroTargetX = 0.65;
-let heroTargetY = 0.45;
-let heroCurX = 0.65;
-let heroCurY = 0.45;
-let heroRadiusEve = 520;
-let heroRadiusDark = 280;
-let heroTargetRadiusEve = 520;
-let heroTargetRadiusDark = 280;
-let heroAnimId = null;
-let heroIsHovered = false;
-let heroAmbientAngle = 0;
+// ==================== SEAMLESS CLOUD AUTO-SYNC ON INITIAL BOOT ====================
+async function autoFetchCloudDatabaseOnBoot(){
+  try {
+    const res = await fetch('portfolio_data.json?_t=' + Date.now());
+    if(!res.ok) return;
+    const cloudDb = await res.json();
+    if(!cloudDb || !cloudDb.updatedAt) return;
 
-function setHeroGlobalMode(mode){
-  heroMode = mode;
-  const lLight = document.getElementById('heroLayerLight');
-  const lEve = document.getElementById('heroLayerEvening');
-  const lDark = document.getElementById('heroLayerDark');
-  const ind = document.getElementById('heroColorIndicator');
-  const lbl = document.getElementById('heroTimeLabel');
-
-  ['cursor', 'light', 'evening', 'dark'].forEach(m => {
-    const btn = document.getElementById('btnAtmo' + m.charAt(0).toUpperCase() + m.slice(1));
-    if(btn){
-      if(m === mode){
-        btn.style.background = m === 'dark' ? 'rgba(79,195,247,0.3)' : (m === 'evening' ? 'rgba(255,112,67,0.3)' : 'rgba(255,202,40,0.3)');
-        btn.style.borderColor = m === 'dark' ? '#4fc3f7' : (m === 'evening' ? '#ff7043' : '#ffca28');
-        btn.style.color = m === 'dark' ? '#4fc3f7' : (m === 'evening' ? '#ff7043' : '#ffca28');
-        btn.style.fontWeight = '600';
-      } else {
-        btn.style.background = 'rgba(255,255,255,0.08)';
-        btn.style.borderColor = 'rgba(255,255,255,0.2)';
-        btn.style.color = '#c9d1d9';
-        btn.style.fontWeight = '400';
+    const localUpdated = localStorage.getItem('rana_last_cloud_update');
+    if(!localUpdated || new Date(cloudDb.updatedAt) > new Date(localUpdated) || !localStorage.getItem('rana_gallery_data')){
+      if(cloudDb.gallery && Array.isArray(cloudDb.gallery)) { galleryItems = cloudDb.gallery; saveData('rana_gallery_data', galleryItems); }
+      if(cloudDb.novels && Array.isArray(cloudDb.novels)) { novels = cloudDb.novels; saveData('rana_novels_data', novels); }
+      if(cloudDb.tech && Array.isArray(cloudDb.tech)) { techProjects = cloudDb.tech; saveData('rana_tech_data', techProjects); }
+      if(cloudDb.software && Array.isArray(cloudDb.software)) { software = cloudDb.software; saveData('rana_software_data', software); }
+      if(cloudDb.articles && Array.isArray(cloudDb.articles)) { articles = cloudDb.articles; saveData('rana_articles_data', articles); }
+      if(cloudDb.experience && Array.isArray(cloudDb.experience)) { experience = cloudDb.experience; saveData('rana_experience_data', experience); }
+      if(cloudDb.clients && Array.isArray(cloudDb.clients)) { clients = cloudDb.clients; saveData('rana_clients_data', clients); }
+      
+      localStorage.setItem('rana_last_cloud_update', cloudDb.updatedAt);
+      
+      const activePage = document.querySelector('.page.active');
+      if(activePage){
+        const pageId = activePage.id.replace('page-','');
+        renderPage(pageId);
       }
     }
-  });
-
-  if(mode === 'cursor'){
-    if(lLight) lLight.style.opacity = '1';
-    if(lEve){
-      lEve.style.opacity = '1';
-      lEve.style.webkitMaskImage = 'radial-gradient(circle var(--eve-radius, 520px) at var(--mouse-x, 65%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0) 100%)';
-      lEve.style.maskImage = 'radial-gradient(circle var(--eve-radius, 520px) at var(--mouse-x, 65%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0) 100%)';
-    }
-    if(lDark){
-      lDark.style.opacity = '1';
-      lDark.style.webkitMaskImage = 'radial-gradient(circle var(--dark-radius, 280px) at var(--mouse-x, 65%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0) 100%)';
-      lDark.style.maskImage = 'radial-gradient(circle var(--dark-radius, 280px) at var(--mouse-x, 65%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0) 100%)';
-    }
-    if(ind){ ind.style.background = '#ffca28'; ind.style.boxShadow = '0 0 10px #ffca28'; }
-    if(lbl){ lbl.textContent = 'INTERACTIVE CURSOR ILLUMINATION'; lbl.style.color = '#ffca28'; }
-  } else if(mode === 'light'){
-    if(lLight) lLight.style.opacity = '1';
-    if(lEve){ lEve.style.opacity = '0'; lEve.style.webkitMaskImage = 'none'; lEve.style.maskImage = 'none'; }
-    if(lDark){ lDark.style.opacity = '0'; lDark.style.webkitMaskImage = 'none'; lDark.style.maskImage = 'none'; }
-    if(ind){ ind.style.background = '#ffca28'; ind.style.boxShadow = '0 0 10px #ffca28'; }
-    if(lbl){ lbl.textContent = 'FULL DAYLIGHT STUDY'; lbl.style.color = '#ffca28'; }
-  } else if(mode === 'evening'){
-    if(lLight) lLight.style.opacity = '1';
-    if(lEve){
-      lEve.style.opacity = '1';
-      lEve.style.webkitMaskImage = 'none';
-      lEve.style.maskImage = 'none';
-    }
-    if(lDark){ lDark.style.opacity = '0'; lDark.style.webkitMaskImage = 'none'; lDark.style.maskImage = 'none'; }
-    if(ind){ ind.style.background = '#ff7043'; ind.style.boxShadow = '0 0 10px #ff7043'; }
-    if(lbl){ lbl.textContent = 'FULL EVENING GOLDEN HOUR'; lbl.style.color = '#ff7043'; }
-  } else if(mode === 'dark'){
-    if(lLight) lLight.style.opacity = '1';
-    if(lEve){ lEve.style.opacity = '0'; lEve.style.webkitMaskImage = 'none'; lEve.style.maskImage = 'none'; }
-    if(lDark){
-      lDark.style.opacity = '1';
-      lDark.style.webkitMaskImage = 'none';
-      lDark.style.maskImage = 'none';
-    }
-    if(ind){ ind.style.background = '#4fc3f7'; ind.style.boxShadow = '0 0 10px #4fc3f7'; }
-    if(lbl){ lbl.textContent = 'FULL NOCTURNAL NIGHT'; lbl.style.color = '#4fc3f7'; }
-  }
-}
-window.setHeroGlobalMode = setHeroGlobalMode;
-
-function setupInteractiveHero(){
-  const hero = document.getElementById('homeHeroSection') || document.querySelector('.home-hero');
-  if(!hero) return;
-
-  // Window-level tracking so mouse movement over text/buttons is seamless
-  window.addEventListener('mousemove', function(e){
-    if(heroMode !== 'cursor') return;
-    if(!document.getElementById('page-home')?.classList.contains('active')) return;
-    
-    const rect = hero.getBoundingClientRect();
-    if(e.clientY >= rect.top && e.clientY <= rect.bottom){
-      heroTargetX = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      heroTargetY = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
-      heroIsHovered = true;
-      heroTargetRadiusEve = 560;
-      heroTargetRadiusDark = 300;
-    } else {
-      heroIsHovered = false;
-      heroTargetRadiusEve = 440;
-      heroTargetRadiusDark = 220;
-    }
-  });
-
-  // Touch support for mobile devices
-  window.addEventListener('touchmove', function(e){
-    if(heroMode !== 'cursor' || !e.touches[0]) return;
-    if(!document.getElementById('page-home')?.classList.contains('active')) return;
-    
-    const rect = hero.getBoundingClientRect();
-    if(e.touches[0].clientY >= rect.top && e.touches[0].clientY <= rect.bottom){
-      heroTargetX = Math.max(0, Math.min(1, (e.touches[0].clientX - rect.left) / rect.width));
-      heroTargetY = Math.max(0, Math.min(1, (e.touches[0].clientY - rect.top) / rect.height));
-      heroIsHovered = true;
-    }
-  }, { passive: true });
-
-  if(!heroAnimId){
-    animateInteractiveHero();
+  } catch(e){
+    console.warn('Silent cloud boot fetch info:', e);
   }
 }
 
-function animateInteractiveHero(){
-  if(document.getElementById('page-home')?.classList.contains('active')){
-    // Smooth lerp physics
-    if(!heroIsHovered && heroMode === 'cursor'){
-      heroAmbientAngle += 0.008;
-      const ambX = 0.65 + Math.cos(heroAmbientAngle) * 0.12;
-      const ambY = 0.45 + Math.sin(heroAmbientAngle * 0.7) * 0.08;
-      heroCurX += (ambX - heroCurX) * 0.04;
-      heroCurY += (ambY - heroCurY) * 0.04;
-    } else {
-      heroCurX += (heroTargetX - heroCurX) * 0.09;
-      heroCurY += (heroTargetY - heroCurY) * 0.09;
-    }
-
-    heroRadiusEve += (heroTargetRadiusEve - heroRadiusEve) * 0.06;
-    heroRadiusDark += (heroTargetRadiusDark - heroRadiusDark) * 0.06;
-
-    const hero = document.getElementById('homeHeroSection') || document.querySelector('.home-hero');
-    if(hero && heroMode === 'cursor'){
-      const posX = (heroCurX * 100).toFixed(2) + '%';
-      const posY = (heroCurY * 100).toFixed(2) + '%';
-      hero.style.setProperty('--mouse-x', posX);
-      hero.style.setProperty('--mouse-y', posY);
-      hero.style.setProperty('--eve-radius', Math.round(heroRadiusEve) + 'px');
-      hero.style.setProperty('--dark-radius', Math.round(heroRadiusDark) + 'px');
-    }
-  }
-
-  heroAnimId = requestAnimationFrame(animateInteractiveHero);
-}
-
-
-
-
-
-// ==================== BACKUP & EXPORT MODAL HANDLERS ====================
-function openBackupModal(){
-  const m = document.getElementById('backup-modal');
-  if(m){ m.style.display = 'flex'; exportDataSection('gallery'); }
-}
+// ==================== MASTER INTERACTIVE HERO TIME-OF-DAY ENGINE ====================
 function closeBackupModal(){
   const m = document.getElementById('backup-modal');
   if(m) m.style.display = 'none';
@@ -6021,6 +5889,118 @@ function scheduleGitHubAutoSync(){
 
 // Init GitHub Sync Badge
 setTimeout(updateGitHubStatusBadge, 200);
+
+
+// ==================== MASTER INTERACTIVE HERO TIME-OF-DAY ENGINE ====================
+let heroMode = 'cursor'; // 'cursor' | 'light' | 'evening' | 'dark'
+let heroTargetX = 0.65;
+let heroTargetY = 0.45;
+
+function setHeroGlobalMode(mode){
+  heroMode = mode;
+  const lLight = document.getElementById('heroLayerLight');
+  const lEve = document.getElementById('heroLayerEvening');
+  const lDark = document.getElementById('heroLayerDark');
+  const ind = document.getElementById('heroColorIndicator');
+  const lbl = document.getElementById('heroTimeLabel');
+
+  ['cursor', 'light', 'evening', 'dark'].forEach(m => {
+    const btn = document.getElementById('btnAtmo' + m.charAt(0).toUpperCase() + m.slice(1));
+    if(btn){
+      if(m === mode){
+        btn.style.background = m === 'dark' ? 'rgba(79,195,247,0.3)' : (m === 'evening' ? 'rgba(255,112,67,0.3)' : 'rgba(255,202,40,0.3)');
+        btn.style.borderColor = m === 'dark' ? '#4fc3f7' : (m === 'evening' ? '#ff7043' : '#ffca28');
+        btn.style.color = m === 'dark' ? '#4fc3f7' : (m === 'evening' ? '#ff7043' : '#ffca28');
+        btn.style.fontWeight = '600';
+      } else {
+        btn.style.background = 'rgba(255,255,255,0.08)';
+        btn.style.borderColor = 'rgba(255,255,255,0.2)';
+        btn.style.color = '#c9d1d9';
+        btn.style.fontWeight = '400';
+      }
+    }
+  });
+
+  if(mode === 'cursor'){
+    if(lLight) { lLight.style.opacity = '1'; lLight.style.webkitMaskImage = 'none'; lLight.style.maskImage = 'none'; }
+    if(lEve){
+      lEve.style.opacity = '1';
+      lEve.style.webkitMaskImage = 'radial-gradient(circle 540px at var(--mouse-x, 65%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0) 100%)';
+      lEve.style.maskImage = 'radial-gradient(circle 540px at var(--mouse-x, 65%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0) 100%)';
+    }
+    if(lDark){
+      lDark.style.opacity = '1';
+      lDark.style.webkitMaskImage = 'radial-gradient(circle 280px at var(--mouse-x, 65%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0) 100%)';
+      lDark.style.maskImage = 'radial-gradient(circle 280px at var(--mouse-x, 65%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0) 100%)';
+    }
+    if(ind){ ind.style.background = '#ffca28'; ind.style.boxShadow = '0 0 10px #ffca28'; }
+    if(lbl){ lbl.textContent = 'INTERACTIVE CURSOR ILLUMINATION'; lbl.style.color = '#ffca28'; }
+  } else if(mode === 'light'){
+    if(lLight) { lLight.style.opacity = '1'; lLight.style.webkitMaskImage = 'none'; lLight.style.maskImage = 'none'; }
+    if(lEve){ lEve.style.opacity = '0'; lEve.style.webkitMaskImage = 'none'; lEve.style.maskImage = 'none'; }
+    if(lDark){ lDark.style.opacity = '0'; lDark.style.webkitMaskImage = 'none'; lDark.style.maskImage = 'none'; }
+    if(ind){ ind.style.background = '#ffca28'; ind.style.boxShadow = '0 0 10px #ffca28'; }
+    if(lbl){ lbl.textContent = 'FULL DAYLIGHT STUDY'; lbl.style.color = '#ffca28'; }
+  } else if(mode === 'evening'){
+    if(lLight) { lLight.style.opacity = '1'; lLight.style.webkitMaskImage = 'none'; lLight.style.maskImage = 'none'; }
+    if(lEve){
+      lEve.style.opacity = '1';
+      lEve.style.webkitMaskImage = 'none';
+      lEve.style.maskImage = 'none';
+    }
+    if(lDark){ lDark.style.opacity = '0'; lDark.style.webkitMaskImage = 'none'; lDark.style.maskImage = 'none'; }
+    if(ind){ ind.style.background = '#ff7043'; ind.style.boxShadow = '0 0 10px #ff7043'; }
+    if(lbl){ lbl.textContent = 'FULL EVENING GOLDEN HOUR'; lbl.style.color = '#ff7043'; }
+  } else if(mode === 'dark'){
+    if(lLight) { lLight.style.opacity = '1'; lLight.style.webkitMaskImage = 'none'; lLight.style.maskImage = 'none'; }
+    if(lEve){ lEve.style.opacity = '0'; lEve.style.webkitMaskImage = 'none'; lEve.style.maskImage = 'none'; }
+    if(lDark){
+      lDark.style.opacity = '1';
+      lDark.style.webkitMaskImage = 'none';
+      lDark.style.maskImage = 'none';
+    }
+    if(ind){ ind.style.background = '#4fc3f7'; ind.style.boxShadow = '0 0 10px #4fc3f7'; }
+    if(lbl){ lbl.textContent = 'FULL NOCTURNAL NIGHT'; lbl.style.color = '#4fc3f7'; }
+  }
+}
+window.setHeroGlobalMode = setHeroGlobalMode;
+
+function setupInteractiveHero(){
+  const hero = document.getElementById('homeHeroSection') || document.querySelector('.home-hero');
+  if(!hero) return;
+
+  function updateMouseCoords(clientX, clientY){
+    const rect = hero.getBoundingClientRect();
+    if(rect.width === 0 || rect.height === 0) return;
+    heroTargetX = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    heroTargetY = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+    
+    if(heroMode === 'cursor'){
+      const px = (heroTargetX * 100).toFixed(2) + '%';
+      const py = (heroTargetY * 100).toFixed(2) + '%';
+      hero.style.setProperty('--mouse-x', px);
+      hero.style.setProperty('--mouse-y', py);
+    }
+  }
+
+  window.addEventListener('mousemove', function(e){
+    updateMouseCoords(e.clientX, e.clientY);
+  });
+
+  window.addEventListener('touchmove', function(e){
+    if(e.touches && e.touches[0]){
+      updateMouseCoords(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+
+  setHeroGlobalMode('cursor');
+}
+
+// Initialize everything on load
+setupInteractiveHero();
+autoFetchCloudDatabaseOnBoot();
+renderHome();
+
 </script>
 </body>
 </html>
