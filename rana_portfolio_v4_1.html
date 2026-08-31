@@ -1798,7 +1798,7 @@ const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "W
 
 let novels = loadData('rana_novels_data', NOVELS_DATA);
 let techProjects = loadData('rana_tech_data', TECH_PROJECTS_DATA);
-if(!articles || !Array.isArray(articles) || articles.length < 5){ articles = JSON.parse(JSON.stringify(ARTICLES_DATA)); saveData('rana_articles_data', articles); }
+let articles = loadData('rana_articles_data', ARTICLES_DATA);
 let galleryItems = loadData('rana_gallery_data', GALLERY_DATA);
 let software = loadData('rana_software_data', SOFTWARE_DATA);
 let experience = loadData('rana_experience_data', EXPERIENCE_DATA);
