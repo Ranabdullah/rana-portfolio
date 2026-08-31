@@ -1560,7 +1560,6 @@ body.theme-dark .be-login-btn:hover {
         <button onclick="setGlobalTheme('light')" id="btnThemeLight" style="padding:5px 13px;font-family:var(--mono);font-size:9.5px;border-radius:14px;cursor:pointer;font-weight:600;background:var(--ink);color:var(--bg);border:1px solid var(--ink)">&#9728; White</button>
         <button onclick="setGlobalTheme('evening')" id="btnThemeEvening" style="padding:5px 13px;font-family:var(--mono);font-size:9.5px;border-radius:14px;cursor:pointer;background:var(--bg-card);color:var(--ink);border:1px solid var(--border)">&#9729; Blue</button>
         <button onclick="setGlobalTheme('dark')" id="btnThemeDark" style="padding:5px 13px;font-family:var(--mono);font-size:9.5px;border-radius:14px;cursor:pointer;background:var(--bg-card);color:var(--ink);border:1px solid var(--border)">&#9790; Black</button>
-        <button onclick="toggleGlobalAutoTransition()" id="btnThemeAuto" style="padding:5px 13px;font-family:var(--mono);font-size:9.5px;background:transparent;color:var(--ink3);border:1px dashed var(--border);border-radius:14px;cursor:pointer">&#8634; Auto Transition</button>
       </div>
     </div>
   </section>
@@ -6509,8 +6508,6 @@ const GLOBAL_THEMES = {
 };
 
 let activeTheme = 'light';
-let isAutoTransition = true;
-let autoTransitionTimer = null;
 let starCanvasCtx = null;
 let starsArray = [];
 let starAnimationId = null;
@@ -6518,6 +6515,9 @@ let starAnimationId = null;
 function setGlobalTheme(theme, manual = true){
   if(!GLOBAL_THEMES[theme]) return;
   activeTheme = theme;
+  if(manual){
+    try { localStorage.setItem('rana_preferred_theme', theme); } catch(e){}
+  }
 
   // 1. Update body theme class (triggers global CSS variable and header color updates)
   if(document.body){
@@ -6565,41 +6565,8 @@ function setGlobalTheme(theme, manual = true){
       }
     }
   });
-
-  // 4. Timer management
-  if(manual && isAutoTransition){
-    clearInterval(autoTransitionTimer);
-    autoTransitionTimer = setInterval(advanceGlobalTheme, 8500);
-  }
 }
 window.setGlobalTheme = setGlobalTheme;
-
-function advanceGlobalTheme(){
-  if(!isAutoTransition) return;
-  if(document.hidden) return;
-  const seq = ['light', 'evening', 'dark'];
-  const nextIdx = (seq.indexOf(activeTheme) + 1) % seq.length;
-  setGlobalTheme(seq[nextIdx], false);
-}
-
-function toggleGlobalAutoTransition(){
-  isAutoTransition = !isAutoTransition;
-  const btn = document.getElementById('btnThemeAuto');
-  if(btn){
-    btn.style.color = isAutoTransition ? 'var(--ink)' : 'var(--ink4)';
-    btn.style.fontWeight = isAutoTransition ? '600' : '400';
-    btn.textContent = isAutoTransition ? '✓ Auto Transition (On)' : '⏸ Auto Transition (Paused)';
-  }
-  if(isAutoTransition){
-    clearInterval(autoTransitionTimer);
-    autoTransitionTimer = setInterval(advanceGlobalTheme, 8500);
-    showToast('Auto transition enabled: White ➔ Blue ➔ Black');
-  } else {
-    clearInterval(autoTransitionTimer);
-    showToast('Auto transition paused on ' + activeTheme);
-  }
-}
-window.toggleGlobalAutoTransition = toggleGlobalAutoTransition;
 
 // ==================== TWINKLING BACKGROUND STARS ====================
 function initGlobalStarsCanvas(){
@@ -6678,9 +6645,9 @@ async function autoFetchCloudDatabaseOnBoot(){
 
 function setupGlobalThemeEngine(){
   initGlobalStarsCanvas();
-  setGlobalTheme('light', false);
-  clearInterval(autoTransitionTimer);
-  autoTransitionTimer = setInterval(advanceGlobalTheme, 8500);
+  let saved = 'light';
+  try { saved = localStorage.getItem('rana_preferred_theme') || 'light'; } catch(e){}
+  setGlobalTheme(saved, false);
 }
 
 // Final Boot Sequence on Window Load
