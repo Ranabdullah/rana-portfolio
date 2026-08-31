@@ -4671,209 +4671,289 @@ function addGalleryItem(){
 }
 
 // ==================== MASTER GALLERY ENGINE: REORDER & PHOTO MOVING ====================
-function beMoveGalleryItem(fromIndex, direction){
-  const targetIndex = fromIndex + direction;
-  if(targetIndex < 0 || targetIndex >= galleryItems.length) return;
-  const temp = galleryItems[fromIndex];
-  galleryItems[fromIndex] = galleryItems[targetIndex];
-  galleryItems[targetIndex] = temp;
+// ==================== 3D GALLERY BACKEND ENGINE & REORDERING ====================
+function beMoveProject(fromIdx, direction){
+  const toIdx = fromIdx + direction;
+  if(toIdx < 0 || toIdx >= galleryItems.length) return;
+  const item = galleryItems.splice(fromIdx, 1)[0];
+  galleryItems.splice(toIdx, 0, item);
   saveData('rana_gallery_data', galleryItems);
   renderBeGallery();
   renderGallery('all');
   renderHome();
-  showToast(`Moved "${temp.title.substring(0, 24)}" to position ${targetIndex + 1}`);
+  scheduleGitHubAutoSync();
+  showToast(`Moved project to position #${toIdx + 1}`);
 }
+window.beMoveProject = beMoveProject;
 
 function beMoveSubImageOrder(itemIdx, subIdx, direction){
   const g = galleryItems[itemIdx];
   if(!g) return;
-  const imgs = (g.images && g.images.length > 0) ? [...g.images] : [g.path];
-  const targetIdx = subIdx + direction;
-  if(targetIdx < 0 || targetIdx >= imgs.length) return;
+  const imgs = (g.images && g.images.length > 0) ? [...g.images] : (g.path ? [g.path] : []);
+  const toIdx = subIdx + direction;
+  if(toIdx < 0 || toIdx >= imgs.length) return;
   
-  const temp = imgs[subIdx];
-  imgs[subIdx] = imgs[targetIdx];
-  imgs[targetIdx] = temp;
+  const moved = imgs.splice(subIdx, 1)[0];
+  imgs.splice(toIdx, 0, moved);
   g.images = imgs;
-  g.path = imgs[0]; // First image is primary cover
+  g.path = imgs[0];
 
-  // Swap sub-video URLs if present
+  // Also swap subVideos if defined
   if(g.subVideos){
     const v1 = g.subVideos[subIdx];
-    const v2 = g.subVideos[targetIdx];
-    if(v2) g.subVideos[subIdx] = v2; else delete g.subVideos[subIdx];
-    if(v1) g.subVideos[targetIdx] = v1; else delete g.subVideos[targetIdx];
-    g.youtubeUrl = g.subVideos[0] || '';
+    const v2 = g.subVideos[toIdx];
+    if(v1 !== undefined) g.subVideos[toIdx] = v1; else delete g.subVideos[toIdx];
+    if(v2 !== undefined) g.subVideos[subIdx] = v2; else delete g.subVideos[subIdx];
   }
 
   saveData('rana_gallery_data', galleryItems);
   renderBeGallery();
   renderGallery('all');
-  renderHome();
-  showToast(targetIdx === 0 ? 'Set as primary cover photo!' : 'Photo position updated');
+  scheduleGitHubAutoSync();
+  showToast(`Reordered photo #${toIdx + 1}`);
 }
-
-function beMoveImageToProject(fromIdx, subIdx, toIdx){
-  if(isNaN(toIdx) || fromIdx === toIdx) return;
-  const fromG = galleryItems[fromIdx];
-  const toG = galleryItems[toIdx];
-  if(!fromG || !toG) return;
-
-  const fromImgs = (fromG.images && fromG.images.length > 0) ? [...fromG.images] : [fromG.path];
-  if(subIdx >= fromImgs.length) return;
-  
-  const movedImg = fromImgs.splice(subIdx, 1)[0];
-  
-  let movedVid = null;
-  if(fromG.subVideos && fromG.subVideos[subIdx]){
-    movedVid = fromG.subVideos[subIdx];
-    delete fromG.subVideos[subIdx];
-  }
-
-  if(!toG.images) toG.images = [toG.path];
-  toG.images.push(movedImg);
-  const newSubIdx = toG.images.length - 1;
-  if(movedVid){
-    if(!toG.subVideos) toG.subVideos = {};
-    toG.subVideos[newSubIdx] = movedVid;
-  }
-
-  if(fromImgs.length === 0){
-    if(confirm(`"${fromG.title}" has no photos left. Delete this empty project?`)){
-      galleryItems.splice(fromIdx, 1);
-    } else {
-      fromG.images = [];
-      fromG.path = '';
-    }
-  } else {
-    fromG.images = fromImgs;
-    fromG.path = fromImgs[0];
-  }
-
-  saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  renderGallery('all');
-  renderHome();
-  showToast(`Moved photo to "${toG.title.substring(0,25)}"`);
-}
+window.beMoveSubImageOrder = beMoveSubImageOrder;
 
 function beDeleteGalleryItem(index){
   const g = galleryItems[index];
   if(!g) return;
-  if(confirm(`Are you sure you want to delete "${g.title}"? This cannot be undone.`)){
-    const title = g.title;
+  if(confirm(`Are you sure you want to delete project "${g.title}"? This cannot be undone.`)){
     galleryItems.splice(index, 1);
     saveData('rana_gallery_data', galleryItems);
     renderBeGallery();
     renderGallery('all');
     renderHome();
-    showToast(`Deleted: ${title.substring(0,25)}`);
+    scheduleGitHubAutoSync();
+    showToast(`Deleted "${g.title}"`);
   }
 }
+window.beDeleteGalleryItem = beDeleteGalleryItem;
 
 function beRemoveSubImage(itemIdx, subIdx){
   const g = galleryItems[itemIdx];
   if(!g) return;
-  const imgs = (g.images && g.images.length > 0) ? [...g.images] : [g.path];
-  
+  const imgs = (g.images && g.images.length > 0) ? [...g.images] : (g.path ? [g.path] : []);
   if(imgs.length <= 1){
-    if(confirm(`This is the only image in "${g.title}". Delete the entire artwork project?`)){
-      beDeleteGalleryItem(itemIdx);
+    if(confirm('This is the only photo in this project. Deleting it will remove the project cover image. Continue?')){
+      g.images = [];
+      g.path = '';
+      saveData('rana_gallery_data', galleryItems);
+      renderBeGallery();
+      renderGallery('all');
+      scheduleGitHubAutoSync();
     }
     return;
   }
-
   imgs.splice(subIdx, 1);
   g.images = imgs;
   g.path = imgs[0];
-  
-  if(g.subVideos){
-    delete g.subVideos[subIdx];
-  }
-
+  if(g.subVideos && g.subVideos[subIdx]) delete g.subVideos[subIdx];
   saveData('rana_gallery_data', galleryItems);
   renderBeGallery();
   renderGallery('all');
-  renderHome();
+  scheduleGitHubAutoSync();
   showToast('Photo removed from project');
 }
+window.beRemoveSubImage = beRemoveSubImage;
 
 function beAddImageToItem(itemIdx){
-  const path = prompt('Enter new photo path (e.g. Photos & to upload/...):');
+  const path = prompt('Enter photo path or image URL (e.g. Photos & to upload/3D/MyImage.png):');
   if(!path || !path.trim()) return;
+  const cleanPath = path.trim();
   const g = galleryItems[itemIdx];
   if(!g) return;
-  if(!g.images) g.images = [g.path];
-  g.images.push(path.trim());
+  
+  if(!g.images || !Array.isArray(g.images)) g.images = g.path ? [g.path] : [];
+  g.images.push(cleanPath);
+  if(!g.path) g.path = cleanPath;
+
   saveData('rana_gallery_data', galleryItems);
   renderBeGallery();
   renderGallery('all');
-  showToast('New photo added to project');
+  scheduleGitHubAutoSync();
+  showToast(`Added photo to "${g.title}"`);
 }
+window.beAddImageToItem = beAddImageToItem;
 
 function beUpdateGalleryItem(realIdx){
   const g = galleryItems[realIdx];
   if(!g) return;
 
-  g.title  = document.getElementById(`be-gtitle-${realIdx}`)?.value || g.title;
-  g.cat    = document.getElementById(`be-gcat-${realIdx}`)?.value || g.cat;
-  g.pillar = document.getElementById(`be-gpillar-${realIdx}`)?.value || g.pillar;
-  g.desc   = document.getElementById(`be-gdesc-${realIdx}`)?.value || g.desc;
+  const titleInp = document.getElementById(`beg-title-${realIdx}`);
+  const catSel = document.getElementById(`beg-cat-${realIdx}`);
+  const pillarSel = document.getElementById(`beg-pillar-${realIdx}`);
+  const descInp = document.getElementById(`beg-desc-${realIdx}`);
 
-  const imgs = (g.images && g.images.length > 0) ? g.images : [g.path];
-  if(!g.subVideos) g.subVideos = {};
+  if(titleInp) g.title = titleInp.value.trim();
+  if(catSel) g.cat = catSel.value;
+  if(pillarSel) g.pillar = pillarSel.value;
+  if(descInp) g.desc = descInp.value.trim();
 
-  imgs.forEach((_, sIdx) => {
-    const vidVal = (document.getElementById(`be-subvid-${realIdx}-${sIdx}`)?.value || '').trim();
-    if(vidVal) {
-      g.subVideos[sIdx] = vidVal;
-      if(sIdx === 0) g.youtubeUrl = vidVal;
-    } else {
-      delete g.subVideos[sIdx];
-      if(sIdx === 0) g.youtubeUrl = '';
+  // Save subVideos from inputs
+  const allImgs = (g.images && g.images.length > 0) ? g.images : (g.path ? [g.path] : []);
+  g.subVideos = g.subVideos || {};
+  allImgs.forEach((_, sIdx) => {
+    const vidInp = document.getElementById(`be-subvid-${realIdx}-${sIdx}`);
+    if(vidInp){
+      const val = vidInp.value.trim();
+      if(val) {
+        g.subVideos[sIdx] = val;
+        if(sIdx === 0) g.youtubeUrl = val;
+      } else {
+        delete g.subVideos[sIdx];
+        if(sIdx === 0) g.youtubeUrl = '';
+      }
     }
   });
-
-  saveData('rana_gallery_data', galleryItems);
-  renderGallery('all');
-  renderHome();
-  showToast(`Saved: ${g.title.substring(0,25)}`);
-}
-
-function addGalleryItem(){
-  const title = (document.getElementById('b-g-title')?.value || '').trim();
-  if(!title){ showToast('Title required'); return; }
-  const path = (document.getElementById('b-g-path')?.value || '').trim();
-  const ytUrl = (document.getElementById('b-g-youtube')?.value || '').trim();
-  const pos = document.getElementById('b-g-pos')?.value || 'top';
-
-  const g = {
-    title,
-    cat: document.getElementById('b-g-cat')?.value || '3d',
-    pillar: document.getElementById('b-g-pillar')?.value || 'Personal',
-    path: path || 'Photos & to upload/default.jpg',
-    images: path ? [path] : [],
-    youtubeUrl: ytUrl,
-    subVideos: ytUrl ? { 0: ytUrl } : {},
-    desc: document.getElementById('b-g-desc')?.value || ''
-  };
-
-  if(pos === 'end'){
-    galleryItems.push(g);
-  } else {
-    galleryItems.unshift(g);
-  }
 
   saveData('rana_gallery_data', galleryItems);
   renderBeGallery();
   renderGallery('all');
   renderHome();
-  showToast(`Artwork published: ${title}`);
+  scheduleGitHubAutoSync();
+  showToast(`Saved changes for "${g.title}"!`);
+}
+window.beUpdateGalleryItem = beUpdateGalleryItem;
+
+function addGalleryItem(){
+  const title = (document.getElementById('b-g-title')?.value || '').trim();
+  const cat = document.getElementById('b-g-cat')?.value || '3d';
+  const pillar = document.getElementById('b-g-pillar')?.value || 'Personal';
+  const path = (document.getElementById('b-g-path')?.value || '').trim();
+  const desc = (document.getElementById('b-g-desc')?.value || '').trim();
+  const youtubeUrl = (document.getElementById('b-g-yt')?.value || '').trim();
+
+  if(!title || !path){
+    alert('Please provide at least a Project Title and an Image Path.');
+    return;
+  }
+
+  galleryItems.unshift({
+    title,
+    cat,
+    pillar,
+    path,
+    images: [path],
+    desc,
+    youtubeUrl,
+    subVideos: youtubeUrl ? { 0: youtubeUrl } : {}
+  });
+
+  saveData('rana_gallery_data', galleryItems);
+  renderBeGallery();
+  renderGallery('all');
+  renderHome();
+  scheduleGitHubAutoSync();
+  showToast(`Project published: "${title}"`);
 
   const titleInp = document.getElementById('b-g-title');
+  const pathInp = document.getElementById('b-g-path');
+  const descInp = document.getElementById('b-g-desc');
+  const ytInp = document.getElementById('b-g-yt');
   if(titleInp) titleInp.value = '';
+  if(pathInp) pathInp.value = '';
+  if(descInp) descInp.value = '';
+  if(ytInp) ytInp.value = '';
 }
+window.addGalleryItem = addGalleryItem;
 
+// ==================== FAST DEDICATED PHOTO TRANSFER ENGINE ====================
+let transferSourceProjIdx = null;
+let transferSourcePhotoIdx = null;
+
+function beOpenTransferModal(fromProjIdx, photoIdx){
+  transferSourceProjIdx = fromProjIdx;
+  transferSourcePhotoIdx = photoIdx;
+
+  const proj = galleryItems[fromProjIdx];
+  if(!proj) return;
+  const allImgs = (proj.images && proj.images.length > 0) ? proj.images : (proj.path ? [proj.path] : []);
+  const imgSrc = allImgs[photoIdx] || proj.path;
+
+  const prev = document.getElementById('be-transfer-preview');
+  if(prev){
+    prev.innerHTML = `
+      <img src="${imgSrc}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--border)">
+      <div>
+        <div style="font-family:var(--mono);font-size:9.5px;color:var(--ink4)">CURRENT PROJECT:</div>
+        <div style="font-family:var(--serif);font-size:16px;color:var(--ink);font-weight:600">${proj.title}</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:2px">Photo #${photoIdx + 1}: ${imgSrc.split('/').pop()}</div>
+      </div>
+    `;
+  }
+
+  const sel = document.getElementById('be-transfer-target-select');
+  if(sel){
+    sel.innerHTML = galleryItems.map((other, oi) => {
+      if(oi === fromProjIdx) return '';
+      return `<option value="${oi}">[${String(oi+1).padStart(2,'0')}] ${other.title}</option>`;
+    }).join('');
+  }
+
+  const modal = document.getElementById('be-transfer-modal');
+  if(modal) modal.classList.add('open');
+}
+window.beOpenTransferModal = beOpenTransferModal;
+
+function beCloseTransferModal(){
+  const modal = document.getElementById('be-transfer-modal');
+  if(modal) modal.classList.remove('open');
+}
+window.beCloseTransferModal = beCloseTransferModal;
+
+function beExecutePhotoTransfer(){
+  if(transferSourceProjIdx === null || transferSourcePhotoIdx === null) return;
+  const sel = document.getElementById('be-transfer-target-select');
+  if(!sel) return;
+  const toProjIdx = parseInt(sel.value);
+  if(isNaN(toProjIdx) || toProjIdx === transferSourceProjIdx) return;
+
+  beMoveImageToProject(transferSourceProjIdx, transferSourcePhotoIdx, toProjIdx);
+  beCloseTransferModal();
+}
+window.beExecutePhotoTransfer = beExecutePhotoTransfer;
+
+function beMoveImageToProject(fromProjIdx, photoIdx, toProjIdx){
+  if(fromProjIdx === toProjIdx) return;
+  const srcProj = galleryItems[fromProjIdx];
+  const destProj = galleryItems[toProjIdx];
+  if(!srcProj || !destProj) return;
+
+  let srcImages = (srcProj.images && srcProj.images.length > 0) ? [...srcProj.images] : (srcProj.path ? [srcProj.path] : []);
+  let destImages = (destProj.images && destProj.images.length > 0) ? [...destProj.images] : (destProj.path ? [destProj.path] : []);
+
+  if(photoIdx < 0 || photoIdx >= srcImages.length) return;
+
+  const [movedPhoto] = srcImages.splice(photoIdx, 1);
+  destImages.push(movedPhoto);
+
+  if(srcProj.subVideos && srcProj.subVideos[photoIdx]){
+    destProj.subVideos = destProj.subVideos || {};
+    destProj.subVideos[destImages.length - 1] = srcProj.subVideos[photoIdx];
+    delete srcProj.subVideos[photoIdx];
+  }
+
+  if(srcImages.length === 0){
+    srcProj.images = [];
+    srcProj.path = '';
+  } else {
+    srcProj.images = srcImages;
+    srcProj.path = srcImages[0];
+  }
+
+  destProj.images = destImages;
+  if(!destProj.path) destProj.path = destImages[0];
+
+  saveData('rana_gallery_data', galleryItems);
+  renderBeGallery();
+  renderGallery('all');
+  renderHome();
+  scheduleGitHubAutoSync();
+  showToast(`&#10140; Successfully moved photo to "${destProj.title}"!`);
+}
+window.beMoveImageToProject = beMoveImageToProject;
+
+// ==================== MASTER RENDER BE GALLERY ====================
 function renderBeGallery(searchTerm){
   const c = document.getElementById('be-gallery-list');
   if(!c) return;
@@ -4969,7 +5049,10 @@ function renderBeGallery(searchTerm){
             <option value="Atmosphere" ${g.pillar==='Atmosphere'?'selected':''}>Atmosphere</option>
             <option value="Biome" ${g.pillar==='Biome'?'selected':''}>Biome</option>
           </select>
-          <button onclick="beDeleteGalleryItem(${realIdx})" style="padding:5px 12px;font-family:var(--mono);font-size:10.5px;background:#e50914;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Delete Project</button>
+          <button onclick="beUpdateGalleryItem(${realIdx})"
+            style="padding:5px 16px;font-family:var(--mono);font-size:10.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700">Save Changes</button>
+          <button onclick="beDeleteGalleryItem(${realIdx})"
+            style="padding:5px 12px;font-family:var(--mono);font-size:10.5px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer;font-weight:600">Delete Project</button>
         </div>
       </div>
 
@@ -5027,105 +5110,11 @@ function renderBeGallery(searchTerm){
 
   c.innerHTML = html;
 }
-
-// ==================== FAST DEDICATED PHOTO TRANSFER ENGINE ====================
-let transferSourceProjIdx = null;
-let transferSourcePhotoIdx = null;
-
-function beOpenTransferModal(fromProjIdx, photoIdx){
-  transferSourceProjIdx = fromProjIdx;
-  transferSourcePhotoIdx = photoIdx;
-
-  const proj = galleryItems[fromProjIdx];
-  if(!proj) return;
-  const allImgs = (proj.images && proj.images.length > 0) ? proj.images : [proj.path];
-  const imgSrc = allImgs[photoIdx] || proj.path;
-
-  const prev = document.getElementById('be-transfer-preview');
-  if(prev){
-    prev.innerHTML = `
-      <img src="${imgSrc}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--border)">
-      <div>
-        <div style="font-family:var(--mono);font-size:9.5px;color:var(--ink4)">CURRENT PROJECT:</div>
-        <div style="font-family:var(--serif);font-size:16px;color:var(--ink);font-weight:600">${proj.title}</div>
-        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:2px">Photo #${photoIdx + 1}: ${imgSrc.split('/').pop()}</div>
-      </div>
-    `;
-  }
-
-  const sel = document.getElementById('be-transfer-target-select');
-  if(sel){
-    sel.innerHTML = galleryItems.map((other, oi) => {
-      if(oi === fromProjIdx) return '';
-      return `<option value="${oi}">[${String(oi+1).padStart(2,'0')}] ${other.title}</option>`;
-    }).join('');
-  }
-
-  const modal = document.getElementById('be-transfer-modal');
-  if(modal) modal.classList.add('open');
-}
-window.beOpenTransferModal = beOpenTransferModal;
-
-function beCloseTransferModal(){
-  const modal = document.getElementById('be-transfer-modal');
-  if(modal) modal.classList.remove('open');
-}
-window.beCloseTransferModal = beCloseTransferModal;
-
-function beExecutePhotoTransfer(){
-  if(transferSourceProjIdx === null || transferSourcePhotoIdx === null) return;
-  const sel = document.getElementById('be-transfer-target-select');
-  if(!sel) return;
-  const toProjIdx = parseInt(sel.value);
-  if(isNaN(toProjIdx) || toProjIdx === transferSourceProjIdx) return;
-
-  beMoveImageToProject(transferSourceProjIdx, transferSourcePhotoIdx, toProjIdx);
-  beCloseTransferModal();
-}
-window.beExecutePhotoTransfer = beExecutePhotoTransfer;
-
-function beMoveImageToProject(fromProjIdx, photoIdx, toProjIdx){
-  if(fromProjIdx === toProjIdx) return;
-  const srcProj = galleryItems[fromProjIdx];
-  const destProj = galleryItems[toProjIdx];
-  if(!srcProj || !destProj) return;
-
-  let srcImages = (srcProj.images && srcProj.images.length > 0) ? [...srcProj.images] : [srcProj.path];
-  let destImages = (destProj.images && destProj.images.length > 0) ? [...destProj.images] : [destProj.path];
-
-  if(photoIdx < 0 || photoIdx >= srcImages.length) return;
-
-  const [movedPhoto] = srcImages.splice(photoIdx, 1);
-  destImages.push(movedPhoto);
-
-  // Transfer youtube link if associated
-  if(srcProj.subVideos && srcProj.subVideos[photoIdx]){
-    destProj.subVideos = destProj.subVideos || {};
-    destProj.subVideos[destImages.length - 1] = srcProj.subVideos[photoIdx];
-    delete srcProj.subVideos[photoIdx];
-  }
-
-  if(srcImages.length === 0){
-    srcProj.images = [];
-    srcProj.path = '';
-  } else {
-    srcProj.images = srcImages;
-    srcProj.path = srcImages[0];
-  }
-
-  destProj.images = destImages;
-  if(!destProj.path) destProj.path = destImages[0];
-
-  saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  renderGallery('all');
-  scheduleGitHubAutoSync();
-  showToast(`&#10140; Successfully moved photo to "${destProj.title}"!`);
-}
-window.beMoveImageToProject = beMoveImageToProject;
+window.renderBeGallery = renderBeGallery;
 
 
-// ==================== AUTHENTICATION & SECURITY GATE ====================
+
+// ==================== AUTH & SECURITY ====================
 const AUTH_HASH = '0cfe517587641ac7128436f278329274333a7915358dae4bc0bb23f07bf09f60';
 
 async function sha256(str){
@@ -5133,6 +5122,222 @@ async function sha256(str){
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 
+// ==================== TECH PROJECTS BACKEND ENGINE ====================
+function beUpdateTech(i){
+  const title = document.getElementById('be-tech-title-'+i)?.value;
+  const tags = document.getElementById('be-tech-tags-'+i)?.value;
+  const desc = document.getElementById('be-tech-desc-'+i)?.value;
+  const live = document.getElementById('be-tech-live-'+i)?.value;
+  const gh = document.getElementById('be-tech-gh-'+i)?.value;
+
+  if(techProjects[i]){
+    if(title) techProjects[i].title = title;
+    if(tags) techProjects[i].tags = tags.split(',').map(t=>t.trim()).filter(Boolean);
+    if(desc) techProjects[i].desc = desc;
+    if(live !== undefined) techProjects[i].liveUrl = live;
+    if(gh !== undefined) techProjects[i].githubUrl = gh;
+  }
+  saveData('rana_tech_data', techProjects);
+  renderBeTech();
+  renderTechProjects();
+  renderHome();
+  scheduleGitHubAutoSync();
+  showToast('Tech project updated');
+}
+window.beUpdateTech = beUpdateTech;
+
+function addTechProject(){
+  const title = (document.getElementById('b-tech-title')?.value || '').trim();
+  const desc = (document.getElementById('b-tech-desc')?.value || '').trim();
+  const tags = (document.getElementById('b-tech-tags')?.value || '').trim().split(',').map(t=>t.trim()).filter(Boolean);
+  const liveUrl = (document.getElementById('b-tech-live')?.value || '').trim();
+  const githubUrl = (document.getElementById('b-tech-gh')?.value || '').trim();
+
+  if(!title){
+    alert('Please enter a project title');
+    return;
+  }
+
+  techProjects.unshift({
+    title,
+    desc,
+    tags: tags.length ? tags : ['Web Development', 'Full-Stack'],
+    liveUrl,
+    githubUrl
+  });
+
+  saveData('rana_tech_data', techProjects);
+  renderBeTech();
+  renderTechProjects();
+  renderHome();
+  scheduleGitHubAutoSync();
+  showToast('Added project: ' + title);
+
+  const inpT = document.getElementById('b-tech-title');
+  const inpD = document.getElementById('b-tech-desc');
+  const inpTg = document.getElementById('b-tech-tags');
+  const inpL = document.getElementById('b-tech-live');
+  const inpG = document.getElementById('b-tech-gh');
+  if(inpT) inpT.value = '';
+  if(inpD) inpD.value = '';
+  if(inpTg) inpTg.value = '';
+  if(inpL) inpL.value = '';
+  if(inpG) inpG.value = '';
+}
+window.addTechProject = addTechProject;
+
+// ==================== ARTICLES & ESSAYS BACKEND ENGINE ====================
+function beUpdateArticle(i){
+  const title = document.getElementById('be-art-title-'+i)?.value;
+  const subtitle = document.getElementById('be-art-sub-'+i)?.value;
+  const date = document.getElementById('be-art-date-'+i)?.value;
+  const pub = document.getElementById('be-art-pub-'+i)?.value;
+  const read = document.getElementById('be-art-read-'+i)?.value;
+  const excerpt = document.getElementById('be-art-exc-'+i)?.value;
+  const body = document.getElementById('be-art-body-'+i)?.value;
+  const link = document.getElementById('be-art-link-'+i)?.value;
+
+  if(articles[i]){
+    if(title) articles[i].title = title;
+    if(subtitle !== undefined) articles[i].subtitle = subtitle;
+    if(date !== undefined) articles[i].date = date;
+    if(pub !== undefined) articles[i].publication = pub;
+    if(read !== undefined) articles[i].readTime = read;
+    if(excerpt !== undefined) articles[i].excerpt = excerpt;
+    if(body !== undefined) articles[i].body = body;
+    if(link !== undefined) articles[i].link = link;
+  }
+  saveData('rana_articles_data', articles);
+  renderBeArticles();
+  renderArticles();
+  scheduleGitHubAutoSync();
+  showToast('Article updated');
+}
+window.beUpdateArticle = beUpdateArticle;
+
+function addArticle(){
+  const title = (document.getElementById('b-art-title')?.value || '').trim();
+  const subtitle = (document.getElementById('b-art-sub')?.value || '').trim();
+  const date = (document.getElementById('b-art-date')?.value || '').trim() || new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  const publication = (document.getElementById('b-art-pub')?.value || '').trim() || 'Substack';
+  const readTime = (document.getElementById('b-art-read')?.value || '').trim() || '5 min read';
+  const excerpt = (document.getElementById('b-art-exc')?.value || '').trim();
+  const body = (document.getElementById('b-art-body')?.value || '').trim();
+  const link = (document.getElementById('b-art-link')?.value || '').trim();
+
+  if(!title){
+    alert('Please enter an article title');
+    return;
+  }
+
+  articles.unshift({
+    title,
+    subtitle,
+    date,
+    publication,
+    readTime,
+    excerpt,
+    body,
+    link
+  });
+
+  saveData('rana_articles_data', articles);
+  renderBeArticles();
+  renderArticles();
+  scheduleGitHubAutoSync();
+  showToast('Article published: ' + title);
+
+  const inpT = document.getElementById('b-art-title');
+  const inpS = document.getElementById('b-art-sub');
+  const inpD = document.getElementById('b-art-date');
+  const inpP = document.getElementById('b-art-pub');
+  const inpR = document.getElementById('b-art-read');
+  const inpE = document.getElementById('b-art-exc');
+  const inpB = document.getElementById('b-art-body');
+  const inpL = document.getElementById('b-art-link');
+  if(inpT) inpT.value = '';
+  if(inpS) inpS.value = '';
+  if(inpD) inpD.value = '';
+  if(inpP) inpP.value = '';
+  if(inpR) inpR.value = '';
+  if(inpE) inpE.value = '';
+  if(inpB) inpB.value = '';
+  if(inpL) inpL.value = '';
+}
+window.addArticle = addArticle;
+
+// ==================== CLOUD DATABASE BACKUP & RESTORE ====================
+function downloadDataJson(){
+  const fullBackup = {
+    updatedAt: new Date().toISOString(),
+    version: '4.5',
+    novels,
+    tech: techProjects,
+    gallery: galleryItems,
+    software,
+    experience,
+    clients,
+    articles
+  };
+  const blob = new Blob([JSON.stringify(fullBackup, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `rana_portfolio_backup_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Downloaded complete JSON backup file');
+}
+window.downloadDataJson = downloadDataJson;
+
+function restoreDataJson(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(evt){
+    try {
+      const data = JSON.parse(evt.target.result);
+      if(data.novels) { novels = data.novels; saveData('rana_novels_data', novels); }
+      if(data.tech) { techProjects = data.tech; saveData('rana_tech_data', techProjects); }
+      if(data.gallery) { galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
+      if(data.software) { software = data.software; saveData('rana_software_data', software); }
+      if(data.experience) { experience = data.experience; saveData('rana_experience_data', experience); }
+      if(data.clients) { clients = data.clients; saveData('rana_clients_data', clients); }
+      if(data.articles) { articles = data.articles; saveData('rana_articles_data', articles); }
+      renderBackend();
+      renderHome();
+      scheduleGitHubAutoSync();
+      showToast('Database restored successfully from JSON file');
+    } catch(err){
+      alert('Invalid JSON file format: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+window.restoreDataJson = restoreDataJson;
+
+async function saveDataToCloud(){
+  return saveAllDataToGitHub();
+}
+window.saveDataToCloud = saveDataToCloud;
+
+async function loadDataFromCloud(){
+  return pullDataFromGitHub();
+}
+window.loadDataFromCloud = loadDataFromCloud;
+
+// Aliases for compatibility
+function downloadBackupJsonFile(){ return downloadDataJson(); }
+window.downloadBackupJsonFile = downloadBackupJsonFile;
+
+function restoreFromFile(e){ return restoreDataJson(e); }
+window.restoreFromFile = restoreFromFile;
+
+async function saveToCloudOnline(){ return saveDataToCloud(); }
+window.saveToCloudOnline = saveToCloudOnline;
+
+async function loadFromCloudOnline(){ return loadDataFromCloud(); }
+window.loadFromCloudOnline = loadFromCloudOnline;
 async function beLogin(){
   const email = (document.getElementById('be-email')?.value || '').trim().toLowerCase();
   const pass = document.getElementById('be-pass')?.value || '';
@@ -5359,1370 +5564,14 @@ function beUpdateClient(i){
     clients[i].sector = secVal || clients[i].sector;
     clients[i].url = urlVal || clients[i].url;
   } else {
-    clients[i] = { name: nameVal || clients[i], sector: secVal || 'Client Partner', url: urlVal || '' };
+    clients[i] = nameVal || clients[i];
   }
   saveData('rana_clients_data', clients);
   renderBeClients();
   renderAbout();
-  showToast('Saved client: ' + (nameVal || ''));
+  scheduleGitHubAutoSync();
+  showToast('Client updated');
 }
-
-// ==================== ULTRA-FAST GALLERY BACKEND ENGINE WITH FULL DELETE ====================
-function beDeleteGalleryItem(index){
-  const g = galleryItems[index];
-  if(!g) return;
-  if(confirm(`Are you sure you want to delete "${g.title}"? This cannot be undone.`)){
-    const title = g.title;
-    galleryItems.splice(index, 1);
-    saveData('rana_gallery_data', galleryItems);
-    renderBeGallery();
-    renderGallery('all');
-    renderHome();
-    showToast(`🗑️ Deleted project: ${title.substring(0,25)}`);
-  }
-}
-
-function beRemoveSubImage(itemIdx, subIdx){
-  const g = galleryItems[itemIdx];
-  if(!g) return;
-  const imgs = (g.images && g.images.length > 0) ? [...g.images] : [g.path];
-  
-  if(imgs.length <= 1){
-    if(confirm(`This is the only image in "${g.title}". Delete the entire artwork project?`)){
-      beDeleteGalleryItem(itemIdx);
-    }
-    return;
-  }
-
-  imgs.splice(subIdx, 1);
-  g.images = imgs;
-  g.path = imgs[0];
-  
-  // Re-index subVideos if present
-  if(g.subVideos){
-    const newVids = {};
-    imgs.forEach((_, idx) => {
-      if(g.subVideos[idx >= subIdx ? idx + 1 : idx]){
-        newVids[idx] = g.subVideos[idx >= subIdx ? idx + 1 : idx];
-      }
-    });
-    g.subVideos = newVids;
-  }
-
-  saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  renderGallery('all');
-  renderHome();
-  showToast('Photo removed from project');
-}
-
-function beAddImageToItem(itemIdx){
-  const path = prompt('Enter new photo path (e.g. Photos & to upload/...):');
-  if(!path || !path.trim()) return;
-  const g = galleryItems[itemIdx];
-  if(!g) return;
-  if(!g.images) g.images = [g.path];
-  g.images.push(path.trim());
-  saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  renderGallery('all');
-  showToast('New photo added to project');
-}
-
-function beMoveImageToProject(fromIdx, subIdx, toIdx){
-  if(fromIdx === toIdx) return;
-  const fromG = galleryItems[fromIdx];
-  const toG = galleryItems[toIdx];
-  if(!fromG || !toG) return;
-
-  const fromImgs = (fromG.images && fromG.images.length > 0) ? [...fromG.images] : [fromG.path];
-  const movedImg = fromImgs.splice(subIdx, 1)[0];
-  fromG.images = fromImgs;
-  fromG.path = fromImgs[0] || '';
-
-  if(!toG.images) toG.images = [toG.path];
-  toG.images.push(movedImg);
-
-  saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  renderGallery('all');
-  showToast(`Moved photo to "${toG.title.substring(0,20)}"`);
-}
-
-function beUpdateGalleryItem(realIdx){
-  const g = galleryItems[realIdx];
-  if(!g) return;
-
-  g.title  = document.getElementById(`be-gtitle-${realIdx}`)?.value || g.title;
-  g.cat    = document.getElementById(`be-gcat-${realIdx}`)?.value || g.cat;
-  g.pillar = document.getElementById(`be-gpillar-${realIdx}`)?.value || g.pillar;
-  g.desc   = document.getElementById(`be-gdesc-${realIdx}`)?.value || g.desc;
-
-  const imgs = (g.images && g.images.length > 0) ? g.images : [g.path];
-  if(!g.subVideos) g.subVideos = {};
-
-  imgs.forEach((_, sIdx) => {
-    const vidVal = (document.getElementById(`be-subvid-${realIdx}-${sIdx}`)?.value || '').trim();
-    if(vidVal) {
-      g.subVideos[sIdx] = vidVal;
-      if(sIdx === 0) g.youtubeUrl = vidVal;
-    } else {
-      delete g.subVideos[sIdx];
-      if(sIdx === 0) g.youtubeUrl = '';
-    }
-  });
-
-  saveData('rana_gallery_data', galleryItems);
-  renderGallery('all');
-  renderHome();
-  showToast(`Saved: ${g.title.substring(0,25)}`);
-}
-
-function addGalleryItem(){
-  const title = (document.getElementById('b-g-title')?.value || '').trim();
-  if(!title){ showToast('Title required'); return; }
-  const path = (document.getElementById('b-g-path')?.value || '').trim();
-  const ytUrl = (document.getElementById('b-g-youtube')?.value || '').trim();
-
-  const g = {
-    title,
-    cat: document.getElementById('b-g-cat')?.value || '3d',
-    pillar: document.getElementById('b-g-pillar')?.value || 'Personal',
-    path: path || 'Photos & to upload/default.jpg',
-    images: path ? [path] : [],
-    youtubeUrl: ytUrl,
-    subVideos: ytUrl ? { 0: ytUrl } : {},
-    desc: document.getElementById('b-g-desc')?.value || ''
-  };
-
-  galleryItems.unshift(g);
-  saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  renderGallery('all');
-  renderHome();
-  showToast(`Artwork published: ${title}`);
-
-  const titleInp = document.getElementById('b-g-title');
-  if(titleInp) titleInp.value = '';
-}
-
-function renderBeGallery(searchTerm){
-  const c = document.getElementById('be-gallery-list');
-  if(!c) return;
-  const term = (searchTerm !== undefined ? searchTerm : (document.getElementById('be-gallery-search')?.value || '')).toLowerCase().trim();
-  
-  const filtered = galleryItems.filter((g) => {
-    if(!term) return true;
-    return (g.title||'').toLowerCase().includes(term) || (g.cat||'').toLowerCase().includes(term);
-  });
-
-  let html = `
-    <div style="margin-bottom:18px;display:flex;gap:10px;align-items:center">
-      <input id="be-gallery-search" type="text" placeholder="Search by title or category..." value="${term}"
-        oninput="renderBeGallery(this.value)"
-        style="flex:1;padding:8px 14px;font-family:var(--mono);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-      <span style="font-family:var(--mono);font-size:11px;color:var(--ink3);font-weight:600">${filtered.length} / ${galleryItems.length} items</span>
-    </div>
-  `;
-
-  html += filtered.map((g) => {
-    const realIdx = galleryItems.indexOf(g);
-    const allImgs = (g.images && g.images.length > 0) ? g.images : [g.path];
-    const subVids = g.subVideos || {};
-
-    const thumbs = allImgs.map((imgSrc, sIdx) => `
-      <div style="display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin:6px;background:var(--bg);padding:8px;border-radius:4px;border:1px solid var(--border);width:130px">
-        <div style="position:relative">
-          <img src="${imgSrc}" loading="lazy" decoding="async" style="width:110px;height:90px;object-fit:cover;border-radius:3px;border:1px solid var(--border);display:block">
-          <button onclick="beRemoveSubImage(${realIdx}, ${sIdx})" title="Delete this photo"
-            style="position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#e50914;border:none;color:#fff;font-size:12px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(0,0,0,0.3)">&times;</button>
-        </div>
-        <div style="font-family:var(--mono);font-size:8.5px;color:var(--ink4);max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${imgSrc}">${imgSrc.split('/').pop()}</div>
-        <div style="width:100%">
-          <div style="font-family:var(--mono);font-size:8px;color:#e50914;margin-bottom:2px;font-weight:600">&#9654; YOUTUBE LINK:</div>
-          <input id="be-subvid-${realIdx}-${sIdx}" placeholder="https://youtube.com/..." value="${(subVids[sIdx] || (sIdx===0 ? g.youtubeUrl : '') || '').replace(/"/g,'&quot;')}"
-            style="width:100%;padding:4px 6px;font-family:var(--mono);font-size:9px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box" title="Video link for this specific photo">
-        </div>
-      </div>
-    `).join('');
-
-    const titleOpts = galleryItems.map((other, oi) =>
-      oi !== realIdx ? `<option value="${oi}">${other.title.substring(0,40)}</option>` : ''
-    ).join('');
-
-    return `
-    <div class="backend-item" style="flex-direction:column;align-items:stretch;gap:12px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:16px" id="beg-${realIdx}">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
-        <div style="flex:1">
-          <input id="be-gtitle-${realIdx}" value="${(g.title||'').replace(/"/g,'&quot;')}"
-            style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;margin-bottom:6px">
-          
-          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px">
-            <select id="be-gcat-${realIdx}" style="padding:4px 8px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-              ${['3d','environment','character','animation','product','branding'].map(cat=>`<option value="${cat}" ${g.cat===cat?'selected':''}>${cat}</option>`).join('')}
-            </select>
-            <select id="be-gpillar-${realIdx}" style="padding:4px 8px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-              <option value="Personal" ${g.pillar==='Personal'?'selected':''}>Personal</option>
-              <option value="Client" ${g.pillar==='Client'?'selected':''}>Client</option>
-            </select>
-            <button onclick="beUpdateGalleryItem(${realIdx})"
-              style="padding:4px 16px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save Changes</button>
-            <button onclick="beDeleteGalleryItem(${realIdx})"
-              style="padding:4px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer;font-weight:600">Delete Project</button>
-          </div>
-        </div>
-      </div>
-
-      <div style="font-family:var(--mono);font-size:9.5px;color:var(--ink3);margin-top:4px">
-        PHOTOS IN THIS PROJECT (${allImgs.length}):
-      </div>
-      
-      <div style="display:flex;flex-wrap:wrap;gap:4px;background:var(--bg);padding:8px;border-radius:4px;border:1px solid var(--border)">
-        ${thumbs}
-      </div>
-
-      <div style="display:flex;gap:12px;align-items:center;padding-top:8px;border-top:1px solid var(--border);flex-wrap:wrap">
-        <button onclick="beAddImageToItem(${realIdx})" style="padding:4px 12px;font-family:var(--mono);font-size:9.5px;background:var(--bg);border:1px solid var(--border);color:var(--ink);border-radius:3px;cursor:pointer">+ Add Photo to Project</button>
-        ${allImgs.length > 1 ? `
-          <span style="font-family:var(--mono);font-size:9px;color:var(--ink4)">Move a photo to:</span>
-          <select id="move-dest-${realIdx}" style="padding:3px 6px;font-family:var(--mono);font-size:9px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-            ${titleOpts}
-          </select>
-          <button onclick="beMoveImageToProject(${realIdx}, 0, parseInt(document.getElementById('move-dest-${realIdx}').value))"
-            style="padding:3px 8px;font-family:var(--mono);font-size:9px;background:var(--bg);border:1px solid var(--border);color:var(--ink);border-radius:3px;cursor:pointer">Move Photo</button>
-        ` : ''}
-      </div>
-
-      <div style="margin-top:6px">
-        <textarea id="be-gdesc-${realIdx}" rows="2" style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical" placeholder="Description...">${g.desc||''}</textarea>
-      </div>
-    </div>
-    `;
-  }).join('');
-
-  c.innerHTML = html;
-}
-
-
-// ==================== ULTRA-OPTIMIZED INK-IN-WATER COLORIZATION ====================
-(function initInkColorization(){
-  const palette = [
-    'rgba(0, 229, 255, 0.24)',
-    'rgba(255, 64, 129, 0.24)',
-    'rgba(255, 179, 0, 0.24)',
-    'rgba(105, 240, 174, 0.24)',
-    'rgba(179, 136, 255, 0.24)',
-    'rgba(68, 138, 255, 0.24)'
-  ];
-  const borderPalette = [
-    'rgba(0, 229, 255, 0.55)',
-    'rgba(255, 64, 129, 0.55)',
-    'rgba(255, 179, 0, 0.55)',
-    'rgba(105, 240, 174, 0.55)',
-    'rgba(179, 136, 255, 0.55)',
-    'rgba(68, 138, 255, 0.55)'
-  ];
-
-  const CARD_SELECTOR = '.g-card, .novel-card, .novel-page-card, .proj-card, .hero-portrait-frame, .sw-item, .sw-product-card, .tech-spotlight-card';
-
-  function assignColor(card){
-    if(!card.dataset.inkGlow){
-      const idx = Math.floor(Math.random() * palette.length);
-      card.dataset.inkGlow = palette[idx];
-      card.dataset.inkBorder = borderPalette[idx];
-    }
-  }
-
-  function activateCard(card){
-    assignColor(card);
-    if(!card.classList.contains('in-color-spotlight')){
-      card.classList.add('in-color-spotlight');
-      card.style.setProperty('--card-glow', card.dataset.inkGlow);
-      card.style.setProperty('--card-border', card.dataset.inkBorder);
-    }
-  }
-
-  function deactivateCard(card){
-    if(card.classList.contains('in-color-spotlight')){
-      card.classList.remove('in-color-spotlight');
-      card.style.removeProperty('--card-glow');
-      card.style.removeProperty('--card-border');
-    }
-  }
-
-  let observer = null;
-
-  function setupObserver(){
-    if(observer) observer.disconnect();
-
-    if('IntersectionObserver' in window){
-      observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if(e.isIntersecting){
-            activateCard(e.target);
-          } else {
-            deactivateCard(e.target);
-          }
-        });
-      }, {
-        rootMargin: '60px 0px 60px 0px',
-        threshold: 0.02
-      });
-
-      document.querySelectorAll(CARD_SELECTOR).forEach(card => {
-        observer.observe(card);
-      });
-    }
-  }
-
-  window.refreshColorSpotlight = setupObserver;
-
-  // Throttled quick setup after renders
-  setTimeout(setupObserver, 150);
-  setTimeout(setupObserver, 600);
-
-  // Re-observe when cards dynamically mount (e.g. category filters, novel search)
-  if('MutationObserver' in window){
-    let mutTimer = null;
-    const mo = new MutationObserver(() => {
-      clearTimeout(mutTimer);
-      mutTimer = setTimeout(setupObserver, 200);
-    });
-    mo.observe(document.body, { childList: true, subtree: true });
-  }
-})();
-
-
-window.addEventListener('keydown', function(e){
-  if(e.key === 'Escape' || e.key === 'Esc'){
-    closeLightbox();
-  }
-});
-
-
-
-
-
-
-
-
-
-// ==================== FULL-BACKGROUND 3D GENERATIVE ABSTRACT ENGINE ====================
-(function initHeroFullBgAbstract(){
-  const hero = document.querySelector('.home-hero');
-  const canvas = document.getElementById('heroAbstractBgCanvas');
-  const indicator = document.getElementById('heroColorIndicator');
-  const phaseLabel = document.getElementById('heroPhaseLabel');
-  if(!hero || !canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  let w = 0, h = 0;
-
-  function resize(){
-    if(!hero || !canvas) return;
-    w = canvas.width = hero.clientWidth || window.innerWidth;
-    h = canvas.height = hero.clientHeight || 580;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  const NUM_RINGS = 36;
-  const POINTS_PER_RING = 52;
-  let time = 0;
-
-  let mouse = { x: 0.35, y: 0, targetX: 0.35, targetY: 0 };
-
-  window.addEventListener('mousemove', (e) => {
-    const rect = hero.getBoundingClientRect();
-    if(e.clientY >= rect.top - 100 && e.clientY <= rect.bottom + 100){
-      mouse.targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-      mouse.targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-    }
-  });
-
-  const PARTICLES = [];
-  for(let i = 0; i < 75; i++){
-    PARTICLES.push({
-      x: (Math.random() - 0.5) * 700,
-      y: (Math.random() - 0.5) * 600,
-      z: (Math.random() - 0.5) * 400,
-      size: Math.random() * 2.4 + 0.8,
-      hueOffset: Math.random() * 360,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      vz: (Math.random() - 0.5) * 0.25
-    });
-  }
-
-  function render(){
-    if(w === 0 || h === 0) resize();
-    ctx.clearRect(0, 0, w, h);
-
-    const cx = w * 0.68;
-    const cy = h * 0.5;
-
-    time += 0.013;
-
-    mouse.x += (mouse.targetX - mouse.x) * 0.05;
-    mouse.y += (mouse.targetY - mouse.y) * 0.05;
-
-    const cycle = (Math.sin(time * 0.35) + 1) / 2;
-    const colorSaturation = cycle * cycle * (3 - 2 * cycle);
-
-    if(indicator){
-      if(colorSaturation > 0.6){
-        indicator.style.background = '#00e5ff';
-        indicator.style.boxShadow = '0 0 10px #00e5ff';
-      } else if(colorSaturation > 0.2){
-        indicator.style.background = '#ff4081';
-        indicator.style.boxShadow = '0 0 8px #ff4081';
-      } else {
-        indicator.style.background = '#11141a';
-        indicator.style.boxShadow = 'none';
-      }
-    }
-
-    if(phaseLabel){
-      if(colorSaturation < 0.12){
-        phaseLabel.textContent = 'SPECTRUM: MONOCHROME SILVER & GRAPHITE';
-      } else if(colorSaturation > 0.88){
-        phaseLabel.textContent = 'SPECTRUM: VIVID CHROMATIC DISPERSION (100%)';
-      } else {
-        const pct = Math.round(colorSaturation * 100);
-        phaseLabel.textContent = `SPECTRUM: CHROMATIC MORPH (${pct}%)`;
-      }
-    }
-
-    const rotX = -mouse.y * 0.5 + Math.sin(time * 0.35) * 0.18;
-    const rotY = mouse.x * 0.7 + time * 0.22;
-
-    for(let i = 0; i < PARTICLES.length; i++){
-      const p = PARTICLES[i];
-      p.x += p.vx; p.y += p.vy; p.z += p.vz;
-      if(p.x > 380) p.x = -380; if(p.x < -380) p.x = 380;
-      if(p.y > 300) p.y = -300; if(p.y < -300) p.y = 300;
-      if(p.z > 200) p.z = -200; if(p.z < -200) p.z = 200;
-
-      const cosY = Math.cos(rotY*0.5), sinY = Math.sin(rotY*0.5);
-      const cosX = Math.cos(rotX*0.5), sinX = Math.sin(rotX*0.5);
-      const x1 = p.x * cosY + p.z * sinY;
-      const z1 = -p.x * sinY + p.z * cosY;
-      const y2 = p.y * cosX - z1 * sinX;
-      const z2 = p.y * sinX + z1 * cosX;
-
-      const fov = 450;
-      const scale = fov / (fov + z2 + 150);
-      if(scale > 0){
-        const px = cx + x1 * scale;
-        const py = cy + y2 * scale;
-        
-        const hue = (p.hueOffset + time * 45) % 360;
-        const sat = Math.round(colorSaturation * 90);
-        const lum = Math.round(35 + (1 - colorSaturation) * 15);
-        const alpha = Math.min(0.7, scale * (0.35 + colorSaturation * 0.35));
-
-        ctx.beginPath();
-        ctx.arc(px, py, p.size * scale, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${hue}, ${sat}%, ${lum}%, ${alpha})`;
-        ctx.fill();
-      }
-    }
-
-    for(let r = 0; r < NUM_RINGS; r++){
-      const u = (r / NUM_RINGS) * Math.PI * 2;
-      const ringRadius = 135 + Math.sin(u * 3 + time * 1.1) * 35;
-      
-      ctx.beginPath();
-
-      for(let p = 0; p <= POINTS_PER_RING; p++){
-        const v = (p / POINTS_PER_RING) * Math.PI * 2;
-        const tubeRadius = 45 + Math.cos(v * 4 + time * 1.4 + u) * 16;
-
-        const rawX = (ringRadius + tubeRadius * Math.cos(v)) * Math.cos(u * 2);
-        const rawY = (ringRadius + tubeRadius * Math.cos(v)) * Math.sin(u * 2);
-        const rawZ = tubeRadius * Math.sin(v) + Math.sin(u * 4 + time) * 40;
-
-        const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
-        const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
-
-        const x1 = rawX * cosY + rawZ * sinY;
-        const z1 = -rawX * sinY + rawZ * cosY;
-        const y2 = rawY * cosX - z1 * sinX;
-        const z2 = rawY * sinX + z1 * cosX;
-
-        const fov = 480;
-        const scale = fov / (fov + z2 + 100);
-        const px = cx + x1 * scale;
-        const py = cy + y2 * scale;
-
-        if(p === 0){
-          ctx.moveTo(px, py);
-        } else {
-          ctx.lineTo(px, py);
-        }
-      }
-
-      const ringHue = (r * (360 / NUM_RINGS) + time * 55) % 360;
-      const sat = Math.round(colorSaturation * 92);
-      const lum = Math.round(25 + colorSaturation * 25 + Math.sin(u + time) * 12);
-      const alpha = 0.35 + colorSaturation * 0.35 + Math.sin(u * 2 + time) * 0.15;
-
-      ctx.strokeStyle = `hsla(${ringHue}, ${sat}%, ${lum}%, ${alpha})`;
-      ctx.lineWidth = 1.4 + (1 - colorSaturation) * 0.6;
-      ctx.stroke();
-    }
-
-    requestAnimationFrame(render);
-  }
-
-  render();
-})();
-
-
-
-// ==================== BACKUP & EXPORT MODAL HANDLERS ====================
-function openBackupModal(){
-  const m = document.getElementById('backup-modal');
-  if(m){ m.style.display = 'flex'; exportDataSection('gallery'); }
-}
-function closeBackupModal(){
-  const m = document.getElementById('backup-modal');
-  if(m) m.style.display = 'none';
-}
-function exportDataSection(section){
-  const txt = document.getElementById('backup-text');
-  if(!txt) return;
-  if(section === 'gallery') txt.value = JSON.stringify(galleryItems, null, 2);
-  else if(section === 'novels') txt.value = JSON.stringify(novels, null, 2);
-  else if(section === 'tech') txt.value = JSON.stringify(techProjects, null, 2);
-  else if(section === 'software') txt.value = JSON.stringify(software, null, 2);
-  else if(section === 'articles') txt.value = JSON.stringify(articles, null, 2);
-  else if(section === 'all'){
-    txt.value = JSON.stringify({
-      backupDate: new Date().toISOString(),
-      gallery: galleryItems,
-      novels: novels,
-      tech: techProjects,
-      software: software,
-      articles: articles,
-      experience: experience,
-      clients: clients
-    }, null, 2);
-  }
-}
-function copyBackupText(){
-  const txt = document.getElementById('backup-text');
-  if(txt){
-    txt.select();
-    navigator.clipboard.writeText(txt.value);
-    showToast('Copied data to clipboard');
-  }
-}
-function importBackupText(){
-  const txt = document.getElementById('backup-text');
-  if(!txt || !txt.value.trim()) return;
-  try {
-    const data = JSON.parse(txt.value.trim());
-    if(Array.isArray(data)){
-      if(data[0] && data[0].path){ galleryItems = data; saveData('rana_gallery_data', galleryItems); renderBeGallery(); renderGallery('all'); }
-      else if(data[0] && data[0].genre){ novels = data; saveData('rana_novels_data', novels); renderBeNovels(); renderNovels(); }
-      else if(data[0] && data[0].subtitle){ techProjects = data; saveData('rana_tech_data', techProjects); renderBeTech(); renderTechProjects(); }
-      else if(data[0] && data[0].price){ software = data; saveData('rana_software_data', software); renderBeSoftware(); }
-      else if(data[0] && (data[0].readTime || data[0].category)){ articles = data; saveData('rana_articles_data', articles); renderBeArticles(); renderArticles(); }
-    } else if(typeof data === 'object'){
-      if(data.gallery){ galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
-      if(data.novels){ novels = data.novels; saveData('rana_novels_data', novels); }
-      if(data.tech){ techProjects = data.tech; saveData('rana_tech_data', techProjects); }
-      if(data.software){ software = data.software; saveData('rana_software_data', software); }
-      if(data.articles){ articles = data.articles; saveData('rana_articles_data', articles); }
-      if(data.experience){ experience = data.experience; saveData('rana_experience_data', experience); }
-      if(data.clients){ clients = data.clients; saveData('rana_clients_data', clients); }
-      renderBackend();
-      renderHome();
-    }
-    showToast('Data imported and restored successfully!');
-  } catch(e){
-    alert('Invalid JSON data. Please check what you pasted.');
-  }
-}
-
-function downloadBackupJsonFile(){
-  const fullDatabase = {
-    backupDate: new Date().toISOString(),
-    gallery: galleryItems,
-    novels: novels,
-    tech: techProjects,
-    software: software,
-    articles: articles,
-    experience: experience,
-    clients: clients
-  };
-  const str = JSON.stringify(fullDatabase, null, 2);
-  const blob = new Blob([str], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `rana_portfolio_backup_${new Date().toISOString().split('T')[0]}.json`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  showToast('Backup file downloaded successfully!');
-}
-
-function restoreFromFile(event){
-  const file = event.target.files?.[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e){
-    try {
-      const data = JSON.parse(e.target.result);
-      if(data.gallery){ galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
-      if(data.novels){ novels = data.novels; saveData('rana_novels_data', novels); }
-      if(data.tech){ techProjects = data.tech; saveData('rana_tech_data', techProjects); }
-      if(data.software){ software = data.software; saveData('rana_software_data', software); }
-      if(data.articles){ articles = data.articles; saveData('rana_articles_data', articles); }
-      if(data.experience){ experience = data.experience; saveData('rana_experience_data', experience); }
-      if(data.clients){ clients = data.clients; saveData('rana_clients_data', clients); }
-      renderBackend();
-      renderHome();
-      showToast('All portfolio data restored from file!');
-      closeBackupModal();
-    } catch(err){
-      alert('Error reading backup file: ' + err.message);
-    }
-  };
-  reader.readAsText(file);
-}
-
-
-
-// ==================== CLOUD ONLINE SYNC & CLOUD STORAGE ENGINE ====================
-// Uses JSONBin / Cloud Sync API for 100% online cloud persistence
-const CLOUD_BIN_ID = localStorage.getItem('rana_cloud_bin_id') || '66d1f94ee41b4d34e428c0a1';
-const CLOUD_MASTER_KEY = '$2a$10$71A4VfR8q9Yc1Qf5B.7r1eUo8J1V6Q3T8h2F1Y6Q9M3N2P4R5T6U8';
-
-async function saveToCloudOnline(){
-  showToast('☁️ Saving database to Cloud...');
-  const fullData = {
-    updatedAt: new Date().toISOString(),
-    gallery: galleryItems,
-    novels: novels,
-    tech: techProjects,
-    software: software,
-    articles: articles,
-    experience: experience,
-    clients: clients
-  };
-
-  try {
-    // Save to free serverless cloud bin
-    const res = await fetch('https://api.jsonbin.io/v3/b', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Bin-Private': 'false',
-        'X-Bin-Name': 'Rana_Portfolio_Database'
-      },
-      body: JSON.stringify(fullData)
-    });
-
-    if(res.ok){
-      const resJson = await res.json();
-      const binId = resJson.metadata?.id || resJson.id;
-      if(binId){
-        localStorage.setItem('rana_cloud_bin_id', binId);
-        showToast('☁️ Database Saved Online to Cloud! (Sync ID: ' + binId.substring(0,8) + ')');
-        const binInput = document.getElementById('cloud-sync-id');
-        if(binInput) binInput.value = binId;
-      }
-    } else {
-      // Fallback: download file
-      downloadBackupJsonFile();
-      showToast('☁️ Cloud saved & backup file downloaded!');
-    }
-  } catch(e){
-    console.log('Cloud sync online:', e);
-    downloadBackupJsonFile();
-    showToast('💾 Database saved locally + downloaded JSON backup');
-  }
-}
-
-async function loadFromCloudOnline(){
-  const binId = (document.getElementById('cloud-sync-id')?.value || localStorage.getItem('rana_cloud_bin_id') || '').trim();
-  if(!binId){
-    const promptId = prompt('Enter your Cloud Sync ID (or click Cancel to use latest local backup):');
-    if(!promptId) return;
-    localStorage.setItem('rana_cloud_bin_id', promptId.trim());
-  }
-
-  const activeId = (document.getElementById('cloud-sync-id')?.value || localStorage.getItem('rana_cloud_bin_id') || '').trim();
-  showToast('☁️ Loading database from Cloud...');
-
-  try {
-    const res = await fetch(`https://api.jsonbin.io/v3/b/${activeId}/latest`, {
-      headers: { 'X-Bin-Meta': 'false' }
-    });
-    if(res.ok){
-      const data = await res.json();
-      if(data.gallery){ galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
-      if(data.novels){ novels = data.novels; saveData('rana_novels_data', novels); }
-      if(data.tech){ techProjects = data.tech; saveData('rana_tech_data', techProjects); }
-      if(data.software){ software = data.software; saveData('rana_software_data', software); }
-      if(data.articles){ articles = data.articles; saveData('rana_articles_data', articles); }
-      if(data.experience){ experience = data.experience; saveData('rana_experience_data', experience); }
-      if(data.clients){ clients = data.clients; saveData('rana_clients_data', clients); }
-      renderBackend();
-      renderHome();
-      showToast('☁️ Portfolio successfully restored from Cloud!');
-      closeBackupModal();
-    } else {
-      showToast('Could not find Cloud Sync ID. Restoring from local backup instead.');
-    }
-  } catch(e){
-    alert('Error connecting to Cloud: ' + e.message);
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Init GitHub Sync Badge
-setTimeout(updateGitHubStatusBadge, 200);
-
-
-
-
-
-// ==================== CANONICAL ARTICLES DATA ====================
-articles = loadData('rana_articles_data', ARTICLES_DATA);
-if(!articles || !Array.isArray(articles) || articles.length < 5){
-  articles = JSON.parse(JSON.stringify(ARTICLES_DATA));
-  saveData('rana_articles_data', articles);
-}
-
-function renderArticles(){
-  const c = document.getElementById('articlesPageGrid');
-  if(!c) return;
-  if(!articles || articles.length === 0){
-    articles = JSON.parse(JSON.stringify(ARTICLES_DATA));
-  }
-  c.innerHTML = articles.map(a=>`
-    <div class="article-card" onclick="if('${a.url}'.startsWith('http')){window.open('${a.url}','_blank')}else{location.href='${a.url}'}">
-      <div>
-        <div class="article-meta" style="font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:8px">${a.category || a.cat || 'Essay'} · ${a.date || '2026'} · ${a.readTime || '5 min read'}</div>
-        <h3 class="article-title" style="font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ink);margin:0 0 10px;line-height:1.3">${a.title}</h3>
-        <p class="article-desc" style="font-size:13px;color:var(--ink2);line-height:1.6;margin:0 0 16px">${a.desc || ''}</p>
-        <div class="tech-tags-wrap" style="margin-bottom:20px">
-          ${(a.tags||['Writing', 'Essay']).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
-        </div>
-      </div>
-      <a class="article-btn" href="${a.url}" target="${a.url.startsWith('http')?'_blank':'_self'}">Read Article &rarr;</a>
-    </div>
-  `).join('');
-}
-
-function renderBeArticles(){
-  const c = document.getElementById('be-articles-list');
-  if(!c) return;
-  if(!articles || !Array.isArray(articles) || articles.length === 0){
-    articles = JSON.parse(JSON.stringify(ARTICLES_DATA));
-    saveData('rana_articles_data', articles);
-  }
-  c.innerHTML = articles.map((a,i) => `
-    <div class="backend-item" style="flex-direction:column;gap:12px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:12px">
-      <div style="display:flex;gap:12px;align-items:flex-start">
-        <div style="flex:1;display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px">
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">TITLE</div>
-            <input id="be-art-t-${i}" value="${(a.title||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">CATEGORY</div>
-            <input id="be-art-c-${i}" value="${(a.category||a.cat||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">READ TIME</div>
-            <input id="be-art-rt-${i}" value="${(a.readTime||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div style="grid-column:1/3">
-            <div style="font-family:var(--mono);font-size:9px;color:#1565c0;margin-bottom:4px;font-weight:600">ARTICLE / MEDIUM URL</div>
-            <input id="be-art-u-${i}" value="${(a.url||'').replace(/"/g,'&quot;')}" placeholder="https://medium.com/..."
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">DATE</div>
-            <input id="be-art-d-${i}" value="${(a.date||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">EXCERPT / DESCRIPTION</div>
-            <textarea id="be-art-desc-${i}" rows="2" style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical">${a.desc||''}</textarea>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
-          <button onclick="beUpdateArticle(${i})"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save</button>
-          <button onclick="articles.splice(${i},1);saveData('rana_articles_data',articles);renderBeArticles();renderArticles();showToast('Article deleted')"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function addArticle(){
-  const title = (document.getElementById('b-art-title')?.value || '').trim();
-  if(!title){ showToast('Title required'); return; }
-  const a = {
-    id: Date.now(),
-    title: title,
-    category: document.getElementById('b-art-cat')?.value || 'Essay',
-    cat: document.getElementById('b-art-cat')?.value || 'Essay',
-    date: document.getElementById('b-art-date')?.value || '2026',
-    readTime: document.getElementById('b-art-time')?.value || '5 min read',
-    url: document.getElementById('b-art-url')?.value || '#',
-    desc: document.getElementById('b-art-desc')?.value || '',
-    tags: ['Writing', 'Literature']
-  };
-  articles.unshift(a);
-  saveData('rana_articles_data', articles);
-  renderBeArticles();
-  renderArticles();
-  const inpT = document.getElementById('b-art-title');
-  if(inpT) inpT.value = '';
-  showToast('Article published: ' + title);
-}
-
-function beUpdateArticle(i){
-  const a = articles[i];
-  if(!a) return;
-  a.title    = document.getElementById('be-art-t-'+i)?.value || a.title;
-  a.category = document.getElementById('be-art-c-'+i)?.value || a.category;
-  a.cat      = a.category;
-  a.readTime = document.getElementById('be-art-rt-'+i)?.value || a.readTime;
-  a.url      = document.getElementById('be-art-u-'+i)?.value || a.url;
-  a.date     = document.getElementById('be-art-d-'+i)?.value || a.date;
-  a.desc     = document.getElementById('be-art-desc-'+i)?.value || a.desc;
-  saveData('rana_articles_data', articles);
-  renderBeArticles();
-  renderArticles();
-  showToast('Saved: ' + a.title.substring(0,30));
-}
-
-// ==================== TECHNICAL PROJECTS COMPLETE ENGINE ====================
-function renderBeTech(){
-  const c = document.getElementById('be-tech-list');
-  if(!c) return;
-  c.innerHTML = techProjects.map((p,i) => {
-    const featStr = Array.isArray(p.features) ? p.features.join(', ') : (p.features || '');
-    const techStr = Array.isArray(p.tech) ? (typeof p.tech[0]==='object' ? p.tech.map(t=>t.name).join(', ') : p.tech.join(', ')) : (p.tech || '');
-    const liveVal = p.liveUrl || p.webUrl || '';
-    const dlVal = p.downloadUrl || '';
-    const repoVal = p.repoUrl || p.githubUrl || '';
-
-    return `
-    <div class="backend-item" style="flex-direction:column;gap:12px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:14px" id="be-tech-card-${i}">
-      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--border)">
-        <div style="font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink)">
-          Position [ ${String(i+1).padStart(2,'0')} of ${techProjects.length} ] &middot; ID: ${p.id || 'tech-'+i}
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <button onclick="moveTechProject(${i}, -1)" ${i===0?'disabled style="opacity:0.3;cursor:not-allowed"':'style="cursor:pointer"'}
-            class="be-pos-btn" title="Move Up in order">&#9650; Move Up</button>
-          <button onclick="moveTechProject(${i}, 1)" ${i===techProjects.length-1?'disabled style="opacity:0.3;cursor:not-allowed"':'style="cursor:pointer"'}
-            class="be-pos-btn" title="Move Down in order">&#9660; Move Down</button>
-        </div>
-      </div>
-
-      <div style="display:flex;gap:12px;align-items:flex-start">
-        <div style="flex:1;display:grid;grid-template-columns:2fr 1fr;gap:10px">
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">PROJECT TITLE</div>
-            <input id="be-tp-t-${i}" value="${(p.title||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">STATUS</div>
-            <input id="be-tp-s-${i}" value="${(p.status||'Live').replace(/"/g,'&quot;')}" placeholder="Live, Beta, Production..."
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">SUBTITLE / PLATFORM TYPE</div>
-            <input id="be-tp-sub-${i}" value="${(p.subtitle||'').replace(/"/g,'&quot;')}" placeholder="e.g. Chrome Multi-Profile Link Vault"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">TECH STACK (comma-separated)</div>
-            <input id="be-tp-tech-${i}" value="${techStr.replace(/"/g,'&quot;')}" placeholder="Electron, Node.js, TypeScript"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">KEY ARCHITECTURAL FEATURES (comma-separated)</div>
-            <input id="be-tp-feat-${i}" value="${featStr.replace(/"/g,'&quot;')}" placeholder="AES-256-GCM encrypted vault, 13+ Chrome profile support, 1-click launch"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:#1565c0;margin-bottom:4px;font-weight:600">LIVE DEMO / WEB LINK (Optional)</div>
-            <input id="be-tp-live-${i}" value="${liveVal.replace(/"/g,'&quot;')}" placeholder="https://..."
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:#2e7d32;margin-bottom:4px;font-weight:600">DOWNLOAD / APP LINK (Optional)</div>
-            <input id="be-tp-dl-${i}" value="${dlVal.replace(/"/g,'&quot;')}" placeholder="https://..."
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:4px;font-weight:600">GITHUB REPOSITORY (Optional)</div>
-            <input id="be-tp-repo-${i}" value="${repoVal.replace(/"/g,'&quot;')}" placeholder="https://github.com/..."
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">DESCRIPTION</div>
-            <textarea id="be-tp-d-${i}" rows="3" style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical">${p.desc||''}</textarea>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
-          <button onclick="beUpdateTech(${i})"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save</button>
-          <button onclick="techProjects.splice(${i},1);saveData('rana_tech_data',techProjects);renderBeTech();renderTechProjects();renderHome();showToast('Project deleted')"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
-        </div>
-      </div>
-    </div>
-  `;
-  }).join('');
-}
-
-function addTechProject(){
-  const title = (document.getElementById('b-tech-title')?.value || '').trim();
-  if(!title){ showToast('Title required'); return; }
-  const stackStr = (document.getElementById('b-tech-stack')?.value || 'JavaScript').trim();
-  const featStr = (document.getElementById('b-tech-features')?.value || '').trim();
-  const pos = document.getElementById('b-tech-pos')?.value || 'end';
-
-  const p = {
-    id: 'proj-' + Date.now(),
-    title,
-    subtitle: document.getElementById('b-tech-sub')?.value || '',
-    status: document.getElementById('b-tech-status')?.value || 'Live',
-    badgeClass: 'badge-outline',
-    num: '0' + (techProjects.length + 1),
-    desc: document.getElementById('b-tech-desc')?.value || '',
-    liveUrl: (document.getElementById('b-tech-live')?.value || '').trim(),
-    downloadUrl: (document.getElementById('b-tech-dl')?.value || '').trim(),
-    repoUrl: (document.getElementById('b-tech-repo')?.value || '').trim(),
-    features: featStr ? featStr.split(/[,\r\n]+/).map(s=>s.trim()).filter(Boolean) : ['Modular architecture', 'High-performance runtime'],
-    tech: stackStr.split(',').map(s=>s.trim()).filter(Boolean)
-  };
-
-  if(pos === 'top'){
-    techProjects.unshift(p);
-  } else {
-    techProjects.push(p);
-  }
-  // Renumber
-  techProjects.forEach((proj, idx) => {
-    proj.num = String(idx + 1).padStart(2, '0');
-  });
-
-  saveData('rana_tech_data', techProjects);
-  renderBeTech();
-  renderTechProjects();
-  renderHome();
-  showToast('Project added: ' + title);
-
-  const tInp = document.getElementById('b-tech-title');
-  if(tInp) tInp.value = '';
-}
-
-function beUpdateTech(i){
-  const p = techProjects[i];
-  if(!p) return;
-  p.title       = document.getElementById('be-tp-t-'+i)?.value || p.title;
-  p.status      = document.getElementById('be-tp-s-'+i)?.value || p.status;
-  p.subtitle    = document.getElementById('be-tp-sub-'+i)?.value || p.subtitle;
-  p.liveUrl     = (document.getElementById('be-tp-live-'+i)?.value || '').trim();
-  p.downloadUrl = (document.getElementById('be-tp-dl-'+i)?.value || '').trim();
-  p.repoUrl     = (document.getElementById('be-tp-repo-'+i)?.value || '').trim();
-  p.desc        = document.getElementById('be-tp-d-'+i)?.value || p.desc;
-  
-  const techStr = document.getElementById('be-tp-tech-'+i)?.value || '';
-  p.tech        = techStr.split(',').map(s=>s.trim()).filter(Boolean);
-
-  const featStr = document.getElementById('be-tp-feat-'+i)?.value || '';
-  p.features    = featStr.split(/[,\r\n]+/).map(s=>s.trim()).filter(Boolean);
-
-  saveData('rana_tech_data', techProjects);
-  renderBeTech();
-  renderTechProjects();
-  renderHome();
-  showToast('Saved: ' + p.title.substring(0,30));
-}
-
-function moveTechProject(index, direction){
-  const targetIndex = index + direction;
-  if(targetIndex < 0 || targetIndex >= techProjects.length) return;
-  
-  const temp = techProjects[index];
-  techProjects[index] = techProjects[targetIndex];
-  techProjects[targetIndex] = temp;
-
-  // Renumber
-  techProjects.forEach((p, idx) => {
-    p.num = String(idx + 1).padStart(2, '0');
-  });
-
-  saveData('rana_tech_data', techProjects);
-  renderBeTech();
-  renderTechProjects();
-  renderHome();
-  showToast(`Moved "${temp.title.substring(0,24)}" to position ${targetIndex + 1}`);
-}
-
-
-
-// ==================== GITHUB CLOUD AUTO-SYNC ENGINE (PERMANENT CONFIG) ====================
-const DEFAULT_GH_TOKEN = (function(){
-  try {
-    const p1 = 'Z2hwX2xTRWtMWEY2';
-    const p2 = 'Nm9uZ3pQWU1rYm94';
-    const p3 = 'WDYyYTN0dEFrQTJU';
-    const p4 = 'Vld2OA==';
-    return window.atob(p1 + p2 + p3 + p4);
-  } catch(e){
-    return '';
-  }
-})();
-const DEFAULT_GH_OWNER = 'Ranabdullah';
-const DEFAULT_GH_REPO  = 'rana-portfolio';
-const DEFAULT_GH_BRANCH = 'main';
-const DEFAULT_GH_PATH  = 'portfolio_data.json';
-
-// Automatically set active valid token in browser
-if(!localStorage.getItem('rana_gh_token') || !localStorage.getItem('rana_gh_token').includes('lSEk')){
-  localStorage.setItem('rana_gh_token', DEFAULT_GH_TOKEN);
-  localStorage.setItem('rana_gh_owner', DEFAULT_GH_OWNER);
-  localStorage.setItem('rana_gh_repo', DEFAULT_GH_REPO);
-  localStorage.setItem('rana_gh_branch', DEFAULT_GH_BRANCH);
-  localStorage.setItem('rana_gh_path', DEFAULT_GH_PATH);
-  localStorage.setItem('rana_gh_autosync', 'true');
-}
-
-function utf8ToBase64(str) {
-  return window.btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-    return String.fromCharCode('0x' + p1);
-  }));
-}
-
-function base64ToUtf8(str) {
-  return decodeURIComponent(Array.prototype.map.call(window.atob(str), function(c) {
-    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
-}
-
-function openGitHubModal(){
-  const m = document.getElementById('github-modal');
-  if(m){
-    m.style.display = 'flex';
-    document.getElementById('gh-token-input').value = localStorage.getItem('rana_gh_token') || DEFAULT_GH_TOKEN;
-    document.getElementById('gh-owner-input').value = localStorage.getItem('rana_gh_owner') || DEFAULT_GH_OWNER;
-    document.getElementById('gh-repo-input').value = localStorage.getItem('rana_gh_repo') || DEFAULT_GH_REPO;
-    document.getElementById('gh-branch-input').value = localStorage.getItem('rana_gh_branch') || DEFAULT_GH_BRANCH;
-    document.getElementById('gh-path-input').value = localStorage.getItem('rana_gh_path') || DEFAULT_GH_PATH;
-    document.getElementById('gh-autosync-chk').checked = localStorage.getItem('rana_gh_autosync') !== 'false';
-    updateGitHubStatusBadge();
-  }
-}
-
-function closeGitHubModal(){
-  const m = document.getElementById('github-modal');
-  if(m) m.style.display = 'none';
-}
-
-function toggleTokenVisibility(){
-  const inp = document.getElementById('gh-token-input');
-  const btn = document.getElementById('gh-toggle-btn');
-  if(inp.type === 'password'){
-    inp.type = 'text';
-    btn.textContent = '🔒 Hide';
-  } else {
-    inp.type = 'password';
-    btn.textContent = '👁️ Show';
-  }
-}
-
-function saveGitHubConfig(){
-  const token = (document.getElementById('gh-token-input')?.value || DEFAULT_GH_TOKEN).trim();
-  const owner = (document.getElementById('gh-owner-input')?.value || DEFAULT_GH_OWNER).trim();
-  const repo = (document.getElementById('gh-repo-input')?.value || DEFAULT_GH_REPO).trim();
-  const branch = (document.getElementById('gh-branch-input')?.value || DEFAULT_GH_BRANCH).trim();
-  const path = (document.getElementById('gh-path-input')?.value || DEFAULT_GH_PATH).trim();
-  const autosync = document.getElementById('gh-autosync-chk')?.checked;
-
-  localStorage.setItem('rana_gh_token', token);
-  localStorage.setItem('rana_gh_owner', owner);
-  localStorage.setItem('rana_gh_repo', repo);
-  localStorage.setItem('rana_gh_branch', branch);
-  localStorage.setItem('rana_gh_path', path);
-  localStorage.setItem('rana_gh_autosync', autosync ? 'true' : 'false');
-
-  showToast('🐙 Testing GitHub connection & syncing...');
-  pushToGitHubDirect(true);
-}
-
-function disconnectGitHub(){
-  if(confirm('Reset GitHub Sync to permanent default token?')){
-    localStorage.setItem('rana_gh_token', DEFAULT_GH_TOKEN);
-    localStorage.setItem('rana_gh_owner', DEFAULT_GH_OWNER);
-    localStorage.setItem('rana_gh_repo', DEFAULT_GH_REPO);
-    localStorage.setItem('rana_gh_branch', DEFAULT_GH_BRANCH);
-    localStorage.setItem('rana_gh_path', DEFAULT_GH_PATH);
-    updateGitHubStatusBadge('synced');
-    showToast('Reset to permanent GitHub configuration');
-    closeGitHubModal();
-  }
-}
-
-function updateGitHubStatusBadge(status, commitSha){
-  const token = localStorage.getItem('rana_gh_token') || DEFAULT_GH_TOKEN;
-  const owner = localStorage.getItem('rana_gh_owner') || DEFAULT_GH_OWNER;
-  const repo = localStorage.getItem('rana_gh_repo') || DEFAULT_GH_REPO;
-  const lastSync = localStorage.getItem('rana_gh_last_sync');
-
-  const dot = document.getElementById('gh-status-dot');
-  const label = document.getElementById('gh-header-label');
-  const modalDot = document.getElementById('gh-modal-dot');
-  const statusText = document.getElementById('gh-status-text');
-  const timeText = document.getElementById('gh-last-sync-time');
-
-  if(status === 'syncing'){
-    if(dot) dot.style.background = '#e3b341';
-    if(label) label.textContent = '🐙 Syncing...';
-    if(modalDot) modalDot.style.background = '#e3b341';
-    if(statusText) statusText.textContent = 'Status: Syncing with GitHub...';
-    return;
-  }
-
-  if(token){
-    if(dot) dot.style.background = '#2da44e';
-    if(label) label.textContent = '🐙 GitHub Sync: Active ✓';
-    if(modalDot) modalDot.style.background = '#2da44e';
-    if(statusText) statusText.textContent = `Status: Connected to ${owner}/${repo} ✓`;
-    if(timeText && lastSync){
-      const d = new Date(lastSync);
-      timeText.textContent = 'Last synced: ' + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    }
-  } else {
-    if(dot) dot.style.background = '#8b949e';
-    if(label) label.textContent = '🐙 GitHub Sync';
-    if(modalDot) modalDot.style.background = '#8b949e';
-    if(statusText) statusText.textContent = 'Status: Not Connected';
-    if(timeText) timeText.textContent = 'Never synced';
-  }
-}
-
-function updateGitHubTokenPrompt(){
-  const cur = localStorage.getItem('rana_gh_token') || '';
-  const token = prompt('Enter your GitHub Personal Access Token (starts with ghp_...):', cur);
-  if(token !== null){
-    const clean = token.trim();
-    if(clean){
-      localStorage.setItem('rana_gh_token', clean);
-      showToast('🔑 GitHub Token updated! Testing connection...');
-      pushToGitHubDirect(true);
-    } else {
-      localStorage.removeItem('rana_gh_token');
-      showToast('Token cleared');
-    }
-  }
-}
-
-async function pushToGitHubDirect(isManual = true){
-  let token = (localStorage.getItem('rana_gh_token') || '').trim();
-  const owner = (localStorage.getItem('rana_gh_owner') || 'Ranabdullah').trim();
-  const repo = (localStorage.getItem('rana_gh_repo') || 'rana-portfolio').trim();
-  const branch = (localStorage.getItem('rana_gh_branch') || 'main').trim();
-  const path = (localStorage.getItem('rana_gh_path') || 'portfolio_data.json').trim();
-
-  if(!token){
-    const userEntered = prompt('Enter your GitHub Personal Access Token (starts with ghp_...):\n\nCreate one at https://github.com/settings/tokens/new (select "repo" scope)');
-    if(!userEntered || !userEntered.trim()) return;
-    token = userEntered.trim();
-    localStorage.setItem('rana_gh_token', token);
-  }
-
-  updateGitHubStatusBadge('syncing');
-  if(isManual) showToast('🐙 Saving all portfolio data to GitHub...');
-
-  const fullDatabase = {
-    updatedAt: new Date().toISOString(),
-    gallery: galleryItems,
-    novels: novels,
-    tech: techProjects,
-    software: software,
-    articles: articles,
-    experience: experience,
-    clients: clients
-  };
-
-  const contentStr = JSON.stringify(fullDatabase, null, 2);
-  const base64Content = utf8ToBase64(contentStr);
-
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-
-  try {
-    // 1. Get existing file SHA if it exists
-    let existingSha = null;
-    try {
-      const getRes = await fetch(`${url}?ref=${branch}&_t=${Date.now()}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-      if(getRes.ok) {
-        const fileInfo = await getRes.json();
-        existingSha = fileInfo.sha;
-      }
-    } catch(e) {
-      console.warn('Could not fetch existing file SHA:', e);
-    }
-
-    // 2. PUT commit
-    const body = {
-      message: `Auto-sync portfolio database update [${new Date().toISOString()}]`,
-      content: base64Content,
-      branch: branch
-    };
-    if(existingSha) {
-      body.sha = existingSha;
-    }
-
-    const putRes = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    });
-
-    if(putRes.ok) {
-      const resData = await putRes.json();
-      const commitSha = resData.commit?.sha?.substring(0, 7) || 'latest';
-      localStorage.setItem('rana_gh_last_sync', new Date().toISOString());
-      updateGitHubStatusBadge('synced', commitSha);
-      showToast(`🐙 Successfully Saved to GitHub! (${commitSha})`);
-    } else {
-      const errJson = await putRes.json().catch(() => ({}));
-      updateGitHubStatusBadge('error');
-      
-      if(putRes.status === 401 || errJson.message?.includes('Bad credentials')){
-        const reToken = prompt('GitHub Token was revoked or expired (401 Bad credentials).\n\nPlease paste your new GitHub Personal Access Token:');
-        if(reToken && reToken.trim()){
-          localStorage.setItem('rana_gh_token', reToken.trim());
-          pushToGitHubDirect(true);
-          return;
-        }
-      }
-      
-      console.error('GitHub API error:', errJson);
-      if(isManual) alert('GitHub Sync Error: ' + (errJson.message || putRes.statusText));
-      else showToast('⚠️ GitHub sync failed: ' + (errJson.message || 'Check token permissions'));
-    }
-  } catch(err) {
-    updateGitHubStatusBadge('error');
-    console.error('GitHub sync error:', err);
-    if(isManual) alert('Connection Error: ' + err.message);
-  }
-}
-
-async function pullFromGitHubDirect(){
-  const token = (localStorage.getItem('rana_gh_token') || DEFAULT_GH_TOKEN).trim();
-  const owner = (localStorage.getItem('rana_gh_owner') || DEFAULT_GH_OWNER).trim();
-  const repo = (localStorage.getItem('rana_gh_repo') || DEFAULT_GH_REPO).trim();
-  const branch = (localStorage.getItem('rana_gh_branch') || DEFAULT_GH_BRANCH).trim();
-  const path = (localStorage.getItem('rana_gh_path') || DEFAULT_GH_PATH).trim();
-
-  if(!token){
-    openGitHubModal();
-    return;
-  }
-
-  showToast('🐙 Pulling latest database from GitHub...');
-
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}&t=${Date.now()}`;
-
-  try {
-    const res = await fetch(url, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github.v3+json'
-      }
-    });
-
-    if(res.ok) {
-      const fileData = await res.json();
-      const rawText = base64ToUtf8(fileData.content);
-      const data = JSON.parse(rawText);
-
-      if(data.gallery) { galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
-      if(data.novels) { novels = data.novels; saveData('rana_novels_data', novels); }
-      if(data.tech) { techProjects = data.tech; saveData('rana_tech_data', techProjects); }
-      if(data.software) { software = data.software; saveData('rana_software_data', software); }
-      if(data.articles) { articles = data.articles; saveData('rana_articles_data', articles); }
-      if(data.experience) { experience = data.experience; saveData('rana_experience_data', experience); }
-      if(data.clients) { clients = data.clients; saveData('rana_clients_data', clients); }
-
-      renderBackend();
-      renderHome();
-      renderGallery('all');
-      showToast('🐙 All portfolio data pulled & updated from GitHub!');
-      closeGitHubModal();
-    } else {
-      const err = await res.json().catch(() => ({}));
-      alert('Could not find portfolio file on GitHub: ' + (err.message || res.statusText));
-    }
-  } catch(e) {
-    alert('Error pulling from GitHub: ' + e.message);
-  }
-}
-
-// Debounced Auto-Sync on any change
-let ghDebounceTimer = null;
-function scheduleGitHubAutoSync(){
-  const token = localStorage.getItem('rana_gh_token') || DEFAULT_GH_TOKEN;
-  const auto = localStorage.getItem('rana_gh_autosync') !== 'false';
-  if(!token || !auto) return;
-
-  updateGitHubStatusBadge('syncing');
-  clearTimeout(ghDebounceTimer);
-  ghDebounceTimer = setTimeout(() => {
-    pushToGitHubDirect(false);
-  }, 1800);
-}
-
-
-// Init GitHub Sync Badge
-setTimeout(updateGitHubStatusBadge, 200);
-
 
 // ==================== MASTER 3-COLOR THEME & HERO ENGINE ====================
 const GLOBAL_THEMES = {
