@@ -1549,98 +1549,11 @@ body.theme-dark .submit-btn {
 
 
 
-/* ==================== VIBRANT 360-DEGREE OMNIDIRECTIONAL AURA & CHROMATIC TITLES ==================== */
-/* Track and container padding so top, bottom, left, and right glow breathe freely in 360 degrees */
-.novels-slider-track,
-.projects-slider-wrap,
-.home-gallery-slider-wrap {
-  position: relative;
-  overflow: hidden !important;
-  padding: 32px 20px 38px !important;
-  margin: -32px -20px -38px !important;
-}
 
-.novels-slider,
-.projects-grid,
-.home-gallery-grid {
-  padding: 4px 6px !important;
-}
 
-.gallery-grid,
-.tech-spotlight-grid,
-.dls-card-holder,
-.sw-products-grid,
-.novels-grid,
-.articles-grid,
-.expertise-grid {
-  padding-top: 20px !important;
-  padding-bottom: 34px !important;
-}
+/* ==================== 100% BULLETPROOF THEME CONTRAST & LEGIBILITY ENGINE ==================== */
 
-/* Master 360-Degree Gentle Multi-Colored Aura applied to ALL cards (Subtle, Non-Overpowering at Rest) */
-.g-card,
-.novel-card,
-.novel-page-card,
-.proj-card,
-.sw-product-card,
-.tech-spotlight-card,
-.dls-card,
-.article-card,
-.expertise-grid > div,
-.exp-item {
-  position: relative;
-  border: 1px solid var(--card-border, rgba(255, 215, 64, 0.28)) !important;
-  /* Gentle, Atmospheric 60%+ Transparent Glow at Rest */
-  box-shadow: 0 0 10px 1px var(--card-glow, rgba(255, 215, 64, 0.12)),
-              0 0 24px 3px var(--card-glow-ambient, rgba(255, 215, 64, 0.05)),
-              0 0 42px 8px var(--card-glow-soft, rgba(255, 215, 64, 0.02)),
-              0 6px 18px rgba(0, 0, 0, 0.25) !important;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  border-radius: 8px !important;
-}
-
-/* On Hover: Soft Vivid Bloom when cursor comes there */
-.g-card:hover,
-.novel-card:hover,
-.novel-page-card:hover,
-.proj-card:hover,
-.sw-product-card:hover,
-.tech-spotlight-card:hover,
-.dls-card:hover,
-.article-card:hover,
-.expertise-grid > div:hover,
-.exp-item:hover {
-  transform: translateY(-5px) !important;
-  border-color: var(--card-border-hover, rgba(255, 215, 64, 0.75)) !important;
-  box-shadow: 0 0 18px 3px var(--card-glow-hover, rgba(255, 215, 64, 0.35)),
-              0 0 40px 8px var(--card-glow-ambient-hover, rgba(255, 215, 64, 0.18)),
-              0 0 65px 14px var(--card-glow-soft-hover, rgba(255, 215, 64, 0.08)),
-              0 14px 32px rgba(0, 0, 0, 0.45) !important;
-}
-
-/* Card Images: Vivid, crisp rendering */
-.g-card img,
-.novel-card img,
-.novel-page-card img,
-.proj-card img,
-.sw-product-card img,
-.tech-spotlight-card img {
-  filter: contrast(1.06) brightness(1.02) saturate(1.08) !important;
-  transition: transform 0.4s ease, filter 0.4s ease !important;
-}
-
-.g-card:hover img,
-.novel-card:hover img,
-.novel-page-card:hover img,
-.proj-card:hover img,
-.sw-product-card:hover img {
-  filter: contrast(1.1) brightness(1.05) saturate(1.15) !important;
-  transform: scale(1.02);
-}
-
-/* PROMINENT CHROMATIC TITLES matching each card's unique rainbow accent */
+/* Master typography defaults */
 .novel-name,
 .novel-title,
 .novel-page-title,
@@ -1653,42 +1566,15 @@ body.theme-dark .submit-btn {
 .article-title,
 .article-card h3,
 .sw-product-name {
-  color: var(--card-accent, #ffd740) !important;
   font-family: var(--serif) !important;
   font-weight: 600 !important;
-  transition: color 0.3s ease !important;
+  transition: color 0.25s ease, transform 0.25s ease !important;
 }
 
-/* Software & Add-ons: Reduced distance between Title, Price & Platform */
-.sw-product-meta {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  margin-bottom: 4px !important;
-  gap: 8px !important;
-}
-.sw-product-name {
-  font-size: 19px !important;
-  margin-bottom: 6px !important;
-}
-.sw-product-desc {
-  margin-bottom: 12px !important;
-  line-height: 1.5 !important;
-}
-.sw-product-price {
-  font-family: var(--mono) !important;
-  font-size: 11px !important;
-  font-weight: 700 !important;
-  color: var(--card-accent, #ffd740) !important;
-}
-
-
-
-/* ==================== 100% FLAWLESS LIGHT OVER DARK & DARK OVER LIGHT CONTRAST ENGINE ==================== */
-
-/* 1. LIGHT THEME (White / Day Study): Pure High-Contrast Dark-Over-Light Everywhere */
-body.theme-light {
-  --bg: #f5f6f8 !important;
+/* 1. LIGHT THEME (White Backgrounds): 100% Crisp Dark Ink Over White (NO YELLOW / NO LIGHT-ON-LIGHT) */
+body.theme-light,
+body:not(.theme-dark):not(.theme-evening) {
+  --bg: #f4f5f7 !important;
   --bg-card: #ffffff !important;
   --bg2: #eaedf2 !important;
   --bg3: #f8fafc !important;
@@ -1698,7 +1584,7 @@ body.theme-light {
   --ink4: #6b7280 !important;
   --border: #d1d5db !important;
   --border2: #e5e7eb !important;
-  --nav-bg: rgba(245, 246, 248, 0.95) !important;
+  --nav-bg: rgba(244, 245, 247, 0.95) !important;
 }
 
 body.theme-light h1, body.theme-light h2, body.theme-light h3, body.theme-light h4, body.theme-light h5, body.theme-light h6,
@@ -1714,51 +1600,69 @@ body.theme-light .dls-card h2,
 body.theme-light .article-title,
 body.theme-light .article-card h3,
 body.theme-light .sw-product-name {
-  color: #11141a !important; /* 100% Dark Over Light: Never light yellow or washed-out on white cards */
-  font-family: var(--serif) !important;
-  font-weight: 600 !important;
+  color: #11141a !important; /* Pure high-contrast dark ink on white */
+}
+
+body.theme-light .novel-page-card,
+body.theme-light .novel-card,
+body.theme-light .g-card,
+body.theme-light .proj-card,
+body.theme-light .tech-spotlight-card,
+body.theme-light .dls-card,
+body.theme-light .sw-product-card,
+body.theme-light .article-card,
+body.theme-light .expertise-grid > div {
+  background: #ffffff !important;
+  border: 1px solid #d1d5db !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.theme-light .novel-page-card:hover,
+body.theme-light .novel-card:hover,
+body.theme-light .g-card:hover,
+body.theme-light .proj-card:hover,
+body.theme-light .tech-spotlight-card:hover,
+body.theme-light .dls-card:hover,
+body.theme-light .sw-product-card:hover,
+body.theme-light .article-card:hover,
+body.theme-light .expertise-grid > div:hover {
+  border-color: var(--card-border-hover, #11141a) !important;
+  box-shadow: 0 8px 24px var(--card-glow-hover, rgba(0, 0, 0, 0.12)), 0 0 16px var(--card-glow, rgba(0, 0, 0, 0.06)) !important;
 }
 
 body.theme-light .novel-page-genre,
 body.theme-light .novel-genre,
+body.theme-light .g-cat,
 body.theme-light .article-meta,
-body.theme-light .sw-product-type,
-body.theme-light .g-cat {
+body.theme-light .sw-product-type {
   color: #6b7280 !important;
-  font-weight: 600 !important;
 }
 
-body.theme-light .novel-sub,
 body.theme-light .novel-page-tagline,
+body.theme-light .novel-sub,
 body.theme-light .article-desc,
 body.theme-light .sw-product-desc {
   color: #4b5563 !important;
 }
 
-body.theme-light .btn-primary, body.theme-light .submit-btn, body.theme-light .novel-amz-btn {
-  background: #11141a !important;
-  color: #ffffff !important;
-  border: 1px solid #11141a !important;
-  font-weight: 700 !important;
-}
-body.theme-light .btn-outline, body.theme-light .novel-read-btn, body.theme-light .article-btn, body.theme-light .sw-product-link {
-  background: #ffffff !important;
-  color: #11141a !important;
-  border: 1px solid #d1d5db !important;
-  font-weight: 600 !important;
-}
-body.theme-light .form-input, body.theme-light .form-textarea, body.theme-light .backend-item input, body.theme-light .backend-item textarea, body.theme-light .backend-item select {
-  background: #ffffff !important;
-  color: #11141a !important;
-  border: 1px solid #d1d5db !important;
-}
-body.theme-light .backend-item button:not([style*="color:#e50914"]):not([style*="color: #e50914"]):not([style*="color: rgb(229, 9, 20)"]) {
+body.theme-light .btn-primary,
+body.theme-light .submit-btn,
+body.theme-light .novel-amz-btn {
   background: #11141a !important;
   color: #ffffff !important;
   border: 1px solid #11141a !important;
 }
 
-/* 2. EVENING THEME (Blue Dusk Study): Light-Over-Dark Twilight Palette */
+body.theme-light .btn-outline,
+body.theme-light .novel-read-btn,
+body.theme-light .article-btn,
+body.theme-light .sw-product-link {
+  background: #ffffff !important;
+  color: #11141a !important;
+  border: 1px solid #d1d5db !important;
+}
+
+/* 2. EVENING THEME (Blue Dusk Backgrounds): High-Contrast Luminous Light Over Navy */
 body.theme-evening {
   --bg: #0b132b !important;
   --bg-card: #1c2541 !important;
@@ -1786,35 +1690,27 @@ body.theme-evening .dls-card h2,
 body.theme-evening .article-title,
 body.theme-evening .article-card h3,
 body.theme-evening .sw-product-name {
-  color: var(--card-accent, #f0f4f8) !important;
-  font-family: var(--serif) !important;
-  font-weight: 600 !important;
+  color: #ffd166 !important; /* Golden Amber on navy */
 }
-body.theme-evening .btn-primary, body.theme-evening .submit-btn, body.theme-evening .novel-amz-btn {
+
+body.theme-evening .btn-primary,
+body.theme-evening .submit-btn,
+body.theme-evening .novel-amz-btn {
   background: #ffd166 !important;
   color: #0b132b !important;
   border: 1px solid #ffd166 !important;
-  font-weight: 700 !important;
 }
-body.theme-evening .btn-outline, body.theme-evening .novel-read-btn, body.theme-evening .article-btn, body.theme-evening .sw-product-link {
+
+body.theme-evening .btn-outline,
+body.theme-evening .novel-read-btn,
+body.theme-evening .article-btn,
+body.theme-evening .sw-product-link {
   background: #1c2541 !important;
   color: #f0f4f8 !important;
   border: 1px solid rgba(255, 255, 255, 0.22) !important;
-  font-weight: 600 !important;
-}
-body.theme-evening .form-input, body.theme-evening .form-textarea, body.theme-evening .backend-item input, body.theme-evening .backend-item textarea, body.theme-evening .backend-item select {
-  background: #141e3c !important;
-  color: #f0f4f8 !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-body.theme-evening .backend-item button:not([style*="color:#e50914"]):not([style*="color: #e50914"]):not([style*="color: rgb(229, 9, 20)"]) {
-  background: #ffd166 !important;
-  color: #0b132b !important;
-  border: 1px solid #ffd166 !important;
-  font-weight: 700 !important;
 }
 
-/* 3. DARK THEME (Black Nocturnal Study): Ultra-Crisp Luminous Light-Over-Dark */
+/* 3. DARK THEME (Black Nocturnal Backgrounds): High-Contrast Crisp White & Cyan Over Black */
 body.theme-dark {
   --bg: #07080b !important;
   --bg-card: #111318 !important;
@@ -1842,32 +1738,24 @@ body.theme-dark .dls-card h2,
 body.theme-dark .article-title,
 body.theme-dark .article-card h3,
 body.theme-dark .sw-product-name {
-  color: var(--card-accent, #ffffff) !important;
-  font-family: var(--serif) !important;
-  font-weight: 600 !important;
+  color: #00e5ff !important; /* Luminous Cyan on black */
 }
-body.theme-dark .btn-primary, body.theme-dark .submit-btn, body.theme-dark .novel-amz-btn {
+
+body.theme-dark .btn-primary,
+body.theme-dark .submit-btn,
+body.theme-dark .novel-amz-btn {
   background: #ffffff !important;
   color: #07080b !important;
   border: 1px solid #ffffff !important;
-  font-weight: 700 !important;
 }
-body.theme-dark .btn-outline, body.theme-dark .novel-read-btn, body.theme-dark .article-btn, body.theme-dark .sw-product-link {
+
+body.theme-dark .btn-outline,
+body.theme-dark .novel-read-btn,
+body.theme-dark .article-btn,
+body.theme-dark .sw-product-link {
   background: #111318 !important;
   color: #ffffff !important;
   border: 1px solid rgba(255, 255, 255, 0.22) !important;
-  font-weight: 600 !important;
-}
-body.theme-dark .form-input, body.theme-dark .form-textarea, body.theme-dark .backend-item input, body.theme-dark .backend-item textarea, body.theme-dark .backend-item select {
-  background: #181b22 !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-body.theme-dark .backend-item button:not([style*="color:#e50914"]):not([style*="color: #e50914"]):not([style*="color: rgb(229, 9, 20)"]) {
-  background: #ffffff !important;
-  color: #07080b !important;
-  border: 1px solid #ffffff !important;
-  font-weight: 700 !important;
 }
 
 /* Modals & Gate Light/Dark Contrast */
@@ -4587,14 +4475,14 @@ function renderHome(){
             <span style="font-family:var(--mono);font-size:11px;color:var(--ink4)">[ ${p.num || ('0' + (i+1))} ]</span>
             <span class="badge-pill ${p.badgeClass || 'badge-live'}">${p.status || 'Live'}</span>
           </div>
-          <h3 style="color:var(--card-accent) !important;font-size:21px;font-weight:600;margin-bottom:4px;font-family:var(--serif)">${p.title}</h3>
+          <h3 >${p.title}</h3>
           <div style="font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:12px">${p.subtitle || ''}</div>
           <p style="font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:16px">${(p.desc||'').substring(0,130)}...</p>
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
             <div class="tech-tags-wrap">
               ${(Array.isArray(p.tags) ? p.tags : (p.tech||[])).slice(0,3).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
             </div>
-            ${hasLive ? `<span style="font-family:var(--mono);font-size:10px;color:var(--card-accent);text-decoration:underline">View Live &rarr;</span>` : ''}
+            ${hasLive ? `<span >View Live &rarr;</span>` : ''}
           </div>
         </div>
       `;
@@ -4611,7 +4499,7 @@ function renderHome(){
         </div>
         <div class="novel-info">
           <div class="novel-genre" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">${n.genre || 'Book'} &middot; ${n.year || 'Published'}</div>
-          <div class="novel-name" style="font-family:var(--serif);font-size:16px;font-weight:600;color:var(--card-accent) !important;margin:0 0 4px;line-height:1.25">${n.title}</div>
+          <div class="novel-name" >${n.title}</div>
           <div class="novel-sub" style="font-size:11.5px;color:var(--ink2);line-height:1.5;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${n.tagline || n.desc || ''}</div>
         </div>
       </div>
@@ -4628,7 +4516,7 @@ function renderHome(){
         </div>
         <div class="g-info" style="padding:12px 6px 6px">
           <div class="g-cat" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase">${g.cat}</div>
-          <div class="g-title" style="color:var(--card-accent) !important;font-weight:600">${g.title}</div>
+          <div class="g-title" >${g.title}</div>
         </div>
       </div>
     `).join('');
@@ -4658,7 +4546,7 @@ function renderNovels(){
         ${n.amazonUrl ? `<span style="position:absolute;top:10px;right:10px;background:rgba(17,20,26,0.92);color:#fff;font-family:var(--mono);font-size:9px;padding:3px 7px;border-radius:3px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,0.3)">Amazon UK &#8599;</span>` : ''}
       </div>
       <div class="novel-page-genre">${n.genre} &middot; ${n.type || 'Published Book'}</div>
-      <div class="novel-page-title" style="color:var(--card-accent) !important;font-weight:600">${n.title}</div>
+      <div class="novel-page-title" >${n.title}</div>
       <div class="novel-page-tagline">${n.tagline || n.desc || ''}</div>
       <div class="novel-actions">
         <span class="novel-read-btn">Read Excerpt &rarr;</span>
@@ -4712,7 +4600,7 @@ function renderTechProjects(){
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:16px">
           <div>
             <div style="font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:4px">[ ${p.num} ]</div>
-            <h2 style="font-family:var(--serif);font-size:24px;font-weight:600;color:var(--card-accent) !important;margin:0 0 4px">${p.title}</h2>
+            <h2 >${p.title}</h2>
             <div style="font-family:var(--mono);font-size:12px;color:var(--ink3)">${p.subtitle}</div>
           </div>
           <span class="badge-pill ${p.badgeClass}">${p.status}</span>
@@ -4762,7 +4650,7 @@ function renderGallery(filter){
           <div class="g-cat-label">${g.cat} · ${g.pillar}</div>
           ${g.youtubeUrl ? `<a href="${g.youtubeUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-family:var(--mono);font-size:10.5px;color:#e50914;text-decoration:none;font-weight:600">Watch ↗</a>` : ''}
         </div>
-        <div class="g-title" style="color:var(--card-accent) !important;font-weight:600">${g.title}</div>
+        <div class="g-title" >${g.title}</div>
       </div>
     </div>
   `).join('');
@@ -4872,7 +4760,7 @@ function swCard(s, i){
           <span class="sw-product-type">${s.cat}</span>
           <span class="sw-product-price">${s.price}</span>
         </div>
-        <div class="sw-product-name" style="color:var(--card-accent) !important;font-weight:600">${s.name}</div>
+        <div class="sw-product-name" >${s.name}</div>
         <div class="sw-product-desc">${s.desc}</div>
       </div>
       ${s.link && s.link !== '#' ? `<a class="sw-product-link" href="${s.link}" target="_blank">View Product →</a>` : `<span class="sw-product-link" style="color:var(--ink4)">Active Production Tool</span>`}
@@ -4888,7 +4776,7 @@ function renderArticles(){
     <div class="article-card" onclick="if('${a.url}'.startsWith('http')){window.open('${a.url}','_blank')}else{location.href='${a.url}'}">
       <div>
         <div class="article-meta">${a.category} · ${a.date}</div>
-        <h3 class="article-title" style="color:var(--card-accent) !important;font-weight:600">${a.title}</h3>
+        <h3 class="article-title" >${a.title}</h3>
         <p class="article-desc">${a.desc}</p>
         <div class="tech-tags-wrap" style="margin-bottom:20px">
           ${(a.tags||[]).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
