@@ -1547,6 +1547,8 @@ body.theme-dark .submit-btn {
 
 
 
+
+
 /* ==================== VIBRANT 360-DEGREE OMNIDIRECTIONAL AURA & CHROMATIC TITLES ==================== */
 /* Track and container padding so top, bottom, left, and right glow breathe freely in 360 degrees */
 .novels-slider-track,
@@ -1554,14 +1556,14 @@ body.theme-dark .submit-btn {
 .home-gallery-slider-wrap {
   position: relative;
   overflow: hidden !important;
-  padding: 38px 24px 46px !important;
-  margin: -38px -24px -46px !important;
+  padding: 32px 20px 38px !important;
+  margin: -32px -20px -38px !important;
 }
 
 .novels-slider,
 .projects-grid,
 .home-gallery-grid {
-  padding: 6px 8px !important;
+  padding: 4px 6px !important;
 }
 
 .gallery-grid,
@@ -1571,11 +1573,11 @@ body.theme-dark .submit-btn {
 .novels-grid,
 .articles-grid,
 .expertise-grid {
-  padding-top: 24px !important;
-  padding-bottom: 40px !important;
+  padding-top: 20px !important;
+  padding-bottom: 34px !important;
 }
 
-/* Master 360-Degree Aura applied to ALL cards across the entire website */
+/* Master 360-Degree Gentle Multi-Colored Aura applied to ALL cards (Subtle, Non-Overpowering at Rest) */
 .g-card,
 .novel-card,
 .novel-page-card,
@@ -1587,19 +1589,19 @@ body.theme-dark .submit-btn {
 .expertise-grid > div,
 .exp-item {
   position: relative;
-  border: 1.5px solid var(--card-border, rgba(0, 229, 255, 0.85)) !important;
-  /* Solid, Rich, Non-Washed-Out Resting 360° Omnidirectional Glow */
-  box-shadow: 0 0 18px 2px var(--card-glow, rgba(0, 229, 255, 0.42)),
-              0 0 38px 8px var(--card-glow-ambient, rgba(0, 229, 255, 0.22)),
-              0 0 64px 16px var(--card-glow-soft, rgba(0, 229, 255, 0.12)),
-              0 10px 32px rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid var(--card-border, rgba(255, 215, 64, 0.28)) !important;
+  /* Gentle, Atmospheric 60%+ Transparent Glow at Rest */
+  box-shadow: 0 0 10px 1px var(--card-glow, rgba(255, 215, 64, 0.12)),
+              0 0 24px 3px var(--card-glow-ambient, rgba(255, 215, 64, 0.05)),
+              0 0 42px 8px var(--card-glow-soft, rgba(255, 215, 64, 0.02)),
+              0 6px 18px rgba(0, 0, 0, 0.25) !important;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
   border-radius: 8px !important;
 }
 
-/* On Hover: Intense, Luminous Bloom Effect */
+/* On Hover: Soft Vivid Bloom when cursor comes there */
 .g-card:hover,
 .novel-card:hover,
 .novel-page-card:hover,
@@ -1610,22 +1612,22 @@ body.theme-dark .submit-btn {
 .article-card:hover,
 .expertise-grid > div:hover,
 .exp-item:hover {
-  transform: translateY(-6px) !important;
-  border-color: var(--card-border, rgba(0, 229, 255, 1)) !important;
-  box-shadow: 0 0 28px 5px var(--card-glow, rgba(0, 229, 255, 0.65)),
-              0 0 58px 14px var(--card-glow-ambient, rgba(0, 229, 255, 0.38)),
-              0 0 95px 24px var(--card-glow-soft, rgba(0, 229, 255, 0.22)),
-              0 20px 50px rgba(0, 0, 0, 0.7) !important;
+  transform: translateY(-5px) !important;
+  border-color: var(--card-border-hover, rgba(255, 215, 64, 0.75)) !important;
+  box-shadow: 0 0 18px 3px var(--card-glow-hover, rgba(255, 215, 64, 0.35)),
+              0 0 40px 8px var(--card-glow-ambient-hover, rgba(255, 215, 64, 0.18)),
+              0 0 65px 14px var(--card-glow-soft-hover, rgba(255, 215, 64, 0.08)),
+              0 14px 32px rgba(0, 0, 0, 0.45) !important;
 }
 
-/* Card Images: Vivid, high-saturation rendering */
+/* Card Images: Vivid, crisp rendering */
 .g-card img,
 .novel-card img,
 .novel-page-card img,
 .proj-card img,
 .sw-product-card img,
 .tech-spotlight-card img {
-  filter: contrast(1.08) brightness(1.03) saturate(1.1) !important;
+  filter: contrast(1.06) brightness(1.02) saturate(1.08) !important;
   transition: transform 0.4s ease, filter 0.4s ease !important;
 }
 
@@ -1634,20 +1636,24 @@ body.theme-dark .submit-btn {
 .novel-page-card:hover img,
 .proj-card:hover img,
 .sw-product-card:hover img {
-  filter: contrast(1.12) brightness(1.06) saturate(1.18) !important;
-  transform: scale(1.025);
+  filter: contrast(1.1) brightness(1.05) saturate(1.15) !important;
+  transform: scale(1.02);
 }
 
-/* Chromatic Titles matching each card's theme aura */
+/* PROMINENT CHROMATIC TITLES matching each card's unique rainbow accent */
+.novel-name,
 .novel-title,
 .novel-page-title,
 .nv-title,
 .g-title,
 .proj-title,
 .tech-spotlight-title,
+.tech-spotlight-card h3,
+.dls-card h2,
 .article-title,
+.article-card h3,
 .sw-product-name {
-  color: var(--card-accent, var(--ink)) !important;
+  color: var(--card-accent, #ffd740) !important;
   font-family: var(--serif) !important;
   font-weight: 600 !important;
   transition: color 0.3s ease !important;
@@ -1673,7 +1679,7 @@ body.theme-dark .submit-btn {
   font-family: var(--mono) !important;
   font-size: 11px !important;
   font-weight: 700 !important;
-  color: var(--card-accent, #00e5ff) !important;
+  color: var(--card-accent, #ffd740) !important;
 }
 </style>
 
@@ -4270,18 +4276,107 @@ function renderPage(name){
 let novelSlideIdx=0, projSlideIdx=0;
 // ==================== MASTER MULTI-COLOR RAINBOW SYSTEM ====================
 const RAINBOW_PALETTE = [
-  { border: 'rgba(0, 229, 255, 0.95)', glow: 'rgba(0, 229, 255, 0.55)', ambient: 'rgba(0, 229, 255, 0.28)', soft: 'rgba(0, 229, 255, 0.14)', accent: '#00e5ff' },   // Electric Cyan
-  { border: 'rgba(0, 230, 118, 0.95)', glow: 'rgba(0, 230, 118, 0.55)', ambient: 'rgba(0, 230, 118, 0.28)', soft: 'rgba(0, 230, 118, 0.14)', accent: '#00e676' },   // Emerald Mint Green
-  { border: 'rgba(179, 136, 255, 0.95)', glow: 'rgba(179, 136, 255, 0.55)', ambient: 'rgba(179, 136, 255, 0.28)', soft: 'rgba(179, 136, 255, 0.14)', accent: '#b388ff' }, // Amethyst Violet
-  { border: 'rgba(255, 215, 64, 0.95)', glow: 'rgba(255, 215, 64, 0.55)', ambient: 'rgba(255, 215, 64, 0.28)', soft: 'rgba(255, 215, 64, 0.14)', accent: '#ffd740' },  // Golden Amber Yellow
-  { border: 'rgba(255, 64, 129, 0.95)', glow: 'rgba(255, 64, 129, 0.55)', ambient: 'rgba(255, 64, 129, 0.28)', soft: 'rgba(255, 64, 129, 0.14)', accent: '#ff4081' },  // Vivid Coral Pink
-  { border: 'rgba(68, 138, 255, 0.95)', glow: 'rgba(68, 138, 255, 0.55)', ambient: 'rgba(68, 138, 255, 0.28)', soft: 'rgba(68, 138, 255, 0.14)', accent: '#448aff' },   // Cobalt Sapphire Blue
-  { border: 'rgba(255, 109, 0, 0.95)', glow: 'rgba(255, 109, 0, 0.55)', ambient: 'rgba(255, 109, 0, 0.28)', soft: 'rgba(255, 109, 0, 0.14)', accent: '#ff6d00' }    // Neon Orange
+  // 1. Golden Amber Yellow
+  { 
+    border: 'rgba(255, 215, 64, 0.30)', 
+    glow: 'rgba(255, 215, 64, 0.14)', 
+    ambient: 'rgba(255, 215, 64, 0.06)', 
+    soft: 'rgba(255, 215, 64, 0.02)', 
+    borderHover: 'rgba(255, 215, 64, 0.80)', 
+    glowHover: 'rgba(255, 215, 64, 0.36)', 
+    ambientHover: 'rgba(255, 215, 64, 0.18)', 
+    softHover: 'rgba(255, 215, 64, 0.08)', 
+    accent: '#ffd740' 
+  },
+  // 2. Emerald Mint Green
+  { 
+    border: 'rgba(0, 230, 118, 0.30)', 
+    glow: 'rgba(0, 230, 118, 0.14)', 
+    ambient: 'rgba(0, 230, 118, 0.06)', 
+    soft: 'rgba(0, 230, 118, 0.02)', 
+    borderHover: 'rgba(0, 230, 118, 0.80)', 
+    glowHover: 'rgba(0, 230, 118, 0.36)', 
+    ambientHover: 'rgba(0, 230, 118, 0.18)', 
+    softHover: 'rgba(0, 230, 118, 0.08)', 
+    accent: '#00e676' 
+  },
+  // 3. Amethyst Violet Purple
+  { 
+    border: 'rgba(179, 136, 255, 0.30)', 
+    glow: 'rgba(179, 136, 255, 0.14)', 
+    ambient: 'rgba(179, 136, 255, 0.06)', 
+    soft: 'rgba(179, 136, 255, 0.02)', 
+    borderHover: 'rgba(179, 136, 255, 0.80)', 
+    glowHover: 'rgba(179, 136, 255, 0.36)', 
+    ambientHover: 'rgba(179, 136, 255, 0.18)', 
+    softHover: 'rgba(179, 136, 255, 0.08)', 
+    accent: '#b388ff' 
+  },
+  // 4. Vivid Coral Rose Pink
+  { 
+    border: 'rgba(255, 64, 129, 0.30)', 
+    glow: 'rgba(255, 64, 129, 0.14)', 
+    ambient: 'rgba(255, 64, 129, 0.06)', 
+    soft: 'rgba(255, 64, 129, 0.02)', 
+    borderHover: 'rgba(255, 64, 129, 0.80)', 
+    glowHover: 'rgba(255, 64, 129, 0.36)', 
+    ambientHover: 'rgba(255, 64, 129, 0.18)', 
+    softHover: 'rgba(255, 64, 129, 0.08)', 
+    accent: '#ff4081' 
+  },
+  // 5. Electric Cyan
+  { 
+    border: 'rgba(0, 229, 255, 0.30)', 
+    glow: 'rgba(0, 229, 255, 0.14)', 
+    ambient: 'rgba(0, 229, 255, 0.06)', 
+    soft: 'rgba(0, 229, 255, 0.02)', 
+    borderHover: 'rgba(0, 229, 255, 0.80)', 
+    glowHover: 'rgba(0, 229, 255, 0.36)', 
+    ambientHover: 'rgba(0, 229, 255, 0.18)', 
+    softHover: 'rgba(0, 229, 255, 0.08)', 
+    accent: '#00e5ff' 
+  },
+  // 6. Sunset Peach / Warm Orange
+  { 
+    border: 'rgba(255, 138, 101, 0.30)', 
+    glow: 'rgba(255, 138, 101, 0.14)', 
+    ambient: 'rgba(255, 138, 101, 0.06)', 
+    soft: 'rgba(255, 138, 101, 0.02)', 
+    borderHover: 'rgba(255, 138, 101, 0.80)', 
+    glowHover: 'rgba(255, 138, 101, 0.36)', 
+    ambientHover: 'rgba(255, 138, 101, 0.18)', 
+    softHover: 'rgba(255, 138, 101, 0.08)', 
+    accent: '#ff8a65' 
+  },
+  // 7. Neon Lavender
+  { 
+    border: 'rgba(224, 64, 251, 0.30)', 
+    glow: 'rgba(224, 64, 251, 0.14)', 
+    ambient: 'rgba(224, 64, 251, 0.06)', 
+    soft: 'rgba(224, 64, 251, 0.02)', 
+    borderHover: 'rgba(224, 64, 251, 0.80)', 
+    glowHover: 'rgba(224, 64, 251, 0.36)', 
+    ambientHover: 'rgba(224, 64, 251, 0.18)', 
+    softHover: 'rgba(224, 64, 251, 0.08)', 
+    accent: '#e040fb' 
+  },
+  // 8. Cobalt Sky Blue
+  { 
+    border: 'rgba(68, 138, 255, 0.30)', 
+    glow: 'rgba(68, 138, 255, 0.14)', 
+    ambient: 'rgba(68, 138, 255, 0.06)', 
+    soft: 'rgba(68, 138, 255, 0.02)', 
+    borderHover: 'rgba(68, 138, 255, 0.80)', 
+    glowHover: 'rgba(68, 138, 255, 0.36)', 
+    ambientHover: 'rgba(68, 138, 255, 0.18)', 
+    softHover: 'rgba(68, 138, 255, 0.08)', 
+    accent: '#448aff' 
+  }
 ];
 
 function getCardGlowStyle(index){
   const col = RAINBOW_PALETTE[index % RAINBOW_PALETTE.length];
-  return `--card-border:${col.border};--card-glow:${col.glow};--card-glow-ambient:${col.ambient};--card-glow-soft:${col.soft};--card-accent:${col.accent};`;
+  return `--card-border:${col.border};--card-glow:${col.glow};--card-glow-ambient:${col.ambient};--card-glow-soft:${col.soft};--card-border-hover:${col.borderHover};--card-glow-hover:${col.glowHover};--card-glow-ambient-hover:${col.ambientHover};--card-glow-soft-hover:${col.softHover};--card-accent:${col.accent};`;
 }
 window.getCardGlowStyle = getCardGlowStyle;
 
