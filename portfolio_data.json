@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T21:45:26.645Z",
+  "updatedAt": "2026-08-31T21:45:32.018Z",
   "gallery": [
     {
       "title": "Children's Creative Studio & Art Illustration Study",
@@ -196,7 +196,7 @@
       }
     },
     {
-      "title": "Yale Center: Brutalist Architecture & Daylighting Study",
+      "title": "The Built Exterior: Architectural Form & Daylighting Studies",
       "pillar": "Personal",
       "cat": "environment",
       "desc": "Architectural homage exploring poured-in-place concrete textures, dramatic clerestory lightwells, and minimalist geometric proportions.",
@@ -204,7 +204,9 @@
       "images": [
         "Photos & to upload/Exterior/All Work (128).jpg",
         "Photos & to upload/Exterior/All Work (132).jpg"
-      ]
+      ],
+      "subVideos": {},
+      "youtubeUrl": ""
     },
     {
       "title": "Autumn Woodland Vista & Whisper of the Heart Scenery",
