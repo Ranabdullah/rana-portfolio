@@ -1011,6 +1011,134 @@ img {
   z-index: 6;
   max-width: 660px;
 }
+
+/* ==================== CLEAN LUXURY WHITE HERO AESTHETIC ==================== */
+.home-hero {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: calc(100vh - 72px) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 80px 6vw !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  background: #ffffff !important;
+}
+
+.hero-bg-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+  background: #ffffff;
+}
+
+.hero-bg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: right center;
+  transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.hero-layer-light {
+  background-image: url('Hero Image/Light_House_Render.png');
+  z-index: 1;
+  opacity: 1;
+}
+
+.hero-layer-evening {
+  background-image: url('Hero Image/Evening_House_Render.png');
+  z-index: 2;
+  opacity: 0;
+}
+
+.hero-layer-dark {
+  background-image: url('Hero Image/Dark_House_Render.png');
+  z-index: 3;
+  opacity: 0;
+}
+
+/* Soft Pristine White Scrim Overlay (No Dark Edges) */
+.hero-white-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.92) 36%, rgba(255,255,255,0.3) 65%, transparent 100%),
+              linear-gradient(to top, #ffffff 0%, rgba(255,255,255,0.4) 15%, transparent 35%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-text-side {
+  position: relative;
+  z-index: 6;
+  max-width: 620px;
+}
+
+/* ==================== PERFECTLY FRAMED NOVEL CARDS ==================== */
+.novels-slider-track {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.novels-slider {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.novel-card {
+  flex: 0 0 220px;
+  background: #ffffff;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.novel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+  border-color: var(--ink3, #666);
+}
+
+.novel-cover {
+  width: 100%;
+  aspect-ratio: 2/3;
+  height: auto;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  background: #f3f4f6;
+}
+
+.novel-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.novel-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -1045,49 +1173,49 @@ img {
 <div class="page active" id="page-home">
 
   <!-- HERO -->
-  <!-- HERO SECTION (FULL BLEED INTERACTIVE CURSOR LIGHT -> EVENING -> NIGHT REVEAL) -->
+  <!-- HERO SECTION (PRISTINE WHITE BACKGROUND WITH CINEMATIC LIGHT -> EVENING -> NIGHT FULL-SCENE TRANSITIONS) -->
   <section class="home-hero" id="homeHeroSection">
     
-    <!-- Edge-to-Edge 3-Stage Interactive Background -->
+    <!-- Pristine White Edge-to-Edge Architectural Canvas -->
     <div class="hero-bg-container" id="heroBgContainer">
       <div class="hero-bg-layer hero-layer-light" id="heroLayerLight"></div>
       <div class="hero-bg-layer hero-layer-evening" id="heroLayerEvening"></div>
       <div class="hero-bg-layer hero-layer-dark" id="heroLayerDark"></div>
-      <div class="hero-scrim-overlay"></div>
+      <div class="hero-white-scrim"></div>
     </div>
     
-    <!-- Hero Text Foreground (High Contrast & Legibility) -->
+    <!-- Hero Text Foreground (Crisp Editorial Dark Typography on Pure Light Background) -->
     <div class="hero-text-side">
-      <div class="hero-eyebrow" style="font-family:var(--mono);font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;color:#e6edf3;margin-bottom:18px;display:flex;align-items:center;gap:10px">
-        <span id="heroColorIndicator" style="width:8px;height:8px;border-radius:50%;background:#ffca28;box-shadow:0 0 10px #ffca28;display:inline-block;transition:all 0.6s"></span>
-        <span id="heroTimeLabel" style="font-weight:600;letter-spacing:0.12em;color:#ffca28">INTERACTIVE CURSOR ILLUMINATION</span>
-        <span style="opacity:0.4">&middot;</span>
-        <span style="color:#c9d1d9">Architect &amp; Creative Director</span>
+      <div class="hero-eyebrow" style="font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px;display:flex;align-items:center;gap:10px">
+        <span id="heroColorIndicator" style="width:8px;height:8px;border-radius:50%;background:#e6a100;box-shadow:0 0 8px #e6a100;display:inline-block;transition:all 0.5s"></span>
+        <span id="heroTimeLabel" style="font-weight:600;letter-spacing:0.12em;color:var(--ink)">DAYLIGHT STUDY</span>
+        <span style="opacity:0.35">&middot;</span>
+        <span style="color:var(--ink3)">Architect &amp; Creative Director</span>
       </div>
       
-      <h1 class="hero-name" style="font-family:var(--serif);font-size:clamp(50px, 6.8vw, 88px);font-weight:300;line-height:1.02;color:#ffffff;margin-bottom:22px;text-shadow:0 3px 25px rgba(0,0,0,0.6)">
+      <h1 class="hero-name" style="font-family:var(--serif);font-size:clamp(48px, 6.5vw, 84px);font-weight:300;line-height:1.04;color:var(--ink);margin-bottom:20px">
         <span>Rana</span><br>
-        <span style="font-style:italic;color:#f0f6fc">Abdullah</span>
+        <span style="font-style:italic;color:var(--ink2)">Abdullah</span>
       </h1>
       
-      <p class="hero-title" style="font-family:var(--sans);font-size:17px;line-height:1.68;color:#d0d7de;margin-bottom:32px;max-width:540px;text-shadow:0 1px 10px rgba(0,0,0,0.5)">
+      <p class="hero-title" style="font-family:var(--sans);font-size:16.5px;line-height:1.68;color:var(--ink2);margin-bottom:30px;max-width:520px">
         Novelist &middot; 3D Artist &middot; Software Engineer<br>
-        <span style="color:#8b949e;font-size:14.5px">Move your cursor to dynamically illuminate the scene from Daylight to Golden Evening to Midnight Nocturnal.</span>
+        <span style="color:var(--ink3);font-size:14.5px">Architectural spatial narratives, physical material lighting, and robust engineering.</span>
       </p>
       
       <div class="hero-cta-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-        <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false" style="background:#ffffff;color:#0a0c10;border-color:#ffffff;font-weight:600">Technical Projects &rarr;</a>
-        <a class="btn-outline" href="#" onclick="showPage('novels');return false" style="color:#ffffff;border-color:rgba(255,255,255,0.45);background:rgba(255,255,255,0.08);backdrop-filter:blur(8px)">Novels &amp; Books</a>
-        <a class="btn-outline" href="#" onclick="showPage('gallery');return false" style="color:#ffffff;border-color:rgba(255,255,255,0.45);background:rgba(255,255,255,0.08);backdrop-filter:blur(8px)">3D Gallery</a>
+        <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false">Technical Projects &rarr;</a>
+        <a class="btn-outline" href="#" onclick="showPage('novels');return false">Novels &amp; Books</a>
+        <a class="btn-outline" href="#" onclick="showPage('gallery');return false">3D Gallery</a>
       </div>
 
-      <!-- Quick Interactive Mood Switcher -->
-      <div style="margin-top:30px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9.5px;color:#8b949e">
+      <!-- Clean Minimalist Atmosphere / Lighting Switcher -->
+      <div style="margin-top:28px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9.5px;color:var(--ink3)">
         <span style="text-transform:uppercase;letter-spacing:0.08em;margin-right:4px">ATMOSPHERE:</span>
-        <button onclick="setHeroGlobalMode('cursor')" id="btnAtmoCursor" style="padding:4px 11px;font-family:var(--mono);font-size:9px;background:rgba(255,202,40,0.25);color:#ffca28;border:1px solid #ffca28;border-radius:12px;cursor:pointer;font-weight:600">&#10024; Cursor Lens</button>
-        <button onclick="setHeroGlobalMode('light')" id="btnAtmoLight" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,255,255,0.08);color:#c9d1d9;border:1px solid rgba(255,255,255,0.2);border-radius:12px;cursor:pointer">&#9728; Full Light</button>
-        <button onclick="setHeroGlobalMode('evening')" id="btnAtmoEvening" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,255,255,0.08);color:#c9d1d9;border:1px solid rgba(255,255,255,0.2);border-radius:12px;cursor:pointer">&#9729; Full Evening</button>
-        <button onclick="setHeroGlobalMode('dark')" id="btnAtmoDark" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,255,255,0.08);color:#c9d1d9;border:1px solid rgba(255,255,255,0.2);border-radius:12px;cursor:pointer">&#9790; Full Night</button>
+        <button onclick="setHeroAtmosphere('light')" id="btnAtmoLight" style="padding:5px 12px;font-family:var(--mono);font-size:9.5px;background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:14px;cursor:pointer;font-weight:600">&#9728; Light</button>
+        <button onclick="setHeroAtmosphere('evening')" id="btnAtmoEvening" style="padding:5px 12px;font-family:var(--mono);font-size:9.5px;background:var(--bg);color:var(--ink);border:1px solid var(--border);border-radius:14px;cursor:pointer">&#9729; Evening</button>
+        <button onclick="setHeroAtmosphere('dark')" id="btnAtmoDark" style="padding:5px 12px;font-family:var(--mono);font-size:9.5px;background:var(--bg);color:var(--ink);border:1px solid var(--border);border-radius:14px;cursor:pointer">&#9790; Night</button>
+        <button onclick="toggleHeroAutoCycle()" id="btnAtmoAuto" style="padding:5px 12px;font-family:var(--mono);font-size:9.5px;background:transparent;color:var(--ink3);border:1px dashed var(--border);border-radius:14px;cursor:pointer">&#8634; Auto Transition</button>
       </div>
     </div>
   </section>
@@ -5998,6 +6126,107 @@ function setupInteractiveHero(){
 
 // Initialize everything on load
 setupInteractiveHero();
+autoFetchCloudDatabaseOnBoot();
+renderHome();
+
+
+
+// ==================== SEAMLESS FULL-SCENE HERO ATMOSPHERE ENGINE ====================
+let heroAtmoState = 'light'; // 'light' -> 'evening' -> 'dark'
+let heroAutoCycle = true;
+let heroAutoTimer = null;
+
+const HERO_STATES = {
+  light: { label: 'DAYLIGHT STUDY', color: '#e6a100' },
+  evening: { label: 'EVENING GOLDEN HOUR', color: '#e65100' },
+  dark: { label: 'NOCTURNAL NIGHT STUDY', color: '#0288d1' }
+};
+
+function setHeroAtmosphere(state, manual = true){
+  if(!HERO_STATES[state]) return;
+  heroAtmoState = state;
+
+  const lLight = document.getElementById('heroLayerLight');
+  const lEve = document.getElementById('heroLayerEvening');
+  const lDark = document.getElementById('heroLayerDark');
+  const ind = document.getElementById('heroColorIndicator');
+  const lbl = document.getElementById('heroTimeLabel');
+
+  if(lLight && lEve && lDark){
+    lLight.style.opacity = state === 'light' ? '1' : '0';
+    lEve.style.opacity = state === 'evening' ? '1' : '0';
+    lDark.style.opacity = state === 'dark' ? '1' : '0';
+  }
+
+  const info = HERO_STATES[state];
+  if(ind && info){
+    ind.style.background = info.color;
+    ind.style.boxShadow = `0 0 8px ${info.color}`;
+  }
+  if(lbl && info){
+    lbl.textContent = info.label;
+    lbl.style.color = info.color;
+  }
+
+  // Update button styles
+  ['light', 'evening', 'dark'].forEach(st => {
+    const btn = document.getElementById('btnAtmo' + st.charAt(0).toUpperCase() + st.slice(1));
+    if(btn){
+      if(st === state){
+        btn.style.background = 'var(--ink)';
+        btn.style.color = '#ffffff';
+        btn.style.borderColor = 'var(--ink)';
+        btn.style.fontWeight = '600';
+      } else {
+        btn.style.background = 'var(--bg)';
+        btn.style.color = 'var(--ink)';
+        btn.style.borderColor = 'var(--border)';
+        btn.style.fontWeight = '400';
+      }
+    }
+  });
+
+  if(manual && heroAutoCycle){
+    // Pause auto cycle briefly on manual click then resume
+    clearInterval(heroAutoTimer);
+    heroAutoTimer = setInterval(advanceHeroAtmosphere, 8000);
+  }
+}
+
+function advanceHeroAtmosphere(){
+  if(!heroAutoCycle) return;
+  if(document.hidden || !document.getElementById('page-home')?.classList.contains('active')) return;
+  const seq = ['light', 'evening', 'dark'];
+  const nextIdx = (seq.indexOf(heroAtmoState) + 1) % seq.length;
+  setHeroAtmosphere(seq[nextIdx], false);
+}
+
+function toggleHeroAutoCycle(){
+  heroAutoCycle = !heroAutoCycle;
+  const btn = document.getElementById('btnAtmoAuto');
+  if(btn){
+    btn.style.color = heroAutoCycle ? 'var(--ink)' : 'var(--ink4)';
+    btn.style.fontWeight = heroAutoCycle ? '600' : '400';
+    btn.textContent = heroAutoCycle ? '✓ Auto Transition (On)' : '⏸ Auto Transition (Paused)';
+  }
+  if(heroAutoCycle){
+    clearInterval(heroAutoTimer);
+    heroAutoTimer = setInterval(advanceHeroAtmosphere, 8000);
+    showToast('Auto daylight transition enabled');
+  } else {
+    clearInterval(heroAutoTimer);
+    showToast('Auto transition paused');
+  }
+}
+
+function setupHeroAtmosphere(){
+  setHeroAtmosphere('light', false);
+  clearInterval(heroAutoTimer);
+  heroAutoTimer = setInterval(advanceHeroAtmosphere, 8000);
+}
+
+// Start hero & home on load
+setupHeroAtmosphere();
 autoFetchCloudDatabaseOnBoot();
 renderHome();
 
