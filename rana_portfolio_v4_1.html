@@ -1139,6 +1139,96 @@ img {
   flex-direction: column;
   flex: 1;
 }
+
+/* ==================== GLOBAL 3-THEME ARCHITECTURE (LIGHT / EVENING / DARK) ==================== */
+body.theme-light {
+  --bg: #f4f5f7;
+  --bg-card: #ffffff;
+  --bg2: #eaedf2;
+  --bg3: #f8fafc;
+  --ink: #11141a;
+  --ink2: #2d333f;
+  --ink3: #5a6474;
+  --ink4: #8b95a5;
+  --border: #dbe0e8;
+  --border2: #e9ecf0;
+  --nav-bg: rgba(244, 245, 247, 0.94);
+  --scrim-grad: linear-gradient(to right, #f4f5f7 0%, rgba(244,245,247,0.92) 36%, rgba(244,245,247,0.3) 65%, transparent 100%), linear-gradient(to top, #f4f5f7 0%, rgba(244,245,247,0.4) 15%, transparent 35%);
+}
+
+body.theme-evening {
+  --bg: #0b132b;
+  --bg-card: #1c2541;
+  --bg2: #141e3c;
+  --bg3: #080d1f;
+  --ink: #f0f4f8;
+  --ink2: #d9e2ec;
+  --ink3: #9fb3c8;
+  --ink4: #627d98;
+  --border: rgba(255, 255, 255, 0.14);
+  --border2: rgba(255, 255, 255, 0.08);
+  --nav-bg: rgba(11, 19, 43, 0.94);
+  --scrim-grad: linear-gradient(to right, #0b132b 0%, rgba(11,19,43,0.92) 36%, rgba(11,19,43,0.3) 65%, transparent 100%), linear-gradient(to top, #0b132b 0%, rgba(11,19,43,0.4) 15%, transparent 35%);
+}
+
+body.theme-dark {
+  --bg: #07080b;
+  --bg-card: #111318;
+  --bg2: #181b22;
+  --bg3: #0c0d11;
+  --ink: #ffffff;
+  --ink2: #e1e4e8;
+  --ink3: #9da5b4;
+  --ink4: #5c6370;
+  --border: rgba(255, 255, 255, 0.12);
+  --border2: rgba(255, 255, 255, 0.06);
+  --nav-bg: rgba(7, 8, 11, 0.95);
+  --scrim-grad: linear-gradient(to right, #07080b 0%, rgba(7,8,11,0.92) 36%, rgba(7,8,11,0.3) 65%, transparent 100%), linear-gradient(to top, #07080b 0%, rgba(7,8,11,0.4) 15%, transparent 35%);
+}
+
+/* Smooth Theme Transitions across the whole website */
+body, nav, .home-hero, .page, section, footer, .tech-spotlight-card, .novel-card, .sw-item, .proj-card, .article-card, .exp-item, .modal-inner {
+  transition: background-color 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom Cursor Theme Adaptations */
+body.theme-evening .cursor { background: #ffd166; box-shadow: 0 0 10px #ffd166; }
+body.theme-evening #curRing { border-color: rgba(255, 209, 102, 0.5); }
+body.theme-dark .cursor { background: #00e5ff; box-shadow: 0 0 10px #00e5ff; }
+body.theme-dark #curRing { border-color: rgba(0, 229, 255, 0.5); }
+
+/* Hero Scrim adapts dynamically */
+.hero-white-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--scrim-grad);
+  z-index: 4;
+  pointer-events: none;
+  transition: background 0.85s ease;
+}
+
+/* Buttons in Dark / Evening Themes */
+body.theme-evening .btn-primary { background: #ffd166; color: #0b132b; border-color: #ffd166; font-weight: 600; }
+body.theme-evening .btn-outline { background: rgba(255, 255, 255, 0.08); color: #ffffff; border-color: rgba(255, 255, 255, 0.3); }
+body.theme-dark .btn-primary { background: #ffffff; color: #07080b; border-color: #ffffff; font-weight: 600; }
+body.theme-dark .btn-outline { background: rgba(255, 255, 255, 0.08); color: #ffffff; border-color: rgba(255, 255, 255, 0.25); }
+
+/* Stars Canvas */
+#globalStarsCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+body.theme-evening #globalStarsCanvas { opacity: 0.85; }
+body.theme-dark #globalStarsCanvas { opacity: 0.95; }
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -1146,6 +1236,8 @@ img {
 <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
+  <canvas id="globalStarsCanvas"></canvas>
+
 <!-- INTERACTIVE COLORFUL BACKGROUND PARTICLES -->
 <!-- CURSOR -->
 <div class="cursor" id="cur"></div>
@@ -6131,21 +6223,31 @@ renderHome();
 
 
 
-// ==================== SEAMLESS FULL-SCENE HERO ATMOSPHERE ENGINE ====================
-let heroAtmoState = 'light'; // 'light' -> 'evening' -> 'dark'
+// ==================== SEAMLESS FULL-SCENE HERO & GLOBAL THEME ENGINE ====================
+const HERO_STATES = {
+  light: { label: 'DAYLIGHT STUDY', color: '#e6a100', bodyClass: 'theme-light' },
+  evening: { label: 'EVENING GOLDEN HOUR', color: '#ff9800', bodyClass: 'theme-evening' },
+  dark: { label: 'NOCTURNAL NIGHT STUDY', color: '#00e5ff', bodyClass: 'theme-dark' }
+};
+
+let heroAtmoState = 'light';
 let heroAutoCycle = true;
 let heroAutoTimer = null;
-
-const HERO_STATES = {
-  light: { label: 'DAYLIGHT STUDY', color: '#e6a100' },
-  evening: { label: 'EVENING GOLDEN HOUR', color: '#e65100' },
-  dark: { label: 'NOCTURNAL NIGHT STUDY', color: '#0288d1' }
-};
+let globalStarsCtx = null;
+let globalStarsList = [];
+let globalStarsAnim = null;
 
 function setHeroAtmosphere(state, manual = true){
   if(!HERO_STATES[state]) return;
   heroAtmoState = state;
 
+  // 1. Update body class to toggle whole-website theme
+  if(document.body){
+    document.body.classList.remove('theme-light', 'theme-evening', 'theme-dark');
+    document.body.classList.add(HERO_STATES[state].bodyClass);
+  }
+
+  // 2. Crossfade Hero Image layers
   const lLight = document.getElementById('heroLayerLight');
   const lEve = document.getElementById('heroLayerEvening');
   const lDark = document.getElementById('heroLayerDark');
@@ -6168,17 +6270,17 @@ function setHeroAtmosphere(state, manual = true){
     lbl.style.color = info.color;
   }
 
-  // Update button styles
+  // 3. Update button highlights
   ['light', 'evening', 'dark'].forEach(st => {
     const btn = document.getElementById('btnAtmo' + st.charAt(0).toUpperCase() + st.slice(1));
     if(btn){
       if(st === state){
         btn.style.background = 'var(--ink)';
-        btn.style.color = '#ffffff';
+        btn.style.color = 'var(--bg)';
         btn.style.borderColor = 'var(--ink)';
         btn.style.fontWeight = '600';
       } else {
-        btn.style.background = 'var(--bg)';
+        btn.style.background = 'var(--bg-card)';
         btn.style.color = 'var(--ink)';
         btn.style.borderColor = 'var(--border)';
         btn.style.fontWeight = '400';
@@ -6187,15 +6289,15 @@ function setHeroAtmosphere(state, manual = true){
   });
 
   if(manual && heroAutoCycle){
-    // Pause auto cycle briefly on manual click then resume
     clearInterval(heroAutoTimer);
-    heroAutoTimer = setInterval(advanceHeroAtmosphere, 8000);
+    heroAutoTimer = setInterval(advanceHeroAtmosphere, 8500);
   }
 }
+window.setHeroAtmosphere = setHeroAtmosphere;
 
 function advanceHeroAtmosphere(){
   if(!heroAutoCycle) return;
-  if(document.hidden || !document.getElementById('page-home')?.classList.contains('active')) return;
+  if(document.hidden) return;
   const seq = ['light', 'evening', 'dark'];
   const nextIdx = (seq.indexOf(heroAtmoState) + 1) % seq.length;
   setHeroAtmosphere(seq[nextIdx], false);
@@ -6211,21 +6313,66 @@ function toggleHeroAutoCycle(){
   }
   if(heroAutoCycle){
     clearInterval(heroAutoTimer);
-    heroAutoTimer = setInterval(advanceHeroAtmosphere, 8000);
-    showToast('Auto daylight transition enabled');
+    heroAutoTimer = setInterval(advanceHeroAtmosphere, 8500);
+    showToast('Auto daylight transition enabled (Light ➔ Evening ➔ Dark)');
   } else {
     clearInterval(heroAutoTimer);
-    showToast('Auto transition paused');
+    showToast('Auto transition paused on ' + heroAtmoState);
   }
+}
+window.toggleHeroAutoCycle = toggleHeroAutoCycle;
+
+// ==================== TWINKLING EVENING & NIGHT STARS ENGINE ====================
+function initGlobalStarsCanvas(){
+  const canvas = document.getElementById('globalStarsCanvas');
+  if(!canvas) return;
+  globalStarsCtx = canvas.getContext('2d');
+
+  function resizeStars(){
+    canvas.width = window.innerWidth || 1920;
+    canvas.height = window.innerHeight || 1080;
+  }
+  resizeStars();
+  window.addEventListener('resize', resizeStars);
+
+  globalStarsList = [];
+  const STAR_COUNT = 90;
+  for(let i = 0; i < STAR_COUNT; i++){
+    globalStarsList.push({
+      x: Math.random() * (window.innerWidth || 1920),
+      y: Math.random() * (window.innerHeight || 1080),
+      radius: Math.random() * 1.5 + 0.5,
+      alpha: Math.random() * 0.8 + 0.2,
+      twinkleSpeed: Math.random() * 0.02 + 0.005,
+      hue: Math.random() > 0.6 ? '#ffd166' : '#a0c4ff'
+    });
+  }
+
+  function renderStars(){
+    if((heroAtmoState === 'evening' || heroAtmoState === 'dark') && globalStarsCtx && canvas.width > 0){
+      globalStarsCtx.clearRect(0, 0, canvas.width, canvas.height);
+      for(let i = 0; i < globalStarsList.length; i++){
+        const s = globalStarsList[i];
+        s.alpha += Math.sin(Date.now() * s.twinkleSpeed * 0.1) * 0.015;
+        const curAlpha = Math.max(0.1, Math.min(1, s.alpha));
+        globalStarsCtx.beginPath();
+        globalStarsCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        globalStarsCtx.fillStyle = s.hue === '#ffd166' ? `rgba(255, 209, 102, ${curAlpha})` : `rgba(160, 196, 255, ${curAlpha})`;
+        globalStarsCtx.fill();
+      }
+    }
+    globalStarsAnim = requestAnimationFrame(renderStars);
+  }
+  renderStars();
 }
 
 function setupHeroAtmosphere(){
+  initGlobalStarsCanvas();
   setHeroAtmosphere('light', false);
   clearInterval(heroAutoTimer);
-  heroAutoTimer = setInterval(advanceHeroAtmosphere, 8000);
+  heroAutoTimer = setInterval(advanceHeroAtmosphere, 8500);
 }
 
-// Start hero & home on load
 setupHeroAtmosphere();
 autoFetchCloudDatabaseOnBoot();
 renderHome();
