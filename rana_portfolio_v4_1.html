@@ -1694,6 +1694,9 @@ function showPage(name){
   if(name === 'backend'){
     beCheckAuthOnNav();
   }
+  if(window.isHeroVisible !== undefined){
+    window.isHeroVisible = (name === 'home');
+  }
 
   setTimeout(function(){
     if(window.refreshColorSpotlight) window.refreshColorSpotlight();
@@ -2306,391 +2309,484 @@ function renderBeGallery(searchTerm){
   }).join('');
 }
 
-function beUpdateGalleryItem(idx){
-  const g = galleryItems[idx];
-  if(!g) return;
-  g.title = document.getElementById('be-gtitle-'+idx)?.value || g.title;
-  g.cat = document.getElementById('be-gcat-'+idx)?.value || g.cat;
-  g.pillar = document.getElementById('be-gpillar-'+idx)?.value || g.pillar;
-  g.youtubeUrl = (document.getElementById('be-gyt-'+idx)?.value || '').trim();
-  saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  showToast('Saved: ' + g.title.substring(0,30));
+// ==================== AUTHENTICATION & SECURITY GATE ====================
+const AUTH_HASH = '0cfe517587641ac7128436f278329274333a7915358dae4bc0bb23f07bf09f60';
+
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 
-function beAddImageToItem(itemIdx){
-  const g = galleryItems[itemIdx];
-  if(!g) return;
-  const path = prompt('Enter image path (relative to site root):\nExample: Photos & to upload/Instagram/filename.jpg');
-  if(!path || !path.trim()) return;
-  if(!g.images || g.images.length === 0) g.images = [g.path];
-  g.images.push(path.trim());
-  saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  showToast('Photo added to: ' + g.title.substring(0,30));
-}
+async function beLogin(){
+  const email = (document.getElementById('be-email')?.value || '').trim().toLowerCase();
+  const pass = document.getElementById('be-pass')?.value || '';
+  const err = document.getElementById('be-login-err');
 
-function beMoveImageToProject(fromIdx){
-  const toIdxStr = document.getElementById('be-gmove-'+fromIdx)?.value;
-  const subIdxStr = document.getElementById('be-gmoveidx-'+fromIdx)?.value;
-  if(!toIdxStr){ showToast('Select a destination project first'); return; }
-  const toIdx = parseInt(toIdxStr);
-  const subIdx = parseInt(subIdxStr) || 0;
-  const fromItem = galleryItems[fromIdx];
-  const toItem = galleryItems[toIdx];
-  if(!fromItem || !toItem) return;
-  const fromImgs = (fromItem.images && fromItem.images.length > 0) ? [...fromItem.images] : [fromItem.path];
-  if(subIdx < 0 || subIdx >= fromImgs.length){ showToast('Invalid photo index'); return; }
-  const [movedImg] = fromImgs.splice(subIdx, 1);
-  if(!toItem.images || toItem.images.length === 0) toItem.images = [toItem.path];
-  toItem.images.push(movedImg);
-  if(fromImgs.length === 0){
-    galleryItems.splice(fromIdx, 1);
-    showToast('Photo moved – empty project deleted');
+  const combined = email + ':' + pass;
+  const hash = await sha256(combined);
+
+  if(hash === AUTH_HASH){
+    sessionStorage.setItem('rana_be_auth', 'true');
+    document.getElementById('be-login-gate').style.display = 'none';
+    document.getElementById('backend-authorized-view').style.display = 'block';
+    if(err) err.textContent = '';
+    renderBackend();
+    showToast('Signed in successfully');
   } else {
-    fromItem.images = fromImgs;
-    fromItem.path = fromImgs[0];
+    if(err) err.textContent = 'Invalid credentials. Access denied.';
   }
-  saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  showToast('Moved to: ' + toItem.title.substring(0,30));
 }
 
-function addSoftware(){
-  const name = document.getElementById('b-sw-name').value.trim();
-  if(!name){ showToast('Name required'); return; }
-  const s = {
-    id: Date.now(),
-    name,
-    cat: document.getElementById('b-sw-cat').value || 'Blender Add-on',
-    price: document.getElementById('b-sw-price').value || '$19.99',
-    desc: document.getElementById('b-sw-desc').value,
-    link: '#',
-    img: ''
-  };
-  software.unshift(s); saveData('rana_software_data', software); renderBeSoftware(); showToast('Product added');
+function beSignOut(){
+  sessionStorage.removeItem('rana_be_auth');
+  document.getElementById('backend-authorized-view').style.display = 'none';
+  document.getElementById('be-login-gate').style.display = 'flex';
+  const emailInp = document.getElementById('be-email');
+  const passInp = document.getElementById('be-pass');
+  if(emailInp) emailInp.value = '';
+  if(passInp) passInp.value = '';
+  showToast('Signed out');
 }
 
+function beCheckAuthOnNav(){
+  const isAuth = sessionStorage.getItem('rana_be_auth') === 'true';
+  const gate = document.getElementById('be-login-gate');
+  const view = document.getElementById('backend-authorized-view');
+  if(isAuth){
+    if(gate) gate.style.display = 'none';
+    if(view) view.style.display = 'block';
+    renderBackend();
+  } else {
+    if(gate) gate.style.display = 'flex';
+    if(view) view.style.display = 'none';
+  }
+}
+
+// ==================== SOFTWARE BACKEND CRUD HANDLERS ====================
 function renderBeSoftware(){
   const c = document.getElementById('be-software-list');
   if(!c) return;
   c.innerHTML = software.map((s,i) => `
-    <div class="backend-item" style="flex-direction:column;gap:12px;padding:16px">
-      <div style="display:flex;gap:12px;align-items:flex-start">
-        ${s.img ? `<img src="${s.img}" style="width:64px;height:64px;object-fit:cover;border-radius:3px;flex-shrink:0;border:1px solid var(--border)">` : ''}
+    <div class="backend-item" style="flex-direction:column;gap:10px;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:12px">
+      <div style="display:flex;gap:10px;align-items:flex-start">
         <div style="flex:1;display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px">
           <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">PRODUCT NAME</div>
-            <input id="be-sw-n-${i}" value="${(s.name||'').replace(/"/g,'&quot;')}"
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">TITLE</div>
+            <input id="be-soft-t-${i}" value="${(s.title||'').replace(/"/g,'&quot;')}"
               style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
           </div>
           <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">CATEGORY</div>
-            <select id="be-sw-c-${i}" style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-              ${['Blender Add-on', 'Web App', 'Interactive Tool', 'Resource Pack'].map(cat=>`<option value="${cat}" ${s.cat===cat?'selected':''}>${cat}</option>`).join('')}
-            </select>
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">PRICE</div>
-            <input id="be-sw-p-${i}" value="${(s.price||'').replace(/"/g,'&quot;')}"
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">PLATFORM</div>
+            <input id="be-soft-p-${i}" value="${(s.plat||s.platform||'').replace(/"/g,'&quot;')}"
               style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
           </div>
-          <div style="grid-column:1/3">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">IMAGE PATH</div>
-            <input id="be-sw-img-${i}" value="${(s.img||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
           <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">PRODUCT / DEMO LINK</div>
-            <input id="be-sw-link-${i}" value="${(s.link||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">PRICE</div>
+            <input id="be-soft-pr-${i}" value="${(s.price||'').replace(/"/g,'&quot;')}"
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
           </div>
           <div style="grid-column:1/-1">
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">DESCRIPTION</div>
-            <textarea id="be-sw-d-${i}" rows="2" style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical">${s.desc||''}</textarea>
+            <div style="font-family:var(--mono);font-size:9px;color:#1565c0;margin-bottom:4px;font-weight:600">URL / DOWNLOAD LINK</div>
+            <input id="be-soft-u-${i}" value="${(s.url||'').replace(/"/g,'&quot;')}"
+              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          </div>
+          <div style="grid-column:1/-1">
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px;font-weight:600">DESCRIPTION</div>
+            <textarea id="be-soft-d-${i}" rows="2" style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical">${s.desc||''}</textarea>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
           <button onclick="beUpdateSoftware(${i})"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
-          <button onclick="software.splice(${i},1);saveData('rana_software_data',software);renderBeSoftware();showToast('Product deleted')"
+            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save</button>
+          <button onclick="software.splice(${i},1);saveData('rana_software_data',software);renderBeSoftware();renderSoftware();showToast('Software deleted')"
             style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
         </div>
       </div>
     </div>
   `).join('');
+}
+
+function addSoftware(){
+  const title = (document.getElementById('b-soft-title')?.value || '').trim();
+  if(!title){ showToast('Title required'); return; }
+  const s = {
+    title,
+    plat: document.getElementById('b-soft-plat')?.value || 'Windows',
+    platform: document.getElementById('b-soft-plat')?.value || 'Windows',
+    price: document.getElementById('b-soft-price')?.value || 'Free',
+    url: document.getElementById('b-soft-url')?.value || '#',
+    desc: document.getElementById('b-soft-desc')?.value || ''
+  };
+  software.push(s);
+  saveData('rana_software_data', software);
+  renderBeSoftware();
+  renderSoftware();
+  const inpT = document.getElementById('b-soft-title');
+  if(inpT) inpT.value = '';
+  showToast('Software added: ' + title);
 }
 
 function beUpdateSoftware(i){
   const s = software[i];
   if(!s) return;
-  s.name  = document.getElementById('be-sw-n-'+i)?.value || s.name;
-  s.cat   = document.getElementById('be-sw-c-'+i)?.value || s.cat;
-  s.price = document.getElementById('be-sw-p-'+i)?.value || s.price;
-  s.img   = document.getElementById('be-sw-img-'+i)?.value || s.img;
-  s.link  = document.getElementById('be-sw-link-'+i)?.value || s.link;
-  s.desc  = document.getElementById('be-sw-d-'+i)?.value || s.desc;
+  s.title = document.getElementById('be-soft-t-'+i)?.value || s.title;
+  s.plat  = document.getElementById('be-soft-p-'+i)?.value || s.plat;
+  s.platform = s.plat;
+  s.price = document.getElementById('be-soft-pr-'+i)?.value || s.price;
+  s.url   = document.getElementById('be-soft-u-'+i)?.value || s.url;
+  s.desc  = document.getElementById('be-soft-d-'+i)?.value || s.desc;
   saveData('rana_software_data', software);
   renderBeSoftware();
-  showToast('Saved: ' + s.name.substring(0,30));
+  renderSoftware();
+  showToast('Saved: ' + s.title.substring(0,30));
 }
 
-function addExperience(){
-  const company = document.getElementById('b-exp-company').value.trim();
-  if(!company){ showToast('Company required'); return; }
-  const e = {
-    id: Date.now(),
-    company,
-    role: document.getElementById('b-exp-role').value,
-    start: document.getElementById('b-exp-dates').value.split('—')[0] || '2023',
-    end: document.getElementById('b-exp-dates').value.split('—')[1] || 'Present',
-    tags: ['Software', 'Engineering']
-  };
-  experience.unshift(e); saveData('rana_experience_data', experience); renderBeExp(); showToast('Experience added');
-}
-
+// ==================== EXPERIENCE BACKEND CRUD HANDLERS ====================
 function renderBeExp(){
   const c = document.getElementById('be-exp-list');
   if(!c) return;
   c.innerHTML = experience.map((e,i) => `
-    <div class="backend-item" style="flex-direction:column;gap:10px;padding:16px">
-      <div style="display:flex;gap:8px;align-items:flex-start">
-        <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">COMPANY</div>
-            <input id="be-ec-${i}" value="${(e.company||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">ROLE</div>
-            <input id="be-er-${i}" value="${(e.role||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">START</div>
-            <input id="be-es-${i}" value="${e.start||''}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">END</div>
-            <input id="be-ee-${i}" value="${e.end||'Present'}"
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <button onclick="beUpdateExp(${i})"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
-          <button onclick="experience.splice(${i},1);saveData('rana_experience_data',experience);renderBeExp();showToast('Deleted')"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
-        </div>
+    <div class="backend-item" style="padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:10px;display:flex;gap:10px;align-items:center">
+      <div style="flex:1;display:grid;grid-template-columns:1.5fr 1.5fr 1fr 1fr;gap:8px">
+        <div><input id="be-exp-comp-${i}" value="${(e.company||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+        <div><input id="be-exp-role-${i}" value="${(e.role||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+        <div><input id="be-exp-s-${i}" value="${(e.start||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+        <div><input id="be-exp-e-${i}" value="${(e.end||'').replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button onclick="beUpdateExp(${i})" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
+        <button onclick="experience.splice(${i},1);saveData('rana_experience_data',experience);renderBeExp();renderAbout();showToast('Experience deleted')" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
       </div>
     </div>
   `).join('');
 }
 
+function addExperience(){
+  const comp = (document.getElementById('b-exp-comp')?.value || '').trim();
+  if(!comp){ showToast('Company name required'); return; }
+  const e = {
+    company: comp,
+    role: document.getElementById('b-exp-role')?.value || '',
+    start: document.getElementById('b-exp-start')?.value || '2022',
+    end: document.getElementById('b-exp-end')?.value || 'Present'
+  };
+  experience.push(e);
+  saveData('rana_experience_data', experience);
+  renderBeExp();
+  renderAbout();
+  const inpC = document.getElementById('b-exp-comp');
+  if(inpC) inpC.value = '';
+  showToast('Experience added: ' + comp);
+}
+
 function beUpdateExp(i){
   const e = experience[i];
   if(!e) return;
-  e.company = document.getElementById('be-ec-'+i)?.value || e.company;
-  e.role    = document.getElementById('be-er-'+i)?.value || e.role;
-  e.start   = document.getElementById('be-es-'+i)?.value || e.start;
-  e.end     = document.getElementById('be-ee-'+i)?.value || e.end;
+  e.company = document.getElementById('be-exp-comp-'+i)?.value || e.company;
+  e.role    = document.getElementById('be-exp-role-'+i)?.value || e.role;
+  e.start   = document.getElementById('be-exp-s-'+i)?.value || e.start;
+  e.end     = document.getElementById('be-exp-e-'+i)?.value || e.end;
   saveData('rana_experience_data', experience);
   renderBeExp();
-  showToast('Experience saved');
+  renderAbout();
+  showToast('Saved: ' + e.company);
 }
 
-function addClient(){
-  const name = document.getElementById('b-client-name').value.trim();
-  if(!name){ showToast('Name required'); return; }
-  clients.push(name); saveData('rana_clients_data', clients); renderBeClients();
-  document.getElementById('b-client-name').value = ''; showToast('Client added');
-}
-
+// ==================== CLIENTS BACKEND CRUD HANDLERS ====================
 function renderBeClients(){
   const c = document.getElementById('be-clients-list');
   if(!c) return;
   c.innerHTML = clients.map((cl,i) => {
-    const cName = typeof cl === 'string' ? cl : (cl.name || '');
-    const cSector = typeof cl === 'object' ? (cl.sector || cl.industry || '') : '';
-    const cLogo = typeof cl === 'object' ? (cl.logo || '') : '';
-    const cUrl = typeof cl === 'object' ? (cl.url || '') : '';
+    const name = typeof cl === 'object' ? cl.name : cl;
+    const sector = typeof cl === 'object' ? (cl.sector || 'Commercial Project') : 'Client Partner';
+    const url = typeof cl === 'object' ? (cl.url || '') : '';
 
     return `
-    <div class="backend-item" style="flex-direction:column;gap:10px;padding:16px">
-      <div style="display:flex;gap:12px;align-items:flex-start">
-        <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">CLIENT NAME</div>
-            <input id="be-cln-${i}" value="${cName.replace(/"/g,'&quot;')}" placeholder="e.g. IDFL International"
-              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">SECTOR / INDUSTRY</div>
-            <input id="be-cls-${i}" value="${cSector.replace(/"/g,'&quot;')}" placeholder="e.g. Commercial Architecture, SaaS, Retail"
-              style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">LOGO URL (Optional)</div>
-            <input id="be-cll-${i}" value="${cLogo.replace(/"/g,'&quot;')}" placeholder="https://..."
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);margin-bottom:4px">WEBSITE URL (Optional)</div>
-            <input id="be-clw-${i}" value="${cUrl.replace(/"/g,'&quot;')}" placeholder="https://..."
-              style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
-          <button onclick="beUpdateClient(${i})"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
-          <button onclick="clients.splice(${i},1);saveData('rana_clients_data',clients);renderBeClients();renderAbout();showToast('Deleted')"
-            style="padding:6px 14px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
-        </div>
+    <div class="backend-item" style="padding:12px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <div style="flex:1;display:grid;grid-template-columns:1.5fr 1.5fr 1fr;gap:10px;align-items:center">
+        <div><input id="be-cl-name-${i}" value="${name.replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;font-weight:600"></div>
+        <div><input id="be-cl-sec-${i}" value="${sector.replace(/"/g,'&quot;')}" style="width:100%;padding:6px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+        <div><input id="be-cl-url-${i}" value="${url.replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:6px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px"></div>
+      </div>
+      <div style="display:flex;gap:6px;flex-shrink:0">
+        <button onclick="beUpdateClient(${i})" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Save</button>
+        <button onclick="clients.splice(${i},1);saveData('rana_clients_data',clients);renderBeClients();renderAbout();showToast('Client deleted')" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer">Delete</button>
       </div>
     </div>
-  `;
+    `;
   }).join('');
 }
 
-function beUpdateClient(i){
-  const name = (document.getElementById('be-cln-'+i)?.value || '').trim();
-  const sector = (document.getElementById('be-cls-'+i)?.value || '').trim();
-  const logo = (document.getElementById('be-cll-'+i)?.value || '').trim();
-  const url = (document.getElementById('be-clw-'+i)?.value || '').trim();
-  clients[i] = { name: name || 'Client', sector, logo, url };
+function addClient(){
+  const name = (document.getElementById('b-client-name')?.value || '').trim();
+  if(!name){ showToast('Client name required'); return; }
+  const cl = {
+    name,
+    sector: document.getElementById('b-client-sector')?.value || 'Commercial Client',
+    url: document.getElementById('b-client-url')?.value || ''
+  };
+  clients.push(cl);
   saveData('rana_clients_data', clients);
   renderBeClients();
   renderAbout();
-  showToast('Client saved: ' + (name || 'Client'));
+  const inpN = document.getElementById('b-client-name');
+  if(inpN) inpN.value = '';
+  showToast('Client added: ' + name);
 }
 
-// KEYBOARD EVENTS
-document.addEventListener('keydown', e => {
-  if(document.getElementById('lightbox').classList.contains('open')){
-    if(e.key==='ArrowLeft') lbNav(-1);
-    if(e.key==='ArrowRight') lbNav(1);
-    if(e.key==='Escape') closeLightbox();
-  }
-  if(document.getElementById('nvModal').classList.contains('open')){
-    if(e.key==='Escape') closeNovelModal();
-  }
-});
-
-// HERO 3D TILT
-const heroFrame = document.getElementById('heroFrame');
-if(heroFrame){
-  document.addEventListener('mousemove', e => {
-    const r = heroFrame.getBoundingClientRect();
-    const cx = r.left + r.width/2, cy = r.top + r.height/2;
-    const dx = (e.clientX - cx) / window.innerWidth * 12;
-    const dy = (e.clientY - cy) / window.innerHeight * 8;
-    heroFrame.style.transform = `perspective(800px) rotateY(${dx}deg) rotateX(${-dy}deg)`;
-  });
-}
-
-// INIT
-renderHome();
-setupCursorHover();
-
-
-// ==================== 1. COLORFUL BACKGROUND PARTICLES ====================
-
-
-// ==================== 2. RANDOM ACCENT GLOW ON CARD HOVER ====================
-function setupRandomColorHover(){
-  const glowColors = [
-    'rgba(0, 229, 255, 0.28)',
-    'rgba(255, 64, 129, 0.28)',
-    'rgba(255, 179, 0, 0.28)',
-    'rgba(105, 240, 174, 0.28)',
-    'rgba(179, 136, 255, 0.28)',
-    'rgba(68, 138, 255, 0.28)'
-  ];
-
-  const cards = document.querySelectorAll('.g-card, .novel-card, .novel-page-card, .proj-card, .hero-portrait-frame');
-  cards.forEach(card => {
-    card.addEventListener('mouseenter', ()=>{
-      const randomColor = glowColors[Math.floor(Math.random() * glowColors.length)];
-      card.style.boxShadow = `0 18px 45px ${randomColor}, 0 4px 12px rgba(0,0,0,0.08)`;
-      card.style.borderColor = randomColor.replace('0.28', '0.65');
-    });
-    card.addEventListener('mouseleave', ()=>{
-      card.style.boxShadow = '';
-      card.style.borderColor = '';
-    });
-  });
-}
-
-
-// ── BACKEND AUTH ──────────────────────────────────────────────────────
-// ==================== SECURE BACKEND AUTHENTICATION ====================
-const _CRED_HASH = '0cfe517587641ac7128436f278329274333a7915358dae4bc0bb23f07bf09f60';
-
-async function _sha256(str){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
-}
-
-async function beLogin(){
-  const email = (document.getElementById('be-email')?.value || '').trim().toLowerCase();
-  const pass  = (document.getElementById('be-pass')?.value || '').trim();
-  const errEl = document.getElementById('be-login-err');
-  if(!email || !pass){ if(errEl) errEl.textContent = 'Please enter email and password.'; return; }
-  
-  const hash = await _sha256(email + ':' + pass);
-  if(hash === _CRED_HASH){
-    sessionStorage.setItem('_beAuth', '1');
-    const gate = document.getElementById('be-login-gate');
-    if(gate) gate.classList.add('hidden');
-    const authView = document.getElementById('backend-authorized-view');
-    if(authView) authView.style.display = 'block';
-    if(errEl) errEl.textContent = '';
-    renderBackend();
-    showToast('Signed in successfully');
+function beUpdateClient(i){
+  const nameVal = document.getElementById('be-cl-name-'+i)?.value;
+  const secVal = document.getElementById('be-cl-sec-'+i)?.value;
+  const urlVal = document.getElementById('be-cl-url-'+i)?.value;
+  if(typeof clients[i] === 'object'){
+    clients[i].name = nameVal || clients[i].name;
+    clients[i].sector = secVal || clients[i].sector;
+    clients[i].url = urlVal || clients[i].url;
   } else {
-    if(errEl) errEl.textContent = 'Incorrect email or password.';
-    const passInput = document.getElementById('be-pass');
-    if(passInput) passInput.value = '';
+    clients[i] = { name: nameVal || clients[i], sector: secVal || 'Client Partner', url: urlVal || '' };
+  }
+  saveData('rana_clients_data', clients);
+  renderBeClients();
+  renderAbout();
+  showToast('Saved client: ' + (nameVal || ''));
+}
+
+// ==================== ULTRA-FAST GALLERY BACKEND ENGINE WITH FULL DELETE ====================
+function beDeleteGalleryItem(index){
+  const g = galleryItems[index];
+  if(!g) return;
+  if(confirm(`Are you sure you want to delete "${g.title}"? This cannot be undone.`)){
+    const title = g.title;
+    galleryItems.splice(index, 1);
+    saveData('rana_gallery_data', galleryItems);
+    renderBeGallery();
+    renderGallery('all');
+    renderHome();
+    showToast(`🗑️ Deleted project: ${title.substring(0,25)}`);
   }
 }
 
-function beSignOut(){
-  sessionStorage.removeItem('_beAuth');
-  const authView = document.getElementById('backend-authorized-view');
-  if(authView) authView.style.display = 'none';
-  const gate = document.getElementById('be-login-gate');
-  if(gate){
-    gate.classList.remove('hidden');
-    const emailInput = document.getElementById('be-email');
-    const passInput = document.getElementById('be-pass');
-    if(emailInput) emailInput.value = '';
-    if(passInput) passInput.value = '';
-  }
-  showToast('Signed out');
-}
-
-function beCheckAuthOnNav(){
-  const gate = document.getElementById('be-login-gate');
-  const authView = document.getElementById('backend-authorized-view');
-  const isAuth = sessionStorage.getItem('_beAuth') === '1';
+function beRemoveSubImage(itemIdx, subIdx){
+  const g = galleryItems[itemIdx];
+  if(!g) return;
+  const imgs = (g.images && g.images.length > 0) ? [...g.images] : [g.path];
   
-  if(isAuth){
-    if(gate) gate.classList.add('hidden');
-    if(authView) authView.style.display = 'block';
-  } else {
-    if(gate){
-      gate.classList.remove('hidden');
-      const emailInput = document.getElementById('be-email');
-      const passInput = document.getElementById('be-pass');
-      if(emailInput) emailInput.value = '';
-      if(passInput) passInput.value = '';
-      const errEl = document.getElementById('be-login-err');
-      if(errEl) errEl.textContent = '';
+  if(imgs.length <= 1){
+    if(confirm(`This is the only image in "${g.title}". Delete the entire artwork project?`)){
+      beDeleteGalleryItem(itemIdx);
     }
-    if(authView) authView.style.display = 'none';
+    return;
   }
+
+  imgs.splice(subIdx, 1);
+  g.images = imgs;
+  g.path = imgs[0];
+  
+  // Re-index subVideos if present
+  if(g.subVideos){
+    const newVids = {};
+    imgs.forEach((_, idx) => {
+      if(g.subVideos[idx >= subIdx ? idx + 1 : idx]){
+        newVids[idx] = g.subVideos[idx >= subIdx ? idx + 1 : idx];
+      }
+    });
+    g.subVideos = newVids;
+  }
+
+  saveData('rana_gallery_data', galleryItems);
+  renderBeGallery();
+  renderGallery('all');
+  renderHome();
+  showToast('Photo removed from project');
 }
+
+function beAddImageToItem(itemIdx){
+  const path = prompt('Enter new photo path (e.g. Photos & to upload/...):');
+  if(!path || !path.trim()) return;
+  const g = galleryItems[itemIdx];
+  if(!g) return;
+  if(!g.images) g.images = [g.path];
+  g.images.push(path.trim());
+  saveData('rana_gallery_data', galleryItems);
+  renderBeGallery();
+  renderGallery('all');
+  showToast('New photo added to project');
+}
+
+function beMoveImageToProject(fromIdx, subIdx, toIdx){
+  if(fromIdx === toIdx) return;
+  const fromG = galleryItems[fromIdx];
+  const toG = galleryItems[toIdx];
+  if(!fromG || !toG) return;
+
+  const fromImgs = (fromG.images && fromG.images.length > 0) ? [...fromG.images] : [fromG.path];
+  const movedImg = fromImgs.splice(subIdx, 1)[0];
+  fromG.images = fromImgs;
+  fromG.path = fromImgs[0] || '';
+
+  if(!toG.images) toG.images = [toG.path];
+  toG.images.push(movedImg);
+
+  saveData('rana_gallery_data', galleryItems);
+  renderBeGallery();
+  renderGallery('all');
+  showToast(`Moved photo to "${toG.title.substring(0,20)}"`);
+}
+
+function beUpdateGalleryItem(realIdx){
+  const g = galleryItems[realIdx];
+  if(!g) return;
+
+  g.title  = document.getElementById(`be-gtitle-${realIdx}`)?.value || g.title;
+  g.cat    = document.getElementById(`be-gcat-${realIdx}`)?.value || g.cat;
+  g.pillar = document.getElementById(`be-gpillar-${realIdx}`)?.value || g.pillar;
+  g.desc   = document.getElementById(`be-gdesc-${realIdx}`)?.value || g.desc;
+
+  const imgs = (g.images && g.images.length > 0) ? g.images : [g.path];
+  if(!g.subVideos) g.subVideos = {};
+
+  imgs.forEach((_, sIdx) => {
+    const vidVal = (document.getElementById(`be-subvid-${realIdx}-${sIdx}`)?.value || '').trim();
+    if(vidVal) {
+      g.subVideos[sIdx] = vidVal;
+      if(sIdx === 0) g.youtubeUrl = vidVal;
+    } else {
+      delete g.subVideos[sIdx];
+      if(sIdx === 0) g.youtubeUrl = '';
+    }
+  });
+
+  saveData('rana_gallery_data', galleryItems);
+  renderGallery('all');
+  renderHome();
+  showToast(`Saved: ${g.title.substring(0,25)}`);
+}
+
+function addGalleryItem(){
+  const title = (document.getElementById('b-g-title')?.value || '').trim();
+  if(!title){ showToast('Title required'); return; }
+  const path = (document.getElementById('b-g-path')?.value || '').trim();
+  const ytUrl = (document.getElementById('b-g-youtube')?.value || '').trim();
+
+  const g = {
+    title,
+    cat: document.getElementById('b-g-cat')?.value || '3d',
+    pillar: document.getElementById('b-g-pillar')?.value || 'Personal',
+    path: path || 'Photos & to upload/default.jpg',
+    images: path ? [path] : [],
+    youtubeUrl: ytUrl,
+    subVideos: ytUrl ? { 0: ytUrl } : {},
+    desc: document.getElementById('b-g-desc')?.value || ''
+  };
+
+  galleryItems.unshift(g);
+  saveData('rana_gallery_data', galleryItems);
+  renderBeGallery();
+  renderGallery('all');
+  renderHome();
+  showToast(`Artwork published: ${title}`);
+
+  const titleInp = document.getElementById('b-g-title');
+  if(titleInp) titleInp.value = '';
+}
+
+function renderBeGallery(searchTerm){
+  const c = document.getElementById('be-gallery-list');
+  if(!c) return;
+  const term = (searchTerm !== undefined ? searchTerm : (document.getElementById('be-gallery-search')?.value || '')).toLowerCase().trim();
+  
+  const filtered = galleryItems.filter((g) => {
+    if(!term) return true;
+    return (g.title||'').toLowerCase().includes(term) || (g.cat||'').toLowerCase().includes(term);
+  });
+
+  let html = `
+    <div style="margin-bottom:18px;display:flex;gap:10px;align-items:center">
+      <input id="be-gallery-search" type="text" placeholder="Search by title or category..." value="${term}"
+        oninput="renderBeGallery(this.value)"
+        style="flex:1;padding:8px 14px;font-family:var(--mono);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+      <span style="font-family:var(--mono);font-size:11px;color:var(--ink3);font-weight:600">${filtered.length} / ${galleryItems.length} items</span>
+    </div>
+  `;
+
+  html += filtered.map((g) => {
+    const realIdx = galleryItems.indexOf(g);
+    const allImgs = (g.images && g.images.length > 0) ? g.images : [g.path];
+    const subVids = g.subVideos || {};
+
+    const thumbs = allImgs.map((imgSrc, sIdx) => `
+      <div style="display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin:6px;background:var(--bg);padding:8px;border-radius:4px;border:1px solid var(--border);width:130px">
+        <div style="position:relative">
+          <img src="${imgSrc}" loading="lazy" decoding="async" style="width:110px;height:90px;object-fit:cover;border-radius:3px;border:1px solid var(--border);display:block">
+          <button onclick="beRemoveSubImage(${realIdx}, ${sIdx})" title="Delete this photo"
+            style="position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#e50914;border:none;color:#fff;font-size:12px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(0,0,0,0.3)">&times;</button>
+        </div>
+        <div style="font-family:var(--mono);font-size:8.5px;color:var(--ink4);max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${imgSrc}">${imgSrc.split('/').pop()}</div>
+        <div style="width:100%">
+          <div style="font-family:var(--mono);font-size:8px;color:#e50914;margin-bottom:2px;font-weight:600">&#9654; YOUTUBE LINK:</div>
+          <input id="be-subvid-${realIdx}-${sIdx}" placeholder="https://youtube.com/..." value="${(subVids[sIdx] || (sIdx===0 ? g.youtubeUrl : '') || '').replace(/"/g,'&quot;')}"
+            style="width:100%;padding:4px 6px;font-family:var(--mono);font-size:9px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box" title="Video link for this specific photo">
+        </div>
+      </div>
+    `).join('');
+
+    const titleOpts = galleryItems.map((other, oi) =>
+      oi !== realIdx ? `<option value="${oi}">${other.title.substring(0,40)}</option>` : ''
+    ).join('');
+
+    return `
+    <div class="backend-item" style="flex-direction:column;align-items:stretch;gap:12px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:16px" id="beg-${realIdx}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+        <div style="flex:1">
+          <input id="be-gtitle-${realIdx}" value="${(g.title||'').replace(/"/g,'&quot;')}"
+            style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;margin-bottom:6px">
+          
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px">
+            <select id="be-gcat-${realIdx}" style="padding:4px 8px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+              ${['3d','environment','character','animation','product','branding'].map(cat=>`<option value="${cat}" ${g.cat===cat?'selected':''}>${cat}</option>`).join('')}
+            </select>
+            <select id="be-gpillar-${realIdx}" style="padding:4px 8px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+              <option value="Personal" ${g.pillar==='Personal'?'selected':''}>Personal</option>
+              <option value="Client" ${g.pillar==='Client'?'selected':''}>Client</option>
+            </select>
+            <button onclick="beUpdateGalleryItem(${realIdx})"
+              style="padding:4px 16px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save Changes</button>
+            <button onclick="beDeleteGalleryItem(${realIdx})"
+              style="padding:4px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer;font-weight:600">Delete Project</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-family:var(--mono);font-size:9.5px;color:var(--ink3);margin-top:4px">
+        PHOTOS IN THIS PROJECT (${allImgs.length}):
+      </div>
+      
+      <div style="display:flex;flex-wrap:wrap;gap:4px;background:var(--bg);padding:8px;border-radius:4px;border:1px solid var(--border)">
+        ${thumbs}
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:center;padding-top:8px;border-top:1px solid var(--border);flex-wrap:wrap">
+        <button onclick="beAddImageToItem(${realIdx})" style="padding:4px 12px;font-family:var(--mono);font-size:9.5px;background:var(--bg);border:1px solid var(--border);color:var(--ink);border-radius:3px;cursor:pointer">+ Add Photo to Project</button>
+        ${allImgs.length > 1 ? `
+          <span style="font-family:var(--mono);font-size:9px;color:var(--ink4)">Move a photo to:</span>
+          <select id="move-dest-${realIdx}" style="padding:3px 6px;font-family:var(--mono);font-size:9px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+            ${titleOpts}
+          </select>
+          <button onclick="beMoveImageToProject(${realIdx}, 0, parseInt(document.getElementById('move-dest-${realIdx}').value))"
+            style="padding:3px 8px;font-family:var(--mono);font-size:9px;background:var(--bg);border:1px solid var(--border);color:var(--ink);border-radius:3px;cursor:pointer">Move Photo</button>
+        ` : ''}
+      </div>
+
+      <div style="margin-top:6px">
+        <textarea id="be-gdesc-${realIdx}" rows="2" style="width:100%;padding:6px 10px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical" placeholder="Description...">${g.desc||''}</textarea>
+      </div>
+    </div>
+    `;
+  }).join('');
+
+  c.innerHTML = html;
+}
+
 
 // ==================== ULTRA-OPTIMIZED INK-IN-WATER COLORIZATION ====================
 (function initInkColorization(){
