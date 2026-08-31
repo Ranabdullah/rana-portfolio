@@ -4471,101 +4471,101 @@ function renderPage(name){
 let novelSlideIdx=0, projSlideIdx=0;
 // ==================== MASTER MULTI-COLOR RAINBOW SYSTEM ====================
 const RAINBOW_PALETTE = [
-  // 1. Golden Amber Yellow
+  // 1. Electric Cyan
   { 
-    border: 'rgba(255, 215, 64, 0.30)', 
-    glow: 'rgba(255, 215, 64, 0.14)', 
-    ambient: 'rgba(255, 215, 64, 0.06)', 
-    soft: 'rgba(255, 215, 64, 0.02)', 
-    borderHover: 'rgba(255, 215, 64, 0.80)', 
-    glowHover: 'rgba(255, 215, 64, 0.36)', 
-    ambientHover: 'rgba(255, 215, 64, 0.18)', 
-    softHover: 'rgba(255, 215, 64, 0.08)', 
-    accent: '#ffd740' 
+    border: 'rgba(0, 229, 255, 0.40)', 
+    glow: 'rgba(0, 229, 255, 0.18)', 
+    ambient: 'rgba(0, 229, 255, 0.08)', 
+    soft: 'rgba(0, 229, 255, 0.03)', 
+    borderHover: 'rgba(0, 229, 255, 0.90)', 
+    glowHover: 'rgba(0, 229, 255, 0.45)', 
+    ambientHover: 'rgba(0, 229, 255, 0.22)', 
+    softHover: 'rgba(0, 229, 255, 0.10)', 
+    accent: '#00bcd4' 
   },
   // 2. Emerald Mint Green
   { 
-    border: 'rgba(0, 230, 118, 0.30)', 
-    glow: 'rgba(0, 230, 118, 0.14)', 
-    ambient: 'rgba(0, 230, 118, 0.06)', 
-    soft: 'rgba(0, 230, 118, 0.02)', 
-    borderHover: 'rgba(0, 230, 118, 0.80)', 
-    glowHover: 'rgba(0, 230, 118, 0.36)', 
-    ambientHover: 'rgba(0, 230, 118, 0.18)', 
-    softHover: 'rgba(0, 230, 118, 0.08)', 
-    accent: '#00e676' 
+    border: 'rgba(0, 230, 118, 0.40)', 
+    glow: 'rgba(0, 230, 118, 0.18)', 
+    ambient: 'rgba(0, 230, 118, 0.08)', 
+    soft: 'rgba(0, 230, 118, 0.03)', 
+    borderHover: 'rgba(0, 230, 118, 0.90)', 
+    glowHover: 'rgba(0, 230, 118, 0.45)', 
+    ambientHover: 'rgba(0, 230, 118, 0.22)', 
+    softHover: 'rgba(0, 230, 118, 0.10)', 
+    accent: '#00c853' 
   },
   // 3. Amethyst Violet Purple
   { 
-    border: 'rgba(179, 136, 255, 0.30)', 
-    glow: 'rgba(179, 136, 255, 0.14)', 
-    ambient: 'rgba(179, 136, 255, 0.06)', 
-    soft: 'rgba(179, 136, 255, 0.02)', 
-    borderHover: 'rgba(179, 136, 255, 0.80)', 
-    glowHover: 'rgba(179, 136, 255, 0.36)', 
-    ambientHover: 'rgba(179, 136, 255, 0.18)', 
-    softHover: 'rgba(179, 136, 255, 0.08)', 
-    accent: '#b388ff' 
+    border: 'rgba(179, 136, 255, 0.40)', 
+    glow: 'rgba(179, 136, 255, 0.18)', 
+    ambient: 'rgba(179, 136, 255, 0.08)', 
+    soft: 'rgba(179, 136, 255, 0.03)', 
+    borderHover: 'rgba(179, 136, 255, 0.90)', 
+    glowHover: 'rgba(179, 136, 255, 0.45)', 
+    ambientHover: 'rgba(179, 136, 255, 0.22)', 
+    softHover: 'rgba(179, 136, 255, 0.10)', 
+    accent: '#9c27b0' 
   },
-  // 4. Vivid Coral Rose Pink
+  // 4. Golden Amber
   { 
-    border: 'rgba(255, 64, 129, 0.30)', 
-    glow: 'rgba(255, 64, 129, 0.14)', 
-    ambient: 'rgba(255, 64, 129, 0.06)', 
-    soft: 'rgba(255, 64, 129, 0.02)', 
-    borderHover: 'rgba(255, 64, 129, 0.80)', 
-    glowHover: 'rgba(255, 64, 129, 0.36)', 
-    ambientHover: 'rgba(255, 64, 129, 0.18)', 
-    softHover: 'rgba(255, 64, 129, 0.08)', 
-    accent: '#ff4081' 
+    border: 'rgba(255, 179, 0, 0.40)', 
+    glow: 'rgba(255, 179, 0, 0.18)', 
+    ambient: 'rgba(255, 179, 0, 0.08)', 
+    soft: 'rgba(255, 179, 0, 0.03)', 
+    borderHover: 'rgba(255, 179, 0, 0.90)', 
+    glowHover: 'rgba(255, 179, 0, 0.45)', 
+    ambientHover: 'rgba(255, 179, 0, 0.22)', 
+    softHover: 'rgba(255, 179, 0, 0.10)', 
+    accent: '#d97706' 
   },
-  // 5. Electric Cyan
+  // 5. Vivid Coral Rose Pink
   { 
-    border: 'rgba(0, 229, 255, 0.30)', 
-    glow: 'rgba(0, 229, 255, 0.14)', 
-    ambient: 'rgba(0, 229, 255, 0.06)', 
-    soft: 'rgba(0, 229, 255, 0.02)', 
-    borderHover: 'rgba(0, 229, 255, 0.80)', 
-    glowHover: 'rgba(0, 229, 255, 0.36)', 
-    ambientHover: 'rgba(0, 229, 255, 0.18)', 
-    softHover: 'rgba(0, 229, 255, 0.08)', 
-    accent: '#00e5ff' 
+    border: 'rgba(255, 64, 129, 0.40)', 
+    glow: 'rgba(255, 64, 129, 0.18)', 
+    ambient: 'rgba(255, 64, 129, 0.08)', 
+    soft: 'rgba(255, 64, 129, 0.03)', 
+    borderHover: 'rgba(255, 64, 129, 0.90)', 
+    glowHover: 'rgba(255, 64, 129, 0.45)', 
+    ambientHover: 'rgba(255, 64, 129, 0.22)', 
+    softHover: 'rgba(255, 64, 129, 0.10)', 
+    accent: '#e91e63' 
   },
-  // 6. Sunset Peach / Warm Orange
+  // 6. Cobalt Sapphire Blue
   { 
-    border: 'rgba(255, 138, 101, 0.30)', 
-    glow: 'rgba(255, 138, 101, 0.14)', 
-    ambient: 'rgba(255, 138, 101, 0.06)', 
-    soft: 'rgba(255, 138, 101, 0.02)', 
-    borderHover: 'rgba(255, 138, 101, 0.80)', 
-    glowHover: 'rgba(255, 138, 101, 0.36)', 
-    ambientHover: 'rgba(255, 138, 101, 0.18)', 
-    softHover: 'rgba(255, 138, 101, 0.08)', 
-    accent: '#ff8a65' 
+    border: 'rgba(68, 138, 255, 0.40)', 
+    glow: 'rgba(68, 138, 255, 0.18)', 
+    ambient: 'rgba(68, 138, 255, 0.08)', 
+    soft: 'rgba(68, 138, 255, 0.03)', 
+    borderHover: 'rgba(68, 138, 255, 0.90)', 
+    glowHover: 'rgba(68, 138, 255, 0.45)', 
+    ambientHover: 'rgba(68, 138, 255, 0.22)', 
+    softHover: 'rgba(68, 138, 255, 0.10)', 
+    accent: '#2563eb' 
   },
-  // 7. Neon Lavender
+  // 7. Sunset Tangerine / Warm Orange
   { 
-    border: 'rgba(224, 64, 251, 0.30)', 
-    glow: 'rgba(224, 64, 251, 0.14)', 
-    ambient: 'rgba(224, 64, 251, 0.06)', 
-    soft: 'rgba(224, 64, 251, 0.02)', 
-    borderHover: 'rgba(224, 64, 251, 0.80)', 
-    glowHover: 'rgba(224, 64, 251, 0.36)', 
-    ambientHover: 'rgba(224, 64, 251, 0.18)', 
-    softHover: 'rgba(224, 64, 251, 0.08)', 
-    accent: '#e040fb' 
+    border: 'rgba(255, 109, 0, 0.40)', 
+    glow: 'rgba(255, 109, 0, 0.18)', 
+    ambient: 'rgba(255, 109, 0, 0.08)', 
+    soft: 'rgba(255, 109, 0, 0.03)', 
+    borderHover: 'rgba(255, 109, 0, 0.90)', 
+    glowHover: 'rgba(255, 109, 0, 0.45)', 
+    ambientHover: 'rgba(255, 109, 0, 0.22)', 
+    softHover: 'rgba(255, 109, 0, 0.10)', 
+    accent: '#ea580c' 
   },
-  // 8. Cobalt Sky Blue
+  // 8. Neon Lavender
   { 
-    border: 'rgba(68, 138, 255, 0.30)', 
-    glow: 'rgba(68, 138, 255, 0.14)', 
-    ambient: 'rgba(68, 138, 255, 0.06)', 
-    soft: 'rgba(68, 138, 255, 0.02)', 
-    borderHover: 'rgba(68, 138, 255, 0.80)', 
-    glowHover: 'rgba(68, 138, 255, 0.36)', 
-    ambientHover: 'rgba(68, 138, 255, 0.18)', 
-    softHover: 'rgba(68, 138, 255, 0.08)', 
-    accent: '#448aff' 
+    border: 'rgba(224, 64, 251, 0.40)', 
+    glow: 'rgba(224, 64, 251, 0.18)', 
+    ambient: 'rgba(224, 64, 251, 0.08)', 
+    soft: 'rgba(224, 64, 251, 0.03)', 
+    borderHover: 'rgba(224, 64, 251, 0.90)', 
+    glowHover: 'rgba(224, 64, 251, 0.45)', 
+    ambientHover: 'rgba(224, 64, 251, 0.22)', 
+    softHover: 'rgba(224, 64, 251, 0.10)', 
+    accent: '#8b5cf6' 
   }
 ];
 
@@ -4579,22 +4579,22 @@ function renderHome(){
   // 1. Home Tech Spotlight
   const hTech = document.getElementById('homeTechSpotlight');
   if(hTech){
-    hTech.innerHTML = techProjects.slice(0,3).map(p=>{
+    hTech.innerHTML = techProjects.slice(0,3).map((p,i)=>{
       const hasLive = Boolean(p.liveUrl && p.liveUrl.trim());
       return `
-        <div class="tech-spotlight-card" onclick="showPage('technical-projects')">
+        <div class="tech-spotlight-card" onclick="showPage('technical-projects')" style="${getCardGlowStyle(i)}">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-            <span style="font-family:var(--mono);font-size:11px;color:var(--ink4)">[ ${p.num} ]</span>
-            <span class="badge-pill ${p.badgeClass}">${p.status}</span>
+            <span style="font-family:var(--mono);font-size:11px;color:var(--ink4)">[ ${p.num || ('0' + (i+1))} ]</span>
+            <span class="badge-pill ${p.badgeClass || 'badge-live'}">${p.status || 'Live'}</span>
           </div>
-          <h3 style="color:var(--ink);font-size:21px;font-weight:400;margin-bottom:4px;font-family:var(--serif)">${p.title}</h3>
-          <div style="font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:12px">${p.subtitle}</div>
+          <h3 style="color:var(--card-accent) !important;font-size:21px;font-weight:600;margin-bottom:4px;font-family:var(--serif)">${p.title}</h3>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:12px">${p.subtitle || ''}</div>
           <p style="font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:16px">${(p.desc||'').substring(0,130)}...</p>
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
             <div class="tech-tags-wrap">
-              ${(p.tech||[]).slice(0,3).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
+              ${(Array.isArray(p.tags) ? p.tags : (p.tech||[])).slice(0,3).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
             </div>
-            ${hasLive ? `<span style="font-family:var(--mono);font-size:10px;color:var(--ink);text-decoration:underline">View Live &rarr;</span>` : ''}
+            ${hasLive ? `<span style="font-family:var(--mono);font-size:10px;color:var(--card-accent);text-decoration:underline">View Live &rarr;</span>` : ''}
           </div>
         </div>
       `;
@@ -4605,67 +4605,45 @@ function renderHome(){
   const nSlider = document.getElementById('novelSlider');
   if(nSlider){
     nSlider.innerHTML = novels.map((n,i)=>`
-      <div class="novel-card" onclick="openNovelModal(${i})">
+      <div class="novel-card" onclick="openNovelModal(${i})" style="${getCardGlowStyle(i)}">
         <div class="novel-cover">
           <img src="${n.cover}" alt="${n.title}" loading="lazy" decoding="async" onerror="this.style.display='none'">
         </div>
         <div class="novel-info">
-          <div class="novel-genre" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">${n.genre || 'Book'} · ${n.year || 'Published'}</div>
-          <div class="novel-name" style="font-family:var(--serif);font-size:16px;font-weight:400;color:var(--ink);margin:0 0 4px;line-height:1.25">${n.title}</div>
+          <div class="novel-genre" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">${n.genre || 'Book'} &middot; ${n.year || 'Published'}</div>
+          <div class="novel-name" style="font-family:var(--serif);font-size:16px;font-weight:600;color:var(--card-accent) !important;margin:0 0 4px;line-height:1.25">${n.title}</div>
           <div class="novel-sub" style="font-size:11.5px;color:var(--ink2);line-height:1.5;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${n.tagline || n.desc || ''}</div>
         </div>
       </div>
     `).join('');
   }
 
-  // 3. Software Vertical Slider
-  const swS = document.getElementById('swSlider');
-  if(swS){
-    swS.innerHTML = software.slice(0,5).map(s=>`
-      <div class="sw-item" onclick="showPage('software')">
-        <img class="sw-thumb" src="${s.img}" alt="${s.name}" loading="lazy" decoding="async" onerror="this.style.display='none'">
-        <div>
-          <div class="sw-item-meta">
-            <span class="sw-cat">${s.cat || 'Tools'}</span>
-          </div>
-          <div class="sw-name">${s.name}</div>
-          <div class="sw-desc">${(s.desc||'').substring(0,85)}...</div>
+  // 3. Home 3D Gallery Grid
+  const hGal = document.getElementById('homeGalleryGrid');
+  if(hGal){
+    hGal.innerHTML = galleryItems.slice(0,6).map((g,i)=>`
+      <div class="g-card" onclick="showPage('gallery')" style="position:relative;${getCardGlowStyle(i)}">
+        <div style="position:relative;overflow:hidden;border-radius:4px">
+          <img src="${g.path}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'" style="width:100%;height:220px;object-fit:cover">
         </div>
-        <div class="sw-price">${s.price || 'Free'}</div>
-      </div>
-    `).join('');
-  }
-
-  // 4. Visual Projects Slider (projGrid)
-  const pGrid = document.getElementById('projGrid');
-  if(pGrid){
-    pGrid.innerHTML = galleryItems.slice(0,8).map((g, gi)=>`
-      <div class="proj-card" onclick="openLightbox(${gi})">
-        <div class="proj-img">
-          <img src="${g.path}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.style.display='none'">
-        </div>
-        <div class="proj-info">
-          <div class="proj-cat" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">${g.pillar} &middot; ${g.cat}</div>
-          <div class="proj-name" style="font-family:var(--serif);font-size:15.5px;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:4px">${g.title}</div>
-          <div class="proj-desc" style="font-size:11.5px;color:var(--ink3);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${g.desc || ''}</div>
+        <div class="g-info" style="padding:12px 6px 6px">
+          <div class="g-cat" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase">${g.cat}</div>
+          <div class="g-title" style="color:var(--card-accent) !important;font-weight:600">${g.title}</div>
         </div>
       </div>
     `).join('');
   }
 
-  // 5. Home Essays & Insights (homeArticlesGrid)
-  const haGrid = document.getElementById('homeArticlesGrid');
-  if(haGrid){
-    haGrid.innerHTML = articles.slice(0,4).map(a=>`
-      <div class="article-card" onclick="if('${a.url}'.startsWith('http')){window.open('${a.url}','_blank')}else{location.href='${a.url}'}">
-        <div>
-          <div class="article-meta" style="font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:8px">${a.category || a.cat || 'Essay'} · ${a.date || '2026'} · ${a.readTime || '5 min read'}</div>
-          <h3 class="article-title" style="font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin:0 0 8px;line-height:1.3">${a.title}</h3>
-          <p class="article-desc" style="font-size:12.5px;color:var(--ink2);line-height:1.6;margin:0 0 16px">${a.desc || ''}</p>
-        </div>
-        <a class="article-btn" href="${a.url}" target="${a.url.startsWith('http')?'_blank':'_self'}" style="font-family:var(--mono);font-size:11px;color:var(--ink);text-decoration:none;font-weight:600">Read Article &rarr;</a>
-      </div>
-    `).join('');
+  // 4. Area of Mastery (Expertise)
+  const expGrid = document.querySelector('.expertise-grid');
+  if(expGrid){
+    Array.from(expGrid.children).forEach((child, i) => {
+      const col = RAINBOW_PALETTE[i % RAINBOW_PALETTE.length];
+      child.style.setProperty('--card-border', col.border);
+      child.style.setProperty('--card-glow', col.glow);
+      child.style.setProperty('--card-glow-ambient', col.ambient);
+      child.style.setProperty('--card-accent', col.accent);
+    });
   }
 }
 
@@ -4674,17 +4652,17 @@ function renderNovels(){
   const c = document.getElementById('novelsGrid');
   if(!c) return;
   c.innerHTML = novels.map((n,i)=>`
-    <div class="novel-page-card" onclick="openNovelModal(${i})">
+    <div class="novel-page-card" onclick="openNovelModal(${i})" style="${getCardGlowStyle(i)}">
       <div class="novel-page-cover">
         <img src="${n.cover}" alt="${n.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
-        ${n.amazonUrl ? `<span style="position:absolute;top:10px;right:10px;background:rgba(17,20,26,0.92);color:#fff;font-family:var(--mono);font-size:9px;padding:3px 7px;border-radius:3px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,0.3)">Amazon UK ↗</span>` : ''}
+        ${n.amazonUrl ? `<span style="position:absolute;top:10px;right:10px;background:rgba(17,20,26,0.92);color:#fff;font-family:var(--mono);font-size:9px;padding:3px 7px;border-radius:3px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,0.3)">Amazon UK &#8599;</span>` : ''}
       </div>
-      <div class="novel-page-genre">${n.genre} · ${n.type}</div>
-      <div class="novel-page-title">${n.title}</div>
-      <div class="novel-page-tagline">${n.tagline}</div>
+      <div class="novel-page-genre">${n.genre} &middot; ${n.type || 'Published Book'}</div>
+      <div class="novel-page-title" style="color:var(--card-accent) !important;font-weight:600">${n.title}</div>
+      <div class="novel-page-tagline">${n.tagline || n.desc || ''}</div>
       <div class="novel-actions">
-        <span class="novel-read-btn">Read Excerpt →</span>
-        ${n.amazonUrl ? `<a href="${n.amazonUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="novel-amz-btn">Buy on Amazon ↗</a>` : ''}
+        <span class="novel-read-btn">Read Excerpt &rarr;</span>
+        ${n.amazonUrl ? `<a href="${n.amazonUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="novel-amz-btn">Buy on Amazon &#8599;</a>` : ''}
       </div>
     </div>
   `).join('');
@@ -4734,7 +4712,7 @@ function renderTechProjects(){
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:16px">
           <div>
             <div style="font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:4px">[ ${p.num} ]</div>
-            <h2 style="font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);margin:0 0 4px">${p.title}</h2>
+            <h2 style="font-family:var(--serif);font-size:24px;font-weight:600;color:var(--card-accent) !important;margin:0 0 4px">${p.title}</h2>
             <div style="font-family:var(--mono);font-size:12px;color:var(--ink3)">${p.subtitle}</div>
           </div>
           <span class="badge-pill ${p.badgeClass}">${p.status}</span>
@@ -4784,7 +4762,7 @@ function renderGallery(filter){
           <div class="g-cat-label">${g.cat} · ${g.pillar}</div>
           ${g.youtubeUrl ? `<a href="${g.youtubeUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-family:var(--mono);font-size:10.5px;color:#e50914;text-decoration:none;font-weight:600">Watch ↗</a>` : ''}
         </div>
-        <div class="g-title">${g.title}</div>
+        <div class="g-title" style="color:var(--card-accent) !important;font-weight:600">${g.title}</div>
       </div>
     </div>
   `).join('');
@@ -4894,7 +4872,7 @@ function swCard(s, i){
           <span class="sw-product-type">${s.cat}</span>
           <span class="sw-product-price">${s.price}</span>
         </div>
-        <div class="sw-product-name">${s.name}</div>
+        <div class="sw-product-name" style="color:var(--card-accent) !important;font-weight:600">${s.name}</div>
         <div class="sw-product-desc">${s.desc}</div>
       </div>
       ${s.link && s.link !== '#' ? `<a class="sw-product-link" href="${s.link}" target="_blank">View Product →</a>` : `<span class="sw-product-link" style="color:var(--ink4)">Active Production Tool</span>`}
@@ -4910,7 +4888,7 @@ function renderArticles(){
     <div class="article-card" onclick="if('${a.url}'.startsWith('http')){window.open('${a.url}','_blank')}else{location.href='${a.url}'}">
       <div>
         <div class="article-meta">${a.category} · ${a.date}</div>
-        <h3 class="article-title">${a.title}</h3>
+        <h3 class="article-title" style="color:var(--card-accent) !important;font-weight:600">${a.title}</h3>
         <p class="article-desc">${a.desc}</p>
         <div class="tech-tags-wrap" style="margin-bottom:20px">
           ${(a.tags||[]).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
