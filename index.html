@@ -939,6 +939,78 @@ img {
   color: #fff;
   border-color: var(--ink);
 }
+
+/* ==================== FULL-BLEED INTERACTIVE HERO BACKGROUND ==================== */
+.home-hero {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 100px 6vw !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  background: #0d1117 !important;
+}
+
+.hero-bg-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-bg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  will-change: transform, opacity, mask-image, -webkit-mask-image;
+  transform: translateZ(0);
+}
+
+.hero-layer-light {
+  background-image: url('Hero Image/Light_House_Render.png');
+  z-index: 1;
+  opacity: 1;
+}
+
+.hero-layer-evening {
+  background-image: url('Hero Image/Evening_House_Render.png');
+  z-index: 2;
+  -webkit-mask-image: radial-gradient(circle var(--eve-radius, 420px) at var(--mouse-x, 60%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(circle var(--eve-radius, 420px) at var(--mouse-x, 60%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0) 100%);
+  transition: opacity 0.8s ease;
+}
+
+.hero-layer-dark {
+  background-image: url('Hero Image/Dark_House_Render.png');
+  z-index: 3;
+  -webkit-mask-image: radial-gradient(circle var(--dark-radius, 240px) at var(--mouse-x, 60%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(circle var(--dark-radius, 240px) at var(--mouse-x, 60%) var(--mouse-y, 45%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0) 100%);
+  transition: opacity 0.8s ease;
+}
+
+.hero-scrim-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(10,12,16,0.88) 0%, rgba(10,12,16,0.65) 42%, rgba(10,12,16,0.18) 100%), linear-gradient(to top, rgba(10,12,16,0.75) 0%, transparent 55%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-text-side {
+  position: relative;
+  z-index: 6;
+  max-width: 660px;
+}
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -973,50 +1045,49 @@ img {
 <div class="page active" id="page-home">
 
   <!-- HERO -->
-  <!-- HERO SECTION (3-STAGE CINEMATIC DAY -> EVENING -> NIGHT ARCHITECTURAL TRANSITION) -->
-  <section class="home-hero" style="position:relative;overflow:hidden;min-height:640px;display:flex;align-items:center;padding:80px 48px;background:#0d1117">
+  <!-- HERO SECTION (FULL BLEED INTERACTIVE CURSOR LIGHT -> EVENING -> NIGHT REVEAL) -->
+  <section class="home-hero" id="homeHeroSection">
     
-    <!-- 3-State Cinematic Image Layers -->
-    <div id="heroBgWrapper" style="position:absolute;inset:0;width:100%;height:100%;overflow:hidden;z-index:1;pointer-events:none">
-      <div id="heroLayerLight" class="hero-bg-layer active" style="position:absolute;inset:0;background-image:url('Hero Image/Light_House_Render.png');background-size:cover;background-position:center;transition:opacity 2.4s cubic-bezier(0.4, 0, 0.2, 1), transform 12s ease;opacity:1;transform:scale(1.02)"></div>
-      <div id="heroLayerEvening" class="hero-bg-layer" style="position:absolute;inset:0;background-image:url('Hero Image/Evening_House_Render.png');background-size:cover;background-position:center;transition:opacity 2.4s cubic-bezier(0.4, 0, 0.2, 1), transform 12s ease;opacity:0;transform:scale(1.02)"></div>
-      <div id="heroLayerDark" class="hero-bg-layer" style="position:absolute;inset:0;background-image:url('Hero Image/Dark_House_Render.png');background-size:cover;background-position:center;transition:opacity 2.4s cubic-bezier(0.4, 0, 0.2, 1), transform 12s ease;opacity:0;transform:scale(1.02)"></div>
-      
-      <!-- Elegant Contrast Scrim Gradient Overlay for Superior Text Legibility -->
-      <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(10,12,16,0.85) 0%, rgba(10,12,16,0.65) 45%, rgba(10,12,16,0.25) 100%), linear-gradient(to top, rgba(10,12,16,0.7) 0%, transparent 60%);z-index:2"></div>
+    <!-- Edge-to-Edge 3-Stage Interactive Background -->
+    <div class="hero-bg-container" id="heroBgContainer">
+      <div class="hero-bg-layer hero-layer-light" id="heroLayerLight"></div>
+      <div class="hero-bg-layer hero-layer-evening" id="heroLayerEvening"></div>
+      <div class="hero-bg-layer hero-layer-dark" id="heroLayerDark"></div>
+      <div class="hero-scrim-overlay"></div>
     </div>
     
     <!-- Hero Text Foreground (High Contrast & Legibility) -->
-    <div class="hero-text-side" style="position:relative;z-index:4;max-width:650px">
-      <div class="hero-eyebrow" style="font-family:var(--mono);font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;color:#e6edf3;margin-bottom:16px;display:flex;align-items:center;gap:10px">
-        <span id="heroColorIndicator" style="width:8px;height:8px;border-radius:50%;background:#ffca28;box-shadow:0 0 10px #ffca28;display:inline-block;transition:all 0.8s"></span>
-        <span id="heroTimeLabel" style="font-weight:600;letter-spacing:0.12em;color:#ffca28">DAYLIGHT STUDY</span>
+    <div class="hero-text-side">
+      <div class="hero-eyebrow" style="font-family:var(--mono);font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;color:#e6edf3;margin-bottom:18px;display:flex;align-items:center;gap:10px">
+        <span id="heroColorIndicator" style="width:8px;height:8px;border-radius:50%;background:#ffca28;box-shadow:0 0 10px #ffca28;display:inline-block;transition:all 0.6s"></span>
+        <span id="heroTimeLabel" style="font-weight:600;letter-spacing:0.12em;color:#ffca28">INTERACTIVE CURSOR ILLUMINATION</span>
         <span style="opacity:0.4">&middot;</span>
         <span style="color:#c9d1d9">Architect &amp; Creative Director</span>
       </div>
       
-      <h1 class="hero-name" style="font-family:var(--serif);font-size:clamp(48px, 6.2vw, 82px);font-weight:300;line-height:1.05;color:#ffffff;margin-bottom:20px;text-shadow:0 2px 20px rgba(0,0,0,0.5)">
+      <h1 class="hero-name" style="font-family:var(--serif);font-size:clamp(50px, 6.8vw, 88px);font-weight:300;line-height:1.02;color:#ffffff;margin-bottom:22px;text-shadow:0 3px 25px rgba(0,0,0,0.6)">
         <span>Rana</span><br>
-        <span style="font-style:italic;color:#e6edf3">Abdullah</span>
+        <span style="font-style:italic;color:#f0f6fc">Abdullah</span>
       </h1>
       
-      <p class="hero-title" style="font-family:var(--sans);font-size:16.5px;line-height:1.68;color:#d0d7de;margin-bottom:30px;max-width:530px;text-shadow:0 1px 8px rgba(0,0,0,0.4)">
+      <p class="hero-title" style="font-family:var(--sans);font-size:17px;line-height:1.68;color:#d0d7de;margin-bottom:32px;max-width:540px;text-shadow:0 1px 10px rgba(0,0,0,0.5)">
         Novelist &middot; 3D Artist &middot; Software Engineer<br>
-        <span style="color:#8b949e;font-size:14px">Architectural spatial narratives, physical material lighting, and robust engineering.</span>
+        <span style="color:#8b949e;font-size:14.5px">Move your cursor to dynamically illuminate the scene from Daylight to Golden Evening to Midnight Nocturnal.</span>
       </p>
       
       <div class="hero-cta-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
         <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false" style="background:#ffffff;color:#0a0c10;border-color:#ffffff;font-weight:600">Technical Projects &rarr;</a>
-        <a class="btn-outline" href="#" onclick="showPage('novels');return false" style="color:#ffffff;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);backdrop-filter:blur(8px)">Novels &amp; Books</a>
-        <a class="btn-outline" href="#" onclick="showPage('gallery');return false" style="color:#ffffff;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);backdrop-filter:blur(8px)">3D Gallery</a>
+        <a class="btn-outline" href="#" onclick="showPage('novels');return false" style="color:#ffffff;border-color:rgba(255,255,255,0.45);background:rgba(255,255,255,0.08);backdrop-filter:blur(8px)">Novels &amp; Books</a>
+        <a class="btn-outline" href="#" onclick="showPage('gallery');return false" style="color:#ffffff;border-color:rgba(255,255,255,0.45);background:rgba(255,255,255,0.08);backdrop-filter:blur(8px)">3D Gallery</a>
       </div>
 
-      <!-- Interactive Atmosphere / Time-of-Day Switcher -->
-      <div style="margin-top:28px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9.5px;color:#8b949e">
+      <!-- Quick Interactive Mood Switcher -->
+      <div style="margin-top:30px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9.5px;color:#8b949e">
         <span style="text-transform:uppercase;letter-spacing:0.08em;margin-right:4px">ATMOSPHERE:</span>
-        <button onclick="setHeroAtmosphere('light')" id="btnAtmoLight" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,202,40,0.2);color:#ffca28;border:1px solid #ffca28;border-radius:12px;cursor:pointer;font-weight:600">&#9728; Light</button>
-        <button onclick="setHeroAtmosphere('evening')" id="btnAtmoEvening" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,255,255,0.08);color:#c9d1d9;border:1px solid rgba(255,255,255,0.2);border-radius:12px;cursor:pointer">&#9729; Evening</button>
-        <button onclick="setHeroAtmosphere('dark')" id="btnAtmoDark" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,255,255,0.08);color:#c9d1d9;border:1px solid rgba(255,255,255,0.2);border-radius:12px;cursor:pointer">&#9790; Dark</button>
+        <button onclick="setHeroGlobalMode('cursor')" id="btnAtmoCursor" style="padding:4px 11px;font-family:var(--mono);font-size:9px;background:rgba(255,202,40,0.25);color:#ffca28;border:1px solid #ffca28;border-radius:12px;cursor:pointer;font-weight:600">&#10024; Cursor Lens</button>
+        <button onclick="setHeroGlobalMode('light')" id="btnAtmoLight" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,255,255,0.08);color:#c9d1d9;border:1px solid rgba(255,255,255,0.2);border-radius:12px;cursor:pointer">&#9728; Full Light</button>
+        <button onclick="setHeroGlobalMode('evening')" id="btnAtmoEvening" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,255,255,0.08);color:#c9d1d9;border:1px solid rgba(255,255,255,0.2);border-radius:12px;cursor:pointer">&#9729; Full Evening</button>
+        <button onclick="setHeroGlobalMode('dark')" id="btnAtmoDark" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,255,255,0.08);color:#c9d1d9;border:1px solid rgba(255,255,255,0.2);border-radius:12px;cursor:pointer">&#9790; Full Night</button>
       </div>
     </div>
   </section>
