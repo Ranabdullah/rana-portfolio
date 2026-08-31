@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T21:41:10.494Z",
+  "updatedAt": "2026-08-31T21:44:51.203Z",
   "gallery": [
     {
       "title": "Children's Creative Studio & Art Illustration Study",
@@ -153,7 +153,7 @@
       ]
     },
     {
-      "title": "The Kinetic Figure: Character Studies in Anatomy, Gesture, and Form",
+      "title": "Character Study: Facial Structure, Gesture & Kinetic Figure Dynamics",
       "pillar": "Personal",
       "cat": "character",
       "desc": "Traditional hand-drawn anatomical studies examining dynamic silhouette weight distribution, skull plane transitions, and gestural momentum.",
@@ -162,25 +162,22 @@
         "Photos & to upload/Sketch/11053043_919157774801703_4563455775003564932_n.jpg",
         "Photos & to upload/Sketch/11202825_919018721482275_3884168732202231454_o.jpg",
         "Photos & to upload/Sketch/12.jpg"
-      ],
-      "subVideos": {},
-      "youtubeUrl": ""
+      ]
     },
     {
-      "title": "Speculative Worldbuilding: Environmental Architecture & Hard Surface Design",
+      "title": "Desert Megacity & Sci-Fi Heavy Reconnaissance Vessel",
       "pillar": "Personal",
       "cat": "3d",
       "desc": "Massive monolithic desert metropolis and orbital transport vessel navigating atmospheric sand haze and harsh desert sunlight.",
       "path": "Photos & to upload/Scifi/All Work (175).jpg",
       "images": [
         "Photos & to upload/Scifi/All Work (175).jpg",
+        "Photos & to upload/Scifi/All Work (18).jpg",
         "Photos & to upload/Plane/25542788_1949128395101535_7558624210513976664_o.jpg"
-      ],
-      "subVideos": {},
-      "youtubeUrl": ""
+      ]
     },
     {
-      "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
+      "title": "Photorealistic Forest Biome & Woodland Sanctuary (UE5)",
       "pillar": "Personal",
       "cat": "animation",
       "desc": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
@@ -189,15 +186,11 @@
       "images": [
         "Photos & to upload/YouTube/jN-SOF7No1Q.jpg",
         "Photos & to upload/Nature/All Work (113).jpg",
-        "Photos & to upload/YouTube/L6NKHuSGThA.jpg",
-        "Photos & to upload/Nature/All Work (122).jpg"
-      ],
-      "subVideos": {
-        "0": "https://www.youtube.com/watch?v=jN-SOF7No1Q"
-      }
+        "Photos & to upload/YouTube/L6NKHuSGThA.jpg"
+      ]
     },
     {
-      "title": "The Built Exterior: Architectural Form",
+      "title": "Yale Center: Brutalist Architecture & Daylighting Study",
       "pillar": "Personal",
       "cat": "environment",
       "desc": "Architectural homage exploring poured-in-place concrete textures, dramatic clerestory lightwells, and minimalist geometric proportions.",
@@ -205,17 +198,16 @@
       "images": [
         "Photos & to upload/Exterior/All Work (128).jpg",
         "Photos & to upload/Exterior/All Work (132).jpg"
-      ],
-      "subVideos": {},
-      "youtubeUrl": ""
+      ]
     },
     {
       "title": "Autumn Woodland Vista & Whisper of the Heart Scenery",
       "pillar": "Personal",
       "cat": "environment",
       "desc": "Scenic anime-inspired natural environment depicting golden autumn foliage, quiet forest clearings, and atmospheric depth of field.",
-      "path": "Photos & to upload/Nature/All Work (123).jpg",
+      "path": "Photos & to upload/Nature/All Work (122).jpg",
       "images": [
+        "Photos & to upload/Nature/All Work (122).jpg",
         "Photos & to upload/Nature/All Work (123).jpg"
       ]
     },
