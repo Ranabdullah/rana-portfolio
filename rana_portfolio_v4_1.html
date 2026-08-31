@@ -4268,6 +4268,23 @@ function renderPage(name){
 
 // 1. HOME RENDERING
 let novelSlideIdx=0, projSlideIdx=0;
+// ==================== MASTER MULTI-COLOR RAINBOW SYSTEM ====================
+const RAINBOW_PALETTE = [
+  { border: 'rgba(0, 229, 255, 0.95)', glow: 'rgba(0, 229, 255, 0.55)', ambient: 'rgba(0, 229, 255, 0.28)', soft: 'rgba(0, 229, 255, 0.14)', accent: '#00e5ff' },   // Electric Cyan
+  { border: 'rgba(0, 230, 118, 0.95)', glow: 'rgba(0, 230, 118, 0.55)', ambient: 'rgba(0, 230, 118, 0.28)', soft: 'rgba(0, 230, 118, 0.14)', accent: '#00e676' },   // Emerald Mint Green
+  { border: 'rgba(179, 136, 255, 0.95)', glow: 'rgba(179, 136, 255, 0.55)', ambient: 'rgba(179, 136, 255, 0.28)', soft: 'rgba(179, 136, 255, 0.14)', accent: '#b388ff' }, // Amethyst Violet
+  { border: 'rgba(255, 215, 64, 0.95)', glow: 'rgba(255, 215, 64, 0.55)', ambient: 'rgba(255, 215, 64, 0.28)', soft: 'rgba(255, 215, 64, 0.14)', accent: '#ffd740' },  // Golden Amber Yellow
+  { border: 'rgba(255, 64, 129, 0.95)', glow: 'rgba(255, 64, 129, 0.55)', ambient: 'rgba(255, 64, 129, 0.28)', soft: 'rgba(255, 64, 129, 0.14)', accent: '#ff4081' },  // Vivid Coral Pink
+  { border: 'rgba(68, 138, 255, 0.95)', glow: 'rgba(68, 138, 255, 0.55)', ambient: 'rgba(68, 138, 255, 0.28)', soft: 'rgba(68, 138, 255, 0.14)', accent: '#448aff' },   // Cobalt Sapphire Blue
+  { border: 'rgba(255, 109, 0, 0.95)', glow: 'rgba(255, 109, 0, 0.55)', ambient: 'rgba(255, 109, 0, 0.28)', soft: 'rgba(255, 109, 0, 0.14)', accent: '#ff6d00' }    // Neon Orange
+];
+
+function getCardGlowStyle(index){
+  const col = RAINBOW_PALETTE[index % RAINBOW_PALETTE.length];
+  return `--card-border:${col.border};--card-glow:${col.glow};--card-glow-ambient:${col.ambient};--card-glow-soft:${col.soft};--card-accent:${col.accent};`;
+}
+window.getCardGlowStyle = getCardGlowStyle;
+
 function renderHome(){
   // 1. Home Tech Spotlight
   const hTech = document.getElementById('homeTechSpotlight');
@@ -4573,14 +4590,14 @@ function renderSoftware(){
   if(!c) return;
   c.innerHTML = `
     <div class="software-cat-section" style="padding:48px;background:var(--bg)">
-      <div class="sw-products-grid">${software.map(swCard).join('')}</div>
+      <div class="sw-products-grid">${software.map((s,i)=>swCard(s,i)).join('')}</div>
     </div>
   `;
 }
 
-function swCard(s){
+function swCard(s, i){
   return `
-    <div class="sw-product-card">
+    <div class="sw-product-card" style="${getCardGlowStyle(i !== undefined ? i : 0)}">
       <div>
         ${s.img ? `<img class="sw-img-banner" src="${s.img}" alt="${s.name}" loading="lazy" decoding="async" onerror="this.style.display='none'">` : ''}
         <div class="sw-product-meta">
@@ -4719,6 +4736,28 @@ function beCheckAuthOnNav(){
   }
 }
 window.beCheckAuthOnNav = beCheckAuthOnNav;
+
+function switchBackend(name, btn){
+  document.querySelectorAll('.bt').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.backend-panel').forEach(p => p.classList.remove('on'));
+  if(btn) {
+    btn.classList.add('on');
+  } else {
+    const matchingBtn = document.querySelector(`.bt[onclick*="${name}"]`);
+    if(matchingBtn) matchingBtn.classList.add('on');
+  }
+  const targetPanel = document.getElementById('bp-' + name);
+  if(targetPanel) targetPanel.classList.add('on');
+
+  if(name === 'gallery') renderBeGallery();
+  else if(name === 'novels') renderBeNovels();
+  else if(name === 'tech') renderBeTech();
+  else if(name === 'software') renderBeSoftware();
+  else if(name === 'experience') renderBeExp();
+  else if(name === 'clients') renderBeClients();
+  else if(name === 'articles') renderBeArticles();
+}
+window.switchBackend = switchBackend;
 
 function renderBackend(){
   const activeTab = document.querySelector('.bt.on');
