@@ -1438,6 +1438,50 @@ body.theme-dark .dls-btn-outline:hover {
   background: rgba(255, 255, 255, 0.14) !important;
   border-color: #ffffff !important;
 }
+
+/* ==================== LOGIN GATE BUTTON THEME CONTRAST ==================== */
+.be-login-btn {
+  width: 100%;
+  padding: 13px 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all .25s ease;
+}
+
+body.theme-light .be-login-btn {
+  background: #11141a !important;
+  color: #ffffff !important;
+  border: 1px solid #11141a !important;
+  font-weight: 700 !important;
+}
+body.theme-light .be-login-btn:hover {
+  background: #2d333f !important;
+}
+
+body.theme-evening .be-login-btn {
+  background: #ffd166 !important;
+  color: #0b132b !important;
+  border: 1px solid #ffd166 !important;
+  font-weight: 700 !important;
+}
+body.theme-evening .be-login-btn:hover {
+  background: #ffbe0b !important;
+}
+
+body.theme-dark .be-login-btn {
+  background: #ffffff !important;
+  color: #07080b !important;
+  border: 1px solid #ffffff !important;
+  font-weight: 700 !important;
+}
+body.theme-dark .be-login-btn:hover {
+  background: #e1e4e8 !important;
+}
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -4333,18 +4377,11 @@ function lbNav(dir){
 
 // 5. SOFTWARE PAGE (B&W WITH IMAGES)
 function renderSoftware(){
-  const c = document.getElementById('softwareContent');
+  const c = document.getElementById('softwareContainer');
   if(!c) return;
-  const blender = software.filter(s => s.cat === 'Blender Add-on');
-  const web = software.filter(s => s.cat !== 'Blender Add-on');
   c.innerHTML = `
-    <div class="software-cat-section">
-      <div class="sw-section-label">Blender Add-ons &amp; 3D Pipelines</div>
-      <div class="sw-products-grid">${blender.map(swCard).join('')}</div>
-    </div>
-    <div class="software-cat-section" style="background:var(--bg2)">
-      <div class="sw-section-label">Web Applications &amp; Utilities</div>
-      <div class="sw-products-grid">${web.map(swCard).join('')}</div>
+    <div class="software-cat-section" style="padding:48px;background:var(--bg)">
+      <div class="sw-products-grid">${software.map(swCard).join('')}</div>
     </div>
   `;
 }
