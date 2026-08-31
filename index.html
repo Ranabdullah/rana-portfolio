@@ -77,7 +77,7 @@ nav {
   position:fixed; top:0; left:0; right:0; z-index:100;
   display:flex; align-items:center; justify-content:space-between;
   padding:18px 48px;
-  background:rgba(255, 255, 255, 0.96);
+  background:rgba(244, 245, 247, 0.94);
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
   transition:all .3s ease;
@@ -132,7 +132,7 @@ nav {
   font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; padding:4px 12px;
   border-radius:20px; display:inline-flex; align-items:center; gap:6px;
 }
-.badge-dark { background:#11141a !important; color:#ffffff !important; }
+.badge-dark { background:var(--ink); color:#ffffff; }
 .badge-outline { background:var(--bg-card); color:var(--ink2); border:1px solid var(--border); }
 
 /* Slider Controls */
@@ -176,7 +176,7 @@ nav {
 .home-novels { background:var(--bg); padding:84px 48px; }
 .novels-slider-track { overflow:hidden; position:relative; width:100%; }
 .novels-slider { display:flex; gap:26px; transition:transform .6s cubic-bezier(.16,1,.3,1); }
-.novel-card { flex: 0 0 220px; background: #ffffff; border: 1px solid var(--border, #e5e7eb); border-radius: 8px; padding: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.03); transition: transform 0.35s ease, box-shadow 0.35s ease; box-sizing: border-box; display: flex; flex-direction: column; cursor: none; }
+.novel-card { flex:0 0 240px; cursor:none; }
 .novel-cover { width:240px; height:345px; position:relative; overflow:hidden; filter:grayscale(1) contrast(1.15); transition:filter .35s, transform .35s; background:#e2e6eb; }
 .novel-cover:hover { filter:grayscale(0) contrast(1.05); transform:translateY(-4px); }
 .novel-cover img { width:100%; height:100%; object-fit:cover; }
@@ -940,86 +940,198 @@ img {
   border-color: var(--ink);
 }
 
-/* ==================== STRICT HIGH-CONTRAST BADGES, BUTTONS & TABS ==================== */
-.badge-pill {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  padding: 4px 12px;
-  border-radius: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 600;
-}
-.badge-dark {
-  background: #11141a !important;
-  color: #ffffff !important;
-  border: 1px solid #11141a !important;
-}
-.badge-outline {
-  background: #ffffff !important;
-  color: #11141a !important;
-  border: 1px solid #dbe0e8 !important;
+/* ==================== 3-THEME ENGINE (WHITE / BLUE / BLACK) ==================== */
+:root {
+  --bg: #f4f5f7;
+  --bg-card: #ffffff;
+  --bg2: #eaedf2;
+  --bg3: #f8fafc;
+  --ink: #11141a;
+  --ink2: #2d333f;
+  --ink3: #5a6474;
+  --ink4: #8b95a5;
+  --border: #dbe0e8;
+  --border2: #e9ecf0;
+  --nav-bg: rgba(244, 245, 247, 0.94);
+  --scrim-grad: linear-gradient(to right, #f4f5f7 0%, rgba(244,245,247,0.92) 36%, rgba(244,245,247,0.2) 65%, transparent 100%), linear-gradient(to top, #f4f5f7 0%, rgba(244,245,247,0.4) 15%, transparent 35%);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'Space Grotesk', monospace;
+  --display: 'Space Grotesk', sans-serif;
 }
 
-.btn-primary {
-  background: #11141a !important;
-  color: #ffffff !important;
-  border: 1px solid #11141a !important;
-  font-weight: 600 !important;
+/* 1. WHITE THEME */
+body.theme-light {
+  --bg: #f4f5f7;
+  --bg-card: #ffffff;
+  --bg2: #eaedf2;
+  --bg3: #f8fafc;
+  --ink: #11141a;
+  --ink2: #2d333f;
+  --ink3: #5a6474;
+  --ink4: #8b95a5;
+  --border: #dbe0e8;
+  --border2: #e9ecf0;
+  --nav-bg: rgba(244, 245, 247, 0.94);
+  --scrim-grad: linear-gradient(to right, #f4f5f7 0%, rgba(244,245,247,0.92) 36%, rgba(244,245,247,0.2) 65%, transparent 100%), linear-gradient(to top, #f4f5f7 0%, rgba(244,245,247,0.4) 15%, transparent 35%);
 }
-.btn-primary:hover {
-  background: #2d333f !important;
-  color: #ffffff !important;
+body.theme-light nav { background: rgba(244, 245, 247, 0.94) !important; border-bottom: 1px solid #dbe0e8 !important; }
+body.theme-light .nav-logo { color: #11141a !important; }
+body.theme-light .nav-logo span { color: #5a6474 !important; }
+body.theme-light .nav-links a { color: #5a6474 !important; }
+body.theme-light .nav-links a:hover, body.theme-light .nav-links a.active { color: #11141a !important; }
+body.theme-light .badge-dark { background: #11141a !important; color: #ffffff !important; border: 1px solid #11141a !important; }
+body.theme-light .badge-outline { background: #ffffff !important; color: #11141a !important; border: 1px solid #dbe0e8 !important; }
+body.theme-light .g-tab.active, body.theme-light .tech-filter-btn.active { background: #11141a !important; color: #ffffff !important; border-color: #11141a !important; }
+body.theme-light .btn-primary { background: #11141a !important; color: #ffffff !important; border-color: #11141a !important; }
+
+/* 2. BLUE THEME (Deep Twilight Sapphire) */
+body.theme-evening {
+  --bg: #0b132b;
+  --bg-card: #1c2541;
+  --bg2: #141e3c;
+  --bg3: #080d1f;
+  --ink: #f0f4f8;
+  --ink2: #d9e2ec;
+  --ink3: #9fb3c8;
+  --ink4: #627d98;
+  --border: rgba(255, 255, 255, 0.14);
+  --border2: rgba(255, 255, 255, 0.08);
+  --nav-bg: rgba(11, 19, 43, 0.94);
+  --scrim-grad: linear-gradient(to right, #0b132b 0%, rgba(11,19,43,0.92) 36%, rgba(11,19,43,0.2) 65%, transparent 100%), linear-gradient(to top, #0b132b 0%, rgba(11,19,43,0.4) 15%, transparent 35%);
+}
+body.theme-evening nav { background: rgba(11, 19, 43, 0.94) !important; border-bottom: 1px solid rgba(255,255,255,0.14) !important; }
+body.theme-evening .nav-logo { color: #ffffff !important; }
+body.theme-evening .nav-logo span { color: #ffd166 !important; }
+body.theme-evening .nav-links a { color: #9fb3c8 !important; }
+body.theme-evening .nav-links a:hover, body.theme-evening .nav-links a.active { color: #ffd166 !important; }
+body.theme-evening .badge-dark { background: #ffd166 !important; color: #0b132b !important; border: 1px solid #ffd166 !important; font-weight: 700 !important; }
+body.theme-evening .badge-outline { background: #1c2541 !important; color: #f0f4f8 !important; border: 1px solid rgba(255,255,255,0.2) !important; }
+body.theme-evening .g-tab.active, body.theme-evening .tech-filter-btn.active { background: #ffd166 !important; color: #0b132b !important; border-color: #ffd166 !important; font-weight: 700 !important; }
+body.theme-evening .btn-primary { background: #ffd166 !important; color: #0b132b !important; border-color: #ffd166 !important; font-weight: 700 !important; }
+body.theme-evening .btn-outline { background: rgba(255,255,255,0.08) !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.3) !important; }
+body.theme-evening .cursor { background: #ffd166 !important; box-shadow: 0 0 10px #ffd166 !important; }
+body.theme-evening #curRing { border-color: rgba(255, 209, 102, 0.5) !important; }
+
+/* 3. BLACK THEME (Nocturnal Midnight Obsidian) */
+body.theme-dark {
+  --bg: #07080b;
+  --bg-card: #111318;
+  --bg2: #181b22;
+  --bg3: #0c0d11;
+  --ink: #ffffff;
+  --ink2: #e1e4e8;
+  --ink3: #9da5b4;
+  --ink4: #5c6370;
+  --border: rgba(255, 255, 255, 0.12);
+  --border2: rgba(255, 255, 255, 0.06);
+  --nav-bg: rgba(7, 8, 11, 0.95);
+  --scrim-grad: linear-gradient(to right, #07080b 0%, rgba(7,8,11,0.92) 36%, rgba(7,8,11,0.2) 65%, transparent 100%), linear-gradient(to top, #07080b 0%, rgba(7,8,11,0.4) 15%, transparent 35%);
+}
+body.theme-dark nav { background: rgba(7, 8, 11, 0.95) !important; border-bottom: 1px solid rgba(255,255,255,0.12) !important; }
+body.theme-dark .nav-logo { color: #ffffff !important; }
+body.theme-dark .nav-logo span { color: #8b949e !important; }
+body.theme-dark .nav-links a { color: #8b949e !important; }
+body.theme-dark .nav-links a:hover, body.theme-dark .nav-links a.active { color: #ffffff !important; }
+body.theme-dark .badge-dark { background: #ffffff !important; color: #07080b !important; border: 1px solid #ffffff !important; font-weight: 700 !important; }
+body.theme-dark .badge-outline { background: #111318 !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.2) !important; }
+body.theme-dark .g-tab.active, body.theme-dark .tech-filter-btn.active { background: #ffffff !important; color: #07080b !important; border-color: #ffffff !important; font-weight: 700 !important; }
+body.theme-dark .btn-primary { background: #ffffff !important; color: #07080b !important; border-color: #ffffff !important; font-weight: 700 !important; }
+body.theme-dark .btn-outline { background: rgba(255,255,255,0.08) !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.25) !important; }
+body.theme-dark .cursor { background: #00e5ff !important; box-shadow: 0 0 10px #00e5ff !important; }
+body.theme-dark #curRing { border-color: rgba(0, 229, 255, 0.5) !important; }
+
+/* Global Smooth Transitions */
+body, nav, .home-hero, .page, section, footer, .tech-spotlight-card, .novel-card, .sw-item, .proj-card, .article-card, .exp-item, .modal-inner {
+  transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-outline {
-  background: #ffffff !important;
-  color: #11141a !important;
-  border: 1px solid #dbe0e8 !important;
-  font-weight: 500 !important;
-}
-.btn-outline:hover {
-  background: #f4f5f7 !important;
-  border-color: #11141a !important;
-  color: #11141a !important;
-}
-
-.g-tab, .tech-filter-btn {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .08em;
-  padding: 6px 14px;
-  border-radius: 20px;
-  background: #f4f5f7 !important;
-  color: #5a6474 !important;
-  border: 1px solid #dbe0e8 !important;
-  cursor: pointer;
-  transition: all .2s ease;
-}
-.g-tab:hover, .tech-filter-btn:hover {
-  color: #11141a !important;
-  border-color: #8b95a5 !important;
-}
-.g-tab.active, .tech-filter-btn.active {
-  background: #11141a !important;
-  color: #ffffff !important;
-  border-color: #11141a !important;
-  font-weight: 600 !important;
+/* Hero Section (Clean Full-Visibility Architecture Layers - No Dark Masks / Circles) */
+.home-hero {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: calc(100vh - 72px) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 80px 6vw !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  background: var(--bg) !important;
 }
 
-.tech-tag {
-  font-family: var(--mono);
-  font-size: 10px;
-  padding: 3px 8px;
-  background: #11141a !important;
-  color: #ffffff !important;
-  border-radius: 4px;
-  border: 1px solid #2d333f;
-  display: inline-block;
+.hero-bg-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--bg);
 }
+
+.hero-bg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: right center;
+  transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.hero-layer-light {
+  background-image: url('Hero Image/Light_House_Render.png');
+  z-index: 1;
+  opacity: 1;
+}
+
+.hero-layer-evening {
+  background-image: url('Hero Image/Evening_House_Render.png');
+  z-index: 2;
+  opacity: 0;
+}
+
+.hero-layer-dark {
+  background-image: url('Hero Image/Dark_House_Render.png');
+  z-index: 3;
+  opacity: 0;
+}
+
+.hero-theme-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--scrim-grad);
+  z-index: 4;
+  pointer-events: none;
+  transition: background 0.8s ease;
+}
+
+.hero-text-side {
+  position: relative;
+  z-index: 6;
+  max-width: 620px;
+}
+
+/* Stars Canvas for Evening/Dark */
+#globalStarsCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+body.theme-evening #globalStarsCanvas { opacity: 0.85; }
+body.theme-dark #globalStarsCanvas { opacity: 0.95; }
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -1027,6 +1139,8 @@ img {
 <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
+  <canvas id="globalStarsCanvas"></canvas>
+
 <!-- INTERACTIVE COLORFUL BACKGROUND PARTICLES -->
 <!-- CURSOR -->
 <div class="cursor" id="cur"></div>
@@ -1054,31 +1168,49 @@ img {
 <div class="page active" id="page-home">
 
   <!-- HERO -->
-  <!-- HERO SECTION (CLEAN ARCHITECTURAL RENDER BACKGROUND) -->
-  <section class="home-hero" style="position:relative;overflow:hidden;min-height:620px;display:flex;align-items:center;padding:75px 5vw;background:#ffffff">
-    <!-- Crisp Full Background Architectural Render -->
-    <div style="position:absolute;inset:0;width:100%;height:100%;background-image:url('Hero Image/Light_House_Render.png');background-size:cover;background-position:right center;pointer-events:none;z-index:1"></div>
-    <!-- Soft Left Fade for Perfect High-Contrast Text Legibility -->
-    <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.85) 35%, rgba(255,255,255,0.15) 70%, transparent 100%);pointer-events:none;z-index:2"></div>
+  <!-- HERO SECTION (FULL-SCENE 3-THEME ARCHITECTURAL RENDER) -->
+  <section class="home-hero" id="homeHeroSection">
+    
+    <!-- Full-Scene Architectural Render Layers (100% Fully Visible, No Masks/Circles) -->
+    <div class="hero-bg-container" id="heroBgContainer">
+      <div class="hero-bg-layer hero-layer-light" id="heroLayerLight"></div>
+      <div class="hero-bg-layer hero-layer-evening" id="heroLayerEvening"></div>
+      <div class="hero-bg-layer hero-layer-dark" id="heroLayerDark"></div>
+      <div class="hero-theme-scrim"></div>
+    </div>
     
     <!-- Hero Text Foreground -->
-    <div class="hero-text-side" style="position:relative;z-index:3;max-width:620px">
-      <div class="hero-eyebrow" style="font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px;display:flex;align-items:center;gap:8px">
-        <span style="width:7px;height:7px;border-radius:50%;background:#00e5ff;box-shadow:0 0 8px #00e5ff;display:inline-block"></span>
-        <span>Creative Director &amp; Technologist</span>
+    <div class="hero-text-side">
+      <div class="hero-eyebrow" style="font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px;display:flex;align-items:center;gap:10px">
+        <span id="heroColorIndicator" style="width:8px;height:8px;border-radius:50%;background:#e6a100;box-shadow:0 0 8px #e6a100;display:inline-block;transition:all 0.5s"></span>
+        <span id="heroTimeLabel" style="font-weight:600;letter-spacing:0.12em;color:var(--ink)">WHITE STUDY</span>
+        <span style="opacity:0.35">&middot;</span>
+        <span style="color:var(--ink3)">Architect &amp; Creative Director</span>
       </div>
-      <h1 class="hero-name" style="font-family:var(--serif);font-size:clamp(46px, 6vw, 78px);font-weight:300;line-height:1.06;color:var(--ink);margin-bottom:18px">
+      
+      <h1 class="hero-name" style="font-family:var(--serif);font-size:clamp(48px, 6.5vw, 84px);font-weight:300;line-height:1.04;color:var(--ink);margin-bottom:20px">
         <span>Rana</span><br>
         <span style="font-style:italic;color:var(--ink2)">Abdullah</span>
       </h1>
-      <p class="hero-title" style="font-family:var(--sans);font-size:16px;line-height:1.65;color:var(--ink2);margin-bottom:28px;max-width:520px">
+      
+      <p class="hero-title" style="font-family:var(--sans);font-size:16.5px;line-height:1.68;color:var(--ink2);margin-bottom:30px;max-width:520px">
         Novelist &middot; 3D Artist &middot; Software Engineer<br>
-        <span style="color:var(--ink3);font-size:14px">Blending literary narrative, architectural visualization, and robust engineering.</span>
+        <span style="color:var(--ink3);font-size:14.5px">Architectural spatial narratives, physical material lighting, and robust engineering.</span>
       </p>
-      <div class="hero-cta-row" style="display:flex;gap:12px;flex-wrap:wrap">
+      
+      <div class="hero-cta-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
         <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false">Technical Projects &rarr;</a>
         <a class="btn-outline" href="#" onclick="showPage('novels');return false">Novels &amp; Books</a>
         <a class="btn-outline" href="#" onclick="showPage('gallery');return false">3D Gallery</a>
+      </div>
+
+      <!-- 3-Color Global Theme Switcher (White, Blue, Black) -->
+      <div style="margin-top:28px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9.5px;color:var(--ink3)">
+        <span style="text-transform:uppercase;letter-spacing:0.08em;margin-right:4px">THEME:</span>
+        <button onclick="setGlobalTheme('light')" id="btnThemeLight" style="padding:5px 13px;font-family:var(--mono);font-size:9.5px;border-radius:14px;cursor:pointer;font-weight:600;background:var(--ink);color:var(--bg);border:1px solid var(--ink)">&#9728; White</button>
+        <button onclick="setGlobalTheme('evening')" id="btnThemeEvening" style="padding:5px 13px;font-family:var(--mono);font-size:9.5px;border-radius:14px;cursor:pointer;background:var(--bg-card);color:var(--ink);border:1px solid var(--border)">&#9729; Blue</button>
+        <button onclick="setGlobalTheme('dark')" id="btnThemeDark" style="padding:5px 13px;font-family:var(--mono);font-size:9.5px;border-radius:14px;cursor:pointer;background:var(--bg-card);color:var(--ink);border:1px solid var(--border)">&#9790; Black</button>
+        <button onclick="toggleGlobalAutoTransition()" id="btnThemeAuto" style="padding:5px 13px;font-family:var(--mono);font-size:9.5px;background:transparent;color:var(--ink3);border:1px dashed var(--border);border-radius:14px;cursor:pointer">&#8634; Auto Transition</button>
       </div>
     </div>
   </section>
@@ -1594,13 +1726,10 @@ img {
 // ==================== RESILIENT DATA STORAGE & AUTO-RECOVERY ENGINE ====================
 function loadData(key, def){
   try {
+    // 1. Direct key lookup
     const direct = localStorage.getItem(key);
     if(direct){
-      try {
-        const parsed = JSON.parse(direct);
-        if(Array.isArray(parsed) && parsed.length > 0) return parsed;
-        if(!Array.isArray(parsed) && parsed) return parsed;
-      } catch(e){}
+      try { return JSON.parse(direct); } catch(e){}
     }
 
     // 2. Extract base prefix (e.g. 'rana_gallery' from 'rana_gallery_v35' or 'rana_gallery_data')
@@ -6027,6 +6156,203 @@ function scheduleGitHubAutoSync(){
 
 // Init GitHub Sync Badge
 setTimeout(updateGitHubStatusBadge, 200);
+
+
+// ==================== MASTER 3-COLOR THEME & HERO ENGINE ====================
+const GLOBAL_THEMES = {
+  light: { label: 'WHITE STUDY', color: '#e6a100', bodyClass: 'theme-light' },
+  evening: { label: 'BLUE EVENING STUDY', color: '#ff9800', bodyClass: 'theme-evening' },
+  dark: { label: 'BLACK NOCTURNAL STUDY', color: '#00e5ff', bodyClass: 'theme-dark' }
+};
+
+let activeTheme = 'light';
+let isAutoTransition = true;
+let autoTransitionTimer = null;
+let starCanvasCtx = null;
+let starsArray = [];
+let starAnimationId = null;
+
+function setGlobalTheme(theme, manual = true){
+  if(!GLOBAL_THEMES[theme]) return;
+  activeTheme = theme;
+
+  // 1. Update body theme class (triggers global CSS variable and header color updates)
+  if(document.body){
+    document.body.classList.remove('theme-light', 'theme-evening', 'theme-dark');
+    document.body.classList.add(GLOBAL_THEMES[theme].bodyClass);
+  }
+
+  // 2. Crossfade Hero Image layers cleanly (Full Visibility, No Masks)
+  const lLight = document.getElementById('heroLayerLight');
+  const lEve = document.getElementById('heroLayerEvening');
+  const lDark = document.getElementById('heroLayerDark');
+  const ind = document.getElementById('heroColorIndicator');
+  const lbl = document.getElementById('heroTimeLabel');
+
+  if(lLight && lEve && lDark){
+    lLight.style.opacity = theme === 'light' ? '1' : '0';
+    lEve.style.opacity = theme === 'evening' ? '1' : '0';
+    lDark.style.opacity = theme === 'dark' ? '1' : '0';
+  }
+
+  const info = GLOBAL_THEMES[theme];
+  if(ind && info){
+    ind.style.background = info.color;
+    ind.style.boxShadow = `0 0 8px ${info.color}`;
+  }
+  if(lbl && info){
+    lbl.textContent = info.label;
+    lbl.style.color = 'var(--ink)';
+  }
+
+  // 3. Update theme buttons UI
+  ['light', 'evening', 'dark'].forEach(st => {
+    const btn = document.getElementById('btnTheme' + st.charAt(0).toUpperCase() + st.slice(1));
+    if(btn){
+      if(st === theme){
+        btn.style.background = 'var(--ink)';
+        btn.style.color = 'var(--bg)';
+        btn.style.borderColor = 'var(--ink)';
+        btn.style.fontWeight = '600';
+      } else {
+        btn.style.background = 'var(--bg-card)';
+        btn.style.color = 'var(--ink)';
+        btn.style.borderColor = 'var(--border)';
+        btn.style.fontWeight = '400';
+      }
+    }
+  });
+
+  // 4. Timer management
+  if(manual && isAutoTransition){
+    clearInterval(autoTransitionTimer);
+    autoTransitionTimer = setInterval(advanceGlobalTheme, 8500);
+  }
+}
+window.setGlobalTheme = setGlobalTheme;
+
+function advanceGlobalTheme(){
+  if(!isAutoTransition) return;
+  if(document.hidden) return;
+  const seq = ['light', 'evening', 'dark'];
+  const nextIdx = (seq.indexOf(activeTheme) + 1) % seq.length;
+  setGlobalTheme(seq[nextIdx], false);
+}
+
+function toggleGlobalAutoTransition(){
+  isAutoTransition = !isAutoTransition;
+  const btn = document.getElementById('btnThemeAuto');
+  if(btn){
+    btn.style.color = isAutoTransition ? 'var(--ink)' : 'var(--ink4)';
+    btn.style.fontWeight = isAutoTransition ? '600' : '400';
+    btn.textContent = isAutoTransition ? '✓ Auto Transition (On)' : '⏸ Auto Transition (Paused)';
+  }
+  if(isAutoTransition){
+    clearInterval(autoTransitionTimer);
+    autoTransitionTimer = setInterval(advanceGlobalTheme, 8500);
+    showToast('Auto transition enabled: White ➔ Blue ➔ Black');
+  } else {
+    clearInterval(autoTransitionTimer);
+    showToast('Auto transition paused on ' + activeTheme);
+  }
+}
+window.toggleGlobalAutoTransition = toggleGlobalAutoTransition;
+
+// ==================== TWINKLING BACKGROUND STARS ====================
+function initGlobalStarsCanvas(){
+  const canvas = document.getElementById('globalStarsCanvas');
+  if(!canvas) return;
+  starCanvasCtx = canvas.getContext('2d');
+
+  function resizeStars(){
+    canvas.width = window.innerWidth || 1920;
+    canvas.height = window.innerHeight || 1080;
+  }
+  resizeStars();
+  window.addEventListener('resize', resizeStars);
+
+  starsArray = [];
+  const STAR_COUNT = 90;
+  for(let i = 0; i < STAR_COUNT; i++){
+    starsArray.push({
+      x: Math.random() * (window.innerWidth || 1920),
+      y: Math.random() * (window.innerHeight || 1080),
+      radius: Math.random() * 1.5 + 0.5,
+      alpha: Math.random() * 0.8 + 0.2,
+      twinkleSpeed: Math.random() * 0.02 + 0.005,
+      hue: Math.random() > 0.6 ? '#ffd166' : '#a0c4ff'
+    });
+  }
+
+  function renderStars(){
+    if((activeTheme === 'evening' || activeTheme === 'dark') && starCanvasCtx && canvas.width > 0){
+      starCanvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+      for(let i = 0; i < starsArray.length; i++){
+        const s = starsArray[i];
+        s.alpha += Math.sin(Date.now() * s.twinkleSpeed * 0.1) * 0.015;
+        const curAlpha = Math.max(0.1, Math.min(1, s.alpha));
+        starCanvasCtx.beginPath();
+        starCanvasCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        starCanvasCtx.fillStyle = s.hue === '#ffd166' ? `rgba(255, 209, 102, ${curAlpha})` : `rgba(160, 196, 255, ${curAlpha})`;
+        starCanvasCtx.fill();
+      }
+    }
+    starAnimationId = requestAnimationFrame(renderStars);
+  }
+  renderStars();
+}
+
+// ==================== SEAMLESS CLOUD AUTO-SYNC ON INITIAL BOOT ====================
+async function autoFetchCloudDatabaseOnBoot(){
+  try {
+    const res = await fetch('portfolio_data.json?_t=' + Date.now());
+    if(!res.ok) return;
+    const cloudDb = await res.json();
+    if(!cloudDb || !cloudDb.updatedAt) return;
+
+    const localUpdated = localStorage.getItem('rana_last_cloud_update');
+    if(!localUpdated || new Date(cloudDb.updatedAt) > new Date(localUpdated) || !localStorage.getItem('rana_gallery_data')){
+      if(cloudDb.gallery && Array.isArray(cloudDb.gallery)) { galleryItems = cloudDb.gallery; saveData('rana_gallery_data', galleryItems); }
+      if(cloudDb.novels && Array.isArray(cloudDb.novels)) { novels = cloudDb.novels; saveData('rana_novels_data', novels); }
+      if(cloudDb.tech && Array.isArray(cloudDb.tech)) { techProjects = cloudDb.tech; saveData('rana_tech_data', techProjects); }
+      if(cloudDb.software && Array.isArray(cloudDb.software)) { software = cloudDb.software; saveData('rana_software_data', software); }
+      if(cloudDb.articles && Array.isArray(cloudDb.articles)) { articles = cloudDb.articles; saveData('rana_articles_data', articles); }
+      if(cloudDb.experience && Array.isArray(cloudDb.experience)) { experience = cloudDb.experience; saveData('rana_experience_data', experience); }
+      if(cloudDb.clients && Array.isArray(cloudDb.clients)) { clients = cloudDb.clients; saveData('rana_clients_data', clients); }
+      
+      localStorage.setItem('rana_last_cloud_update', cloudDb.updatedAt);
+      
+      const activePage = document.querySelector('.page.active');
+      if(activePage){
+        const pageId = activePage.id.replace('page-','');
+        renderPage(pageId);
+      }
+    }
+  } catch(e){
+    console.warn('Silent cloud boot fetch info:', e);
+  }
+}
+
+function setupGlobalThemeEngine(){
+  initGlobalStarsCanvas();
+  setGlobalTheme('light', false);
+  clearInterval(autoTransitionTimer);
+  autoTransitionTimer = setInterval(advanceGlobalTheme, 8500);
+}
+
+// Final Boot Sequence on Window Load
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', function(){
+    setupGlobalThemeEngine();
+    autoFetchCloudDatabaseOnBoot();
+    renderHome();
+  });
+} else {
+  setupGlobalThemeEngine();
+  autoFetchCloudDatabaseOnBoot();
+  renderHome();
+}
+
 </script>
 </body>
 </html>
