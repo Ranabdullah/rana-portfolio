@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T21:45:43.519Z",
+  "updatedAt": "2026-08-31T21:45:47.966Z",
   "gallery": [
     {
       "title": "Children's Creative Studio & Art Illustration Study",
@@ -217,7 +217,9 @@
       "path": "Photos & to upload/Nature/All Work (123).jpg",
       "images": [
         "Photos & to upload/Nature/All Work (123).jpg"
-      ]
+      ],
+      "subVideos": {},
+      "youtubeUrl": ""
     },
     {
       "title": "Riverside Cottage & Wooden Boat Mooring",
