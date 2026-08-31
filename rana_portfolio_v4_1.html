@@ -4845,7 +4845,7 @@ function renderBeGallery(searchTerm){
 
   html += filtered.map((g, fi) => {
     const realIdx = galleryItems.indexOf(g);
-    const allImgs = (g.images && g.images.length > 0) ? g.images : [g.path];
+    const allImgs = (g.images && g.images.length > 0) ? g.images : (g.path ? [g.path] : []);
     const subVids = g.subVideos || {};
 
     const thumbs = allImgs.map((imgSrc, sIdx) => `
@@ -4877,9 +4877,9 @@ function renderBeGallery(searchTerm){
             style="width:100%;padding:4px 6px;font-family:var(--mono);font-size:9px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box">
         </div>
 
-        <!-- DEDICATED INSTANT TRANSFER BUTTON -->
+        <!-- DEDICATED INSTANT TRANSFER BUTTON ON EVERY PHOTO (SINGLE OR MULTI) -->
         <button onclick="beOpenTransferModal(${realIdx}, ${sIdx})" title="Move this photo into another project"
-          style="width:100%;margin-top:4px;padding:5px 4px;font-family:var(--mono);font-size:9px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px">
+          style="width:100%;margin-top:4px;padding:6px 4px;font-family:var(--mono);font-size:9.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px">
           &#10140; Move Photo
         </button>
       </div>
@@ -4931,13 +4931,22 @@ function renderBeGallery(searchTerm){
         <div style="font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;font-weight:700">
           PHOTOS IN THIS PROJECT (${allImgs.length}):
         </div>
-        <div style="display:flex;flex-wrap:wrap;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:6px">
-          ${thumbs}
+        <div style="display:flex;flex-wrap:wrap;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:6px;min-height:50px;align-items:center">
+          ${allImgs.length > 0 ? thumbs : '<span style="font-family:var(--mono);font-size:11px;color:var(--ink4);padding:10px">No photos currently in this project. Click "+ Add Photo to Project" below.</span>'}
         </div>
-        <button onclick="beAddImageToItem(${realIdx})"
-          style="margin-top:8px;padding:6px 14px;font-family:var(--mono);font-size:10.5px;background:var(--bg-card);color:var(--ink);border:1px dashed var(--border);border-radius:3px;cursor:pointer;font-weight:600">
-          + Add Photo to Project
-        </button>
+        
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px">
+          <button onclick="beAddImageToItem(${realIdx})"
+            style="padding:6px 14px;font-family:var(--mono);font-size:10.5px;background:var(--bg-card);color:var(--ink);border:1px dashed var(--border);border-radius:3px;cursor:pointer;font-weight:600">
+            + Add Photo to Project
+          </button>
+          ${allImgs.length > 0 ? `
+            <button onclick="beOpenTransferModal(${realIdx}, 0)"
+              style="padding:6px 14px;font-family:var(--mono);font-size:10.5px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer;font-weight:600">
+              &#10140; Transfer Photo to Another Project...
+            </button>
+          ` : ''}
+        </div>
       </div>
 
       <!-- DESCRIPTION & SAVE -->
@@ -4949,7 +4958,7 @@ function renderBeGallery(searchTerm){
 
       <div style="display:flex;justify-content:flex-end">
         <button onclick="beUpdateGalleryItem(${realIdx})" class="submit-btn" style="padding:8px 20px;font-size:11px">
-          Save Project #${realIdx + 1}
+          Save Changes
         </button>
       </div>
     </div>
