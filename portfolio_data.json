@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T21:38:10.685Z",
+  "updatedAt": "2026-08-31T21:38:39.215Z",
   "gallery": [
     {
       "title": "Children's Creative Studio & Art Illustration Study",
@@ -180,7 +180,7 @@
       "youtubeUrl": ""
     },
     {
-      "title": "Photorealistic Forest Biome & Woodland Sanctuary (UE5)",
+      "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
       "pillar": "Personal",
       "cat": "animation",
       "desc": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
@@ -190,7 +190,10 @@
         "Photos & to upload/YouTube/jN-SOF7No1Q.jpg",
         "Photos & to upload/Nature/All Work (113).jpg",
         "Photos & to upload/YouTube/L6NKHuSGThA.jpg"
-      ]
+      ],
+      "subVideos": {
+        "0": "https://www.youtube.com/watch?v=jN-SOF7No1Q"
+      }
     },
     {
       "title": "Yale Center: Brutalist Architecture & Daylighting Study",
