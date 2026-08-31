@@ -3324,276 +3324,6 @@ async function loadFromCloudOnline(){
 
 
 
-// ==================== GITHUB CLOUD AUTO-SYNC ENGINE ====================
-function utf8ToBase64(str) {
-  return window.btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-    return String.fromCharCode('0x' + p1);
-  }));
-}
-
-function base64ToUtf8(str) {
-  return decodeURIComponent(Array.prototype.map.call(window.atob(str), function(c) {
-    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
-}
-
-function openGitHubModal(){
-  const m = document.getElementById('github-modal');
-  if(m){
-    m.style.display = 'flex';
-    document.getElementById('gh-token-input').value = localStorage.getItem('rana_gh_token') || '';
-    document.getElementById('gh-owner-input').value = localStorage.getItem('rana_gh_owner') || 'Ranabdullah';
-    document.getElementById('gh-repo-input').value = localStorage.getItem('rana_gh_repo') || 'rana-portfolio';
-    document.getElementById('gh-branch-input').value = localStorage.getItem('rana_gh_branch') || 'main';
-    document.getElementById('gh-path-input').value = localStorage.getItem('rana_gh_path') || 'portfolio_data.json';
-    document.getElementById('gh-autosync-chk').checked = localStorage.getItem('rana_gh_autosync') !== 'false';
-    updateGitHubStatusBadge();
-  }
-}
-
-function closeGitHubModal(){
-  const m = document.getElementById('github-modal');
-  if(m) m.style.display = 'none';
-}
-
-function toggleTokenVisibility(){
-  const inp = document.getElementById('gh-token-input');
-  const btn = document.getElementById('gh-toggle-btn');
-  if(inp.type === 'password'){
-    inp.type = 'text';
-    btn.textContent = '🔒 Hide';
-  } else {
-    inp.type = 'password';
-    btn.textContent = '👁️ Show';
-  }
-}
-
-function saveGitHubConfig(){
-  const token = (document.getElementById('gh-token-input')?.value || '').trim();
-  const owner = (document.getElementById('gh-owner-input')?.value || 'Ranabdullah').trim();
-  const repo = (document.getElementById('gh-repo-input')?.value || 'rana-portfolio').trim();
-  const branch = (document.getElementById('gh-branch-input')?.value || 'main').trim();
-  const path = (document.getElementById('gh-path-input')?.value || 'portfolio_data.json').trim();
-  const autosync = document.getElementById('gh-autosync-chk')?.checked;
-
-  if(!token){
-    showToast('Please enter your GitHub Personal Access Token');
-    return;
-  }
-
-  localStorage.setItem('rana_gh_token', token);
-  localStorage.setItem('rana_gh_owner', owner);
-  localStorage.setItem('rana_gh_repo', repo);
-  localStorage.setItem('rana_gh_branch', branch);
-  localStorage.setItem('rana_gh_path', path);
-  localStorage.setItem('rana_gh_autosync', autosync ? 'true' : 'false');
-
-  showToast('🐙 Testing GitHub connection...');
-  pushToGitHubDirect(true);
-}
-
-function disconnectGitHub(){
-  if(confirm('Disconnect GitHub Sync and remove saved token from this browser?')){
-    localStorage.removeItem('rana_gh_token');
-    localStorage.removeItem('rana_gh_last_sync');
-    updateGitHubStatusBadge('disconnected');
-    showToast('GitHub disconnected');
-    closeGitHubModal();
-  }
-}
-
-function updateGitHubStatusBadge(status, commitSha){
-  const token = localStorage.getItem('rana_gh_token');
-  const owner = localStorage.getItem('rana_gh_owner') || 'Ranabdullah';
-  const repo = localStorage.getItem('rana_gh_repo') || 'rana-portfolio';
-  const lastSync = localStorage.getItem('rana_gh_last_sync');
-
-  const dot = document.getElementById('gh-status-dot');
-  const label = document.getElementById('gh-header-label');
-  const modalDot = document.getElementById('gh-modal-dot');
-  const statusText = document.getElementById('gh-status-text');
-  const timeText = document.getElementById('gh-last-sync-time');
-
-  if(status === 'syncing'){
-    if(dot) dot.style.background = '#e3b341';
-    if(label) label.textContent = '🐙 Syncing...';
-    if(modalDot) modalDot.style.background = '#e3b341';
-    if(statusText) statusText.textContent = 'Status: Syncing with GitHub...';
-    return;
-  }
-
-  if(token){
-    if(dot) dot.style.background = '#2da44e';
-    if(label) label.textContent = '🐙 GitHub Sync: Active ✓';
-    if(modalDot) modalDot.style.background = '#2da44e';
-    if(statusText) statusText.textContent = `Status: Connected to ${owner}/${repo} ✓`;
-    if(timeText && lastSync){
-      const d = new Date(lastSync);
-      timeText.textContent = 'Last synced: ' + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    }
-  } else {
-    if(dot) dot.style.background = '#8b949e';
-    if(label) label.textContent = '🐙 GitHub Sync';
-    if(modalDot) modalDot.style.background = '#8b949e';
-    if(statusText) statusText.textContent = 'Status: Not Connected';
-    if(timeText) timeText.textContent = 'Never synced';
-  }
-}
-
-async function pushToGitHubDirect(isManual = true){
-  const token = (localStorage.getItem('rana_gh_token') || '').trim();
-  const owner = (localStorage.getItem('rana_gh_owner') || 'Ranabdullah').trim();
-  const repo = (localStorage.getItem('rana_gh_repo') || 'rana-portfolio').trim();
-  const branch = (localStorage.getItem('rana_gh_branch') || 'main').trim();
-  const path = (localStorage.getItem('rana_gh_path') || 'portfolio_data.json').trim();
-
-  if(!token){
-    if(isManual) openGitHubModal();
-    return;
-  }
-
-  updateGitHubStatusBadge('syncing');
-  if(isManual) showToast('🐙 Connecting to GitHub & pushing changes...');
-
-  const fullDatabase = {
-    updatedAt: new Date().toISOString(),
-    gallery: galleryItems,
-    novels: novels,
-    tech: techProjects,
-    software: software,
-    articles: articles,
-    experience: experience,
-    clients: clients
-  };
-
-  const contentStr = JSON.stringify(fullDatabase, null, 2);
-  const base64Content = utf8ToBase64(contentStr);
-
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-
-  try {
-    // 1. Get existing file SHA if it exists
-    let existingSha = null;
-    try {
-      const getRes = await fetch(`${url}?ref=${branch}&_t=${Date.now()}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-      if(getRes.ok) {
-        const fileInfo = await getRes.json();
-        existingSha = fileInfo.sha;
-      }
-    } catch(e) {
-      console.warn('Could not fetch existing file SHA:', e);
-    }
-
-    // 2. PUT commit
-    const body = {
-      message: `Auto-sync portfolio database update [${new Date().toISOString()}]`,
-      content: base64Content,
-      branch: branch
-    };
-    if(existingSha) {
-      body.sha = existingSha;
-    }
-
-    const putRes = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    });
-
-    if(putRes.ok) {
-      const resData = await putRes.json();
-      const commitSha = resData.commit?.sha?.substring(0, 7) || 'latest';
-      localStorage.setItem('rana_gh_last_sync', new Date().toISOString());
-      updateGitHubStatusBadge('synced', commitSha);
-      showToast(`🐙 Synced to GitHub (${commitSha})`);
-      if(isManual) closeGitHubModal();
-    } else {
-      const errJson = await putRes.json().catch(() => ({}));
-      updateGitHubStatusBadge('error');
-      console.error('GitHub API error:', errJson);
-      if(isManual) alert('GitHub Sync Error: ' + (errJson.message || putRes.statusText));
-      else showToast('⚠️ GitHub sync failed: ' + (errJson.message || 'Check token permissions'));
-    }
-  } catch(err) {
-    updateGitHubStatusBadge('error');
-    console.error('GitHub sync error:', err);
-    if(isManual) alert('Connection Error: ' + err.message);
-  }
-}
-
-async function pullFromGitHubDirect(){
-  const token = (localStorage.getItem('rana_gh_token') || '').trim();
-  const owner = (localStorage.getItem('rana_gh_owner') || 'Ranabdullah').trim();
-  const repo = (localStorage.getItem('rana_gh_repo') || 'rana-portfolio').trim();
-  const branch = (localStorage.getItem('rana_gh_branch') || 'main').trim();
-  const path = (localStorage.getItem('rana_gh_path') || 'portfolio_data.json').trim();
-
-  if(!token){
-    openGitHubModal();
-    return;
-  }
-
-  showToast('🐙 Pulling latest database from GitHub...');
-
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}&t=${Date.now()}`;
-
-  try {
-    const res = await fetch(url, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github.v3+json'
-      }
-    });
-
-    if(res.ok) {
-      const fileData = await res.json();
-      const rawText = base64ToUtf8(fileData.content);
-      const data = JSON.parse(rawText);
-
-      if(data.gallery) { galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
-      if(data.novels) { novels = data.novels; saveData('rana_novels_data', novels); }
-      if(data.tech) { techProjects = data.tech; saveData('rana_tech_data', techProjects); }
-      if(data.software) { software = data.software; saveData('rana_software_data', software); }
-      if(data.articles) { articles = data.articles; saveData('rana_articles_data', articles); }
-      if(data.experience) { experience = data.experience; saveData('rana_experience_data', experience); }
-      if(data.clients) { clients = data.clients; saveData('rana_clients_data', clients); }
-
-      renderBackend();
-      renderHome();
-      renderGallery('all');
-      showToast('🐙 All portfolio data pulled & updated from GitHub!');
-      closeGitHubModal();
-    } else {
-      const err = await res.json().catch(() => ({}));
-      alert('Could not find portfolio file on GitHub: ' + (err.message || res.statusText));
-    }
-  } catch(e) {
-    alert('Error pulling from GitHub: ' + e.message);
-  }
-}
-
-// Debounced Auto-Sync on any change
-let ghDebounceTimer = null;
-function scheduleGitHubAutoSync(){
-  const token = localStorage.getItem('rana_gh_token');
-  const auto = localStorage.getItem('rana_gh_autosync') !== 'false';
-  if(!token || !auto) return;
-
-  updateGitHubStatusBadge('syncing');
-  clearTimeout(ghDebounceTimer);
-  ghDebounceTimer = setTimeout(() => {
-    pushToGitHubDirect(false);
-  }, 1800);
-}
 
 
 // Init GitHub Sync Badge
@@ -3889,6 +3619,296 @@ function moveTechProject(index, direction){
   showToast(`Moved "${temp.title.substring(0,24)}" to position ${targetIndex + 1}`);
 }
 
+
+
+// ==================== GITHUB CLOUD AUTO-SYNC ENGINE (PERMANENT CONFIG) ====================
+const DEFAULT_GH_TOKEN = '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';
+const DEFAULT_GH_OWNER = 'Ranabdullah';
+const DEFAULT_GH_REPO  = 'rana-portfolio';
+const DEFAULT_GH_BRANCH = 'main';
+const DEFAULT_GH_PATH  = 'portfolio_data.json';
+
+// Auto-initialize permanent GitHub sync on first load
+if(!localStorage.getItem('rana_gh_token') || localStorage.getItem('rana_gh_token') === ''){
+  localStorage.setItem('rana_gh_token', DEFAULT_GH_TOKEN);
+  localStorage.setItem('rana_gh_owner', DEFAULT_GH_OWNER);
+  localStorage.setItem('rana_gh_repo', DEFAULT_GH_REPO);
+  localStorage.setItem('rana_gh_branch', DEFAULT_GH_BRANCH);
+  localStorage.setItem('rana_gh_path', DEFAULT_GH_PATH);
+  localStorage.setItem('rana_gh_autosync', 'true');
+}
+
+function utf8ToBase64(str) {
+  return window.btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+    return String.fromCharCode('0x' + p1);
+  }));
+}
+
+function base64ToUtf8(str) {
+  return decodeURIComponent(Array.prototype.map.call(window.atob(str), function(c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+}
+
+function openGitHubModal(){
+  const m = document.getElementById('github-modal');
+  if(m){
+    m.style.display = 'flex';
+    document.getElementById('gh-token-input').value = localStorage.getItem('rana_gh_token') || DEFAULT_GH_TOKEN;
+    document.getElementById('gh-owner-input').value = localStorage.getItem('rana_gh_owner') || DEFAULT_GH_OWNER;
+    document.getElementById('gh-repo-input').value = localStorage.getItem('rana_gh_repo') || DEFAULT_GH_REPO;
+    document.getElementById('gh-branch-input').value = localStorage.getItem('rana_gh_branch') || DEFAULT_GH_BRANCH;
+    document.getElementById('gh-path-input').value = localStorage.getItem('rana_gh_path') || DEFAULT_GH_PATH;
+    document.getElementById('gh-autosync-chk').checked = localStorage.getItem('rana_gh_autosync') !== 'false';
+    updateGitHubStatusBadge();
+  }
+}
+
+function closeGitHubModal(){
+  const m = document.getElementById('github-modal');
+  if(m) m.style.display = 'none';
+}
+
+function toggleTokenVisibility(){
+  const inp = document.getElementById('gh-token-input');
+  const btn = document.getElementById('gh-toggle-btn');
+  if(inp.type === 'password'){
+    inp.type = 'text';
+    btn.textContent = '🔒 Hide';
+  } else {
+    inp.type = 'password';
+    btn.textContent = '👁️ Show';
+  }
+}
+
+function saveGitHubConfig(){
+  const token = (document.getElementById('gh-token-input')?.value || DEFAULT_GH_TOKEN).trim();
+  const owner = (document.getElementById('gh-owner-input')?.value || DEFAULT_GH_OWNER).trim();
+  const repo = (document.getElementById('gh-repo-input')?.value || DEFAULT_GH_REPO).trim();
+  const branch = (document.getElementById('gh-branch-input')?.value || DEFAULT_GH_BRANCH).trim();
+  const path = (document.getElementById('gh-path-input')?.value || DEFAULT_GH_PATH).trim();
+  const autosync = document.getElementById('gh-autosync-chk')?.checked;
+
+  localStorage.setItem('rana_gh_token', token);
+  localStorage.setItem('rana_gh_owner', owner);
+  localStorage.setItem('rana_gh_repo', repo);
+  localStorage.setItem('rana_gh_branch', branch);
+  localStorage.setItem('rana_gh_path', path);
+  localStorage.setItem('rana_gh_autosync', autosync ? 'true' : 'false');
+
+  showToast('🐙 Testing GitHub connection & syncing...');
+  pushToGitHubDirect(true);
+}
+
+function disconnectGitHub(){
+  if(confirm('Reset GitHub Sync to permanent default token?')){
+    localStorage.setItem('rana_gh_token', DEFAULT_GH_TOKEN);
+    localStorage.setItem('rana_gh_owner', DEFAULT_GH_OWNER);
+    localStorage.setItem('rana_gh_repo', DEFAULT_GH_REPO);
+    localStorage.setItem('rana_gh_branch', DEFAULT_GH_BRANCH);
+    localStorage.setItem('rana_gh_path', DEFAULT_GH_PATH);
+    updateGitHubStatusBadge('synced');
+    showToast('Reset to permanent GitHub configuration');
+    closeGitHubModal();
+  }
+}
+
+function updateGitHubStatusBadge(status, commitSha){
+  const token = localStorage.getItem('rana_gh_token') || DEFAULT_GH_TOKEN;
+  const owner = localStorage.getItem('rana_gh_owner') || DEFAULT_GH_OWNER;
+  const repo = localStorage.getItem('rana_gh_repo') || DEFAULT_GH_REPO;
+  const lastSync = localStorage.getItem('rana_gh_last_sync');
+
+  const dot = document.getElementById('gh-status-dot');
+  const label = document.getElementById('gh-header-label');
+  const modalDot = document.getElementById('gh-modal-dot');
+  const statusText = document.getElementById('gh-status-text');
+  const timeText = document.getElementById('gh-last-sync-time');
+
+  if(status === 'syncing'){
+    if(dot) dot.style.background = '#e3b341';
+    if(label) label.textContent = '🐙 Syncing...';
+    if(modalDot) modalDot.style.background = '#e3b341';
+    if(statusText) statusText.textContent = 'Status: Syncing with GitHub...';
+    return;
+  }
+
+  if(token){
+    if(dot) dot.style.background = '#2da44e';
+    if(label) label.textContent = '🐙 GitHub Sync: Active ✓';
+    if(modalDot) modalDot.style.background = '#2da44e';
+    if(statusText) statusText.textContent = `Status: Connected to ${owner}/${repo} ✓`;
+    if(timeText && lastSync){
+      const d = new Date(lastSync);
+      timeText.textContent = 'Last synced: ' + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }
+  } else {
+    if(dot) dot.style.background = '#8b949e';
+    if(label) label.textContent = '🐙 GitHub Sync';
+    if(modalDot) modalDot.style.background = '#8b949e';
+    if(statusText) statusText.textContent = 'Status: Not Connected';
+    if(timeText) timeText.textContent = 'Never synced';
+  }
+}
+
+async function pushToGitHubDirect(isManual = true){
+  const token = (localStorage.getItem('rana_gh_token') || DEFAULT_GH_TOKEN).trim();
+  const owner = (localStorage.getItem('rana_gh_owner') || DEFAULT_GH_OWNER).trim();
+  const repo = (localStorage.getItem('rana_gh_repo') || DEFAULT_GH_REPO).trim();
+  const branch = (localStorage.getItem('rana_gh_branch') || DEFAULT_GH_BRANCH).trim();
+  const path = (localStorage.getItem('rana_gh_path') || DEFAULT_GH_PATH).trim();
+
+  if(!token){
+    if(isManual) openGitHubModal();
+    return;
+  }
+
+  updateGitHubStatusBadge('syncing');
+  if(isManual) showToast('🐙 Connecting to GitHub & pushing changes...');
+
+  const fullDatabase = {
+    updatedAt: new Date().toISOString(),
+    gallery: galleryItems,
+    novels: novels,
+    tech: techProjects,
+    software: software,
+    articles: articles,
+    experience: experience,
+    clients: clients
+  };
+
+  const contentStr = JSON.stringify(fullDatabase, null, 2);
+  const base64Content = utf8ToBase64(contentStr);
+
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+  try {
+    // 1. Get existing file SHA if it exists
+    let existingSha = null;
+    try {
+      const getRes = await fetch(`${url}?ref=${branch}&_t=${Date.now()}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if(getRes.ok) {
+        const fileInfo = await getRes.json();
+        existingSha = fileInfo.sha;
+      }
+    } catch(e) {
+      console.warn('Could not fetch existing file SHA:', e);
+    }
+
+    // 2. PUT commit
+    const body = {
+      message: `Auto-sync portfolio database update [${new Date().toISOString()}]`,
+      content: base64Content,
+      branch: branch
+    };
+    if(existingSha) {
+      body.sha = existingSha;
+    }
+
+    const putRes = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    if(putRes.ok) {
+      const resData = await putRes.json();
+      const commitSha = resData.commit?.sha?.substring(0, 7) || 'latest';
+      localStorage.setItem('rana_gh_last_sync', new Date().toISOString());
+      updateGitHubStatusBadge('synced', commitSha);
+      showToast(`🐙 Synced to GitHub (${commitSha})`);
+      if(isManual) closeGitHubModal();
+    } else {
+      const errJson = await putRes.json().catch(() => ({}));
+      updateGitHubStatusBadge('error');
+      console.error('GitHub API error:', errJson);
+      if(isManual) alert('GitHub Sync Error: ' + (errJson.message || putRes.statusText));
+      else showToast('⚠️ GitHub sync failed: ' + (errJson.message || 'Check token permissions'));
+    }
+  } catch(err) {
+    updateGitHubStatusBadge('error');
+    console.error('GitHub sync error:', err);
+    if(isManual) alert('Connection Error: ' + err.message);
+  }
+}
+
+async function pullFromGitHubDirect(){
+  const token = (localStorage.getItem('rana_gh_token') || DEFAULT_GH_TOKEN).trim();
+  const owner = (localStorage.getItem('rana_gh_owner') || DEFAULT_GH_OWNER).trim();
+  const repo = (localStorage.getItem('rana_gh_repo') || DEFAULT_GH_REPO).trim();
+  const branch = (localStorage.getItem('rana_gh_branch') || DEFAULT_GH_BRANCH).trim();
+  const path = (localStorage.getItem('rana_gh_path') || DEFAULT_GH_PATH).trim();
+
+  if(!token){
+    openGitHubModal();
+    return;
+  }
+
+  showToast('🐙 Pulling latest database from GitHub...');
+
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}&t=${Date.now()}`;
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+
+    if(res.ok) {
+      const fileData = await res.json();
+      const rawText = base64ToUtf8(fileData.content);
+      const data = JSON.parse(rawText);
+
+      if(data.gallery) { galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
+      if(data.novels) { novels = data.novels; saveData('rana_novels_data', novels); }
+      if(data.tech) { techProjects = data.tech; saveData('rana_tech_data', techProjects); }
+      if(data.software) { software = data.software; saveData('rana_software_data', software); }
+      if(data.articles) { articles = data.articles; saveData('rana_articles_data', articles); }
+      if(data.experience) { experience = data.experience; saveData('rana_experience_data', experience); }
+      if(data.clients) { clients = data.clients; saveData('rana_clients_data', clients); }
+
+      renderBackend();
+      renderHome();
+      renderGallery('all');
+      showToast('🐙 All portfolio data pulled & updated from GitHub!');
+      closeGitHubModal();
+    } else {
+      const err = await res.json().catch(() => ({}));
+      alert('Could not find portfolio file on GitHub: ' + (err.message || res.statusText));
+    }
+  } catch(e) {
+    alert('Error pulling from GitHub: ' + e.message);
+  }
+}
+
+// Debounced Auto-Sync on any change
+let ghDebounceTimer = null;
+function scheduleGitHubAutoSync(){
+  const token = localStorage.getItem('rana_gh_token') || DEFAULT_GH_TOKEN;
+  const auto = localStorage.getItem('rana_gh_autosync') !== 'false';
+  if(!token || !auto) return;
+
+  updateGitHubStatusBadge('syncing');
+  clearTimeout(ghDebounceTimer);
+  ghDebounceTimer = setTimeout(() => {
+    pushToGitHubDirect(false);
+  }, 1800);
+}
+
+
+// Init GitHub Sync Badge
+setTimeout(updateGitHubStatusBadge, 200);
 </script>
 </body>
 </html>
