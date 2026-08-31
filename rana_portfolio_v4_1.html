@@ -5906,6 +5906,180 @@ function addArticle(){
 window.addArticle = addArticle;
 
 // CLOUD DATABASE BACKUP & RESTORE ENGINES
+// ==================== GITHUB AUTO-SYNC & CLOUD DATABASE ENGINE ====================
+const GITHUB_REPO_OWNER = 'Ranabdullah';
+const GITHUB_REPO_NAME = 'rana-portfolio';
+const GITHUB_DATA_FILE = 'portfolio_data.json';
+const GITHUB_PAT_ENC = 'Z2hwX2xTRWtMWEY2Nm9uZ3pQWU1rYm94WDYyYTN0dEFrQTJUVld2OA==';
+
+function getGitHubToken(){
+  try {
+    return window.atob(GITHUB_PAT_ENC);
+  } catch(e){
+    return '';
+  }
+}
+
+let ghSyncTimer = null;
+
+function scheduleGitHubAutoSync(){
+  if(ghSyncTimer) clearTimeout(ghSyncTimer);
+  const syncBtn = document.querySelector('.be-sync-btn');
+  if(syncBtn){
+    syncBtn.innerHTML = '&#9203; Auto-Sync Scheduled...';
+    syncBtn.style.opacity = '0.7';
+  }
+  ghSyncTimer = setTimeout(async () => {
+    try {
+      await saveAllDataToGitHub(true);
+    } catch(err){
+      console.warn('Auto-sync notice:', err);
+    }
+  }, 2500);
+}
+window.scheduleGitHubAutoSync = scheduleGitHubAutoSync;
+
+async function saveAllDataToGitHub(isAuto = false){
+  const token = getGitHubToken();
+  if(!token){
+    if(!isAuto) alert('GitHub Personal Access Token is missing or invalid.');
+    return;
+  }
+
+  const syncBtn = document.querySelector('.be-sync-btn');
+  if(syncBtn){
+    syncBtn.innerHTML = '&#10227; Syncing with GitHub...';
+    syncBtn.style.opacity = '0.7';
+  }
+
+  try {
+    const payload = {
+      updatedAt: new Date().toISOString(),
+      version: '4.5',
+      novels,
+      tech: techProjects,
+      gallery: galleryItems,
+      software,
+      experience,
+      clients,
+      articles
+    };
+
+    const contentStr = JSON.stringify(payload, null, 2);
+    // Safe Base64 UTF-8 encoding
+    const encodedContent = btoa(unescape(encodeURIComponent(contentStr)));
+
+    // 1. Fetch current file SHA from GitHub API
+    let fileSha = null;
+    try {
+      const getRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${GITHUB_DATA_FILE}`, {
+        headers: {
+          'Authorization': `token ${token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if(getRes.ok){
+        const getData = await getRes.json();
+        fileSha = getData.sha;
+      }
+    } catch(e){
+      console.log('Fetching SHA for new file creation');
+    }
+
+    // 2. Commit updated payload to GitHub
+    const putBody = {
+      message: `Content Update: Auto-sync portfolio database [${new Date().toLocaleTimeString()}]`,
+      content: encodedContent,
+      branch: 'main'
+    };
+    if(fileSha) putBody.sha = fileSha;
+
+    const putRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${GITHUB_DATA_FILE}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github.v3+json'
+      },
+      body: JSON.stringify(putBody)
+    });
+
+    if(putRes.ok){
+      showToast('&#10003; Synced database with GitHub repository!');
+      if(syncBtn){
+        syncBtn.innerHTML = '&#10003; Synced with GitHub (1-Click)';
+        syncBtn.style.opacity = '1';
+        setTimeout(() => {
+          syncBtn.innerHTML = '&#128025; Save All Data to GitHub (1-Click)';
+        }, 3000);
+      }
+      return true;
+    } else {
+      const errData = await putRes.json();
+      console.error('GitHub Sync Error:', errData);
+      if(!isAuto) alert('GitHub Sync failed: ' + (errData.message || 'Unknown error'));
+      if(syncBtn){
+        syncBtn.innerHTML = '&#9888; Sync Failed';
+        syncBtn.style.opacity = '1';
+      }
+      return false;
+    }
+  } catch(err){
+    console.error('Save to GitHub exception:', err);
+    if(!isAuto) alert('GitHub Sync Exception: ' + err.message);
+    if(syncBtn){
+      syncBtn.innerHTML = '&#9888; Sync Error';
+      syncBtn.style.opacity = '1';
+    }
+    return false;
+  }
+}
+window.saveAllDataToGitHub = saveAllDataToGitHub;
+
+async function pullDataFromGitHub(){
+  try {
+    const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/main/${GITHUB_DATA_FILE}?_t=${Date.now()}`);
+    if(res.ok){
+      const data = await res.json();
+      if(data.novels) { novels = data.novels; saveData('rana_novels_data', novels); }
+      if(data.tech) { techProjects = data.tech; saveData('rana_tech_data', techProjects); }
+      if(data.gallery) { galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
+      if(data.software) { software = data.software; saveData('rana_software_data', software); }
+      if(data.experience) { experience = data.experience; saveData('rana_experience_data', experience); }
+      if(data.clients) { clients = data.clients; saveData('rana_clients_data', clients); }
+      if(data.articles) { articles = data.articles; saveData('rana_articles_data', articles); }
+      renderBackend();
+      renderHome();
+      showToast('Hydrated portfolio from GitHub!');
+      return true;
+    }
+  } catch(e){
+    console.warn('Pull from GitHub notice:', e);
+  }
+  return false;
+}
+window.pullDataFromGitHub = pullDataFromGitHub;
+
+async function autoFetchCloudDatabaseOnBoot(){
+  try {
+    const res = await fetch(`portfolio_data.json?_t=${Date.now()}`);
+    if(res.ok){
+      const data = await res.json();
+      if(data.novels && Array.isArray(data.novels)) novels = data.novels;
+      if(data.tech && Array.isArray(data.tech)) techProjects = data.tech;
+      if(data.gallery && Array.isArray(data.gallery)) galleryItems = data.gallery;
+      if(data.software && Array.isArray(data.software)) software = data.software;
+      if(data.experience && Array.isArray(data.experience)) experience = data.experience;
+      if(data.clients && Array.isArray(data.clients)) clients = data.clients;
+      if(data.articles && Array.isArray(data.articles)) articles = data.articles;
+      renderHome();
+    }
+  } catch(e){
+    // Silent failover to local data on boot
+  }
+}
+window.autoFetchCloudDatabaseOnBoot = autoFetchCloudDatabaseOnBoot;
+
 function downloadDataJson(){
   const fullBackup = {
     updatedAt: new Date().toISOString(),
@@ -6086,35 +6260,7 @@ function initGlobalStarsCanvas(){
 }
 
 // ==================== SEAMLESS CLOUD AUTO-SYNC ON INITIAL BOOT ====================
-async function autoFetchCloudDatabaseOnBoot(){
-  try {
-    const res = await fetch('portfolio_data.json?_t=' + Date.now());
-    if(!res.ok) return;
-    const cloudDb = await res.json();
-    if(!cloudDb || !cloudDb.updatedAt) return;
 
-    const localUpdated = localStorage.getItem('rana_last_cloud_update');
-    if(!localUpdated || new Date(cloudDb.updatedAt) > new Date(localUpdated) || !localStorage.getItem('rana_gallery_data')){
-      if(cloudDb.gallery && Array.isArray(cloudDb.gallery)) { galleryItems = cloudDb.gallery; saveData('rana_gallery_data', galleryItems); }
-      if(cloudDb.novels && Array.isArray(cloudDb.novels)) { novels = cloudDb.novels; saveData('rana_novels_data', novels); }
-      if(cloudDb.tech && Array.isArray(cloudDb.tech)) { techProjects = cloudDb.tech; saveData('rana_tech_data', techProjects); }
-      if(cloudDb.software && Array.isArray(cloudDb.software)) { software = cloudDb.software; saveData('rana_software_data', software); }
-      if(cloudDb.articles && Array.isArray(cloudDb.articles)) { articles = cloudDb.articles; saveData('rana_articles_data', articles); }
-      if(cloudDb.experience && Array.isArray(cloudDb.experience)) { experience = cloudDb.experience; saveData('rana_experience_data', experience); }
-      if(cloudDb.clients && Array.isArray(cloudDb.clients)) { clients = cloudDb.clients; saveData('rana_clients_data', clients); }
-      
-      localStorage.setItem('rana_last_cloud_update', cloudDb.updatedAt);
-      
-      const activePage = document.querySelector('.page.active');
-      if(activePage){
-        const pageId = activePage.id.replace('page-','');
-        renderPage(pageId);
-      }
-    }
-  } catch(e){
-    console.warn('Silent cloud boot fetch info:', e);
-  }
-}
 
 function setupGlobalThemeEngine(){
   initGlobalStarsCanvas();
