@@ -1541,32 +1541,52 @@ body.theme-dark .submit-btn {
 
 
 
-/* ==================== 360-DEGREE OMNIDIRECTIONAL RAINBOW OUTLINE & AMBIENT GLOW ==================== */
+
+
+/* ==================== TRUE 360-DEGREE OMNIDIRECTIONAL GLOW AURA ==================== */
+/* Track and container padding so top, bottom, left, and right glow never get clipped */
+.novels-slider-track,
+.projects-slider-wrap,
+.home-gallery-slider-wrap {
+  position: relative;
+  overflow: hidden !important;
+  padding: 36px 20px 42px !important;
+  margin: -36px -20px -42px !important;
+}
+
+.novels-slider,
+.projects-grid,
+.home-gallery-grid {
+  padding: 4px 6px !important;
+}
+
+.gallery-grid,
+.tech-spotlight-grid,
+.dls-card-holder,
+.sw-products-grid,
+.novels-grid {
+  padding-top: 24px !important;
+  padding-bottom: 36px !important;
+}
+
+/* 360-Degree Radial Outer Aura in ALL directions (Up, Down, Left, Right) */
 .g-card, .novel-card, .novel-page-card, .proj-card, .sw-product-card, .tech-spotlight-card, .dls-card {
-  border: 1.5px solid var(--card-border, rgba(0, 229, 255, 0.55)) !important;
-  box-shadow: 0 0 22px var(--card-glow, rgba(0, 229, 255, 0.28)),
-              0 0 45px var(--card-glow, rgba(0, 229, 255, 0.12)),
-              0 8px 30px rgba(0, 0, 0, 0.35) !important;
+  position: relative;
+  border: 1.5px solid var(--card-border, rgba(0, 229, 255, 0.7)) !important;
+  box-shadow: 0 0 16px 2px var(--card-glow, rgba(0, 229, 255, 0.35)),
+              0 0 32px 6px var(--card-glow-ambient, rgba(0, 229, 255, 0.18)),
+              0 0 56px 12px var(--card-glow-soft, rgba(0, 229, 255, 0.09)),
+              0 10px 30px rgba(0, 0, 0, 0.45) !important;
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease !important;
 }
 
 .g-card:hover, .novel-card:hover, .novel-page-card:hover, .proj-card:hover, .sw-product-card:hover, .tech-spotlight-card:hover, .dls-card:hover {
-  transform: translateY(-5px) !important;
-  border-color: var(--card-border, rgba(0, 229, 255, 0.9)) !important;
-  box-shadow: 0 0 35px var(--card-glow, rgba(0, 229, 255, 0.45)),
-              0 0 75px var(--card-glow, rgba(0, 229, 255, 0.22)),
-              0 16px 42px rgba(0, 0, 0, 0.5) !important;
-}
-
-.novel-slider {
-  padding: 24px 12px 36px !important;
-  overflow-x: auto !important;
-  overflow-y: visible !important;
-}
-
-.tech-spotlight-grid, .dls-card-holder, .gallery-grid, .home-gallery-grid {
-  padding-top: 16px !important;
-  padding-bottom: 24px !important;
+  transform: translateY(-6px) !important;
+  border-color: var(--card-border, rgba(0, 229, 255, 0.95)) !important;
+  box-shadow: 0 0 24px 4px var(--card-glow, rgba(0, 229, 255, 0.5)),
+              0 0 48px 10px var(--card-glow-ambient, rgba(0, 229, 255, 0.3)),
+              0 0 80px 18px var(--card-glow-soft, rgba(0, 229, 255, 0.16)),
+              0 18px 45px rgba(0, 0, 0, 0.6) !important;
 }
 </style>
 
@@ -6869,44 +6889,40 @@ if(document.readyState === 'loading'){
 
 
 
-// ==================== 360-DEGREE CHROMATIC RAINBOW PALETTE ASSIGNMENT ====================
-(function initOmnidirectionalInkGlow(){
+
+
+
+// ==================== TRUE 360-DEGREE CHROMATIC RAINBOW PALETTES ====================
+(function initTrue360Glow(){
   const palette = [
-    { border: 'rgba(0, 229, 255, 0.75)', glow: 'rgba(0, 229, 255, 0.32)' },   // Cyan
-    { border: 'rgba(0, 230, 118, 0.75)', glow: 'rgba(0, 230, 118, 0.32)' },   // Emerald Mint
-    { border: 'rgba(179, 136, 255, 0.75)', glow: 'rgba(179, 136, 255, 0.32)' }, // Amethyst Violet
-    { border: 'rgba(255, 215, 64, 0.75)', glow: 'rgba(255, 215, 64, 0.32)' },  // Golden Amber
-    { border: 'rgba(255, 64, 129, 0.75)', glow: 'rgba(255, 64, 129, 0.32)' },  // Vivid Coral/Pink
-    { border: 'rgba(68, 138, 255, 0.75)', glow: 'rgba(68, 138, 255, 0.32)' }   // Cobalt Sapphire
+    { border: 'rgba(0, 229, 255, 0.8)', glow: 'rgba(0, 229, 255, 0.38)', ambient: 'rgba(0, 229, 255, 0.2)', soft: 'rgba(0, 229, 255, 0.1)' },   // Cyan
+    { border: 'rgba(0, 230, 118, 0.8)', glow: 'rgba(0, 230, 118, 0.38)', ambient: 'rgba(0, 230, 118, 0.2)', soft: 'rgba(0, 230, 118, 0.1)' },   // Emerald
+    { border: 'rgba(179, 136, 255, 0.8)', glow: 'rgba(179, 136, 255, 0.38)', ambient: 'rgba(179, 136, 255, 0.2)', soft: 'rgba(179, 136, 255, 0.1)' }, // Purple
+    { border: 'rgba(255, 215, 64, 0.8)', glow: 'rgba(255, 215, 64, 0.38)', ambient: 'rgba(255, 215, 64, 0.2)', soft: 'rgba(255, 215, 64, 0.1)' },  // Gold
+    { border: 'rgba(255, 64, 129, 0.8)', glow: 'rgba(255, 64, 129, 0.38)', ambient: 'rgba(255, 64, 129, 0.2)', soft: 'rgba(255, 64, 129, 0.1)' },  // Pink
+    { border: 'rgba(68, 138, 255, 0.8)', glow: 'rgba(68, 138, 255, 0.38)', ambient: 'rgba(68, 138, 255, 0.2)', soft: 'rgba(68, 138, 255, 0.1)' }   // Blue
   ];
 
   const CARD_SELECTOR = '.g-card, .novel-card, .novel-page-card, .proj-card, .sw-product-card, .tech-spotlight-card, .dls-card';
 
-  function assignOmniColor(card, idx){
-    if(!card.dataset.omniGlow){
-      const color = palette[idx % palette.length];
-      card.dataset.omniGlow = color.glow;
-      card.dataset.omniBorder = color.border;
-      card.style.setProperty('--card-glow', color.glow);
-      card.style.setProperty('--card-border', color.border);
-    }
-  }
-
-  function setupAllCards(){
+  function apply360GlowToCards(){
     document.querySelectorAll(CARD_SELECTOR).forEach((card, i) => {
-      assignOmniColor(card, i);
+      const col = palette[i % palette.length];
+      card.style.setProperty('--card-border', col.border);
+      card.style.setProperty('--card-glow', col.glow);
+      card.style.setProperty('--card-glow-ambient', col.ambient);
+      card.style.setProperty('--card-glow-soft', col.soft);
     });
   }
 
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', setupAllCards);
+    document.addEventListener('DOMContentLoaded', apply360GlowToCards);
   } else {
-    setupAllCards();
+    apply360GlowToCards();
   }
 
-  // Hook into rendering updates
   window.refreshAllCardGlows = function(){
-    setTimeout(setupAllCards, 50);
+    setTimeout(apply360GlowToCards, 30);
   };
 })();
 </script>
