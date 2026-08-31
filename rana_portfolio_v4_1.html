@@ -3589,7 +3589,7 @@ const DEFAULT_GH_BRANCH = 'main';
 const DEFAULT_GH_PATH  = 'portfolio_data.json';
 
 // Auto-initialize permanent GitHub sync on first load
-if(!localStorage.getItem('rana_gh_token') || localStorage.getItem('rana_gh_token') === ''){
+if(!localStorage.getItem('rana_gh_token') || localStorage.getItem('rana_gh_token').includes('0YNh')){
   localStorage.setItem('rana_gh_token', DEFAULT_GH_TOKEN);
   localStorage.setItem('rana_gh_owner', DEFAULT_GH_OWNER);
   localStorage.setItem('rana_gh_repo', DEFAULT_GH_REPO);
