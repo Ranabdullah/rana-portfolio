@@ -973,32 +973,50 @@ img {
 <div class="page active" id="page-home">
 
   <!-- HERO -->
-  <!-- HERO SECTION (CLEAN WHITE FULL BACKGROUND 3D GENERATIVE ABSTRACT CANVAS) -->
-  <section class="home-hero" style="position:relative;overflow:hidden;min-height:580px;display:flex;align-items:center;padding:70px 48px;background:var(--bg,#f8f9fa)">
-    <!-- Full-Background 3D Generative Abstract Canvas on Crisp Light Canvas -->
-    <canvas id="heroAbstractBgCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0.95"></canvas>
+  <!-- HERO SECTION (3-STAGE CINEMATIC DAY -> EVENING -> NIGHT ARCHITECTURAL TRANSITION) -->
+  <section class="home-hero" style="position:relative;overflow:hidden;min-height:640px;display:flex;align-items:center;padding:80px 48px;background:#0d1117">
+    
+    <!-- 3-State Cinematic Image Layers -->
+    <div id="heroBgWrapper" style="position:absolute;inset:0;width:100%;height:100%;overflow:hidden;z-index:1;pointer-events:none">
+      <div id="heroLayerLight" class="hero-bg-layer active" style="position:absolute;inset:0;background-image:url('Hero Image/Light_House_Render.png');background-size:cover;background-position:center;transition:opacity 2.4s cubic-bezier(0.4, 0, 0.2, 1), transform 12s ease;opacity:1;transform:scale(1.02)"></div>
+      <div id="heroLayerEvening" class="hero-bg-layer" style="position:absolute;inset:0;background-image:url('Hero Image/Evening_House_Render.png');background-size:cover;background-position:center;transition:opacity 2.4s cubic-bezier(0.4, 0, 0.2, 1), transform 12s ease;opacity:0;transform:scale(1.02)"></div>
+      <div id="heroLayerDark" class="hero-bg-layer" style="position:absolute;inset:0;background-image:url('Hero Image/Dark_House_Render.png');background-size:cover;background-position:center;transition:opacity 2.4s cubic-bezier(0.4, 0, 0.2, 1), transform 12s ease;opacity:0;transform:scale(1.02)"></div>
+      
+      <!-- Elegant Contrast Scrim Gradient Overlay for Superior Text Legibility -->
+      <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(10,12,16,0.85) 0%, rgba(10,12,16,0.65) 45%, rgba(10,12,16,0.25) 100%), linear-gradient(to top, rgba(10,12,16,0.7) 0%, transparent 60%);z-index:2"></div>
+    </div>
     
     <!-- Hero Text Foreground (High Contrast & Legibility) -->
-    <div class="hero-text-side" style="position:relative;z-index:3;max-width:640px">
-      <div class="hero-eyebrow" style="font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px;display:flex;align-items:center;gap:8px">
-        <span id="heroColorIndicator" style="width:7px;height:7px;border-radius:50%;background:#00e5ff;box-shadow:0 0 8px #00e5ff;display:inline-block;transition:all 0.5s"></span>
-        <span>Creative Director &amp; Technologist</span>
+    <div class="hero-text-side" style="position:relative;z-index:4;max-width:650px">
+      <div class="hero-eyebrow" style="font-family:var(--mono);font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;color:#e6edf3;margin-bottom:16px;display:flex;align-items:center;gap:10px">
+        <span id="heroColorIndicator" style="width:8px;height:8px;border-radius:50%;background:#ffca28;box-shadow:0 0 10px #ffca28;display:inline-block;transition:all 0.8s"></span>
+        <span id="heroTimeLabel" style="font-weight:600;letter-spacing:0.12em;color:#ffca28">DAYLIGHT STUDY</span>
+        <span style="opacity:0.4">&middot;</span>
+        <span style="color:#c9d1d9">Architect &amp; Creative Director</span>
       </div>
-      <h1 class="hero-name" style="font-family:var(--serif);font-size:clamp(46px, 6vw, 78px);font-weight:300;line-height:1.06;color:var(--ink);margin-bottom:18px">
+      
+      <h1 class="hero-name" style="font-family:var(--serif);font-size:clamp(48px, 6.2vw, 82px);font-weight:300;line-height:1.05;color:#ffffff;margin-bottom:20px;text-shadow:0 2px 20px rgba(0,0,0,0.5)">
         <span>Rana</span><br>
-        <span style="font-style:italic;color:var(--ink2)">Abdullah</span>
+        <span style="font-style:italic;color:#e6edf3">Abdullah</span>
       </h1>
-      <p class="hero-title" style="font-family:var(--sans);font-size:16px;line-height:1.65;color:var(--ink2);margin-bottom:28px;max-width:520px">
+      
+      <p class="hero-title" style="font-family:var(--sans);font-size:16.5px;line-height:1.68;color:#d0d7de;margin-bottom:30px;max-width:530px;text-shadow:0 1px 8px rgba(0,0,0,0.4)">
         Novelist &middot; 3D Artist &middot; Software Engineer<br>
-        <span style="color:var(--ink3);font-size:14px">Blending literary narrative, generative light, and robust architectural code.</span>
+        <span style="color:#8b949e;font-size:14px">Architectural spatial narratives, physical material lighting, and robust engineering.</span>
       </p>
-      <div class="hero-cta-row" style="display:flex;gap:12px;flex-wrap:wrap">
-        <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false">Technical Projects &rarr;</a>
-        <a class="btn-outline" href="#" onclick="showPage('novels');return false">Novels &amp; Books</a>
-        <a class="btn-outline" href="#" onclick="showPage('gallery');return false">3D Gallery</a>
+      
+      <div class="hero-cta-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false" style="background:#ffffff;color:#0a0c10;border-color:#ffffff;font-weight:600">Technical Projects &rarr;</a>
+        <a class="btn-outline" href="#" onclick="showPage('novels');return false" style="color:#ffffff;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);backdrop-filter:blur(8px)">Novels &amp; Books</a>
+        <a class="btn-outline" href="#" onclick="showPage('gallery');return false" style="color:#ffffff;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);backdrop-filter:blur(8px)">3D Gallery</a>
       </div>
-      <div id="heroPhaseLabel" style="margin-top:22px;font-family:var(--mono);font-size:9.5px;color:var(--ink4);letter-spacing:0.08em">
-        SPECTRUM: GENERATIVE 3D &middot; B&amp;W &harr; CHROMATIC
+
+      <!-- Interactive Atmosphere / Time-of-Day Switcher -->
+      <div style="margin-top:28px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9.5px;color:#8b949e">
+        <span style="text-transform:uppercase;letter-spacing:0.08em;margin-right:4px">ATMOSPHERE:</span>
+        <button onclick="setHeroAtmosphere('light')" id="btnAtmoLight" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,202,40,0.2);color:#ffca28;border:1px solid #ffca28;border-radius:12px;cursor:pointer;font-weight:600">&#9728; Light</button>
+        <button onclick="setHeroAtmosphere('evening')" id="btnAtmoEvening" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,255,255,0.08);color:#c9d1d9;border:1px solid rgba(255,255,255,0.2);border-radius:12px;cursor:pointer">&#9729; Evening</button>
+        <button onclick="setHeroAtmosphere('dark')" id="btnAtmoDark" style="padding:4px 10px;font-family:var(--mono);font-size:9px;background:rgba(255,255,255,0.08);color:#c9d1d9;border:1px solid rgba(255,255,255,0.2);border-radius:12px;cursor:pointer">&#9790; Dark</button>
       </div>
     </div>
   </section>
@@ -1514,16 +1532,16 @@ img {
 // ==================== RESILIENT DATA STORAGE & AUTO-RECOVERY ENGINE ====================
 function loadData(key, def){
   try {
-    // 1. Direct key lookup
     const direct = localStorage.getItem(key);
     if(direct){
-      try { return JSON.parse(direct); } catch(e){}
+      try {
+        const parsed = JSON.parse(direct);
+        if(Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if(!Array.isArray(parsed) && parsed) return parsed;
+      } catch(e){}
     }
 
-    // 2. Extract base prefix (e.g. 'rana_gallery' from 'rana_gallery_v35' or 'rana_gallery_data')
     const prefix = key.replace(/_(?:data|v\d+|bw)$/, '');
-    
-    // 3. Scan all keys in localStorage to auto-recover from any previous version
     let bestKey = null;
     let maxVer = -1;
     
@@ -1542,20 +1560,21 @@ function loadData(key, def){
     if(bestKey){
       const saved = localStorage.getItem(bestKey);
       if(saved){
-        const parsed = JSON.parse(saved);
-        // Automatically migrate forward to the standard key
-        localStorage.setItem(key, saved);
-        console.log(`[Auto-Recovered] Restored data for ${key} from ${bestKey}`);
-        return parsed;
+        try {
+          const parsed = JSON.parse(saved);
+          if(Array.isArray(parsed) && parsed.length > 0){
+            localStorage.setItem(key, saved);
+            return parsed;
+          }
+        } catch(e){}
       }
     }
-
-    return def;
-  } catch(e) {
-    console.error('Storage load error:', e);
-    return def;
+  } catch(e){
+    console.error('loadData error for', key, e);
   }
+  return JSON.parse(JSON.stringify(def));
 }
+
 
 function saveData(key, val){
   try {
