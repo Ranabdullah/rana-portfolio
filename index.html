@@ -4848,8 +4848,12 @@ function renderBeGallery(searchTerm){
     const allImgs = (g.images && g.images.length > 0) ? g.images : (g.path ? [g.path] : []);
     const subVids = g.subVideos || {};
 
+    const otherProjectsOpts = galleryItems.map((other, oi) =>
+      oi !== realIdx ? `<option value="${oi}">[${String(oi+1).padStart(2,'0')}] ${other.title.substring(0,35)}</option>` : ''
+    ).join('');
+
     const thumbs = allImgs.map((imgSrc, sIdx) => `
-      <div style="display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin:6px;background:var(--bg);padding:10px;border-radius:6px;border:1px solid var(--border);width:150px;box-sizing:border-box">
+      <div style="display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin:6px;background:var(--bg);padding:10px;border-radius:6px;border:1px solid var(--border);width:155px;box-sizing:border-box">
         <div style="position:relative;width:100%">
           <img src="${imgSrc}" loading="lazy" decoding="async" style="width:100%;height:95px;object-fit:cover;border-radius:4px;border:1px solid var(--border);display:block">
           
@@ -4869,7 +4873,7 @@ function renderBeGallery(searchTerm){
             style="padding:3px 7px;font-size:9px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9654;</button>
         </div>
 
-        <div style="font-family:var(--mono);font-size:8.5px;color:var(--ink4);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${imgSrc}">${imgSrc.split('/').pop()}</div>
+        <div style="font-family:var(--mono);font-size:8.5px;color:var(--ink4);max-width:135px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${imgSrc}">${imgSrc.split('/').pop()}</div>
         
         <div style="width:100%">
           <div style="font-family:var(--mono);font-size:8px;color:#e50914;margin-bottom:2px;font-weight:600">&#9654; YOUTUBE LINK:</div>
@@ -4877,7 +4881,7 @@ function renderBeGallery(searchTerm){
             style="width:100%;padding:4px 6px;font-family:var(--mono);font-size:9px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box">
         </div>
 
-        <!-- DEDICATED INSTANT TRANSFER BUTTON ON EVERY PHOTO (SINGLE OR MULTI) -->
+        <!-- DEDICATED TRANSFER BUTTON -->
         <button onclick="beOpenTransferModal(${realIdx}, ${sIdx})" title="Move this photo into another project"
           style="width:100%;margin-top:4px;padding:6px 4px;font-family:var(--mono);font-size:9.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px">
           &#10140; Move Photo
@@ -4935,17 +4939,23 @@ function renderBeGallery(searchTerm){
           ${allImgs.length > 0 ? thumbs : '<span style="font-family:var(--mono);font-size:11px;color:var(--ink4);padding:10px">No photos currently in this project. Click "+ Add Photo to Project" below.</span>'}
         </div>
         
-        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px">
+        <!-- PROJECT LEVEL ACTION BAR -->
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px">
           <button onclick="beAddImageToItem(${realIdx})"
             style="padding:6px 14px;font-family:var(--mono);font-size:10.5px;background:var(--bg-card);color:var(--ink);border:1px dashed var(--border);border-radius:3px;cursor:pointer;font-weight:600">
             + Add Photo to Project
           </button>
-          ${allImgs.length > 0 ? `
-            <button onclick="beOpenTransferModal(${realIdx}, 0)"
-              style="padding:6px 14px;font-family:var(--mono);font-size:10.5px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer;font-weight:600">
-              &#10140; Transfer Photo to Another Project...
+          
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="font-family:var(--mono);font-size:10px;color:var(--ink3)">Move a photo to:</span>
+            <select id="be-quick-target-${realIdx}" style="padding:5px 8px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;max-width:240px">
+              ${otherProjectsOpts}
+            </select>
+            <button onclick="beMoveImageToProject(${realIdx}, 0, parseInt(document.getElementById('be-quick-target-${realIdx}').value))"
+              style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer;font-weight:600">
+              Move Photo
             </button>
-          ` : ''}
+          </div>
         </div>
       </div>
 
