@@ -1132,6 +1132,71 @@ body, nav, .home-hero, .page, section, footer, .tech-spotlight-card, .novel-card
 }
 body.theme-evening #globalStarsCanvas { opacity: 0.85; }
 body.theme-dark #globalStarsCanvas { opacity: 0.95; }
+
+/* ==================== FOOTER & EXPERTISE THEME FIX ==================== */
+footer {
+  padding: 54px 48px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 36px;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  transition: background-color 0.8s ease, color 0.6s ease, border-color 0.6s ease;
+}
+
+body.theme-light footer {
+  background: #0f1115 !important;
+  border-top-color: #24292f !important;
+}
+body.theme-light .footer-name { color: #ffffff !important; }
+body.theme-light .footer-sub { color: rgba(255,255,255,0.6) !important; }
+body.theme-light .footer-links a { color: rgba(255,255,255,0.6) !important; }
+body.theme-light .footer-links a:hover { color: #ffffff !important; }
+
+body.theme-evening footer {
+  background: #070d1a !important;
+  border-top-color: rgba(255,255,255,0.12) !important;
+}
+body.theme-evening .footer-name { color: #ffffff !important; }
+body.theme-evening .footer-sub { color: #9fb3c8 !important; }
+body.theme-evening .footer-links a { color: #9fb3c8 !important; }
+body.theme-evening .footer-links a:hover { color: #ffd166 !important; }
+
+body.theme-dark footer {
+  background: #040507 !important;
+  border-top-color: rgba(255,255,255,0.1) !important;
+}
+body.theme-dark .footer-name { color: #ffffff !important; }
+body.theme-dark .footer-sub { color: #8b949e !important; }
+body.theme-dark .footer-links a { color: #8b949e !important; }
+body.theme-dark .footer-links a:hover { color: #00e5ff !important; }
+
+/* Uniform Clean Expertise Cards */
+.home-expertise { background: var(--bg) !important; padding: 84px 48px; }
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  background: transparent !important;
+  border: none !important;
+  margin-top: 36px;
+}
+.exp-item {
+  padding: 32px 26px;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.exp-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  border-color: var(--ink);
+}
+.exp-num { font-family: var(--serif); font-size: 38px; font-weight: 300; color: var(--ink4) !important; margin-bottom: 12px; line-height: 1; }
+.exp-name { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink) !important; margin-bottom: 10px; font-weight: 600; }
+.exp-desc { font-family: var(--sans); font-size: 13.5px; color: var(--ink3) !important; line-height: 1.65; }
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
