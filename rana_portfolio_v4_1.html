@@ -1316,331 +1316,191 @@ img {
 </div>
 
 <!-- ==================== 8. BACKEND PAGE ==================== -->
+<!-- ==================== BACKEND PAGE ==================== -->
 <div class="page" id="page-backend">
 
-<!-- GITHUB CLOUD AUTO-SYNC MODAL -->
-<div id="github-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,12,16,0.92);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:24px">
-  <div style="width:100%;max-width:680px;background:var(--bg-card,#fff);border:1px solid var(--border);border-radius:6px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,0.3);max-height:92vh;overflow-y:auto">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-      <div style="display:flex;align-items:center;gap:10px">
-        <span style="font-size:24px">🐙</span>
-        <h3 style="font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);margin:0">GitHub Cloud Auto-Sync</h3>
+  <!-- BACKEND SECURITY AUTHENTICATION GATE -->
+  <div id="be-login-gate">
+    <div class="be-login-box">
+      <div style="font-size:32px;margin-bottom:14px;opacity:0.65">&#128274;</div>
+      <h2>Admin Access</h2>
+      <div class="be-login-sub">RANA PORTFOLIO &middot; CONTENT MANAGER</div>
+      <div class="be-login-field">
+        <label>Email Address</label>
+        <input type="email" id="be-email" autocomplete="off" placeholder="">
       </div>
-      <button onclick="closeGitHubModal()" style="background:transparent;border:none;font-size:24px;color:var(--ink3);cursor:pointer">&times;</button>
-    </div>
-
-    <p style="font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:20px">
-      Connect your portfolio directly to your GitHub repository (<strong style="color:var(--ink)">Ranabdullah/rana-portfolio</strong>). Once configured, every edit you make in the backend automatically commits to GitHub so your work is safely backed up and in sync!
-    </p>
-
-    <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:18px;margin-bottom:20px">
-      <div style="margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <label style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);font-weight:600">GitHub Personal Access Token (PAT)</label>
-          <a href="https://github.com/settings/tokens/new?scopes=repo&description=Portfolio+Auto+Sync" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:10px;color:#0969da;text-decoration:underline">Get a Token on GitHub &nearr;</a>
-        </div>
-        <div style="display:flex;gap:8px">
-          <input id="gh-token-input" type="password" placeholder="Enter GitHub Token (Auto-configured)"
-            style="flex:1;padding:8px 12px;font-family:var(--mono);font-size:11.5px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px">
-          <button onclick="toggleTokenVisibility()" id="gh-toggle-btn"
-            style="padding:8px 12px;font-family:var(--mono);font-size:11px;background:transparent;border:1px solid var(--border);color:var(--ink);border-radius:3px;cursor:pointer">👁️ Show</button>
-        </div>
-        <div style="font-size:10.5px;color:var(--ink4);margin-top:4px">Your token is stored only in your private local browser storage and used only to push commits.</div>
+      <div class="be-login-field">
+        <label>Password</label>
+        <input type="password" id="be-pass" autocomplete="new-password" placeholder=""
+          onkeydown="if(event.key==='Enter') beLogin()">
       </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
-        <div>
-          <label style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:4px">Repository Owner</label>
-          <input id="gh-owner-input" value="Ranabdullah" placeholder="Ranabdullah"
-            style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">
-        </div>
-        <div>
-          <label style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:4px">Repository Name</label>
-          <input id="gh-repo-input" value="rana-portfolio" placeholder="rana-portfolio"
-            style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">
-        </div>
-      </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
-        <div>
-          <label style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:4px">Branch</label>
-          <input id="gh-branch-input" value="main" placeholder="main"
-            style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">
-        </div>
-        <div>
-          <label style="font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:4px">Data File Path</label>
-          <input id="gh-path-input" value="portfolio_data.json" placeholder="portfolio_data.json"
-            style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">
-        </div>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:8px;padding-top:6px;border-top:1px solid var(--border)">
-        <input type="checkbox" id="gh-autosync-chk" checked style="cursor:pointer;width:15px;height:15px">
-        <label for="gh-autosync-chk" style="font-size:12px;color:var(--ink);cursor:pointer;font-weight:500">
-          ⚡ Automatically sync to GitHub after every edit (Save, Add, Delete)
-        </label>
-      </div>
-    </div>
-
-    <!-- Status Banner -->
-    <div id="gh-status-banner" style="background:#f6f8fa;border:1px solid var(--border);border-radius:4px;padding:10px 14px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
-      <div style="display:flex;align-items:center;gap:8px">
-        <span id="gh-modal-dot" style="width:8px;height:8px;border-radius:50%;background:#8b949e;display:inline-block"></span>
-        <span id="gh-status-text" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">Status: Not Connected</span>
-      </div>
-      <span id="gh-last-sync-time" style="font-family:var(--mono);font-size:10px;color:var(--ink4)">Never synced</span>
-    </div>
-
-    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center">
-      <div style="display:flex;gap:8px">
-        <button onclick="saveGitHubConfig()" style="padding:8px 18px;font-family:var(--mono);font-size:11px;background:#24292e;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save &amp; Test Connection</button>
-        <button onclick="pushToGitHubDirect(true)" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#2da44e;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">🐙 Push to GitHub Now</button>
-        <button onclick="pullFromGitHubDirect()" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#0969da;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">📥 Pull from GitHub</button>
-      </div>
-      <button onclick="disconnectGitHub()" style="padding:8px 14px;font-family:var(--mono);font-size:11px;background:transparent;color:#cf222e;border:1px solid #cf222e;border-radius:3px;cursor:pointer">Disconnect</button>
-    </div>
-
-    <!-- Quick 1-Minute Setup Guide -->
-    <details style="margin-top:22px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 16px">
-      <summary style="font-family:var(--mono);font-size:11px;color:var(--ink);cursor:pointer;font-weight:600">📖 How to create your GitHub Token in 1 minute (Step-by-Step)</summary>
-      <ol style="font-size:12px;color:var(--ink2);line-height:1.75;margin:12px 0 0 20px;padding:0">
-        <li>Click <a href="https://github.com/settings/tokens/new?scopes=repo&description=Portfolio+Auto+Sync" target="_blank" rel="noopener" style="color:#0969da;font-weight:600">this direct link</a> to open GitHub Token Settings.</li>
-        <li>Under <strong>Note</strong>, type: <code>Portfolio Auto Sync</code></li>
-        <li>Set <strong>Expiration</strong> to <code>No expiration</code> (or 90 days).</li>
-        <li>Ensure the <strong><code>repo</code></strong> scope checkbox is ticked (gives full repository write access).</li>
-        <li>Scroll to the bottom, click green button <strong>Generate token</strong>.</li>
-        <li>Copy the token (starts with <code>ghp_...</code>) and paste it into the box above!</li>
-      </ol>
-    </details>
-  </div>
-</div>
-
-
-<!-- AUTOMATED DATABASE BACKUP & CLOUD RESTORE MODAL -->
-<div id="backup-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,12,16,0.92);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:24px">
-  <div style="width:100%;max-width:720px;background:var(--bg-card,#fff);border:1px solid var(--border);border-radius:4px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,0.3)">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-      <h3 style="font-family:var(--serif);font-size:24px;font-weight:300;color:var(--ink);margin:0">Database Backup &amp; Online Cloud Sync</h3>
-      <button onclick="closeBackupModal()" style="background:transparent;border:none;font-size:24px;color:var(--ink3);cursor:pointer">&times;</button>
-    </div>
-
-    <!-- Cloud Sync Online Banner -->
-    <div style="background:#e3f2fd;border:1px solid #90caf9;border-radius:4px;padding:14px 18px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-      <div>
-        <div style="font-family:var(--sans);font-size:13.5px;font-weight:600;color:#1565c0">☁️ Online Cloud Database Sync</div>
-        <div style="font-size:11.5px;color:#1976d2">Save online to the cloud so your work is accessible on any device, or load your cloud save.</div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button onclick="saveToCloudOnline()" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#1565c0;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">☁️ Save Online to Cloud</button>
-        <button onclick="loadFromCloudOnline()" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#0288d1;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">☁️ Load from Cloud</button>
-      </div>
-    </div>
-    
-    <!-- 1-Click File Backup Banner -->
-    <div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:4px;padding:12px 16px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-      <div>
-        <div style="font-family:var(--sans);font-size:13px;font-weight:600;color:#2e7d32">💾 1-Click Offline File Backup</div>
-        <div style="font-size:11.5px;color:#388e3c">Download your full database file (.json) to your computer, or restore a file anytime.</div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button onclick="downloadBackupJsonFile()" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#2e7d32;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">💾 Download .JSON</button>
-        <button onclick="document.getElementById('backup-file-input').click()" style="padding:8px 16px;font-family:var(--mono);font-size:11px;background:#37474f;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">📂 Restore .JSON</button>
-        <input type="file" id="backup-file-input" accept=".json" style="display:none" onchange="restoreFromFile(event)">
-      </div>
-    </div>
-
-    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
-      <button onclick="exportDataSection('gallery')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">View Gallery JSON</button>
-      <button onclick="exportDataSection('novels')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">View Novels JSON</button>
-      <button onclick="exportDataSection('tech')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">View Tech JSON</button>
-      <button onclick="exportDataSection('software')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">View Software JSON</button>
-      <button onclick="exportDataSection('articles')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">View Articles JSON</button>
-      <button onclick="exportDataSection('all')" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer">View Complete JSON</button>
-    </div>
-
-    <textarea id="backup-text" rows="8" style="width:100%;padding:12px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical;box-sizing:border-box"></textarea>
-    
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px">
-      <button onclick="copyBackupText()" style="padding:8px 18px;font-family:var(--mono);font-size:11px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Copy Raw JSON to Clipboard</button>
-      <button onclick="importBackupText()" style="padding:8px 18px;font-family:var(--mono);font-size:11px;background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer">Apply Pasted JSON</button>
+      <button class="be-login-btn" onclick="beLogin()">SIGN IN</button>
+      <div class="be-login-err" id="be-login-err"></div>
+      <a class="be-login-cancel" onclick="showPage('home')">&larr; Return to Portfolio</a>
     </div>
   </div>
-</div>
 
-
-<!-- DATA BACKUP & EXPORT MODAL -->
-<div id="backup-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,12,16,0.92);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:24px">
-  <div style="width:100%;max-width:680px;background:var(--bg-card,#fff);border:1px solid var(--border);border-radius:4px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,0.3)">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
-      <h3 style="font-family:var(--serif);font-size:24px;font-weight:300;color:var(--ink);margin:0">Database Backup &amp; Code Sync</h3>
-      <button onclick="closeBackupModal()" style="background:transparent;border:none;font-size:22px;color:var(--ink3);cursor:pointer">&times;</button>
-    </div>
-    <p style="font-size:12.5px;color:var(--ink3);margin-bottom:16px;line-height:1.5">
-      Your changes are automatically saved to your browser's persistent storage. You can also export your updated data below to backup or update your code permanently.
-    </p>
-    <div style="display:flex;gap:8px;margin-bottom:12px">
-      <button onclick="exportDataSection('gallery')" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Export Gallery</button>
-      <button onclick="exportDataSection('novels')" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Export Novels</button>
-      <button onclick="exportDataSection('tech')" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Export Tech</button>
-      <button onclick="exportDataSection('software')" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Export Software</button>
-      <button onclick="exportDataSection('all')" style="padding:6px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer">Export All (JSON)</button>
-    </div>
-    <textarea id="backup-text" rows="12" style="width:100%;padding:12px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical;box-sizing:border-box" placeholder="Exported code will appear here..."></textarea>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
-      <button onclick="copyBackupText()" style="padding:8px 18px;font-family:var(--mono);font-size:11px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer">Copy to Clipboard</button>
-      <button onclick="importBackupText()" style="padding:8px 18px;font-family:var(--mono);font-size:11px;background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer">Import / Restore Pasted JSON</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- BACKEND SECURITY AUTHENTICATION GATE -->
-<div id="be-login-gate">
-  <div class="be-login-box">
-    <div style="font-size:32px;margin-bottom:14px;opacity:0.65">&#128274;</div>
-    <h2>Admin Access</h2>
-    <div class="be-login-sub">RANA PORTFOLIO &middot; CONTENT MANAGER</div>
-    <div class="be-login-field">
-      <label>Email Address</label>
-      <input type="email" id="be-email" autocomplete="off" placeholder="">
-    </div>
-    <div class="be-login-field">
-      <label>Password</label>
-      <input type="password" id="be-pass" autocomplete="new-password" placeholder=""
-        onkeydown="if(event.key==='Enter') beLogin()">
-    </div>
-    <button class="be-login-btn" onclick="beLogin()">SIGN IN</button>
-    <div class="be-login-err" id="be-login-err"></div>
-    <a class="be-login-cancel" onclick="showPage('home')">&larr; Return to Portfolio</a>
-  </div>
-</div>
-
-<div id="backend-authorized-view" style="display:none">
-
-  <div class="backend-page">
-    <div class="backend-header" style="display:flex;justify-content:space-between;align-items:flex-start"><div>
-      <h1>Content <em>Manager</em></h1>
-      <p style="color:var(--ink3);font-size:13.5px;margin-top:4px">Add, update, and customize your portfolio content. Stored in your local browser state.</p></div><button class="be-signout-btn" onclick="openBackupModal()" style="margin-right:8px;background:var(--ink);color:#fff;border-color:var(--ink)">💾 Backup / Export Data</button><button class="be-signout-btn" onclick="beSignOut()">&#128274; Sign Out</button>
-    </div>
-    <div class="backend-tabs">
-      <button class="bt on" onclick="switchBackend('novels',this)">Novels &amp; Books</button>
-      <button class="bt" onclick="switchBackend('tech',this)">Technical Projects</button>
-      <button class="bt" onclick="switchBackend('gallery',this)">Gallery</button>
-      <button class="bt" onclick="switchBackend('software',this)">Software</button>
-      <button class="bt" onclick="switchBackend('experience',this)">Experience</button>
-      <button class="bt" onclick="switchBackend('clients',this)">Clients</button>
-      <button class="bt" onclick="switchBackend('articles',this)">Articles &amp; Essays</button>
-    </div>
-
-    <!-- NOVELS BACKEND -->
-    <div class="backend-panel on" id="bp-novels">
-      <div class="backend-form">
-        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Novel</h3>
-        <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="b-novel-title" placeholder="Novel title"></div>
-        <div class="form-group"><label class="form-label">Genre &amp; Type</label><input class="form-input" id="b-novel-genre" placeholder="e.g. Psychological Thriller · Novel"></div>
-        <div class="form-group"><label class="form-label">Tagline</label><input class="form-input" id="b-novel-tagline" placeholder="Short compelling tagline"></div>
-        <div class="form-group"><label class="form-label">Description / Excerpt</label><textarea class="form-textarea" id="b-novel-desc" placeholder="Full summary and opening excerpt..."></textarea></div>
-        <div class="form-group"><label class="form-label">Cover Path</label><input class="form-input" id="b-novel-cover" placeholder="Novels/Title/cover.png"></div>
-        <button class="submit-btn" onclick="addNovel()">Add Novel</button>
+  <div id="backend-authorized-view" style="display:none">
+    <div class="backend-page">
+      <div class="backend-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--border)">
+        <div>
+          <h1 style="font-family:var(--serif);font-size:32px;font-weight:300;margin:0">Content <em>Manager</em></h1>
+          <p style="color:var(--ink3);font-size:13px;margin:4px 0 0">All your portfolio content synced directly with your GitHub repository.</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <button class="be-signout-btn" onclick="pushToGitHubDirect(true)" style="background:#24292e;color:#fff;border:1px solid #24292e;font-weight:600;display:inline-flex;align-items:center;gap:8px;padding:9px 20px;font-size:12.5px;border-radius:4px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.15)">
+            <span style="font-size:16px">🐙</span> Save All Data to GitHub (1-Click)
+          </button>
+          <button class="be-signout-btn" onclick="pullFromGitHubDirect()" style="background:var(--bg);color:var(--ink);border:1px solid var(--border);padding:9px 15px;font-size:11.5px;border-radius:4px;cursor:pointer;font-weight:500">
+            📥 Pull from GitHub
+          </button>
+          <button class="be-signout-btn" onclick="downloadBackupJsonFile()" style="background:var(--bg);color:var(--ink3);border:1px solid var(--border);padding:9px 14px;font-size:11.5px;border-radius:4px;cursor:pointer">
+            💾 Download .JSON
+          </button>
+          <button class="be-signout-btn" onclick="beSignOut()" style="background:transparent;color:#e50914;border:1px solid #e50914;padding:9px 14px;font-size:11.5px;border-radius:4px;cursor:pointer">
+            🔒 Sign Out
+          </button>
+        </div>
       </div>
-      <div class="backend-items" id="be-novels-list"></div>
-    </div>
 
-    <!-- TECH BACKEND -->
-            <!-- 2. TECHNICAL PROJECTS BACKEND -->
-    <div class="backend-panel" id="bp-tech">
-      <div class="backend-form">
-        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:20px">Add Technical Project</h3>
-        <div class="form-group"><label class="form-label">Project Title</label><input class="form-input" id="b-tech-title" placeholder="Project Name"></div>
-        <div class="form-group"><label class="form-label">Subtitle</label><input class="form-input" id="b-tech-sub" placeholder="e.g. Chrome Multi-Profile Link Vault"></div>
-        <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-          <div><label class="form-label">Status</label><input class="form-input" id="b-tech-status" placeholder="Live, Beta, Production"></div>
-          <div>
-            <label class="form-label">Insert Position</label>
-            <select class="form-input" id="b-tech-pos">
-              <option value="end">Add to End (Bottom)</option>
-              <option value="top">Add to Top (Beginning)</option>
+      <div class="backend-tabs">
+        <button class="bt on" onclick="switchBackend('novels',this)">Novels &amp; Books</button>
+        <button class="bt" onclick="switchBackend('tech',this)">Technical Projects</button>
+        <button class="bt" onclick="switchBackend('gallery',this)">Gallery</button>
+        <button class="bt" onclick="switchBackend('software',this)">Software</button>
+        <button class="bt" onclick="switchBackend('experience',this)">Experience</button>
+        <button class="bt" onclick="switchBackend('clients',this)">Clients</button>
+        <button class="bt" onclick="switchBackend('articles',this)">Articles &amp; Essays</button>
+      </div>
+
+      <!-- 1. NOVELS BACKEND -->
+      <div class="backend-panel on" id="bp-novels">
+        <div class="backend-form">
+          <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:20px">Add Novel / Book</h3>
+          <div class="form-group"><label class="form-label">Book Title</label><input class="form-input" id="b-title" placeholder="Title"></div>
+          <div class="form-group"><label class="form-label">Genre</label><input class="form-input" id="b-genre" placeholder="e.g. Literary Fiction"></div>
+          <div class="form-group"><label class="form-label">Year / Status</label><input class="form-input" id="b-year" placeholder="2026 · Published"></div>
+          <div class="form-group"><label class="form-label">Cover Image Path</label><input class="form-input" id="b-cover" placeholder="Photos & to upload/Novels/..."></div>
+          <div class="form-group"><label class="form-label">Logline / Synopsis</label><textarea class="form-textarea" id="b-logline" placeholder="Brief premise..."></textarea></div>
+          <button class="submit-btn" onclick="addNovel()">Add Book</button>
+        </div>
+        <div class="backend-items" id="be-novels-list"></div>
+      </div>
+
+      <!-- 2. TECHNICAL PROJECTS BACKEND -->
+      <div class="backend-panel" id="bp-tech">
+        <div class="backend-form">
+          <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:20px">Add Technical Project</h3>
+          <div class="form-group"><label class="form-label">Project Title</label><input class="form-input" id="b-tech-title" placeholder="Project Name"></div>
+          <div class="form-group"><label class="form-label">Subtitle</label><input class="form-input" id="b-tech-sub" placeholder="e.g. Chrome Multi-Profile Link Vault"></div>
+          <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+            <div><label class="form-label">Status</label><input class="form-input" id="b-tech-status" placeholder="Live, Beta, Production"></div>
+            <div>
+              <label class="form-label">Insert Position</label>
+              <select class="form-input" id="b-tech-pos">
+                <option value="end">Add to End (Bottom)</option>
+                <option value="top">Add to Top (Beginning)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label class="form-label">Tech Stack (comma-separated)</label><input class="form-input" id="b-tech-stack" placeholder="Electron, Node.js, TypeScript"></div>
+          <div class="form-group"><label class="form-label">Key Architectural Features (comma or newline-separated)</label><textarea class="form-textarea" id="b-tech-features" rows="2" placeholder="e.g. AES-256-GCM encrypted vault, 13+ Chrome profile support, 1-click launch"></textarea></div>
+          <div class="form-group"><label class="form-label" style="color:#1565c0;font-weight:600">Live Demo / Web Link (Optional)</label><input class="form-input" id="b-tech-live" placeholder="https://..."></div>
+          <div class="form-group"><label class="form-label" style="color:#2e7d32;font-weight:600">Download URL (Optional)</label><input class="form-input" id="b-tech-dl" placeholder="https://..."></div>
+          <div class="form-group"><label class="form-label" style="color:var(--ink3);font-weight:600">GitHub Repo URL (Optional)</label><input class="form-input" id="b-tech-repo" placeholder="https://github.com/..."></div>
+          <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="b-tech-desc" rows="3" placeholder="Comprehensive project description..."></textarea></div>
+          <button class="submit-btn" onclick="addTechProject()">Add Project</button>
+        </div>
+        <div class="backend-items" id="be-tech-list"></div>
+      </div>
+
+      <!-- 3. GALLERY BACKEND -->
+      <div class="backend-panel" id="bp-gallery">
+        <div class="backend-form">
+          <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:20px">Add Artwork / 3D Project</h3>
+          <div class="form-group"><label class="form-label">Project Title</label><input class="form-input" id="b-g-title" placeholder="e.g. Photorealistic Forest Biome"></div>
+          <div class="form-group"><label class="form-label">Category</label>
+            <select class="form-input" id="b-g-cat">
+              <option value="3d">3D Art</option>
+              <option value="environment">Environment</option>
+              <option value="character">Character</option>
+              <option value="animation">Animation</option>
+              <option value="product">Product</option>
+              <option value="branding">Branding</option>
             </select>
           </div>
+          <div class="form-group"><label class="form-label">Pillar</label>
+            <select class="form-input" id="b-g-pillar">
+              <option value="Personal">Personal</option>
+              <option value="Client">Client</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Primary Image Path</label><input class="form-input" id="b-g-path" placeholder="Photos & to upload/..."></div>
+          <div class="form-group"><label class="form-label" style="color:#e50914;font-weight:600">▶ Primary YouTube Video URL (Optional)</label><input class="form-input" id="b-g-youtube" placeholder="https://youtube.com/..."></div>
+          <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="b-g-desc" placeholder="Technical notes & details..."></textarea></div>
+          <button class="submit-btn" onclick="addGalleryItem()">Add Artwork</button>
         </div>
-        <div class="form-group"><label class="form-label">Tech Stack (comma-separated)</label><input class="form-input" id="b-tech-stack" placeholder="Electron, Node.js, TypeScript"></div>
-        <div class="form-group"><label class="form-label">Key Architectural Features (comma or newline-separated)</label><textarea class="form-textarea" id="b-tech-features" rows="2" placeholder="e.g. AES-256-GCM encrypted vault, 13+ Chrome profile support, 1-click launch"></textarea></div>
-        <div class="form-group"><label class="form-label" style="color:#1565c0;font-weight:600">Live Demo / Web Link (Optional)</label><input class="form-input" id="b-tech-live" placeholder="https://..."></div>
-        <div class="form-group"><label class="form-label" style="color:#2e7d32;font-weight:600">Download URL (Optional)</label><input class="form-input" id="b-tech-dl" placeholder="https://..."></div>
-        <div class="form-group"><label class="form-label" style="color:var(--ink3);font-weight:600">GitHub Repo URL (Optional)</label><input class="form-input" id="b-tech-repo" placeholder="https://github.com/..."></div>
-        <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="b-tech-desc" rows="3" placeholder="Comprehensive project description..."></textarea></div>
-        <button class="submit-btn" onclick="addTechProject()">Add Project</button>
+        <div class="backend-items" id="be-gallery-list"></div>
       </div>
-      <div class="backend-items" id="be-tech-list"></div>
-    </div>
 
-    <!-- GALLERY BACKEND -->
-    <div class="backend-panel" id="bp-gallery">
-      <div class="backend-form">
-        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Gallery Item</h3>
-        <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="b-gal-title" placeholder="Artwork title"></div>
-        <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="b-gal-cat" placeholder="3d / environment / character / product / logo"></div>
-        <div class="form-group"><label class="form-label">Pillar</label><input class="form-input" id="b-gal-pillar" placeholder="Personal / Client"></div>
-        <div class="form-group"><label class="form-label">Image Path</label><input class="form-input" id="b-gal-path" placeholder="Photos & to upload/..."></div>
-        <button class="submit-btn" onclick="addGalleryItem()">Add Image</button>
+      <!-- 4. SOFTWARE BACKEND -->
+      <div class="backend-panel" id="bp-software">
+        <div class="backend-form">
+          <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:20px">Add Commercial Software</h3>
+          <div class="form-group"><label class="form-label">Software Title</label><input class="form-input" id="b-soft-title" placeholder="Software Name"></div>
+          <div class="form-group"><label class="form-label">Platform</label><input class="form-input" id="b-soft-plat" placeholder="Windows, macOS, Web"></div>
+          <div class="form-group"><label class="form-label">Price / License</label><input class="form-input" id="b-soft-price" placeholder="Free, Open Source, $49"></div>
+          <div class="form-group"><label class="form-label">URL / Download Link</label><input class="form-input" id="b-soft-url" placeholder="https://..."></div>
+          <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="b-soft-desc" placeholder="Description..."></textarea></div>
+          <button class="submit-btn" onclick="addSoftware()">Add Software</button>
+        </div>
+        <div class="backend-items" id="be-software-list"></div>
       </div>
-      <div class="backend-items" id="be-gallery-list"></div>
-    </div>
 
-    <!-- SOFTWARE BACKEND -->
-    <div class="backend-panel" id="bp-software">
-      <div class="backend-form">
-        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Software Product</h3>
-        <div class="form-group"><label class="form-label">Product Name</label><input class="form-input" id="b-sw-name" placeholder="Tool name"></div>
-        <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="b-sw-cat" placeholder="Blender Add-on / Web Application"></div>
-        <div class="form-group"><label class="form-label">Price / Status</label><input class="form-input" id="b-sw-price" placeholder="$23.99 / Free"></div>
-        <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="b-sw-desc" placeholder="Product features..."></textarea></div>
-        <button class="submit-btn" onclick="addSoftware()">Add Product</button>
+      <!-- 5. EXPERIENCE BACKEND -->
+      <div class="backend-panel" id="bp-experience">
+        <div class="backend-form">
+          <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:20px">Add Career Experience</h3>
+          <div class="form-group"><label class="form-label">Company / Studio</label><input class="form-input" id="b-exp-comp" placeholder="Company Name"></div>
+          <div class="form-group"><label class="form-label">Role</label><input class="form-input" id="b-exp-role" placeholder="Creative Director, 3D Artist"></div>
+          <div class="form-group"><label class="form-label">Start Year</label><input class="form-input" id="b-exp-start" placeholder="2022"></div>
+          <div class="form-group"><label class="form-label">End Year</label><input class="form-input" id="b-exp-end" placeholder="Present"></div>
+          <button class="submit-btn" onclick="addExperience()">Add Experience</button>
+        </div>
+        <div class="backend-items" id="be-exp-list"></div>
       </div>
-      <div class="backend-items" id="be-software-list"></div>
-    </div>
 
-    <!-- EXPERIENCE BACKEND -->
-    <div class="backend-panel" id="bp-experience">
-      <div class="backend-form">
-        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Experience</h3>
-        <div class="form-group"><label class="form-label">Company</label><input class="form-input" id="b-exp-company" placeholder="Company name"></div>
-        <div class="form-group"><label class="form-label">Role</label><input class="form-input" id="b-exp-role" placeholder="Job title"></div>
-        <div class="form-group"><label class="form-label">Start — End</label><input class="form-input" id="b-exp-dates" placeholder="Sep 2023 — Present"></div>
-        <button class="submit-btn" onclick="addExperience()">Add Experience</button>
+      <!-- 6. CLIENTS BACKEND -->
+      <div class="backend-panel" id="bp-clients">
+        <div class="backend-form">
+          <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Client / Brand</h3>
+          <div class="form-group"><label class="form-label">Client Name</label><input class="form-input" id="b-client-name" placeholder="Brand / Client Name"></div>
+          <div class="form-group"><label class="form-label">Sector / Industry</label><input class="form-input" id="b-client-sector" placeholder="e.g. Commercial Architecture, Tech"></div>
+          <div class="form-group"><label class="form-label">Website (Optional)</label><input class="form-input" id="b-client-url" placeholder="https://..."></div>
+          <button class="submit-btn" onclick="addClient()">Add Client</button>
+        </div>
+        <div class="backend-items" id="be-clients-list"></div>
       </div>
-      <div class="backend-items" id="be-exp-list"></div>
-    </div>
 
-    <!-- CLIENTS BACKEND -->
-        <!-- CLIENTS BACKEND -->
-    <div class="backend-panel" id="bp-clients">
-      <div class="backend-form">
-        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Client / Brand</h3>
-        <div class="form-group"><label class="form-label">Client Name</label><input class="form-input" id="b-client-name" placeholder="Brand / Client Name"></div>
-        <div class="form-group"><label class="form-label">Sector / Industry</label><input class="form-input" id="b-client-sector" placeholder="e.g. Commercial Architecture, Tech"></div>
-        <div class="form-group"><label class="form-label">Website (Optional)</label><input class="form-input" id="b-client-url" placeholder="https://..."></div>
-        <button class="submit-btn" onclick="addClient()">Add Client</button>
+      <!-- 7. ARTICLES & ESSAYS BACKEND -->
+      <div class="backend-panel" id="bp-articles">
+        <div class="backend-form">
+          <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Published Article / Essay</h3>
+          <div class="form-group"><label class="form-label">Article Title</label><input class="form-input" id="b-art-title" placeholder="Title of essay..."></div>
+          <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="b-art-cat" placeholder="Personal Essay, Tech, Philosophy..."></div>
+          <div class="form-group"><label class="form-label">Publication Date</label><input class="form-input" id="b-art-date" placeholder="August 2026"></div>
+          <div class="form-group"><label class="form-label">Read Time</label><input class="form-input" id="b-art-time" placeholder="7 min read"></div>
+          <div class="form-group"><label class="form-label">Article / Medium URL</label><input class="form-input" id="b-art-url" placeholder="https://medium.com/..."></div>
+          <div class="form-group"><label class="form-label">Excerpt / Summary</label><textarea class="form-textarea" id="b-art-desc" placeholder="Brief premise or summary..."></textarea></div>
+          <button class="submit-btn" onclick="addArticle()">Add Article</button>
+        </div>
+        <div class="backend-items" id="be-articles-list"></div>
       </div>
-      <div class="backend-items" id="be-clients-list"></div>
-    </div>
 
-    <!-- ARTICLES & ESSAYS BACKEND -->
-    <div class="backend-panel" id="bp-articles">
-      <div class="backend-form">
-        <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:24px">Add Published Article / Essay</h3>
-        <div class="form-group"><label class="form-label">Article Title</label><input class="form-input" id="b-art-title" placeholder="Title of essay..."></div>
-        <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="b-art-cat" placeholder="Personal Essay, Tech, Philosophy..."></div>
-        <div class="form-group"><label class="form-label">Publication Date</label><input class="form-input" id="b-art-date" placeholder="August 2026"></div>
-        <div class="form-group"><label class="form-label">Read Time</label><input class="form-input" id="b-art-time" placeholder="7 min read"></div>
-        <div class="form-group"><label class="form-label">Article / Medium URL</label><input class="form-input" id="b-art-url" placeholder="https://medium.com/..."></div>
-        <div class="form-group"><label class="form-label">Excerpt / Summary</label><textarea class="form-textarea" id="b-art-desc" placeholder="Brief premise or summary..."></textarea></div>
-        <button class="submit-btn" onclick="addArticle()">Add Article</button>
-      </div>
-      <div class="backend-items" id="be-articles-list"></div>
     </div>
   </div>
 </div>
+
 
 <!-- ==================== JAVASCRIPT LOGIC ==================== -->
 <script>
