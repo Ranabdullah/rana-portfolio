@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T21:37:38.645Z",
+  "updatedAt": "2026-08-31T21:37:47.645Z",
   "gallery": [
     {
       "title": "Children's Creative Studio & Art Illustration Study",
@@ -174,9 +174,10 @@
       "path": "Photos & to upload/Scifi/All Work (175).jpg",
       "images": [
         "Photos & to upload/Scifi/All Work (175).jpg",
-        "Photos & to upload/Scifi/All Work (18).jpg",
         "Photos & to upload/Plane/25542788_1949128395101535_7558624210513976664_o.jpg"
-      ]
+      ],
+      "subVideos": {},
+      "youtubeUrl": ""
     },
     {
       "title": "Photorealistic Forest Biome & Woodland Sanctuary (UE5)",
