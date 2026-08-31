@@ -1342,28 +1342,30 @@ img {
 
   <div id="backend-authorized-view" style="display:none">
     <div class="backend-page">
-      <div class="backend-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--border)">
-        <div>
-          <h1 style="font-family:var(--serif);font-size:32px;font-weight:300;margin:0">Content <em>Manager</em></h1>
-          <p style="color:var(--ink3);font-size:13px;margin:4px 0 0">All your portfolio content synced directly with your GitHub repository.</p>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <button class="be-signout-btn" onclick="pushToGitHubDirect(true)" style="background:#24292e;color:#fff;border:1px solid #24292e;font-weight:600;display:inline-flex;align-items:center;gap:8px;padding:9px 20px;font-size:12.5px;border-radius:4px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.15)">
-            <span style="font-size:16px">🐙</span> Save All Data to GitHub (1-Click)
-          </button>
-          <button class="be-signout-btn" onclick="pullFromGitHubDirect()" style="background:var(--bg);color:var(--ink);border:1px solid var(--border);padding:9px 15px;font-size:11.5px;border-radius:4px;cursor:pointer;font-weight:500">
-            📥 Pull from GitHub
-          </button>
-          <button class="be-signout-btn" onclick="downloadBackupJsonFile()" style="background:var(--bg);color:var(--ink3);border:1px solid var(--border);padding:9px 14px;font-size:11.5px;border-radius:4px;cursor:pointer">
-            💾 Download .JSON
-          </button>
-          <button class="be-signout-btn" onclick="beSignOut()" style="background:transparent;color:#e50914;border:1px solid #e50914;padding:9px 14px;font-size:11.5px;border-radius:4px;cursor:pointer">
-            🔒 Sign Out
-          </button>
-        </div>
+          <div class="backend-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--border)">
+      <div>
+        <h1 style="font-family:var(--serif);font-size:32px;font-weight:300;margin:0">Content <em>Manager</em></h1>
+        <p style="color:var(--ink3);font-size:13px;margin:4px 0 0">All your portfolio content synced directly with your GitHub repository.</p>
       </div>
-
-      <div class="backend-tabs">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <button class="be-signout-btn" onclick="pushToGitHubDirect(true)" style="background:#24292e;color:#fff;border:1px solid #24292e;font-weight:600;display:inline-flex;align-items:center;gap:8px;padding:9px 20px;font-size:12.5px;border-radius:4px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.15)">
+          <span style="font-size:16px">🐙</span> Save All Data to GitHub (1-Click)
+        </button>
+        <button class="be-signout-btn" onclick="pullFromGitHubDirect()" style="background:var(--bg);color:var(--ink);border:1px solid var(--border);padding:9px 15px;font-size:11.5px;border-radius:4px;cursor:pointer;font-weight:500">
+          📥 Pull from GitHub
+        </button>
+        <button class="be-signout-btn" onclick="updateGitHubTokenPrompt()" style="background:var(--bg);color:var(--ink2);border:1px solid var(--border);padding:9px 14px;font-size:11.5px;border-radius:4px;cursor:pointer">
+          🔑 Set Token
+        </button>
+        <button class="be-signout-btn" onclick="downloadBackupJsonFile()" style="background:var(--bg);color:var(--ink3);border:1px solid var(--border);padding:9px 14px;font-size:11.5px;border-radius:4px;cursor:pointer">
+          💾 Download .JSON
+        </button>
+        <button class="be-signout-btn" onclick="beSignOut()" style="background:transparent;color:#e50914;border:1px solid #e50914;padding:9px 14px;font-size:11.5px;border-radius:4px;cursor:pointer">
+          🔒 Sign Out
+        </button>
+      </div>
+    </div>
+    <div class="backend-tabs">
         <button class="bt on" onclick="switchBackend('novels',this)">Novels &amp; Books</button>
         <button class="bt" onclick="switchBackend('tech',this)">Technical Projects</button>
         <button class="bt" onclick="switchBackend('gallery',this)">Gallery</button>
@@ -3613,20 +3615,38 @@ function updateGitHubStatusBadge(status, commitSha){
   }
 }
 
+function updateGitHubTokenPrompt(){
+  const cur = localStorage.getItem('rana_gh_token') || '';
+  const token = prompt('Enter your GitHub Personal Access Token (starts with ghp_...):', cur);
+  if(token !== null){
+    const clean = token.trim();
+    if(clean){
+      localStorage.setItem('rana_gh_token', clean);
+      showToast('🔑 GitHub Token updated! Testing connection...');
+      pushToGitHubDirect(true);
+    } else {
+      localStorage.removeItem('rana_gh_token');
+      showToast('Token cleared');
+    }
+  }
+}
+
 async function pushToGitHubDirect(isManual = true){
-  const token = (localStorage.getItem('rana_gh_token') || DEFAULT_GH_TOKEN).trim();
-  const owner = (localStorage.getItem('rana_gh_owner') || DEFAULT_GH_OWNER).trim();
-  const repo = (localStorage.getItem('rana_gh_repo') || DEFAULT_GH_REPO).trim();
-  const branch = (localStorage.getItem('rana_gh_branch') || DEFAULT_GH_BRANCH).trim();
-  const path = (localStorage.getItem('rana_gh_path') || DEFAULT_GH_PATH).trim();
+  let token = (localStorage.getItem('rana_gh_token') || '').trim();
+  const owner = (localStorage.getItem('rana_gh_owner') || 'Ranabdullah').trim();
+  const repo = (localStorage.getItem('rana_gh_repo') || 'rana-portfolio').trim();
+  const branch = (localStorage.getItem('rana_gh_branch') || 'main').trim();
+  const path = (localStorage.getItem('rana_gh_path') || 'portfolio_data.json').trim();
 
   if(!token){
-    if(isManual) openGitHubModal();
-    return;
+    const userEntered = prompt('Enter your GitHub Personal Access Token (starts with ghp_...):\n\nCreate one at https://github.com/settings/tokens/new (select "repo" scope)');
+    if(!userEntered || !userEntered.trim()) return;
+    token = userEntered.trim();
+    localStorage.setItem('rana_gh_token', token);
   }
 
   updateGitHubStatusBadge('syncing');
-  if(isManual) showToast('🐙 Connecting to GitHub & pushing changes...');
+  if(isManual) showToast('🐙 Saving all portfolio data to GitHub...');
 
   const fullDatabase = {
     updatedAt: new Date().toISOString(),
@@ -3687,11 +3707,20 @@ async function pushToGitHubDirect(isManual = true){
       const commitSha = resData.commit?.sha?.substring(0, 7) || 'latest';
       localStorage.setItem('rana_gh_last_sync', new Date().toISOString());
       updateGitHubStatusBadge('synced', commitSha);
-      showToast(`🐙 Synced to GitHub (${commitSha})`);
-      if(isManual) closeGitHubModal();
+      showToast(`🐙 Successfully Saved to GitHub! (${commitSha})`);
     } else {
       const errJson = await putRes.json().catch(() => ({}));
       updateGitHubStatusBadge('error');
+      
+      if(putRes.status === 401 || errJson.message?.includes('Bad credentials')){
+        const reToken = prompt('GitHub Token was revoked or expired (401 Bad credentials).\n\nPlease paste your new GitHub Personal Access Token:');
+        if(reToken && reToken.trim()){
+          localStorage.setItem('rana_gh_token', reToken.trim());
+          pushToGitHubDirect(true);
+          return;
+        }
+      }
+      
       console.error('GitHub API error:', errJson);
       if(isManual) alert('GitHub Sync Error: ' + (errJson.message || putRes.statusText));
       else showToast('⚠️ GitHub sync failed: ' + (errJson.message || 'Check token permissions'));
