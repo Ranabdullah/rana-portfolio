@@ -1482,6 +1482,62 @@ body.theme-dark .be-login-btn {
 body.theme-dark .be-login-btn:hover {
   background: #e1e4e8 !important;
 }
+
+/* ==================== BACKEND HIGH CONTRAST & THEME FIXES ==================== */
+.bt {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+  padding: 8px 18px; border-radius: 4px; cursor: pointer; transition: all .2s ease;
+}
+
+body.theme-light .bt {
+  background: #ffffff !important; color: #5a6474 !important; border: 1px solid #dbe0e8 !important;
+}
+body.theme-light .bt.on, body.theme-light .bt:hover {
+  background: #11141a !important; color: #ffffff !important; border-color: #11141a !important; font-weight: 700 !important;
+}
+
+body.theme-evening .bt {
+  background: #1c2541 !important; color: #9fb3c8 !important; border: 1px solid rgba(255,255,255,0.16) !important;
+}
+body.theme-evening .bt.on, body.theme-evening .bt:hover {
+  background: #ffd166 !important; color: #0b132b !important; border-color: #ffd166 !important; font-weight: 700 !important;
+}
+
+body.theme-dark .bt {
+  background: #111318 !important; color: #9da5b4 !important; border: 1px solid rgba(255,255,255,0.14) !important;
+}
+body.theme-dark .bt.on, body.theme-dark .bt:hover {
+  background: #ffffff !important; color: #07080b !important; border-color: #ffffff !important; font-weight: 700 !important;
+}
+
+/* Submit and Backend Action Buttons */
+.submit-btn {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+  padding: 11px 24px; border-radius: 4px; cursor: pointer; transition: all .2s;
+}
+body.theme-light .submit-btn {
+  background: #11141a !important; color: #ffffff !important; border: 1px solid #11141a !important;
+}
+body.theme-evening .submit-btn {
+  background: #ffd166 !important; color: #0b132b !important; border: 1px solid #ffd166 !important; font-weight: 700 !important;
+}
+body.theme-dark .submit-btn {
+  background: #ffffff !important; color: #07080b !important; border: 1px solid #ffffff !important; font-weight: 700 !important;
+}
+
+/* Transfer Modal Overlay */
+#be-transfer-modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+  z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;
+}
+#be-transfer-modal.open {
+  display: flex !important;
+}
+.be-transfer-box {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+  width: 100%; max-width: 520px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  display: flex; flex-direction: column; gap: 16px;
+}
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -4780,9 +4836,9 @@ function renderBeGallery(searchTerm){
 
   let html = `
     <div style="margin-bottom:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <input id="be-gallery-search" type="text" placeholder="Search by title or category..." value="${term}"
+      <input id="be-gallery-search" type="text" placeholder="Search 235 projects by title or category..." value="${term}"
         oninput="renderBeGallery(this.value)"
-        style="flex:1;min-width:200px;padding:8px 14px;font-family:var(--mono);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+        style="flex:1;min-width:220px;padding:9px 14px;font-family:var(--mono);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px">
       <span style="font-family:var(--mono);font-size:11px;color:var(--ink3);font-weight:600">${filtered.length} / ${galleryItems.length} projects</span>
     </div>
   `;
@@ -4792,29 +4848,25 @@ function renderBeGallery(searchTerm){
     const allImgs = (g.images && g.images.length > 0) ? g.images : [g.path];
     const subVids = g.subVideos || {};
 
-    const otherProjectsOpts = galleryItems.map((other, oi) =>
-      oi !== realIdx ? `<option value="${oi}">${String(oi+1).padStart(2,'0')}. ${other.title.substring(0,40)}</option>` : ''
-    ).join('');
-
     const thumbs = allImgs.map((imgSrc, sIdx) => `
-      <div style="display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin:6px;background:var(--bg);padding:10px;border-radius:6px;border:1px solid var(--border);width:150px">
-        <div style="position:relative">
-          <img src="${imgSrc}" loading="lazy" decoding="async" style="width:130px;height:100px;object-fit:cover;border-radius:4px;border:1px solid var(--border);display:block">
+      <div style="display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin:6px;background:var(--bg);padding:10px;border-radius:6px;border:1px solid var(--border);width:150px;box-sizing:border-box">
+        <div style="position:relative;width:100%">
+          <img src="${imgSrc}" loading="lazy" decoding="async" style="width:100%;height:95px;object-fit:cover;border-radius:4px;border:1px solid var(--border);display:block">
           
           <button onclick="beRemoveSubImage(${realIdx}, ${sIdx})" title="Delete this photo"
             style="position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#e50914;border:none;color:#fff;font-size:12px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.3)">&times;</button>
           
           ${sIdx === 0 ? `
-            <span style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,0.75);color:#fff;font-family:var(--mono);font-size:8px;padding:2px 5px;border-radius:2px;font-weight:600">COVER</span>
+            <span style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,0.8);color:#fff;font-family:var(--mono);font-size:8px;padding:2px 5px;border-radius:2px;font-weight:700">COVER</span>
           ` : ''}
         </div>
 
         <div style="display:flex;gap:4px;align-items:center;justify-content:center;width:100%">
           <button onclick="beMoveSubImageOrder(${realIdx}, ${sIdx}, -1)" ${sIdx === 0 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''} title="Move photo left"
-            style="padding:2px 7px;font-size:9px;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9664;</button>
+            style="padding:3px 7px;font-size:9px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9664;</button>
           <span style="font-family:var(--mono);font-size:8.5px;color:var(--ink3)">#${sIdx + 1}</span>
           <button onclick="beMoveSubImageOrder(${realIdx}, ${sIdx}, 1)" ${sIdx === allImgs.length - 1 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''} title="Move photo right"
-            style="padding:2px 7px;font-size:9px;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9654;</button>
+            style="padding:3px 7px;font-size:9px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9654;</button>
         </div>
 
         <div style="font-family:var(--mono);font-size:8.5px;color:var(--ink4);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${imgSrc}">${imgSrc.split('/').pop()}</div>
@@ -4825,15 +4877,11 @@ function renderBeGallery(searchTerm){
             style="width:100%;padding:4px 6px;font-family:var(--mono);font-size:9px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box">
         </div>
 
-        <!-- ALWAYS ACTIVE MOVE TO ANOTHER PROJECT -->
-        <div style="width:100%;margin-top:4px;padding-top:4px;border-top:1px dashed var(--border)">
-          <div style="font-family:var(--mono);font-size:8px;color:var(--ink3);margin-bottom:2px">MOVE TO PROJECT:</div>
-          <select id="move-sel-${realIdx}-${sIdx}" style="width:100%;padding:3px;font-family:var(--mono);font-size:8.5px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;margin-bottom:3px">
-            ${otherProjectsOpts}
-          </select>
-          <button onclick="beMoveImageToProject(${realIdx}, ${sIdx}, parseInt(document.getElementById('move-sel-${realIdx}-${sIdx}').value))"
-            style="width:100%;padding:3px;font-family:var(--mono);font-size:8.5px;background:var(--ink);color:#fff;border:none;border-radius:2px;cursor:pointer;font-weight:600">&#10140; Move Photo</button>
-        </div>
+        <!-- DEDICATED INSTANT TRANSFER BUTTON -->
+        <button onclick="beOpenTransferModal(${realIdx}, ${sIdx})" title="Move this photo into another project"
+          style="width:100%;margin-top:4px;padding:5px 4px;font-family:var(--mono);font-size:9px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px">
+          &#10140; Move Photo
+        </button>
       </div>
     `).join('');
 
@@ -4841,57 +4889,68 @@ function renderBeGallery(searchTerm){
     <div class="backend-item" style="flex-direction:column;align-items:stretch;gap:14px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:18px" id="beg-${realIdx}">
       
       <!-- TOP CONTROLS & REORDER BUTTONS -->
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--border);padding-bottom:12px">
         <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-family:var(--mono);font-size:12px;font-weight:700;color:#1565c0;background:rgba(21,101,192,0.1);padding:4px 8px;border-radius:3px">
-            [ ${String(realIdx + 1).padStart(2, '0')} / ${galleryItems.length} ]
-          </span>
-          <span style="font-family:var(--mono);font-size:10px;color:var(--ink3)">Position</span>
+          <button onclick="beMoveProject(${realIdx}, -1)" ${realIdx === 0 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''}
+            style="padding:4px 10px;font-family:var(--mono);font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer;font-weight:700">&#9650; Move Up</button>
+          <button onclick="beMoveProject(${realIdx}, 1)" ${realIdx === galleryItems.length - 1 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''}
+            style="padding:4px 10px;font-family:var(--mono);font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer;font-weight:700">&#9660; Move Down</button>
+          <span style="font-family:var(--mono);font-size:10.5px;padding:3px 9px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:12px;font-weight:700">[ ${String(realIdx + 1).padStart(2, '0')} / ${galleryItems.length} ]</span>
         </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <button onclick="beMoveGalleryItem(${realIdx}, -1)" ${realIdx === 0 ? 'disabled style="opacity:0.35;cursor:not-allowed;padding:5px 12px"' : 'style="padding:5px 12px;background:var(--bg);border:1px solid var(--border);color:var(--ink);border-radius:3px;cursor:pointer;font-weight:600"'} title="Move project up">
-            &#9650; Move Up
-          </button>
-          <button onclick="beMoveGalleryItem(${realIdx}, 1)" ${realIdx === galleryItems.length - 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;padding:5px 12px"' : 'style="padding:5px 12px;background:var(--bg);border:1px solid var(--border);color:var(--ink);border-radius:3px;cursor:pointer;font-weight:600"'} title="Move project down">
-            &#9660; Move Down
-          </button>
-          <button onclick="beUpdateGalleryItem(${realIdx})"
-            style="padding:5px 16px;font-family:var(--mono);font-size:10.5px;background:var(--ink);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Save Changes</button>
-          <button onclick="beDeleteGalleryItem(${realIdx})"
-            style="padding:5px 12px;font-family:var(--mono);font-size:10.5px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer;font-weight:600">Delete Project</button>
-        </div>
-      </div>
-
-      <!-- TITLE & CATEGORY -->
-      <div>
-        <input id="be-gtitle-${realIdx}" value="${(g.title||'').replace(/"/g,'&quot;')}" placeholder="Project Title"
-          style="width:100%;padding:8px 12px;font-family:var(--sans);font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;margin-bottom:8px">
         
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-          <label style="font-family:var(--mono);font-size:10px;color:var(--ink3)">Category:</label>
-          <select id="be-gcat-${realIdx}" style="padding:5px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
-            ${['3d','environment','character','animation','product','branding'].map(cat=>`<option value="${cat}" ${g.cat===cat?'selected':''}>${cat}</option>`).join('')}
+        <div style="display:flex;gap:8px;align-items:center">
+          <select id="beg-cat-${realIdx}" style="padding:5px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px">
+            <option value="client" ${g.cat==='client'?'selected':''}>client</option>
+            <option value="personal" ${g.cat==='personal'?'selected':''}>personal</option>
+            <option value="animation" ${g.cat==='animation'?'selected':''}>animation</option>
+            <option value="3d" ${g.cat==='3d'?'selected':''}>3d</option>
+            <option value="environment" ${g.cat==='environment'?'selected':''}>environment</option>
+            <option value="character" ${g.cat==='character'?'selected':''}>character</option>
+            <option value="product" ${g.cat==='product'?'selected':''}>product</option>
+            <option value="branding" ${g.cat==='branding'?'selected':''}>branding</option>
           </select>
-          <label style="font-family:var(--mono);font-size:10px;color:var(--ink3)">Pillar:</label>
-          <select id="be-gpillar-${realIdx}" style="padding:5px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px">
+          <select id="beg-pillar-${realIdx}" style="padding:5px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px">
+            <option value="Client Work" ${g.pillar==='Client Work'?'selected':''}>Client Work</option>
             <option value="Personal" ${g.pillar==='Personal'?'selected':''}>Personal</option>
-            <option value="Client" ${g.pillar==='Client'?'selected':''}>Client</option>
+            <option value="Atmosphere" ${g.pillar==='Atmosphere'?'selected':''}>Atmosphere</option>
+            <option value="Biome" ${g.pillar==='Biome'?'selected':''}>Biome</option>
           </select>
-          <button onclick="beAddImageToItem(${realIdx})" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--bg);border:1px solid var(--border);color:var(--ink);border-radius:3px;cursor:pointer">+ Add Photo to This Project</button>
+          <button onclick="beDeleteGalleryItem(${realIdx})" style="padding:5px 12px;font-family:var(--mono);font-size:10.5px;background:#e50914;color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:600">Delete Project</button>
         </div>
       </div>
 
-      <!-- PHOTO THUMBNAILS GRID -->
-      <div style="font-family:var(--mono);font-size:10px;color:var(--ink3);font-weight:600">
-        PHOTOS IN THIS PROJECT (${allImgs.length}):
-      </div>
-      
-      <div style="display:flex;flex-wrap:wrap;gap:8px;background:var(--bg);padding:10px;border-radius:6px;border:1px solid var(--border)">
-        ${thumbs}
+      <!-- TITLE INPUT -->
+      <div>
+        <label style="font-family:var(--mono);font-size:9.5px;text-transform:uppercase;color:var(--ink4);display:block;margin-bottom:4px">Project Title</label>
+        <input id="beg-title-${realIdx}" value="${(g.title||'').replace(/"/g,'&quot;')}"
+          style="width:100%;padding:8px 12px;font-family:var(--serif);font-size:18px;font-weight:600;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">
       </div>
 
+      <!-- PHOTOS IN THIS PROJECT -->
       <div>
-        <textarea id="be-gdesc-${realIdx}" rows="2" style="width:100%;padding:8px 12px;font-family:var(--sans);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:3px;resize:vertical" placeholder="Project Description & Notes...">${g.desc||''}</textarea>
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;font-weight:700">
+          PHOTOS IN THIS PROJECT (${allImgs.length}):
+        </div>
+        <div style="display:flex;flex-wrap:wrap;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:6px">
+          ${thumbs}
+        </div>
+        <button onclick="beAddImageToItem(${realIdx})"
+          style="margin-top:8px;padding:6px 14px;font-family:var(--mono);font-size:10.5px;background:var(--bg-card);color:var(--ink);border:1px dashed var(--border);border-radius:3px;cursor:pointer;font-weight:600">
+          + Add Photo to Project
+        </button>
+      </div>
+
+      <!-- DESCRIPTION & SAVE -->
+      <div>
+        <label style="font-family:var(--mono);font-size:9.5px;text-transform:uppercase;color:var(--ink4);display:block;margin-bottom:4px">Project Description</label>
+        <textarea id="beg-desc-${realIdx}" rows="3"
+          style="width:100%;padding:8px 12px;font-family:var(--sans);font-size:13px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">${g.desc||''}</textarea>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end">
+        <button onclick="beUpdateGalleryItem(${realIdx})" class="submit-btn" style="padding:8px 20px;font-size:11px">
+          Save Project #${realIdx + 1}
+        </button>
       </div>
     </div>
     `;
@@ -4899,6 +4958,102 @@ function renderBeGallery(searchTerm){
 
   c.innerHTML = html;
 }
+
+// ==================== FAST DEDICATED PHOTO TRANSFER ENGINE ====================
+let transferSourceProjIdx = null;
+let transferSourcePhotoIdx = null;
+
+function beOpenTransferModal(fromProjIdx, photoIdx){
+  transferSourceProjIdx = fromProjIdx;
+  transferSourcePhotoIdx = photoIdx;
+
+  const proj = galleryItems[fromProjIdx];
+  if(!proj) return;
+  const allImgs = (proj.images && proj.images.length > 0) ? proj.images : [proj.path];
+  const imgSrc = allImgs[photoIdx] || proj.path;
+
+  const prev = document.getElementById('be-transfer-preview');
+  if(prev){
+    prev.innerHTML = `
+      <img src="${imgSrc}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--border)">
+      <div>
+        <div style="font-family:var(--mono);font-size:9.5px;color:var(--ink4)">CURRENT PROJECT:</div>
+        <div style="font-family:var(--serif);font-size:16px;color:var(--ink);font-weight:600">${proj.title}</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:2px">Photo #${photoIdx + 1}: ${imgSrc.split('/').pop()}</div>
+      </div>
+    `;
+  }
+
+  const sel = document.getElementById('be-transfer-target-select');
+  if(sel){
+    sel.innerHTML = galleryItems.map((other, oi) => {
+      if(oi === fromProjIdx) return '';
+      return `<option value="${oi}">[${String(oi+1).padStart(2,'0')}] ${other.title}</option>`;
+    }).join('');
+  }
+
+  const modal = document.getElementById('be-transfer-modal');
+  if(modal) modal.classList.add('open');
+}
+window.beOpenTransferModal = beOpenTransferModal;
+
+function beCloseTransferModal(){
+  const modal = document.getElementById('be-transfer-modal');
+  if(modal) modal.classList.remove('open');
+}
+window.beCloseTransferModal = beCloseTransferModal;
+
+function beExecutePhotoTransfer(){
+  if(transferSourceProjIdx === null || transferSourcePhotoIdx === null) return;
+  const sel = document.getElementById('be-transfer-target-select');
+  if(!sel) return;
+  const toProjIdx = parseInt(sel.value);
+  if(isNaN(toProjIdx) || toProjIdx === transferSourceProjIdx) return;
+
+  beMoveImageToProject(transferSourceProjIdx, transferSourcePhotoIdx, toProjIdx);
+  beCloseTransferModal();
+}
+window.beExecutePhotoTransfer = beExecutePhotoTransfer;
+
+function beMoveImageToProject(fromProjIdx, photoIdx, toProjIdx){
+  if(fromProjIdx === toProjIdx) return;
+  const srcProj = galleryItems[fromProjIdx];
+  const destProj = galleryItems[toProjIdx];
+  if(!srcProj || !destProj) return;
+
+  let srcImages = (srcProj.images && srcProj.images.length > 0) ? [...srcProj.images] : [srcProj.path];
+  let destImages = (destProj.images && destProj.images.length > 0) ? [...destProj.images] : [destProj.path];
+
+  if(photoIdx < 0 || photoIdx >= srcImages.length) return;
+
+  const [movedPhoto] = srcImages.splice(photoIdx, 1);
+  destImages.push(movedPhoto);
+
+  // Transfer youtube link if associated
+  if(srcProj.subVideos && srcProj.subVideos[photoIdx]){
+    destProj.subVideos = destProj.subVideos || {};
+    destProj.subVideos[destImages.length - 1] = srcProj.subVideos[photoIdx];
+    delete srcProj.subVideos[photoIdx];
+  }
+
+  if(srcImages.length === 0){
+    srcProj.images = [];
+    srcProj.path = '';
+  } else {
+    srcProj.images = srcImages;
+    srcProj.path = srcImages[0];
+  }
+
+  destProj.images = destImages;
+  if(!destProj.path) destProj.path = destImages[0];
+
+  saveData('rana_gallery_data', galleryItems);
+  renderBeGallery();
+  renderGallery('all');
+  scheduleGitHubAutoSync();
+  showToast(`&#10140; Successfully moved photo to "${destProj.title}"!`);
+}
+window.beMoveImageToProject = beMoveImageToProject;
 
 
 // ==================== AUTHENTICATION & SECURITY GATE ====================
@@ -6664,5 +6819,31 @@ if(document.readyState === 'loading'){
 }
 
 </script>
+<!-- DEDICATED PHOTO TRANSFER TO ANOTHER PROJECT MODAL -->
+  <div id="be-transfer-modal">
+    <div class="be-transfer-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px">
+        <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin:0">&#10140; Transfer Photo to Another Project</h3>
+        <button onclick="beCloseTransferModal()" style="background:none;border:none;color:var(--ink3);font-size:22px;cursor:pointer">&times;</button>
+      </div>
+
+      <div id="be-transfer-preview" style="display:flex;gap:14px;align-items:center;background:var(--bg);padding:12px;border-radius:6px;border:1px solid var(--border)">
+        <!-- Injected via JS -->
+      </div>
+
+      <div>
+        <label style="display:block;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink3);margin-bottom:6px">SELECT TARGET DESTINATION PROJECT:</label>
+        <select id="be-transfer-target-select" style="width:100%;padding:10px 12px;font-family:var(--mono);font-size:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px">
+          <!-- Injected dynamically on open -->
+        </select>
+      </div>
+
+      <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px">
+        <button onclick="beCloseTransferModal()" style="padding:9px 18px;font-family:var(--mono);font-size:11px;background:transparent;border:1px solid var(--border);color:var(--ink3);border-radius:4px;cursor:pointer">Cancel</button>
+        <button id="be-transfer-confirm-btn" onclick="beExecutePhotoTransfer()" style="padding:9px 22px;font-family:var(--mono);font-size:11px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:4px;cursor:pointer;font-weight:700">&#10140; Confirm &amp; Move Photo</button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
