@@ -1340,7 +1340,7 @@ img {
           <a href="https://github.com/settings/tokens/new?scopes=repo&description=Portfolio+Auto+Sync" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:10px;color:#0969da;text-decoration:underline">Get a Token on GitHub &nearr;</a>
         </div>
         <div style="display:flex;gap:8px">
-          <input id="gh-token-input" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+          <input id="gh-token-input" type="password" placeholder="Enter GitHub Token (Auto-configured)"
             style="flex:1;padding:8px 12px;font-family:var(--mono);font-size:11.5px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px">
           <button onclick="toggleTokenVisibility()" id="gh-toggle-btn"
             style="padding:8px 12px;font-family:var(--mono);font-size:11px;background:transparent;border:1px solid var(--border);color:var(--ink);border-radius:3px;cursor:pointer">👁️ Show</button>
@@ -1547,7 +1547,7 @@ img {
     </div>
 
     <!-- TECH BACKEND -->
-        <!-- 2. TECHNICAL PROJECTS BACKEND -->
+            <!-- 2. TECHNICAL PROJECTS BACKEND -->
     <div class="backend-panel" id="bp-tech">
       <div class="backend-form">
         <h3 style="font-family:var(--serif);font-size:22px;font-weight:300;margin-bottom:20px">Add Technical Project</h3>
@@ -1797,9 +1797,8 @@ const ARTICLES_DATA = [
 const CLIENTS_DATA = ["IDFL", "Hashage", "Rizpros", "Eskimo Pizza", "Subway", "Wayback Burgers", "Get Connected", "Digiworld", "Apache", "IPPA", "Zouq", "Dera", "Chick City", "Chickn Lickn", "Biryani Box", "R24 News", "IT-Fix", "FSK Solicitors", "I&C Law", "IMK Law", "IK & Co", "QR Accounting", "FAMS", "Fast Premium", "Wonderlicious", "Eurasia", "Laura Dowling", "Madia Street", "Quality Food", "Motokraft", "Chronic Pain"];
 
 let novels = loadData('rana_novels_data', NOVELS_DATA);
-let articles = loadData('rana_articles_data', ARTICLES_DATA);
 let techProjects = loadData('rana_tech_data', TECH_PROJECTS_DATA);
-articles = loadData('rana_articles_data', ARTICLES_DATA);
+if(!articles || !Array.isArray(articles) || articles.length < 5){ articles = JSON.parse(JSON.stringify(ARTICLES_DATA)); saveData('rana_articles_data', articles); }
 let galleryItems = loadData('rana_gallery_data', GALLERY_DATA);
 let software = loadData('rana_software_data', SOFTWARE_DATA);
 let experience = loadData('rana_experience_data', EXPERIENCE_DATA);
@@ -3598,6 +3597,9 @@ function scheduleGitHubAutoSync(){
 
 // Init GitHub Sync Badge
 setTimeout(updateGitHubStatusBadge, 200);
+
+
+
 
 
 // ==================== CANONICAL ARTICLES DATA ====================
