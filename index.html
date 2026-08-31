@@ -1545,6 +1545,8 @@ body.theme-dark .submit-btn {
 
 
 
+
+
 /* ==================== VIBRANT 360-DEGREE OMNIDIRECTIONAL AURA & CHROMATIC TITLES ==================== */
 /* Track and container padding so top, bottom, left, and right glow breathe freely in 360 degrees */
 .novels-slider-track,
@@ -4636,41 +4638,13 @@ function renderAbout(){
 // 8. BACKEND PAGE
 
 
-function switchBackend(name, btn){
-  document.querySelectorAll('.bt').forEach(b=>b.classList.remove('on'));
-  document.querySelectorAll('.backend-panel').forEach(p=>p.classList.remove('on'));
-  btn.classList.add('on');
-  const targetPanel = document.getElementById('bp-'+name);
-  if(targetPanel) targetPanel.classList.add('on');
-  if(name === 'articles' && window.renderBeArticles) renderBeArticles();
-  if(name === 'clients' && window.renderBeClients) renderBeClients();
-  if(name === 'tech' && window.renderBeTech) renderBeTech();
-  if(name === 'gallery' && window.renderBeGallery) renderBeGallery();
-  if(name === 'novels' && window.renderBeNovels) renderBeNovels();
-  if(name === 'software' && window.renderBeSoftware) renderBeSoftware();
-  if(name === 'experience' && window.renderBeExp) renderBeExp();
-}
+
 
 function showToast(msg){
   const t = document.getElementById('toast');
+  if(!t) return;
   t.textContent = msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 2500);
-}
-
-function addNovel(){
-  const title = document.getElementById('b-novel-title').value.trim();
-  if(!title){ showToast('Title required'); return; }
-  const n = {
-    id: Date.now(),
-    title,
-    genre: document.getElementById('b-novel-genre').value || 'Fiction',
-    type: 'Novel',
-    tagline: document.getElementById('b-novel-tagline').value,
-    desc: document.getElementById('b-novel-desc').value,
-    excerpt: document.getElementById('b-novel-desc').value,
-    cover: document.getElementById('b-novel-cover').value || 'Novels/Ten Days in Heaven/20260407_1207_Image Generation_simple_compose_01knksznadeb291cpy5nqgw13c.png'
-  };
-  novels.unshift(n); saveData('rana_novels_data', novels); renderBeNovels(); showToast('Novel added');
 }
 
 // ==================== MASTER COMPLETE BACKEND CONTROLLER ====================
@@ -4764,20 +4738,7 @@ function renderBackend(){
 }
 window.renderBackend = renderBackend;
 
-function switchBackend(name, btn){
-  document.querySelectorAll('.bt').forEach(b=>b.classList.remove('on'));
-  document.querySelectorAll('.backend-panel').forEach(p=>p.classList.remove('on'));
-  if(btn) btn.classList.add('on');
-  const targetPanel = document.getElementById('bp-'+name);
-  if(targetPanel) targetPanel.classList.add('on');
-  if(name === 'gallery') renderBeGallery();
-  else if(name === 'novels') renderBeNovels();
-  else if(name === 'tech') renderBeTech();
-  else if(name === 'software') renderBeSoftware();
-  else if(name === 'experience') renderBeExp();
-  else if(name === 'clients') renderBeClients();
-  else if(name === 'articles') renderBeArticles();
-}
+
 window.switchBackend = switchBackend;
 
 // 1. NOVELS BACKEND
@@ -6040,6 +6001,9 @@ if(document.readyState === 'loading'){
   autoFetchCloudDatabaseOnBoot();
   renderHome();
 }
+
+
+
 
 
 
