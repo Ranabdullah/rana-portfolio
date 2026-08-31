@@ -1681,6 +1681,143 @@ body.theme-dark .submit-btn {
   font-weight: 700 !important;
   color: var(--card-accent, #ffd740) !important;
 }
+
+/* ==================== 100% FLAWLESS LIGHT OVER DARK & DARK OVER LIGHT CONTRAST ENGINE ==================== */
+
+/* 1. LIGHT THEME (White / Day Study): Crisp Dark Text & Elements on Light Canvas */
+body.theme-light {
+  --bg: #f5f6f8 !important;
+  --bg-card: #ffffff !important;
+  --bg2: #eaedf2 !important;
+  --bg3: #f8fafc !important;
+  --ink: #11141a !important;
+  --ink2: #242933 !important;
+  --ink3: #4b5563 !important;
+  --ink4: #6b7280 !important;
+  --border: #d1d5db !important;
+  --border2: #e5e7eb !important;
+  --nav-bg: rgba(245, 246, 248, 0.95) !important;
+}
+
+body.theme-light h1, body.theme-light h2, body.theme-light h3, body.theme-light h4, body.theme-light h5, body.theme-light h6 {
+  color: #11141a !important;
+}
+body.theme-light p, body.theme-light span, body.theme-light div {
+  color: inherit;
+}
+body.theme-light .btn-primary, body.theme-light .submit-btn, body.theme-light .novel-amz-btn {
+  background: #11141a !important;
+  color: #ffffff !important;
+  border: 1px solid #11141a !important;
+  font-weight: 700 !important;
+}
+body.theme-light .btn-outline, body.theme-light .novel-read-btn, body.theme-light .article-btn, body.theme-light .sw-product-link {
+  background: #ffffff !important;
+  color: #11141a !important;
+  border: 1px solid #d1d5db !important;
+  font-weight: 600 !important;
+}
+body.theme-light .form-input, body.theme-light .form-textarea, body.theme-light .backend-item input, body.theme-light .backend-item textarea, body.theme-light .backend-item select {
+  background: #ffffff !important;
+  color: #11141a !important;
+  border: 1px solid #d1d5db !important;
+}
+body.theme-light .backend-item button:not([style*="color:#e50914"]):not([style*="color: #e50914"]):not([style*="color: rgb(229, 9, 20)"]) {
+  background: #11141a !important;
+  color: #ffffff !important;
+  border: 1px solid #11141a !important;
+}
+
+/* 2. EVENING THEME (Blue Dusk Study): Crisp Light Text & Elements on Rich Navy Canvas */
+body.theme-evening {
+  --bg: #0b132b !important;
+  --bg-card: #1c2541 !important;
+  --bg2: #141e3c !important;
+  --bg3: #080d1f !important;
+  --ink: #f0f4f8 !important;
+  --ink2: #d9e2ec !important;
+  --ink3: #9fb3c8 !important;
+  --ink4: #7b8f9f !important;
+  --border: rgba(255, 255, 255, 0.18) !important;
+  --border2: rgba(255, 255, 255, 0.1) !important;
+  --nav-bg: rgba(11, 19, 43, 0.95) !important;
+}
+
+body.theme-evening h1, body.theme-evening h2, body.theme-evening h3, body.theme-evening h4, body.theme-evening h5, body.theme-evening h6 {
+  color: #f0f4f8 !important;
+}
+body.theme-evening .btn-primary, body.theme-evening .submit-btn, body.theme-evening .novel-amz-btn {
+  background: #ffd166 !important;
+  color: #0b132b !important;
+  border: 1px solid #ffd166 !important;
+  font-weight: 700 !important;
+}
+body.theme-evening .btn-outline, body.theme-evening .novel-read-btn, body.theme-evening .article-btn, body.theme-evening .sw-product-link {
+  background: #1c2541 !important;
+  color: #f0f4f8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  font-weight: 600 !important;
+}
+body.theme-evening .form-input, body.theme-evening .form-textarea, body.theme-evening .backend-item input, body.theme-evening .backend-item textarea, body.theme-evening .backend-item select {
+  background: #141e3c !important;
+  color: #f0f4f8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+body.theme-evening .backend-item button:not([style*="color:#e50914"]):not([style*="color: #e50914"]):not([style*="color: rgb(229, 9, 20)"]) {
+  background: #ffd166 !important;
+  color: #0b132b !important;
+  border: 1px solid #ffd166 !important;
+  font-weight: 700 !important;
+}
+
+/* 3. DARK THEME (Black Nocturnal Study): Ultra-Crisp High Contrast White Text on Jet Black Canvas */
+body.theme-dark {
+  --bg: #07080b !important;
+  --bg-card: #111318 !important;
+  --bg2: #181b22 !important;
+  --bg3: #0c0d11 !important;
+  --ink: #ffffff !important;
+  --ink2: #f0f2f5 !important;
+  --ink3: #cbd5e1 !important;
+  --ink4: #94a3b8 !important;
+  --border: rgba(255, 255, 255, 0.16) !important;
+  --border2: rgba(255, 255, 255, 0.08) !important;
+  --nav-bg: rgba(7, 8, 11, 0.95) !important;
+}
+
+body.theme-dark h1, body.theme-dark h2, body.theme-dark h3, body.theme-dark h4, body.theme-dark h5, body.theme-dark h6 {
+  color: #ffffff !important;
+}
+body.theme-dark .btn-primary, body.theme-dark .submit-btn, body.theme-dark .novel-amz-btn {
+  background: #ffffff !important;
+  color: #07080b !important;
+  border: 1px solid #ffffff !important;
+  font-weight: 700 !important;
+}
+body.theme-dark .btn-outline, body.theme-dark .novel-read-btn, body.theme-dark .article-btn, body.theme-dark .sw-product-link {
+  background: #111318 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  font-weight: 600 !important;
+}
+body.theme-dark .form-input, body.theme-dark .form-textarea, body.theme-dark .backend-item input, body.theme-dark .backend-item textarea, body.theme-dark .backend-item select {
+  background: #181b22 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+body.theme-dark .backend-item button:not([style*="color:#e50914"]):not([style*="color: #e50914"]):not([style*="color: rgb(229, 9, 20)"]) {
+  background: #ffffff !important;
+  color: #07080b !important;
+  border: 1px solid #ffffff !important;
+  font-weight: 700 !important;
+}
+
+/* Modals & Gate Light/Dark Contrast */
+#novelModal .modal-inner, #be-transfer-modal .modal-content, #be-login-gate .be-gate-box {
+  background: var(--bg-card) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--border) !important;
+}
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
