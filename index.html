@@ -2335,10 +2335,10 @@ img,
         <p style="color:var(--ink3);font-size:13px;margin:4px 0 0">All your portfolio content synced directly with your GitHub repository.</p>
       </div>
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-        <button class="be-signout-btn" onclick="pushToGitHubDirect(true)" style="background:#24292e;color:#fff;border:1px solid #24292e;font-weight:600;display:inline-flex;align-items:center;gap:8px;padding:9px 20px;font-size:12.5px;border-radius:4px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.15)">
+        <button class="be-signout-btn" onclick="saveAllDataToGitHub()" style="background:#24292e;color:#fff;border:1px solid #24292e;font-weight:600;display:inline-flex;align-items:center;gap:8px;padding:9px 20px;font-size:12.5px;border-radius:4px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.15)">
           <span style="font-size:16px">🐙</span> Save All Data to GitHub (1-Click)
         </button>
-        <button class="be-signout-btn" onclick="pullFromGitHubDirect()" style="background:var(--bg);color:var(--ink);border:1px solid var(--border);padding:9px 15px;font-size:11.5px;border-radius:4px;cursor:pointer;font-weight:500">
+        <button class="be-signout-btn" onclick="pullDataFromGitHub()" style="background:var(--bg);color:var(--ink);border:1px solid var(--border);padding:9px 15px;font-size:11.5px;border-radius:4px;cursor:pointer;font-weight:500">
           📥 Pull from GitHub
         </button>
         <button class="be-signout-btn" onclick="updateGitHubTokenPrompt()" style="background:var(--bg);color:var(--ink2);border:1px solid var(--border);padding:9px 14px;font-size:11.5px;border-radius:4px;cursor:pointer">
@@ -5010,15 +5010,22 @@ function switchBackend(name, btn){
   const targetPanel = document.getElementById('bp-' + name);
   if(targetPanel) targetPanel.classList.add('on');
 
-  if(name === 'gallery') renderBeGallery();
-  else if(name === 'novels') renderBeNovels();
-  else if(name === 'tech') renderBeTech();
-  else if(name === 'software') renderBeSoftware();
-  else if(name === 'experience') renderBeExp();
-  else if(name === 'clients') renderBeClients();
-  else if(name === 'articles') renderBeArticles();
+  // Asynchronous non-blocking render (0ms INP response!)
+  requestAnimationFrame(() => {
+    if(name === 'gallery') renderBeGallery();
+    else if(name === 'novels') renderBeNovels();
+    else if(name === 'tech') renderBeTech();
+    else if(name === 'software') renderBeSoftware();
+    else if(name === 'experience') renderBeExp();
+    else if(name === 'clients') renderBeClients();
+    else if(name === 'articles') renderBeArticles();
+  });
 }
 window.switchBackend = switchBackend;
+
+// GitHub Sync & Cloud Aliases
+window.pushToGitHubDirect = saveAllDataToGitHub;
+window.pullFromGitHubDirect = pullDataFromGitHub;
 
 function renderBackend(){
   const activeTab = document.querySelector('.bt.on');
