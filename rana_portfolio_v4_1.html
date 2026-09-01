@@ -2352,6 +2352,24 @@ img,
         </button>
       </div>
     </div>
+<!-- GITHUB PAT TOKEN VAULT & CONFIG BAR -->
+          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-size:18px">&#128273;</span>
+              <div>
+                <div style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.08em">GitHub Personal Access Token (PAT) Vault</div>
+                <div style="font-size:11px;color:var(--ink3)">Stored securely in your local browser for instant 1-Click Sync.</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;flex:1;max-width:540px;min-width:280px">
+              <input type="password" id="be-header-token-input" placeholder="Paste ghp_... token here"
+                style="flex:1;padding:8px 12px;font-family:var(--mono);font-size:11.5px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px">
+              <button onclick="beToggleTokenVisibility()" id="btnToggleTokVis" class="submit-btn" style="width:auto;padding:7px 10px;font-size:10.5px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border)">&#128065; Show</button>
+              <button onclick="beCopyTokenFromVault()" class="submit-btn" style="width:auto;padding:7px 12px;font-size:10.5px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border)">&#128203; Copy</button>
+              <button onclick="beSaveTokenToVault()" class="submit-btn" style="width:auto;padding:7px 14px;font-size:10.5px;background:#00c853;color:#fff;border-color:#00c853;font-weight:700">&#128190; Save Token</button>
+            </div>
+          </div>
+
     <div class="backend-tabs">
         <button class="bt on" onclick="switchBackend('novels',this)">Novels &amp; Books</button>
         <button class="bt" onclick="switchBackend('tech',this)">Technical Projects</button>
@@ -4492,7 +4510,7 @@ function renderPage(name){
   else if(name==='software'){ renderSoftware(); }
   else if(name==='articles'){ renderArticles(); }
   else if(name==='about'){ renderAbout(); }
-  else if(name==='backend'){ renderBackend(); }
+  else if(name==='backend'){ renderBackend(); beLoadTokenToVaultInput(); }
   setupCursorHover();
 }
 
@@ -4524,6 +4542,60 @@ function getCardGlowStyle(index){
   return `--card-border:${col.border};--card-glow:${col.glow};--card-glow-ambient:${col.ambient};--card-glow-soft:${col.soft};--card-border-hover:${col.borderHover};--card-glow-hover:${col.glowHover};--card-glow-ambient-hover:${col.ambientHover};--card-glow-soft-hover:${col.softHover};--card-accent:${col.accent};`;
 }
 window.getCardGlowStyle = getCardGlowStyle;
+
+// ==================== GITHUB TOKEN VAULT ENGINE ====================
+function beLoadTokenToVaultInput(){
+  const input = document.getElementById('be-header-token-input');
+  if(input){
+    input.value = localStorage.getItem('rana_github_token') || '';
+  }
+}
+
+function beToggleTokenVisibility(){
+  const input = document.getElementById('be-header-token-input');
+  const btn = document.getElementById('btnToggleTokVis');
+  if(input && btn){
+    if(input.type === 'password'){
+      input.type = 'text';
+      btn.innerHTML = '&#128065; Hide';
+    } else {
+      input.type = 'password';
+      btn.innerHTML = '&#128065; Show';
+    }
+  }
+}
+window.beToggleTokenVisibility = beToggleTokenVisibility;
+
+function beCopyTokenFromVault(){
+  const input = document.getElementById('be-header-token-input');
+  if(input && input.value.trim()){
+    navigator.clipboard.writeText(input.value.trim()).then(() => {
+      showToast('&#10003; Token copied to clipboard!');
+    }).catch(() => {
+      input.select();
+      document.execCommand('copy');
+      showToast('&#10003; Token copied!');
+    });
+  } else {
+    alert('Vault is currently empty. Paste your GitHub token into the box first.');
+  }
+}
+window.beCopyTokenFromVault = beCopyTokenFromVault;
+
+function beSaveTokenToVault(){
+  const input = document.getElementById('be-header-token-input');
+  if(input){
+    const val = input.value.trim();
+    if(val){
+      localStorage.setItem('rana_github_token', val);
+      showToast('&#10003; GitHub Token saved to Vault!');
+    } else {
+      localStorage.removeItem('rana_github_token');
+      showToast('Token cleared from Vault.');
+    }
+  }
+}
+window.beSaveTokenToVault = beSaveTokenToVault;
 
 function renderHome(){
   // 1. Home Tech Spotlight
@@ -4989,7 +5061,7 @@ function beCheckAuthOnNav(){
     if(isAuth){
       gate.style.display = 'none';
       auth.style.display = 'block';
-      renderBackend();
+      renderBackend(); beLoadTokenToVaultInput();
     } else {
       gate.style.display = 'flex';
       auth.style.display = 'none';
@@ -6246,7 +6318,7 @@ async function pullDataFromGitHub(){
       if(data.experience) { experience = data.experience; saveData('rana_experience_data', experience); }
       if(data.clients) { clients = data.clients; saveData('rana_clients_data', clients); }
       if(data.articles) { articles = data.articles; saveData('rana_articles_data', articles); }
-      renderBackend();
+      renderBackend(); beLoadTokenToVaultInput();
       renderHome();
       showToast('Hydrated portfolio from GitHub!');
       return true;
@@ -6317,7 +6389,7 @@ function restoreDataJson(e){
       if(data.experience) { experience = data.experience; saveData('rana_experience_data', experience); }
       if(data.clients) { clients = data.clients; saveData('rana_clients_data', clients); }
       if(data.articles) { articles = data.articles; saveData('rana_articles_data', articles); }
-      renderBackend();
+      renderBackend(); beLoadTokenToVaultInput();
       renderHome();
       scheduleGitHubAutoSync();
       showToast('Database restored successfully from JSON file');
