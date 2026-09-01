@@ -6087,11 +6087,29 @@ const GITHUB_PAT_ENC = 'Z2hwX2xTRWtMWEY2Nm9uZ3pQWU1rYm94WDYyYTN0dEFrQTJUVld2OA==
 
 function getGitHubToken(){
   try {
+    const userTok = localStorage.getItem('rana_github_token');
+    if(userTok && userTok.trim()) return userTok.trim();
     return window.atob(GITHUB_PAT_ENC);
   } catch(e){
-    return '';
+    return localStorage.getItem('rana_github_token') || '';
   }
 }
+
+function updateGitHubTokenPrompt(){
+  const curr = localStorage.getItem('rana_github_token') || '';
+  const val = prompt('Enter your GitHub Personal Access Token (starts with ghp_... with "repo" scope):', curr);
+  if(val !== null){
+    if(val.trim()){
+      localStorage.setItem('rana_github_token', val.trim());
+      showToast('&#10003; GitHub Token saved securely!');
+      saveAllDataToGitHub(false);
+    } else {
+      localStorage.removeItem('rana_github_token');
+      showToast('Custom token cleared.');
+    }
+  }
+}
+window.updateGitHubTokenPrompt = updateGitHubTokenPrompt;
 
 let ghSyncTimer = null;
 
@@ -6190,7 +6208,14 @@ async function saveAllDataToGitHub(isAuto = false){
     } else {
       const errData = await putRes.json();
       console.error('GitHub Sync Error:', errData);
-      if(!isAuto) alert('GitHub Sync failed: ' + (errData.message || 'Unknown error'));
+      if(!isAuto){
+        if(errData.message === 'Bad credentials'){
+          const ask = confirm('GitHub Sync Notice: Your GitHub Access Token has expired or is invalid.\n\nWould you like to enter a new GitHub Token now?');
+          if(ask) updateGitHubTokenPrompt();
+        } else {
+          alert('GitHub Sync failed: ' + (errData.message || 'Unknown error'));
+        }
+      }
       if(syncBtn){
         syncBtn.innerHTML = '&#9888; Sync Failed';
         syncBtn.style.opacity = '1';
