@@ -1905,6 +1905,159 @@ img,
   font-weight: 700 !important;
   color: var(--card-accent, #00e5ff) !important;
 }
+
+/* ==================== 60FPS HARDWARE GPU ACCELERATION & LAYOUT CONTAINMENT ==================== */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: #00e5ff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  will-change: transform;
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(0, 229, 255, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  will-change: transform;
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+}
+
+.cursor.hover {
+  width: 14px;
+  height: 14px;
+  background: #ff007f;
+}
+
+.cursor-ring.hover {
+  width: 50px;
+  height: 50px;
+  border-color: rgba(255, 0, 127, 0.7);
+}
+
+/* Card GPU Compositing Layers */
+.g-card,
+.novel-card,
+.novel-page-card,
+.proj-card,
+.sw-product-card,
+.tech-spotlight-card,
+.dls-card,
+.article-card,
+.expertise-grid > div {
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
+  contain: content;
+}
+
+
+
+/* ==================== CINEMATIC PROGRESSIVE LOADERS & RESPONSIVE NOVELS GRID ==================== */
+
+/* Shimmer Skeleton Placeholder */
+@keyframes shimmerPulse {
+  0% { opacity: 0.3; background-position: -200% 0; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; background-position: 200% 0; }
+}
+
+.skeleton-card {
+  height: 280px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--bg-card) 25%, var(--border) 50%, var(--bg-card) 75%);
+  background-size: 200% 100%;
+  animation: shimmerPulse 1.8s infinite ease-in-out;
+  border: 1px solid var(--border);
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* Smooth Fade-in on Image Loaded */
+img.lazy-fade {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s ease;
+}
+img.lazy-fade.loaded {
+  opacity: 1 !important;
+}
+
+/* ==================== NOVELS FULL SCREEN RESPONSIVE (3, 4, 5, 6 COLS) ==================== */
+#page-novels {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.novels-hero {
+  padding: 80px 48px 30px !important;
+  max-width: 100% !important;
+}
+
+.novels-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  gap: 32px 24px !important;
+  padding: 20px 48px 80px !important;
+  box-sizing: border-box !important;
+  background: var(--bg) !important;
+}
+
+@media (min-width: 1920px) {
+  .novels-grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+  }
+}
+@media (min-width: 1560px) and (max-width: 1919px) {
+  .novels-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+}
+@media (min-width: 1200px) and (max-width: 1559px) {
+  .novels-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+@media (min-width: 860px) and (max-width: 1199px) {
+  .novels-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+@media (max-width: 859px) {
+  .novels-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+    padding: 20px 16px 60px !important;
+  }
+}
+
+.novel-page-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+.novel-page-cover {
+  width: 100% !important;
+  aspect-ratio: 2/3 !important;
+  overflow: hidden !important;
+}
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -1918,7 +2071,6 @@ img,
 <!-- CURSOR -->
 <div class="cursor" id="cur"></div>
 <div class="cursor-ring" id="curRing"></div>
-
 <!-- NAVIGATION -->
 <nav id="mainNav">
   <a class="nav-logo" href="#" onclick="showPage('home');return false">Rana <span>Abdullah</span></a>
@@ -2512,64 +2664,48 @@ img,
 
 <!-- ==================== JAVASCRIPT LOGIC ==================== -->
 <script>
+// ==================== ULTRA-FAST HARDWARE-ACCELERATED CUSTOM CURSOR ====================
+let mx = -100, my = -100, rx = -100, ry = -100;
+let cursorTicking = false;
+const cur = document.getElementById('cur');
+const curRing = document.getElementById('curRing');
 
-// ==================== RESILIENT DATA STORAGE & AUTO-RECOVERY ENGINE ====================
-function loadData(key, def){
-  try {
-    // 1. Direct key lookup
-    const direct = localStorage.getItem(key);
-    if(direct){
-      try { return JSON.parse(direct); } catch(e){}
+if(cur && curRing){
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+    if(!cursorTicking){
+      requestAnimationFrame(() => {
+        cur.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+        cursorTicking = false;
+      });
+      cursorTicking = true;
     }
+  }, { passive: true });
 
-    // 2. Extract base prefix (e.g. 'rana_gallery' from 'rana_gallery_v35' or 'rana_gallery_data')
-    const prefix = key.replace(/_(?:data|v\d+|bw)$/, '');
-    
-    // 3. Scan all keys in localStorage to auto-recover from any previous version
-    let bestKey = null;
-    let maxVer = -1;
-    
-    for(let i = 0; i < localStorage.length; i++){
-      const k = localStorage.key(i);
-      if(k && (k.startsWith(prefix) || (prefix==='rana_experience' && k.startsWith('rana_exp')))){
-        const match = k.match(/_v(\d+)$/);
-        const ver = match ? parseInt(match[1], 10) : 0;
-        if(ver >= maxVer){
-          maxVer = ver;
-          bestKey = k;
-        }
-      }
-    }
-
-    if(bestKey){
-      const saved = localStorage.getItem(bestKey);
-      if(saved){
-        const parsed = JSON.parse(saved);
-        // Automatically migrate forward to the standard key
-        localStorage.setItem(key, saved);
-        console.log(`[Auto-Recovered] Restored data for ${key} from ${bestKey}`);
-        return parsed;
-      }
-    }
-
-    return def;
-  } catch(e) {
-    console.error('Storage load error:', e);
-    return def;
+  function animRing(){
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    curRing.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+    requestAnimationFrame(animRing);
   }
+  requestAnimationFrame(animRing);
+
+  document.addEventListener('mouseover', (e) => {
+    if(e.target.closest('a, button, input, select, textarea, .g-card, .novel-card, .novel-page-card, .proj-card, .sw-product-card, .tech-spotlight-card, .dls-card, .article-card, .bt, .submit-btn')){
+      cur.classList.add('hover');
+      curRing.classList.add('hover');
+    }
+  }, { passive: true });
+
+  document.addEventListener('mouseout', (e) => {
+    if(e.target.closest('a, button, input, select, textarea, .g-card, .novel-card, .novel-page-card, .proj-card, .sw-product-card, .tech-spotlight-card, .dls-card, .article-card, .bt, .submit-btn')){
+      cur.classList.remove('hover');
+      curRing.classList.remove('hover');
+    }
+  }, { passive: true });
 }
 
-function saveData(key, val){
-  try {
-    const json = JSON.stringify(val);
-    localStorage.setItem(key, json);
-    const prefix = key.replace(/_(?:data|v\d+|bw)$/, '');
-    localStorage.setItem(prefix + '_data', json);
-    if(window.scheduleGitHubAutoSync) window.scheduleGitHubAutoSync();
-  } catch(e) {
-    console.error('Storage save error:', e);
-  }
-}
 const NOVELS_DATA = [{"id": "amz-1", "title": "The Child's World: How Family and the Earliest Relationships Shape the Human Mind", "genre": "Psychology & Attachment", "type": "Published Book", "published": true, "amazonUrl": "https://www.amazon.co.uk/dp/B0H4NV4494", "tagline": "How family dynamics and early attachment shape cognitive and emotional growth.", "desc": "An insightful exploration into developmental psychology, examining how early parental bonds, familial environments, and formative relational experiences establish the foundation for lifelong emotional resilience, cognitive patterns, and relational security.", "excerpt": "INTRODUCTION: THE INVISIBLE FOUNDATION\\n\\nThe human mind is not assembled in isolation. It is sculpted in the quiet interactions of infancy — in the tone of a caregiver's voice, the consistency of a response to distress, and the emotional climate of the home.\\n\\nDecades of developmental neuroscience and attachment theory converge on a single undeniable truth: the earliest relationships provide the primary blueprint for how an individual perceives safety, navigates intimacy, and regulates stress throughout life.", "cover": "Novels/Amazon_B0H4NV4494/cover.jpg"}, {"id": "amz-5", "title": "The Child's World: How Harm and Healing in Childhood Shape the Human Mind", "genre": "Trauma & Resilience", "type": "Published Book", "published": true, "amazonUrl": "https://www.amazon.co.uk/dp/B0H4WT1JZY", "tagline": "Understanding developmental adversity, neurological resilience, and restorative pathways.", "desc": "A compassionate and scientifically grounded examination of developmental trauma, adverse childhood experiences (ACEs), neuroplasticity, and the restorative conditions necessary for lasting psychological healing.", "excerpt": "CHAPTER ONE: THE ARCHITECTURE OF RESILIENCE\\n\\nAdversity leaves neurological imprints, but neuroplasticity ensures that the human mind possesses an extraordinary capacity for restoration.\\n\\nHealing is not the erasure of past harm; it is the deliberate construction of new neural pathways, safe attachments, and restorative self-narratives that allow individuals to reclaim their full developmental potential.", "cover": "Novels/Amazon_B0H4WT1JZY/cover.jpg"}, {"id": "amz-3", "title": "The Child's World: How Teachers, Classrooms, and the World Beyond the Family Shape the Human Mind", "genre": "Educational Psychology", "type": "Published Book", "published": true, "amazonUrl": "https://www.amazon.co.uk/dp/B0H57BNZGQ", "tagline": "Exploring classroom environments, pedagogical impact, and social development.", "desc": "An investigation into the secondary crucible of human development: schools, peer groups, and community structures. Explores how educators, classroom cultures, and institutional support shape intellectual autonomy and identity.", "excerpt": "CHAPTER ONE: BEYOND THE THRESHOLD\\n\\nThe moment a child steps into a classroom, their psychological landscape expands exponentially. They encounter an institutional world where rules are shared, hierarchies are negotiated, and validation must be earned among peers.\\n\\nA great teacher does not merely transmit curriculum; they construct a psychological container in which intellectual curiosity feels safe enough to override the fear of failure.", "cover": "Novels/Amazon_B0H57BNZGQ/cover.jpg"}, {"id": "amz-2", "title": "The Child's World: On Screens, Social Media, and the Childhood That Changed", "genre": "Digital Psychology", "type": "Published Book", "published": true, "amazonUrl": "https://www.amazon.co.uk/dp/B0HFK6LWPG", "tagline": "An essential inquiry into attention, social media, and digital childhood.", "desc": "A timely and rigorous analysis of how smartphones, algorithmic media feeds, and ubiquitous digital stimulation are reshaping childhood development, attention spans, social anxiety, and emotional regulation in modern adolescents.", "excerpt": "CHAPTER ONE: THE ATTENTION MIGRATION\\n\\nChildhood did not gradually evolve into the digital era; it was relocated there almost overnight.\\n\\nWhen a child engages with an algorithmic stream designed by hundreds of behavioral engineers to capture and monetize attention, the fundamental rhythm of unstructured play, boredom, and autonomous social exploration is fundamentally disrupted. Understanding this shift is the defining developmental challenge of our era.", "cover": "Novels/Amazon_B0HFK6LWPG/cover.jpg"}, {"id": "nov-7", "title": "Children of Pain", "genre": "Literary Drama", "type": "Novel", "published": false, "amazonUrl": "", "tagline": "Some wounds do not heal into scars; they heal into armor.", "desc": "A piercing family saga exploring three generations of migrants navigating industrial shifts, grief, unexpressed tenderness, and the silent covenants made to protect the next generation.", "excerpt": "PROLOGUE: THE FOUNDRY SHIFT\\n\\nThe iron did not care who poured it. In the winter of 1974, the floor of the northern foundry remained twenty degrees below freezing until the first furnace tapped at six in the morning.\\n\\nRashid stood at the ladle with his coat buttoned to the chin. His knuckles were permanently stained grey with carbon dust.", "cover": "Novels/Children of Pain/Children of Pain.jpg"}, {"id": "nov-4", "title": "What the Buffalo Carry", "genre": "Literary Fiction", "type": "Novella", "published": false, "amazonUrl": "", "tagline": "The first stories we are told become the rooms we live in.", "desc": "A seven-year-old boy counts stars from a dusty rooftop while listening to his great-grandmother's stories of the migrating buffalo — an intimate exploration of inheritance, generational memory, and cultural weight.", "excerpt": "PART ONE: THE ROOF\\n\\nChapter One: Uncle Moon\\n\\nThe night my great-grandmother first told me about the buffalo, the sky was doing something I had never seen it do before. It was not black, and it was not blue. It was the color of a bruised plum, swollen with clouds that had travelled all the way from the northern mountains without dropping a single bead of rain.", "cover": "Novels/What the Buffalo Carry/What the Buffalo Carry.png"}, {"id": "nov-8", "title": "Shavings", "genre": "Literary Fiction", "type": "Novella", "published": false, "amazonUrl": "", "tagline": "The art of what gets planed away in pursuit of form.", "desc": "An intimate novella exploring a master woodworker and his estranged apprentice as they restore an 18th-century pipe organ in an isolated coastal cathedral before winter sets in.", "excerpt": "CHAPTER ONE: THE PLANE\\n\\nThe cedar curls fell like parchment ribbons onto the stone flags of the nave. With every stroke of the hand plane, the timber gave up a scent that was half forest, half cathedral incense.", "cover": "Novels/Shavings/shavings_cover.png"}, {"id": "nov-3", "title": "The Veil of Shadows", "genre": "Epic Fantasy", "type": "Novel", "published": false, "amazonUrl": "", "tagline": "They say silence is peace. But I've seen what festers in silence.", "desc": "Cael's journey through the Trial of Frost — an outcast warrior who learns to forge resilience from silence, weaponize ancient shadows, and reclaim his ancestral voice in a world commanded by frost kings.", "excerpt": "PREFACE\\n\\nFor the unseen ones — the broken who kept walking, the silenced who kept listening, and the children who learnt to turn shadows into shields.\\n\\n\"They say silence is peace. But I've seen what festers in silence. I've heard what it hides.\" — Carved on the mountain stones of the Northern Reach.", "cover": "Novels/The Veil of Shadows/ChatGPT Image May 4, 2026, 11_41_39 PM.png"}, {"id": "nov-6", "title": "The Record Survives", "genre": "Historical Fiction", "type": "Novel", "published": false, "amazonUrl": "", "tagline": "Witnessing matters. Because what is recorded outlives what is destroyed.", "desc": "A sweeping historical novel following an archivist across wartime Europe who preserves clandestine letters, forgotten blueprints, and suppressed voices from being erased by totalitarian regimes.", "excerpt": "ACT 1: THE HIDDEN ROOM\\n\\nChapter One: A Wise Man Feareth\\n\\nHe was nine, and the attic was the safest room in the house: forgotten, obscure, inert. It held its breath, and so did he. Not clean silence. Silence thick with dust, cedar resin, and the dry tang of old paper turning yellow under thirty summers of uninsulated heat.", "cover": "Novels/The Record Survives/The Record Survives.png"}, {"id": "nov-2", "title": "The Last Beacon", "genre": "Speculative Fiction", "type": "Novel", "published": false, "amazonUrl": "", "tagline": "To carry something is to change it.", "desc": "In a fractured future across post-collapse Europe, couriers navigate scarred landscapes carrying corrupted data pods, sacred relics, and memories of a civilization that forgot how to speak without destroying.", "excerpt": "PART ONE: THE CEILING\\n\\nBarcelona, 2263. Before the road.\\n\\n1. Green\\n\\nThe first thing is a ceiling. Pale grey. Water-stained in the northeast corner where a dead light fitting has been dark long enough to forget what light was. He lies on his back and looks at it for a while, not thinking about anything in particular, because thinking in particular would require a context for the thoughts and he has no context yet. He has been alive for six hours.", "cover": "Novels/The Last Beacon/The Last Beacon.png"}, {"id": "nov-1", "title": "Ten Days in Heaven", "genre": "Psychological Thriller", "type": "Novel", "published": false, "amazonUrl": "", "tagline": "Memory is not a record. It is a weapon.", "desc": "Amason Lincoln wakes to find himself at the center of three missing persons cases, one arson investigation, and a financial anomaly — with no memory of the last ten days. A taut, literary thriller exploring the fault lines of memory and identity.", "excerpt": "PART ONE: THE FRACTURE\\n\\nChapter 1: Guns and Ghosts\\n\\nThey were not asking what I did. They were asking what I remember. That distinction mattered more than the guns.\\n\\nI was on the floor of my own living room, hands zip-tied behind my back, three different firearms aimed at various parts of my body. The man in the gray suit crouched before me with the patient, empty expression of someone who has asked the same question to a great many people and is entirely prepared to wait as long as necessary.", "cover": "Novels/Ten Days in Heaven/20260407_1207_Image Generation_simple_compose_01knksznadeb291cpy5nqgw13c.png"}];
 const TECH_PROJECTS_DATA = [{"id": "launcher", "title": "DreamsLab Cyber Launcher", "subtitle": "Chrome Multi-Profile Link Vault", "status": "Live", "badgeClass": "badge-dark", "num": "01", "desc": "A standalone Windows desktop app that acts as an encrypted personal link vault with full multi-account Chrome profile management. Save your important links, notes and account context per Google profile, then launch any Chrome account in one click. Protected with AES-256-GCM encryption.", "features": ["Modular application dock & launcher", "Real-time system telemetry monitor", "Encrypted local vault storage", "Low-overhead native resource pipeline"], "tech": ["Electron", "Node.js", "AES-256-GCM", "Web Crypto API", "Chrome API", "Windows", "GitHub Pages"], "buttons": [{"label": "Download for Windows", "url": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe", "primary": true}, {"label": "Open Web App →", "url": "https://abdullahinayat24-lang.github.io/link-launcher/", "primary": false}, {"label": "GitHub Repo →", "url": "https://github.com/abdullahinayat24-lang/link-launcher", "primary": false}], "hasLinks": true, "links": [{"label": "Download for Windows ↗", "url": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe", "primary": true}, {"label": "Live Web App ↗", "url": "https://abdullahinayat24-lang.github.io/link-launcher/", "primary": false}]}, {"id": "mythos", "title": "Mythos Encyclopedia", "subtitle": "Global Gods, Myths & Folklore Platform", "status": "Mobile & Web App", "badgeClass": "badge-outline", "num": "02", "desc": "A deep cross-platform encyclopedia cataloging 50+ world mythologies and thousands of deities from Greek, Norse, and Egyptian to Hindu, Celtic, Aztec, Japanese, African, and urban folklore. Features rich mythological dossiers, daily deity notifications, interactive world mythology atlas, sacred objects collection, and a 4-tier mythology quiz with global leaderboards.", "features": ["200+ authenticated mythological entities", "Multi-pantheon taxonomic classification", "High-resolution architectural renders", "Full offline search & bookmarking engine"], "tech": ["Ionic / Capacitor", "Vue.js / Vite", "TypeScript", "SQLite", "Wikipedia REST API", "Android SDK"], "buttons": [{"label": "Google Play Store ↗", "url": "https://play.google.com/store/apps/details?id=com.mythos.app", "primary": true}], "hasLinks": true, "links": [{"label": "Google Play Store ↗", "url": "https://play.google.com/store/apps/details?id=com.mythos.app", "primary": true}]}, {"id": "timeline", "title": "World History & Mythology Timeline", "subtitle": "Chronological Multi-Track Engine (10,000 BCE – 1800 CE)", "status": "Web Platform", "badgeClass": "badge-outline", "num": "03", "desc": "An interactive, high-contrast, multi-track chronological timeline connecting global civilizations, founding epics, and legendary writers across 12 millennia. Features independent box zoom controls, Google Photos style epoch scrubber, continuous regional vertical history spines, middle-mouse drag panning, in-window story reader with multi-act chapters, and AI Text-to-Speech narration.", "features": ["Interactive chronological zoom canvas", "Parallel civilizational timeline overlays", "Cross-linked primary source citations", "Dynamic geographic epoch mapping"], "tech": ["JavaScript (ES6+)", "HTML5 Canvas / DOM", "CSS Grid", "Python Crawler", "Wikimedia REST API", "Cloudflare Pages"], "buttons": [], "hasLinks": true, "links": []}, {"id": "psych", "title": "Psychology Lecture Knowledge Platform", "subtitle": "Multilingual ASR, Diarization & Semantic Topic Graph", "status": "Production-Ready", "badgeClass": "badge-dark", "num": "04", "desc": "An end-to-end academic lecture capture and knowledge exploration platform. Features a real-time chunked audio recording pipeline with fault-tolerant uploads, speaker diarization (pyannote), multilingual speech-to-text (Whisper), AI-generated structured lecture analyses with teacher approval workflows, interactive topic relation graphs, student confusion tracking, and strict server-side RBAC.", "features": ["Full-text cognitive curriculum search", "Dynamic neural concept graph visualizer", "Audio lecture waveform synchronizer", "Exportable study guides & flashcards"], "tech": ["Next.js 14 (App Router)", "TypeScript", "PostgreSQL", "Prisma ORM", "NextAuth", "Whisper ASR", "pyannote", "Claude API"], "buttons": [], "hasLinks": true, "links": []}, {"id": "onboardflow", "title": "OnboardFlow", "subtitle": "Client Onboarding Automation SaaS for Agencies", "status": "Full-Stack SaaS", "badgeClass": "badge-outline", "num": "05", "desc": "A production-ready agency client onboarding SaaS that turns signed clients into project-ready clients automatically. Eliminates chaotic email threads and manual intake forms with a single branded, intelligent onboarding link. Features token-based zero-login client wizard, dynamic questionnaire builder, deliverables checklist, contract uploader, AI-powered project brief generation (Claude 3.5 Sonnet / GPT-4o), shareable handoff packages, and automated reminder crons.", "features": ["Zero-Login Token Wizard (/onboard/[token])", "Dynamic Drag-and-Drop Questionnaire Builder", "AI Executive Brief Generation (Claude / GPT-4o)", "Shareable Client Handoff Package & PDF Export", "White-Label Agency Branding & Color Engine", "Automated Inactivity Nudge & Reminder Cron"], "tech": ["Next.js 14", "TypeScript", "Supabase Auth & DB", "Tailwind CSS", "Anthropic Claude 3.5", "Resend API", "Vercel Cron"], "buttons": [], "hasLinks": true, "links": []}, {"id": "medicare", "title": "MediCare AI Companion", "subtitle": "Ireland HPRA Rx & OTC Multi-Disease Scheduler", "status": "Healthcare Web App", "badgeClass": "badge-outline", "num": "06", "desc": "Clinical healthcare companion and medication management system engineered specifically for Ireland's HPRA drug classification (POM Prescription-Only Medicine vs OTC Over-The-Counter). Features multi-disease automated dosing schedules, drug-drug interaction alerts, personalized dietary and exercise guidelines, one-click PDF prescription export, and verified medical citations directly linked to PubMed literature.", "features": ["Conversational clinical symptom triaging", "Automated medication schedule alerts", "Encrypted FHIR-compliant patient metrics", "Multi-language empathetic voice synthesizer"], "tech": ["Vanilla JS (ES6+)", "HTML5 / CSS3", "Gemini AI API", "Ireland HPRA Drug Registry", "PubMed BioC API"], "buttons": [], "hasLinks": true, "links": []}, {"id": "ledger", "title": "Ledger Command Deck", "subtitle": "Glassmorphic Personal Life Operating System & Finances", "status": "Live Dashboard", "badgeClass": "badge-dark", "num": "07", "desc": "A personal command deck and life OS built with precision glassmorphic aesthetics. Unifies double-entry financial ledger tracking with cash-flow analytics, habit formation monitoring, TV series and season episode trackers, structured knowledge taxonomy across psychology, philosophy, and history, markdown scratchpads, and custom theme switchers.", "features": ["Multi-currency cashflow forecasting", "Automated invoice reconciliation pipeline", "Tax-ready quarterly ledger exports", "Role-based departmental budget controls"], "tech": ["Vanilla JavaScript", "CSS Custom Properties", "Glassmorphism UI", "HTML5 Canvas", "IndexedDB / LocalStorage"], "buttons": [], "hasLinks": true, "links": []}, {"id": "vapes", "title": "Vapes Quantity Stock Manager", "subtitle": "Bilingual Retail Inventory & Stock Intelligence System", "status": "Retail Cloud App", "badgeClass": "badge-outline", "num": "08", "desc": "Fast, high-density retail stock management and inventory tracking web application featuring full bilingual English and Urdu Nastaliq support. Built for high-volume retail environments with real-time stock counters, rapid batch item intake, low-inventory threshold notifications, category and brand filters, instant search, and export capabilities.", "features": ["Full English & Urdu Nastaliq Bilingual Interface", "Real-Time Stock Increment / Decrement Pipeline", "Automated Low-Stock & Reorder Alerts", "Rapid Batch Intake & Barcode / SKU Tagging", "Instant Sub-Second Search & Multi-Filter Matrix", "Dark / Light High-Contrast Retail Themes"], "tech": ["Vanilla JavaScript", "CSS3 Design System", "DM Mono", "Noto Nastaliq Urdu", "Cloudflare Pages"], "buttons": [], "hasLinks": true, "links": []}, {"id": "repair", "title": "IDFL Repair Price Matrix", "subtitle": "Multi-Device Hardware Repair Quoting System", "status": "Live Quoting Engine", "badgeClass": "badge-outline", "num": "09", "desc": "Comprehensive enterprise hardware repair price estimation and quoting system built for IDFL. Provides instant sub-second search across hundreds of smartphone, tablet, laptop, and gaming console models, dynamic component pricing breakdowns (OLED screens, batteries, charging ports, liquid damage, logic boards), margin and labor calculation, and glassmorphic UI.", "features": ["500+ Device Models (iPhone, Samsung, iPad, Mac, Consoles)", "Component-Level Pricing Matrix (Screen, Battery, Board)", "Automated Labor & Profit Margin Calculation", "Instant Sub-Second Fuzzy Search Filter", "Multi-Currency & Tax Estimation Engine", "Responsive Glassmorphic Dark / Light Architecture"], "tech": ["Vanilla JS", "Space Grotesk", "IBM Plex Mono", "Responsive CSS3 Grid", "Cloudflare Pages"], "buttons": [], "hasLinks": true, "links": []}];
 
@@ -4465,91 +4601,7 @@ let software = loadData('rana_software_data', SOFTWARE_DATA);
 let experience = loadData('rana_experience_data', EXPERIENCE_DATA);
 let clients = loadData('rana_clients_data', CLIENTS_DATA);
 
-// CURSOR
-const cur = document.getElementById('cur');
-const curRing = document.getElementById('curRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-function animRing(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;curRing.style.left=rx+'px';curRing.style.top=ry+'px';requestAnimationFrame(animRing)}
-animRing();
-function setupCursorHover(){
-  document.querySelectorAll('a,button,.novel-cover,.nv-cover,.g-card,.proj-card,.tech-spotlight-card,.dls-card,.article-card,.sw-item').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{cur.classList.add('hover');curRing.classList.add('hover')});
-    el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');curRing.classList.remove('hover')});
-  });
-}
 
-// PAGE ROUTING
-function showPage(name){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
-  const targetPage = document.getElementById('page-'+name);
-  if(targetPage) targetPage.classList.add('active');
-  const targetNav = document.getElementById('nav-'+name);
-  if(targetNav) targetNav.classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
-  renderPage(name);
-
-  if(name === 'backend'){
-    beCheckAuthOnNav();
-  }
-  if(window.isHeroVisible !== undefined){
-    window.isHeroVisible = (name === 'home');
-  }
-
-  setTimeout(function(){
-    if(window.refreshColorSpotlight) window.refreshColorSpotlight();
-  }, 180);
-}
-
-function renderPage(name){
-  if(name==='home'){ renderHome(); }
-  else if(name==='novels'){ renderNovels(); }
-  else if(name==='technical-projects'){ renderTechProjects(); }
-  else if(name==='gallery'){ renderGallery('all'); }
-  else if(name==='software'){ renderSoftware(); }
-  else if(name==='articles'){ renderArticles(); }
-  else if(name==='about'){ renderAbout(); }
-  else if(name==='backend'){ renderBackend(); beLoadTokenToVaultInput(); }
-  setupCursorHover();
-}
-
-// 1. HOME RENDERING
-let novelSlideIdx=0, projSlideIdx=0;
-// ==================== MASTER MULTI-COLOR RAINBOW SYSTEM ====================
-// ==================== MASTER MULTI-COLOR RAINBOW PALETTE ====================
-const RAINBOW_PALETTE = [
-  // 1. Electric Cyan
-  { border: 'rgba(0, 229, 255, 0.45)', glow: 'rgba(0, 229, 255, 0.18)', ambient: 'rgba(0, 229, 255, 0.09)', soft: 'rgba(0, 229, 255, 0.04)', borderHover: 'rgba(0, 229, 255, 0.95)', glowHover: 'rgba(0, 229, 255, 0.45)', ambientHover: 'rgba(0, 229, 255, 0.24)', softHover: 'rgba(0, 229, 255, 0.12)', accent: '#00bcd4' },
-  // 2. Emerald Mint Green
-  { border: 'rgba(0, 230, 118, 0.45)', glow: 'rgba(0, 230, 118, 0.18)', ambient: 'rgba(0, 230, 118, 0.09)', soft: 'rgba(0, 230, 118, 0.04)', borderHover: 'rgba(0, 230, 118, 0.95)', glowHover: 'rgba(0, 230, 118, 0.45)', ambientHover: 'rgba(0, 230, 118, 0.24)', softHover: 'rgba(0, 230, 118, 0.12)', accent: '#00c853' },
-  // 3. Royal Amethyst Purple
-  { border: 'rgba(179, 136, 255, 0.45)', glow: 'rgba(179, 136, 255, 0.18)', ambient: 'rgba(179, 136, 255, 0.09)', soft: 'rgba(179, 136, 255, 0.04)', borderHover: 'rgba(179, 136, 255, 0.95)', glowHover: 'rgba(179, 136, 255, 0.45)', ambientHover: 'rgba(179, 136, 255, 0.24)', softHover: 'rgba(179, 136, 255, 0.12)', accent: '#9c27b0' },
-  // 4. Golden Amber
-  { border: 'rgba(255, 179, 0, 0.45)', glow: 'rgba(255, 179, 0, 0.18)', ambient: 'rgba(255, 179, 0, 0.09)', soft: 'rgba(255, 179, 0, 0.04)', borderHover: 'rgba(255, 179, 0, 0.95)', glowHover: 'rgba(255, 179, 0, 0.45)', ambientHover: 'rgba(255, 179, 0, 0.24)', softHover: 'rgba(255, 179, 0, 0.12)', accent: '#d97706' },
-  // 5. Vivid Coral Rose
-  { border: 'rgba(255, 64, 129, 0.45)', glow: 'rgba(255, 64, 129, 0.18)', ambient: 'rgba(255, 64, 129, 0.09)', soft: 'rgba(255, 64, 129, 0.04)', borderHover: 'rgba(255, 64, 129, 0.95)', glowHover: 'rgba(255, 64, 129, 0.45)', ambientHover: 'rgba(255, 64, 129, 0.24)', softHover: 'rgba(255, 64, 129, 0.12)', accent: '#e91e63' },
-  // 6. Cobalt Sapphire Blue
-  { border: 'rgba(68, 138, 255, 0.45)', glow: 'rgba(68, 138, 255, 0.18)', ambient: 'rgba(68, 138, 255, 0.09)', soft: 'rgba(68, 138, 255, 0.04)', borderHover: 'rgba(68, 138, 255, 0.95)', glowHover: 'rgba(68, 138, 255, 0.45)', ambientHover: 'rgba(68, 138, 255, 0.24)', softHover: 'rgba(68, 138, 255, 0.12)', accent: '#2563eb' },
-  // 7. Sunset Tangerine
-  { border: 'rgba(255, 109, 0, 0.45)', glow: 'rgba(255, 109, 0, 0.18)', ambient: 'rgba(255, 109, 0, 0.09)', soft: 'rgba(255, 109, 0, 0.04)', borderHover: 'rgba(255, 109, 0, 0.95)', glowHover: 'rgba(255, 109, 0, 0.45)', ambientHover: 'rgba(255, 109, 0, 0.24)', softHover: 'rgba(255, 109, 0, 0.12)', accent: '#ea580c' },
-  // 8. Neon Lavender
-  { border: 'rgba(224, 64, 251, 0.45)', glow: 'rgba(224, 64, 251, 0.18)', ambient: 'rgba(224, 64, 251, 0.09)', soft: 'rgba(224, 64, 251, 0.04)', borderHover: 'rgba(224, 64, 251, 0.95)', glowHover: 'rgba(224, 64, 251, 0.45)', ambientHover: 'rgba(224, 64, 251, 0.24)', softHover: 'rgba(224, 64, 251, 0.12)', accent: '#8b5cf6' }
-];
-
-function getCardGlowStyle(index){
-  const col = RAINBOW_PALETTE[index % RAINBOW_PALETTE.length];
-  return `--card-border:${col.border};--card-glow:${col.glow};--card-glow-ambient:${col.ambient};--card-glow-soft:${col.soft};--card-border-hover:${col.borderHover};--card-glow-hover:${col.glowHover};--card-glow-ambient-hover:${col.ambientHover};--card-glow-soft-hover:${col.softHover};--card-accent:${col.accent};`;
-}
-window.getCardGlowStyle = getCardGlowStyle;
-
-// ==================== GITHUB TOKEN VAULT ENGINE ====================
-function beLoadTokenToVaultInput(){
-  const input = document.getElementById('be-header-token-input');
-  if(input){
-    input.value = localStorage.getItem('rana_github_token') || '';
-  }
-}
 
 function beToggleTokenVisibility(){
   const input = document.getElementById('be-header-token-input');
@@ -4596,6 +4648,32 @@ function beSaveTokenToVault(){
   }
 }
 window.beSaveTokenToVault = beSaveTokenToVault;
+
+// ==================== ASYNCHRONOUS PROGRESSIVE PAGE LOADER ====================
+function showPage(pageId){
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+
+  const targetPage = document.getElementById('page-' + pageId);
+  if(targetPage) targetPage.classList.add('active');
+
+  const activeLink = document.querySelector(`.nav-links a[onclick*="${pageId}"]`);
+  if(activeLink) activeLink.classList.add('active');
+
+  // Progressive Non-Blocking Chunked Rendering
+  requestAnimationFrame(() => {
+    if(pageId === 'home') renderHome();
+    else if(pageId === 'novels') renderNovels();
+    else if(pageId === 'technical-projects') renderTechProjects();
+    else if(pageId === 'gallery') renderGallery('all');
+    else if(pageId === 'software') renderSoftware();
+    else if(pageId === 'articles') renderArticles();
+    else if(pageId === 'about') renderAbout();
+    else if(pageId === 'backend') renderBackend();
+  });
+}
+window.showPage = showPage;
 
 function renderHome(){
   // 1. Home Tech Spotlight
@@ -4682,7 +4760,7 @@ function renderHome(){
   }
 
   // 5. Home Essays & Articles Grid
-  const artGrid = document.getElementById('articleGrid');
+  const artGrid = document.getElementById("homeArticlesGrid") || document.getElementById("articleGrid");
   if(artGrid){
     artGrid.innerHTML = articles.slice(0,3).map((a,i)=>{
       const col = RAINBOW_PALETTE[i % RAINBOW_PALETTE.length];
