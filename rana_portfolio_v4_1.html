@@ -37,7 +37,7 @@ body { background:var(--bg); color:var(--ink); font-family:var(--sans); overflow
 .g-card img, .novel-cover img, .novel-page-cover img, .hero-portrait-frame img,
 .novel-card img, .novel-card .novel-cover img,
 .proj-img img, .sw-thumb, .sw-img-banner, .nv-cover img {
-  filter: grayscale(1) contrast(1.05) brightness(0.97);
+  filter: none !important;
   /* Slow fill: 2.8s — colour seeps in, not snaps */
   transition: filter 2.8s cubic-bezier(0.0, 0.55, 0.45, 1.0),
               transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
@@ -48,7 +48,7 @@ body { background:var(--bg); color:var(--ink); font-family:var(--sans); overflow
 .g-card:hover img, .novel-cover:hover img, .novel-page-card:hover img, .hero-portrait-frame:hover img,
 .novel-card:hover img, .novel-card:hover .novel-cover img,
 .proj-card:hover img, .sw-item:hover .sw-thumb, .sw-product-card:hover .sw-img-banner, .nv-cover:hover img {
-  filter: grayscale(0) contrast(1.06) brightness(1.02) !important;
+  filter: none !important;
   transform: scale(1.03);
 }
 
@@ -155,10 +155,10 @@ nav {
 .hero-cta-row { display:flex; gap:12px; flex-wrap:wrap; }
 .hero-visual-side { position:relative; height:580px; width:100%; display:flex; align-items:center; justify-content:center; }
 .hero-portrait-frame {
-  width:460px; height:560px; max-width:100%; position:relative; overflow:hidden; filter:grayscale(1) contrast(1.15);
+  width:460px; height:560px; max-width:100%; position:relative; overflow:hidden; filter: none !important;
   box-shadow:25px 25px 60px rgba(0,0,0,0.08); transition:transform .4s ease, filter .35s ease; background:#e2e6eb;
 }
-.hero-portrait-frame:hover { filter:grayscale(0) contrast(1.05); }
+.hero-portrait-frame:hover { filter: none !important; }
 .hero-portrait-frame img { width:100%; height:100%; object-fit:cover; }
 .hero-portrait-frame::after { content:''; position:absolute; inset:0; border:1px solid var(--border); pointer-events:none; }
 .hero-portrait-number { position:absolute; top:10px; right:-20px; font-family:var(--serif); font-size:90px; font-weight:300; color:var(--border); line-height:1; z-index:-1; }
@@ -177,8 +177,8 @@ nav {
 .novels-slider-track { overflow:hidden; position:relative; width:100%; }
 .novels-slider { display:flex; gap:26px; transition:transform .6s cubic-bezier(.16,1,.3,1); }
 .novel-card { flex:0 0 240px; cursor:none; }
-.novel-cover { width:240px; height:345px; position:relative; overflow:hidden; filter:grayscale(1) contrast(1.15); transition:filter .35s, transform .35s; background:#e2e6eb; }
-.novel-cover:hover { filter:grayscale(0) contrast(1.05); transform:translateY(-4px); }
+.novel-cover { width:240px; height:345px; position:relative; overflow:hidden; filter: none !important; transition:filter .35s, transform .35s; background:#e2e6eb; }
+.novel-cover:hover { filter: none !important; transform:translateY(-4px); }
 .novel-cover img { width:100%; height:100%; object-fit:cover; }
 .novel-cover::after { content:''; position:absolute; inset:0; border:1px solid var(--border); pointer-events:none; }
 .novel-info { padding:14px 0; }
@@ -198,8 +198,8 @@ nav {
 .sw-vertical-slider { display:flex; flex-direction:column; gap:0; }
 .sw-item { padding:22px 40px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:80px 1fr auto; align-items:center; gap:20px; transition:background .25s; cursor:none; }
 .sw-item:hover { background:var(--bg-card); }
-.sw-thumb { width:80px; height:60px; object-fit:cover; border:1px solid var(--border); filter:grayscale(1); transition:filter .25s; background:#e2e6eb; }
-.sw-item:hover .sw-thumb { filter:grayscale(0); }
+.sw-thumb { width:80px; height:60px; object-fit:cover; border:1px solid var(--border); filter: none !important; transition:filter .25s; background:#e2e6eb; }
+.sw-item:hover .sw-thumb { filter: none !important; }
 .sw-item-meta { display:flex; align-items:center; gap:10px; margin-bottom:4px; }
 .sw-cat { font-family:var(--mono); font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); padding:2px 7px; border:1px solid var(--border); border-radius:3px; }
 .sw-name { font-family:var(--serif); font-size:18px; font-weight:400; color:var(--ink); margin-bottom:2px; }
@@ -211,8 +211,8 @@ nav {
 .projects-slider-wrap { position:relative; overflow:hidden; }
 .projects-grid { display:flex; gap:22px; transition:transform .6s cubic-bezier(.16,1,.3,1); }
 .proj-card { flex:0 0 310px; cursor:none; }
-.proj-img { width:100%; height:220px; overflow:hidden; position:relative; filter:grayscale(1) contrast(1.1); transition:filter .35s, transform .35s; background:#e2e6eb; }
-.proj-img:hover { filter:grayscale(0) contrast(1); transform:scale(1.02); }
+.proj-img { width:100%; height:220px; overflow:hidden; position:relative; filter: none !important; transition:filter .35s, transform .35s; background:#e2e6eb; }
+.proj-img:hover { filter: none !important; transform:scale(1.02); }
 .proj-img img { width:100%; height:100%; object-fit:cover; }
 .proj-info { padding:14px 0; }
 .proj-cat { font-family:var(--mono); font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:6px; }
@@ -303,12 +303,12 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  filter: grayscale(1) contrast(1.08) brightness(0.98) !important;
+  filter: none !important;
   transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s ease !important;
 }
 
 .novel-page-card:hover .novel-page-cover img {
-  filter: grayscale(0) contrast(1.05) brightness(1.02) !important;
+  filter: none !important;
   transform: scale(1.03) !important;
 }
 
@@ -391,8 +391,8 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
 
 .novels-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:40px 28px; padding:54px 48px; background:var(--bg); }
 .nv-card { cursor:none; }
-.nv-cover { width:100%; aspect-ratio:2/3; overflow:hidden; position:relative; filter:grayscale(1) contrast(1.15); transition:filter .4s, transform .4s; margin-bottom:16px; background:#e2e6eb; }
-.nv-cover:hover { filter:grayscale(0) contrast(1.05); transform:translateY(-4px); }
+.nv-cover { width:100%; aspect-ratio:2/3; overflow:hidden; position:relative; filter: none !important; transition:filter .4s, transform .4s; margin-bottom:16px; background:#e2e6eb; }
+.nv-cover:hover { filter: none !important; transform:translateY(-4px); }
 .nv-cover img { width:100%; height:100%; object-fit:cover; }
 .nv-genre { font-family:var(--mono); font-size:9.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:6px; }
 .nv-title { font-family:var(--serif); font-size:21px; font-weight:400; color:var(--ink); margin-bottom:6px; }
@@ -410,7 +410,7 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
 .nv-modal-bar { padding:16px 48px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:var(--bg-card); }
 .nv-modal-inner { flex:1; display:grid; grid-template-columns:360px 1fr; overflow:hidden; }
 .nv-modal-cover { background:var(--bg2); display:flex; align-items:center; justify-content:center; padding:48px 36px; border-right:1px solid var(--border); }
-.nv-modal-cover img { max-width:240px; max-height:380px; object-fit:cover; filter:grayscale(1) contrast(1.15); box-shadow:25px 25px 70px rgba(0,0,0,0.12); }
+.nv-modal-cover img { max-width:240px; max-height:380px; object-fit:cover; filter: none !important; box-shadow:25px 25px 70px rgba(0,0,0,0.12); }
 .nv-modal-content { padding:48px 60px; overflow-y:auto; background:var(--bg); }
 .nv-modal-close {
   width:40px; height:40px; border:1px solid var(--border); background:transparent; cursor:none; font-size:17px;
@@ -466,8 +466,8 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
   background:var(--bg-card); border:1px solid var(--border); overflow:hidden; cursor:none; transition:all .3s ease;
 }
 .g-card:hover { transform:translateY(-3px); box-shadow:0 14px 34px rgba(0,0,0,0.08); border-color:var(--ink); }
-.g-card img { width:100%; height:220px; object-fit:cover; filter:grayscale(1) contrast(1.1); transition:all .4s ease; background:#e2e6eb; }
-.g-card:hover img { filter:grayscale(0) contrast(1); transform:scale(1.02); }
+.g-card img { width:100%; height:220px; object-fit:cover; filter: none !important; transition:all .4s ease; background:#e2e6eb; }
+.g-card:hover img { filter: none !important; transform:scale(1.02); }
 .g-card-info { padding:14px 18px; }
 .g-cat-label { font-family:var(--mono); font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:4px; }
 .g-title { font-family:var(--serif); font-size:18px; font-weight:400; color:var(--ink); }
@@ -493,8 +493,8 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
   flex-direction:column; justify-content:space-between; transition:all .25s ease; cursor:none;
 }
 .sw-product-card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,0,0,0.06); border-color:var(--ink); }
-.sw-img-banner { width:100%; height:160px; object-fit:cover; border-radius:4px; margin-bottom:16px; filter:grayscale(1); transition:filter .3s; background:#e2e6eb; }
-.sw-product-card:hover .sw-img-banner { filter:grayscale(0); }
+.sw-img-banner { width:100%; height:160px; object-fit:cover; border-radius:4px; margin-bottom:16px; filter: none !important; transition:filter .3s; background:#e2e6eb; }
+.sw-product-card:hover .sw-img-banner { filter: none !important; }
 .sw-product-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
 .sw-product-type { font-family:var(--mono); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); padding:3px 8px; border:1px solid var(--border); border-radius:3px; }
 .sw-product-price { font-family:var(--serif); font-size:19px; font-weight:400; color:var(--ink); }
@@ -631,7 +631,7 @@ img { image-rendering: auto; }
 .nv-cover,
 .nv-cover img,
 .tech-spotlight-card {
-  filter: grayscale(1) contrast(1.06) brightness(0.96) !important;
+  filter: none !important;
   transition: filter 3.0s cubic-bezier(0.1, 0.7, 0.1, 1),
               box-shadow 2.2s cubic-bezier(0.1, 0.7, 0.1, 1),
               border-color 1.8s cubic-bezier(0.1, 0.7, 0.1, 1),
@@ -696,7 +696,7 @@ img { image-rendering: auto; }
 .sw-item.dot-illuminated .sw-thumb,
 .sw-product-card.dot-illuminated .sw-img-banner,
 .tech-spotlight-card.dot-illuminated {
-  filter: grayscale(0) contrast(1.05) brightness(1.02) !important;
+  filter: none !important;
   transition: filter 3.0s cubic-bezier(0.1, 0.7, 0.1, 1),
               box-shadow 2.2s cubic-bezier(0.1, 0.7, 0.1, 1),
               border-color 1.8s cubic-bezier(0.1, 0.7, 0.1, 1),
@@ -1763,6 +1763,147 @@ body.theme-dark .sw-product-link {
   background: var(--bg-card) !important;
   color: var(--ink) !important;
   border: 1px solid var(--border) !important;
+}
+
+/* ==================== 360-DEGREE MULTI-COLOR RAINBOW SYSTEM & VIVID RENDERING ==================== */
+
+/* Track Clearance & Clean Bounds (No clipping or going out of bounds) */
+.novels-slider-track,
+.projects-slider-wrap,
+.home-gallery-slider-wrap {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 16px 8px 24px !important;
+  margin: 0 0 16px 0 !important;
+}
+
+.novels-slider,
+.projects-grid,
+.home-gallery-grid {
+  display: flex !important;
+  gap: 20px !important;
+  padding: 4px 6px !important;
+}
+
+.novels-grid,
+.gallery-grid,
+.tech-spotlight-grid,
+.sw-products-grid,
+.articles-grid,
+.expertise-grid {
+  padding-top: 16px !important;
+  padding-bottom: 32px !important;
+  margin: 0 !important;
+}
+
+/* Master 360-Degree Atmospheric Halo Aura on ALL Cards Across the Full Website */
+.g-card,
+.novel-card,
+.novel-page-card,
+.proj-card,
+.sw-product-card,
+.tech-spotlight-card,
+.dls-card,
+.article-card,
+.expertise-grid > div,
+.exp-item {
+  position: relative;
+  border: 1px solid var(--card-border, rgba(0, 229, 255, 0.45)) !important;
+  /* 360-Degree Radial Ambient Halo Glow */
+  box-shadow: 0 0 12px 2px var(--card-glow, rgba(0, 229, 255, 0.18)),
+              0 0 28px 6px var(--card-glow-ambient, rgba(0, 229, 255, 0.09)),
+              0 0 50px 10px var(--card-glow-soft, rgba(0, 229, 255, 0.04)),
+              0 4px 14px rgba(0, 0, 0, 0.06) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border-radius: 8px !important;
+}
+
+/* On Hover: Radiant Bloom Effect */
+.g-card:hover,
+.novel-card:hover,
+.novel-page-card:hover,
+.proj-card:hover,
+.sw-product-card:hover,
+.tech-spotlight-card:hover,
+.dls-card:hover,
+.article-card:hover,
+.expertise-grid > div:hover,
+.exp-item:hover {
+  transform: translateY(-6px) !important;
+  border-color: var(--card-border-hover, rgba(0, 229, 255, 0.95)) !important;
+  box-shadow: 0 0 22px 4px var(--card-glow-hover, rgba(0, 229, 255, 0.45)),
+              0 0 48px 10px var(--card-glow-ambient-hover, rgba(0, 229, 255, 0.24)),
+              0 0 75px 16px var(--card-glow-soft-hover, rgba(0, 229, 255, 0.12)),
+              0 14px 32px rgba(0, 0, 0, 0.16) !important;
+}
+
+/* Vivid, Full-Color High-Fidelity Photos (Zero Grayscale) */
+img,
+.g-card img,
+.novel-cover img,
+.novel-page-cover img,
+.novel-card img,
+.proj-img img,
+.sw-thumb,
+.sw-img-banner,
+.nv-cover img {
+  filter: contrast(1.06) saturate(1.14) brightness(1.02) !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease !important;
+}
+
+.g-card:hover img,
+.novel-card:hover img,
+.novel-page-card:hover img,
+.proj-card:hover img,
+.sw-product-card:hover img {
+  filter: contrast(1.1) saturate(1.24) brightness(1.05) !important;
+  transform: scale(1.025);
+}
+
+/* Chromatic Colored Titles Matching Individual Card Rainbow Accents */
+.novel-name,
+.novel-title,
+.novel-page-title,
+.nv-title,
+.g-title,
+.proj-title,
+.tech-spotlight-title,
+.tech-spotlight-card h3,
+.dls-card h2,
+.article-title,
+.article-card h3,
+.sw-product-name {
+  color: var(--card-accent, #00e5ff) !important;
+  font-family: var(--serif) !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  word-break: break-word !important;
+  transition: color 0.25s ease !important;
+}
+
+/* Software Meta Spacing & Alignment */
+.sw-product-meta {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 4px !important;
+}
+.sw-product-name {
+  font-size: 19px !important;
+  margin-bottom: 6px !important;
+}
+.sw-product-desc {
+  margin-bottom: 14px !important;
+  line-height: 1.5 !important;
+}
+.sw-product-price {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: var(--card-accent, #00e5ff) !important;
 }
 </style>
 
@@ -4358,103 +4499,24 @@ function renderPage(name){
 // 1. HOME RENDERING
 let novelSlideIdx=0, projSlideIdx=0;
 // ==================== MASTER MULTI-COLOR RAINBOW SYSTEM ====================
+// ==================== MASTER MULTI-COLOR RAINBOW PALETTE ====================
 const RAINBOW_PALETTE = [
   // 1. Electric Cyan
-  { 
-    border: 'rgba(0, 229, 255, 0.40)', 
-    glow: 'rgba(0, 229, 255, 0.18)', 
-    ambient: 'rgba(0, 229, 255, 0.08)', 
-    soft: 'rgba(0, 229, 255, 0.03)', 
-    borderHover: 'rgba(0, 229, 255, 0.90)', 
-    glowHover: 'rgba(0, 229, 255, 0.45)', 
-    ambientHover: 'rgba(0, 229, 255, 0.22)', 
-    softHover: 'rgba(0, 229, 255, 0.10)', 
-    accent: '#00bcd4' 
-  },
+  { border: 'rgba(0, 229, 255, 0.45)', glow: 'rgba(0, 229, 255, 0.18)', ambient: 'rgba(0, 229, 255, 0.09)', soft: 'rgba(0, 229, 255, 0.04)', borderHover: 'rgba(0, 229, 255, 0.95)', glowHover: 'rgba(0, 229, 255, 0.45)', ambientHover: 'rgba(0, 229, 255, 0.24)', softHover: 'rgba(0, 229, 255, 0.12)', accent: '#00bcd4' },
   // 2. Emerald Mint Green
-  { 
-    border: 'rgba(0, 230, 118, 0.40)', 
-    glow: 'rgba(0, 230, 118, 0.18)', 
-    ambient: 'rgba(0, 230, 118, 0.08)', 
-    soft: 'rgba(0, 230, 118, 0.03)', 
-    borderHover: 'rgba(0, 230, 118, 0.90)', 
-    glowHover: 'rgba(0, 230, 118, 0.45)', 
-    ambientHover: 'rgba(0, 230, 118, 0.22)', 
-    softHover: 'rgba(0, 230, 118, 0.10)', 
-    accent: '#00c853' 
-  },
-  // 3. Amethyst Violet Purple
-  { 
-    border: 'rgba(179, 136, 255, 0.40)', 
-    glow: 'rgba(179, 136, 255, 0.18)', 
-    ambient: 'rgba(179, 136, 255, 0.08)', 
-    soft: 'rgba(179, 136, 255, 0.03)', 
-    borderHover: 'rgba(179, 136, 255, 0.90)', 
-    glowHover: 'rgba(179, 136, 255, 0.45)', 
-    ambientHover: 'rgba(179, 136, 255, 0.22)', 
-    softHover: 'rgba(179, 136, 255, 0.10)', 
-    accent: '#9c27b0' 
-  },
+  { border: 'rgba(0, 230, 118, 0.45)', glow: 'rgba(0, 230, 118, 0.18)', ambient: 'rgba(0, 230, 118, 0.09)', soft: 'rgba(0, 230, 118, 0.04)', borderHover: 'rgba(0, 230, 118, 0.95)', glowHover: 'rgba(0, 230, 118, 0.45)', ambientHover: 'rgba(0, 230, 118, 0.24)', softHover: 'rgba(0, 230, 118, 0.12)', accent: '#00c853' },
+  // 3. Royal Amethyst Purple
+  { border: 'rgba(179, 136, 255, 0.45)', glow: 'rgba(179, 136, 255, 0.18)', ambient: 'rgba(179, 136, 255, 0.09)', soft: 'rgba(179, 136, 255, 0.04)', borderHover: 'rgba(179, 136, 255, 0.95)', glowHover: 'rgba(179, 136, 255, 0.45)', ambientHover: 'rgba(179, 136, 255, 0.24)', softHover: 'rgba(179, 136, 255, 0.12)', accent: '#9c27b0' },
   // 4. Golden Amber
-  { 
-    border: 'rgba(255, 179, 0, 0.40)', 
-    glow: 'rgba(255, 179, 0, 0.18)', 
-    ambient: 'rgba(255, 179, 0, 0.08)', 
-    soft: 'rgba(255, 179, 0, 0.03)', 
-    borderHover: 'rgba(255, 179, 0, 0.90)', 
-    glowHover: 'rgba(255, 179, 0, 0.45)', 
-    ambientHover: 'rgba(255, 179, 0, 0.22)', 
-    softHover: 'rgba(255, 179, 0, 0.10)', 
-    accent: '#d97706' 
-  },
-  // 5. Vivid Coral Rose Pink
-  { 
-    border: 'rgba(255, 64, 129, 0.40)', 
-    glow: 'rgba(255, 64, 129, 0.18)', 
-    ambient: 'rgba(255, 64, 129, 0.08)', 
-    soft: 'rgba(255, 64, 129, 0.03)', 
-    borderHover: 'rgba(255, 64, 129, 0.90)', 
-    glowHover: 'rgba(255, 64, 129, 0.45)', 
-    ambientHover: 'rgba(255, 64, 129, 0.22)', 
-    softHover: 'rgba(255, 64, 129, 0.10)', 
-    accent: '#e91e63' 
-  },
+  { border: 'rgba(255, 179, 0, 0.45)', glow: 'rgba(255, 179, 0, 0.18)', ambient: 'rgba(255, 179, 0, 0.09)', soft: 'rgba(255, 179, 0, 0.04)', borderHover: 'rgba(255, 179, 0, 0.95)', glowHover: 'rgba(255, 179, 0, 0.45)', ambientHover: 'rgba(255, 179, 0, 0.24)', softHover: 'rgba(255, 179, 0, 0.12)', accent: '#d97706' },
+  // 5. Vivid Coral Rose
+  { border: 'rgba(255, 64, 129, 0.45)', glow: 'rgba(255, 64, 129, 0.18)', ambient: 'rgba(255, 64, 129, 0.09)', soft: 'rgba(255, 64, 129, 0.04)', borderHover: 'rgba(255, 64, 129, 0.95)', glowHover: 'rgba(255, 64, 129, 0.45)', ambientHover: 'rgba(255, 64, 129, 0.24)', softHover: 'rgba(255, 64, 129, 0.12)', accent: '#e91e63' },
   // 6. Cobalt Sapphire Blue
-  { 
-    border: 'rgba(68, 138, 255, 0.40)', 
-    glow: 'rgba(68, 138, 255, 0.18)', 
-    ambient: 'rgba(68, 138, 255, 0.08)', 
-    soft: 'rgba(68, 138, 255, 0.03)', 
-    borderHover: 'rgba(68, 138, 255, 0.90)', 
-    glowHover: 'rgba(68, 138, 255, 0.45)', 
-    ambientHover: 'rgba(68, 138, 255, 0.22)', 
-    softHover: 'rgba(68, 138, 255, 0.10)', 
-    accent: '#2563eb' 
-  },
-  // 7. Sunset Tangerine / Warm Orange
-  { 
-    border: 'rgba(255, 109, 0, 0.40)', 
-    glow: 'rgba(255, 109, 0, 0.18)', 
-    ambient: 'rgba(255, 109, 0, 0.08)', 
-    soft: 'rgba(255, 109, 0, 0.03)', 
-    borderHover: 'rgba(255, 109, 0, 0.90)', 
-    glowHover: 'rgba(255, 109, 0, 0.45)', 
-    ambientHover: 'rgba(255, 109, 0, 0.22)', 
-    softHover: 'rgba(255, 109, 0, 0.10)', 
-    accent: '#ea580c' 
-  },
+  { border: 'rgba(68, 138, 255, 0.45)', glow: 'rgba(68, 138, 255, 0.18)', ambient: 'rgba(68, 138, 255, 0.09)', soft: 'rgba(68, 138, 255, 0.04)', borderHover: 'rgba(68, 138, 255, 0.95)', glowHover: 'rgba(68, 138, 255, 0.45)', ambientHover: 'rgba(68, 138, 255, 0.24)', softHover: 'rgba(68, 138, 255, 0.12)', accent: '#2563eb' },
+  // 7. Sunset Tangerine
+  { border: 'rgba(255, 109, 0, 0.45)', glow: 'rgba(255, 109, 0, 0.18)', ambient: 'rgba(255, 109, 0, 0.09)', soft: 'rgba(255, 109, 0, 0.04)', borderHover: 'rgba(255, 109, 0, 0.95)', glowHover: 'rgba(255, 109, 0, 0.45)', ambientHover: 'rgba(255, 109, 0, 0.24)', softHover: 'rgba(255, 109, 0, 0.12)', accent: '#ea580c' },
   // 8. Neon Lavender
-  { 
-    border: 'rgba(224, 64, 251, 0.40)', 
-    glow: 'rgba(224, 64, 251, 0.18)', 
-    ambient: 'rgba(224, 64, 251, 0.08)', 
-    soft: 'rgba(224, 64, 251, 0.03)', 
-    borderHover: 'rgba(224, 64, 251, 0.90)', 
-    glowHover: 'rgba(224, 64, 251, 0.45)', 
-    ambientHover: 'rgba(224, 64, 251, 0.22)', 
-    softHover: 'rgba(224, 64, 251, 0.10)', 
-    accent: '#8b5cf6' 
-  }
+  { border: 'rgba(224, 64, 251, 0.45)', glow: 'rgba(224, 64, 251, 0.18)', ambient: 'rgba(224, 64, 251, 0.09)', soft: 'rgba(224, 64, 251, 0.04)', borderHover: 'rgba(224, 64, 251, 0.95)', glowHover: 'rgba(224, 64, 251, 0.45)', ambientHover: 'rgba(224, 64, 251, 0.24)', softHover: 'rgba(224, 64, 251, 0.12)', accent: '#8b5cf6' }
 ];
 
 function getCardGlowStyle(index){
@@ -4468,6 +4530,7 @@ function renderHome(){
   const hTech = document.getElementById('homeTechSpotlight');
   if(hTech){
     hTech.innerHTML = techProjects.slice(0,3).map((p,i)=>{
+      const col = RAINBOW_PALETTE[i % RAINBOW_PALETTE.length];
       const hasLive = Boolean(p.liveUrl && p.liveUrl.trim());
       return `
         <div class="tech-spotlight-card" onclick="showPage('technical-projects')" style="${getCardGlowStyle(i)}">
@@ -4475,14 +4538,14 @@ function renderHome(){
             <span style="font-family:var(--mono);font-size:11px;color:var(--ink4)">[ ${p.num || ('0' + (i+1))} ]</span>
             <span class="badge-pill ${p.badgeClass || 'badge-live'}">${p.status || 'Live'}</span>
           </div>
-          <h3 >${p.title}</h3>
+          <h3 style="color:${col.accent} !important;font-size:21px;font-weight:600;margin-bottom:4px;font-family:var(--serif);line-height:1.3">${p.title}</h3>
           <div style="font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:12px">${p.subtitle || ''}</div>
           <p style="font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:16px">${(p.desc||'').substring(0,130)}...</p>
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
             <div class="tech-tags-wrap">
               ${(Array.isArray(p.tags) ? p.tags : (p.tech||[])).slice(0,3).map(t=>`<span class="tech-tag">${t}</span>`).join('')}
             </div>
-            ${hasLive ? `<span >View Live &rarr;</span>` : ''}
+            ${hasLive ? `<span style="font-family:var(--mono);font-size:10px;color:${col.accent};text-decoration:underline">View Live &rarr;</span>` : ''}
           </div>
         </div>
       `;
@@ -4492,37 +4555,76 @@ function renderHome(){
   // 2. Novels Slider
   const nSlider = document.getElementById('novelSlider');
   if(nSlider){
-    nSlider.innerHTML = novels.map((n,i)=>`
-      <div class="novel-card" onclick="openNovelModal(${i})" style="${getCardGlowStyle(i)}">
-        <div class="novel-cover">
-          <img src="${n.cover}" alt="${n.title}" loading="lazy" decoding="async" onerror="this.style.display='none'">
+    nSlider.innerHTML = novels.map((n,i)=>{
+      const col = RAINBOW_PALETTE[i % RAINBOW_PALETTE.length];
+      return `
+        <div class="novel-card" onclick="openNovelModal(${i})" style="${getCardGlowStyle(i)}">
+          <div class="novel-cover">
+            <img src="${n.cover}" alt="${n.title}" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          </div>
+          <div class="novel-info">
+            <div class="novel-genre" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">${n.genre || 'Book'} &middot; ${n.year || 'Published'}</div>
+            <div class="novel-name" style="font-family:var(--serif);font-size:16px;font-weight:600;color:${col.accent} !important;margin:0 0 4px;line-height:1.25;word-break:break-word">${n.title}</div>
+            <div class="novel-sub" style="font-size:11.5px;color:var(--ink2);line-height:1.5;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${n.tagline || n.desc || ''}</div>
+          </div>
         </div>
-        <div class="novel-info">
-          <div class="novel-genre" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">${n.genre || 'Book'} &middot; ${n.year || 'Published'}</div>
-          <div class="novel-name" >${n.title}</div>
-          <div class="novel-sub" style="font-size:11.5px;color:var(--ink2);line-height:1.5;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${n.tagline || n.desc || ''}</div>
-        </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
-  // 3. Home 3D Gallery Grid
-  const hGal = document.getElementById('homeGalleryGrid');
-  if(hGal){
-    hGal.innerHTML = galleryItems.slice(0,6).map((g,i)=>`
-      <div class="g-card" onclick="showPage('gallery')" style="position:relative;${getCardGlowStyle(i)}">
-        <div style="position:relative;overflow:hidden;border-radius:4px">
-          <img src="${g.path}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'" style="width:100%;height:220px;object-fit:cover">
+  // 3. Home Software Slider
+  const swSlider = document.getElementById('swSlider');
+  if(swSlider){
+    swSlider.innerHTML = software.map((s,i)=>{
+      const col = RAINBOW_PALETTE[i % RAINBOW_PALETTE.length];
+      return `
+        <div class="sw-product-card" onclick="showPage('software')" style="margin-bottom:16px;${getCardGlowStyle(i)}">
+          <div class="sw-product-meta">
+            <span class="sw-product-type">${s.type || 'Blender Add-on'}</span>
+            <span class="sw-product-price" style="color:${col.accent}">${s.price || 'Free'}</span>
+          </div>
+          <div class="sw-product-name" style="color:${col.accent} !important;font-size:18px;font-weight:600;margin-bottom:6px">${s.name}</div>
+          <div class="sw-product-desc" style="font-size:12px;color:var(--ink3);line-height:1.5">${s.tagline || s.desc || ''}</div>
         </div>
-        <div class="g-info" style="padding:12px 6px 6px">
-          <div class="g-cat" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase">${g.cat}</div>
-          <div class="g-title" >${g.title}</div>
-        </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
-  // 4. Area of Mastery (Expertise)
+  // 4. Home Visual Works (Projects) Grid / Slider
+  const projGrid = document.getElementById('projGrid');
+  if(projGrid){
+    projGrid.innerHTML = galleryItems.slice(0,8).map((g,i)=>{
+      const col = RAINBOW_PALETTE[i % RAINBOW_PALETTE.length];
+      return `
+        <div class="g-card" onclick="showPage('gallery')" style="position:relative;${getCardGlowStyle(i)}">
+          <div style="position:relative;overflow:hidden;border-radius:4px">
+            <img src="${g.path}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'" style="width:100%;height:220px;object-fit:cover">
+          </div>
+          <div class="g-info" style="padding:12px 8px 8px">
+            <div class="g-cat" style="font-family:var(--mono);font-size:9.5px;color:var(--ink4);text-transform:uppercase">${g.cat}</div>
+            <div class="g-title" style="color:${col.accent} !important;font-weight:600;font-size:16px;margin-top:2px;line-height:1.3">${g.title}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // 5. Home Essays & Articles Grid
+  const artGrid = document.getElementById('articleGrid');
+  if(artGrid){
+    artGrid.innerHTML = articles.slice(0,3).map((a,i)=>{
+      const col = RAINBOW_PALETTE[i % RAINBOW_PALETTE.length];
+      return `
+        <div class="article-card" style="${getCardGlowStyle(i)}" onclick="if('${a.url}'.startsWith('http')){window.open('${a.url}','_blank')}else{location.href='${a.url}'}">
+          <div class="article-meta" style="font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:8px">${a.pub || 'Published'} &middot; ${a.date || ''}</div>
+          <h3 class="article-title" style="color:${col.accent} !important;font-weight:600;font-size:19px;margin-bottom:8px;line-height:1.35">${a.title}</h3>
+          <p class="article-desc" style="font-size:13px;color:var(--ink3);line-height:1.6">${(a.excerpt || a.desc || '').substring(0,140)}...</p>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // 6. Area of Mastery (Expertise)
   const expGrid = document.querySelector('.expertise-grid');
   if(expGrid){
     Array.from(expGrid.children).forEach((child, i) => {
@@ -4539,21 +4641,24 @@ function renderHome(){
 function renderNovels(){
   const c = document.getElementById('novelsGrid');
   if(!c) return;
-  c.innerHTML = novels.map((n,i)=>`
-    <div class="novel-page-card" onclick="openNovelModal(${i})" style="${getCardGlowStyle(i)}">
-      <div class="novel-page-cover">
-        <img src="${n.cover}" alt="${n.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
-        ${n.amazonUrl ? `<span style="position:absolute;top:10px;right:10px;background:rgba(17,20,26,0.92);color:#fff;font-family:var(--mono);font-size:9px;padding:3px 7px;border-radius:3px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,0.3)">Amazon UK &#8599;</span>` : ''}
+  c.innerHTML = novels.map((n,i)=>{
+    const col = RAINBOW_PALETTE[i % RAINBOW_PALETTE.length];
+    return `
+      <div class="novel-page-card" onclick="openNovelModal(${i})" style="${getCardGlowStyle(i)}">
+        <div class="novel-page-cover">
+          <img src="${n.cover}" alt="${n.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
+          ${n.amazonUrl ? `<span style="position:absolute;top:10px;right:10px;background:rgba(17,20,26,0.92);color:#fff;font-family:var(--mono);font-size:9px;padding:3px 7px;border-radius:3px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,0.3)">Amazon UK &#8599;</span>` : ''}
+        </div>
+        <div class="novel-page-genre">${n.genre} &middot; ${n.type || 'Published Book'}</div>
+        <div class="novel-page-title" style="color:${col.accent} !important;font-weight:600;font-size:18px;line-height:1.35;margin-bottom:8px">${n.title}</div>
+        <div class="novel-page-tagline">${n.tagline || n.desc || ''}</div>
+        <div class="novel-actions">
+          <span class="novel-read-btn">Read Excerpt &rarr;</span>
+          ${n.amazonUrl ? `<a href="${n.amazonUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="novel-amz-btn">Buy on Amazon &#8599;</a>` : ''}
+        </div>
       </div>
-      <div class="novel-page-genre">${n.genre} &middot; ${n.type || 'Published Book'}</div>
-      <div class="novel-page-title" >${n.title}</div>
-      <div class="novel-page-tagline">${n.tagline || n.desc || ''}</div>
-      <div class="novel-actions">
-        <span class="novel-read-btn">Read Excerpt &rarr;</span>
-        ${n.amazonUrl ? `<a href="${n.amazonUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="novel-amz-btn">Buy on Amazon &#8599;</a>` : ''}
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 function openNovelModal(idx){
