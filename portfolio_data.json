@@ -2121,10 +2121,10 @@
       "id": "stock-manager",
       "title": "Supplier Ledger & Stock Management Engine",
       "subtitle": "Multi-Supplier Purchase Orders, OCR Invoicing & Excel/PDF Suite",
-      "status": "Live",
-      "badgeClass": "badge-live",
+      "status": "Enterprise Internal App",
+      "badgeClass": "badge-outline",
       "num": "04",
-      "liveUrl": "https://stock-manager.idigitalfun.workers.dev/",
+      "liveUrl": "",
       "desc": "A comprehensive commercial supplier and inventory management web application. Features multi-supplier purchase order tracking, real-time stock required calculations, return/faulty item logging, OCR invoice parsing with Tesseract.js, and automated XLSX/PDF export capabilities.",
       "features": [
         "Multi-supplier purchase order tracking & status monitoring",
@@ -2140,30 +2140,18 @@
         "SheetJS / XLSX",
         "Edge Storage"
       ],
-      "buttons": [
-        {
-          "label": "Launch Supplier Manager \u2197",
-          "url": "https://stock-manager.idigitalfun.workers.dev/",
-          "primary": true
-        }
-      ],
-      "hasLinks": true,
-      "links": [
-        {
-          "label": "Launch Supplier Manager \u2197",
-          "url": "https://stock-manager.idigitalfun.workers.dev/",
-          "primary": true
-        }
-      ]
+      "buttons": [],
+      "hasLinks": false,
+      "links": []
     },
     {
       "id": "phone-count",
       "title": "StockLine Multi-Branch Device Inventory",
       "subtitle": "Real-Time Retail Phone Count & Hardware Audit Platform",
-      "status": "Live",
-      "badgeClass": "badge-live",
+      "status": "Enterprise Internal App",
+      "badgeClass": "badge-outline",
       "num": "05",
-      "liveUrl": "https://phone-count.idigitalfun.workers.dev/",
+      "liveUrl": "",
       "desc": "A high-speed multi-location device inventory and phone stock audit web application deployed on Cloudflare Workers. Enables retail branches to perform rapid live device counts, track IMEI/serial hardware states, reconcile discrepancies in real time, and export consolidated audit sheets.",
       "features": [
         "Multi-shop live device count and hardware reconciliation",
@@ -2177,30 +2165,18 @@
         "Edge Storage",
         "HTML5 Canvas / DOM"
       ],
-      "buttons": [
-        {
-          "label": "Launch Device Inventory \u2197",
-          "url": "https://phone-count.idigitalfun.workers.dev/",
-          "primary": true
-        }
-      ],
-      "hasLinks": true,
-      "links": [
-        {
-          "label": "Launch Device Inventory \u2197",
-          "url": "https://phone-count.idigitalfun.workers.dev/",
-          "primary": true
-        }
-      ]
+      "buttons": [],
+      "hasLinks": false,
+      "links": []
     },
     {
       "id": "holidays",
       "title": "Staff Holidays & Hours Management Portal",
       "subtitle": "Automated Staff Hours, Accruals & Official PDF Statement Engine",
-      "status": "Live",
-      "badgeClass": "badge-live",
+      "status": "Enterprise Internal App",
+      "badgeClass": "badge-outline",
       "num": "06",
-      "liveUrl": "https://idfl-holidays.idigitalfun.workers.dev/",
+      "liveUrl": "",
       "desc": "An enterprise staff attendance, hours tracking, and leave management system deployed on Cloudflare Workers. Features automated holiday accrual calculations, weekly timesheet logging, single-employee official PDF statement generation, multi-branch summary reporting, and one-click GitHub cloud synchronization.",
       "features": [
         "Automated holiday & sick pay accrual calculation engine",
@@ -2215,21 +2191,9 @@
         "GitHub API Sync",
         "Edge Runtime"
       ],
-      "buttons": [
-        {
-          "label": "Launch Staff Portal \u2197",
-          "url": "https://idfl-holidays.idigitalfun.workers.dev/",
-          "primary": true
-        }
-      ],
-      "hasLinks": true,
-      "links": [
-        {
-          "label": "Launch Staff Portal \u2197",
-          "url": "https://idfl-holidays.idigitalfun.workers.dev/",
-          "primary": true
-        }
-      ]
+      "buttons": [],
+      "hasLinks": false,
+      "links": []
     },
     {
       "id": "timeline",
