@@ -672,6 +672,246 @@
   <!-- SCRIPT -->
   <script>
 
+// ==================== MASTER AUTHENTICATION & SECURITY GATE (TOP LEVEL) ====================
+var VALID_AUTH_HASHES = window.VALID_AUTH_HASHES = new Set([
+  '0cfe517587641ac7128436f278329274333a7915358dae4bc0bb23f07bf09f60', // ranakaharian1@gmail.com:Lhana!472580
+  'bab0eb7908172f1dc6fe260516c7bcea47c4d1c83b13ee455953dec6ccf14b1c', // ranakaharian1@gmail.com:lhana!472580
+  'aaed36779baa7a0136f4204f7b5f565313eed52eb0086303c8d1ebe49a77eb13', // ranakaharian1@gmail.com:Lhana472580
+  'd4d23b1e8f32bb3af1143abbd26f59ae3fd0376aa6cbc4e5a23b0bae5b8be631', // ranakaharian1@gmail.com:admin
+  '5e2d814700332bf088c33fe773bf5f025da66b3f613ec3c6c3057947a1765688', // admin:Lhana!472580
+  '8da193366e1554c08b2870c50f737b9587c3372b656151c4a96028af26f51334', // admin:admin
+  'fb5e7940018017bdf86beefcec92576bf543f7b3a647fa5feb9b60f674af13e2', // Lhana!472580
+  'c6cbeee83e37435f4aee24c07806fe83253b5a2e413f4008ff71d99c3646b875'  // lhana!472580
+]);
+
+var KNOWN_ADMIN_EMAILS = window.KNOWN_ADMIN_EMAILS = new Set([
+  'ranakaharian1@gmail.com',
+  'admin',
+  'rana',
+  'ranakaharian1'
+]);
+
+function jsSha256(ascii){
+  function rightRotate(value, amount){ return (value>>>amount) | (value<<(32 - amount)); }
+  var mathPow = Math.pow;
+  var maxWord = mathPow(2, 32);
+  var lengthProperty = 'length';
+  var i, j;
+  var result = '';
+  var words = [];
+  var asciiBitLength = ascii[lengthProperty] * 8;
+  var hash = jsSha256.h = jsSha256.h || [];
+  var k = jsSha256.k = jsSha256.k || [];
+  var primeCounter = k[lengthProperty];
+  var isComposite = {};
+  for(var candidate = 2; primeCounter < 64; candidate++){
+    if(!isComposite[candidate]){
+      for(i = 0; i < 300; i += candidate){ isComposite[i] = candidate; }
+      hash[primeCounter] = (mathPow(candidate, .5)*maxWord)|0;
+      k[primeCounter++] = (mathPow(candidate, 1/3)*maxWord)|0;
+    }
+  }
+  ascii += '\x80';
+  while (ascii[lengthProperty]%64 - 56) ascii += '\x00';
+  for(i = 0; i < ascii[lengthProperty]; i++){
+    j = ascii.charCodeAt(i);
+    if(j>>8) return '';
+    words[i>>2] |= j << ((3 - i)%4)*8;
+  }
+  words[words[lengthProperty]] = ((asciiBitLength/maxWord)|0);
+  words[words[lengthProperty]] = (asciiBitLength);
+  for(j = 0; j < words[lengthProperty];){
+    var w = words.slice(j, j += 16);
+    var oldHash = hash;
+    hash = hash.slice(0, 8);
+    for(i = 0; i < 64; i++){
+      var w15 = w[i - 15], w2 = w[i - 2];
+      var s0 = rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15>>>3);
+      var s1 = rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2>>>10);
+      var ch = (hash[4] & hash[5]) ^ (~hash[4] & hash[6]);
+      var maj = (hash[0] & hash[1]) ^ (hash[0] & hash[2]) ^ (hash[1] & hash[2]);
+      var temp1 = hash[7] + (rightRotate(hash[4], 6) ^ rightRotate(hash[4], 11) ^ rightRotate(hash[4], 25)) + ch + k[i] + (w[i] = (i < 16) ? w[i] : (w[i - 16] + s0 + w[i - 7] + s1)|0);
+      var temp2 = (rightRotate(hash[0], 2) ^ rightRotate(hash[0], 13) ^ rightRotate(hash[0], 22)) + maj;
+      hash = [(temp1 + temp2)|0].concat(hash);
+      hash[4] = (hash[4] + temp1)|0;
+    }
+    for(i = 0; i < 8; i++){ hash[i] = (hash[i] + oldHash[i])|0; }
+  }
+  for(i = 0; i < 8; i++){
+    for(var i2 = 3; i2 >= 0; i2--){
+      var b = (hash[i]>>(i2*8))&255;
+      result += ((b < 16) ? 0 : '') + b.toString(16);
+    }
+  }
+  return result;
+}
+window.jsSha256 = jsSha256;
+
+async function sha256(str){
+  try {
+    if(window.crypto && window.crypto.subtle && window.crypto.subtle.digest){
+      var buf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+    }
+  } catch(e){}
+  return jsSha256(str);
+}
+window.sha256 = sha256;
+
+function togglePassVisibility(){
+  var passInp = document.getElementById('be-pass');
+  var toggleBtn = document.getElementById('togglePassBtn');
+  if(passInp && toggleBtn){
+    if(passInp.type === 'password'){
+      passInp.type = 'text';
+      toggleBtn.textContent = 'Hide Password';
+    } else {
+      passInp.type = 'password';
+      toggleBtn.textContent = 'Show Password';
+    }
+  }
+}
+window.togglePassVisibility = togglePassVisibility;
+
+function triggerLoginShake(){
+  var box = document.querySelector('.login-box');
+  if(box){
+    box.classList.remove('shake-box');
+    void box.offsetWidth;
+    box.classList.add('shake-box');
+  }
+}
+window.triggerLoginShake = triggerLoginShake;
+
+function clearLoginError(){
+  var err = document.getElementById('be-login-err');
+  var passInp = document.getElementById('be-pass');
+  var emailInp = document.getElementById('be-email');
+  if(err) err.style.display = 'none';
+  if(passInp) passInp.style.borderColor = '';
+  if(emailInp) emailInp.style.borderColor = '';
+}
+window.clearLoginError = clearLoginError;
+
+async function beLogin(){
+  var emailInp = document.getElementById('be-email');
+  var passInp = document.getElementById('be-pass');
+  var email = (emailInp ? emailInp.value : '').trim().toLowerCase();
+  var pass = (passInp ? passInp.value : '').trim();
+  var err = document.getElementById('be-login-err');
+  var btn = document.getElementById('be-login-btn');
+
+  if(!email){
+    if(err){
+      err.style.display = 'block';
+      err.innerHTML = '<strong>Email Required:</strong> Please enter your admin email address.';
+    }
+    if(emailInp){ emailInp.style.borderColor = '#f85149'; emailInp.focus(); }
+    triggerLoginShake();
+    return;
+  }
+
+  if(!pass){
+    if(err){
+      err.style.display = 'block';
+      err.innerHTML = '<strong>Password Required:</strong> Please enter your password.';
+    }
+    if(passInp){ passInp.style.borderColor = '#f85149'; passInp.focus(); }
+    triggerLoginShake();
+    return;
+  }
+
+  if(btn) btn.textContent = 'Verifying credentials...';
+
+  try {
+    var combinedHash = await sha256(email + ':' + pass);
+    var passOnlyHash = await sha256(pass);
+
+    var isMatch = VALID_AUTH_HASHES.has(combinedHash) || 
+                  VALID_AUTH_HASHES.has(passOnlyHash) ||
+                  pass === 'Lhana!472580' ||
+                  pass === 'lhana!472580' ||
+                  pass === 'Lhana472580';
+
+    if(isMatch){
+      sessionStorage.setItem('rana_be_auth', 'true');
+      var gate = document.getElementById('be-login-gate');
+      var auth = document.getElementById('backend-authorized-view');
+      if(gate) gate.style.display = 'none';
+      if(auth) auth.style.display = 'flex';
+      if(err) err.style.display = 'none';
+      if(passInp) passInp.style.borderColor = '';
+      if(emailInp) emailInp.style.borderColor = '';
+      
+      if(window.renderBackend) renderBackend();
+      if(window.showToast) showToast('Signed in successfully');
+    } else {
+      triggerLoginShake();
+      if(err){
+        err.style.display = 'block';
+        var isKnownEmail = KNOWN_ADMIN_EMAILS.has(email) || email.includes('ranakaharian1');
+        if(isKnownEmail){
+          err.innerHTML = '<div style="font-weight:600;margin-bottom:2px">&#9888; Incorrect Password</div><div>The password you entered is incorrect. Please check your password and try again.</div>';
+          if(passInp){
+            passInp.style.borderColor = '#f85149';
+            passInp.select();
+            passInp.focus();
+          }
+        } else {
+          err.innerHTML = '<div style="font-weight:600;margin-bottom:2px">&#9888; Unrecognized Email Address</div><div>This email is not authorized for administrator access.</div>';
+          if(emailInp){
+            emailInp.style.borderColor = '#f85149';
+            emailInp.focus();
+          }
+        }
+      }
+    }
+  } catch(e){
+    if(err){
+      err.style.display = 'block';
+      err.innerHTML = '<strong>Authentication Error:</strong> ' + (e.message || 'Please try again.');
+    }
+  } finally {
+    if(btn) btn.textContent = 'Sign In to Dashboard →';
+  }
+}
+window.beLogin = beLogin;
+
+function beSignOut(){
+  sessionStorage.removeItem('rana_be_auth');
+  var auth = document.getElementById('backend-authorized-view');
+  var gate = document.getElementById('be-login-gate');
+  if(auth) auth.style.display = 'none';
+  if(gate) gate.style.display = 'flex';
+  var emailInp = document.getElementById('be-email');
+  var passInp = document.getElementById('be-pass');
+  if(emailInp) emailInp.value = '';
+  if(passInp) passInp.value = '';
+  clearLoginError();
+  if(window.showToast) showToast('Signed out');
+}
+window.beSignOut = beSignOut;
+
+function beCheckAuthOnNav(){
+  var isAuth = sessionStorage.getItem('rana_be_auth') === 'true';
+  var gate = document.getElementById('be-login-gate');
+  var auth = document.getElementById('backend-authorized-view');
+  if(gate && auth){
+    if(isAuth){
+      gate.style.display = 'none';
+      auth.style.display = 'flex';
+      if(window.renderBackend) renderBackend();
+      if(window.beLoadTokenToVaultInput) beLoadTokenToVaultInput();
+    } else {
+      gate.style.display = 'flex';
+      auth.style.display = 'none';
+    }
+  }
+}
+window.beCheckAuthOnNav = beCheckAuthOnNav;
+
+
+
 
 // ==================== RESILIENT DATA STORAGE & AUTO-RECOVERY ENGINE ====================
 function loadData(key, def){
@@ -3171,234 +3411,6 @@ function showToast(msg){
 // ==================== MASTER COMPLETE BACKEND CONTROLLER ====================
 
 // 1. NOVELS BACKEND
-// ==================== AUTH & SECURITY ====================
-const VALID_AUTH_HASHES = new Set([
-  '0cfe517587641ac7128436f278329274333a7915358dae4bc0bb23f07bf09f60', // ranakaharian1@gmail.com:Lhana!472580
-  'bab0eb7908172f1dc6fe260516c7bcea47c4d1c83b13ee455953dec6ccf14b1c', // ranakaharian1@gmail.com:lhana!472580
-  'aaed36779baa7a0136f4204f7b5f565313eed52eb0086303c8d1ebe49a77eb13', // ranakaharian1@gmail.com:Lhana472580
-  'd4d23b1e8f32bb3af1143abbd26f59ae3fd0376aa6cbc4e5a23b0bae5b8be631', // ranakaharian1@gmail.com:admin
-  '5e2d814700332bf088c33fe773bf5f025da66b3f613ec3c6c3057947a1765688', // admin:Lhana!472580
-  '8da193366e1554c08b2870c50f737b9587c3372b656151c4a96028af26f51334', // admin:admin
-  'fb5e7940018017bdf86beefcec92576bf543f7b3a647fa5feb9b60f674af13e2', // Lhana!472580
-  'c6cbeee83e37435f4aee24c07806fe83253b5a2e413f4008ff71d99c3646b875'  // lhana!472580
-]);
-
-// Pure JavaScript SHA-256 Implementation (100% resilient across all browsers/contexts)
-function jsSha256(ascii){
-  function rightRotate(value, amount){ return (value>>>amount) | (value<<(32 - amount)); }
-  const mathPow = Math.pow;
-  const maxWord = mathPow(2, 32);
-  let lengthProperty = 'length';
-  let i, j;
-  let result = '';
-  const words = [];
-  const asciiBitLength = ascii[lengthProperty] * 8;
-  let hash = jsSha256.h = jsSha256.h || [];
-  const k = jsSha256.k = jsSha256.k || [];
-  let primeCounter = k[lengthProperty];
-  const isComposite = {};
-  for(let candidate = 2; primeCounter < 64; candidate++){
-    if(!isComposite[candidate]){
-      for(i = 0; i < 300; i += candidate){ isComposite[i] = candidate; }
-      hash[primeCounter] = (mathPow(candidate, .5)*maxWord)|0;
-      k[primeCounter++] = (mathPow(candidate, 1/3)*maxWord)|0;
-    }
-  }
-  ascii += '\x80';
-  while (ascii[lengthProperty]%64 - 56) ascii += '\x00';
-  for(i = 0; i < ascii[lengthProperty]; i++){
-    j = ascii.charCodeAt(i);
-    if(j>>8) return;
-    words[i>>2] |= j << ((3 - i)%4)*8;
-  }
-  words[words[lengthProperty]] = ((asciiBitLength/maxWord)|0);
-  words[words[lengthProperty]] = (asciiBitLength);
-  for(j = 0; j < words[lengthProperty];){
-    const w = words.slice(j, j += 16);
-    const oldHash = hash;
-    hash = hash.slice(0, 8);
-    for(i = 0; i < 64; i++){
-      const w15 = w[i - 15], w2 = w[i - 2];
-      const s0 = rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15>>>3);
-      const s1 = rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2>>>10);
-      const ch = (hash[4] & hash[5]) ^ (~hash[4] & hash[6]);
-      const maj = (hash[0] & hash[1]) ^ (hash[0] & hash[2]) ^ (hash[1] & hash[2]);
-      const temp1 = hash[7] + (rightRotate(hash[4], 6) ^ rightRotate(hash[4], 11) ^ rightRotate(hash[4], 25)) + ch + k[i] + (w[i] = (i < 16) ? w[i] : (w[i - 16] + s0 + w[i - 7] + s1)|0);
-      const temp2 = (rightRotate(hash[0], 2) ^ rightRotate(hash[0], 13) ^ rightRotate(hash[0], 22)) + maj;
-      hash = [(temp1 + temp2)|0].concat(hash);
-      hash[4] = (hash[4] + temp1)|0;
-    }
-    for(i = 0; i < 8; i++){ hash[i] = (hash[i] + oldHash[i])|0; }
-  }
-  for(i = 0; i < 8; i++){
-    for(let i2 = 3; i2 >= 0; i2--){
-      const b = (hash[i]>>(i2*8))&255;
-      result += ((b < 16) ? 0 : '') + b.toString(16);
-    }
-  }
-  return result;
-}
-
-async function sha256(str){
-  try {
-    if(window.crypto && crypto.subtle && crypto.subtle.digest){
-      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-      return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-    }
-  } catch(e){}
-  return jsSha256(str);
-}
-
-function togglePassVisibility(){
-  const passInp = document.getElementById('be-pass');
-  const toggleBtn = document.getElementById('togglePassBtn');
-  if(passInp && toggleBtn){
-    if(passInp.type === 'password'){
-      passInp.type = 'text';
-      toggleBtn.textContent = 'Hide';
-    } else {
-      passInp.type = 'password';
-      toggleBtn.textContent = 'Show';
-    }
-  }
-}
-window.togglePassVisibility = togglePassVisibility;
-
-const KNOWN_ADMIN_EMAILS = new Set([
-  'ranakaharian1@gmail.com',
-  'admin',
-  'rana',
-  'ranakaharian1'
-]);
-
-function triggerLoginShake(){
-  const box = document.querySelector('.login-box');
-  if(box){
-    box.classList.remove('shake-box');
-    void box.offsetWidth;
-    box.classList.add('shake-box');
-  }
-}
-
-function clearLoginError(){
-  const err = document.getElementById('be-login-err');
-  const passInp = document.getElementById('be-pass');
-  const emailInp = document.getElementById('be-email');
-  if(err) err.style.display = 'none';
-  if(passInp) passInp.style.borderColor = '';
-  if(emailInp) emailInp.style.borderColor = '';
-}
-window.clearLoginError = clearLoginError;
-
-async function beLogin(){
-  const emailInp = document.getElementById('be-email');
-  const passInp = document.getElementById('be-pass');
-  const email = (emailInp?.value || '').trim().toLowerCase();
-  const pass = (passInp?.value || '').trim();
-  const err = document.getElementById('be-login-err');
-  const btn = document.getElementById('be-login-btn');
-
-  if(!email){
-    if(err){
-      err.style.display = 'block';
-      err.innerHTML = '<strong>Email Required:</strong> Please enter your admin email address.';
-    }
-    if(emailInp){ emailInp.style.borderColor = '#f85149'; emailInp.focus(); }
-    triggerLoginShake();
-    return;
-  }
-
-  if(!pass){
-    if(err){
-      err.style.display = 'block';
-      err.innerHTML = '<strong>Password Required:</strong> Please enter your password.';
-    }
-    if(passInp){ passInp.style.borderColor = '#f85149'; passInp.focus(); }
-    triggerLoginShake();
-    return;
-  }
-
-  if(btn) btn.textContent = 'Verifying credentials...';
-
-  try {
-    const combinedHash = await sha256(email + ':' + pass);
-    const passOnlyHash = await sha256(pass);
-
-    const isMatch = VALID_AUTH_HASHES.has(combinedHash) || VALID_AUTH_HASHES.has(passOnlyHash);
-
-    if(isMatch){
-      sessionStorage.setItem('rana_be_auth', 'true');
-      const gate = document.getElementById('be-login-gate');
-      const auth = document.getElementById('backend-authorized-view');
-      if(gate) gate.style.display = 'none';
-      if(auth) auth.style.display = 'flex';
-      if(err) err.style.display = 'none';
-      if(passInp) passInp.style.borderColor = '';
-      if(emailInp) emailInp.style.borderColor = '';
-      
-      renderBackend();
-      showToast('Signed in successfully');
-    } else {
-      triggerLoginShake();
-      if(err){
-        err.style.display = 'block';
-        const isKnownEmail = KNOWN_ADMIN_EMAILS.has(email) || email.includes('ranakaharian1');
-        if(isKnownEmail){
-          err.innerHTML = '<div style="font-weight:600;margin-bottom:2px">&#9888; Incorrect Password</div><div>The password you entered is incorrect. Please check your password and try again.</div>';
-          if(passInp){
-            passInp.style.borderColor = '#f85149';
-            passInp.select();
-            passInp.focus();
-          }
-        } else {
-          err.innerHTML = '<div style="font-weight:600;margin-bottom:2px">&#9888; Unrecognized Email Address</div><div>This email is not authorized for administrator access.</div>';
-          if(emailInp){
-            emailInp.style.borderColor = '#f85149';
-            emailInp.focus();
-          }
-        }
-      }
-    }
-  } catch(e){
-    if(err){
-      err.style.display = 'block';
-      err.innerHTML = '<strong>Authentication Error:</strong> ' + (e.message || 'Please try again.');
-    }
-  } finally {
-    if(btn) btn.textContent = 'Sign In to Dashboard →';
-  }
-}
-window.beLogin = beLogin;
-
-function beSignOut(){
-  sessionStorage.removeItem('rana_be_auth');
-  document.getElementById('backend-authorized-view').style.display = 'none';
-  document.getElementById('be-login-gate').style.display = 'flex';
-  const emailInp = document.getElementById('be-email');
-  const passInp = document.getElementById('be-pass');
-  if(emailInp) emailInp.value = '';
-  if(passInp) passInp.value = '';
-  showToast('Signed out');
-}
-window.beSignOut = beSignOut;
-
-function beCheckAuthOnNav(){
-  const isAuth = sessionStorage.getItem('rana_be_auth') === 'true';
-  const gate = document.getElementById('be-login-gate');
-  const auth = document.getElementById('backend-authorized-view');
-  if(gate && auth){
-    if(isAuth){
-      gate.style.display = 'none';
-      auth.style.display = 'block';
-      renderBackend(); beLoadTokenToVaultInput();
-    } else {
-      gate.style.display = 'flex';
-      auth.style.display = 'none';
-    }
-  }
-}
-window.beCheckAuthOnNav = beCheckAuthOnNav;
-
 function switchBackend(name, btn){
   document.querySelectorAll('.bt').forEach(b => b.classList.remove('on'));
   document.querySelectorAll('.backend-panel').forEach(p => p.classList.remove('on'));
