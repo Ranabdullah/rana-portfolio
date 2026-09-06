@@ -1905,6 +1905,100 @@ img,
   font-weight: 700 !important;
   color: var(--card-accent, #00e5ff) !important;
 }
+
+/* ==================== HOME SLIDERS, FULL RESPONSIVE NOVELS GRID & GPU CURSOR ==================== */
+
+/* Visual Works Home Slider Cards */
+.projects-grid {
+  display: flex !important;
+  gap: 24px !important;
+  padding: 12px 6px 24px !important;
+}
+.projects-grid .g-card {
+  flex: 0 0 290px !important;
+  min-width: 290px !important;
+  max-width: 290px !important;
+}
+
+/* Home Novels Slider Cards */
+.novels-slider {
+  display: flex !important;
+  gap: 24px !important;
+  padding: 12px 6px 24px !important;
+}
+.novels-slider .novel-card {
+  flex: 0 0 220px !important;
+  min-width: 220px !important;
+  max-width: 220px !important;
+}
+
+/* Articles Home Grid */
+.articles-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  gap: 26px !important;
+  padding: 20px 0 40px !important;
+}
+
+/* ==================== NOVELS PAGE FULL-WIDTH RESPONSIVE (3, 4, 5, 6 COLS) ==================== */
+#page-novels {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.novels-hero {
+  padding: 80px 48px 30px !important;
+  max-width: 100% !important;
+}
+
+.novels-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  gap: 32px 24px !important;
+  padding: 20px 48px 80px !important;
+  box-sizing: border-box !important;
+  background: var(--bg) !important;
+}
+
+@media (min-width: 1920px) {
+  .novels-grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+  }
+}
+@media (min-width: 1560px) and (max-width: 1919px) {
+  .novels-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+}
+@media (min-width: 1200px) and (max-width: 1559px) {
+  .novels-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+@media (min-width: 860px) and (max-width: 1199px) {
+  .novels-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+@media (max-width: 859px) {
+  .novels-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+    padding: 20px 16px 60px !important;
+  }
+}
+
+.novel-page-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+.novel-page-cover {
+  width: 100% !important;
+  aspect-ratio: 2/3 !important;
+  overflow: hidden !important;
+}
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -4682,7 +4776,7 @@ function renderHome(){
   }
 
   // 5. Home Essays & Articles Grid
-  const artGrid = document.getElementById('articleGrid');
+  const artGrid = document.getElementById("homeArticlesGrid") || document.getElementById("articleGrid");
   if(artGrid){
     artGrid.innerHTML = articles.slice(0,3).map((a,i)=>{
       const col = RAINBOW_PALETTE[i % RAINBOW_PALETTE.length];
