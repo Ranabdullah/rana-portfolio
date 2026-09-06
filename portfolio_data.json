@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-06T23:52:35.427Z",
+  "updatedAt": "2026-09-06T23:53:21.867Z",
   "version": "4.5",
   "novels": [
     {
@@ -824,15 +824,11 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=yEWTwD7XMjw",
       "subVideos": {
         "0": "https://www.youtube.com/watch?v=yEWTwD7XMjw"
-      }
-    },
-    {
-      "title": "Windy Storm Coastline: Dynamic Ocean Simulation",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Dramatic coastal storm environment in Unreal Engine 5 with turbulent wave physics, sea spray particles, and stormy atmospheric overcast.",
-      "path": "Photos & to upload/YouTube/x9p50UJI_NU.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=x9p50UJI_NU"
+      },
+      "images": [
+        "Photos & to upload/YouTube/yEWTwD7XMjw.jpg",
+        "Photos & to upload/YouTube/x9p50UJI_NU.jpg"
+      ]
     },
     {
       "title": "Cyber Coupe: Hard-Surface Automotive",
@@ -842,18 +838,22 @@
       "path": "Photos & to upload/Car/550237818_18527373967025424_2167346014008595452_n.jpeg"
     },
     {
-      "title": "Subway Express: Industrial Locomotive",
+      "title": "Locomotive: Industrial & Commercial",
       "pillar": "Personal",
       "cat": "3d",
       "desc": "Atmospheric underground train carriage interior with distressed stainless steel textures and fluorescent flicker.",
-      "path": "Photos & to upload/Train/All Work (183).jpg"
+      "path": "Photos & to upload/Train/All Work (183).jpg",
+      "subVideos": {},
+      "youtubeUrl": ""
     },
     {
-      "title": "Micro Diorama: Architectural Scale Model",
+      "title": "Diorama: Architectural Scale Model",
       "pillar": "Personal",
       "cat": "3d",
       "desc": "Charming isometric miniature building block with tilt-shift depth of field and soft ambient occlusion.",
-      "path": "Photos & to upload/Miniature/Miniature.png"
+      "path": "Photos & to upload/Miniature/Miniature.png",
+      "subVideos": {},
+      "youtubeUrl": ""
     },
     {
       "title": "Luxury Penthouse Interior Design | ArchViz",
