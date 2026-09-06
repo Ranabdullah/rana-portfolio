@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-06T23:18:30.345Z",
+  "updatedAt": "2026-09-06T23:18:37.003Z",
   "version": "4.5",
   "novels": [
     {
@@ -871,15 +871,6 @@
       "desc": "Minimalist Scandinavian architectural visualization render exploring indirect bounce lighting, wood grain reflections, and urban skyline backdrops.",
       "path": "Photos & to upload/YouTube/AYk-BZrP6D0.jpg",
       "youtubeUrl": "https://www.youtube.com/watch?v=AYk-BZrP6D0"
-    },
-    {
-      "title": "Cinematic UE5 Sequence & Camera Breakdown",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Technical breakdown of multi-camera sequencing, depth of field control, and cinematic framing techniques in Unreal Engine 5.",
-      "path": "",
-      "youtubeUrl": "https://www.youtube.com/watch?v=NOFS6gQ8Zfk",
-      "images": []
     },
     {
       "title": "Make Whatever You Want: Blender 3D Concept Showreel",
