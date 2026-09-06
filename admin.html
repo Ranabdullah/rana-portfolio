@@ -271,7 +271,15 @@
       z-index: 99999;
       padding: 20px;
     }
-  </style>
+  
+    @keyframes loginShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+    .shake-box { animation: loginShake 0.4s ease-in-out; }
+
+</style>
 </head>
 <body>
 
@@ -286,14 +294,14 @@
       
       <div style="text-align:left;margin-bottom:16px">
         <label class="form-label">Email Address</label>
-        <input type="email" id="be-email" class="form-input" placeholder="admin@email.com" onkeydown="if(event.key==='Enter') beLogin()">
+        <input type="email" id="be-email" class="form-input" placeholder="admin@email.com" oninput="clearLoginError()" onkeydown="if(event.key==='Enter') beLogin()">
       </div>
       <div style="text-align:left;margin-bottom:24px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
           <label class="form-label" style="margin:0">Password</label>
-          <span onclick="togglePassVisibility()" style="font-family:var(--mono);font-size:11px;color:var(--accent,#00e5ff);cursor:pointer;user-select:none" id="togglePassBtn">Show</span>
+          <span onclick="togglePassVisibility()" style="font-family:var(--mono);font-size:11px;color:var(--accent,#00e5ff);cursor:pointer;user-select:none" id="togglePassBtn">Show Password</span>
         </div>
-        <input type="password" id="be-pass" class="form-input" placeholder="••••••••••••" onkeydown="if(event.key==='Enter') beLogin()">
+        <input type="password" id="be-pass" class="form-input" placeholder="••••••••••••" oninput="clearLoginError()" onkeydown="if(event.key==='Enter') beLogin()">
       </div>
       <button onclick="beLogin()" class="submit-btn" id="be-login-btn" style="width:100%;padding:12px;font-size:13px">Sign In to Dashboard &rarr;</button>
       <div id="be-login-err" style="color:#f85149;font-size:12px;margin-top:14px;display:none;background:rgba(248,81,73,0.1);padding:8px 12px;border-radius:4px;border:1px solid rgba(248,81,73,0.3)">Invalid email or password. Please try again.</div>
@@ -3256,6 +3264,32 @@ function togglePassVisibility(){
 }
 window.togglePassVisibility = togglePassVisibility;
 
+const KNOWN_ADMIN_EMAILS = new Set([
+  'ranakaharian1@gmail.com',
+  'admin',
+  'rana',
+  'ranakaharian1'
+]);
+
+function triggerLoginShake(){
+  const box = document.querySelector('.login-box');
+  if(box){
+    box.classList.remove('shake-box');
+    void box.offsetWidth;
+    box.classList.add('shake-box');
+  }
+}
+
+function clearLoginError(){
+  const err = document.getElementById('be-login-err');
+  const passInp = document.getElementById('be-pass');
+  const emailInp = document.getElementById('be-email');
+  if(err) err.style.display = 'none';
+  if(passInp) passInp.style.borderColor = '';
+  if(emailInp) emailInp.style.borderColor = '';
+}
+window.clearLoginError = clearLoginError;
+
 async function beLogin(){
   const emailInp = document.getElementById('be-email');
   const passInp = document.getElementById('be-pass');
@@ -3264,15 +3298,27 @@ async function beLogin(){
   const err = document.getElementById('be-login-err');
   const btn = document.getElementById('be-login-btn');
 
-  if(!email || !pass){
+  if(!email){
     if(err){
       err.style.display = 'block';
-      err.textContent = 'Please enter both email address and password.';
+      err.innerHTML = '<strong>Email Required:</strong> Please enter your admin email address.';
     }
+    if(emailInp){ emailInp.style.borderColor = '#f85149'; emailInp.focus(); }
+    triggerLoginShake();
     return;
   }
 
-  if(btn) btn.textContent = 'Signing in...';
+  if(!pass){
+    if(err){
+      err.style.display = 'block';
+      err.innerHTML = '<strong>Password Required:</strong> Please enter your password.';
+    }
+    if(passInp){ passInp.style.borderColor = '#f85149'; passInp.focus(); }
+    triggerLoginShake();
+    return;
+  }
+
+  if(btn) btn.textContent = 'Verifying credentials...';
 
   try {
     const combinedHash = await sha256(email + ':' + pass);
@@ -3287,19 +3333,36 @@ async function beLogin(){
       if(gate) gate.style.display = 'none';
       if(auth) auth.style.display = 'flex';
       if(err) err.style.display = 'none';
+      if(passInp) passInp.style.borderColor = '';
+      if(emailInp) emailInp.style.borderColor = '';
       
       renderBackend();
       showToast('Signed in successfully');
     } else {
+      triggerLoginShake();
       if(err){
         err.style.display = 'block';
-        err.textContent = 'Invalid credentials. Access denied.';
+        const isKnownEmail = KNOWN_ADMIN_EMAILS.has(email) || email.includes('ranakaharian1');
+        if(isKnownEmail){
+          err.innerHTML = '<div style="font-weight:600;margin-bottom:2px">&#9888; Incorrect Password</div><div>The password you entered is incorrect. Please check your password and try again.</div>';
+          if(passInp){
+            passInp.style.borderColor = '#f85149';
+            passInp.select();
+            passInp.focus();
+          }
+        } else {
+          err.innerHTML = '<div style="font-weight:600;margin-bottom:2px">&#9888; Unrecognized Email Address</div><div>This email is not authorized for administrator access.</div>';
+          if(emailInp){
+            emailInp.style.borderColor = '#f85149';
+            emailInp.focus();
+          }
+        }
       }
     }
   } catch(e){
     if(err){
       err.style.display = 'block';
-      err.textContent = 'Authentication error: ' + (e.message || 'Please try again.');
+      err.innerHTML = '<strong>Authentication Error:</strong> ' + (e.message || 'Please try again.');
     }
   } finally {
     if(btn) btn.textContent = 'Sign In to Dashboard →';
