@@ -3375,6 +3375,20 @@ function beDebouncedGallerySearch(val){
 }
 window.beDebouncedGallerySearch = beDebouncedGallerySearch;
 
+function beRefreshSingleGalleryCard(realIdx){
+  const cardEl = document.getElementById(`beg-${realIdx}`);
+  const g = galleryItems[realIdx];
+  if(!cardEl || !g) {
+    if(typeof renderBeGallery === 'function') renderBeGallery();
+    return;
+  }
+  const cachedOptions = galleryItems.map((other, oi) =>
+    `<option value="${oi}">[${String(oi+1).padStart(2,'0')}] ${(other.title || 'Project').substring(0,35)}</option>`
+  ).join('');
+  cardEl.outerHTML = beBuildProjectCardHtml(g, realIdx, cachedOptions);
+}
+window.beRefreshSingleGalleryCard = beRefreshSingleGalleryCard;
+
 function beBuildProjectCardHtml(g, realIdx, cachedOptions){
   const allImgs = (g.images && g.images.length > 0) ? g.images : (g.path ? [g.path] : []);
   const subVids = g.subVideos || {};
@@ -3591,9 +3605,9 @@ function beMoveSubImageOrder(itemIdx, subIdx, dir){
   }
 
   saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  scheduleGitHubAutoSync();
-  showToast('Photo reordered');
+  beRefreshSingleGalleryCard(itemIdx);
+  markUnsavedChanges();
+  showToast('✓ Photo reordered');
 }
 window.beMoveSubImageOrder = beMoveSubImageOrder;
 
@@ -3629,9 +3643,9 @@ function beRemoveSubImage(itemIdx, subIdx){
   g.path = imgs[0];
   if(g.subVideos && g.subVideos[subIdx]) delete g.subVideos[subIdx];
   saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  scheduleGitHubAutoSync();
-  showToast('Photo removed from project');
+  beRefreshSingleGalleryCard(itemIdx);
+  markUnsavedChanges();
+  showToast('✓ Photo removed from project');
 }
 window.beRemoveSubImage = beRemoveSubImage;
 
@@ -3647,13 +3661,13 @@ function beAddImageToItem(itemIdx){
   if(!g.path) g.path = cleanPath;
 
   saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  scheduleGitHubAutoSync();
-  showToast(`Added photo to "${g.title}"`);
+  beRefreshSingleGalleryCard(itemIdx);
+  markUnsavedChanges();
+  showToast(`✓ Added photo to "${g.title}"`);
 }
 window.beAddImageToItem = beAddImageToItem;
 
-function beUpdateGalleryItem(realIdx){
+function beUpdateGalleryItem(realIdx, silent = false){
   const g = galleryItems[realIdx];
   if(!g) return;
 
@@ -3662,7 +3676,7 @@ function beUpdateGalleryItem(realIdx){
   const pillarSel = document.getElementById(`beg-pillar-${realIdx}`);
   const descInp = document.getElementById(`beg-desc-${realIdx}`);
 
-  if(titleInp) g.title = titleInp.value.trim();
+  if(titleInp && titleInp.value.trim()) g.title = titleInp.value.trim();
   if(catSel) g.cat = catSel.value;
   if(pillarSel) g.pillar = pillarSel.value;
   if(descInp) g.desc = descInp.value.trim();
@@ -3684,9 +3698,11 @@ function beUpdateGalleryItem(realIdx){
   });
 
   saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  scheduleGitHubAutoSync();
-  showToast(`Saved changes for "${g.title}"!`);
+  markUnsavedChanges();
+  if(!silent){
+    beRefreshSingleGalleryCard(realIdx);
+    showToast(`✓ Saved changes for "${g.title}"`);
+  }
 }
 window.beUpdateGalleryItem = beUpdateGalleryItem;
 
@@ -3818,9 +3834,10 @@ function beMoveImageToProject(fromProjIdx, photoIdx, toProjIdx){
   if(!destProj.path) destProj.path = destImages[0];
 
   saveData('rana_gallery_data', galleryItems);
-  renderBeGallery();
-  scheduleGitHubAutoSync();
-  showToast(`&#10140; Successfully moved photo to "${destProj.title}"!`);
+  beRefreshSingleGalleryCard(fromProjIdx);
+  beRefreshSingleGalleryCard(toProjIdx);
+  markUnsavedChanges();
+  showToast(`✓ Moved photo to "${destProj.title}"`);
 }
 window.beMoveImageToProject = beMoveImageToProject;
 
@@ -4252,21 +4269,33 @@ function updateGitHubTokenPrompt(){
 }
 window.updateGitHubTokenPrompt = updateGitHubTokenPrompt;
 
+let pendingEditsCount = 0;
 let ghSyncTimer = null;
+
+function markUnsavedChanges(){
+  pendingEditsCount++;
+  const syncBtn = document.querySelector('.btn-sync');
+  if(syncBtn && !syncBtn.innerHTML.includes('Syncing')){
+    syncBtn.innerHTML = `<span>💾</span> Save to GitHub (${pendingEditsCount} pending)`;
+    syncBtn.style.background = '#d97706';
+    syncBtn.style.borderColor = '#d97706';
+  }
+  scheduleGitHubAutoSync();
+}
+window.markUnsavedChanges = markUnsavedChanges;
+
 function scheduleGitHubAutoSync(){
   if(ghSyncTimer) clearTimeout(ghSyncTimer);
-  const syncBtn = document.querySelector('.btn-sync');
-  if(syncBtn){
-    syncBtn.innerHTML = '<span>&#9203;</span> Auto-Sync Scheduled...';
-    syncBtn.style.opacity = '0.7';
-  }
+  // Debounce auto-sync to 45 seconds of idle inactivity so Vercel is not spammed with builds
   ghSyncTimer = setTimeout(async () => {
     try {
-      await saveAllDataToGitHub(true);
+      if(pendingEditsCount > 0){
+        await saveAllDataToGitHub(true);
+      }
     } catch(err){
       console.warn('Auto-sync notice:', err);
     }
-  }, 2500);
+  }, 45000);
 }
 window.scheduleGitHubAutoSync = scheduleGitHubAutoSync;
 
@@ -4337,7 +4366,10 @@ async function saveAllDataToGitHub(isAuto = false){
     if(putRes.ok){
       showToast('&#10003; Synced database with GitHub repository!');
       if(syncBtn){
-        syncBtn.innerHTML = '<span>&#10003;</span> Synced with GitHub (1-Click)';
+        pendingEditsCount = 0;
+syncBtn.style.background = '';
+syncBtn.style.borderColor = '';
+syncBtn.innerHTML = '<span>&#10003;</span> Synced with GitHub (1-Click)';
         syncBtn.style.opacity = '1';
         setTimeout(() => {
           syncBtn.innerHTML = '<span>&#128025;</span> Save to GitHub (1-Click)';
