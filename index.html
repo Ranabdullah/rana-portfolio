@@ -1361,6 +1361,152 @@ body.theme-dark .hero-theme-scrim {
   background: linear-gradient(90deg, rgba(7,8,11,0.96) 0%, rgba(7,8,11,0.88) 38%, rgba(7,8,11,0.3) 68%, rgba(7,8,11,0) 100%) !important;
 }
 
+
+/* ==================== BULLETPROOF BUTTON, BADGE, AND CONTRAST SYSTEM ==================== */
+.btn-primary,
+.dls-btn-primary,
+.submit-btn,
+.badge-dark,
+.badge-live,
+.gf-btn.on,
+.bt.on,
+.toast {
+  background: var(--ink) !important;
+  color: var(--bg) !important;
+  border-color: var(--ink) !important;
+}
+
+.btn-primary:hover,
+.dls-btn-primary:hover,
+.submit-btn:hover {
+  background: var(--ink2) !important;
+  color: var(--bg) !important;
+  border-color: var(--ink2) !important;
+}
+
+.btn-outline:hover,
+.slider-btn:hover,
+.novel-read-btn:hover,
+.nv-btn:hover,
+.gf-btn:hover,
+.bt:hover {
+  background: var(--ink) !important;
+  color: var(--bg) !important;
+  border-color: var(--ink) !important;
+}
+
+/* Badges */
+.badge-pill {
+  font-family: var(--sans) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  padding: 4px 12px !important;
+  border-radius: 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+.badge-dark, .badge-live {
+  background: var(--ink) !important;
+  color: var(--bg) !important;
+}
+.badge-outline {
+  background: var(--bg-card) !important;
+  color: var(--ink2) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* Gallery and Category Filter Buttons */
+.gf-btn, .bt {
+  font-family: var(--sans) !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  padding: 7px 16px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--ink3) !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  border-radius: 20px !important;
+}
+.gf-btn.on, .gf-btn:hover, .bt.on, .bt:hover {
+  background: var(--ink) !important;
+  color: var(--bg) !important;
+  border-color: var(--ink) !important;
+}
+
+/* Tech Buttons */
+.dls-btn {
+  font-family: var(--sans) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 8px 18px !important;
+  border-radius: 6px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+}
+.dls-btn-primary {
+  background: var(--ink) !important;
+  color: var(--bg) !important;
+  border: 1px solid var(--ink) !important;
+}
+.dls-btn-primary:hover {
+  background: var(--ink2) !important;
+  color: var(--bg) !important;
+}
+.dls-btn-outline {
+  background: var(--bg-card) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--border) !important;
+}
+.dls-btn-outline:hover {
+  border-color: var(--ink) !important;
+  background: var(--bg2) !important;
+  color: var(--ink) !important;
+}
+
+/* Bulletproof Deep Dark Footer across all themes */
+footer {
+  background: #07090e !important;
+  color: #ffffff !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  padding: 54px 48px !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto !important;
+  gap: 36px !important;
+  align-items: center !important;
+}
+footer .footer-name {
+  color: #ffffff !important;
+  font-family: var(--serif) !important;
+  font-size: 26px !important;
+  font-weight: 500 !important;
+}
+footer .footer-sub {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-family: var(--sans) !important;
+  font-size: 12.5px !important;
+}
+footer .footer-links a {
+  color: rgba(255, 255, 255, 0.65) !important;
+  font-family: var(--sans) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  transition: color 0.25s ease !important;
+}
+footer .footer-links a:hover {
+  color: #ffffff !important;
+}
+
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
