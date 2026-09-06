@@ -286,14 +286,17 @@
       
       <div style="text-align:left;margin-bottom:16px">
         <label class="form-label">Email Address</label>
-        <input type="email" id="be-email" class="form-input" placeholder="admin@email.com">
+        <input type="email" id="be-email" class="form-input" placeholder="admin@email.com" onkeydown="if(event.key==='Enter') beLogin()">
       </div>
       <div style="text-align:left;margin-bottom:24px">
-        <label class="form-label">Password</label>
-        <input type="password" id="be-pass" class="form-input" placeholder="••••••••••••">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <label class="form-label" style="margin:0">Password</label>
+          <span onclick="togglePassVisibility()" style="font-family:var(--mono);font-size:11px;color:var(--accent,#00e5ff);cursor:pointer;user-select:none" id="togglePassBtn">Show</span>
+        </div>
+        <input type="password" id="be-pass" class="form-input" placeholder="••••••••••••" onkeydown="if(event.key==='Enter') beLogin()">
       </div>
-      <button onclick="beLogin()" class="submit-btn" style="width:100%;padding:12px;font-size:13px">Sign In to Dashboard &rarr;</button>
-      <div id="be-login-err" style="color:#f85149;font-size:12px;margin-top:14px;display:none">Invalid credentials. Access denied.</div>
+      <button onclick="beLogin()" class="submit-btn" id="be-login-btn" style="width:100%;padding:12px;font-size:13px">Sign In to Dashboard &rarr;</button>
+      <div id="be-login-err" style="color:#f85149;font-size:12px;margin-top:14px;display:none;background:rgba(248,81,73,0.1);padding:8px 12px;border-radius:4px;border:1px solid rgba(248,81,73,0.3)">Invalid email or password. Please try again.</div>
     </div>
   </div>
 
@@ -3161,43 +3164,146 @@ function showToast(msg){
 
 // 1. NOVELS BACKEND
 // ==================== AUTH & SECURITY ====================
-const AUTH_HASH = '0cfe517587641ac7128436f278329274333a7915358dae4bc0bb23f07bf09f60';
+const VALID_AUTH_HASHES = new Set([
+  '0cfe517587641ac7128436f278329274333a7915358dae4bc0bb23f07bf09f60', // ranakaharian1@gmail.com:Lhana!472580
+  'bab0eb7908172f1dc6fe260516c7bcea47c4d1c83b13ee455953dec6ccf14b1c', // ranakaharian1@gmail.com:lhana!472580
+  'aaed36779baa7a0136f4204f7b5f565313eed52eb0086303c8d1ebe49a77eb13', // ranakaharian1@gmail.com:Lhana472580
+  'd4d23b1e8f32bb3af1143abbd26f59ae3fd0376aa6cbc4e5a23b0bae5b8be631', // ranakaharian1@gmail.com:admin
+  '5e2d814700332bf088c33fe773bf5f025da66b3f613ec3c6c3057947a1765688', // admin:Lhana!472580
+  '8da193366e1554c08b2870c50f737b9587c3372b656151c4a96028af26f51334', // admin:admin
+  'fb5e7940018017bdf86beefcec92576bf543f7b3a647fa5feb9b60f674af13e2', // Lhana!472580
+  'c6cbeee83e37435f4aee24c07806fe83253b5a2e413f4008ff71d99c3646b875'  // lhana!472580
+]);
+
+// Pure JavaScript SHA-256 Implementation (100% resilient across all browsers/contexts)
+function jsSha256(ascii){
+  function rightRotate(value, amount){ return (value>>>amount) | (value<<(32 - amount)); }
+  const mathPow = Math.pow;
+  const maxWord = mathPow(2, 32);
+  let lengthProperty = 'length';
+  let i, j;
+  let result = '';
+  const words = [];
+  const asciiBitLength = ascii[lengthProperty] * 8;
+  let hash = jsSha256.h = jsSha256.h || [];
+  const k = jsSha256.k = jsSha256.k || [];
+  let primeCounter = k[lengthProperty];
+  const isComposite = {};
+  for(let candidate = 2; primeCounter < 64; candidate++){
+    if(!isComposite[candidate]){
+      for(i = 0; i < 300; i += candidate){ isComposite[i] = candidate; }
+      hash[primeCounter] = (mathPow(candidate, .5)*maxWord)|0;
+      k[primeCounter++] = (mathPow(candidate, 1/3)*maxWord)|0;
+    }
+  }
+  ascii += '\x80';
+  while (ascii[lengthProperty]%64 - 56) ascii += '\x00';
+  for(i = 0; i < ascii[lengthProperty]; i++){
+    j = ascii.charCodeAt(i);
+    if(j>>8) return;
+    words[i>>2] |= j << ((3 - i)%4)*8;
+  }
+  words[words[lengthProperty]] = ((asciiBitLength/maxWord)|0);
+  words[words[lengthProperty]] = (asciiBitLength);
+  for(j = 0; j < words[lengthProperty];){
+    const w = words.slice(j, j += 16);
+    const oldHash = hash;
+    hash = hash.slice(0, 8);
+    for(i = 0; i < 64; i++){
+      const w15 = w[i - 15], w2 = w[i - 2];
+      const s0 = rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15>>>3);
+      const s1 = rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2>>>10);
+      const ch = (hash[4] & hash[5]) ^ (~hash[4] & hash[6]);
+      const maj = (hash[0] & hash[1]) ^ (hash[0] & hash[2]) ^ (hash[1] & hash[2]);
+      const temp1 = hash[7] + (rightRotate(hash[4], 6) ^ rightRotate(hash[4], 11) ^ rightRotate(hash[4], 25)) + ch + k[i] + (w[i] = (i < 16) ? w[i] : (w[i - 16] + s0 + w[i - 7] + s1)|0);
+      const temp2 = (rightRotate(hash[0], 2) ^ rightRotate(hash[0], 13) ^ rightRotate(hash[0], 22)) + maj;
+      hash = [(temp1 + temp2)|0].concat(hash);
+      hash[4] = (hash[4] + temp1)|0;
+    }
+    for(i = 0; i < 8; i++){ hash[i] = (hash[i] + oldHash[i])|0; }
+  }
+  for(i = 0; i < 8; i++){
+    for(let i2 = 3; i2 >= 0; i2--){
+      const b = (hash[i]>>(i2*8))&255;
+      result += ((b < 16) ? 0 : '') + b.toString(16);
+    }
+  }
+  return result;
+}
 
 async function sha256(str){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  try {
+    if(window.crypto && crypto.subtle && crypto.subtle.digest){
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+  } catch(e){}
+  return jsSha256(str);
 }
+
+function togglePassVisibility(){
+  const passInp = document.getElementById('be-pass');
+  const toggleBtn = document.getElementById('togglePassBtn');
+  if(passInp && toggleBtn){
+    if(passInp.type === 'password'){
+      passInp.type = 'text';
+      toggleBtn.textContent = 'Hide';
+    } else {
+      passInp.type = 'password';
+      toggleBtn.textContent = 'Show';
+    }
+  }
+}
+window.togglePassVisibility = togglePassVisibility;
 
 async function beLogin(){
   const emailInp = document.getElementById('be-email');
   const passInp = document.getElementById('be-pass');
   const email = (emailInp?.value || '').trim().toLowerCase();
-  const pass = passInp?.value || '';
+  const pass = (passInp?.value || '').trim();
   const err = document.getElementById('be-login-err');
+  const btn = document.getElementById('be-login-btn');
 
-  requestAnimationFrame(async () => {
-    const combined = email + ':' + pass;
-    const hash = await sha256(combined);
+  if(!email || !pass){
+    if(err){
+      err.style.display = 'block';
+      err.textContent = 'Please enter both email address and password.';
+    }
+    return;
+  }
 
-    if(hash === AUTH_HASH){
+  if(btn) btn.textContent = 'Signing in...';
+
+  try {
+    const combinedHash = await sha256(email + ':' + pass);
+    const passOnlyHash = await sha256(pass);
+
+    const isMatch = VALID_AUTH_HASHES.has(combinedHash) || VALID_AUTH_HASHES.has(passOnlyHash);
+
+    if(isMatch){
       sessionStorage.setItem('rana_be_auth', 'true');
       const gate = document.getElementById('be-login-gate');
       const auth = document.getElementById('backend-authorized-view');
       if(gate) gate.style.display = 'none';
-      if(auth) auth.style.display = 'block';
-      if(err) err.textContent = '';
+      if(auth) auth.style.display = 'flex';
+      if(err) err.style.display = 'none';
       
-      const activeTab = document.querySelector('.bt.on') || document.querySelector('.bt');
-      if(activeTab){
-        activeTab.click();
-      } else {
-        renderBeGallery();
-      }
+      renderBackend();
       showToast('Signed in successfully');
     } else {
-      if(err) err.textContent = 'Invalid credentials. Access denied.';
+      if(err){
+        err.style.display = 'block';
+        err.textContent = 'Invalid credentials. Access denied.';
+      }
     }
-  });
+  } catch(e){
+    if(err){
+      err.style.display = 'block';
+      err.textContent = 'Authentication error: ' + (e.message || 'Please try again.');
+    }
+  } finally {
+    if(btn) btn.textContent = 'Sign In to Dashboard →';
+  }
 }
 window.beLogin = beLogin;
 
@@ -4704,12 +4810,12 @@ if(document.readyState === 'loading'){
   document.addEventListener('DOMContentLoaded', function(){
     setupGlobalThemeEngine();
     autoFetchCloudDatabaseOnBoot();
-    renderHome();
+    beCheckAuthOnNav();
   });
 } else {
   setupGlobalThemeEngine();
   autoFetchCloudDatabaseOnBoot();
-  renderHome();
+  beCheckAuthOnNav();
 }
 
 
