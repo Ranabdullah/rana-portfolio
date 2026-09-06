@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-06T23:49:36.461Z",
+  "updatedAt": "2026-09-06T23:50:22.768Z",
   "version": "4.5",
   "novels": [
     {
@@ -650,7 +650,9 @@
       "images": [
         "Photos & to upload/Kitchen/67748729_2470650796319052_4466508233967665152_o.jpg",
         "Photos & to upload/Kitchen/All Work (160).jpg",
-        "Photos & to upload/Kitchen/All Work (167).jpg"
+        "Photos & to upload/Kitchen/All Work (167).jpg",
+        "Photos & to upload/YouTube/wvJ3n61oNlQ.jpg",
+        "Photos & to upload/Church/4.jpg"
       ],
       "subVideos": {},
       "youtubeUrl": ""
@@ -822,14 +824,6 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=yEWTwD7XMjw"
     },
     {
-      "title": "Modern Architectural Interior: Cinematic Walkthrough",
-      "pillar": "Client",
-      "cat": "environment",
-      "desc": "High-end luxury residential interior animation with dynamic exposure transitions, realistic fabric physics, and architectural finish details.",
-      "path": "Photos & to upload/YouTube/wvJ3n61oNlQ.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=wvJ3n61oNlQ"
-    },
-    {
       "title": "Windy Storm Coastline: Dynamic Ocean Simulation",
       "pillar": "Personal",
       "cat": "environment",
@@ -850,13 +844,6 @@
       "cat": "3d",
       "desc": "Atmospheric underground train carriage interior with distressed stainless steel textures and fluorescent flicker.",
       "path": "Photos & to upload/Train/All Work (183).jpg"
-    },
-    {
-      "title": "Gothic Cathedral: Volumetric Godrays",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "High vaulted arches and rose window stained-glass lighting study with atmospheric dust motes and volumetric haze.",
-      "path": "Photos & to upload/Church/4.jpg"
     },
     {
       "title": "Micro Diorama: Architectural Scale Model",
