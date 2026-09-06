@@ -6,7 +6,7 @@
   <title>Rana Abdullah &mdash; Admin CMS Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0d1117;
@@ -19,12 +19,10 @@
       --ink4: #6e7681;
       --accent: #58a6ff;
       --accent-glow: rgba(88, 166, 255, 0.2);
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
-      --font-sans: 'Plus Jakarta Sans', sans-serif;
-      --font-serif: 'Cinzel', serif;
       --mono: var(--font-mono);
       --sans: var(--font-sans);
-      --serif: var(--font-serif);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -34,6 +32,13 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+    }
+
+    /* Enforce normal, natural, clean UI typography across ALL inputs, textareas, and controls */
+    input, textarea, select, button {
+      font-family: var(--sans) !important;
+      letter-spacing: normal !important;
+      text-transform: none !important;
     }
     
     /* Toast Notification */
@@ -69,20 +74,23 @@
       gap: 12px;
     }
     .admin-brand h1 {
-      font-family: var(--serif);
-      font-size: 20px;
-      letter-spacing: 0.05em;
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
       color: var(--ink);
     }
     .admin-brand span {
       background: rgba(88, 166, 255, 0.15);
       color: var(--accent);
-      font-family: var(--mono);
-      font-size: 10px;
+      font-family: var(--sans);
+      font-size: 11px;
       padding: 3px 8px;
       border-radius: 12px;
       border: 1px solid rgba(88, 166, 255, 0.3);
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .admin-actions {
       display: flex;
@@ -94,7 +102,7 @@
     /* Buttons */
     .btn {
       padding: 8px 16px;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 600;
       border-radius: 6px;
       cursor: pointer;
@@ -131,10 +139,11 @@
       color: #0d1117;
       border: 1px solid var(--accent);
       padding: 8px 16px;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 700;
       border-radius: 4px;
       cursor: pointer;
+      font-family: var(--sans);
       transition: opacity 0.2s;
     }
     .submit-btn:hover { opacity: 0.9; }
@@ -162,11 +171,9 @@
       border: 1px solid var(--border);
       color: var(--ink3);
       padding: 10px 18px;
-      font-size: 11.5px;
-      font-family: var(--mono);
+      font-size: 12px;
+      font-family: var(--sans);
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
       border-radius: 6px;
       cursor: pointer;
       white-space: nowrap;
@@ -183,16 +190,17 @@
     .backend-panel { display: none; }
     .backend-panel.on { display: block; }
     .backend-panel-title {
-      font-family: var(--serif);
-      font-size: 24px;
-      font-weight: 400;
+      font-family: var(--sans);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
       margin-bottom: 6px;
     }
     .backend-panel-sub {
       color: var(--ink3);
-      font-size: 12px;
+      font-size: 13px;
       margin-bottom: 24px;
-      font-family: var(--mono);
+      font-family: var(--sans);
     }
     .backend-grid {
       display: grid;
@@ -214,18 +222,18 @@
     .form-group { margin-bottom: 16px; }
     .form-label {
       display: block;
-      font-size: 11px;
-      font-family: var(--mono);
+      font-size: 11.5px;
+      font-family: var(--sans);
       text-transform: uppercase;
       color: var(--ink3);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
       margin-bottom: 6px;
       font-weight: 600;
     }
     .form-input, .form-textarea, .form-select {
       width: 100%;
       padding: 9px 12px;
-      font-size: 12.5px;
+      font-size: 13px;
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--ink);
@@ -292,7 +300,7 @@
   <div id="be-login-gate">
     <div class="login-box">
       <div style="font-size:32px;margin-bottom:12px">&#128274;</div>
-      <h2 style="font-family:var(--serif);font-size:22px;margin-bottom:8px">Portfolio Manager</h2>
+      <h2 style="font-family:var(--sans);font-size:20px;font-weight:700;margin-bottom:8px">Portfolio Manager</h2>
       <p style="color:var(--ink3);font-size:12.5px;margin-bottom:24px">Sign in with authorized administrator credentials.</p>
       
       <div style="text-align:left;margin-bottom:16px">
@@ -302,7 +310,7 @@
       <div style="text-align:left;margin-bottom:24px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
           <label class="form-label" style="margin:0">Password</label>
-          <span onclick="togglePassVisibility()" style="font-family:var(--mono);font-size:11px;color:var(--accent,#00e5ff);cursor:pointer;user-select:none" id="togglePassBtn">Show Password</span>
+          <span onclick="togglePassVisibility()" style="font-family:var(--sans);font-size:11.5px;color:var(--accent,#58a6ff);cursor:pointer;user-select:none;font-weight:600" id="togglePassBtn">Show Password</span>
         </div>
         <input type="password" id="be-pass" class="form-input" placeholder="••••••••••••" oninput="clearLoginError()" onkeydown="if(event.key==='Enter') beLogin()">
       </div>
@@ -351,16 +359,16 @@
         <div style="display:flex;align-items:center;gap:12px">
           <span style="font-size:22px">&#128273;</span>
           <div>
-            <div style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.08em">GitHub Personal Access Token (PAT) Vault</div>
-            <div style="font-size:11.5px;color:var(--ink3)">Stored securely in your browser for 1-Click Sync.</div>
+            <div style="font-family:var(--sans);font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.05em">GitHub Personal Access Token (PAT) Vault</div>
+            <div style="font-size:12px;color:var(--ink3)">Stored securely in your browser for 1-Click Sync.</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex:1;max-width:540px;min-width:280px">
           <input type="password" id="be-header-token-input" placeholder="Paste ghp_... token here"
-            style="flex:1;padding:8px 12px;font-family:var(--mono);font-size:11.5px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px">
-          <button onclick="beToggleTokenVisibility()" id="btnToggleTokVis" class="btn" style="padding:7px 10px;font-size:10.5px">&#128065; Show</button>
-          <button onclick="beCopyTokenFromVault()" class="btn" style="padding:7px 12px;font-size:10.5px">&#128203; Copy</button>
-          <button onclick="beSaveTokenToVault()" class="btn btn-primary" style="padding:7px 14px;font-size:10.5px">&#128190; Save</button>
+            style="flex:1;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px">
+          <button onclick="beToggleTokenVisibility()" id="btnToggleTokVis" class="btn" style="padding:7px 10px;font-size:11px">&#128065; Show</button>
+          <button onclick="beCopyTokenFromVault()" class="btn" style="padding:7px 12px;font-size:11px">&#128203; Copy</button>
+          <button onclick="beSaveTokenToVault()" class="btn btn-primary" style="padding:7px 14px;font-size:11px">&#128190; Save</button>
         </div>
       </div>
 
@@ -381,7 +389,7 @@
         <div class="backend-panel-sub">Manage 235 projects, reorder photos, embed YouTube videos, and transfer images between projects.</div>
         <div class="backend-grid">
           <div class="backend-form-card">
-            <h3 style="font-size:16px;margin-bottom:16px;font-weight:600">+ Add New 3D Project</h3>
+            <h3 style="font-size:15px;margin-bottom:16px;font-weight:700">+ Add New 3D Project</h3>
             <div class="form-group">
               <label class="form-label">Project Title</label>
               <input type="text" id="b-g-title" class="form-input" placeholder="e.g. Neo Tokyo Cyberpunk...">
@@ -433,7 +441,7 @@
         <div class="backend-panel-sub">Manage 15 novels, Amazon UK links, novella readers, cover artwork, and full excerpts.</div>
         <div class="backend-grid">
           <div class="backend-form-card">
-            <h3 style="font-size:16px;margin-bottom:16px;font-weight:600">+ Publish New Novel</h3>
+            <h3 style="font-size:15px;margin-bottom:16px;font-weight:700">+ Publish New Novel</h3>
             <div class="form-group">
               <label class="form-label">Book Title</label>
               <input type="text" id="b-nv-title" class="form-input" placeholder="Novel Title...">
@@ -483,7 +491,7 @@
         <div class="backend-panel-sub">Manage 11 engineering projects, live URLs, GitHub downloads, tech stacks, and feature matrices.</div>
         <div class="backend-grid">
           <div class="backend-form-card">
-            <h3 style="font-size:16px;margin-bottom:16px;font-weight:600">+ Add Engineering Project</h3>
+            <h3 style="font-size:15px;margin-bottom:16px;font-weight:700">+ Add Engineering Project</h3>
             <div class="form-group">
               <label class="form-label">Project Title</label>
               <input type="text" id="b-tp-title" class="form-input" placeholder="Project Title...">
@@ -533,7 +541,7 @@
         <div class="backend-panel-sub">Manage 8 software products, pricing, categories, Gumroad, and download links.</div>
         <div class="backend-grid">
           <div class="backend-form-card">
-            <h3 style="font-size:16px;margin-bottom:16px;font-weight:600">+ Add Software Product</h3>
+            <h3 style="font-size:15px;margin-bottom:16px;font-weight:700">+ Add Software Product</h3>
             <div class="form-group">
               <label class="form-label">Software Name</label>
               <input type="text" id="b-sw-name" class="form-input" placeholder="e.g. 1-Click Lighting Setup">
@@ -567,7 +575,7 @@
         <div class="backend-panel-sub">Manage 5 published essays, critiques, read links, and full excerpts.</div>
         <div class="backend-grid">
           <div class="backend-form-card">
-            <h3 style="font-size:16px;margin-bottom:16px;font-weight:600">+ Publish Essay</h3>
+            <h3 style="font-size:15px;margin-bottom:16px;font-weight:700">+ Publish Essay</h3>
             <div class="form-group">
               <label class="form-label">Article Title</label>
               <input type="text" id="b-art-title" class="form-input" placeholder="Essay Title...">
@@ -602,7 +610,7 @@
         <div class="backend-panel-sub">Manage 7 professional roles, companies, timeframes, and deliverables.</div>
         <div class="backend-grid">
           <div class="backend-form-card">
-            <h3 style="font-size:16px;margin-bottom:16px;font-weight:600">+ Add Experience Role</h3>
+            <h3 style="font-size:15px;margin-bottom:16px;font-weight:700">+ Add Experience Role</h3>
             <div class="form-group">
               <label class="form-label">Role Title</label>
               <input type="text" id="b-exp-role" class="form-input" placeholder="Lead 3D Visualizer...">
@@ -632,7 +640,7 @@
         <div class="backend-panel-sub">Manage 31 commercial clients, sectors, engagement years, and URLs.</div>
         <div class="backend-grid">
           <div class="backend-form-card">
-            <h3 style="font-size:16px;margin-bottom:16px;font-weight:600">+ Add Client Brand</h3>
+            <h3 style="font-size:15px;margin-bottom:16px;font-weight:700">+ Add Client Brand</h3>
             <div class="form-group">
               <label class="form-label">Brand / Client Name</label>
               <input type="text" id="b-cli-name" class="form-input" placeholder="Client Name...">
@@ -662,8 +670,8 @@
   <!-- 3. PHOTO TRANSFER MODAL -->
   <div id="be-transfer-modal">
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:24px;max-width:480px;width:100%">
-      <h3 style="font-size:18px;margin-bottom:12px">&#10140; Move Photo to Another Project</h3>
-      <p style="color:var(--ink3);font-size:12px;margin-bottom:16px">Transfer this selected image directly into another 3D visual project:</p>
+      <h3 style="font-size:17px;font-weight:700;margin-bottom:12px">&#10140; Move Photo to Another Project</h3>
+      <p style="color:var(--ink3);font-size:12.5px;margin-bottom:16px">Transfer this selected image directly into another 3D visual project:</p>
       
       <div id="be-transfer-preview" style="text-align:center;margin-bottom:16px;background:var(--bg);padding:12px;border-radius:6px;border:1px solid var(--border);display:flex;align-items:center;gap:12px"></div>
       
@@ -3001,7 +3009,7 @@ function renderBackend(){
 }
 window.renderBackend = renderBackend;
 
-// 1. NOVELS BACKEND (100% COMPLETE FIELD EDITOR)
+// 1. NOVELS BACKEND (100% CLEAN NATURAL SANS-SERIF UI)
 function renderBeNovels(){
   const c = document.getElementById('be-novels-list');
   if(!c) return;
@@ -3020,22 +3028,22 @@ function renderBeNovels(){
         ${n.cover ? `
           <div style="position:relative;flex-shrink:0">
             <img src="${n.cover}" style="width:64px;height:92px;object-fit:cover;border-radius:4px;border:1px solid var(--border);display:block">
-            <span style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,0.8);color:#fff;font-family:var(--mono);font-size:7.5px;padding:1px 4px;border-radius:2px;font-weight:700">#${i+1}</span>
+            <span style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,0.8);color:#fff;font-size:9px;padding:1px 4px;border-radius:2px;font-weight:700">#${i+1}</span>
           </div>
         ` : ''}
         <div style="flex:1;display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px">
           <div>
             <label class="form-label">Book Title</label>
             <input id="be-nt-${i}" value="${(n.title||'').replace(/"/g,'&quot;')}"
-              style="width:100%;padding:7px 10px;font-family:var(--serif);font-size:15px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+              style="width:100%;padding:8px 12px;font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
           </div>
           <div>
             <label class="form-label">Genre</label>
-            <input id="be-ng-${i}" value="${(n.genre||'').replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+            <input id="be-ng-${i}" value="${(n.genre||'').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
           </div>
           <div>
             <label class="form-label">Year / Status</label>
-            <input id="be-ny-${i}" value="${(n.year||'Published').replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+            <input id="be-ny-${i}" value="${(n.year||'Published').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
           </div>
         </div>
       </div>
@@ -3044,40 +3052,40 @@ function renderBeNovels(){
       <div style="display:grid;grid-template-columns:1.5fr 1.5fr 1fr;gap:10px">
         <div>
           <label class="form-label">Cover Image Path</label>
-          <input id="be-nc-${i}" value="${(n.cover||'').replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-nc-${i}" value="${(n.cover||'').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Amazon UK Store Link</label>
-          <input id="be-na-${i}" value="${amz.replace(/"/g,'&quot;')}" placeholder="https://www.amazon.co.uk/dp/B0..." style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-na-${i}" value="${amz.replace(/"/g,'&quot;')}" placeholder="https://www.amazon.co.uk/dp/B0..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Reader URL (Optional)</label>
-          <input id="be-nr-${i}" value="${read.replace(/"/g,'&quot;')}" placeholder="shavings.html" style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-nr-${i}" value="${read.replace(/"/g,'&quot;')}" placeholder="shavings.html" style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
       </div>
 
       <!-- ROW 3: TAGLINE / ATMOSPHERIC HOOK -->
       <div>
         <label class="form-label">Tagline / Atmospheric Hook</label>
-        <input id="be-ntag-${i}" value="${tag.replace(/"/g,'&quot;')}" placeholder="Short thematic quote or premise..." style="width:100%;padding:7px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+        <input id="be-ntag-${i}" value="${tag.replace(/"/g,'&quot;')}" placeholder="Short thematic quote or premise..." style="width:100%;padding:8px 12px;font-size:13px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
       </div>
 
       <!-- ROW 4: BOOK OVERVIEW / SYNOPSIS -->
       <div>
         <label class="form-label">Book Overview &amp; Synopsis</label>
-        <textarea id="be-ndesc-${i}" rows="2" placeholder="Authoritative overview of the book..." style="width:100%;padding:7px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${desc}</textarea>
+        <textarea id="be-ndesc-${i}" rows="2" placeholder="Authoritative overview of the book..." style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${desc}</textarea>
       </div>
 
       <!-- ROW 5: FULL STORY EXCERPT / CHAPTER TEXT (READING MODAL) -->
       <div>
         <label class="form-label">Full Story Excerpt / Opening Chapter (Shown in Reader Modal)</label>
-        <textarea id="be-nex-${i}" rows="4" placeholder="Paragraphs of the novel excerpt..." style="width:100%;padding:7px 10px;font-family:var(--sans);font-size:12px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${excerpt}</textarea>
+        <textarea id="be-nex-${i}" rows="4" placeholder="Paragraphs of the novel excerpt..." style="width:100%;padding:8px 12px;font-size:13px;line-height:1.6;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${excerpt}</textarea>
       </div>
 
       <!-- ACTION BUTTONS -->
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border)">
-        <button onclick="beDeleteNovel(${i})" style="padding:6px 14px;font-family:var(--mono);font-size:10.5px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Book</button>
-        <button onclick="beUpdateNovel(${i})" class="submit-btn" style="padding:7px 22px;font-size:11.5px">Save Changes</button>
+        <button onclick="beDeleteNovel(${i})" style="padding:6px 14px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Book</button>
+        <button onclick="beUpdateNovel(${i})" class="submit-btn" style="padding:8px 22px;font-size:12px">Save Changes</button>
       </div>
     </div>
     `;
@@ -3169,7 +3177,7 @@ function addNovel(){
 }
 window.addNovel = addNovel;
 
-// 2. TECHNICAL PROJECTS BACKEND (100% COMPLETE FIELD EDITOR)
+// 2. TECHNICAL PROJECTS BACKEND (100% CLEAN NATURAL SANS-SERIF UI)
 function renderBeTech(){
   const c = document.getElementById('be-tech-list');
   if(!c) return;
@@ -3186,19 +3194,19 @@ function renderBeTech(){
         <div>
           <label class="form-label">Project Title</label>
           <input id="be-tech-title-${i}" value="${(tp.title||'').replace(/"/g,'&quot;')}"
-            style="width:100%;padding:7px 10px;font-family:var(--serif);font-size:15px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+            style="width:100%;padding:8px 12px;font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Subtitle / Scope</label>
-          <input id="be-tech-sub-${i}" value="${(tp.subtitle||'').replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-sub-${i}" value="${(tp.subtitle||'').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Number</label>
-          <input id="be-tech-num-${i}" value="${(tp.num||String(i+1).padStart(2,'0')).replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-num-${i}" value="${(tp.num||String(i+1).padStart(2,'0')).replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Status &amp; Badge</label>
-          <input id="be-tech-status-${i}" value="${(tp.status||'Live').replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-status-${i}" value="${(tp.status||'Live').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
       </div>
 
@@ -3206,34 +3214,34 @@ function renderBeTech(){
       <div style="display:grid;grid-template-columns:1.2fr 1.2fr 1.6fr;gap:10px">
         <div>
           <label class="form-label">Live App / Demo URL</label>
-          <input id="be-tech-live-${i}" value="${(tp.liveUrl||'').replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-live-${i}" value="${(tp.liveUrl||'').replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">GitHub / Download / Secondary URL</label>
-          <input id="be-tech-gh-${i}" value="${ghUrl.replace(/"/g,'&quot;')}" placeholder="https://github.com/... or https://play.google.com/..." style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-gh-${i}" value="${ghUrl.replace(/"/g,'&quot;')}" placeholder="https://github.com/... or https://play.google.com/..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Tech Stack (comma-separated)</label>
-          <input id="be-tech-tags-${i}" value="${tagsStr}" style="width:100%;padding:7px 10px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-tags-${i}" value="${tagsStr}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
       </div>
 
       <!-- ROW 3: DESCRIPTION -->
       <div>
         <label class="form-label">Architecture &amp; Overview Description</label>
-        <textarea id="be-tech-desc-${i}" rows="3" style="width:100%;padding:7px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${tp.desc||''}</textarea>
+        <textarea id="be-tech-desc-${i}" rows="3" style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${tp.desc||''}</textarea>
       </div>
 
       <!-- ROW 4: KEY FEATURES / BULLET POINTS -->
       <div>
         <label class="form-label">Core Features (one bullet per line)</label>
-        <textarea id="be-tech-feat-${i}" rows="3" placeholder="✓ High-performance rendering engine&#10;✓ Automated edge data sync" style="width:100%;padding:7px 10px;font-family:var(--sans);font-size:11.5px;line-height:1.4;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${featStr}</textarea>
+        <textarea id="be-tech-feat-${i}" rows="3" placeholder="✓ High-performance rendering engine&#10;✓ Automated edge data sync" style="width:100%;padding:8px 12px;font-size:12.5px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${featStr}</textarea>
       </div>
 
       <!-- ACTION BUTTONS -->
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border)">
-        <button onclick="beDeleteTech(${i})" style="padding:6px 14px;font-family:var(--mono);font-size:10.5px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Project</button>
-        <button onclick="beUpdateTech(${i})" class="submit-btn" style="padding:7px 22px;font-size:11.5px">Save Changes</button>
+        <button onclick="beDeleteTech(${i})" style="padding:6px 14px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Project</button>
+        <button onclick="beUpdateTech(${i})" class="submit-btn" style="padding:8px 22px;font-size:12px">Save Changes</button>
       </div>
     </div>
     `;
@@ -3359,7 +3367,7 @@ function addTechProject(){
 }
 window.addTechProject = addTechProject;
 
-// 3. 3D VISUAL GALLERY BACKEND (HIGH PERFORMANCE CHUNKED RENDERER)
+// 3. 3D VISUAL GALLERY BACKEND (100% CLEAN NATURAL SANS-SERIF UI)
 let beGalleryChunkTimer = null;
 let beGallerySearchDebounce = null;
 
@@ -3381,40 +3389,40 @@ function beBuildProjectCardHtml(g, realIdx, cachedOptions){
         <img src="${imgSrc}" loading="lazy" decoding="async" style="width:100%;height:95px;object-fit:cover;border-radius:4px;border:1px solid var(--border);display:block">
         <button onclick="beRemoveSubImage(${realIdx}, ${sIdx})" title="Delete this photo"
           style="position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#e50914;border:none;color:#fff;font-size:12px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.3)">&times;</button>
-        ${sIdx === 0 ? `<span style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,0.8);color:#fff;font-family:var(--mono);font-size:8px;padding:2px 5px;border-radius:2px;font-weight:700">COVER</span>` : ''}
+        ${sIdx === 0 ? `<span style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,0.8);color:#fff;font-size:9px;padding:2px 5px;border-radius:2px;font-weight:700">COVER</span>` : ''}
       </div>
       <div style="display:flex;gap:4px;align-items:center;justify-content:center;width:100%">
         <button onclick="beMoveSubImageOrder(${realIdx}, ${sIdx}, -1)" ${sIdx === 0 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''} title="Move photo left"
-          style="padding:3px 7px;font-size:9px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9664;</button>
-        <span style="font-family:var(--mono);font-size:8.5px;color:var(--ink3)">#${sIdx + 1}</span>
+          style="padding:3px 7px;font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9664;</button>
+        <span style="font-size:10px;color:var(--ink3);font-weight:600">#${sIdx + 1}</span>
         <button onclick="beMoveSubImageOrder(${realIdx}, ${sIdx}, 1)" ${sIdx === allImgs.length - 1 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''} title="Move photo right"
-          style="padding:3px 7px;font-size:9px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9654;</button>
+          style="padding:3px 7px;font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9654;</button>
       </div>
-      <div style="font-family:var(--mono);font-size:8.5px;color:var(--ink4);max-width:135px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${imgSrc}">${imgSrc.split('/').pop()}</div>
+      <div style="font-size:10px;color:var(--ink4);max-width:135px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${imgSrc}">${imgSrc.split('/').pop()}</div>
       <div style="width:100%">
-        <div style="font-family:var(--mono);font-size:8px;color:#e50914;margin-bottom:2px;font-weight:600">&#9654; YOUTUBE LINK:</div>
+        <div style="font-size:9.5px;color:#e50914;margin-bottom:2px;font-weight:600">&#9654; YOUTUBE LINK:</div>
         <input id="be-subvid-${realIdx}-${sIdx}" placeholder="https://youtube.com/..." value="${(subVids[sIdx] || (sIdx===0 ? g.youtubeUrl : '') || '').replace(/"/g,'&quot;')}"
-          style="width:100%;padding:4px 6px;font-family:var(--mono);font-size:9px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box">
+          style="width:100%;padding:4px 6px;font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box">
       </div>
       <button onclick="beOpenTransferModal(${realIdx}, ${sIdx})" title="Move this photo into another project"
-        style="width:100%;margin-top:4px;padding:6px 4px;font-family:var(--mono);font-size:9.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px">
+        style="width:100%;margin-top:4px;padding:6px 4px;font-size:11px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px">
         &#10140; Move Photo
       </button>
     </div>
   `).join('');
 
   return `
-  <div class="backend-item" style="flex-direction:column;align-items:stretch;gap:14px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:18px" id="beg-${realIdx}">
+  <div class="backend-item" style="flex-direction:column;align-items:stretch;gap:14px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;margin-bottom:18px" id="beg-${realIdx}">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--border);padding-bottom:12px">
       <div style="display:flex;align-items:center;gap:8px">
         <button onclick="beMoveProject(${realIdx}, -1)" ${realIdx === 0 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''}
-          style="padding:4px 10px;font-family:var(--mono);font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer;font-weight:700">&#9650; Move Up</button>
+          style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-weight:700">&#9650; Move Up</button>
         <button onclick="beMoveProject(${realIdx}, 1)" ${realIdx === galleryItems.length - 1 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''}
-          style="padding:4px 10px;font-family:var(--mono);font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer;font-weight:700">&#9660; Move Down</button>
-        <span style="font-family:var(--mono);font-size:10.5px;padding:3px 9px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:12px;font-weight:700">[ ${String(realIdx + 1).padStart(2, '0')} / ${galleryItems.length} ]</span>
+          style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-weight:700">&#9660; Move Down</button>
+        <span style="font-size:11px;padding:4px 10px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:12px;font-weight:700">[ ${String(realIdx + 1).padStart(2, '0')} / ${galleryItems.length} ]</span>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
-        <select id="beg-cat-${realIdx}" style="padding:5px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px">
+        <select id="beg-cat-${realIdx}" style="padding:6px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px">
           <option value="client" ${g.cat==='client'?'selected':''}>client</option>
           <option value="personal" ${g.cat==='personal'?'selected':''}>personal</option>
           <option value="animation" ${g.cat==='animation'?'selected':''}>animation</option>
@@ -3424,54 +3432,54 @@ function beBuildProjectCardHtml(g, realIdx, cachedOptions){
           <option value="product" ${g.cat==='product'?'selected':''}>product</option>
           <option value="branding" ${g.cat==='branding'?'selected':''}>branding</option>
         </select>
-        <select id="beg-pillar-${realIdx}" style="padding:5px 10px;font-family:var(--mono);font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px">
+        <select id="beg-pillar-${realIdx}" style="padding:6px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px">
           <option value="Client Work" ${g.pillar==='Client Work'?'selected':''}>Client Work</option>
           <option value="Personal" ${g.pillar==='Personal'?'selected':''}>Personal</option>
           <option value="Atmosphere" ${g.pillar==='Atmosphere'?'selected':''}>Atmosphere</option>
           <option value="Biome" ${g.pillar==='Biome'?'selected':''}>Biome</option>
         </select>
         <button onclick="beUpdateGalleryItem(${realIdx})"
-          style="padding:5px 16px;font-family:var(--mono);font-size:10.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700">Save Changes</button>
+          style="padding:6px 16px;font-size:12px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:4px;cursor:pointer;font-weight:700">Save Changes</button>
         <button onclick="beDeleteGalleryItem(${realIdx})"
-          style="padding:5px 12px;font-family:var(--mono);font-size:10.5px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer;font-weight:600">Delete Project</button>
+          style="padding:6px 12px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Project</button>
       </div>
     </div>
     <div>
-      <label style="font-family:var(--mono);font-size:9.5px;text-transform:uppercase;color:var(--ink4);display:block;margin-bottom:4px">Project Title</label>
+      <label class="form-label">Project Title</label>
       <input id="beg-title-${realIdx}" value="${(g.title||'').replace(/"/g,'&quot;')}"
-        style="width:100%;padding:8px 12px;font-family:var(--serif);font-size:18px;font-weight:600;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">
+        style="width:100%;padding:8px 12px;font-size:15px;font-weight:600;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px;box-sizing:border-box">
     </div>
     <div>
-      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;font-weight:700">
+      <div style="font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;font-weight:700">
         PHOTOS IN THIS PROJECT (${allImgs.length}):
       </div>
       <div style="display:flex;flex-wrap:wrap;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:6px;min-height:50px;align-items:center">
-        ${allImgs.length > 0 ? thumbs : '<span style="font-family:var(--mono);font-size:11px;color:var(--ink4);padding:10px">No photos currently in this project. Click "+ Add Photo to Project" below.</span>'}
+        ${allImgs.length > 0 ? thumbs : '<span style="font-size:12px;color:var(--ink4);padding:10px">No photos currently in this project. Click "+ Add Photo to Project" below.</span>'}
       </div>
       <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px">
         <button onclick="beAddImageToItem(${realIdx})"
-          style="padding:6px 14px;font-family:var(--mono);font-size:10.5px;background:var(--bg-card);color:var(--ink);border:1px dashed var(--border);border-radius:3px;cursor:pointer;font-weight:600">
+          style="padding:6px 14px;font-size:12px;background:var(--bg-card);color:var(--ink);border:1px dashed var(--border);border-radius:4px;cursor:pointer;font-weight:600">
           + Add Photo to Project
         </button>
         <div style="display:flex;align-items:center;gap:6px">
-          <span style="font-family:var(--mono);font-size:10px;color:var(--ink3)">Move a photo to:</span>
-          <select id="be-quick-target-${realIdx}" style="padding:5px 8px;font-family:var(--mono);font-size:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;max-width:240px">
+          <span style="font-size:11.5px;color:var(--ink3)">Move a photo to:</span>
+          <select id="be-quick-target-${realIdx}" style="padding:6px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px;max-width:260px">
             ${cachedOptions}
           </select>
           <button onclick="beMoveImageToProject(${realIdx}, 0, parseInt(document.getElementById('be-quick-target-${realIdx}').value))"
-            style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:3px;cursor:pointer;font-weight:600">
+            style="padding:6px 12px;font-size:12px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-weight:600">
             Move Photo
           </button>
         </div>
       </div>
     </div>
     <div>
-      <label style="font-family:var(--mono);font-size:9.5px;text-transform:uppercase;color:var(--ink4);display:block;margin-bottom:4px">Project Description</label>
+      <label class="form-label">Project Description</label>
       <textarea id="beg-desc-${realIdx}" rows="3"
-        style="width:100%;padding:8px 12px;font-family:var(--sans);font-size:13px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:3px;box-sizing:border-box">${g.desc||''}</textarea>
+        style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px;box-sizing:border-box">${g.desc||''}</textarea>
     </div>
     <div style="display:flex;justify-content:flex-end">
-      <button onclick="beUpdateGalleryItem(${realIdx})" class="submit-btn" style="padding:8px 20px;font-size:11px">
+      <button onclick="beUpdateGalleryItem(${realIdx})" class="submit-btn" style="padding:8px 20px;font-size:12px">
         Save Changes
       </button>
     </div>
@@ -3503,11 +3511,11 @@ function renderBeGallery(searchTerm){
     <div style="margin-bottom:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
       <input id="be-gallery-search" type="text" placeholder="Search 235 projects by title or category..." value="${term}"
         oninput="beDebouncedGallerySearch(this.value)"
-        style="flex:1;min-width:220px;padding:9px 14px;font-family:var(--mono);font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px">
-      <span style="font-family:var(--mono);font-size:11px;color:var(--ink3);font-weight:600">${filtered.length} / ${galleryItems.length} projects</span>
+        style="flex:1;min-width:220px;padding:9px 14px;font-size:13px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px">
+      <span style="font-size:12px;color:var(--ink3);font-weight:600">${filtered.length} / ${galleryItems.length} projects</span>
     </div>
     <div id="be-gallery-cards-list"></div>
-    <div id="be-gallery-chunk-loader" style="display:none;text-align:center;padding:12px;font-family:var(--mono);font-size:11px;color:var(--ink3)">
+    <div id="be-gallery-chunk-loader" style="display:none;text-align:center;padding:12px;font-size:12px;color:var(--ink3)">
       Loading more projects...
     </div>
   `;
@@ -3744,9 +3752,9 @@ function beOpenTransferModal(fromProjIdx, photoIdx){
     prev.innerHTML = `
       <img src="${imgSrc}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--border)">
       <div style="text-align:left">
-        <div style="font-family:var(--mono);font-size:9.5px;color:var(--ink4)">CURRENT PROJECT:</div>
-        <div style="font-family:var(--serif);font-size:16px;color:var(--ink);font-weight:600">${proj.title}</div>
-        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:2px">Photo #${photoIdx + 1}: ${imgSrc.split('/').pop()}</div>
+        <div style="font-size:10px;color:var(--ink4);text-transform:uppercase;font-weight:700">CURRENT PROJECT:</div>
+        <div style="font-size:15px;color:var(--ink);font-weight:700">${proj.title}</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px">Photo #${photoIdx + 1}: ${imgSrc.split('/').pop()}</div>
       </div>
     `;
   }
@@ -3820,7 +3828,7 @@ function beMoveImageToProject(fromProjIdx, photoIdx, toProjIdx){
 }
 window.beMoveImageToProject = beMoveImageToProject;
 
-// 4. SOFTWARE & ADDONS BACKEND (100% COMPLETE FIELD EDITOR)
+// 4. SOFTWARE & ADDONS BACKEND (100% CLEAN NATURAL SANS-SERIF UI)
 function renderBeSoftware(){
   const c = document.getElementById('be-software-list');
   if(!c) return;
@@ -3833,28 +3841,28 @@ function renderBeSoftware(){
         <div>
           <label class="form-label">Software / Addon Name</label>
           <input id="be-soft-t-${i}" value="${(s.name||s.title||'').replace(/"/g,'&quot;')}"
-            style="width:100%;padding:7px 10px;font-family:var(--sans);font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+            style="width:100%;padding:8px 12px;font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Category / Platform</label>
-          <input id="be-soft-plat-${i}" value="${(s.cat||s.platform||'Blender Addon').replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-soft-plat-${i}" value="${(s.cat||s.platform||'Blender Addon').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Price</label>
-          <input id="be-soft-p-${i}" value="${(s.price||'Free').replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-soft-p-${i}" value="${(s.price||'Free').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
       </div>
       <div>
         <label class="form-label">Product / Download / Gumroad Link</label>
-        <input id="be-soft-url-${i}" value="${linkUrl.replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+        <input id="be-soft-url-${i}" value="${linkUrl.replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
       </div>
       <div>
         <label class="form-label">Description &amp; Workflow Capabilities</label>
-        <textarea id="be-soft-desc-${i}" rows="3" style="width:100%;padding:7px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${s.desc||''}</textarea>
+        <textarea id="be-soft-desc-${i}" rows="3" style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${s.desc||''}</textarea>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border)">
-        <button onclick="beDeleteSoftware(${i})" style="padding:6px 14px;font-family:var(--mono);font-size:10.5px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Software</button>
-        <button onclick="beUpdateSoftware(${i})" class="submit-btn" style="padding:7px 22px;font-size:11.5px">Save Changes</button>
+        <button onclick="beDeleteSoftware(${i})" style="padding:6px 14px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Software</button>
+        <button onclick="beUpdateSoftware(${i})" class="submit-btn" style="padding:8px 22px;font-size:12px">Save Changes</button>
       </div>
     </div>
     `;
@@ -3920,7 +3928,7 @@ function addSoftware(){
 }
 window.addSoftware = addSoftware;
 
-// 5. CAREER & EXPERIENCE BACKEND (100% COMPLETE FIELD EDITOR)
+// 5. CAREER & EXPERIENCE BACKEND (100% CLEAN NATURAL SANS-SERIF UI)
 function renderBeExp(){
   const c = document.getElementById('be-exp-list');
   if(!c) return;
@@ -3929,24 +3937,24 @@ function renderBeExp(){
       <div style="display:grid;grid-template-columns:1.5fr 1.5fr 1fr;gap:10px">
         <div>
           <label class="form-label">Role Title</label>
-          <input id="be-exp-role-${i}" value="${(e.role||'').replace(/"/g,'&quot;')}" placeholder="Role Title" style="width:100%;padding:7px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-exp-role-${i}" value="${(e.role||'').replace(/"/g,'&quot;')}" placeholder="Role Title" style="width:100%;padding:8px 12px;font-size:12.5px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Company / Studio</label>
-          <input id="be-exp-comp-${i}" value="${(e.company||'').replace(/"/g,'&quot;')}" placeholder="Company" style="width:100%;padding:7px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-exp-comp-${i}" value="${(e.company||'').replace(/"/g,'&quot;')}" placeholder="Company" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Period</label>
-          <input id="be-exp-per-${i}" value="${(e.period||'').replace(/"/g,'&quot;')}" placeholder="2023 - Present" style="width:100%;padding:7px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-exp-per-${i}" value="${(e.period||'').replace(/"/g,'&quot;')}" placeholder="2023 - Present" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
       </div>
       <div>
         <label class="form-label">Description &amp; Commercial Deliverables</label>
-        <textarea id="be-exp-desc-${i}" rows="2" placeholder="Responsibilities and achievements..." style="width:100%;padding:7px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${e.desc||''}</textarea>
+        <textarea id="be-exp-desc-${i}" rows="2" placeholder="Responsibilities and achievements..." style="width:100%;padding:8px 12px;font-size:12.5px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${e.desc||''}</textarea>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:4px;border-top:1px solid var(--border)">
-        <button onclick="beDeleteExp(${i})" style="padding:5px 12px;font-family:var(--mono);font-size:10px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:3px;cursor:pointer;font-weight:600">Delete</button>
-        <button onclick="beUpdateExp(${i})" class="submit-btn" style="padding:6px 18px;font-size:11px">Save Role</button>
+        <button onclick="beDeleteExp(${i})" style="padding:5px 12px;font-size:11px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete</button>
+        <button onclick="beUpdateExp(${i})" class="submit-btn" style="padding:6px 18px;font-size:11.5px">Save Role</button>
       </div>
     </div>
   `).join('');
@@ -4007,7 +4015,7 @@ function addExperience(){
 }
 window.addExperience = addExperience;
 
-// 6. CLIENTS BACKEND (100% COMPLETE FIELD EDITOR)
+// 6. CLIENTS BACKEND (100% CLEAN NATURAL SANS-SERIF UI)
 function renderBeClients(){
   const c = document.getElementById('be-clients-list');
   if(!c) return;
@@ -4022,24 +4030,24 @@ function renderBeClients(){
       <div style="flex:1;display:grid;grid-template-columns:1.5fr 1.2fr 80px 1.5fr;gap:10px;align-items:center;min-width:280px">
         <div>
           <label class="form-label" style="margin-bottom:3px">Brand Name</label>
-          <input id="be-cl-name-${i}" value="${name.replace(/"/g,'&quot;')}" style="width:100%;padding:6px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-cl-name-${i}" value="${name.replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label" style="margin-bottom:3px">Sector / Industry</label>
-          <input id="be-cl-sec-${i}" value="${sector.replace(/"/g,'&quot;')}" style="width:100%;padding:6px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-cl-sec-${i}" value="${sector.replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label" style="margin-bottom:3px">Year</label>
-          <input id="be-cl-yr-${i}" value="${year.replace(/"/g,'&quot;')}" style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-cl-yr-${i}" value="${year.replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label" style="margin-bottom:3px">Website URL</label>
-          <input id="be-cl-url-${i}" value="${url.replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:6px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-cl-url-${i}" value="${url.replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
       </div>
       <div style="display:flex;gap:8px">
-        <button onclick="beUpdateClient(${i})" class="submit-btn" style="padding:7px 16px;font-size:11px">Save</button>
-        <button onclick="beDeleteClient(${i})" style="padding:7px 10px;font-family:var(--mono);font-size:11px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer">&times;</button>
+        <button onclick="beUpdateClient(${i})" class="submit-btn" style="padding:8px 16px;font-size:11.5px">Save</button>
+        <button onclick="beDeleteClient(${i})" style="padding:8px 10px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer">&times;</button>
       </div>
     </div>
     `;
@@ -4103,7 +4111,7 @@ function addClient(){
 }
 window.addClient = addClient;
 
-// 7. ARTICLES BACKEND (100% COMPLETE FIELD EDITOR)
+// 7. ARTICLES BACKEND (100% CLEAN NATURAL SANS-SERIF UI)
 function renderBeArticles(){
   const c = document.getElementById('be-articles-list');
   if(!c) return;
@@ -4112,33 +4120,33 @@ function renderBeArticles(){
       <div>
         <label class="form-label">Article / Essay Title</label>
         <input id="be-art-title-${i}" value="${(a.title||'').replace(/"/g,'&quot;')}"
-          style="width:100%;padding:7px 10px;font-family:var(--serif);font-size:15px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          style="width:100%;padding:8px 12px;font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
       </div>
       <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px">
         <div>
           <label class="form-label">Category / Publisher</label>
-          <input id="be-art-cat-${i}" value="${(a.category||a.cat||'Essays & Critique').replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-art-cat-${i}" value="${(a.category||a.cat||'Essays & Critique').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Publication Date / Year</label>
-          <input id="be-art-date-${i}" value="${(a.date||'2026').replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-art-date-${i}" value="${(a.date||'2026').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Reading Time</label>
-          <input id="be-art-time-${i}" value="${(a.readTime||a.time||'5 min read').replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;font-size:11.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-art-time-${i}" value="${(a.readTime||a.time||'5 min read').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
       </div>
       <div>
         <label class="form-label">Article / Medium / Substack Link</label>
-        <input id="be-art-url-${i}" value="${(a.url||a.link||'').replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:7px 10px;font-family:var(--mono);font-size:10.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+        <input id="be-art-url-${i}" value="${(a.url||a.link||'').replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
       </div>
       <div>
         <label class="form-label">Excerpt / Summary</label>
-        <textarea id="be-art-desc-${i}" rows="3" style="width:100%;padding:7px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${a.desc||a.excerpt||''}</textarea>
+        <textarea id="be-art-desc-${i}" rows="3" style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${a.desc||a.excerpt||''}</textarea>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border)">
-        <button onclick="beDeleteArticle(${i})" style="padding:6px 14px;font-family:var(--mono);font-size:10.5px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Article</button>
-        <button onclick="beUpdateArticle(${i})" class="submit-btn" style="padding:7px 22px;font-size:11.5px">Save Changes</button>
+        <button onclick="beDeleteArticle(${i})" style="padding:6px 14px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Article</button>
+        <button onclick="beUpdateArticle(${i})" class="submit-btn" style="padding:8px 22px;font-size:12px">Save Changes</button>
       </div>
     </div>
   `).join('');
