@@ -9,7 +9,7 @@
 <title>Rana Abdullah — Novelist, 3D Artist &amp; Software Engineer</title>
 <meta name="description" content="Official portfolio of Rana Abdullah — Novelist, 3D Artist, and Software Developer based in Dublin, Ireland. Exploring narrative fiction, 3D rendering pipelines, and technical applications.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ==================== GLOBAL RESET & B&W DESIGN SYSTEM ==================== */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -19,15 +19,18 @@
   --bg2: #eaedf2;
   --bg3: #f8fafc;
   --ink: #11141a;
-  --ink2: #2d333f;
-  --ink3: #5a6474;
-  --ink4: #8b95a5;
-  --border: #dbe0e8;
-  --border2: #e9ecf0;
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'DM Sans', -apple-system, sans-serif;
-  --mono: 'JetBrains Mono', 'Space Grotesk', monospace;
-  --display: 'Space Grotesk', sans-serif;
+  --ink2: #242b38;
+  --ink3: #4b5668;
+  --ink4: #7b8798;
+  --border: #d5dce6;
+  --border2: #e4e9f0;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sans: var(--font-sans);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --serif: var(--font-serif);
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  --mono: var(--font-mono);
+  --display: var(--font-sans);
 }
 
 html { scroll-behavior:smooth; }
@@ -782,6 +785,474 @@ img { image-rendering: auto; }
   aspect-ratio: 2/3 !important;
   overflow: hidden !important;
 }
+
+/* ==================== GLOBAL TYPOGRAPHY & TAB BUTTON ENHANCEMENTS ==================== */
+body {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.section-label {
+  font-family: var(--sans) !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--ink3) !important;
+  margin-bottom: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+.section-label::before {
+  content: '' !important;
+  display: block !important;
+  width: 28px !important;
+  height: 2px !important;
+  background: var(--ink3) !important;
+  border-radius: 1px !important;
+}
+
+.section-title {
+  font-family: var(--serif) !important;
+  font-size: clamp(34px, 4.5vw, 54px) !important;
+  font-weight: 600 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--ink) !important;
+}
+.section-title em, .section-title span {
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: var(--ink2) !important;
+}
+
+/* SLEEK INTERACTIVE EXPLORE TAB BUTTON */
+.section-link-tab {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-family: var(--sans) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  color: var(--ink) !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  padding: 8px 18px !important;
+  border-radius: 20px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
+.section-link-tab:hover {
+  background: var(--ink) !important;
+  color: var(--bg) !important;
+  border-color: var(--ink) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12) !important;
+}
+.section-link-tab svg, .section-link-tab .arrow {
+  transition: transform 0.2s ease;
+}
+.section-link-tab:hover svg, .section-link-tab:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* ==================== HERO SECTION BACKGROUND & RENDER LAYERS ==================== */
+.home-hero {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: calc(100vh - 72px) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 80px 7vw !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  background: var(--bg) !important;
+}
+.hero-bg-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  background: var(--bg) !important;
+}
+.hero-bg-layer {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-size: cover !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  will-change: opacity !important;
+}
+.hero-layer-light {
+  background-image: url('Hero Image/Light_House_Render.png') !important;
+  z-index: 1 !important;
+  opacity: 1 !important;
+}
+.hero-layer-evening {
+  background-image: url('Hero Image/Evening_House_Render.png') !important;
+  z-index: 2 !important;
+  opacity: 0 !important;
+}
+.hero-layer-dark {
+  background-image: url('Hero Image/Dark_House_Render.png') !important;
+  z-index: 3 !important;
+  opacity: 0 !important;
+}
+.hero-theme-scrim {
+  position: absolute !important;
+  inset: 0 !important;
+  background: var(--scrim-grad, linear-gradient(90deg, rgba(244,245,247,0.96) 0%, rgba(244,245,247,0.88) 38%, rgba(244,245,247,0.3) 68%, rgba(244,245,247,0) 100%)) !important;
+  z-index: 4 !important;
+  pointer-events: none !important;
+  transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.hero-text-side {
+  position: relative !important;
+  z-index: 6 !important;
+  max-width: 640px !important;
+}
+.hero-eyebrow {
+  font-family: var(--sans) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: var(--ink3) !important;
+  margin-bottom: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+.hero-name {
+  font-family: var(--serif) !important;
+  font-size: clamp(52px, 7vw, 92px) !important;
+  font-weight: 600 !important;
+  line-height: 1.02 !important;
+  color: var(--ink) !important;
+  margin-bottom: 20px !important;
+  letter-spacing: -0.01em !important;
+}
+.hero-title {
+  font-family: var(--sans) !important;
+  font-size: 16.5px !important;
+  font-weight: 500 !important;
+  line-height: 1.65 !important;
+  color: var(--ink) !important;
+  margin-bottom: 28px !important;
+}
+
+/* ==================== NOVELS SLIDER & PROPER COVER RATIOS ==================== */
+.novels-slider-track { overflow: hidden; position: relative; width: 100%; }
+.novels-slider { display: flex; gap: 28px; transition: transform .6s cubic-bezier(.16,1,.3,1); }
+.novel-card {
+  flex: 0 0 240px !important;
+  width: 240px !important;
+  cursor: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.novel-cover {
+  width: 240px !important;
+  height: 350px !important;
+  aspect-ratio: 2 / 3 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 8px !important;
+  background: #14171d !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12) !important;
+  transition: transform 0.35s ease, box-shadow 0.35s ease !important;
+}
+.novel-cover img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+.novel-info { padding: 12px 0 0 !important; }
+.novel-genre {
+  font-family: var(--sans) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--ink3) !important;
+  margin-bottom: 4px !important;
+}
+.novel-name {
+  font-family: var(--sans) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  color: var(--ink) !important;
+  margin: 0 0 5px !important;
+}
+.novel-sub {
+  font-family: var(--sans) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  color: var(--ink2) !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* ==================== TECHNICAL SPOTLIGHT CARDS ==================== */
+.tech-spotlight-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  padding: 28px !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.03) !important;
+  transition: all 0.3s ease !important;
+  cursor: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+.tech-spotlight-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.08) !important;
+}
+.tech-spotlight-card h3 {
+  font-family: var(--sans) !important;
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  margin-bottom: 6px !important;
+}
+.tech-spotlight-card .tech-sub {
+  font-family: var(--sans) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--ink3) !important;
+  margin-bottom: 12px !important;
+}
+.tech-spotlight-card p {
+  font-family: var(--sans) !important;
+  font-size: 13.5px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: var(--ink2) !important;
+  margin-bottom: 16px !important;
+}
+.tech-tag {
+  font-family: var(--sans) !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  padding: 4px 10px !important;
+  border-radius: 4px !important;
+  background: var(--bg) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--ink2) !important;
+}
+
+/* ==================== SOFTWARE CARDS ==================== */
+.sw-product-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  padding: 22px 26px !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  transition: all 0.25s ease !important;
+  cursor: none !important;
+}
+.sw-product-meta {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 10px !important;
+}
+.sw-product-type {
+  font-family: var(--sans) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--ink3) !important;
+  padding: 3px 8px !important;
+  background: var(--bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 4px !important;
+}
+.sw-product-price {
+  font-family: var(--sans) !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  color: var(--ink) !important;
+}
+.sw-product-name {
+  font-family: var(--sans) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  margin-bottom: 6px !important;
+}
+.sw-product-desc {
+  font-family: var(--sans) !important;
+  font-size: 13.5px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: var(--ink2) !important;
+  margin: 0 !important;
+}
+
+/* ==================== VISUAL WORKS CARDS ==================== */
+.proj-card { flex: 0 0 310px !important; cursor: none !important; }
+.proj-img {
+  width: 100% !important;
+  height: 230px !important;
+  overflow: hidden !important;
+  border-radius: 6px !important;
+  position: relative !important;
+  background: #e2e6eb !important;
+}
+.proj-img img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+.proj-info { padding: 14px 0 0 !important; }
+.proj-cat {
+  font-family: var(--sans) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--ink3) !important;
+  margin-bottom: 5px !important;
+}
+.proj-name {
+  font-family: var(--sans) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  color: var(--ink) !important;
+  margin-bottom: 4px !important;
+}
+.proj-desc {
+  font-family: var(--sans) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: var(--ink2) !important;
+  line-height: 1.5 !important;
+}
+
+/* ==================== ARTICLES / ESSAYS ==================== */
+.article-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  padding: 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  transition: all 0.25s ease !important;
+  cursor: none !important;
+}
+.article-date {
+  font-family: var(--sans) !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: var(--ink3) !important;
+  margin-bottom: 8px !important;
+}
+.article-name {
+  font-family: var(--sans) !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  margin-bottom: 8px !important;
+}
+.article-excerpt {
+  font-family: var(--sans) !important;
+  font-size: 13.5px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: var(--ink2) !important;
+}
+
+/* ==================== AREAS OF MASTERY ==================== */
+.expertise-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  border: 1px solid var(--border) !important;
+  background: var(--border) !important;
+  gap: 1px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+@media (max-width: 900px) {
+  .expertise-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 600px) {
+  .expertise-grid { grid-template-columns: 1fr !important; }
+}
+.expertise-grid > div {
+  background: var(--bg-card) !important;
+  padding: 36px 28px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+.exp-num {
+  font-family: var(--serif) !important;
+  font-size: 38px !important;
+  font-weight: 600 !important;
+  color: var(--ink4) !important;
+  line-height: 1 !important;
+}
+.exp-name {
+  font-family: var(--sans) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--ink) !important;
+}
+.exp-desc {
+  font-family: var(--sans) !important;
+  font-size: 13.5px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: var(--ink2) !important;
+  margin: 0 !important;
+}
+
+/* ==================== CURSOR CLEAN INITIAL STATE ==================== */
+.cursor, .cursor-ring {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.3s ease !important;
+}
+.cursor.active, .cursor-ring.active {
+  opacity: 1 !important;
+}
+
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -873,7 +1344,7 @@ img { image-rendering: auto; }
         <div class="section-label">Engineering &amp; Web Systems</div>
         <h2 class="section-title">Technical <em>Projects</em></h2>
       </div>
-      <a class="section-link" href="#" onclick="showPage('technical-projects');return false">Explore all 9 projects →</a>
+      <a class="section-link-tab" href="#" onclick="showPage('technical-projects');return false">Explore All 9 Projects <span class="arrow">&rarr;</span></a>
     </div>
     <div class="tech-spotlight-grid" id="homeTechSpotlight">
       <!-- Injected by JS -->
@@ -889,7 +1360,7 @@ img { image-rendering: auto; }
         <div class="section-label">Literary Work</div>
         <h2 class="section-title">Novels &amp; <em>Published Works</em></h2>
       </div>
-      <a class="section-link" href="#" onclick="showPage('novels');return false">View all novels →</a>
+      <a class="section-link-tab" href="#" onclick="showPage('novels');return false">View All Novels <span class="arrow">&rarr;</span></a>
     </div>
     <div class="novels-slider-track">
       <div class="novels-slider" id="novelSlider">
@@ -911,7 +1382,7 @@ img { image-rendering: auto; }
         <div class="software-left-label">Tools &amp; Products</div>
         <div class="software-big">Software &amp;<br><em style="font-style:italic;color:var(--ink3)">Add-ons</em></div>
         <p class="software-desc">Professional Blender add-ons and automation pipelines built from over a decade of 3D workflow expertise.</p>
-        <a class="btn-outline" href="#" onclick="showPage('software');return false">Explore Software</a>
+        <a class="section-link-tab" href="#" onclick="showPage('software');return false">Explore All Software <span class="arrow">&rarr;</span></a>
       </div>
       <div class="software-right">
         <div class="sw-vertical-slider" id="swSlider">
@@ -930,7 +1401,7 @@ img { image-rendering: auto; }
         <div class="section-label">3D Art &amp; Visualization</div>
         <h2 class="section-title">Visual <em>Works</em></h2>
       </div>
-      <a class="section-link" href="#" onclick="showPage('gallery');return false">View full gallery →</a>
+      <a class="section-link-tab" href="#" onclick="showPage('gallery');return false">View Full Gallery <span class="arrow">&rarr;</span></a>
     </div>
     <div class="projects-slider-wrap">
       <div class="projects-grid" id="projGrid">
@@ -952,7 +1423,7 @@ img { image-rendering: auto; }
         <div class="section-label">Articles &amp; Thought Leadership</div>
         <h2 class="section-title">Essays &amp; <em>Insights</em></h2>
       </div>
-      <a class="section-link" href="#" onclick="showPage('articles');return false">Read all articles →</a>
+      <a class="section-link-tab" href="#" onclick="showPage('articles');return false">Read All Articles <span class="arrow">&rarr;</span></a>
     </div>
     <div class="articles-grid" id="homeArticlesGrid">
       <!-- Injected by JS -->
@@ -3140,8 +3611,20 @@ let clients = loadData('rana_clients_data', CLIENTS_DATA);
 // CURSOR
 const cur = document.getElementById('cur');
 const curRing = document.getElementById('curRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+let mx=-100,my=-100,rx=-100,ry=-100,curActive=false;
+document.addEventListener('mousemove',e=>{
+  if(!curActive){
+    curActive = true;
+    cur.classList.add('active');
+    curRing.classList.add('active');
+    rx = e.clientX;
+    ry = e.clientY;
+  }
+  mx=e.clientX;
+  my=e.clientY;
+  cur.style.left=mx+'px';
+  cur.style.top=my+'px';
+});
 function animRing(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;curRing.style.left=rx+'px';curRing.style.top=ry+'px';requestAnimationFrame(animRing)}
 animRing();
 function setupCursorHover(){
@@ -3265,7 +3748,7 @@ function renderHome(){
   // 3. Home Software Slider
   const swSlider = document.getElementById('swSlider');
   if(swSlider){
-    swSlider.innerHTML = software.map((s,i)=>{
+    swSlider.innerHTML = software.slice(0,3).map((s,i)=>{
       const col = RAINBOW_PALETTE[i % RAINBOW_PALETTE.length];
       return `
         <div class="sw-product-card" onclick="showPage('software')" style="margin-bottom:16px;${getCardGlowStyle(i)}">
