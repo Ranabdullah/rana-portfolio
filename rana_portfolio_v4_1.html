@@ -1264,6 +1264,103 @@ body {
   z-index: 0 !important;
 }
 
+
+/* ==================== COMPLETE 3-THEME STYLING & LAYER CROSSFADE ==================== */
+body.theme-light, body:not(.theme-dark):not(.theme-evening) {
+  --bg: #f4f5f7 !important;
+  --bg-card: #ffffff !important;
+  --bg2: #eaedf2 !important;
+  --bg3: #f8fafc !important;
+  --ink: #11141a !important;
+  --ink2: #242b38 !important;
+  --ink3: #4b5668 !important;
+  --ink4: #7b8798 !important;
+  --border: #d5dce6 !important;
+  --border2: #e4e9f0 !important;
+  --nav-bg: rgba(244, 245, 247, 0.94) !important;
+}
+
+body.theme-evening {
+  --bg: #0b132b !important;
+  --bg-card: #1c2541 !important;
+  --bg2: #141e3c !important;
+  --bg3: #080d1f !important;
+  --ink: #f0f4f8 !important;
+  --ink2: #d9e2ec !important;
+  --ink3: #9fb3c8 !important;
+  --ink4: #7b8f9f !important;
+  --border: rgba(255, 255, 255, 0.18) !important;
+  --border2: rgba(255, 255, 255, 0.1) !important;
+  --nav-bg: rgba(11, 19, 43, 0.94) !important;
+}
+
+body.theme-dark {
+  --bg: #07080b !important;
+  --bg-card: #111318 !important;
+  --bg2: #181b22 !important;
+  --bg3: #0c0d11 !important;
+  --ink: #ffffff !important;
+  --ink2: #f0f2f5 !important;
+  --ink3: #cbd5e1 !important;
+  --ink4: #94a3b8 !important;
+  --border: rgba(255, 255, 255, 0.16) !important;
+  --border2: rgba(255, 255, 255, 0.08) !important;
+  --nav-bg: rgba(7, 8, 11, 0.94) !important;
+}
+
+/* Nav & Global Controls across themes */
+nav {
+  background: var(--nav-bg) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+/* Smooth transitions for theme switching */
+body, .page, section, .home-hero, .tech-spotlight-card, .novel-card, .sw-product-card, .article-card, .proj-card, .g-card, .expertise-grid > div, nav, .section-link-tab {
+  transition: background-color 0.5s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease !important;
+}
+
+/* Architectural Render Layers crossfading via CSS theme classes */
+.hero-layer-light {
+  background-image: url('Hero Image/Light_House_Render.png') !important;
+  z-index: 1 !important;
+  opacity: 1;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.hero-layer-evening {
+  background-image: url('Hero Image/Evening_House_Render.png') !important;
+  z-index: 2 !important;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.hero-layer-dark {
+  background-image: url('Hero Image/Dark_House_Render.png') !important;
+  z-index: 3 !important;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+body.theme-light .hero-layer-light { opacity: 1 !important; }
+body.theme-light .hero-layer-evening { opacity: 0 !important; }
+body.theme-light .hero-layer-dark { opacity: 0 !important; }
+
+body.theme-evening .hero-layer-light { opacity: 0 !important; }
+body.theme-evening .hero-layer-evening { opacity: 1 !important; }
+body.theme-evening .hero-layer-dark { opacity: 0 !important; }
+
+body.theme-dark .hero-layer-light { opacity: 0 !important; }
+body.theme-dark .hero-layer-evening { opacity: 0 !important; }
+body.theme-dark .hero-layer-dark { opacity: 1 !important; }
+
+body.theme-light .hero-theme-scrim {
+  background: linear-gradient(90deg, rgba(244,245,247,0.96) 0%, rgba(244,245,247,0.88) 38%, rgba(244,245,247,0.3) 68%, rgba(244,245,247,0) 100%) !important;
+}
+body.theme-evening .hero-theme-scrim {
+  background: linear-gradient(90deg, rgba(11,19,43,0.96) 0%, rgba(11,19,43,0.88) 38%, rgba(11,19,43,0.3) 68%, rgba(11,19,43,0) 100%) !important;
+}
+body.theme-dark .hero-theme-scrim {
+  background: linear-gradient(90deg, rgba(7,8,11,0.96) 0%, rgba(7,8,11,0.88) 38%, rgba(7,8,11,0.3) 68%, rgba(7,8,11,0) 100%) !important;
+}
+
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
