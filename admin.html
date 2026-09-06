@@ -3035,16 +3035,16 @@ function renderBeNovels(){
         <div style="flex:1;display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px">
           <div>
             <label class="form-label">Book Title</label>
-            <input id="be-nt-${i}" value="${(n.title||'').replace(/"/g,'&quot;')}"
+            <input id="be-nt-${i}" oninput="beUpdateNovel(${i},true)" onchange="beUpdateNovel(${i},true)" value="${(n.title||'').replace(/"/g,'&quot;')}"
               style="width:100%;padding:8px 12px;font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
           </div>
           <div>
             <label class="form-label">Genre</label>
-            <input id="be-ng-${i}" value="${(n.genre||'').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+            <input id="be-ng-${i}" oninput="beUpdateNovel(${i},true)" onchange="beUpdateNovel(${i},true)" value="${(n.genre||'').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
           </div>
           <div>
             <label class="form-label">Year / Status</label>
-            <input id="be-ny-${i}" value="${(n.year||'Published').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+            <input id="be-ny-${i}" oninput="beUpdateNovel(${i},true)" onchange="beUpdateNovel(${i},true)" value="${(n.year||'Published').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
           </div>
         </div>
       </div>
@@ -3053,34 +3053,34 @@ function renderBeNovels(){
       <div style="display:grid;grid-template-columns:1.5fr 1.5fr 1fr;gap:10px">
         <div>
           <label class="form-label">Cover Image Path</label>
-          <input id="be-nc-${i}" value="${(n.cover||'').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-nc-${i}" oninput="beUpdateNovel(${i},true)" onchange="beUpdateNovel(${i},true)" value="${(n.cover||'').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Amazon UK Store Link</label>
-          <input id="be-na-${i}" value="${amz.replace(/"/g,'&quot;')}" placeholder="https://www.amazon.co.uk/dp/B0..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-na-${i}" oninput="beUpdateNovel(${i},true)" onchange="beUpdateNovel(${i},true)" value="${amz.replace(/"/g,'&quot;')}" placeholder="https://www.amazon.co.uk/dp/B0..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Reader URL (Optional)</label>
-          <input id="be-nr-${i}" value="${read.replace(/"/g,'&quot;')}" placeholder="shavings.html" style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-nr-${i}" oninput="beUpdateNovel(${i},true)" onchange="beUpdateNovel(${i},true)" value="${read.replace(/"/g,'&quot;')}" placeholder="shavings.html" style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
       </div>
 
       <!-- ROW 3: TAGLINE / ATMOSPHERIC HOOK -->
       <div>
         <label class="form-label">Tagline / Atmospheric Hook</label>
-        <input id="be-ntag-${i}" value="${tag.replace(/"/g,'&quot;')}" placeholder="Short thematic quote or premise..." style="width:100%;padding:8px 12px;font-size:13px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+        <input id="be-ntag-${i}" oninput="beUpdateNovel(${i},true)" onchange="beUpdateNovel(${i},true)" value="${tag.replace(/"/g,'&quot;')}" placeholder="Short thematic quote or premise..." style="width:100%;padding:8px 12px;font-size:13px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
       </div>
 
       <!-- ROW 4: BOOK OVERVIEW / SYNOPSIS -->
       <div>
         <label class="form-label">Book Overview &amp; Synopsis</label>
-        <textarea id="be-ndesc-${i}" rows="2" placeholder="Authoritative overview of the book..." style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${desc}</textarea>
+        <textarea id="be-ndesc-${i}" oninput="beUpdateNovel(${i},true)" onchange="beUpdateNovel(${i},true)" rows="2" placeholder="Authoritative overview of the book..." style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${desc}</textarea>
       </div>
 
       <!-- ROW 5: FULL STORY EXCERPT / CHAPTER TEXT (READING MODAL) -->
       <div>
         <label class="form-label">Full Story Excerpt / Opening Chapter (Shown in Reader Modal)</label>
-        <textarea id="be-nex-${i}" rows="4" placeholder="Paragraphs of the novel excerpt..." style="width:100%;padding:8px 12px;font-size:13px;line-height:1.6;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${excerpt}</textarea>
+        <textarea id="be-nex-${i}" oninput="beUpdateNovel(${i},true)" onchange="beUpdateNovel(${i},true)" rows="4" placeholder="Paragraphs of the novel excerpt..." style="width:100%;padding:8px 12px;font-size:13px;line-height:1.6;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${excerpt}</textarea>
       </div>
 
       <!-- ACTION BUTTONS -->
@@ -3094,7 +3094,7 @@ function renderBeNovels(){
 }
 window.renderBeNovels = renderBeNovels;
 
-function beUpdateNovel(i){
+function beUpdateNovel(i, silent = false){
   if(!novels[i]) return;
   const t = document.getElementById(`be-nt-${i}`)?.value;
   const g = document.getElementById(`be-ng-${i}`)?.value;
@@ -3106,9 +3106,9 @@ function beUpdateNovel(i){
   const desc = document.getElementById(`be-ndesc-${i}`)?.value;
   const ex = document.getElementById(`be-nex-${i}`)?.value;
 
-  if(t) novels[i].title = t.trim();
-  if(g) novels[i].genre = g.trim();
-  if(y) novels[i].year = y.trim();
+  if(t !== undefined && t.trim()) novels[i].title = t.trim();
+  if(g !== undefined) novels[i].genre = g.trim();
+  if(y !== undefined) novels[i].year = y.trim();
   if(c !== undefined) novels[i].cover = c.trim();
   if(a !== undefined) { novels[i].amazonUrl = a.trim(); novels[i].amzLink = a.trim(); }
   if(r !== undefined) novels[i].readUrl = r.trim();
@@ -3117,9 +3117,10 @@ function beUpdateNovel(i){
   if(ex !== undefined) novels[i].excerpt = ex.trim();
 
   saveData('rana_novels_data', novels);
-  renderBeNovels();
-  scheduleGitHubAutoSync();
-  showToast(`Saved changes for "${novels[i].title}"`);
+  if(!silent){
+    renderBeNovels();
+    showToast(`✓ Saved changes to "${novels[i].title}"`);
+  }
 }
 window.beUpdateNovel = beUpdateNovel;
 
@@ -3194,20 +3195,20 @@ function renderBeTech(){
       <div style="display:grid;grid-template-columns:2fr 1.5fr 70px 1.2fr;gap:10px">
         <div>
           <label class="form-label">Project Title</label>
-          <input id="be-tech-title-${i}" value="${(tp.title||'').replace(/"/g,'&quot;')}"
+          <input id="be-tech-title-${i}" oninput="beUpdateTech(${i},true)" onchange="beUpdateTech(${i},true)" value="${(tp.title||'').replace(/"/g,'&quot;')}"
             style="width:100%;padding:8px 12px;font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Subtitle / Scope</label>
-          <input id="be-tech-sub-${i}" value="${(tp.subtitle||'').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-sub-${i}" oninput="beUpdateTech(${i},true)" onchange="beUpdateTech(${i},true)" value="${(tp.subtitle||'').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Number</label>
-          <input id="be-tech-num-${i}" value="${(tp.num||String(i+1).padStart(2,'0')).replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-num-${i}" oninput="beUpdateTech(${i},true)" onchange="beUpdateTech(${i},true)" value="${(tp.num||String(i+1).padStart(2,'0')).replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Status &amp; Badge</label>
-          <input id="be-tech-status-${i}" value="${(tp.status||'Live').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-status-${i}" oninput="beUpdateTech(${i},true)" onchange="beUpdateTech(${i},true)" value="${(tp.status||'Live').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
       </div>
 
@@ -3215,28 +3216,28 @@ function renderBeTech(){
       <div style="display:grid;grid-template-columns:1.2fr 1.2fr 1.6fr;gap:10px">
         <div>
           <label class="form-label">Live App / Demo URL</label>
-          <input id="be-tech-live-${i}" value="${(tp.liveUrl||'').replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-live-${i}" oninput="beUpdateTech(${i},true)" onchange="beUpdateTech(${i},true)" value="${(tp.liveUrl||'').replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">GitHub / Download / Secondary URL</label>
-          <input id="be-tech-gh-${i}" value="${ghUrl.replace(/"/g,'&quot;')}" placeholder="https://github.com/... or https://play.google.com/..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-gh-${i}" oninput="beUpdateTech(${i},true)" onchange="beUpdateTech(${i},true)" value="${ghUrl.replace(/"/g,'&quot;')}" placeholder="https://github.com/... or https://play.google.com/..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
           <label class="form-label">Tech Stack (comma-separated)</label>
-          <input id="be-tech-tags-${i}" value="${tagsStr}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <input id="be-tech-tags-${i}" oninput="beUpdateTech(${i},true)" onchange="beUpdateTech(${i},true)" value="${tagsStr}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
       </div>
 
       <!-- ROW 3: DESCRIPTION -->
       <div>
         <label class="form-label">Architecture &amp; Overview Description</label>
-        <textarea id="be-tech-desc-${i}" rows="3" style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${tp.desc||''}</textarea>
+        <textarea id="be-tech-desc-${i}" oninput="beUpdateTech(${i},true)" onchange="beUpdateTech(${i},true)" rows="3" style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${tp.desc||''}</textarea>
       </div>
 
       <!-- ROW 4: KEY FEATURES / BULLET POINTS -->
       <div>
         <label class="form-label">Core Features (one bullet per line)</label>
-        <textarea id="be-tech-feat-${i}" rows="3" placeholder="✓ High-performance rendering engine&#10;✓ Automated edge data sync" style="width:100%;padding:8px 12px;font-size:12.5px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${featStr}</textarea>
+        <textarea id="be-tech-feat-${i}" oninput="beUpdateTech(${i},true)" onchange="beUpdateTech(${i},true)" rows="3" placeholder="✓ High-performance rendering engine&#10;✓ Automated edge data sync" style="width:100%;padding:8px 12px;font-size:12.5px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${featStr}</textarea>
       </div>
 
       <!-- ACTION BUTTONS -->
@@ -3250,7 +3251,7 @@ function renderBeTech(){
 }
 window.renderBeTech = renderBeTech;
 
-function beUpdateTech(i){
+function beUpdateTech(i, silent = false){
   if(!techProjects[i]) return;
   const title = document.getElementById('be-tech-title-'+i)?.value;
   const sub = document.getElementById('be-tech-sub-'+i)?.value;
@@ -3262,41 +3263,35 @@ function beUpdateTech(i){
   const desc = document.getElementById('be-tech-desc-'+i)?.value;
   const feat = document.getElementById('be-tech-feat-'+i)?.value;
 
-  if(title) techProjects[i].title = title.trim();
+  if(title !== undefined && title.trim()) techProjects[i].title = title.trim();
   if(sub !== undefined) techProjects[i].subtitle = sub.trim();
-  if(num) techProjects[i].num = num.trim();
-  if(status) {
+  if(num !== undefined) techProjects[i].num = num.trim();
+  if(status !== undefined) {
     techProjects[i].status = status.trim();
     techProjects[i].badgeClass = status.toLowerCase().includes('live') ? 'badge-live' : 'badge-outline';
   }
   if(live !== undefined) techProjects[i].liveUrl = live.trim();
-  if(gh !== undefined) techProjects[i].githubUrl = gh.trim();
+  if(gh !== undefined) techProjects[i].ghUrl = gh.trim();
+  if(tags !== undefined) techProjects[i].tech = tags.split(',').map(t=>t.trim()).filter(Boolean);
   if(desc !== undefined) techProjects[i].desc = desc.trim();
+  if(feat !== undefined) techProjects[i].features = feat.split('\n').map(f=>f.replace(/^[•\-*\s✓]+\s*/,'').trim()).filter(Boolean);
 
-  if(tags !== undefined) {
-    const parsed = tags.split(',').map(t=>t.trim()).filter(Boolean);
-    techProjects[i].tech = parsed;
-    techProjects[i].tags = parsed;
+  // Sync button array
+  techProjects[i].buttons = [];
+  if(techProjects[i].liveUrl){
+    techProjects[i].buttons.push({ label: 'Launch Live App ↗', url: techProjects[i].liveUrl, primary: true });
   }
-  if(feat !== undefined) {
-    techProjects[i].features = feat.split('\n').map(f=>f.trim()).filter(Boolean);
+  if(techProjects[i].ghUrl){
+    techProjects[i].buttons.push({ label: 'Download / GitHub ↗', url: techProjects[i].ghUrl, primary: !techProjects[i].liveUrl });
   }
-
-  // Update button links
-  const btns = [];
-  if(techProjects[i].liveUrl) btns.push({ label: 'Launch Web App ↗', url: techProjects[i].liveUrl, primary: true });
-  if(techProjects[i].githubUrl) {
-    const isPlay = techProjects[i].githubUrl.includes('play.google.com');
-    const isExe = techProjects[i].githubUrl.endsWith('.exe');
-    btns.push({ label: isPlay ? 'Google Play Store ↗' : (isExe ? 'Download for Windows ↗' : 'GitHub Repository ↗'), url: techProjects[i].githubUrl, primary: false });
-  }
-  techProjects[i].buttons = btns;
-  techProjects[i].hasLinks = btns.length > 0;
+  techProjects[i].links = techProjects[i].buttons;
+  techProjects[i].hasLinks = techProjects[i].buttons.length > 0;
 
   saveData('rana_tech_data', techProjects);
-  renderBeTech();
-  scheduleGitHubAutoSync();
-  showToast(`Saved changes for "${techProjects[i].title}"`);
+  if(!silent){
+    renderBeTech();
+    showToast(`✓ Saved changes to "${techProjects[i].title}"`);
+  }
 }
 window.beUpdateTech = beUpdateTech;
 
@@ -3871,24 +3866,25 @@ function renderBeSoftware(){
 }
 window.renderBeSoftware = renderBeSoftware;
 
-function beUpdateSoftware(i){
+function beUpdateSoftware(i, silent = false){
   if(!software[i]) return;
   const name = document.getElementById(`be-soft-t-${i}`)?.value;
   const cat = document.getElementById(`be-soft-plat-${i}`)?.value;
   const price = document.getElementById(`be-soft-p-${i}`)?.value;
-  const link = document.getElementById(`be-soft-url-${i}`)?.value;
+  const link = document.getElementById(`be-soft-l-${i}`)?.value;
   const desc = document.getElementById(`be-soft-desc-${i}`)?.value;
 
-  if(name) { software[i].name = name.trim(); software[i].title = name.trim(); }
-  if(cat) { software[i].cat = cat.trim(); software[i].platform = cat.trim(); }
-  if(price) software[i].price = price.trim();
-  if(link !== undefined) { software[i].link = link.trim(); software[i].url = link.trim(); }
-  if(desc) software[i].desc = desc.trim();
+  if(name !== undefined && name.trim()) { software[i].name = name.trim(); software[i].title = name.trim(); }
+  if(cat !== undefined) { software[i].category = cat.trim(); software[i].cat = cat.trim(); software[i].platform = cat.trim(); }
+  if(price !== undefined) software[i].price = price.trim();
+  if(link !== undefined) { software[i].link = link.trim(); software[i].gumroadUrl = link.trim(); software[i].url = link.trim(); }
+  if(desc !== undefined) software[i].desc = desc.trim();
 
   saveData('rana_software_data', software);
-  renderBeSoftware();
-  scheduleGitHubAutoSync();
-  showToast(`Updated "${software[i].name}"`);
+  if(!silent){
+    renderBeSoftware();
+    showToast(`✓ Saved changes to "${software[i].name}"`);
+  }
 }
 window.beUpdateSoftware = beUpdateSoftware;
 
@@ -4143,7 +4139,7 @@ function renderBeArticles(){
       </div>
       <div>
         <label class="form-label">Excerpt / Summary</label>
-        <textarea id="be-art-desc-${i}" rows="3" style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${a.desc||a.excerpt||''}</textarea>
+        <textarea id="be-art-desc-${i}" oninput="beUpdateArticle(${i},true)" onchange="beUpdateArticle(${i},true)" rows="3" style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${a.desc||a.excerpt||''}</textarea>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border)">
         <button onclick="beDeleteArticle(${i})" style="padding:6px 14px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Article</button>
@@ -4154,7 +4150,7 @@ function renderBeArticles(){
 }
 window.renderBeArticles = renderBeArticles;
 
-function beUpdateArticle(i){
+function beUpdateArticle(i, silent = false){
   if(!articles[i]) return;
   const title = document.getElementById(`be-art-title-${i}`)?.value;
   const cat = document.getElementById(`be-art-cat-${i}`)?.value;
@@ -4163,17 +4159,18 @@ function beUpdateArticle(i){
   const url = document.getElementById(`be-art-url-${i}`)?.value;
   const desc = document.getElementById(`be-art-desc-${i}`)?.value;
 
-  if(title) articles[i].title = title.trim();
-  if(cat) { articles[i].category = cat.trim(); articles[i].cat = cat.trim(); }
-  if(date) articles[i].date = date.trim();
-  if(time) { articles[i].readTime = time.trim(); articles[i].time = time.trim(); }
+  if(title !== undefined && title.trim()) articles[i].title = title.trim();
+  if(cat !== undefined) { articles[i].category = cat.trim(); articles[i].cat = cat.trim(); }
+  if(date !== undefined) articles[i].date = date.trim();
+  if(time !== undefined) { articles[i].readTime = time.trim(); articles[i].time = time.trim(); }
   if(url !== undefined) { articles[i].url = url.trim(); articles[i].link = url.trim(); }
-  if(desc) { articles[i].desc = desc.trim(); articles[i].excerpt = desc.trim(); }
+  if(desc !== undefined) { articles[i].desc = desc.trim(); articles[i].excerpt = desc.trim(); }
 
   saveData('rana_articles_data', articles);
-  renderBeArticles();
-  scheduleGitHubAutoSync();
-  showToast(`Updated "${articles[i].title}"`);
+  if(!silent){
+    renderBeArticles();
+    showToast(`✓ Saved changes to "${articles[i].title}"`);
+  }
 }
 window.beUpdateArticle = beUpdateArticle;
 
