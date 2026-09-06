@@ -992,6 +992,7 @@ function saveData(key, val){
     localStorage.setItem(key, json);
     const prefix = key.replace(/_(?:data|v\d+|bw)$/, '');
     localStorage.setItem(prefix + '_data', json);
+    localStorage.setItem('rana_updatedAt', new Date().toISOString());
     if(window.scheduleGitHubAutoSync) window.scheduleGitHubAutoSync();
   } catch(e) {
     console.error('Storage save error:', e);
@@ -4230,13 +4231,10 @@ window.addArticle = addArticle;
 const GITHUB_REPO_OWNER = 'Ranabdullah';
 const GITHUB_REPO_NAME = 'rana-portfolio';
 const GITHUB_DATA_FILE = 'portfolio_data.json';
-const GITHUB_PAT_ENC = 'Z2hwX25zVTVqenlyb0Z6ODd2U2N5UjlhWTVXUW5QY0xGUTB5bTV0dw==';
+const GITHUB_PAT_ENC = '';
 
 function getGitHubToken(){
   let token = localStorage.getItem('rana_github_token');
-  if(!token || !token.trim()){
-    try { token = atob(GITHUB_PAT_ENC); } catch(e){}
-  }
   return token ? token.trim() : '';
 }
 window.getGitHubToken = getGitHubToken;

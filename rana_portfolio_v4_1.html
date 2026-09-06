@@ -4369,23 +4369,73 @@ function showToast(msg){
 // ==================== AUTH & SECURITY ====================
 async function autoFetchCloudDatabaseOnBoot(){
   try {
-    const res = await fetch(`portfolio_data.json?_t=${Date.now()}`);
+    const res = await fetch(portfolio_data.json?_t=);
     if(res.ok){
       const data = await res.json();
-      if(data.novels && Array.isArray(data.novels)) novels = data.novels;
-      if(data.tech && Array.isArray(data.tech)) techProjects = data.tech;
-      if(data.gallery && Array.isArray(data.gallery)) galleryItems = data.gallery;
-      if(data.software && Array.isArray(data.software)) software = data.software;
-      if(data.experience && Array.isArray(data.experience)) experience = data.experience;
-      if(data.clients && Array.isArray(data.clients)) clients = data.clients;
-      if(data.articles && Array.isArray(data.articles)) articles = data.articles;
-      renderHome();
+      const localUpdated = localStorage.getItem('rana_updatedAt');
+      const serverUpdated = data.updatedAt;
+      
+      const localIsNewer = localUpdated && serverUpdated && (new Date(localUpdated).getTime() > new Date(serverUpdated).getTime());
+      
+      if(!localIsNewer){
+        if(data.novels && Array.isArray(data.novels)) {
+          novels = data.novels;
+          localStorage.setItem('rana_novels_data', JSON.stringify(novels));
+        }
+        if(data.tech && Array.isArray(data.tech)) {
+          techProjects = data.tech;
+          localStorage.setItem('rana_tech_data', JSON.stringify(techProjects));
+        }
+        if(data.gallery && Array.isArray(data.gallery)) {
+          galleryItems = data.gallery;
+          localStorage.setItem('rana_gallery_data', JSON.stringify(galleryItems));
+        }
+        if(data.software && Array.isArray(data.software)) {
+          software = data.software;
+          localStorage.setItem('rana_software_data', JSON.stringify(software));
+        }
+        if(data.experience && Array.isArray(data.experience)) {
+          experience = data.experience;
+          localStorage.setItem('rana_experience_data', JSON.stringify(experience));
+        }
+        if(data.clients && Array.isArray(data.clients)) {
+          clients = data.clients;
+          localStorage.setItem('rana_clients_data', JSON.stringify(clients));
+        }
+        if(data.articles && Array.isArray(data.articles)) {
+          articles = data.articles;
+          localStorage.setItem('rana_articles_data', JSON.stringify(articles));
+        }
+        if(serverUpdated) localStorage.setItem('rana_updatedAt', serverUpdated);
+      }
+      
+      const activePageEl = document.querySelector('.page.active');
+      const currentActive = activePageEl ? activePageEl.id.replace('page-', '') : 'home';
+      if(typeof renderPage === 'function') renderPage(currentActive);
     }
   } catch(e){
     // Silent failover to local data on boot
   }
 }
 window.autoFetchCloudDatabaseOnBoot = autoFetchCloudDatabaseOnBoot;
+
+// Instant Real-Time Cross-Tab Live Sync
+window.addEventListener('storage', function(e){
+  if(e.key && e.key.startsWith('rana_')){
+    if(typeof loadData === 'function'){
+      novels = loadData('rana_novels_data', novels);
+      techProjects = loadData('rana_tech_data', techProjects);
+      galleryItems = loadData('rana_gallery_data', galleryItems);
+      software = loadData('rana_software_data', software);
+      experience = loadData('rana_experience_data', experience);
+      clients = loadData('rana_clients_data', clients);
+      articles = loadData('rana_articles_data', articles);
+    }
+    const activePageEl = document.querySelector('.page.active');
+    const currentActive = activePageEl ? activePageEl.id.replace('page-', '') : 'home';
+    if(typeof renderPage === 'function') renderPage(currentActive);
+  }
+});
 
 function downloadDataJson(){
   const fullBackup = {
