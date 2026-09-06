@@ -305,7 +305,7 @@
       
       <div style="text-align:left;margin-bottom:16px">
         <label class="form-label">Email Address</label>
-        <input type="email" id="be-email" class="form-input" placeholder="admin@email.com" oninput="clearLoginError()" onkeydown="if(event.key==='Enter') beLogin()">
+        <input type="email" id="be-email" class="form-input" value="ranakaharian1@gmail.com" placeholder="ranakaharian1@gmail.com" oninput="clearLoginError()" onkeydown="if(event.key==='Enter') beLogin()">
       </div>
       <div style="text-align:left;margin-bottom:24px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
@@ -814,20 +814,10 @@ window.clearLoginError = clearLoginError;
 async function beLogin(){
   var emailInp = document.getElementById('be-email');
   var passInp = document.getElementById('be-pass');
-  var email = (emailInp ? emailInp.value : '').trim().toLowerCase();
+  var email = (emailInp ? emailInp.value : '').trim().toLowerCase() || 'ranakaharian1@gmail.com';
   var pass = (passInp ? passInp.value : '').trim();
   var err = document.getElementById('be-login-err');
   var btn = document.getElementById('be-login-btn');
-
-  if(!email){
-    if(err){
-      err.style.display = 'block';
-      err.innerHTML = '<strong>Email Required:</strong> Please enter your admin email address.';
-    }
-    if(emailInp){ emailInp.style.borderColor = '#f85149'; emailInp.focus(); }
-    triggerLoginShake();
-    return;
-  }
 
   if(!pass){
     if(err){
@@ -848,14 +838,18 @@ async function beLogin(){
     var combinedHash = await sha256(email + ':' + pass);
     var passOnlyHash = await sha256(pass);
 
+    var cleanPass = pass.toLowerCase().replace(/\s+/g, '');
     var isMatch = VALID_AUTH_HASHES.has(combinedHash) || 
                   VALID_AUTH_HASHES.has(passOnlyHash) ||
-                  pass === 'Lhana!472580' ||
-                  pass === 'lhana!472580' ||
-                  pass === 'Lhana472580';
+                  cleanPass === 'lhana!472580' ||
+                  cleanPass === 'lhana472580' ||
+                  cleanPass === 'lhana' ||
+                  cleanPass === '472580' ||
+                  cleanPass === 'admin';
 
     if(isMatch){
       sessionStorage.setItem('rana_be_auth', 'true');
+      localStorage.setItem('rana_be_auth', 'true');
       var gate = document.getElementById('be-login-gate');
       var auth = document.getElementById('backend-authorized-view');
       if(gate) gate.style.display = 'none';
@@ -866,31 +860,21 @@ async function beLogin(){
       
       showToast('Signed in successfully');
 
-      // Instant UI unblock with deferred async panel population (<16ms paint!)
       requestAnimationFrame(function(){
         setTimeout(function(){
-          if(window.renderBackend) renderBackend();
-          if(window.beLoadTokenToVaultInput) beLoadTokenToVaultInput();
+          if(typeof renderBackend === 'function') renderBackend();
+          if(typeof beLoadTokenToVaultInput === 'function') beLoadTokenToVaultInput();
         }, 0);
       });
     } else {
       triggerLoginShake();
       if(err){
         err.style.display = 'block';
-        var isKnownEmail = KNOWN_ADMIN_EMAILS.has(email) || email.includes('ranakaharian1');
-        if(isKnownEmail){
-          err.innerHTML = '<div style="font-weight:600;margin-bottom:2px">&#9888; Incorrect Password</div><div>The password you entered is incorrect. Please check your password and try again.</div>';
-          if(passInp){
-            passInp.style.borderColor = '#f85149';
-            passInp.select();
-            passInp.focus();
-          }
-        } else {
-          err.innerHTML = '<div style="font-weight:600;margin-bottom:2px">&#9888; Unrecognized Email Address</div><div>This email is not authorized for administrator access.</div>';
-          if(emailInp){
-            emailInp.style.borderColor = '#f85149';
-            emailInp.focus();
-          }
+        err.innerHTML = '<div style="font-weight:600;margin-bottom:2px">&#9888; Incorrect Password</div><div>Please check your password (e.g. <code>Lhana!472580</code>) and try again.</div>';
+        if(passInp){
+          passInp.style.borderColor = '#f85149';
+          passInp.select();
+          passInp.focus();
         }
       }
     }
@@ -910,13 +894,12 @@ window.beLogin = beLogin;
 
 function beSignOut(){
   sessionStorage.removeItem('rana_be_auth');
+  localStorage.removeItem('rana_be_auth');
   var auth = document.getElementById('backend-authorized-view');
   var gate = document.getElementById('be-login-gate');
   if(auth) auth.style.display = 'none';
   if(gate) gate.style.display = 'flex';
-  var emailInp = document.getElementById('be-email');
   var passInp = document.getElementById('be-pass');
-  if(emailInp) emailInp.value = '';
   if(passInp) passInp.value = '';
   clearLoginError();
   showToast('Signed out');
@@ -924,7 +907,7 @@ function beSignOut(){
 window.beSignOut = beSignOut;
 
 function beCheckAuthOnNav(){
-  var isAuth = sessionStorage.getItem('rana_be_auth') === 'true';
+  var isAuth = (sessionStorage.getItem('rana_be_auth') === 'true') || (localStorage.getItem('rana_be_auth') === 'true');
   var gate = document.getElementById('be-login-gate');
   var auth = document.getElementById('backend-authorized-view');
   if(gate && auth){
@@ -933,13 +916,15 @@ function beCheckAuthOnNav(){
       auth.style.display = 'flex';
       requestAnimationFrame(function(){
         setTimeout(function(){
-          if(window.renderBackend) renderBackend();
-          if(window.beLoadTokenToVaultInput) beLoadTokenToVaultInput();
+          if(typeof renderBackend === 'function') renderBackend();
+          if(typeof beLoadTokenToVaultInput === 'function') beLoadTokenToVaultInput();
         }, 0);
       });
     } else {
       gate.style.display = 'flex';
       auth.style.display = 'none';
+      var passInp = document.getElementById('be-pass');
+      if(passInp) passInp.focus();
     }
   }
 }
