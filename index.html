@@ -1596,6 +1596,218 @@ footer .footer-links a:hover {
   color: #ffffff !important;
 }
 
+
+/* ===================================================
+   IMMERSIVE ARCHITECTURAL SHOWCASE & PHOTO CARDS STRIP
+   =================================================== */
+.gallery-showcase-wrapper {
+  padding: 24px 32px 28px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  transition: background 0.3s ease;
+}
+.showcase-media-stage {
+  position: relative;
+  width: 100%;
+  height: 68vh;
+  min-height: 440px;
+  max-height: 760px;
+  background: #06090e;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 16px 45px rgba(0,0,0,0.45);
+}
+.showcase-media-stage img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  cursor: pointer;
+}
+.showcase-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(13, 17, 23, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 15;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+}
+.showcase-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.08);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.showcase-nav-btn.prev { left: 16px; }
+.showcase-nav-btn.next { right: 16px; }
+
+/* Photo Cards Strip Container */
+.sc-strip-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(10, 14, 22, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin: 0 auto;
+  width: 100%;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+.sc-strip-scroll {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 4px 2px;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+.sc-strip-scroll::-webkit-scrollbar {
+  height: 5px;
+}
+.sc-strip-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  border-radius: 3px;
+}
+.sc-photo-card {
+  flex: 0 0 148px;
+  width: 148px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 6px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  text-align: left;
+}
+.sc-photo-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-2px);
+}
+.sc-photo-card.active {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.14);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
+  transform: scale(1.02);
+}
+.sc-card-thumb {
+  width: 100%;
+  height: 64px;
+  border-radius: 5px;
+  object-fit: cover;
+  display: block;
+  background: #070a10;
+}
+.sc-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+.sc-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+.sc-card-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
+}
+.sc-photo-card.active .sc-card-num {
+  color: #38bdf8;
+}
+.sc-card-title {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: #f1f5f9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.sc-card-desc {
+  font-family: var(--sans);
+  font-size: 10px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+.sc-card-vidbadge {
+  background: #e50914;
+  color: #fff;
+  font-size: 8px;
+  font-family: var(--mono);
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.sc-strip-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.sc-strip-arrow:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: #fff;
+}
+.sc-strip-counter {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -1892,47 +2104,44 @@ footer .footer-links a:hover {
   </div>
 
   <!-- 1. FEATURED IMMERSIVE ARCHITECTURAL SLIDER SHOWCASE -->
-  <div id="galleryShowcase" class="gallery-showcase-wrapper" style="padding: 28px 48px 24px; background: var(--bg2); border-bottom: 1px solid var(--border);">
+  <div id="galleryShowcase" class="gallery-showcase-wrapper">
     <div class="showcase-container" style="max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px;">
       
       <!-- A. Main Media Stage (Image or Embedded Video Player) -->
-      <div class="showcase-media-stage" id="showcaseStage" style="position: relative; width: 100%; height: 66vh; min-height: 440px; max-height: 740px; background: #070a10; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 16px 45px rgba(0,0,0,0.5);">
+      <div class="showcase-media-stage" id="showcaseStage">
         
         <!-- Big High-Res Image -->
-        <img id="showcaseImg" src="" alt="Showcase Main Photo" style="width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; display: block; transition: opacity 0.2s ease, transform 0.2s ease; cursor: pointer;" onclick="openShowcaseInLightbox()" title="Click to view fullscreen lightbox">
+        <img id="showcaseImg" src="" alt="Showcase Main Photo" onclick="openShowcaseInLightbox()" title="Click to view fullscreen lightbox">
 
         <!-- Embedded YouTube Video Player -->
-        <div id="showcaseVideoWrap" style="display: none; position: absolute; inset: 0; width: 100%; height: 100%; background: #000; z-index: 10;">
+        <div id="showcaseVideoWrap" style="display: none; position: absolute; inset: 0; width: 100%; height: 100%; background: #000; z-index: 20;">
           <iframe id="showcaseVideoIframe" src="" style="width: 100%; height: 100%; border: none; display: block;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
         <!-- Switch Back to Photo Button (Active during video playback) -->
-        <button id="showcaseCloseVideoBtn" onclick="stopShowcaseVideo()" style="display: none; position: absolute; top: 16px; right: 16px; background: rgba(0,0,0,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 20px; font-family: var(--mono); font-size: 11.5px; cursor: pointer; z-index: 30; font-weight: 700; box-shadow: 0 4px 14px rgba(0,0,0,0.6);">
+        <button id="showcaseCloseVideoBtn" onclick="stopShowcaseVideo()" style="display: none; position: absolute; top: 16px; right: 16px; background: rgba(0,0,0,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 8px 18px; border-radius: 20px; font-family: var(--mono); font-size: 11.5px; cursor: pointer; z-index: 30; font-weight: 700; box-shadow: 0 4px 14px rgba(0,0,0,0.6); backdrop-filter: blur(8px);">
           📷 Switch to Photo
         </button>
 
-        <!-- Project Side Navigation Chevrons -->
-        <button onclick="stepShowcaseProject(-1)" class="showcase-nav-btn prev" title="Previous Project" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); background: rgba(13,17,26,0.85); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.22); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; transition: all 0.2s; z-index: 20;">&larr;</button>
-        <button onclick="stepShowcaseProject(1)" class="showcase-nav-btn next" title="Next Project" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: rgba(13,17,26,0.85); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.22); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; transition: all 0.2s; z-index: 20;">&rarr;</button>
-
+        <!-- Project Left / Right Slider Navigation -->
+        <button onclick="stepShowcaseProject(-1)" class="showcase-nav-btn prev" title="Previous Project">&larr;</button>
+        <button onclick="stepShowcaseProject(1)" class="showcase-nav-btn next" title="Next Project">&rarr;</button>
       </div>
 
-      <!-- B. Dedicated Horizontal Photo Thumbnail Filmstrip Bar -->
-      <div id="showcaseThumbstripBar" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 18px; box-shadow: 0 4px 18px rgba(0,0,0,0.06);">
-        <!-- Injected dynamically -->
-      </div>
+      <!-- B. Dedicated Photo Cards Strip (for Multi-Photo Projects) -->
+      <div id="showcaseThumbstripBar" style="display: none;"></div>
 
-      <!-- C. Photo Metadata & Action Buttons Row -->
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; padding: 6px 4px;">
+      <!-- C. Project Metadata & Interactive Controls -->
+      <div id="showcaseActionsRow" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding: 4px 0;">
         <div style="flex: 1; min-width: 280px;">
-          <div id="showcaseCategory" style="font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink3); margin-bottom: 6px;"></div>
+          <div id="showcaseCategory" style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; font-weight: 600;"></div>
           <h2 id="showcaseTitle" style="font-family: var(--serif); font-size: 26px; font-weight: 500; color: var(--ink); margin-bottom: 8px; line-height: 1.25;"></h2>
-          <p id="showcaseDesc" style="font-family: var(--sans); font-size: 14px; color: var(--ink3); line-height: 1.65; max-width: 840px; margin: 0;"></p>
+          <p id="showcaseDesc" style="font-family: var(--sans); font-size: 14px; color: var(--ink3); line-height: 1.65; max-width: 860px; margin: 0;"></p>
         </div>
         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding-top: 4px;">
           <div id="showcaseVideoBtnWrap" style="display: none;">
-            <button id="showcasePlayVideoBtn" onclick="playShowcaseVideo()" style="display: inline-flex; align-items: center; gap: 8px; background: #e50914; color: #fff; border: none; padding: 9px 22px; border-radius: 20px; font-family: var(--mono); font-size: 12px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(229,9,20,0.4); transition: all 0.2s;">
-              ▶ Play Video on Website
+            <button id="showcasePlayVideoBtn" onclick="playShowcaseVideo()" style="display: inline-flex; align-items: center; gap: 8px; background: #e50914; color: #fff; border: none; padding: 10px 22px; border-radius: 20px; font-family: var(--mono); font-size: 12px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(229,9,20,0.4); transition: all 0.2s;">
+              ▶ Watch Video on Website
             </button>
           </div>
           <button onclick="openShowcaseInLightbox()" style="display: inline-flex; align-items: center; gap: 6px; background: var(--bg-card); color: var(--ink); border: 1px solid var(--border); padding: 9px 20px; border-radius: 20px; font-family: var(--mono); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
@@ -4326,7 +4535,54 @@ function renderTechProjects(){
 }
 
 // 4. GALLERY PAGE & IMMERSIVE ARCHITECTURAL SHOWCASE
-let lbImages = [], lbIdx = 0, curSubImgIdx = 0;
+function safeImgSrc(p){
+  if(!p) return '';
+  if(p.startsWith('data:') || p.startsWith('http://') || p.startsWith('https://')) return p;
+  return encodeURI(p).replace(/&/g, '%26').replace(/#/g, '%23');
+}
+window.safeImgSrc = safeImgSrc;
+
+function getYouTubeId(url){
+  if(!url) return null;
+  const str = String(url).trim();
+  const m = str.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/i);
+  if(m && m[1]) return m[1];
+  if(/^[a-zA-Z0-9_-]{11}$/.test(str)) return str;
+  return null;
+}
+window.getYouTubeId = getYouTubeId;
+
+function getSubVideo(g, idx){
+  if(!g) return '';
+  if(g.subVideos){
+    if(Array.isArray(g.subVideos) && g.subVideos[idx]) return g.subVideos[idx];
+    if(typeof g.subVideos === 'object' && g.subVideos[String(idx)]) return g.subVideos[String(idx)];
+    if(typeof g.subVideos === 'object' && g.subVideos[idx]) return g.subVideos[idx];
+  }
+  if(idx === 0 && g.youtubeUrl) return g.youtubeUrl;
+  return g.youtubeUrl || '';
+}
+
+function getSubTitle(g, idx){
+  if(!g) return '';
+  if(g.subTitles){
+    if(Array.isArray(g.subTitles) && g.subTitles[idx]) return g.subTitles[idx];
+    if(typeof g.subTitles === 'object' && g.subTitles[String(idx)]) return g.subTitles[String(idx)];
+    if(typeof g.subTitles === 'object' && g.subTitles[idx]) return g.subTitles[idx];
+  }
+  return g.title || '';
+}
+
+function getSubDesc(g, idx){
+  if(!g) return '';
+  if(g.subDescriptions){
+    if(Array.isArray(g.subDescriptions) && g.subDescriptions[idx]) return g.subDescriptions[idx];
+    if(typeof g.subDescriptions === 'object' && g.subDescriptions[String(idx)]) return g.subDescriptions[String(idx)];
+    if(typeof g.subDescriptions === 'object' && g.subDescriptions[idx]) return g.subDescriptions[idx];
+  }
+  return g.desc || '';
+}
+
 let showcaseProjIdx = 0, showcasePhotoIdx = 0;
 
 function renderGallery(filter){
@@ -4343,13 +4599,13 @@ function renderGallery(filter){
   c.innerHTML = filtered.map((g,i)=>`
     <div class="g-card ${i === showcaseProjIdx ? 'active-showcase-card' : ''}" id="gcard-${i}" onclick="selectShowcaseProject(${i})" style="position:relative">
       <div style="position:relative;overflow:hidden">
-        <img src="${g.path}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
+        <img src="${safeImgSrc(g.path)}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
         ${(g.images && g.images.length > 1) ? `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.85);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.3)">⊞ ${g.images.length} Photos</span>` : ''}
-        ${g.youtubeUrl ? `<a href="${g.youtubeUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="g-video-badge">▶ Video ↗</a>` : ''}
+        ${g.youtubeUrl ? `<span class="g-video-badge" style="position:absolute;top:10px;right:10px;background:#e50914;color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.4)">▶ Video</span>` : ''}
       </div>
       <div class="g-card-info">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <div class="g-cat-label">${g.cat} · ${g.pillar}</div>
+          <div class="g-cat-label">${g.cat || '3D'} · ${g.pillar || 'Personal'}</div>
           <button onclick="event.stopPropagation(); openLightbox(${i})" style="background:transparent;border:none;color:var(--ink3);cursor:pointer;font-family:var(--mono);font-size:10px;padding:0" title="Open Lightbox">⤢ View ↗</button>
         </div>
         <div class="g-title">${g.title}</div>
@@ -4361,6 +4617,7 @@ function renderGallery(filter){
 function selectShowcaseProject(projIdx){
   showcaseProjIdx = projIdx;
   showcasePhotoIdx = 0;
+  stopShowcaseVideo();
   renderShowcaseViewer();
 
   // Scroll smoothly to showcase top
@@ -4369,10 +4626,16 @@ function selectShowcaseProject(projIdx){
     sc.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  // Highlight card
-  document.querySelectorAll('.g-card').forEach(c => c.style.borderColor = '');
+  // Highlight active grid card
+  document.querySelectorAll('.g-card').forEach(c => {
+    c.classList.remove('active-showcase-card');
+    c.style.borderColor = '';
+  });
   const activeCard = document.getElementById('gcard-' + projIdx);
-  if(activeCard) activeCard.style.borderColor = 'var(--ink)';
+  if(activeCard){
+    activeCard.classList.add('active-showcase-card');
+    activeCard.style.borderColor = 'var(--ink)';
+  }
 }
 window.selectShowcaseProject = selectShowcaseProject;
 
@@ -4380,6 +4643,7 @@ function stepShowcaseProject(dir){
   if(lbImages.length <= 1) return;
   showcaseProjIdx = (showcaseProjIdx + dir + lbImages.length) % lbImages.length;
   showcasePhotoIdx = 0;
+  stopShowcaseVideo();
   renderShowcaseViewer();
 }
 window.stepShowcaseProject = stepShowcaseProject;
@@ -4395,61 +4659,71 @@ function renderShowcaseViewer(){
   // 1. Update Main Stage Image
   const imgEl = document.getElementById('showcaseImg');
   if(imgEl){
-    imgEl.src = activeSrc;
+    imgEl.src = safeImgSrc(activeSrc);
   }
 
-  // 2. Build Bottom Dock Filmstrip
-  const dockWrap = document.getElementById('showcaseDockWrap');
-  if(dockWrap){
+  // 2. Build Dedicated Photo Cards Strip (for multiple photos)
+  const stripBar = document.getElementById('showcaseThumbstripBar');
+  if(stripBar){
     if(allImgs.length > 1){
-      dockWrap.style.display = 'flex';
-      dockWrap.innerHTML = `
-        <button onclick="stepShowcasePhoto(-1)" class="lb-dock-arrow" title="Previous Photo">&lsaquo;</button>
-        <div class="lb-dock-strip" id="scDockStrip">
-          ${allImgs.map((imgSrc, sIdx) => {
-            const hasVid = (g.subVideos && g.subVideos[sIdx]) || (sIdx === 0 && g.youtubeUrl);
-            const isActive = (sIdx === showcasePhotoIdx);
-            return `
-              <div onclick="switchShowcasePhoto(${sIdx})"
-                   class="lb-dock-thumb ${isActive ? 'active' : ''}"
-                   id="scThumb-${sIdx}"
-                   title="Photo #${sIdx+1}">
-                <img src="${imgSrc}" alt="Thumbnail ${sIdx+1}" loading="lazy">
-                ${hasVid ? `<span style="position:absolute;bottom:2px;right:2px;background:#e50914;color:#fff;font-size:8px;padding:1px 3px;border-radius:2px;font-weight:bold">▶</span>` : ''}
-              </div>
-            `;
-          }).join('')}
+      stripBar.style.display = 'block';
+      stripBar.innerHTML = `
+        <div class="sc-strip-container">
+          <button onclick="stepShowcasePhoto(-1)" class="sc-strip-arrow" title="Previous Photo">&lsaquo;</button>
+          <div class="sc-strip-scroll" id="scStripScroll">
+            ${allImgs.map((imgSrc, sIdx) => {
+              const subV = getSubVideo(g, sIdx);
+              const subT = getSubTitle(g, sIdx) || `Photo #${sIdx+1}`;
+              const subD = getSubDesc(g, sIdx);
+              const isActive = (sIdx === showcasePhotoIdx);
+              return `
+                <div onclick="switchShowcasePhoto(${sIdx})"
+                     class="sc-photo-card ${isActive ? 'active' : ''}"
+                     id="scCard-${sIdx}"
+                     title="${subT}">
+                  <img src="${safeImgSrc(imgSrc)}" class="sc-card-thumb" alt="Photo ${sIdx+1}" loading="lazy">
+                  <div class="sc-card-body">
+                    <div class="sc-card-header">
+                      <span class="sc-card-num">#${sIdx+1}</span>
+                      ${subV ? `<span class="sc-card-vidbadge">▶ Video</span>` : ''}
+                    </div>
+                    <div class="sc-card-title">${subT}</div>
+                    ${subD ? `<div class="sc-card-desc">${subD}</div>` : ''}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+          <button onclick="stepShowcasePhoto(1)" class="sc-strip-arrow" title="Next Photo">&rsaquo;</button>
+          <span class="sc-strip-counter">
+            ${showcasePhotoIdx + 1} / ${allImgs.length}
+          </span>
         </div>
-        <button onclick="stepShowcasePhoto(1)" class="lb-dock-arrow" title="Next Photo">&rsaquo;</button>
-        <span style="font-family:var(--mono);font-size:11px;color:#94a3b8;margin-left:4px;font-weight:600;white-space:nowrap">
-          ${showcasePhotoIdx + 1}/${allImgs.length}
-        </span>
       `;
     } else {
-      dockWrap.style.display = 'none';
+      stripBar.style.display = 'none';
+      stripBar.innerHTML = '';
     }
   }
 
   // 3. Update Title, Category, Description, and Video
-  const activeTitle = (g.subTitles && g.subTitles[showcasePhotoIdx]) || g.title;
-  const activeDesc = (g.subDescriptions && g.subDescriptions[showcasePhotoIdx]) || g.desc || '';
-  const vidUrl = (g.subVideos && g.subVideos[showcasePhotoIdx]) || (showcasePhotoIdx === 0 ? g.youtubeUrl : '');
+  const activeTitle = getSubTitle(g, showcasePhotoIdx) || g.title;
+  const activeDesc = getSubDesc(g, showcasePhotoIdx) || g.desc || '';
+  const vidUrl = getSubVideo(g, showcasePhotoIdx);
 
   const catEl = document.getElementById('showcaseCategory');
   const titleEl = document.getElementById('showcaseTitle');
   const descEl = document.getElementById('showcaseDesc');
-  const vidWrap = document.getElementById('showcaseVideoWrap');
-  const vidBtn = document.getElementById('showcaseVideoBtn');
+  const vidBtnWrap = document.getElementById('showcaseVideoBtnWrap');
 
   if(catEl) catEl.textContent = `${(g.cat || '3D').toUpperCase()} • ${(g.pillar || 'PERSONAL').toUpperCase()} [ PROJECT ${showcaseProjIdx+1} OF ${lbImages.length} ]`;
   if(titleEl) titleEl.textContent = activeTitle;
   if(descEl) descEl.textContent = activeDesc;
-  if(vidWrap && vidBtn){
+  if(vidBtnWrap){
     if(vidUrl){
-      vidBtn.href = vidUrl;
-      vidWrap.style.display = 'inline-block';
+      vidBtnWrap.style.display = 'inline-block';
     } else {
-      vidWrap.style.display = 'none';
+      vidBtnWrap.style.display = 'none';
     }
   }
 }
@@ -4462,42 +4736,47 @@ function switchShowcasePhoto(sIdx){
   if(sIdx < 0 || sIdx >= allImgs.length) return;
 
   showcasePhotoIdx = sIdx;
+  stopShowcaseVideo();
   const targetSrc = allImgs[sIdx];
   const imgEl = document.getElementById('showcaseImg');
   if(imgEl){
     imgEl.style.opacity = '0.35';
     setTimeout(() => {
-      imgEl.src = targetSrc;
+      imgEl.src = safeImgSrc(targetSrc);
       imgEl.style.opacity = '1';
     }, 60);
   }
 
-  // Update thumbnails
-  document.querySelectorAll('#showcaseDockWrap .lb-dock-thumb').forEach(t => t.classList.remove('active'));
-  const activeT = document.getElementById('scThumb-' + sIdx);
-  if(activeT){
-    activeT.classList.add('active');
-    activeT.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  // Update active photo card highlight
+  document.querySelectorAll('#showcaseThumbstripBar .sc-photo-card').forEach(c => c.classList.remove('active'));
+  const activeCard = document.getElementById('scCard-' + sIdx);
+  if(activeCard){
+    activeCard.classList.add('active');
+    activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   }
 
-  // Update Title, Desc, and Video
-  const activeTitle = (g.subTitles && g.subTitles[sIdx]) || g.title;
-  const activeDesc = (g.subDescriptions && g.subDescriptions[sIdx]) || g.desc || '';
-  const vidUrl = (g.subVideos && g.subVideos[sIdx]) || (sIdx === 0 ? g.youtubeUrl : '');
+  // Update Photo Counter
+  const counterEl = document.querySelector('#showcaseThumbstripBar .sc-strip-counter');
+  if(counterEl){
+    counterEl.textContent = `${sIdx + 1} / ${allImgs.length}`;
+  }
+
+  // Update Title, Desc, and Video Button
+  const activeTitle = getSubTitle(g, sIdx) || g.title;
+  const activeDesc = getSubDesc(g, sIdx) || g.desc || '';
+  const vidUrl = getSubVideo(g, sIdx);
 
   const titleEl = document.getElementById('showcaseTitle');
   const descEl = document.getElementById('showcaseDesc');
-  const vidWrap = document.getElementById('showcaseVideoWrap');
-  const vidBtn = document.getElementById('showcaseVideoBtn');
+  const vidBtnWrap = document.getElementById('showcaseVideoBtnWrap');
 
   if(titleEl) titleEl.textContent = activeTitle;
   if(descEl) descEl.textContent = activeDesc;
-  if(vidWrap && vidBtn){
+  if(vidBtnWrap){
     if(vidUrl){
-      vidBtn.href = vidUrl;
-      vidWrap.style.display = 'inline-block';
+      vidBtnWrap.style.display = 'inline-block';
     } else {
-      vidWrap.style.display = 'none';
+      vidBtnWrap.style.display = 'none';
     }
   }
 }
@@ -4514,6 +4793,39 @@ function stepShowcasePhoto(dir){
 }
 window.stepShowcasePhoto = stepShowcasePhoto;
 
+function playShowcaseVideo(){
+  const g = lbImages[showcaseProjIdx];
+  if(!g) return;
+  const vidUrl = getSubVideo(g, showcasePhotoIdx);
+  if(!vidUrl) return;
+
+  const ytid = getYouTubeId(vidUrl);
+  const wrap = document.getElementById('showcaseVideoWrap');
+  const iframe = document.getElementById('showcaseVideoIframe');
+  const closeBtn = document.getElementById('showcaseCloseVideoBtn');
+
+  if(wrap && iframe){
+    if(ytid){
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + ytid + '?autoplay=1&rel=0&modestbranding=1&enablejsapi=1';
+    } else {
+      iframe.src = vidUrl;
+    }
+    wrap.style.display = 'block';
+    if(closeBtn) closeBtn.style.display = 'block';
+  }
+}
+window.playShowcaseVideo = playShowcaseVideo;
+
+function stopShowcaseVideo(){
+  const wrap = document.getElementById('showcaseVideoWrap');
+  const iframe = document.getElementById('showcaseVideoIframe');
+  const closeBtn = document.getElementById('showcaseCloseVideoBtn');
+  if(iframe) iframe.src = '';
+  if(wrap) wrap.style.display = 'none';
+  if(closeBtn) closeBtn.style.display = 'none';
+}
+window.stopShowcaseVideo = stopShowcaseVideo;
+
 function openShowcaseInLightbox(){
   openLightbox(showcaseProjIdx);
   if(showcasePhotoIdx > 0){
@@ -4527,6 +4839,7 @@ function filterGallery(cat, btn){
   btn.classList.add('on');
   showcaseProjIdx = 0;
   showcasePhotoIdx = 0;
+  stopShowcaseVideo();
   renderGallery(cat);
   setupCursorHover();
   setTimeout(function(){
@@ -4540,6 +4853,7 @@ function filterGallery(cat, btn){
 function openLightbox(i){
   lbIdx = i;
   curSubImgIdx = 0;
+  stopLightboxVideo();
   const g = lbImages[i];
   if(!g) return;
   const allImgs = (g.images && g.images.length > 0) ? g.images : (g.path ? [g.path] : []);
@@ -4560,8 +4874,9 @@ function openLightbox(i){
   }
 
   const lbImg = document.getElementById('lbImg');
-  if(lbImg) {
-    lbImg.src = allImgs[0];
+  if(lbImg){
+    lbImg.src = safeImgSrc(allImgs[0]);
+    lbImg.style.boxShadow = `0 0 35px ${activeColor.glow}, 0 20px 60px rgba(0,0,0,0.8)`;
     lbImg.style.borderColor = activeColor.border;
   }
 
@@ -4571,6 +4886,39 @@ function openLightbox(i){
   document.body.style.overflow = 'hidden';
 }
 window.openLightbox = openLightbox;
+
+function playLightboxVideo(){
+  const g = lbImages[lbIdx];
+  if(!g) return;
+  const vidUrl = getSubVideo(g, curSubImgIdx);
+  if(!vidUrl) return;
+
+  const ytid = getYouTubeId(vidUrl);
+  const wrap = document.getElementById('lbVideoPlayerWrap');
+  const iframe = document.getElementById('lbVideoIframe');
+  const closeBtn = document.getElementById('lbCloseVideoBtn');
+
+  if(wrap && iframe){
+    if(ytid){
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + ytid + '?autoplay=1&rel=0&modestbranding=1&enablejsapi=1';
+    } else {
+      iframe.src = vidUrl;
+    }
+    wrap.style.display = 'block';
+    if(closeBtn) closeBtn.style.display = 'block';
+  }
+}
+window.playLightboxVideo = playLightboxVideo;
+
+function stopLightboxVideo(){
+  const wrap = document.getElementById('lbVideoPlayerWrap');
+  const iframe = document.getElementById('lbVideoIframe');
+  const closeBtn = document.getElementById('lbCloseVideoBtn');
+  if(iframe) iframe.src = '';
+  if(wrap) wrap.style.display = 'none';
+  if(closeBtn) closeBtn.style.display = 'none';
+}
+window.stopLightboxVideo = stopLightboxVideo;
 
 function renderLightboxDockAndInfo(g, allImgs, activeSubIdx, activeColor){
   const captionEl = document.getElementById('lbCaption');
@@ -4584,14 +4932,15 @@ function renderLightboxDockAndInfo(g, allImgs, activeSubIdx, activeColor){
         <button class="lb-dock-arrow" onclick="lbStepSubImg(-1)" title="Previous photo in project">&lsaquo;</button>
         <div class="lb-dock-strip" id="lbDockStrip">
           ${allImgs.map((imgSrc, sIdx) => {
-            const hasVid = (g.subVideos && g.subVideos[sIdx]) || (sIdx === 0 && g.youtubeUrl);
+            const hasVid = getSubVideo(g, sIdx);
+            const subT = getSubTitle(g, sIdx) || `Photo #${sIdx+1}`;
             const isActive = sIdx === activeSubIdx;
             return `
               <div onclick="switchLbSubImg(${sIdx})"
                    class="lb-dock-thumb ${isActive ? 'active' : ''}"
                    id="lbThumb-${sIdx}"
-                   title="Photo #${sIdx+1}">
-                <img src="${imgSrc}" alt="Thumbnail ${sIdx+1}" loading="lazy">
+                   title="${subT}">
+                <img src="${safeImgSrc(imgSrc)}" alt="Thumbnail ${sIdx+1}" loading="lazy">
                 ${hasVid ? `<span style="position:absolute;bottom:2px;right:2px;background:#e50914;color:#fff;font-size:8px;padding:1px 3px;border-radius:2px;font-weight:bold">▶</span>` : ''}
               </div>
             `;
@@ -4599,17 +4948,17 @@ function renderLightboxDockAndInfo(g, allImgs, activeSubIdx, activeColor){
         </div>
         <button class="lb-dock-arrow" onclick="lbStepSubImg(1)" title="Next photo in project">&rsaquo;</button>
         <span id="lbPhotoCounter" style="font-family:var(--mono);font-size:11px;color:#94a3b8;margin-left:4px;font-weight:600;white-space:nowrap">
-          ${activeSubIdx + 1}/${allImgs.length}
+          ${activeSubIdx + 1} / ${allImgs.length}
         </span>
       </div>
     `;
   }
 
   // 2. Active Metadata
-  const activeTitle = (g.subTitles && g.subTitles[activeSubIdx]) || g.title;
-  const activeDesc = (g.subDescriptions && g.subDescriptions[activeSubIdx]) || g.desc || '';
-  const vidUrl = (g.subVideos && g.subVideos[activeSubIdx]) || (activeSubIdx === 0 ? g.youtubeUrl : '');
-  const activePath = allImgs[activeSubIdx];
+  const activeTitle = getSubTitle(g, activeSubIdx) || g.title;
+  const activeDesc = getSubDesc(g, activeSubIdx) || g.desc || '';
+  const vidUrl = getSubVideo(g, activeSubIdx);
+  const activePath = safeImgSrc(allImgs[activeSubIdx]);
 
   const metaBadge = (g.cat || g.pillar) ? `
     <div style="margin-top:6px;margin-bottom:6px">
@@ -4629,12 +4978,16 @@ function renderLightboxDockAndInfo(g, allImgs, activeSubIdx, activeColor){
       ${activeDesc}
     </div>
     <div id="lbActionButtons" style="margin-top:14px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap">
-      <div id="lbVideoWrap" style="display:${vidUrl ? 'inline-block' : 'none'}">
-        <a id="lbVideoBtn" href="${vidUrl || '#'}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
-           style="display:inline-flex;align-items:center;gap:6px;color:#fff;background:#e50914;padding:7px 20px;border-radius:20px;text-decoration:none;font-family:var(--mono);font-size:11.5px;font-weight:700;box-shadow:0 4px 14px rgba(229,9,20,0.45);transition:all .2s">
-          ▶ Watch Video on YouTube &nearr;
+      ${vidUrl ? `
+        <button onclick="event.stopPropagation(); playLightboxVideo();"
+                style="display:inline-flex;align-items:center;gap:6px;color:#fff;background:#e50914;padding:7px 20px;border-radius:20px;border:none;cursor:pointer;font-family:var(--mono);font-size:11.5px;font-weight:700;box-shadow:0 4px 14px rgba(229,9,20,0.45);transition:all .2s">
+          ▶ Play Video on Website
+        </button>
+        <a href="${vidUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
+           style="display:inline-flex;align-items:center;gap:6px;color:#f87171;background:rgba(229,9,20,0.12);border:1px solid rgba(229,9,20,0.3);padding:7px 16px;border-radius:20px;text-decoration:none;font-family:var(--mono);font-size:11.5px;font-weight:600;transition:all .2s">
+          Watch on YouTube &nearr;
         </a>
-      </div>
+      ` : ''}
       <a id="lbFullBtn" href="${activePath}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
          style="display:inline-flex;align-items:center;gap:6px;color:#cbd5e1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);padding:7px 18px;border-radius:20px;text-decoration:none;font-family:var(--mono);font-size:11.5px;font-weight:600;transition:all .2s">
         &cudarrl; Full Image &nearr;
@@ -4650,7 +5003,8 @@ function switchLbSubImg(sIdx){
   if(sIdx < 0 || sIdx >= allImgs.length) return;
 
   curSubImgIdx = sIdx;
-  const targetSrc = allImgs[sIdx];
+  stopLightboxVideo();
+  const targetSrc = safeImgSrc(allImgs[sIdx]);
   const lbImg = document.getElementById('lbImg');
   if(lbImg){
     lbImg.style.opacity = '0.4';
@@ -4671,33 +5025,38 @@ function switchLbSubImg(sIdx){
   // Update Photo Counter
   const counterEl = document.getElementById('lbPhotoCounter');
   if(counterEl){
-    counterEl.textContent = `${sIdx + 1}/${allImgs.length}`;
+    counterEl.textContent = `${sIdx + 1} / ${allImgs.length}`;
   }
 
   // Update Dynamic Title & Description per photo
-  const activeTitle = (g.subTitles && g.subTitles[sIdx]) || g.title;
-  const activeDesc = (g.subDescriptions && g.subDescriptions[sIdx]) || g.desc || '';
+  const activeTitle = getSubTitle(g, sIdx) || g.title;
+  const activeDesc = getSubDesc(g, sIdx) || g.desc || '';
   const titleEl = document.getElementById('lbActiveTitle');
   const descEl = document.getElementById('lbActiveDesc');
   if(titleEl) titleEl.textContent = activeTitle;
   if(descEl) descEl.textContent = activeDesc;
 
-  // Update YouTube Video Button dynamically per photo
-  const vidUrl = (g.subVideos && g.subVideos[sIdx]) || (sIdx === 0 ? g.youtubeUrl : '');
-  const vidWrap = document.getElementById('lbVideoWrap');
-  const vidBtn = document.getElementById('lbVideoBtn');
-  if(vidWrap && vidBtn){
-    if(vidUrl){
-      vidBtn.href = vidUrl;
-      vidWrap.style.display = 'inline-block';
-    } else {
-      vidWrap.style.display = 'none';
-    }
+  // Re-render Action Buttons for this photo
+  const vidUrl = getSubVideo(g, sIdx);
+  const actionWrap = document.getElementById('lbActionButtons');
+  if(actionWrap){
+    actionWrap.innerHTML = `
+      ${vidUrl ? `
+        <button onclick="event.stopPropagation(); playLightboxVideo();"
+                style="display:inline-flex;align-items:center;gap:6px;color:#fff;background:#e50914;padding:7px 20px;border-radius:20px;border:none;cursor:pointer;font-family:var(--mono);font-size:11.5px;font-weight:700;box-shadow:0 4px 14px rgba(229,9,20,0.45);transition:all .2s">
+          ▶ Play Video on Website
+        </button>
+        <a href="${vidUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
+           style="display:inline-flex;align-items:center;gap:6px;color:#f87171;background:rgba(229,9,20,0.12);border:1px solid rgba(229,9,20,0.3);padding:7px 16px;border-radius:20px;text-decoration:none;font-family:var(--mono);font-size:11.5px;font-weight:600;transition:all .2s">
+          Watch on YouTube &nearr;
+        </a>
+      ` : ''}
+      <a id="lbFullBtn" href="${targetSrc}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
+         style="display:inline-flex;align-items:center;gap:6px;color:#cbd5e1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);padding:7px 18px;border-radius:20px;text-decoration:none;font-family:var(--mono);font-size:11.5px;font-weight:600;transition:all .2s">
+        &cudarrl; Full Image &nearr;
+      </a>
+    `;
   }
-
-  // Update Full Image URL
-  const fullBtn = document.getElementById('lbFullBtn');
-  if(fullBtn) fullBtn.href = targetSrc;
 }
 window.switchLbSubImg = switchLbSubImg;
 
@@ -4733,7 +5092,7 @@ function lbNav(dir){
 window.lbNav = lbNav;
 
 function openLightboxDirect(path, title){
-  document.getElementById('lbImg').src = path;
+  document.getElementById('lbImg').src = safeImgSrc(path);
   document.getElementById('lbCaption').innerHTML = `<div style="font-family:var(--serif);font-size:20px;color:#fff;margin-top:10px">${title}</div>`;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -4741,6 +5100,7 @@ function openLightboxDirect(path, title){
 window.openLightboxDirect = openLightboxDirect;
 
 function closeLightbox(){
+  stopLightboxVideo();
   const lb = document.getElementById('lightbox');
   if(lb) lb.classList.remove('open');
   document.body.style.overflow = '';
@@ -4755,6 +5115,7 @@ document.addEventListener('keydown', function(e){
     else if(e.key === 'Escape') closeLightbox();
   }
 });
+
 
 // 5. SOFTWARE PAGE (B&W WITH IMAGES)
 function renderSoftware(){
