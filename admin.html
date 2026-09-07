@@ -3443,6 +3443,166 @@ function beBuildPaginationControls(currentPage, totalPages, totalItems, filtered
   `;
 }
 
+let beGallerySearchTimer = null;
+function beDebouncedGallerySearch(val){
+  if(beGallerySearchTimer) clearTimeout(beGallerySearchTimer);
+  beGallerySearchTimer = setTimeout(() => {
+    beGalleryCurrentPage = 1;
+    renderBeGallery(val);
+  }, 120);
+}
+window.beDebouncedGallerySearch = beDebouncedGallerySearch;
+
+function beRefreshSingleGalleryCard(realIdx){
+  const cardEl = document.getElementById(`beg-${realIdx}`);
+  const g = galleryItems[realIdx];
+  if(!cardEl || !g) {
+    if(typeof renderBeGallery === 'function') renderBeGallery();
+    return;
+  }
+  const cachedOptions = galleryItems.map((other, oi) =>
+    `<option value="${oi}">[${String(oi+1).padStart(2,'0')}] ${(other.title || 'Project').substring(0,35)}</option>`
+  ).join('');
+  cardEl.outerHTML = beBuildProjectCardHtml(g, realIdx, cachedOptions);
+}
+window.beRefreshSingleGalleryCard = beRefreshSingleGalleryCard;
+
+function beBuildProjectCardHtml(g, realIdx, cachedOptions){
+  const allImgs = (g.images && g.images.length > 0) ? g.images : (g.path ? [g.path] : []);
+  const subTitles = g.subTitles || {};
+  const subDescriptions = g.subDescriptions || {};
+  const subVids = g.subVideos || {};
+
+  const thumbs = allImgs.map((imgSrc, sIdx) => `
+    <div style="display:inline-flex;flex-direction:column;align-items:stretch;gap:6px;margin:6px;background:var(--bg);padding:10px;border-radius:6px;border:1px solid var(--border);width:190px;box-sizing:border-box">
+      <div style="position:relative;width:100%">
+        <img src="${imgSrc}" loading="lazy" decoding="async" style="width:100%;height:105px;object-fit:cover;border-radius:4px;border:1px solid var(--border);display:block">
+        <button onclick="beRemoveSubImage(${realIdx}, ${sIdx})" title="Delete this photo"
+          style="position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#e50914;border:none;color:#fff;font-size:12px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.3)">&times;</button>
+        ${sIdx === 0 ? `<span style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,0.8);color:#fff;font-size:9px;padding:2px 5px;border-radius:2px;font-weight:700">COVER</span>` : ''}
+      </div>
+      
+      <div style="display:flex;gap:4px;align-items:center;justify-content:center;width:100%">
+        <button onclick="beMoveSubImageOrder(${realIdx}, ${sIdx}, -1)" ${sIdx === 0 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''} title="Move photo left"
+          style="padding:3px 7px;font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9664;</button>
+        <span style="font-size:10px;color:var(--ink3);font-weight:600">#${sIdx + 1}</span>
+        <button onclick="beMoveSubImageOrder(${realIdx}, ${sIdx}, 1)" ${sIdx === allImgs.length - 1 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''} title="Move photo right"
+          style="padding:3px 7px;font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9654;</button>
+      </div>
+
+      <div style="font-size:9.5px;color:var(--ink4);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${imgSrc}">
+        ${imgSrc.split('/').pop()}
+      </div>
+
+      <div>
+        <label style="font-size:9px;color:var(--ink3);font-weight:700;text-transform:uppercase;display:block;margin-bottom:2px">Photo Title:</label>
+        <input id="be-subtitle-${realIdx}-${sIdx}" placeholder="Specific title for photo #${sIdx+1}..."
+          value="${(subTitles[sIdx] || '').replace(/"/g,'&quot;')}"
+          oninput="beUpdateGalleryItem(${realIdx}, true)"
+          style="width:100%;padding:4px 6px;font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box">
+      </div>
+
+      <div>
+        <label style="font-size:9px;color:var(--ink3);font-weight:700;text-transform:uppercase;display:block;margin-bottom:2px">Photo Description:</label>
+        <textarea id="be-subdesc-${realIdx}-${sIdx}" rows="2" placeholder="Description for photo #${sIdx+1}..."
+          oninput="beUpdateGalleryItem(${realIdx}, true)"
+          style="width:100%;padding:4px 6px;font-size:10.5px;line-height:1.35;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box">${subDescriptions[sIdx] || ''}</textarea>
+      </div>
+
+      <div>
+        <label style="font-size:9px;color:#e50914;font-weight:700;text-transform:uppercase;display:block;margin-bottom:2px">&#9654; YouTube Link:</label>
+        <input id="be-subvid-${realIdx}-${sIdx}" placeholder="https://youtube.com/..."
+          value="${(subVids[sIdx] || (sIdx===0 ? g.youtubeUrl : '') || '').replace(/"/g,'&quot;')}"
+          oninput="beUpdateGalleryItem(${realIdx}, true)"
+          style="width:100%;padding:4px 6px;font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box">
+      </div>
+
+      <button onclick="beOpenTransferModal(${realIdx}, ${sIdx})" title="Move this photo into another project"
+        style="width:100%;margin-top:2px;padding:5px 4px;font-size:10.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px">
+        &#10140; Move Photo
+      </button>
+    </div>
+  `).join('');
+
+  return `
+  <div class="backend-item" style="flex-direction:column;align-items:stretch;gap:14px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;margin-bottom:18px" id="beg-${realIdx}">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--border);padding-bottom:12px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <button onclick="beMoveProject(${realIdx}, -1)" ${realIdx === 0 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''}
+          style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-weight:700">&#9650; Move Up</button>
+        <button onclick="beMoveProject(${realIdx}, 1)" ${realIdx === galleryItems.length - 1 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''}
+          style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-weight:700">&#9660; Move Down</button>
+        <span style="font-size:11px;padding:4px 10px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:12px;font-weight:700">[ ${String(realIdx + 1).padStart(2, '0')} / ${galleryItems.length} ]</span>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <select id="beg-cat-${realIdx}" onchange="beUpdateGalleryItem(${realIdx}, true)" style="padding:6px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px">
+          <option value="client" ${g.cat==='client'?'selected':''}>client</option>
+          <option value="personal" ${g.cat==='personal'?'selected':''}>personal</option>
+          <option value="animation" ${g.cat==='animation'?'selected':''}>animation</option>
+          <option value="3d" ${g.cat==='3d'?'selected':''}>3d</option>
+          <option value="environment" ${g.cat==='environment'?'selected':''}>environment</option>
+          <option value="character" ${g.cat==='character'?'selected':''}>character</option>
+          <option value="product" ${g.cat==='product'?'selected':''}>product</option>
+          <option value="branding" ${g.cat==='branding'?'selected':''}>branding</option>
+        </select>
+        <select id="beg-pillar-${realIdx}" onchange="beUpdateGalleryItem(${realIdx}, true)" style="padding:6px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px">
+          <option value="Client Work" ${g.pillar==='Client Work'?'selected':''}>Client Work</option>
+          <option value="Personal" ${g.pillar==='Personal'?'selected':''}>Personal</option>
+          <option value="Atmosphere" ${g.pillar==='Atmosphere'?'selected':''}>Atmosphere</option>
+          <option value="Biome" ${g.pillar==='Biome'?'selected':''}>Biome</option>
+        </select>
+        <button onclick="beUpdateGalleryItem(${realIdx})"
+          style="padding:6px 16px;font-size:12px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:4px;cursor:pointer;font-weight:700">Save Changes</button>
+        <button onclick="beDeleteGalleryItem(${realIdx})"
+          style="padding:6px 12px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Project</button>
+      </div>
+    </div>
+    <div>
+      <label class="form-label">Master Project Title</label>
+      <input id="beg-title-${realIdx}" value="${(g.title||'').replace(/"/g,'&quot;')}"
+        oninput="beUpdateGalleryItem(${realIdx}, true)"
+        style="width:100%;padding:8px 12px;font-size:15px;font-weight:600;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px;box-sizing:border-box">
+    </div>
+    <div>
+      <div style="font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;font-weight:700">
+        PHOTOS IN THIS PROJECT (${allImgs.length}) &mdash; EACH WITH INDEPENDENT TITLE, DESCRIPTION &amp; VIDEO:
+      </div>
+      <div style="display:flex;flex-wrap:wrap;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:6px;min-height:50px;align-items:flex-start">
+        ${allImgs.length > 0 ? thumbs : '<span style="font-size:12px;color:var(--ink4);padding:10px">No photos currently in this project. Click "+ Add Photo to Project" below.</span>'}
+      </div>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px">
+        <button onclick="beAddImageToItem(${realIdx})"
+          style="padding:6px 14px;font-size:12px;background:var(--bg-card);color:var(--ink);border:1px dashed var(--border);border-radius:4px;cursor:pointer;font-weight:600">
+          + Add Photo to Project
+        </button>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="font-size:11.5px;color:var(--ink3)">Move a photo to:</span>
+          <select id="be-quick-target-${realIdx}" style="padding:6px 10px;font-size:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px;max-width:260px">
+            ${cachedOptions}
+          </select>
+          <button onclick="beMoveImageToProject(${realIdx}, 0, parseInt(document.getElementById('be-quick-target-${realIdx}').value))"
+            style="padding:6px 12px;font-size:12px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-weight:600">
+            Move Photo
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <label class="form-label">Master Project Description</label>
+      <textarea id="beg-desc-${realIdx}" rows="3"
+        oninput="beUpdateGalleryItem(${realIdx}, true)"
+        style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:4px;box-sizing:border-box">${g.desc||''}</textarea>
+    </div>
+    <div style="display:flex;justify-content:flex-end">
+      <button onclick="beUpdateGalleryItem(${realIdx})" class="submit-btn" style="padding:8px 20px;font-size:12px">
+        Save Changes
+      </button>
+    </div>
+  </div>
+  `;
+}
+window.beBuildProjectCardHtml = beBuildProjectCardHtml;
+
 function renderBeGallery(searchTerm){
   const c = document.getElementById('be-gallery-list');
   if(!c) return;
