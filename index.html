@@ -161,7 +161,7 @@ nav {
   width:460px; height:560px; max-width:100%; position:relative; overflow:hidden; filter: none !important;
   box-shadow:25px 25px 60px rgba(0,0,0,0.08); transition:transform .4s ease, filter .35s ease; background:#e2e6eb;
 }
-.hero-portrait-frame:hover { filter: none !important; }
+.hero-portrait-frame:hover { }
 .hero-portrait-frame img { width:100%; height:100%; object-fit:cover; }
 .hero-portrait-frame::after { content:''; position:absolute; inset:0; border:1px solid var(--border); pointer-events:none; }
 .hero-portrait-number { position:absolute; top:10px; right:-20px; font-family:var(--serif); font-size:90px; font-weight:300; color:var(--border); line-height:1; z-index:-1; }
@@ -180,8 +180,8 @@ nav {
 .novels-slider-track { overflow:hidden; position:relative; width:100%; }
 .novels-slider { display:flex; gap:26px; transition:transform .6s cubic-bezier(.16,1,.3,1); }
 .novel-card { flex:0 0 240px; cursor:none; }
-.novel-cover { width:240px; height:345px; position:relative; overflow:hidden; filter: none !important; transition:filter .35s, transform .35s; background:#e2e6eb; }
-.novel-cover:hover { filter: none !important; transform:translateY(-4px); }
+.novel-cover { width:240px; height:345px; position:relative; overflow:hidden; transition:filter .35s, transform .35s; background:#e2e6eb; }
+.novel-cover:hover { transform:translateY(-4px); }
 .novel-cover img { width:100%; height:100%; object-fit:cover; }
 .novel-cover::after { content:''; position:absolute; inset:0; border:1px solid var(--border); pointer-events:none; }
 .novel-info { padding:14px 0; }
@@ -201,8 +201,8 @@ nav {
 .sw-vertical-slider { display:flex; flex-direction:column; gap:0; }
 .sw-item { padding:22px 40px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:80px 1fr auto; align-items:center; gap:20px; transition:background .25s; cursor:none; }
 .sw-item:hover { background:var(--bg-card); }
-.sw-thumb { width:80px; height:60px; object-fit:cover; border:1px solid var(--border); filter: none !important; transition:filter .25s; background:#e2e6eb; }
-.sw-item:hover .sw-thumb { filter: none !important; }
+.sw-thumb { width:80px; height:60px; object-fit:cover; border:1px solid var(--border); transition:filter .25s; background:#e2e6eb; }
+.sw-item:hover .sw-thumb { }
 .sw-item-meta { display:flex; align-items:center; gap:10px; margin-bottom:4px; }
 .sw-cat { font-family:var(--mono); font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); padding:2px 7px; border:1px solid var(--border); border-radius:3px; }
 .sw-name { font-family:var(--serif); font-size:18px; font-weight:400; color:var(--ink); margin-bottom:2px; }
@@ -214,8 +214,8 @@ nav {
 .projects-slider-wrap { position:relative; overflow:hidden; }
 .projects-grid { display:flex; gap:22px; transition:transform .6s cubic-bezier(.16,1,.3,1); }
 .proj-card { flex:0 0 310px; cursor:none; }
-.proj-img { width:100%; height:220px; overflow:hidden; position:relative; filter: none !important; transition:filter .35s, transform .35s; background:#e2e6eb; }
-.proj-img:hover { filter: none !important; transform:scale(1.02); }
+.proj-img { width:100%; height:220px; overflow:hidden; position:relative; transition:filter .35s, transform .35s; background:#e2e6eb; }
+.proj-img:hover { transform:scale(1.02); }
 .proj-img img { width:100%; height:100%; object-fit:cover; }
 .proj-info { padding:14px 0; }
 .proj-cat { font-family:var(--mono); font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:6px; }
@@ -394,8 +394,8 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
 
 .novels-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:40px 28px; padding:54px 48px; background:var(--bg); }
 .nv-card { cursor:none; }
-.nv-cover { width:100%; aspect-ratio:2/3; overflow:hidden; position:relative; filter: none !important; transition:filter .4s, transform .4s; margin-bottom:16px; background:#e2e6eb; }
-.nv-cover:hover { filter: none !important; transform:translateY(-4px); }
+.nv-cover { width:100%; aspect-ratio:2/3; overflow:hidden; position:relative; transition:filter .4s, transform .4s; margin-bottom:16px; background:#e2e6eb; }
+.nv-cover:hover { transform:translateY(-4px); }
 .nv-cover img { width:100%; height:100%; object-fit:cover; }
 .nv-genre { font-family:var(--mono); font-size:9.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:6px; }
 .nv-title { font-family:var(--serif); font-size:21px; font-weight:400; color:var(--ink); margin-bottom:6px; }
@@ -413,7 +413,7 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
 .nv-modal-bar { padding:16px 48px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:var(--bg-card); }
 .nv-modal-inner { flex:1; display:grid; grid-template-columns:360px 1fr; overflow:hidden; }
 .nv-modal-cover { background:var(--bg2); display:flex; align-items:center; justify-content:center; padding:48px 36px; border-right:1px solid var(--border); }
-.nv-modal-cover img { max-width:240px; max-height:380px; object-fit:cover; filter: none !important; box-shadow:25px 25px 70px rgba(0,0,0,0.12); }
+.nv-modal-cover img { max-width:240px; max-height:380px; object-fit:cover; box-shadow:25px 25px 70px rgba(0,0,0,0.12); }
 .nv-modal-content { padding:48px 60px; overflow-y:auto; background:var(--bg); }
 .nv-modal-close {
   width:40px; height:40px; border:1px solid var(--border); background:transparent; cursor:none; font-size:17px;
@@ -470,7 +470,7 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
 }
 .g-card:hover { transform:translateY(-3px); box-shadow:0 14px 34px rgba(0,0,0,0.08); border-color:var(--ink); }
 .g-card img { width:100%; height:220px; object-fit:cover; transition:all .4s ease; background:#e2e6eb; }
-.g-card:hover img { filter: none !important; transform:scale(1.02); }
+.g-card:hover img { transform:scale(1.02); }
 .g-card-info { padding:14px 18px; }
 .g-cat-label { font-family:var(--mono); font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:4px; }
 .g-title { font-family:var(--serif); font-size:18px; font-weight:400; color:var(--ink); }
@@ -585,8 +585,8 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
   flex-direction:column; justify-content:space-between; transition:all .25s ease; cursor:none;
 }
 .sw-product-card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,0,0,0.06); border-color:var(--ink); }
-.sw-img-banner { width:100%; height:160px; object-fit:cover; border-radius:4px; margin-bottom:16px; filter: none !important; transition:filter .3s; background:#e2e6eb; }
-.sw-product-card:hover .sw-img-banner { filter: none !important; }
+.sw-img-banner { width:100%; height:160px; object-fit:cover; border-radius:4px; margin-bottom:16px; transition:filter .3s; background:#e2e6eb; }
+.sw-product-card:hover .sw-img-banner { }
 .sw-product-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
 .sw-product-type { font-family:var(--mono); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink4); padding:3px 8px; border:1px solid var(--border); border-radius:3px; }
 .sw-product-price { font-family:var(--serif); font-size:19px; font-weight:400; color:var(--ink); }
@@ -1834,55 +1834,185 @@ footer .footer-links a:hover {
 }
 
 
+
+
 /* ===================================================
-   BEAUTIFUL IMAGE FILTERS — CINEMATIC ENHANCEMENT
-   Applied to all gallery images, showcase, lightbox
+   SMART IMAGE FILTER — adaptive per-image enhancement
    =================================================== */
-
-/* Grid gallery cards */
-.g-card img {
-  filter: contrast(1.08) saturate(1.22) brightness(1.03) !important;
-  transition: filter 0.4s ease, transform 0.4s ease !important;
-}
-.g-card:hover img {
-  filter: contrast(1.12) saturate(1.35) brightness(1.07) !important;
-  transform: scale(1.03) !important;
-}
-
-/* Showcase main stage image */
-#showcaseImg {
-  filter: contrast(1.06) saturate(1.18) brightness(1.02);
-  transition: opacity 0.22s ease, filter 0.4s ease;
-}
-
-/* Lightbox main image */
-#lbImg {
-  filter: contrast(1.07) saturate(1.2) brightness(1.02);
-  transition: box-shadow 0.4s ease, border-color 0.4s ease, opacity 0.2s ease, filter 0.3s ease;
-}
-
-/* Showcase photo card thumbnails */
-.sc-card-thumb {
-  filter: contrast(1.06) saturate(1.18) brightness(1.02);
-  transition: filter 0.3s ease;
-}
-.sc-photo-card:hover .sc-card-thumb {
-  filter: contrast(1.1) saturate(1.3) brightness(1.05);
-}
-
-/* Lightbox dock filmstrip thumbnails */
-.lb-dock-thumb img {
-  filter: contrast(1.05) saturate(1.15) brightness(1.01);
-  transition: filter 0.3s ease;
-}
-.lb-dock-thumb:hover img, .lb-dock-thumb.active img {
-  filter: contrast(1.1) saturate(1.3) brightness(1.06);
+.img-smart-filter {
+  transition: filter 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease, transform 0.4s ease !important;
 }
 
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
-<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/insights/script.js">
+// ===================================================
+// SMART IMAGE FILTER ENGINE
+// Analyses brightness, saturation, and color temperature
+// of each image pixel-by-pixel via Canvas, then applies
+// a tailored CSS filter: contrast, saturate, brightness,
+// sepia micro-wash — unique per photo.
+// ===================================================
+(function(){
+  const _canvas = document.createElement('canvas');
+  const _ctx = _canvas.getContext('2d');
+
+  // Analyse a loaded <img> element, returns { brightness, saturation, warmth }
+  // Each value 0–1. Uses 16×16 downsampled analysis for speed.
+  function analyseImage(img){
+    const W = 16, H = 16;
+    _canvas.width = W; _canvas.height = H;
+    try {
+      _ctx.drawImage(img, 0, 0, W, H);
+      const d = _ctx.getImageData(0, 0, W, H).data;
+      let totalL = 0, totalS = 0, totalR = 0, totalG = 0, totalB = 0;
+      const px = W * H;
+      for(let i = 0; i < d.length; i += 4){
+        const r = d[i]/255, g = d[i+1]/255, b = d[i+2]/255;
+        const mx = Math.max(r,g,b), mn = Math.min(r,g,b), delta = mx - mn;
+        const l = (mx + mn) / 2;
+        const s = delta === 0 ? 0 : delta / (1 - Math.abs(2*l - 1));
+        totalL += l; totalS += s;
+        totalR += r; totalG += g; totalB += b;
+      }
+      return {
+        brightness: totalL / px,           // 0 = black, 1 = white
+        saturation: totalS / px,           // 0 = grey, 1 = vivid
+        warmth: (totalR/px - totalB/px),   // positive = warm, negative = cool
+        r: totalR/px, g: totalG/px, b: totalB/px
+      };
+    } catch(e){
+      return null; // cross-origin or tainted canvas
+    }
+  }
+
+  // Compute a tailored CSS filter string from analysis data
+  function computeFilter(a){
+    if(!a) return 'contrast(1.08) saturate(1.18) brightness(1.02)';
+
+    const { brightness: L, saturation: S, warmth: W } = a;
+
+    // --- Brightness correction ---
+    // Very dark images: lift them up. Very bright: pull back slightly.
+    let brightnessF = 1.0;
+    if(L < 0.15) brightnessF = 1.18;
+    else if(L < 0.28) brightnessF = 1.10;
+    else if(L < 0.42) brightnessF = 1.05;
+    else if(L > 0.78) brightnessF = 0.96;
+    else if(L > 0.65) brightnessF = 0.99;
+    else brightnessF = 1.02;
+
+    // --- Contrast correction ---
+    // Low contrast (flat/foggy/washed): boost contrast
+    // Very high saturation + high brightness: gentle touch
+    let contrastF = 1.08;
+    if(L > 0.72 && S < 0.14) contrastF = 1.14; // faded bright → punch it
+    else if(L < 0.2) contrastF = 1.05;           // very dark: don't over-crush
+    else if(S > 0.55) contrastF = 1.06;           // already vivid: gentle
+
+    // --- Saturation correction ---
+    // Greyed/muted images: big saturation boost
+    // Already vivid: just a nudge
+    let saturateF = 1.18;
+    if(S < 0.06) saturateF = 1.45;       // near-greyscale: bring colour life
+    else if(S < 0.14) saturateF = 1.35;
+    else if(S < 0.25) saturateF = 1.26;
+    else if(S < 0.38) saturateF = 1.18;
+    else if(S < 0.55) saturateF = 1.10;
+    else saturateF = 1.05;               // already highly saturated
+
+    // --- Warm/cool micro tone ---
+    // Slightly warm images get a tiny sepia kiss (+richness)
+    // Cool/blue images get a very slight hue-rotate to pop blues
+    let sepiaF = 0;
+    let hueF = 0;
+    if(W > 0.12) sepiaF = 0.06;          // warm tones: micro golden kiss
+    else if(W > 0.06) sepiaF = 0.03;
+    else if(W < -0.1) hueF = -6;        // cool/blue: subtle hue rotation
+    else if(W < -0.05) hueF = -3;
+
+    // Build filter string
+    let f = `contrast(${contrastF.toFixed(3)}) saturate(${saturateF.toFixed(3)}) brightness(${brightnessF.toFixed(3)})`;
+    if(sepiaF > 0) f += ` sepia(${sepiaF.toFixed(2)})`;
+    if(hueF !== 0) f += ` hue-rotate(${hueF}deg)`;
+
+    return f;
+  }
+
+  // Apply smart filter to a single image element
+  function applySmartFilter(img){
+    if(!img.complete || !img.naturalWidth) return;
+    img.classList.add('img-smart-filter');
+    const a = analyseImage(img);
+    img.style.filter = computeFilter(a);
+  }
+
+  // Process all images currently in the DOM + watch for new ones via MutationObserver
+  function processAll(){
+    document.querySelectorAll(
+      '.g-card img, #showcaseImg, #lbImg, .sc-card-thumb, .lb-dock-thumb img'
+    ).forEach(img => {
+      if(img.complete && img.naturalWidth){
+        applySmartFilter(img);
+      } else {
+        img.addEventListener('load', function(){ applySmartFilter(this); }, { once: true });
+      }
+    });
+  }
+
+  // MutationObserver — auto-handles dynamically injected images (gallery cards, dock strip, etc.)
+  const _observer = new MutationObserver(function(mutations){
+    for(const m of mutations){
+      for(const node of m.addedNodes){
+        if(node.nodeType !== 1) continue;
+        const imgs = node.tagName === 'IMG' ? [node] : Array.from(node.querySelectorAll('img'));
+        imgs.forEach(img => {
+          if(img.complete && img.naturalWidth){
+            applySmartFilter(img);
+          } else {
+            img.addEventListener('load', function(){ applySmartFilter(this); }, { once: true });
+          }
+        });
+      }
+    }
+  });
+
+  // Patch src setter so when JS sets img.src, we reapply filter after load
+  const _origSrcDesc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+  Object.defineProperty(HTMLImageElement.prototype, 'src', {
+    set(val){
+      _origSrcDesc.set.call(this, val);
+      if(val && (
+        this.id === 'showcaseImg' || this.id === 'lbImg' ||
+        this.classList.contains('sc-card-thumb') ||
+        this.closest?.('.lb-dock-thumb')
+      )){
+        if(this.complete && this.naturalWidth){
+          applySmartFilter(this);
+        } else {
+          this.addEventListener('load', function(){ applySmartFilter(this); }, { once: true });
+        }
+      }
+    },
+    get(){ return _origSrcDesc.get.call(this); }
+  });
+
+  // Start
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){
+      processAll();
+      _observer.observe(document.body, { childList: true, subtree: true });
+    });
+  } else {
+    processAll();
+    _observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  window._smartFilter = { analyse: analyseImage, compute: computeFilter, apply: applySmartFilter, refresh: processAll };
+})();
+
+</script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
