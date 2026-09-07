@@ -801,13 +801,35 @@ function triggerLoginShake(){
 }
 window.triggerLoginShake = triggerLoginShake;
 
+function showLoginError(title, message){
+  var err = document.getElementById('be-login-err');
+  if(err){
+    err.style.cssText = 'display:block !important; visibility:visible !important; opacity:1 !important; color:#ffffff !important; background:#dc2626 !important; border:1px solid #b91c1c !important; padding:12px 16px !important; border-radius:6px !important; margin-top:16px !important; font-size:12.5px !important; line-height:1.5 !important; text-align:left !important; box-shadow:0 4px 14px rgba(220,38,38,0.3) !important;';
+    err.innerHTML = '<div style="font-weight:700;font-size:13px;margin-bottom:4px;display:flex;align-items:center;gap:6px">&#9888; ' + title + '</div><div style="font-size:12px;opacity:0.95">' + message + '</div>';
+  }
+  var passInp = document.getElementById('be-pass');
+  if(passInp){
+    passInp.style.borderColor = '#dc2626';
+    passInp.style.boxShadow = '0 0 0 2px rgba(220,38,38,0.2)';
+    passInp.focus();
+  }
+  triggerLoginShake();
+}
+window.showLoginError = showLoginError;
+
 function clearLoginError(){
   var err = document.getElementById('be-login-err');
   var passInp = document.getElementById('be-pass');
   var emailInp = document.getElementById('be-email');
   if(err) err.style.display = 'none';
-  if(passInp) passInp.style.borderColor = '';
-  if(emailInp) emailInp.style.borderColor = '';
+  if(passInp) {
+    passInp.style.borderColor = '';
+    passInp.style.boxShadow = '';
+  }
+  if(emailInp) {
+    emailInp.style.borderColor = '';
+    emailInp.style.boxShadow = '';
+  }
 }
 window.clearLoginError = clearLoginError;
 
@@ -816,16 +838,12 @@ async function beLogin(){
   var passInp = document.getElementById('be-pass');
   var email = (emailInp ? emailInp.value : '').trim().toLowerCase() || 'ranakaharian1@gmail.com';
   var pass = (passInp ? passInp.value : '').trim();
-  var err = document.getElementById('be-login-err');
   var btn = document.getElementById('be-login-btn');
 
+  clearLoginError();
+
   if(!pass){
-    if(err){
-      err.style.display = 'block';
-      err.innerHTML = '<strong>Password Required:</strong> Please enter your password.';
-    }
-    if(passInp){ passInp.style.borderColor = '#f85149'; passInp.focus(); }
-    triggerLoginShake();
+    showLoginError('Password Required', 'Please enter your password in the box below to sign in.');
     return;
   }
 
@@ -835,28 +853,35 @@ async function beLogin(){
   }
 
   try {
-    var combinedHash = await sha256(email + ':' + pass);
-    var passOnlyHash = await sha256(pass);
-
     var cleanPass = pass.toLowerCase().replace(/\s+/g, '');
-    var isMatch = VALID_AUTH_HASHES.has(combinedHash) || 
-                  VALID_AUTH_HASHES.has(passOnlyHash) ||
-                  cleanPass === 'lhana!472580' ||
-                  cleanPass === 'lhana472580' ||
-                  cleanPass === 'lhana' ||
-                  cleanPass === '472580' ||
-                  cleanPass === 'admin';
+    var isDirectMatch = (cleanPass === 'lhana!472580') || 
+                        (cleanPass === 'lhana472580') || 
+                        (cleanPass === 'lhana') || 
+                        (cleanPass === '472580') || 
+                        (cleanPass === 'admin') ||
+                        (pass === 'Lhana!472580') ||
+                        (pass === 'lhana!472580') ||
+                        (pass === 'Lhana472580');
 
-    if(isMatch){
+    var isHashMatch = false;
+    if(!isDirectMatch){
+      try {
+        var combinedHash = await sha256(email + ':' + pass);
+        var passOnlyHash = await sha256(pass);
+        isHashMatch = VALID_AUTH_HASHES.has(combinedHash) || VALID_AUTH_HASHES.has(passOnlyHash);
+      } catch(e){
+        console.warn('Hash verification fallback:', e);
+      }
+    }
+
+    if(isDirectMatch || isHashMatch){
       sessionStorage.setItem('rana_be_auth', 'true');
       localStorage.setItem('rana_be_auth', 'true');
+      
       var gate = document.getElementById('be-login-gate');
       var auth = document.getElementById('backend-authorized-view');
       if(gate) gate.style.display = 'none';
       if(auth) auth.style.display = 'flex';
-      if(err) err.style.display = 'none';
-      if(passInp) passInp.style.borderColor = '';
-      if(emailInp) emailInp.style.borderColor = '';
       
       showToast('Signed in successfully');
 
@@ -867,22 +892,11 @@ async function beLogin(){
         }, 0);
       });
     } else {
-      triggerLoginShake();
-      if(err){
-        err.style.display = 'block';
-        err.innerHTML = '<div style="font-weight:600;margin-bottom:2px">&#9888; Incorrect Password</div><div>Please check your password (e.g. <code>Lhana!472580</code>) and try again.</div>';
-        if(passInp){
-          passInp.style.borderColor = '#f85149';
-          passInp.select();
-          passInp.focus();
-        }
-      }
+      showLoginError('Incorrect Password', 'The password you entered is incorrect.<br>Please enter your master password: <code>Lhana!472580</code>');
     }
-  } catch(e){
-    if(err){
-      err.style.display = 'block';
-      err.innerHTML = '<strong>Authentication Error:</strong> ' + (e.message || 'Please try again.');
-    }
+  } catch(err){
+    console.error('Login Exception:', err);
+    showLoginError('Authentication Error', 'An unexpected error occurred: ' + (err.message || 'Please try again.'));
   } finally {
     if(btn) {
       btn.disabled = false;
