@@ -4326,64 +4326,88 @@ function openLightbox(i){
   }
 
   const lbImg = document.getElementById('lbImg');
-  if(lbImg) lbImg.src = allImgs[0];
-
-  // Build Thumbnail Filmstrip
-  let multiThumbsHtml = '';
-  if(allImgs.length > 1){
-    multiThumbsHtml = `
-      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin:12px 0 8px;flex-wrap:wrap;max-width:88vw">
-        <span id="lbPhotoCounter" style="font-family:var(--mono);font-size:11px;color:#94a3b8;margin-right:6px;font-weight:600">
-          Photo 1 of ${allImgs.length}
-        </span>
-        ${allImgs.map((imgSrc, sIdx) => {
-          const hasVid = (g.subVideos && g.subVideos[sIdx]) || (sIdx === 0 && g.youtubeUrl);
-          return `
-            <div onclick="event.stopPropagation(); switchLbSubImg(${sIdx})"
-                 style="position:relative;width:52px;height:52px;border-radius:4px;overflow:hidden;cursor:pointer;border:2px solid ${sIdx===0 ? activeColor.border : 'rgba(255,255,255,0.25)'};transition:all .2s;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.4)"
-                 id="lbThumb-${sIdx}"
-                 title="Photo #${sIdx+1}">
-              <img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover;display:block">
-              ${hasVid ? `<span style="position:absolute;bottom:2px;right:2px;background:#e50914;color:#fff;font-size:8px;padding:1px 3px;border-radius:2px;font-weight:bold">▶</span>` : ''}
-            </div>
-          `;
-        }).join('')}
-      </div>
-    `;
+  if(lbImg) {
+    lbImg.src = allImgs[0];
+    lbImg.style.borderColor = activeColor.border;
   }
 
-  // Active Title, Description, and Video for Photo #0
-  const activeTitle = (g.subTitles && g.subTitles[0]) || g.title;
-  const activeDesc = (g.subDescriptions && g.subDescriptions[0]) || g.desc || '';
-  const initialVid = (g.subVideos && g.subVideos[0]) || g.youtubeUrl || '';
-
-  const videoBtnHtml = `
-    <div id="lbVideoWrap" style="margin-top:12px;display:${initialVid ? 'block' : 'none'}">
-      <a id="lbVideoBtn" href="${initialVid || '#'}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
-         style="display:inline-flex;align-items:center;gap:8px;color:#fff;background:#e50914;padding:8px 22px;border-radius:20px;text-decoration:none;font-family:var(--mono);font-size:12px;font-weight:600;box-shadow:0 4px 14px rgba(229,9,20,0.4);transition:all .2s">
-        ▶ Watch Video on YouTube ↗
-      </a>
-    </div>
-  `;
-
-  const captionEl = document.getElementById('lbCaption');
-  if(captionEl){
-    captionEl.innerHTML = `
-      ${multiThumbsHtml}
-      <div id="lbActiveTitle" style="font-family:var(--serif);font-size:21px;font-weight:500;margin-top:6px;margin-bottom:6px;color:#ffffff;letter-spacing:0.02em">
-        ${activeTitle}
-      </div>
-      <div id="lbActiveDesc" style="font-size:13px;color:rgba(255,255,255,0.8);max-width:680px;margin:0 auto;line-height:1.6">
-        ${activeDesc}
-      </div>
-      ${videoBtnHtml}
-    `;
-  }
+  renderLightboxDockAndInfo(g, allImgs, 0, activeColor);
 
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 window.openLightbox = openLightbox;
+
+function renderLightboxDockAndInfo(g, allImgs, activeSubIdx, activeColor){
+  const captionEl = document.getElementById('lbCaption');
+  if(!captionEl) return;
+
+  // 1. Build Floating Dock Filmstrip with Left/Right arrow controls
+  let dockHtml = '';
+  if(allImgs.length > 1){
+    dockHtml = `
+      <div class="lb-dock-container" onclick="event.stopPropagation()">
+        <button class="lb-dock-arrow" onclick="lbStepSubImg(-1)" title="Previous photo in project">&lsaquo;</button>
+        <div class="lb-dock-strip" id="lbDockStrip">
+          ${allImgs.map((imgSrc, sIdx) => {
+            const hasVid = (g.subVideos && g.subVideos[sIdx]) || (sIdx === 0 && g.youtubeUrl);
+            const isActive = sIdx === activeSubIdx;
+            return `
+              <div onclick="switchLbSubImg(${sIdx})"
+                   class="lb-dock-thumb ${isActive ? 'active' : ''}"
+                   id="lbThumb-${sIdx}"
+                   title="Photo #${sIdx+1}">
+                <img src="${imgSrc}" alt="Thumbnail ${sIdx+1}" loading="lazy">
+                ${hasVid ? `<span style="position:absolute;bottom:2px;right:2px;background:#e50914;color:#fff;font-size:8px;padding:1px 3px;border-radius:2px;font-weight:bold">▶</span>` : ''}
+              </div>
+            `;
+          }).join('')}
+        </div>
+        <button class="lb-dock-arrow" onclick="lbStepSubImg(1)" title="Next photo in project">&rsaquo;</button>
+        <span id="lbPhotoCounter" style="font-family:var(--mono);font-size:11px;color:#94a3b8;margin-left:4px;font-weight:600;white-space:nowrap">
+          ${activeSubIdx + 1}/${allImgs.length}
+        </span>
+      </div>
+    `;
+  }
+
+  // 2. Active Metadata
+  const activeTitle = (g.subTitles && g.subTitles[activeSubIdx]) || g.title;
+  const activeDesc = (g.subDescriptions && g.subDescriptions[activeSubIdx]) || g.desc || '';
+  const vidUrl = (g.subVideos && g.subVideos[activeSubIdx]) || (activeSubIdx === 0 ? g.youtubeUrl : '');
+  const activePath = allImgs[activeSubIdx];
+
+  const metaBadge = (g.cat || g.pillar) ? `
+    <div style="margin-top:6px;margin-bottom:6px">
+      <span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8;padding:3px 10px;border-radius:12px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14)">
+        ${(g.cat || '3D').toUpperCase()} &bull; ${(g.pillar || 'Personal').toUpperCase()}
+      </span>
+    </div>
+  ` : '';
+
+  captionEl.innerHTML = `
+    ${dockHtml}
+    ${metaBadge}
+    <div id="lbActiveTitle" style="font-family:var(--serif);font-size:23px;font-weight:500;margin-top:4px;margin-bottom:6px;color:#ffffff;letter-spacing:0.01em">
+      ${activeTitle}
+    </div>
+    <div id="lbActiveDesc" style="font-size:13.5px;color:rgba(240,246,252,0.85);max-width:720px;margin:0 auto;line-height:1.6">
+      ${activeDesc}
+    </div>
+    <div id="lbActionButtons" style="margin-top:14px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap">
+      <div id="lbVideoWrap" style="display:${vidUrl ? 'inline-block' : 'none'}">
+        <a id="lbVideoBtn" href="${vidUrl || '#'}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
+           style="display:inline-flex;align-items:center;gap:6px;color:#fff;background:#e50914;padding:7px 20px;border-radius:20px;text-decoration:none;font-family:var(--mono);font-size:11.5px;font-weight:700;box-shadow:0 4px 14px rgba(229,9,20,0.45);transition:all .2s">
+          ▶ Watch Video on YouTube &nearr;
+        </a>
+      </div>
+      <a id="lbFullBtn" href="${activePath}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
+         style="display:inline-flex;align-items:center;gap:6px;color:#cbd5e1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);padding:7px 18px;border-radius:20px;text-decoration:none;font-family:var(--mono);font-size:11.5px;font-weight:600;transition:all .2s">
+        &cudarrl; Full Image &nearr;
+      </a>
+    </div>
+  `;
+}
 
 function switchLbSubImg(sIdx){
   const g = lbImages[lbIdx];
@@ -4394,23 +4418,26 @@ function switchLbSubImg(sIdx){
   curSubImgIdx = sIdx;
   const targetSrc = allImgs[sIdx];
   const lbImg = document.getElementById('lbImg');
-  if(lbImg) lbImg.src = targetSrc;
+  if(lbImg){
+    lbImg.style.opacity = '0.4';
+    setTimeout(() => {
+      lbImg.src = targetSrc;
+      lbImg.style.opacity = '1';
+    }, 60);
+  }
 
-  // Highlight thumbnail
-  document.querySelectorAll('[id^="lbThumb-"]').forEach(t => {
-    t.style.borderColor = 'rgba(255,255,255,0.25)';
-    t.style.transform = 'scale(1)';
-  });
+  // Highlight thumbnail in dock
+  document.querySelectorAll('.lb-dock-thumb').forEach(t => t.classList.remove('active'));
   const activeT = document.getElementById('lbThumb-' + sIdx);
   if(activeT){
-    activeT.style.borderColor = '#ffffff';
-    activeT.style.transform = 'scale(1.08)';
+    activeT.classList.add('active');
+    activeT.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   }
 
   // Update Photo Counter
   const counterEl = document.getElementById('lbPhotoCounter');
   if(counterEl){
-    counterEl.textContent = `Photo ${sIdx + 1} of ${allImgs.length}`;
+    counterEl.textContent = `${sIdx + 1}/${allImgs.length}`;
   }
 
   // Update Dynamic Title & Description per photo
@@ -4428,13 +4455,28 @@ function switchLbSubImg(sIdx){
   if(vidWrap && vidBtn){
     if(vidUrl){
       vidBtn.href = vidUrl;
-      vidWrap.style.display = 'block';
+      vidWrap.style.display = 'inline-block';
     } else {
       vidWrap.style.display = 'none';
     }
   }
+
+  // Update Full Image URL
+  const fullBtn = document.getElementById('lbFullBtn');
+  if(fullBtn) fullBtn.href = targetSrc;
 }
 window.switchLbSubImg = switchLbSubImg;
+
+function lbStepSubImg(dir){
+  const g = lbImages[lbIdx];
+  if(!g) return;
+  const allImgs = (g.images && g.images.length > 0) ? g.images : (g.path ? [g.path] : []);
+  if(allImgs.length <= 1) return;
+
+  const nextSub = (curSubImgIdx + dir + allImgs.length) % allImgs.length;
+  switchLbSubImg(nextSub);
+}
+window.lbStepSubImg = lbStepSubImg;
 
 function lbNav(dir){
   const g = lbImages[lbIdx];
