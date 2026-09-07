@@ -1808,6 +1808,31 @@ footer .footer-links a:hover {
   flex-shrink: 0;
 }
 
+
+/* Centered Play Button Overlay on Stage */
+.showcase-play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: rgba(229, 9, 20, 0.92);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 15;
+  box-shadow: 0 8px 30px rgba(229,9,20,0.6), 0 0 0 8px rgba(255,255,255,0.18);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.showcase-play-overlay:hover {
+  transform: translate(-50%, -50%) scale(1.12);
+  background: #ff0f1f;
+  box-shadow: 0 12px 36px rgba(229,9,20,0.8), 0 0 0 12px rgba(255,255,255,0.25);
+}
+
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -2111,7 +2136,14 @@ footer .footer-links a:hover {
       <div class="showcase-media-stage" id="showcaseStage">
         
         <!-- Big High-Res Image -->
-        <img id="showcaseImg" src="" alt="Showcase Main Photo" onclick="openShowcaseInLightbox()" title="Click to view fullscreen lightbox">
+        <img id="showcaseImg" src="" alt="Showcase Main Photo" onclick="handleShowcaseImgClick()" title="Click to view">
+
+        <!-- Centered Play Button Overlay (Active ONLY on videos) -->
+        <div id="showcasePlayOverlay" class="showcase-play-overlay" onclick="playShowcaseVideo()" title="Play Video on Website" style="display: none;">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="#ffffff" style="margin-left: 4px;">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </div>
 
         <!-- Embedded YouTube Video Player -->
         <div id="showcaseVideoWrap" style="display: none; position: absolute; inset: 0; width: 100%; height: 100%; background: #000; z-index: 20;">
@@ -2177,12 +2209,17 @@ footer .footer-links a:hover {
   </button>
   <div class="lb-img-wrap" id="lbImgWrap">
     <button class="lb-nav lb-prev" onclick="event.stopPropagation(); lbNav(-1)" title="Previous Project">&larr;</button>
-    <div class="lb-stage" id="lbStage">
-      <img id="lbImg" src="" alt="Gallery Preview" style="transition:box-shadow .4s ease, border-color .4s ease, opacity .2s ease">
+        <div class="lb-stage" id="lbStage">
+      <img id="lbImg" src="" alt="Gallery Preview" onclick="handleLbImgClick()" style="transition:box-shadow .4s ease, border-color .4s ease, opacity .2s ease">
+      <div id="lbPlayOverlay" class="showcase-play-overlay" onclick="playLightboxVideo()" title="Play Video on Website" style="display: none;">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="#ffffff" style="margin-left: 4px;">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+      </div>
       <div id="lbVideoPlayerWrap" style="display: none; width: 100%; height: 100%; position: absolute; inset: 0; background: #000; border-radius: 6px; overflow: hidden; z-index: 10;">
         <iframe id="lbVideoIframe" src="" style="width: 100%; height: 100%; border: none; display: block;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <button id="lbCloseVideoBtn" onclick="stopLightboxVideo()" style="display: none; position: absolute; top: 14px; right: 14px; background: rgba(0,0,0,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 6px 14px; border-radius: 20px; font-family: var(--mono); font-size: 11px; cursor: pointer; z-index: 30; font-weight: 700;">
+      <button id="lbCloseVideoBtn" onclick="stopLightboxVideo()" style="display: none; position: absolute; top: 14px; right: 14px; background: rgba(0,0,0,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 7px 16px; border-radius: 20px; font-family: var(--mono); font-size: 11px; cursor: pointer; z-index: 30; font-weight: 700;">
         📷 Switch to Photo
       </button>
     </div>
@@ -4554,34 +4591,54 @@ window.getYouTubeId = getYouTubeId;
 
 function getSubVideo(g, idx){
   if(!g) return '';
+  // 1. Explicit subVideos
   if(g.subVideos){
     if(Array.isArray(g.subVideos) && g.subVideos[idx]) return g.subVideos[idx];
-    if(typeof g.subVideos === 'object' && g.subVideos[String(idx)]) return g.subVideos[String(idx)];
-    if(typeof g.subVideos === 'object' && g.subVideos[idx]) return g.subVideos[idx];
+    if(typeof g.subVideos === 'object'){
+      if(g.subVideos[String(idx)]) return g.subVideos[String(idx)];
+      if(g.subVideos[idx]) return g.subVideos[idx];
+    }
   }
-  if(idx === 0 && g.youtubeUrl) return g.youtubeUrl;
-  return g.youtubeUrl || '';
+  // 2. Check if the specific photo file path is a YouTube thumbnail (Photos & to upload/YouTube/VIDEO_ID.jpg)
+  const allImgs = (g.images && g.images.length > 0) ? g.images : (g.path ? [g.path] : []);
+  const curImg = allImgs[idx] || (idx === 0 ? g.path : '');
+  if(curImg){
+    const m = String(curImg).match(/YouTube\/([a-zA-Z0-9_-]{11})\./i);
+    if(m && m[1]) return 'https://www.youtube.com/watch?v=' + m[1];
+  }
+  // 3. Only the first photo (index 0) defaults to root youtubeUrl if no subVideos dict is defined
+  if(idx === 0 && g.youtubeUrl && (!g.subVideos || Object.keys(g.subVideos).length === 0)){
+    return g.youtubeUrl;
+  }
+  return '';
 }
+window.getSubVideo = getSubVideo;
 
 function getSubTitle(g, idx){
   if(!g) return '';
   if(g.subTitles){
     if(Array.isArray(g.subTitles) && g.subTitles[idx]) return g.subTitles[idx];
-    if(typeof g.subTitles === 'object' && g.subTitles[String(idx)]) return g.subTitles[String(idx)];
-    if(typeof g.subTitles === 'object' && g.subTitles[idx]) return g.subTitles[idx];
+    if(typeof g.subTitles === 'object'){
+      if(g.subTitles[String(idx)]) return g.subTitles[String(idx)];
+      if(g.subTitles[idx]) return g.subTitles[idx];
+    }
   }
   return g.title || '';
 }
+window.getSubTitle = getSubTitle;
 
 function getSubDesc(g, idx){
   if(!g) return '';
   if(g.subDescriptions){
     if(Array.isArray(g.subDescriptions) && g.subDescriptions[idx]) return g.subDescriptions[idx];
-    if(typeof g.subDescriptions === 'object' && g.subDescriptions[String(idx)]) return g.subDescriptions[String(idx)];
-    if(typeof g.subDescriptions === 'object' && g.subDescriptions[idx]) return g.subDescriptions[idx];
+    if(typeof g.subDescriptions === 'object'){
+      if(g.subDescriptions[String(idx)]) return g.subDescriptions[String(idx)];
+      if(g.subDescriptions[idx]) return g.subDescriptions[idx];
+    }
   }
   return g.desc || '';
 }
+window.getSubDesc = getSubDesc;
 
 let showcaseProjIdx = 0, showcasePhotoIdx = 0;
 
@@ -4596,12 +4653,14 @@ function renderGallery(filter){
   showcasePhotoIdx = 0;
   renderShowcaseViewer();
 
-  c.innerHTML = filtered.map((g,i)=>`
+  c.innerHTML = filtered.map((g,i)=>{
+    const hasAnyVid = g.youtubeUrl || (g.images && g.images.some((_, sI)=>Boolean(getSubVideo(g, sI))));
+    return `
     <div class="g-card ${i === showcaseProjIdx ? 'active-showcase-card' : ''}" id="gcard-${i}" onclick="selectShowcaseProject(${i})" style="position:relative">
       <div style="position:relative;overflow:hidden">
         <img src="${safeImgSrc(g.path)}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
         ${(g.images && g.images.length > 1) ? `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.85);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.3)">⊞ ${g.images.length} Photos</span>` : ''}
-        ${g.youtubeUrl ? `<span class="g-video-badge" style="position:absolute;top:10px;right:10px;background:#e50914;color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.4)">▶ Video</span>` : ''}
+        ${hasAnyVid ? `<span class="g-video-badge" style="position:absolute;top:10px;right:10px;background:#e50914;color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.4)">▶ Video</span>` : ''}
       </div>
       <div class="g-card-info">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
@@ -4611,7 +4670,7 @@ function renderGallery(filter){
         <div class="g-title">${g.title}</div>
       </div>
     </div>
-  `).join('');
+  `;}).join('');
 }
 
 function selectShowcaseProject(projIdx){
@@ -4648,6 +4707,18 @@ function stepShowcaseProject(dir){
 }
 window.stepShowcaseProject = stepShowcaseProject;
 
+function handleShowcaseImgClick(){
+  const g = lbImages[showcaseProjIdx];
+  if(!g) return;
+  const vidUrl = getSubVideo(g, showcasePhotoIdx);
+  if(vidUrl){
+    playShowcaseVideo();
+  } else {
+    openShowcaseInLightbox();
+  }
+}
+window.handleShowcaseImgClick = handleShowcaseImgClick;
+
 function renderShowcaseViewer(){
   const g = lbImages[showcaseProjIdx];
   if(!g) return;
@@ -4655,11 +4726,17 @@ function renderShowcaseViewer(){
 
   if(showcasePhotoIdx >= allImgs.length) showcasePhotoIdx = 0;
   const activeSrc = allImgs[showcasePhotoIdx];
+  const vidUrl = getSubVideo(g, showcasePhotoIdx);
 
-  // 1. Update Main Stage Image
+  // 1. Update Main Stage Image & Play Overlay
   const imgEl = document.getElementById('showcaseImg');
+  const playOverlay = document.getElementById('showcasePlayOverlay');
   if(imgEl){
     imgEl.src = safeImgSrc(activeSrc);
+    imgEl.title = vidUrl ? "Click to play video on website" : "Click to view fullscreen lightbox";
+  }
+  if(playOverlay){
+    playOverlay.style.display = vidUrl ? 'flex' : 'none';
   }
 
   // 2. Build Dedicated Photo Cards Strip (for multiple photos)
@@ -4681,11 +4758,13 @@ function renderShowcaseViewer(){
                      class="sc-photo-card ${isActive ? 'active' : ''}"
                      id="scCard-${sIdx}"
                      title="${subT}">
-                  <img src="${safeImgSrc(imgSrc)}" class="sc-card-thumb" alt="Photo ${sIdx+1}" loading="lazy">
+                  <div style="position:relative">
+                    <img src="${safeImgSrc(imgSrc)}" class="sc-card-thumb" alt="Photo ${sIdx+1}" loading="lazy">
+                    ${subV ? `<span class="sc-card-vidbadge" style="position:absolute;bottom:4px;right:4px">▶ Video</span>` : ''}
+                  </div>
                   <div class="sc-card-body">
                     <div class="sc-card-header">
                       <span class="sc-card-num">#${sIdx+1}</span>
-                      ${subV ? `<span class="sc-card-vidbadge">▶ Video</span>` : ''}
                     </div>
                     <div class="sc-card-title">${subT}</div>
                     ${subD ? `<div class="sc-card-desc">${subD}</div>` : ''}
@@ -4706,10 +4785,9 @@ function renderShowcaseViewer(){
     }
   }
 
-  // 3. Update Title, Category, Description, and Video
+  // 3. Update Title, Category, Description, and Video Action Button
   const activeTitle = getSubTitle(g, showcasePhotoIdx) || g.title;
   const activeDesc = getSubDesc(g, showcasePhotoIdx) || g.desc || '';
-  const vidUrl = getSubVideo(g, showcasePhotoIdx);
 
   const catEl = document.getElementById('showcaseCategory');
   const titleEl = document.getElementById('showcaseTitle');
@@ -4720,11 +4798,7 @@ function renderShowcaseViewer(){
   if(titleEl) titleEl.textContent = activeTitle;
   if(descEl) descEl.textContent = activeDesc;
   if(vidBtnWrap){
-    if(vidUrl){
-      vidBtnWrap.style.display = 'inline-block';
-    } else {
-      vidBtnWrap.style.display = 'none';
-    }
+    vidBtnWrap.style.display = vidUrl ? 'inline-block' : 'none';
   }
 }
 window.renderShowcaseViewer = renderShowcaseViewer;
@@ -4738,13 +4812,20 @@ function switchShowcasePhoto(sIdx){
   showcasePhotoIdx = sIdx;
   stopShowcaseVideo();
   const targetSrc = allImgs[sIdx];
+  const vidUrl = getSubVideo(g, sIdx);
+
   const imgEl = document.getElementById('showcaseImg');
+  const playOverlay = document.getElementById('showcasePlayOverlay');
   if(imgEl){
     imgEl.style.opacity = '0.35';
     setTimeout(() => {
       imgEl.src = safeImgSrc(targetSrc);
       imgEl.style.opacity = '1';
+      imgEl.title = vidUrl ? "Click to play video on website" : "Click to view fullscreen lightbox";
     }, 60);
+  }
+  if(playOverlay){
+    playOverlay.style.display = vidUrl ? 'flex' : 'none';
   }
 
   // Update active photo card highlight
@@ -4764,7 +4845,6 @@ function switchShowcasePhoto(sIdx){
   // Update Title, Desc, and Video Button
   const activeTitle = getSubTitle(g, sIdx) || g.title;
   const activeDesc = getSubDesc(g, sIdx) || g.desc || '';
-  const vidUrl = getSubVideo(g, sIdx);
 
   const titleEl = document.getElementById('showcaseTitle');
   const descEl = document.getElementById('showcaseDesc');
@@ -4773,11 +4853,7 @@ function switchShowcasePhoto(sIdx){
   if(titleEl) titleEl.textContent = activeTitle;
   if(descEl) descEl.textContent = activeDesc;
   if(vidBtnWrap){
-    if(vidUrl){
-      vidBtnWrap.style.display = 'inline-block';
-    } else {
-      vidBtnWrap.style.display = 'none';
-    }
+    vidBtnWrap.style.display = vidUrl ? 'inline-block' : 'none';
   }
 }
 window.switchShowcasePhoto = switchShowcasePhoto;
@@ -4803,6 +4879,7 @@ function playShowcaseVideo(){
   const wrap = document.getElementById('showcaseVideoWrap');
   const iframe = document.getElementById('showcaseVideoIframe');
   const closeBtn = document.getElementById('showcaseCloseVideoBtn');
+  const playOverlay = document.getElementById('showcasePlayOverlay');
 
   if(wrap && iframe){
     if(ytid){
@@ -4812,6 +4889,7 @@ function playShowcaseVideo(){
     }
     wrap.style.display = 'block';
     if(closeBtn) closeBtn.style.display = 'block';
+    if(playOverlay) playOverlay.style.display = 'none';
   }
 }
 window.playShowcaseVideo = playShowcaseVideo;
@@ -4820,9 +4898,16 @@ function stopShowcaseVideo(){
   const wrap = document.getElementById('showcaseVideoWrap');
   const iframe = document.getElementById('showcaseVideoIframe');
   const closeBtn = document.getElementById('showcaseCloseVideoBtn');
+  const playOverlay = document.getElementById('showcasePlayOverlay');
   if(iframe) iframe.src = '';
   if(wrap) wrap.style.display = 'none';
   if(closeBtn) closeBtn.style.display = 'none';
+
+  const g = lbImages[showcaseProjIdx];
+  if(g){
+    const vidUrl = getSubVideo(g, showcasePhotoIdx);
+    if(playOverlay) playOverlay.style.display = vidUrl ? 'flex' : 'none';
+  }
 }
 window.stopShowcaseVideo = stopShowcaseVideo;
 
@@ -4850,6 +4935,16 @@ function filterGallery(cat, btn){
   }, 350);
 }
 
+function handleLbImgClick(){
+  const g = lbImages[lbIdx];
+  if(!g) return;
+  const vidUrl = getSubVideo(g, curSubImgIdx);
+  if(vidUrl){
+    playLightboxVideo();
+  }
+}
+window.handleLbImgClick = handleLbImgClick;
+
 function openLightbox(i){
   lbIdx = i;
   curSubImgIdx = 0;
@@ -4874,10 +4969,17 @@ function openLightbox(i){
   }
 
   const lbImg = document.getElementById('lbImg');
+  const lbPlayOverlay = document.getElementById('lbPlayOverlay');
+  const vidUrl = getSubVideo(g, 0);
+
   if(lbImg){
     lbImg.src = safeImgSrc(allImgs[0]);
     lbImg.style.boxShadow = `0 0 35px ${activeColor.glow}, 0 20px 60px rgba(0,0,0,0.8)`;
     lbImg.style.borderColor = activeColor.border;
+    lbImg.title = vidUrl ? "Click to play video on website" : "";
+  }
+  if(lbPlayOverlay){
+    lbPlayOverlay.style.display = vidUrl ? 'flex' : 'none';
   }
 
   renderLightboxDockAndInfo(g, allImgs, 0, activeColor);
@@ -4897,6 +4999,7 @@ function playLightboxVideo(){
   const wrap = document.getElementById('lbVideoPlayerWrap');
   const iframe = document.getElementById('lbVideoIframe');
   const closeBtn = document.getElementById('lbCloseVideoBtn');
+  const lbPlayOverlay = document.getElementById('lbPlayOverlay');
 
   if(wrap && iframe){
     if(ytid){
@@ -4906,6 +5009,7 @@ function playLightboxVideo(){
     }
     wrap.style.display = 'block';
     if(closeBtn) closeBtn.style.display = 'block';
+    if(lbPlayOverlay) lbPlayOverlay.style.display = 'none';
   }
 }
 window.playLightboxVideo = playLightboxVideo;
@@ -4914,9 +5018,16 @@ function stopLightboxVideo(){
   const wrap = document.getElementById('lbVideoPlayerWrap');
   const iframe = document.getElementById('lbVideoIframe');
   const closeBtn = document.getElementById('lbCloseVideoBtn');
+  const lbPlayOverlay = document.getElementById('lbPlayOverlay');
   if(iframe) iframe.src = '';
   if(wrap) wrap.style.display = 'none';
   if(closeBtn) closeBtn.style.display = 'none';
+
+  const g = lbImages[lbIdx];
+  if(g){
+    const vidUrl = getSubVideo(g, curSubImgIdx);
+    if(lbPlayOverlay) lbPlayOverlay.style.display = vidUrl ? 'flex' : 'none';
+  }
 }
 window.stopLightboxVideo = stopLightboxVideo;
 
@@ -5005,13 +5116,21 @@ function switchLbSubImg(sIdx){
   curSubImgIdx = sIdx;
   stopLightboxVideo();
   const targetSrc = safeImgSrc(allImgs[sIdx]);
+  const vidUrl = getSubVideo(g, sIdx);
+
   const lbImg = document.getElementById('lbImg');
+  const lbPlayOverlay = document.getElementById('lbPlayOverlay');
+
   if(lbImg){
     lbImg.style.opacity = '0.4';
     setTimeout(() => {
       lbImg.src = targetSrc;
       lbImg.style.opacity = '1';
+      lbImg.title = vidUrl ? "Click to play video on website" : "";
     }, 60);
+  }
+  if(lbPlayOverlay){
+    lbPlayOverlay.style.display = vidUrl ? 'flex' : 'none';
   }
 
   // Highlight thumbnail in dock
@@ -5037,7 +5156,6 @@ function switchLbSubImg(sIdx){
   if(descEl) descEl.textContent = activeDesc;
 
   // Re-render Action Buttons for this photo
-  const vidUrl = getSubVideo(g, sIdx);
   const actionWrap = document.getElementById('lbActionButtons');
   if(actionWrap){
     actionWrap.innerHTML = `
