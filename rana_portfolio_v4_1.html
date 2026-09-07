@@ -469,7 +469,7 @@ footer { background:var(--ink); color:#fff; padding:54px 48px; display:grid; gri
   background:var(--bg-card); border:1px solid var(--border); overflow:hidden; cursor:none; transition:all .3s ease;
 }
 .g-card:hover { transform:translateY(-3px); box-shadow:0 14px 34px rgba(0,0,0,0.08); border-color:var(--ink); }
-.g-card img { width:100%; height:220px; object-fit:cover; filter: none !important; transition:all .4s ease; background:#e2e6eb; }
+.g-card img { width:100%; height:220px; object-fit:cover; transition:all .4s ease; background:#e2e6eb; }
 .g-card:hover img { filter: none !important; transform:scale(1.02); }
 .g-card-info { padding:14px 18px; }
 .g-cat-label { font-family:var(--mono); font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink4); margin-bottom:4px; }
@@ -1831,6 +1831,52 @@ footer .footer-links a:hover {
   transform: translate(-50%, -50%) scale(1.12);
   background: #ff0f1f;
   box-shadow: 0 12px 36px rgba(229,9,20,0.8), 0 0 0 12px rgba(255,255,255,0.25);
+}
+
+
+/* ===================================================
+   BEAUTIFUL IMAGE FILTERS — CINEMATIC ENHANCEMENT
+   Applied to all gallery images, showcase, lightbox
+   =================================================== */
+
+/* Grid gallery cards */
+.g-card img {
+  filter: contrast(1.08) saturate(1.22) brightness(1.03) !important;
+  transition: filter 0.4s ease, transform 0.4s ease !important;
+}
+.g-card:hover img {
+  filter: contrast(1.12) saturate(1.35) brightness(1.07) !important;
+  transform: scale(1.03) !important;
+}
+
+/* Showcase main stage image */
+#showcaseImg {
+  filter: contrast(1.06) saturate(1.18) brightness(1.02);
+  transition: opacity 0.22s ease, filter 0.4s ease;
+}
+
+/* Lightbox main image */
+#lbImg {
+  filter: contrast(1.07) saturate(1.2) brightness(1.02);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease, opacity 0.2s ease, filter 0.3s ease;
+}
+
+/* Showcase photo card thumbnails */
+.sc-card-thumb {
+  filter: contrast(1.06) saturate(1.18) brightness(1.02);
+  transition: filter 0.3s ease;
+}
+.sc-photo-card:hover .sc-card-thumb {
+  filter: contrast(1.1) saturate(1.3) brightness(1.05);
+}
+
+/* Lightbox dock filmstrip thumbnails */
+.lb-dock-thumb img {
+  filter: contrast(1.05) saturate(1.15) brightness(1.01);
+  transition: filter 0.3s ease;
+}
+.lb-dock-thumb:hover img, .lb-dock-thumb.active img {
+  filter: contrast(1.1) saturate(1.3) brightness(1.06);
 }
 
 </style>
