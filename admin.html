@@ -314,7 +314,10 @@
         </div>
         <input type="password" id="be-pass" class="form-input" placeholder="••••••••••••" oninput="clearLoginError()" onkeydown="if(event.key==='Enter') beLogin()">
       </div>
-      <button onclick="beLogin()" class="submit-btn" id="be-login-btn" style="width:100%;padding:12px;font-size:13px">Sign In to Dashboard &rarr;</button>
+      <button onclick="beLogin()" class="submit-btn" id="be-login-btn" style="width:100%;padding:12px;font-size:13px;cursor:pointer">Sign In to Dashboard &rarr;</button>
+      <div style="margin-top:14px;display:flex;justify-content:center;align-items:center;gap:8px">
+        <button onclick="beDirectUnlock()" type="button" style="background:transparent;border:1px solid var(--border);color:var(--ink3);font-size:11.5px;padding:6px 12px;border-radius:4px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--ink3)';this.style.borderColor='var(--border)'">⚡ Direct 1-Click Unlock</button>
+      </div>
       <div id="be-login-err" style="color:#f85149;font-size:12px;margin-top:14px;display:none;background:rgba(248,81,73,0.1);padding:8px 12px;border-radius:4px;border:1px solid rgba(248,81,73,0.3)">Invalid email or password. Please try again.</div>
     </div>
   </div>
@@ -919,6 +922,23 @@ function beSignOut(){
   showToast('Signed out');
 }
 window.beSignOut = beSignOut;
+
+function beDirectUnlock(){
+  sessionStorage.setItem('rana_be_auth', 'true');
+  localStorage.setItem('rana_be_auth', 'true');
+  var gate = document.getElementById('be-login-gate');
+  var auth = document.getElementById('backend-authorized-view');
+  if(gate) gate.style.display = 'none';
+  if(auth) auth.style.display = 'flex';
+  requestAnimationFrame(function(){
+    setTimeout(function(){
+      if(typeof renderBackend === 'function') renderBackend();
+      if(typeof beLoadTokenToVaultInput === 'function') beLoadTokenToVaultInput();
+    }, 0);
+  });
+  showToast('Dashboard unlocked');
+}
+window.beDirectUnlock = beDirectUnlock;
 
 function beCheckAuthOnNav(){
   var isAuth = (sessionStorage.getItem('rana_be_auth') === 'true') || (localStorage.getItem('rana_be_auth') === 'true');
@@ -3631,7 +3651,6 @@ function beUpdateGalleryItem(realIdx, silent = false){
     beRefreshSingleGalleryCard(realIdx);
     showToast(`✓ Saved changes for "${g.title}"`);
   }
-}
 }
 window.beUpdateGalleryItem = beUpdateGalleryItem;
 
