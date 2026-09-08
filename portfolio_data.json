@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T00:12:04.708Z",
+  "updatedAt": "2026-09-08T23:05:28.166Z",
   "version": "4.5",
   "novels": [
     {
@@ -652,7 +652,10 @@
         "Photos & to upload/Kitchen/All Work (160).jpg",
         "Photos & to upload/Kitchen/All Work (167).jpg",
         "Photos & to upload/YouTube/wvJ3n61oNlQ.jpg",
-        "Photos & to upload/Church/4.jpg"
+        "Photos & to upload/Church/4.jpg",
+        "Photos & to upload/YouTube/AYk-BZrP6D0.jpg",
+        "Photos & to upload/Living Room/Final1.png",
+        "Photos & to upload/Bedroom/All Work (67).jpg"
       ],
       "subVideos": {},
       "youtubeUrl": ""
@@ -678,7 +681,8 @@
         "Photos & to upload/Viking/All Work (14).jpg",
         "Photos & to upload/Viking/All Work (62).png",
         "Photos & to upload/Viking/All Work (65).png",
-        "Photos & to upload/YouTube/PJ1i1nk43Zo.jpg"
+        "Photos & to upload/YouTube/PJ1i1nk43Zo.jpg",
+        "Photos & to upload/Sculptures/All Work (55).PNG"
       ],
       "subVideos": {},
       "youtubeUrl": ""
@@ -704,7 +708,10 @@
       "images": [
         "Photos & to upload/Sketch/11053043_919157774801703_4563455775003564932_n.jpg",
         "Photos & to upload/Sketch/11202825_919018721482275_3884168732202231454_o.jpg",
-        "Photos & to upload/Sketch/12.jpg"
+        "Photos & to upload/Sketch/12.jpg",
+        "Photos & to upload/Sketch/All Work (2).jpeg",
+        "Photos & to upload/Sketch/All Work (63).jpg",
+        "Photos & to upload/Sketch/10519193_752125604838255_4807372730966501183_o.jpg"
       ],
       "subVideos": {},
       "youtubeUrl": ""
@@ -735,7 +742,10 @@
         "Photos & to upload/YouTube/L6NKHuSGThA.jpg",
         "Photos & to upload/Nature/All Work (122).jpg",
         "Photos & to upload/Nature/All Work (123).jpg",
-        "Photos & to upload/Nature/All Work (145).jpg"
+        "Photos & to upload/Nature/All Work (145).jpg",
+        "Photos & to upload/Nature/All Work (16).png",
+        "Photos & to upload/Nature/All Work (39).png",
+        "Photos & to upload/Nature/All Work (41).png"
       ],
       "subVideos": {
         "0": "https://www.youtube.com/watch?v=jN-SOF7No1Q"
@@ -753,7 +763,10 @@
         "Photos & to upload/Scifi Living Room/27356343_1713224235395049_6194616003068163822_o.jpg",
         "Photos & to upload/Scifi/All Work (13).jpg",
         "Photos & to upload/YouTube/sc7N1vtVA8M.jpg",
-        "Photos & to upload/YouTube/8zlzhEICw-w.jpg"
+        "Photos & to upload/YouTube/8zlzhEICw-w.jpg",
+        "Photos & to upload/Scifi/All Work (6).png",
+        "Photos & to upload/Scifi/All Work (11).png",
+        "Photos & to upload/Scifi/All Work (45).png"
       ]
     },
     {
@@ -800,12 +813,28 @@
       ]
     },
     {
-      "title": "Stream & Ancient Temple Ruins | Unreal Engine 5",
+      "title": "Cinematic Environments & Scenes",
       "pillar": "Personal",
       "cat": "environment",
       "desc": "Lush mossy ancient ruins beside a dynamic mountain stream with Nanite geometry, Lumen global illumination, and high-fidelity Megascans assets.",
       "path": "Photos & to upload/YouTube/XbsGhjGriEE.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=XbsGhjGriEE"
+      "youtubeUrl": "https://www.youtube.com/watch?v=XbsGhjGriEE",
+      "subTitles": {},
+      "subDescriptions": {},
+      "subVideos": {
+        "0": "https://www.youtube.com/watch?v=XbsGhjGriEE",
+        "1": "https://www.youtube.com/watch?v=yEWTwD7XMjw"
+      },
+      "images": [
+        "Photos & to upload/YouTube/XbsGhjGriEE.jpg",
+        "Photos & to upload/YouTube/yEWTwD7XMjw.jpg",
+        "Photos & to upload/YouTube/x9p50UJI_NU.jpg",
+        "Photos & to upload/YouTube/UYgf9MlZ2iY.jpg",
+        "Photos & to upload/YouTube/BWPjtiNJSr4.jpg",
+        "Photos & to upload/YouTube/NOFS6gQ8Zfk.jpg",
+        "Photos & to upload/Stairs/All Work (44).jpg",
+        "Photos & to upload/Underwater/All Work (27).png"
+      ]
     },
     {
       "title": "Ann's Delight Sweet Paradise: Commercial Store",
@@ -816,35 +845,17 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=aniBOlBF1Ow"
     },
     {
-      "title": "Landscape: Scenes & Lighting Walkthrough",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Romantic green foliage tunnel surrounding overgrown railway tracks, featuring cinematic camera dolly movements and golden-hour sun flares.",
-      "path": "Photos & to upload/YouTube/yEWTwD7XMjw.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=yEWTwD7XMjw",
-      "subVideos": {
-        "0": "https://www.youtube.com/watch?v=yEWTwD7XMjw"
-      },
-      "images": [
-        "Photos & to upload/YouTube/yEWTwD7XMjw.jpg",
-        "Photos & to upload/YouTube/x9p50UJI_NU.jpg"
-      ]
-    },
-    {
-      "title": "Cyber Coupe: Hard-Surface Automotive",
-      "pillar": "Personal",
-      "cat": "product",
-      "desc": "Aerodynamic futuristic sports car concept modeled with precision subdivision surfaces and automotive clearcoat shaders.",
-      "path": "Photos & to upload/Car/550237818_18527373967025424_2167346014008595452_n.jpeg"
-    },
-    {
       "title": "Locomotive: Industrial & Commercial",
       "pillar": "Personal",
       "cat": "3d",
       "desc": "Atmospheric underground train carriage interior with distressed stainless steel textures and fluorescent flicker.",
       "path": "Photos & to upload/Train/All Work (183).jpg",
       "subVideos": {},
-      "youtubeUrl": ""
+      "youtubeUrl": "",
+      "images": [
+        "Photos & to upload/Train/All Work (183).jpg",
+        "Photos & to upload/Car/550237818_18527373967025424_2167346014008595452_n.jpeg"
+      ]
     },
     {
       "title": "Diorama: Architectural Scale Model",
@@ -856,14 +867,6 @@
       "youtubeUrl": ""
     },
     {
-      "title": "Luxury Penthouse Interior Design | ArchViz",
-      "pillar": "Client",
-      "cat": "environment",
-      "desc": "Minimalist Scandinavian architectural visualization render exploring indirect bounce lighting, wood grain reflections, and urban skyline backdrops.",
-      "path": "Photos & to upload/YouTube/AYk-BZrP6D0.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=AYk-BZrP6D0"
-    },
-    {
       "title": "Make Whatever You Want: Blender 3D Concept Showreel",
       "pillar": "Personal",
       "cat": "animation",
@@ -872,115 +875,11 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=IYL4UTTOkdk"
     },
     {
-      "title": "The Tunnel Of Love: Technical Environment Tutorial",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Comprehensive step-by-step masterclass demonstrating procedural ivy scattering, lighting placement, and post-process color grading.",
-      "path": "Photos & to upload/YouTube/UYgf9MlZ2iY.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=UYgf9MlZ2iY"
-    },
-    {
-      "title": "Cinematic Environment Art Reel",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Dynamic visual montage of real-time environments, architectural flythroughs, and particle effects produced across 2023-2026.",
-      "path": "Photos & to upload/YouTube/BWPjtiNJSr4.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=BWPjtiNJSr4",
-      "images": [
-        "Photos & to upload/YouTube/BWPjtiNJSr4.jpg",
-        "Photos & to upload/YouTube/NOFS6gQ8Zfk.jpg"
-      ]
-    },
-    {
-      "title": "Modern Residential Interior",
-      "cat": "3d",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Living Room/Final1.png",
-      "desc": "Clean architectural furniture and lighting"
-    },
-    {
-      "title": "Morning Light Bedroom",
-      "cat": "environment",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Bedroom/All Work (67).jpg",
-      "desc": "Soft diffuse lighting and linen shaders"
-    },
-    {
-      "title": "Geometric Staircase Helix",
-      "cat": "3d",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Stairs/All Work (44).jpg",
-      "desc": "Geometric concrete spiral staircase"
-    },
-    {
-      "title": "Sci-Fi Command Chamber",
-      "cat": "environment",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Scifi/All Work (6).png",
-      "desc": "Speculative sci-fi interior with glowing conduits"
-    },
-    {
-      "title": "Sci-Fi Orbital Hub",
-      "cat": "environment",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Scifi/All Work (11).png",
-      "desc": "Hard-surface modeling and atmospheric glow"
-    },
-    {
-      "title": "Sci-Fi Laboratory Interior",
-      "cat": "environment",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Scifi/All Work (45).png",
-      "desc": "Modular sci-fi environmental assets"
-    },
-    {
-      "title": "Subsurface Deep Sea Atmosphere",
-      "cat": "environment",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Underwater/All Work (27).png",
-      "desc": "Underwater illumination and caustics simulation"
-    },
-    {
       "title": "Underground Metro Tunnel",
       "cat": "environment",
       "pillar": "Personal",
       "path": "Photos & to upload/Underground/7.jpg",
       "desc": "Subterranean corridor and moody fixtures"
-    },
-    {
-      "title": "Fantasy Mountain Valley",
-      "cat": "environment",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Nature/All Work (16).png",
-      "desc": "Expansive landscape and atmospheric mist"
-    },
-    {
-      "title": "Autumn Woodland Vista",
-      "cat": "environment",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Nature/All Work (39).png",
-      "desc": "Volumetric sunlight through forest canopy"
-    },
-    {
-      "title": "Alpine Wilderness Study",
-      "cat": "environment",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Nature/All Work (41).png",
-      "desc": "Foliage simulation and terrain shaders"
-    },
-    {
-      "title": "Abstract Figurative Sculpture",
-      "cat": "character",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Sculptures/All Work (52).png",
-      "desc": "Monochrome sculptural character study"
-    },
-    {
-      "title": "Classical Heroic Sculpture",
-      "cat": "character",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Sculptures/All Work (55).PNG",
-      "desc": "Digital clay anatomy and drapery study"
     },
     {
       "title": "Brand Identity Visual",
@@ -995,27 +894,6 @@
       "pillar": "Client",
       "path": "Photos & to upload/Logo/2.PNG",
       "desc": "Vector identity and corporate symbol"
-    },
-    {
-      "title": "Anatomical Sketch Study",
-      "cat": "character",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Sketch/All Work (2).jpeg",
-      "desc": "Traditional and digital drawing technique study"
-    },
-    {
-      "title": "Atmospheric Sketch Concept",
-      "cat": "environment",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Sketch/All Work (63).jpg",
-      "desc": "Expressive compositional value drawing"
-    },
-    {
-      "title": "Concept Sketch: Hero Silhouette & Posture",
-      "pillar": "Personal",
-      "cat": "character",
-      "desc": "Expressive ink sketch exploring character weight distribution, dynamic silhouette balance, and gesture.",
-      "path": "Photos & to upload/Sketch/10519193_752125604838255_4807372730966501183_o.jpg"
     },
     {
       "title": "Architectural Perspective: Line & Vanishing Grid",
