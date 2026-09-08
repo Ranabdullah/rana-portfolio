@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-08T23:05:28.166Z",
+  "updatedAt": "2026-09-08T23:06:09.078Z",
   "version": "4.5",
   "novels": [
     {
@@ -567,9 +567,12 @@
         "Photos & to upload/Egyptian Mythology/All Work (103).jpg",
         "Photos & to upload/Egyptian Mythology/All Work (104).jpg",
         "Photos & to upload/Egyptian Mythology/All Work (105).jpg",
-        "Photos & to upload/Egyptian Mythology/All Work (140).jpg",
-        "Photos & to upload/Sculptures/All Work (180).jpg"
-      ]
+        "Photos & to upload/Egyptian Mythology/All Work (140).jpg"
+      ],
+      "subTitles": {},
+      "subDescriptions": {},
+      "subVideos": {},
+      "youtubeUrl": ""
     },
     {
       "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
@@ -682,7 +685,8 @@
         "Photos & to upload/Viking/All Work (62).png",
         "Photos & to upload/Viking/All Work (65).png",
         "Photos & to upload/YouTube/PJ1i1nk43Zo.jpg",
-        "Photos & to upload/Sculptures/All Work (55).PNG"
+        "Photos & to upload/Sculptures/All Work (55).PNG",
+        "Photos & to upload/Sculptures/All Work (180).jpg"
       ],
       "subVideos": {},
       "youtubeUrl": ""
@@ -700,7 +704,7 @@
       ]
     },
     {
-      "title": "The Kinetic Figure: Character Studies in Anatomy, Gesture, and Form",
+      "title": "Sketches: Character Studies in Anatomy, Gesture, and Form",
       "pillar": "Personal",
       "cat": "character",
       "desc": "Traditional hand-drawn anatomical studies examining dynamic silhouette weight distribution, skull plane transitions, and gestural momentum.",
@@ -714,7 +718,9 @@
         "Photos & to upload/Sketch/10519193_752125604838255_4807372730966501183_o.jpg"
       ],
       "subVideos": {},
-      "youtubeUrl": ""
+      "youtubeUrl": "",
+      "subTitles": {},
+      "subDescriptions": {}
     },
     {
       "title": "Speculative Worldbuilding: Environmental Architecture & Hard Surface Design",
