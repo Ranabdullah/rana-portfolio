@@ -3414,28 +3414,43 @@ function renderBeSoftware(){
   const c = document.getElementById('be-software-list');
   if(!c) return;
   c.innerHTML = software.map((s,i) => {
-    const linkUrl = s.link || s.url || '';
+    const linkUrl = s.link || s.url || s.gumroadUrl || '';
+    const imgUrl = s.img || s.image || '';
 
     return `
     <div class="backend-item" style="flex-direction:column;gap:14px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;margin-bottom:16px">
-      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px">
-        <div>
-          <label class="form-label">Software / Addon Name</label>
-          <input id="be-soft-t-${i}" value="${(s.name||s.title||'').replace(/"/g,'&quot;')}"
-            style="width:100%;padding:8px 12px;font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
-        </div>
-        <div>
-          <label class="form-label">Category / Platform</label>
-          <input id="be-soft-plat-${i}" value="${(s.cat||s.platform||'Blender Addon').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
-        </div>
-        <div>
-          <label class="form-label">Price</label>
-          <input id="be-soft-p-${i}" value="${(s.price||'Free').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        ${imgUrl ? `
+          <div style="position:relative;flex-shrink:0">
+            <img src="${safeImgSrc(imgUrl)}" style="width:72px;height:72px;object-fit:cover;border-radius:6px;border:1px solid var(--border);display:block">
+            <span style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,0.8);color:#fff;font-size:9px;padding:1px 4px;border-radius:2px;font-weight:700">#${i+1}</span>
+          </div>
+        ` : ''}
+        <div style="flex:1;display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px">
+          <div>
+            <label class="form-label">Software / Addon Name</label>
+            <input id="be-soft-t-${i}" value="${(s.name||s.title||'').replace(/"/g,'&quot;')}"
+              style="width:100%;padding:8px 12px;font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          </div>
+          <div>
+            <label class="form-label">Category / Platform</label>
+            <input id="be-soft-plat-${i}" value="${(s.cat||s.platform||'Blender Addon').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          </div>
+          <div>
+            <label class="form-label">Price</label>
+            <input id="be-soft-p-${i}" value="${(s.price||'Free').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          </div>
         </div>
       </div>
-      <div>
-        <label class="form-label">Product / Download / Gumroad Link</label>
-        <input id="be-soft-url-${i}" value="${linkUrl.replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:10px">
+        <div>
+          <label class="form-label">Product / Download / Gumroad Link</label>
+          <input id="be-soft-url-${i}" value="${linkUrl.replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+        </div>
+        <div>
+          <label class="form-label">Product Image Path</label>
+          <input id="be-soft-img-${i}" value="${imgUrl.replace(/"/g,'&quot;')}" placeholder="Photos & to upload/..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+        </div>
       </div>
       <div>
         <label class="form-label">Description &amp; Workflow Capabilities</label>
@@ -3456,13 +3471,15 @@ function beUpdateSoftware(i, silent = false){
   const name = document.getElementById(`be-soft-t-${i}`)?.value;
   const cat = document.getElementById(`be-soft-plat-${i}`)?.value;
   const price = document.getElementById(`be-soft-p-${i}`)?.value;
-  const link = document.getElementById(`be-soft-l-${i}`)?.value;
+  const link = document.getElementById(`be-soft-url-${i}`)?.value;
+  const img = document.getElementById(`be-soft-img-${i}`)?.value;
   const desc = document.getElementById(`be-soft-desc-${i}`)?.value;
 
   if(name !== undefined && name.trim()) { software[i].name = name.trim(); software[i].title = name.trim(); }
   if(cat !== undefined) { software[i].category = cat.trim(); software[i].cat = cat.trim(); software[i].platform = cat.trim(); }
   if(price !== undefined) software[i].price = price.trim();
   if(link !== undefined) { software[i].link = link.trim(); software[i].gumroadUrl = link.trim(); software[i].url = link.trim(); }
+  if(img !== undefined) { software[i].img = img.trim(); software[i].image = img.trim(); }
   if(desc !== undefined) software[i].desc = desc.trim();
 
   saveData('rana_software_data', software);
@@ -3514,7 +3531,11 @@ window.addSoftware = addSoftware;
 function renderBeExp(){
   const c = document.getElementById('be-exp-list');
   if(!c) return;
-  c.innerHTML = experience.map((e,i) => `
+  c.innerHTML = experience.map((e,i) => {
+    const periodVal = e.period || (e.start && e.end ? `${e.start} - ${e.end}` : e.start || e.end || '');
+    const tagsVal = Array.isArray(e.tags) ? e.tags.join(', ') : (e.tags || '');
+
+    return `
     <div class="backend-item" style="flex-direction:column;gap:12px;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;margin-bottom:14px">
       <div style="display:grid;grid-template-columns:1.5fr 1.5fr 1fr;gap:10px">
         <div>
@@ -3526,9 +3547,13 @@ function renderBeExp(){
           <input id="be-exp-comp-${i}" value="${(e.company||'').replace(/"/g,'&quot;')}" placeholder="Company" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
-          <label class="form-label">Period</label>
-          <input id="be-exp-per-${i}" value="${(e.period||'').replace(/"/g,'&quot;')}" placeholder="2023 - Present" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <label class="form-label">Period / Timeline</label>
+          <input id="be-exp-per-${i}" value="${periodVal.replace(/"/g,'&quot;')}" placeholder="2023 - Present" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
+      </div>
+      <div>
+        <label class="form-label">Skills &amp; Technology Tags (comma-separated)</label>
+        <input id="be-exp-tags-${i}" value="${tagsVal.replace(/"/g,'&quot;')}" placeholder="Python, JavaScript, Blender 3D, Video Editing..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
       </div>
       <div>
         <label class="form-label">Description &amp; Commercial Deliverables</label>
@@ -3539,7 +3564,8 @@ function renderBeExp(){
         <button onclick="beUpdateExp(${i})" class="submit-btn" style="padding:6px 18px;font-size:11.5px">Save Role</button>
       </div>
     </div>
-  `).join('');
+    `;
+  }).join('');
 }
 window.renderBeExp = renderBeExp;
 
@@ -3547,12 +3573,18 @@ function beUpdateExp(i){
   const comp = document.getElementById('be-exp-comp-'+i)?.value;
   const role = document.getElementById('be-exp-role-'+i)?.value;
   const per = document.getElementById('be-exp-per-'+i)?.value;
+  const tags = document.getElementById('be-exp-tags-'+i)?.value;
   const desc = document.getElementById('be-exp-desc-'+i)?.value;
   if(experience[i]){
-    if(comp) experience[i].company = comp.trim();
-    if(role) experience[i].role = role.trim();
-    if(per) experience[i].period = per.trim();
-    if(desc) experience[i].desc = desc.trim();
+    if(comp !== undefined) experience[i].company = comp.trim();
+    if(role !== undefined) experience[i].role = role.trim();
+    if(per !== undefined) {
+      experience[i].period = per.trim();
+      const parts = per.split('-').map(p=>p.trim());
+      if(parts.length === 2){ experience[i].start = parts[0]; experience[i].end = parts[1]; }
+    }
+    if(tags !== undefined) experience[i].tags = tags.split(',').map(t=>t.trim()).filter(Boolean);
+    if(desc !== undefined) experience[i].desc = desc.trim();
   }
   saveData('rana_experience_data', experience);
   renderBeExp();
@@ -3697,7 +3729,10 @@ window.addClient = addClient;
 function renderBeArticles(){
   const c = document.getElementById('be-articles-list');
   if(!c) return;
-  c.innerHTML = articles.map((a,i) => `
+  c.innerHTML = articles.map((a,i) => {
+    const tagsVal = Array.isArray(a.tags) ? a.tags.join(', ') : (a.tags || '');
+
+    return `
     <div class="backend-item" style="flex-direction:column;gap:14px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;margin-bottom:16px">
       <div>
         <label class="form-label">Article / Essay Title</label>
@@ -3723,6 +3758,10 @@ function renderBeArticles(){
         <input id="be-art-url-${i}" value="${(a.url||a.link||'').replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
       </div>
       <div>
+        <label class="form-label">Tags &amp; Topics (comma-separated)</label>
+        <input id="be-art-tags-${i}" value="${tagsVal.replace(/"/g,'&quot;')}" placeholder="Writing, Personal Essay, Philosophy, 3D Design..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+      </div>
+      <div>
         <label class="form-label">Excerpt / Summary</label>
         <textarea id="be-art-desc-${i}" oninput="beUpdateArticle(${i},true)" onchange="beUpdateArticle(${i},true)" rows="3" style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${a.desc||a.excerpt||''}</textarea>
       </div>
@@ -3731,7 +3770,8 @@ function renderBeArticles(){
         <button onclick="beUpdateArticle(${i})" class="submit-btn" style="padding:8px 22px;font-size:12px">Save Changes</button>
       </div>
     </div>
-  `).join('');
+    `;
+  }).join('');
 }
 window.renderBeArticles = renderBeArticles;
 
@@ -3742,6 +3782,7 @@ function beUpdateArticle(i, silent = false){
   const date = document.getElementById(`be-art-date-${i}`)?.value;
   const time = document.getElementById(`be-art-time-${i}`)?.value;
   const url = document.getElementById(`be-art-url-${i}`)?.value;
+  const tags = document.getElementById(`be-art-tags-${i}`)?.value;
   const desc = document.getElementById(`be-art-desc-${i}`)?.value;
 
   if(title !== undefined && title.trim()) articles[i].title = title.trim();
@@ -3749,6 +3790,7 @@ function beUpdateArticle(i, silent = false){
   if(date !== undefined) articles[i].date = date.trim();
   if(time !== undefined) { articles[i].readTime = time.trim(); articles[i].time = time.trim(); }
   if(url !== undefined) { articles[i].url = url.trim(); articles[i].link = url.trim(); }
+  if(tags !== undefined) articles[i].tags = tags.split(',').map(t=>t.trim()).filter(Boolean);
   if(desc !== undefined) { articles[i].desc = desc.trim(); articles[i].excerpt = desc.trim(); }
 
   saveData('rana_articles_data', articles);
