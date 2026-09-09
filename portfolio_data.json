@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T21:05:32.884Z",
+  "updatedAt": "2026-09-09T21:24:06.255Z",
   "version": "4.5",
   "novels": [
     {
@@ -597,7 +597,8 @@
         "Photos & to upload/Instagram/18266166148100937.jpg",
         "Photos & to upload/Instagram/18173685229138105.jpg",
         "Photos & to upload/Instagram/18131148718177645.jpg",
-        "Photos & to upload/Instagram/17935025272142875.jpg"
+        "Photos & to upload/Instagram/17935025272142875.jpg",
+        "Photos & to upload/Instagram/17908652861307783.jpg"
       ],
       "desc": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork.",
       "youtubeUrl": "",
@@ -658,7 +659,8 @@
         "Photos & to upload/Egyptian Mythology/All Work (103).jpg",
         "Photos & to upload/Egyptian Mythology/All Work (104).jpg",
         "Photos & to upload/Egyptian Mythology/All Work (105).jpg",
-        "Photos & to upload/Egyptian Mythology/All Work (140).jpg"
+        "Photos & to upload/Egyptian Mythology/All Work (140).jpg",
+        "Photos & to upload/Instagram/17938299772463929.jpg"
       ],
       "subTitles": {
         "0": "Egyptian Mythology, Temple of Anubis & Osiris Sanctum",
@@ -704,7 +706,7 @@
         "3": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
         "4": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
         "5": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
-        "6": "Shop Interior",
+        "6": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
         "7": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
         "8": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
         "9": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
@@ -718,7 +720,7 @@
         "3": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
         "4": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
         "5": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
-        "6": "Shop Interior Made in Blender",
+        "6": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
         "7": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
         "8": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
         "9": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
@@ -829,10 +831,10 @@
       }
     },
     {
-      "title": "Interior Volumes: A Study in Architectural Light & Materiality",
+      "title": "Interior Volumes: Architectural Light & Materiality",
       "pillar": "Personal",
       "cat": "environment",
-      "desc": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
+      "desc": "A comprehensive 3D interior visualization series exploring the interplay between atmospheric light, shadow projections, and diverse material textures. This collection spans modern residential environments, high-contrast kitchen concepts, and dramatic, sacral interior spaces to study spatial depth and surface reactivity.",
       "path": "Photos & to upload/YouTube/wvJ3n61oNlQ.jpg",
       "images": [
         "Photos & to upload/YouTube/wvJ3n61oNlQ.jpg",
@@ -845,7 +847,20 @@
         "Photos & to upload/Living Room/Final1.png",
         "Photos & to upload/Bedroom/All Work (67).jpg",
         "Photos & to upload/Instagram/18328297867051721.webp",
-        "Photos & to upload/Instagram/17889489539305832.jpg"
+        "Photos & to upload/Instagram/17889489539305832.jpg",
+        "Photos & to upload/Interior/10.jpg",
+        "Photos & to upload/Living Room/Living Room (1).jpg",
+        "Photos & to upload/Bathroom/All Work (2).jpg",
+        "Photos & to upload/Bathroom/Toilet 2.png",
+        "Photos & to upload/Instagram/17937269368567565.jpg",
+        "Photos & to upload/Instagram/18036113920542329.jpg",
+        "Photos & to upload/Instagram/17842254753061661.jpg",
+        "Photos & to upload/Instagram/18292951363191483.jpg",
+        "Photos & to upload/Instagram/18025581433512587.jpg",
+        "Photos & to upload/Instagram/17918320694746097.jpg",
+        "Photos & to upload/Instagram/17843690153794060.webp",
+        "Photos & to upload/Instagram/17972403880526915.jpg",
+        "Photos & to upload/Instagram/17992328569397170.jpg"
       ],
       "subVideos": {
         "0": "https://www.youtube.com/watch?v=wvJ3n61oNlQ",
@@ -856,28 +871,28 @@
       "subTitles": {
         "0": "Interior Volumes: A Study in Architectural Light & Materiality",
         "1": "Interior Volumes: A Study in Architectural Light & Materiality",
-        "2": "Which looks better?",
-        "3": "Interior Volumes: A Study in Architectural Light & Materiality",
-        "4": "Interior Volumes: A Study in Architectural Light & Materiality",
-        "5": "Interior Volumes: A Study in Architectural Light & Materiality",
-        "6": "Interior Volumes: A Study in Architectural Light & Materiality",
-        "7": "Interior Volumes: A Study in Architectural Light & Materiality",
-        "8": "Ann's Delight Sweet Paradise: Commercial Store",
-        "9": "Saw this amazing photograph (2nd photo) by @zakia_ta...",
-        "10": "Interior Design"
+        "2": "Interior Room in UE5",
+        "3": "Stone Island & Contemporary Kitchen",
+        "4": "Monochromatic Kitchen Studio",
+        "5": "Patterned Shadow Projection",
+        "6": "Sanctuary of Light",
+        "7": "Linear Bar & Exterior Framing",
+        "8": "Warm Residential Bedroom",
+        "9": "Subterranean Light Shaft",
+        "10": "Sunlit Lounge & Lattice Shadows"
       },
       "subDescriptions": {
         "0": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
         "1": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
-        "2": "Which looks better?",
-        "3": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
-        "4": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
-        "5": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
-        "6": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
-        "7": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
-        "8": "Unreal Engine 5 virtual walkthrough and 3D architectural retail visualization for Ann's Delight confectionary brand.",
-        "9": "Saw this amazing photograph (2nd photo) by @zakia_takreem So I created this render (1st photo) in Blender",
-        "10": "Interior Design Made in 3ds Max, Unreal Engine and Blender"
+        "2": "Room design with description and price.",
+        "3": "A modern kitchen visualization featuring a bold marble island counter set against deep blue wall tones and dramatic ceiling spotlighting.",
+        "4": "High-contrast kitchen rendering emphasizing sleek dark cabinetry, highly reflective flooring, and balanced studio daylight.",
+        "5": "An experimental architectural lighting study casting intricate geometric screen shadows across dark kitchen surfaces and polished floors.",
+        "6": "A sacral architectural render capturing dramatic volumetric rays breaking through grand chapel windows onto rustic wooden seating.",
+        "7": "A minimalist seating nook visualization utilizing raw concrete textures and expansive floor-to-ceiling glass opening to greenery.",
+        "8": "A cozy bedroom visualization combining soft neutral wall finishes, natural side-lighting, and clean contemporary furniture layout.",
+        "9": "A high-contrast study of rough stone materiality illuminated by a single focused beam of overhead daylight breaking through dark stairs.",
+        "10": "A modern living room study exploring dynamic lattice shadow projections across bright high ceilings and open garden vistas."
       }
     },
     {
@@ -906,53 +921,47 @@
       }
     },
     {
-      "title": "Mythology",
+      "title": "Mythos: Legends in Light & Stone",
       "pillar": "Personal",
       "cat": "environment",
-      "desc": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
-      "path": "Photos & to upload/Viking/All Work (14).jpg",
+      "desc": "A digital visualization and 3D modeling study reinterpreting mythological figures, classical sculptures, and heroic lore across dramatic lighting setups and immersive digital environments.",
+      "path": "Photos & to upload/YouTube/PJ1i1nk43Zo.jpg",
       "images": [
-        "Photos & to upload/Viking/All Work (14).jpg",
-        "Photos & to upload/Viking/All Work (62).png",
-        "Photos & to upload/Viking/All Work (65).png",
         "Photos & to upload/YouTube/PJ1i1nk43Zo.jpg",
+        "Photos & to upload/Viking/All Work (14).jpg",
+        "Photos & to upload/Viking/All Work (65).png",
         "Photos & to upload/Sculptures/All Work (55).PNG",
         "Photos & to upload/Sculptures/All Work (180).jpg",
         "Photos & to upload/Instagram/17875494869798035.webp",
         "Photos & to upload/Instagram/17948748053224548.webp",
+        "Photos & to upload/Instagram/18201618208088220.webp",
         "Photos & to upload/Instagram/17937922127129796.webp",
         "Photos & to upload/Instagram/17921090666306065.webp",
         "Photos & to upload/Instagram/18161220241244824.webp",
-        "Photos & to upload/Instagram/17967146002602452.jpg",
-        "Photos & to upload/Instagram/17933423207010554.jpg",
-        "Photos & to upload/Instagram/17901243131461875.jpg",
         "Photos & to upload/Instagram/17919733238255779.webp",
         "Photos & to upload/Instagram/17914716772998399.jpg",
         "Photos & to upload/Instagram/18247370446047156.jpg",
-        "Photos & to upload/Instagram/17844828329636556.jpg",
-        "Photos & to upload/Instagram/17938299772463929.jpg",
-        "Photos & to upload/Instagram/17881760798115414.jpg",
-        "Photos & to upload/Instagram/17858904386497517.jpg"
+        "Photos & to upload/Instagram/17844828329636556.jpg"
       ],
       "subVideos": {
-        "3": "https://www.youtube.com/watch?v=PJ1i1nk43Zo"
+        "0": "https://www.youtube.com/watch?v=PJ1i1nk43Zo"
       },
-      "youtubeUrl": "",
+      "youtubeUrl": "https://www.youtube.com/watch?v=PJ1i1nk43Zo",
       "subTitles": {
-        "0": "Mythology",
-        "1": "Mythology",
+        "0": "Sunlight in the Timber Hall",
+        "1": "Valkyrie: Wings of Steel",
         "2": "Mythology",
-        "3": "Mythology",
-        "4": "Mythology",
-        "5": "Mythology",
-        "6": "A sculpture with a painting",
-        "7": "Viking ship passing through a gap",
-        "8": "Ancient Ruins",
-        "9": "From Sketch to 3d render",
-        "10": "Different versions",
-        "11": "Norse Mythology- Valkyrie Created and Rendered in Bl...",
-        "12": "Valkyrie in Norse Mythology #render #d #3dart #3dmod...",
-        "13": "Thor from Norse Mythology #render #d #3dart #3dmodel...",
+        "3": "The Pensive Titan",
+        "4": "Sacred Footsteps",
+        "5": "Gallery Composition with Classical Marble",
+        "6": "Passage Through the Gorge",
+        "7": "Golden Hall of Antiquity",
+        "8": "Citadel of the Golden Age",
+        "9": "Gothic Courtyard Assembly",
+        "10": "Eternal Embrace in Ruins",
+        "11": "Sentinel of the Plaza",
+        "12": "Guardians of the Pass",
+        "13": "Reclining Myth in Modern Space",
         "14": "Make love not war",
         "15": "Statue Render",
         "16": "New video coming...",
@@ -963,19 +972,19 @@
       },
       "subDescriptions": {
         "0": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
-        "1": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
-        "2": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
-        "3": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
-        "4": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
-        "5": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
-        "6": "A sculpture with a painting Which art medium do you prefer?",
-        "7": "Viking ship passing through a gap",
-        "8": "Ancient Ruins",
-        "9": "From Sketch to 3d render",
-        "10": "Different versions",
-        "11": "Norse Mythology- Valkyrie Created and Rendered in Blender #blender #artwork #bhfyp #digitalart #gaming #graphicdesign #fortnite #photoshop #cinema ...",
-        "12": "Valkyrie in Norse Mythology #render #d #3dart #3dmodeling #concept #blender3d #robot #vfx #cgi #3dsmax #motiondesign #3dmodel #3drender #cinema4d #...",
-        "13": "Thor from Norse Mythology #render #d #3dart #3dmodeling #concept #blender3d #robot #vfx #cgi #3dsmax #motiondesign #3dmodel #3drender #cinema4d #3d...",
+        "1": "High-contrast specular render highlighting the intricate mechanical geometry and feathered wing details of a mythological Valkyrie.",
+        "2": "A fully textured 3D character render displaying the Valkyrie figure mounted on a gallery pedestal within a classical museum hall.",
+        "3": "Photorealistic stone material study depicting a brooding, seated deity sculpture placed in an urban architectural setting.",
+        "4": "Macro texture detail study highlighting weather-worn marble skin and surface grain resting on grass.",
+        "5": "Clean art gallery visualization contrasting a classical sculptural group with framed artwork under soft museum lighting.",
+        "6": "Environment study depicting a vessel navigating vibrant turquoise waters framed by dramatic, towering cliff walls.",
+        "7": "Richly illuminated ruin interior render showcasing warm stone textures, scattered relics, and soft sunlight filtering through ancient arches.",
+        "8": "Stylized high-fantasy visual conceptualizing gold-armored warriors assembled before a majestic citadel landscape.",
+        "9": "Dark fantasy architectural rendering capturing armored sentinels gathered outside a solemn cathedral under overcast lighting.",
+        "10": "Conceptual narrative render placing classical lovers' marble statuary amidst a gritty, modern war-torn urban environment.",
+        "11": "Monumental statue render featuring a bearded deity sculpture overlooking a historic city plaza under dramatic clouds.",
+        "12": "Sunlit architectural render featuring headless classical statues standing guard near ancient stone ruins.",
+        "13": "Interior gallery display visualization placing a grand classical reclining statue within a crisp, contemporary art studio backdrop.",
         "14": "Make love not war Made in Blender 3d",
         "15": "Statue Render",
         "16": "New video coming... Follow my youtube channel for updates...",
@@ -1024,10 +1033,8 @@
         "Photos & to upload/Sketch/All Work (2).jpeg",
         "Photos & to upload/Sketch/All Work (63).jpg",
         "Photos & to upload/Sketch/10519193_752125604838255_4807372730966501183_o.jpg",
-        "Photos & to upload/Instagram/17860277381321133.jpg",
         "Photos & to upload/Instagram/17878470466970028.jpg",
         "Photos & to upload/Instagram/18128080651083957.jpg",
-        "Photos & to upload/Instagram/17913534727512064.jpg",
         "Photos & to upload/Instagram/17880509302844034.jpg",
         "Photos & to upload/Instagram/17858022551271196.jpg",
         "Photos & to upload/Instagram/17853368626922088.jpg"
@@ -1066,27 +1073,6 @@
       }
     },
     {
-      "title": "Speculative Worldbuilding: Environmental Architecture & Hard Surface Design",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Massive monolithic desert metropolis and orbital transport vessel navigating atmospheric sand haze and harsh desert sunlight.",
-      "path": "Photos & to upload/Scifi/All Work (175).jpg",
-      "images": [
-        "Photos & to upload/Scifi/All Work (175).jpg",
-        "Photos & to upload/Plane/25542788_1949128395101535_7558624210513976664_o.jpg"
-      ],
-      "subVideos": {},
-      "youtubeUrl": "",
-      "subTitles": {
-        "0": "Speculative Worldbuilding: Environmental Architecture & Hard Surface Design",
-        "1": "Speculative Worldbuilding: Environmental Architecture & Hard Surface Design"
-      },
-      "subDescriptions": {
-        "0": "Massive monolithic desert metropolis and orbital transport vessel navigating atmospheric sand haze and harsh desert sunlight.",
-        "1": "Massive monolithic desert metropolis and orbital transport vessel navigating atmospheric sand haze and harsh desert sunlight."
-      }
-    },
-    {
       "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
       "pillar": "Personal",
       "cat": "animation",
@@ -1095,32 +1081,24 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
       "images": [
         "Photos & to upload/YouTube/jN-SOF7No1Q.jpg",
-        "Photos & to upload/Nature/All Work (113).jpg",
+        "Photos & to upload/Instagram/18022650475542477.jpg",
         "Photos & to upload/YouTube/L6NKHuSGThA.jpg",
+        "Photos & to upload/Nature/All Work (113).jpg",
         "Photos & to upload/Nature/All Work (122).jpg",
         "Photos & to upload/Nature/All Work (123).jpg",
         "Photos & to upload/Nature/All Work (145).jpg",
-        "Photos & to upload/Nature/All Work (16).png",
-        "Photos & to upload/Nature/All Work (39).png",
         "Photos & to upload/Nature/All Work (41).png",
         "Photos & to upload/Instagram/17971009390877238.jpg",
         "Photos & to upload/Instagram/17938940090277064.webp",
         "Photos & to upload/Instagram/17934767282102397.webp",
         "Photos & to upload/Instagram/17963484634584183.webp",
-        "Photos & to upload/Instagram/17959157011526618.jpg",
         "Photos & to upload/Instagram/17908107983332904.jpg",
         "Photos & to upload/Instagram/17860437881274324.jpg"
       ],
       "subVideos": {
         "0": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
-        "1": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
         "2": "https://www.youtube.com/watch?v=L6NKHuSGThA",
-        "3": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
-        "4": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
-        "5": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
-        "6": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
-        "7": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
-        "8": "https://www.youtube.com/watch?v=jN-SOF7No1Q"
+        "9": "https://www.youtube.com/watch?v=jN-SOF7No1Q"
       },
       "subTitles": {
         "0": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
@@ -1168,6 +1146,7 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
       "images": [
         "Photos & to upload/YouTube/Tkke1L5bGyM.jpg",
+        "Photos & to upload/Instagram/17916258841067694.jpg",
         "Photos & to upload/Scifi Living Room/27356343_1713224235395049_6194616003068163822_o.jpg",
         "Photos & to upload/Scifi/All Work (13).jpg",
         "Photos & to upload/YouTube/sc7N1vtVA8M.jpg",
@@ -1175,27 +1154,25 @@
         "Photos & to upload/Scifi/All Work (6).png",
         "Photos & to upload/Scifi/All Work (11).png",
         "Photos & to upload/Scifi/All Work (45).png",
+        "Photos & to upload/Instagram/17930139391772432.jpg",
         "Photos & to upload/Instagram/18019952902627974.jpg",
         "Photos & to upload/Instagram/18372087865057475.jpg",
         "Photos & to upload/Instagram/18267657793129426.webp",
         "Photos & to upload/Instagram/17943628076142996.webp",
         "Photos & to upload/Instagram/17951123800970317.webp",
-        "Photos & to upload/Instagram/17945249119965026.webp",
-        "Photos & to upload/Instagram/17945758312966190.jpg",
         "Photos & to upload/Instagram/17917385177186112.jpg",
         "Photos & to upload/Instagram/17960877817493647.jpg",
-        "Photos & to upload/Instagram/17930139391772432.jpg",
-        "Photos & to upload/Instagram/17916258841067694.jpg"
+        "Photos & to upload/Scifi/All Work (175).jpg"
       ],
       "subVideos": {
         "0": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
-        "1": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
         "2": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
-        "3": "https://www.youtube.com/watch?v=sc7N1vtVA8M",
-        "4": "https://www.youtube.com/watch?v=8zlzhEICw-w",
-        "5": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
+        "3": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
+        "4": "https://www.youtube.com/watch?v=sc7N1vtVA8M",
+        "5": "https://www.youtube.com/watch?v=8zlzhEICw-w",
         "6": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
-        "7": "https://www.youtube.com/watch?v=Tkke1L5bGyM"
+        "8": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
+        "10": "https://www.youtube.com/watch?v=Tkke1L5bGyM"
       },
       "subTitles": {
         "0": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study)",
@@ -1248,8 +1225,8 @@
       "path": "Photos & to upload/Exterior/All Work (135).jpg",
       "images": [
         "Photos & to upload/Exterior/All Work (135).jpg",
-        "Photos & to upload/Exterior/All Work (147).jpg",
         "Photos & to upload/Exterior/All Work (132).jpg",
+        "Photos & to upload/Exterior/All Work (147).jpg",
         "Photos & to upload/Exterior/All Work (128).jpg",
         "Photos & to upload/Exterior/All Work (134).jpg",
         "Photos & to upload/Instagram/17880861773865566.jpg",
@@ -1260,21 +1237,35 @@
         "Photos & to upload/Instagram/17987753311837309.webp",
         "Photos & to upload/Instagram/17942528642351143.jpg",
         "Photos & to upload/Instagram/17885028770695263.webp",
-        "Photos & to upload/Instagram/18310428316003251.webp",
         "Photos & to upload/Instagram/18030720565372249.webp",
         "Photos & to upload/Instagram/17936559101230824.webp",
         "Photos & to upload/Instagram/17948203363843416.webp",
         "Photos & to upload/Instagram/18137175004219843.jpg",
         "Photos & to upload/Instagram/17910612287185587.jpg",
-        "Photos & to upload/Instagram/17915849900104283.jpg",
         "Photos & to upload/Instagram/17914216750884681.jpg",
         "Photos & to upload/Instagram/17857249232533945.jpg",
         "Photos & to upload/Instagram/18031520548280063.jpg",
         "Photos & to upload/Instagram/17915254156167498.jpg",
         "Photos & to upload/Instagram/17930780848117326.jpg",
-        "Photos & to upload/Exterior/All Work (3).jpg"
+        "Photos & to upload/Exterior/All Work (3).jpg",
+        "Photos & to upload/Corridor/69316092_2489664787750986_3027960263031652352_o.jpg",
+        "Photos & to upload/Underwater/All Work (27).png",
+        "Photos & to upload/YouTube/NOFS6gQ8Zfk.jpg",
+        "Photos & to upload/YouTube/BWPjtiNJSr4.jpg",
+        "Photos & to upload/Instagram/17982912593132329.jpg",
+        "Photos & to upload/Instagram/18015665518901571.jpg",
+        "Photos & to upload/Instagram/18004810399897282.jpg",
+        "Photos & to upload/Instagram/18001925125897000.jpg",
+        "Photos & to upload/Instagram/17961822577553154.webp",
+        "Photos & to upload/Instagram/17945737477514793.jpg",
+        "Photos & to upload/Underground/7.jpg"
       ],
-      "subVideos": {},
+      "subVideos": {
+        "25": "https://www.youtube.com/watch?v=XbsGhjGriEE",
+        "26": "https://www.youtube.com/watch?v=NOFS6gQ8Zfk",
+        "27": "https://www.youtube.com/watch?v=BWPjtiNJSr4",
+        "29": "https://www.youtube.com/watch?v=XbsGhjGriEE"
+      },
       "youtubeUrl": "",
       "subTitles": {
         "0": "Contemporary Architectural Visualization",
@@ -1334,71 +1325,6 @@
       }
     },
     {
-      "title": "Atmospheric Interior Lighting & Volumetric Illumination Study",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
-      "path": "Photos & to upload/Interior/10.jpg",
-      "images": [
-        "Photos & to upload/Interior/10.jpg",
-        "Photos & to upload/Living Room/Living Room (1).jpg",
-        "Photos & to upload/Living Room/All Work (157).jpg",
-        "Photos & to upload/Corridor/69316092_2489664787750986_3027960263031652352_o.jpg",
-        "Photos & to upload/Bathroom/All Work (2).jpg",
-        "Photos & to upload/Bathroom/All Work (13).png",
-        "Photos & to upload/Bathroom/Toilet 2.png",
-        "Photos & to upload/Instagram/18036113920542329.jpg",
-        "Photos & to upload/Instagram/17842254753061661.jpg",
-        "Photos & to upload/Instagram/18292951363191483.jpg",
-        "Photos & to upload/Instagram/18025581433512587.jpg",
-        "Photos & to upload/Instagram/17918320694746097.jpg",
-        "Photos & to upload/Instagram/17843690153794060.webp",
-        "Photos & to upload/Instagram/17972403880526915.jpg",
-        "Photos & to upload/Instagram/17992328569397170.jpg",
-        "Photos & to upload/Instagram/17937269368567565.jpg",
-        "Photos & to upload/Instagram/17886878243076992.jpg"
-      ],
-      "subVideos": {},
-      "subTitles": {
-        "0": "Atmospheric Interior Lighting & Volumetric Illumination Study",
-        "1": "Atmospheric Interior Lighting & Volumetric Illumination Study",
-        "2": "Atmospheric Interior Lighting & Volumetric Illumination Study",
-        "3": "Atmospheric Interior Lighting & Volumetric Illumination Study",
-        "4": "Atmospheric Interior Lighting & Volumetric Illumination Study",
-        "5": "Atmospheric Interior Lighting & Volumetric Illumination Study",
-        "6": "Atmospheric Interior Lighting & Volumetric Illumination Study",
-        "7": "A 3D door inspired by a photo taken by a friend",
-        "8": "A bathroom made in Blender",
-        "9": "Scifi Room",
-        "10": "Scifi Room",
-        "11": "Japanese Shoji",
-        "12": "Make WHATEVER you want!!! Live Stream on YouTube \"En...",
-        "13": "Bathroom made in Unreal Engine, Blender and Megascan...",
-        "14": "As they say, light is everything",
-        "15": "Practising",
-        "16": "3drender #blender #d #dart #art #render #digitalart ..."
-      },
-      "subDescriptions": {
-        "0": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
-        "1": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
-        "2": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
-        "3": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
-        "4": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
-        "5": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
-        "6": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
-        "7": "A 3D door inspired by a photo taken by a friend",
-        "8": "A bathroom made in Blender",
-        "9": "Scifi Room Made in Blender",
-        "10": "Scifi Room",
-        "11": "Japanese Shoji",
-        "12": "Make WHATEVER you want!!! Live Stream on YouTube \"Entertaindo\" @blender.official @blender.community @blenderartists",
-        "13": "Bathroom made in Unreal Engine, Blender and Megascans #blender #d #dart #art #render #digitalart #dmodeling #blendercommunity #animation #design #c...",
-        "14": "As they say, light is everything",
-        "15": "Practising",
-        "16": "3drender #blender #d #dart #art #render #digitalart #animation #blendercommunity #dmodeling #design #cgi #blendermurah #rendering #dmodel #gfx #rob..."
-      }
-    },
-    {
       "title": "Complete: Emotional Short Animated Film",
       "pillar": "Personal",
       "cat": "animation",
@@ -1406,8 +1332,7 @@
       "path": "Photos & to upload/YouTube/b8_h72abWqM.jpg",
       "youtubeUrl": "https://www.youtube.com/watch?v=b8_h72abWqM",
       "images": [
-        "Photos & to upload/YouTube/b8_h72abWqM.jpg",
-        "Photos & to upload/Instagram/17903299933565896.jpg"
+        "Photos & to upload/YouTube/b8_h72abWqM.jpg"
       ],
       "subVideos": {
         "0": "https://www.youtube.com/watch?v=b8_h72abWqM"
@@ -1513,51 +1438,26 @@
       "subVideos": {
         "0": "https://www.youtube.com/watch?v=XbsGhjGriEE",
         "1": "https://www.youtube.com/watch?v=yEWTwD7XMjw",
-        "2": "https://www.youtube.com/watch?v=x9p50UJI_NU",
-        "3": "https://www.youtube.com/watch?v=UYgf9MlZ2iY",
-        "4": "https://www.youtube.com/watch?v=BWPjtiNJSr4",
-        "5": "https://www.youtube.com/watch?v=NOFS6gQ8Zfk",
-        "6": "https://www.youtube.com/watch?v=XbsGhjGriEE",
-        "7": "https://www.youtube.com/watch?v=XbsGhjGriEE"
+        "2": "https://www.youtube.com/watch?v=x9p50UJI_NU"
       },
       "images": [
         "Photos & to upload/YouTube/XbsGhjGriEE.jpg",
         "Photos & to upload/YouTube/yEWTwD7XMjw.jpg",
         "Photos & to upload/YouTube/x9p50UJI_NU.jpg",
-        "Photos & to upload/YouTube/UYgf9MlZ2iY.jpg",
-        "Photos & to upload/YouTube/BWPjtiNJSr4.jpg",
-        "Photos & to upload/YouTube/NOFS6gQ8Zfk.jpg",
-        "Photos & to upload/Stairs/All Work (44).jpg",
-        "Photos & to upload/Underwater/All Work (27).png",
         "Photos & to upload/Instagram/18065207518458125.jpg",
-        "Photos & to upload/Instagram/18015665518901571.jpg",
         "Photos & to upload/Instagram/18002318024475867.jpg",
         "Photos & to upload/Instagram/17987574743510340.jpg",
         "Photos & to upload/Instagram/18276847624148108.jpg",
         "Photos & to upload/Instagram/17971821890589186.jpg",
-        "Photos & to upload/Instagram/17982912593132329.jpg",
-        "Photos & to upload/Instagram/17966647691361917.jpg",
-        "Photos & to upload/Instagram/18022650475542477.jpg",
-        "Photos & to upload/Instagram/18004810399897282.jpg",
-        "Photos & to upload/Instagram/18001925125897000.jpg",
-        "Photos & to upload/Instagram/18183854143282940.jpg",
-        "Photos & to upload/Instagram/17925974102712346.jpg",
         "Photos & to upload/Instagram/17932527950695918.jpg",
         "Photos & to upload/Instagram/18006495826522628.jpg",
         "Photos & to upload/Instagram/17929421876558831.jpg",
         "Photos & to upload/Instagram/18049081636363176.webp",
-        "Photos & to upload/Instagram/17935797755485339.webp",
         "Photos & to upload/Instagram/17989732810479951.webp",
         "Photos & to upload/Instagram/17926111835458141.webp",
         "Photos & to upload/Instagram/17944114145061519.jpg",
-        "Photos & to upload/Instagram/18201618208088220.webp",
-        "Photos & to upload/Instagram/17952722794855779.jpg",
-        "Photos & to upload/Instagram/17908652861307783.jpg",
-        "Photos & to upload/Instagram/17961822577553154.webp",
         "Photos & to upload/Instagram/17883073064599924.jpg",
         "Photos & to upload/Instagram/18254561107034242.webp",
-        "Photos & to upload/Instagram/18017367577330879.webp",
-        "Photos & to upload/Instagram/17945737477514793.jpg",
         "Photos & to upload/Instagram/17854398092569660.jpg",
         "Photos & to upload/Instagram/17875278170181393.jpg"
       ]
@@ -1574,8 +1474,8 @@
         "Photos & to upload/Train/All Work (183).jpg",
         "Photos & to upload/Car/550237818_18527373967025424_2167346014008595452_n.jpeg",
         "Photos & to upload/Instagram/17861239659097287.jpg",
-        "Photos & to upload/Instagram/18027156172444171.jpg",
-        "Photos & to upload/Instagram/17883650021416002.jpg"
+        "Photos & to upload/Instagram/17883650021416002.jpg",
+        "Photos & to upload/Plane/25542788_1949128395101535_7558624210513976664_o.jpg"
       ],
       "subTitles": {
         "0": "Locomotive: Industrial & Commercial",
@@ -1597,11 +1497,10 @@
       "pillar": "Personal",
       "cat": "3d",
       "desc": "Charming isometric miniature building block with tilt-shift depth of field and soft ambient occlusion.",
-      "path": "Photos & to upload/Miniature/Miniature.png",
+      "path": "Photos & to upload/Instagram/17886144434731868.webp",
       "subVideos": {},
       "youtubeUrl": "",
       "images": [
-        "Photos & to upload/Miniature/Miniature.png",
         "Photos & to upload/Instagram/17886144434731868.webp",
         "Photos & to upload/Instagram/18123427993286303.webp",
         "Photos & to upload/Instagram/17911473037897064.jpg",
@@ -1637,20 +1536,6 @@
       },
       "subDescriptions": {
         "0": "High-octane concept art montage demonstrating creative speed-modeling, hard-surface detailing, and stylistic shader experimentation."
-      }
-    },
-    {
-      "title": "Underground Metro Tunnel",
-      "cat": "environment",
-      "pillar": "Personal",
-      "path": "Photos & to upload/Underground/7.jpg",
-      "desc": "Subterranean corridor and moody fixtures",
-      "subVideos": {},
-      "subTitles": {
-        "0": "Underground Metro Tunnel"
-      },
-      "subDescriptions": {
-        "0": "Subterranean corridor and moody fixtures"
       }
     },
     {
@@ -1766,18 +1651,30 @@
       "youtubeUrl": ""
     },
     {
-      "title": "Year 2022",
+      "title": "Paintings",
       "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Year 2022 Artworks",
-      "path": "Photos & to upload/Instagram/17965931513090724.webp",
-      "subVideos": {},
+      "cat": "3d",
+      "desc": "My father's likeness",
+      "path": "Photos & to upload/Instagram/17860934531409034.jpg",
       "subTitles": {
-        "0": "Year 2022"
+        "0": "My father's likeness",
+        "1": "Sing to the cosmos",
+        "2": "Enjoying weekend",
+        "3": "Amazing Aurora"
       },
       "subDescriptions": {
-        "0": "Year 2022 Artworks"
-      }
+        "0": "My father's likeness",
+        "1": "Sing to the cosmos",
+        "2": "Enjoying weekend",
+        "3": "Amazing Aurora"
+      },
+      "subVideos": {},
+      "youtubeUrl": "",
+      "images": [
+        "Photos & to upload/Instagram/17860934531409034.jpg",
+        "Photos & to upload/Instagram/18089210236209355.jpg",
+        "Photos & to upload/Instagram/18177267772010132.jpg"
+      ]
     },
     {
       "title": "Electronics",
@@ -1801,31 +1698,19 @@
       ]
     },
     {
-      "title": "Paintings",
+      "title": "Year 2022",
       "pillar": "Personal",
-      "cat": "3d",
-      "desc": "My father's likeness",
-      "path": "Photos & to upload/Instagram/17860934531409034.jpg",
+      "cat": "animation",
+      "desc": "Year 2022 Artworks",
+      "path": "Photos & to upload/Instagram/17965931513090724.webp",
+      "subVideos": {},
       "subTitles": {
-        "0": "My father's likeness",
-        "1": "Sing to the cosmos",
-        "2": "Enjoying weekend",
-        "3": "Amazing Aurora"
+        "0": "Year 2022"
       },
       "subDescriptions": {
-        "0": "My father's likeness",
-        "1": "Sing to the cosmos",
-        "2": "Enjoying weekend",
-        "3": "Amazing Aurora"
+        "0": "Year 2022 Artworks"
       },
-      "subVideos": {},
-      "youtubeUrl": "",
-      "images": [
-        "Photos & to upload/Instagram/17860934531409034.jpg",
-        "Photos & to upload/Instagram/18089210236209355.jpg",
-        "Photos & to upload/Instagram/18177267772010132.jpg",
-        "Photos & to upload/Instagram/17881130971770142.jpg"
-      ]
+      "youtubeUrl": ""
     }
   ],
   "software": [
