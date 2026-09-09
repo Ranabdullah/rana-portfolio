@@ -2681,6 +2681,700 @@ body, html {
 img, video, iframe {
   max-width: 100% !important;
 }
+
+/* ==================== APPLE DESIGN SYSTEM FOR HOME ==================== */
+:root {
+  --apple-bg: #f4f5f7;
+  --apple-card: #ffffff;
+  --apple-ink: #11141a;
+  --apple-subtext: #7b8798;
+  --apple-subtext2: #242b38;
+  --apple-blue: #0071e3;
+  --apple-blue-hover: #0077ed;
+  --apple-border: #d5dce6;
+  --apple-border-strong: #b8c2d1;
+  --apple-pill-active-bg: #11141a;
+  --apple-pill-active-color: #ffffff;
+}
+
+body.theme-evening {
+  --apple-bg: #0b132b;
+  --apple-card: #141f3d;
+  --apple-ink: #f0f4f8;
+  --apple-subtext: #96a7c2;
+  --apple-subtext2: #b4c2d6;
+  --apple-blue: #3a86ff;
+  --apple-blue-hover: #5499ff;
+  --apple-border: rgba(255, 255, 255, 0.12);
+  --apple-border-strong: rgba(255, 255, 255, 0.24);
+  --apple-pill-active-bg: #3a86ff;
+  --apple-pill-active-color: #ffffff;
+}
+
+body.theme-dark {
+  --apple-bg: #07080b;
+  --apple-card: #161617;
+  --apple-ink: #f5f5f7;
+  --apple-subtext: #a1a1a6;
+  --apple-subtext2: #86868b;
+  --apple-blue: #2997ff;
+  --apple-blue-hover: #47a7ff;
+  --apple-border: rgba(255, 255, 255, 0.12);
+  --apple-border-strong: rgba(255, 255, 255, 0.24);
+  --apple-pill-active-bg: #ffffff;
+  --apple-pill-active-color: #07080b;
+}
+
+/* Apple Navigation Bar */
+nav#mainNav {
+  position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important;
+  display: flex !important; align-items: center !important; justify-content: space-between !important;
+  padding: 0 44px !important;
+  height: 52px !important;
+  background: rgba(244, 245, 247, 0.9) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid var(--apple-border) !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease !important;
+}
+body.theme-evening nav#mainNav {
+  background: rgba(11, 19, 43, 0.9) !important;
+}
+body.theme-dark nav#mainNav {
+  background: rgba(7, 8, 11, 0.9) !important;
+}
+.nav-logo {
+  font-family: var(--serif) !important;
+  font-size: 22px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.02em !important;
+  color: var(--apple-ink) !important;
+  text-decoration: none !important;
+}
+.nav-logo span {
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: var(--apple-subtext) !important;
+}
+.nav-links a {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--apple-subtext) !important;
+  transition: color 0.2s ease !important;
+  padding: 6px 0 !important;
+  position: relative !important;
+}
+.nav-links a::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 1px !important;
+  background: var(--apple-ink) !important;
+  transition: width 0.25s ease !important;
+  display: block !important;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--apple-ink) !important;
+}
+.nav-links a:hover::after, .nav-links a.active::after {
+  width: 100% !important;
+}
+
+/* ==================== HERO SECTION (FULL-BLEED ARCHITECTURAL RENDER) ==================== */
+.home-hero {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: calc(100vh - 52px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 80px 7vw !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  background: var(--apple-bg) !important;
+}
+
+/* Full-scene architectural background layers */
+.hero-bg-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  background: var(--apple-bg) !important;
+}
+
+.hero-bg-layer {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-size: cover !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  will-change: opacity !important;
+}
+
+.hero-layer-light {
+  background-image: url('Hero Image/Light_House_Render.png') !important;
+  z-index: 1 !important;
+  opacity: 1 !important;
+}
+.hero-layer-evening {
+  background-image: url('Hero Image/Evening_House_Render.png') !important;
+  z-index: 2 !important;
+  opacity: 0 !important;
+}
+.hero-layer-dark {
+  background-image: url('Hero Image/Dark_House_Render.png') !important;
+  z-index: 3 !important;
+  opacity: 0 !important;
+}
+
+body.theme-light .hero-layer-light { opacity: 1 !important; }
+body.theme-light .hero-layer-evening { opacity: 0 !important; }
+body.theme-light .hero-layer-dark { opacity: 0 !important; }
+
+body.theme-evening .hero-layer-light { opacity: 0 !important; }
+body.theme-evening .hero-layer-evening { opacity: 1 !important; }
+body.theme-evening .hero-layer-dark { opacity: 0 !important; }
+
+body.theme-dark .hero-layer-light { opacity: 0 !important; }
+body.theme-dark .hero-layer-evening { opacity: 0 !important; }
+body.theme-dark .hero-layer-dark { opacity: 1 !important; }
+
+/* Subtle gradient scrim to keep text razor-sharp over image */
+.hero-theme-scrim {
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(90deg, rgba(244,245,247,0.96) 0%, rgba(244,245,247,0.88) 38%, rgba(244,245,247,0.25) 68%, rgba(244,245,247,0) 100%) !important;
+  z-index: 4 !important;
+  pointer-events: none !important;
+  transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+body.theme-evening .hero-theme-scrim {
+  background: linear-gradient(90deg, rgba(11,19,43,0.96) 0%, rgba(11,19,43,0.88) 38%, rgba(11,19,43,0.25) 68%, rgba(11,19,43,0) 100%) !important;
+}
+body.theme-dark .hero-theme-scrim {
+  background: linear-gradient(90deg, rgba(7,8,11,0.96) 0%, rgba(7,8,11,0.88) 38%, rgba(7,8,11,0.25) 68%, rgba(7,8,11,0) 100%) !important;
+}
+
+/* Hero Text Foreground */
+.hero-text-side {
+  position: relative !important;
+  z-index: 6 !important;
+  max-width: 640px !important;
+  text-align: left !important;
+}
+
+.hero-eyebrow {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: var(--apple-subtext) !important;
+  margin-bottom: 22px !important;
+}
+.hero-eyebrow-line {
+  display: block !important;
+  width: 32px !important;
+  height: 1px !important;
+  background: var(--apple-subtext) !important;
+}
+.apple-indicator-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: #e6a100 !important;
+  box-shadow: 0 0 8px #e6a100 !important;
+  display: inline-block !important;
+  transition: all 0.5s ease !important;
+}
+.hero-eyebrow-label {
+  font-weight: 600 !important;
+  color: var(--apple-ink) !important;
+}
+.hero-eyebrow-sep {
+  opacity: 0.4 !important;
+}
+.hero-eyebrow-role {
+  color: var(--apple-subtext) !important;
+}
+
+/* Artistic Headline: Rana Abdullah */
+.hero-name {
+  font-family: var(--serif) !important;
+  font-size: clamp(52px, 7vw, 92px) !important;
+  font-weight: 300 !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.015em !important;
+  color: var(--apple-ink) !important;
+  margin-bottom: 20px !important;
+}
+.hero-name .hero-name-italic {
+  font-style: italic !important;
+  color: var(--apple-subtext2) !important;
+  font-weight: 300 !important;
+}
+
+/* Artistic Subheadline */
+.hero-title {
+  font-family: var(--serif) !important;
+  font-size: clamp(18px, 2.2vw, 24px) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+  color: var(--apple-subtext2) !important;
+  line-height: 1.45 !important;
+  margin-bottom: 30px !important;
+}
+.hero-title span {
+  display: block !important;
+  font-family: var(--sans) !important;
+  font-style: normal !important;
+  font-size: 14.5px !important;
+  color: var(--apple-subtext) !important;
+  line-height: 1.6 !important;
+  margin-top: 6px !important;
+  max-width: 520px !important;
+}
+
+/* Hero Apple CTA Buttons */
+.hero-cta-row {
+  display: flex !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+}
+
+.apple-pill-btn {
+  border-radius: 980px !important;
+  padding: 12px 26px !important;
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  background: var(--apple-ink) !important;
+  color: var(--apple-bg) !important;
+  border: 1px solid var(--apple-ink) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1) !important;
+}
+.apple-pill-btn:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
+}
+
+.apple-pill-outline {
+  border-radius: 980px !important;
+  padding: 12px 26px !important;
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  color: var(--apple-ink) !important;
+  border: 1px solid var(--apple-border-strong) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  text-decoration: none !important;
+}
+body.theme-evening .apple-pill-outline,
+body.theme-dark .apple-pill-outline {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.apple-pill-outline:hover {
+  background: var(--apple-ink) !important;
+  color: var(--apple-bg) !important;
+  border-color: var(--apple-ink) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+/* Apple Capsule Theme Switcher in Hero */
+.hero-theme-row {
+  margin-top: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-family: var(--mono) !important;
+  font-size: 10px !important;
+  color: var(--apple-subtext) !important;
+}
+.hero-theme-label {
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  font-weight: 600 !important;
+}
+.apple-capsule-controller {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  padding: 3px 4px !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid var(--apple-border) !important;
+  border-radius: 980px !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+body.theme-evening .apple-capsule-controller,
+body.theme-dark .apple-capsule-controller {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.apple-capsule-btn {
+  font-family: var(--mono) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.06em !important;
+  color: var(--apple-subtext) !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 980px !important;
+  padding: 5px 14px !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
+}
+.apple-capsule-btn:hover {
+  color: var(--apple-ink) !important;
+}
+.apple-capsule-btn.active {
+  background: var(--apple-pill-active-bg, #11141a) !important;
+  color: var(--apple-pill-active-color, #ffffff) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  font-weight: 600 !important;
+}
+
+/* ==================== APPLE BENTO SECTIONS BELOW HERO ==================== */
+.home-tech, .home-novels, .home-software, .home-projects, .home-articles, .home-expertise {
+  padding: 84px 48px !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+}
+
+.apple-section-header {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  margin-bottom: 36px !important;
+  gap: 20px !important;
+  flex-wrap: wrap !important;
+}
+
+.apple-section-label {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.24em !important;
+  text-transform: uppercase !important;
+  color: var(--apple-subtext) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 8px !important;
+}
+.apple-section-label::before {
+  content: '' !important;
+  display: block !important;
+  width: 28px !important;
+  height: 1px !important;
+  background: var(--apple-subtext) !important;
+}
+
+.apple-section-title {
+  font-family: var(--serif) !important;
+  font-size: clamp(38px, 5.2vw, 60px) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--apple-ink) !important;
+  line-height: 1.08 !important;
+}
+.apple-section-title em {
+  font-style: italic !important;
+  color: var(--apple-subtext) !important;
+  font-weight: 300 !important;
+}
+
+.apple-section-link {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--apple-subtext) !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 6px 14px !important;
+  border-radius: 980px !important;
+  transition: all 0.2s ease !important;
+}
+.apple-section-link:hover {
+  color: var(--apple-ink) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+body.theme-evening .apple-section-link:hover,
+body.theme-dark .apple-section-link:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.apple-section-link .arrow {
+  font-size: 17px !important;
+  line-height: 1 !important;
+  transition: transform 0.2s ease !important;
+}
+.apple-section-link:hover .arrow {
+  transform: translateX(3px) !important;
+}
+
+/* Apple Bento Cards */
+.tech-spotlight-card,
+.article-card,
+.sw-product-card {
+  border-radius: 20px !important;
+  background: var(--apple-card) !important;
+  border: 1px solid var(--apple-border) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease !important;
+}
+.tech-spotlight-card:hover,
+.article-card:hover,
+.sw-product-card:hover {
+  transform: translateY(-4px) scale(1.008) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08) !important;
+  border-color: var(--apple-border-strong) !important;
+}
+
+.tech-spotlight-card h3 {
+  font-family: var(--serif) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+.article-card .article-title {
+  font-family: var(--serif) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+}
+.sw-product-card .sw-product-name {
+  font-family: var(--serif) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Badge pills */
+.badge-pill {
+  border-radius: 980px !important;
+  font-family: var(--mono) !important;
+  font-size: 10.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* Novel Cards in Apple Books Style */
+.novel-cover {
+  border-radius: 12px !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid var(--apple-border) !important;
+}
+.novel-name {
+  font-family: var(--serif) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Projects Cards */
+.projects-grid .g-card,
+.projects-grid .proj-card {
+  border-radius: 18px !important;
+  overflow: hidden !important;
+}
+.projects-grid .g-card img {
+  border-radius: 14px !important;
+}
+.g-title {
+  font-family: var(--serif) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Apple Slider Circular Buttons */
+.slider-btn {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: var(--apple-card) !important;
+  border: 1px solid var(--apple-border) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+  color: var(--apple-ink) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 19px !important;
+  line-height: 1 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.slider-btn:hover {
+  background: var(--apple-ink) !important;
+  color: #ffffff !important;
+  border-color: var(--apple-ink) !important;
+  transform: scale(1.06) !important;
+}
+
+/* Apple Expertise 4-Column Feature Grid */
+.expertise-grid {
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  border: 1px solid var(--apple-border) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
+}
+.exp-item {
+  background: var(--apple-card) !important;
+  padding: 40px 32px !important;
+}
+.exp-num {
+  font-family: var(--serif) !important;
+  font-size: 42px !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--apple-subtext) !important;
+  margin-bottom: 14px !important;
+}
+.exp-name {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--apple-ink) !important;
+  margin-bottom: 8px !important;
+}
+.exp-desc {
+  font-family: var(--sans) !important;
+  font-size: 13px !important;
+  color: var(--apple-subtext) !important;
+  line-height: 1.65 !important;
+}
+
+/* Footer Apple Style */
+footer {
+  background: var(--apple-ink) !important;
+  color: #ffffff !important;
+  border-top: 1px solid var(--apple-border) !important;
+  padding: 54px 48px !important;
+}
+.footer-name {
+  font-family: var(--serif) !important;
+  font-size: 24px !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.02em !important;
+  color: #ffffff !important;
+}
+.footer-sub {
+  color: rgba(255,255,255,0.6) !important;
+  font-size: 12.5px !important;
+}
+.footer-links a {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,0.6) !important;
+}
+.footer-links a:hover {
+  color: #ffffff !important;
+}
+
+/* ==================== MOBILE RESPONSIVENESS ==================== */
+@media (max-width: 768px) {
+  nav#mainNav {
+    padding: 0 18px !important;
+    height: 52px !important;
+  }
+  .home-hero {
+    min-height: calc(100dvh - 52px) !important;
+    padding: 36px 20px 48px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+  }
+  .hero-eyebrow {
+    font-size: 10px !important;
+    gap: 8px !important;
+    margin-bottom: 14px !important;
+    flex-wrap: wrap !important;
+  }
+  .hero-name {
+    font-size: clamp(40px, 12vw, 58px) !important;
+    line-height: 1.02 !important;
+    margin-bottom: 14px !important;
+  }
+  .hero-title {
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 24px !important;
+  }
+  .hero-title span {
+    font-size: 13.5px !important;
+  }
+  .hero-cta-row {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+  .apple-pill-btn,
+  .apple-pill-outline {
+    width: 100% !important;
+    min-height: 48px !important;
+    justify-content: center !important;
+    font-size: 11px !important;
+  }
+  .hero-theme-row {
+    flex-wrap: wrap !important;
+    margin-top: 24px !important;
+  }
+  .apple-capsule-controller {
+    overflow-x: auto !important;
+    padding: 3px !important;
+  }
+  .apple-capsule-btn {
+    padding: 5px 10px !important;
+    font-size: 9.5px !important;
+  }
+  .home-tech, .home-novels, .home-software, .home-projects, .home-articles, .home-expertise {
+    padding: 48px 20px !important;
+  }
+  .expertise-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .exp-item {
+    padding: 28px 20px !important;
+  }
+}
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
@@ -2889,46 +3583,47 @@ img, video, iframe {
   <!-- HERO -->
   <!-- HERO SECTION (FULL-SCENE 3-THEME ARCHITECTURAL RENDER) -->
   <section class="home-hero" id="homeHeroSection">
-    
-    <!-- Full-Scene Architectural Render Layers (100% Fully Visible, No Masks/Circles) -->
+    <!-- Full-Scene Architectural Render Layers (100% Fully Visible, Made Specifically for this Hero) -->
     <div class="hero-bg-container" id="heroBgContainer">
       <div class="hero-bg-layer hero-layer-light" id="heroLayerLight"></div>
       <div class="hero-bg-layer hero-layer-evening" id="heroLayerEvening"></div>
       <div class="hero-bg-layer hero-layer-dark" id="heroLayerDark"></div>
       <div class="hero-theme-scrim"></div>
     </div>
-    
-    <!-- Hero Text Foreground -->
+
+    <!-- Hero Text Foreground (Artistic Typography with Apple Refinement) -->
     <div class="hero-text-side">
-      <div class="hero-eyebrow" style="font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px;display:flex;align-items:center;gap:10px">
-        <span id="heroColorIndicator" style="width:8px;height:8px;border-radius:50%;background:#e6a100;box-shadow:0 0 8px #e6a100;display:inline-block;transition:all 0.5s"></span>
-        <span id="heroTimeLabel" style="font-weight:600;letter-spacing:0.12em;color:var(--ink)">WHITE STUDY</span>
-        <span style="opacity:0.35">&middot;</span>
-        <span style="color:var(--ink3)">Architect &amp; Creative Director</span>
-      </div>
-      
-      <h1 class="hero-name" style="font-family:var(--serif);font-size:clamp(48px, 6.5vw, 84px);font-weight:300;line-height:1.04;color:var(--ink);margin-bottom:20px">
-        <span>Rana</span><br>
-        <span style="font-style:italic;color:var(--ink2)">Abdullah</span>
-      </h1>
-      
-      <p class="hero-title" style="font-family:var(--sans);font-size:16.5px;line-height:1.68;color:var(--ink2);margin-bottom:30px;max-width:520px">
-        Novelist &middot; 3D Artist &middot; Software Engineer<br>
-        <span style="color:var(--ink3);font-size:14.5px">Architectural spatial narratives, physical material lighting, and robust engineering.</span>
-      </p>
-      
-      <div class="hero-cta-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-        <a class="btn-primary" href="#" onclick="showPage('technical-projects');return false">Technical Projects &rarr;</a>
-        <a class="btn-outline" href="#" onclick="showPage('novels');return false">Novels &amp; Books</a>
-        <a class="btn-outline" href="#" onclick="showPage('gallery');return false">3D Gallery</a>
+      <div class="hero-eyebrow">
+        <span id="heroColorIndicator" class="apple-indicator-dot"></span>
+        <span id="heroTimeLabel" class="hero-eyebrow-label">WHITE STUDY</span>
+        <span class="hero-eyebrow-sep">&middot;</span>
+        <span class="hero-eyebrow-role">Architect &amp; Creative Director</span>
       </div>
 
-      <!-- 3-Color Global Theme Switcher (White, Blue, Black) -->
-      <div style="margin-top:28px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9.5px;color:var(--ink3)">
-        <span style="text-transform:uppercase;letter-spacing:0.08em;margin-right:4px">THEME:</span>
-        <button onclick="setGlobalTheme('light')" id="btnThemeLight" style="padding:5px 13px;font-family:var(--mono);font-size:9.5px;border-radius:14px;cursor:pointer;font-weight:600;background:var(--ink);color:var(--bg);border:1px solid var(--ink)">&#9728; White</button>
-        <button onclick="setGlobalTheme('evening')" id="btnThemeEvening" style="padding:5px 13px;font-family:var(--mono);font-size:9.5px;border-radius:14px;cursor:pointer;background:var(--bg-card);color:var(--ink);border:1px solid var(--border)">&#9729; Blue</button>
-        <button onclick="setGlobalTheme('dark')" id="btnThemeDark" style="padding:5px 13px;font-family:var(--mono);font-size:9.5px;border-radius:14px;cursor:pointer;background:var(--bg-card);color:var(--ink);border:1px solid var(--border)">&#9790; Black</button>
+      <h1 class="hero-name">
+        <span>Rana</span><br>
+        <span class="hero-name-italic">Abdullah</span>
+      </h1>
+
+      <p class="hero-title">
+        <em>Novelist &middot; 3D Artist &middot; Software Engineer</em><br>
+        <span>Architectural spatial narratives, physical material lighting, and robust engineering.</span>
+      </p>
+
+      <div class="hero-cta-row">
+        <a class="btn-primary apple-pill-btn" href="#" onclick="showPage('technical-projects');return false">Technical Projects &rarr;</a>
+        <a class="btn-outline apple-pill-outline" href="#" onclick="showPage('novels');return false">Novels &amp; Books</a>
+        <a class="btn-outline apple-pill-outline" href="#" onclick="showPage('gallery');return false">3D Gallery</a>
+      </div>
+
+      <!-- 3-Color Global Theme Switcher (Apple Glass Capsule) -->
+      <div class="hero-theme-row">
+        <span class="hero-theme-label">THEME:</span>
+        <div class="apple-capsule-controller" id="appleThemeSegmented">
+          <button onclick="setGlobalTheme('light')" id="btnThemeLight" class="apple-capsule-btn active">&#9728; White</button>
+          <button onclick="setGlobalTheme('evening')" id="btnThemeEvening" class="apple-capsule-btn">&#9729; Blue</button>
+          <button onclick="setGlobalTheme('dark')" id="btnThemeDark" class="apple-capsule-btn">&#9790; Black</button>
+        </div>
       </div>
     </div>
   </section>
@@ -2939,10 +3634,10 @@ img, video, iframe {
   <section class="home-tech">
     <div class="section-header">
       <div>
-        <div class="section-label">Engineering &amp; Web Systems</div>
-        <h2 class="section-title">Technical <em>Projects</em></h2>
+        <div class="section-label apple-section-label">Engineering &amp; Web Systems</div>
+        <h2 class="section-title apple-section-title">Technical <em>Projects</em></h2>
       </div>
-      <a class="section-link-tab" href="#" onclick="showPage('technical-projects');return false">Explore All 11 Projects <span class="arrow">&rarr;</span></a>
+      <a class="section-link-tab" href="#" onclick="showPage('technical-projects');return false">Explore All 11 Projects <span class="arrow">&rsaquo;</span></a>
     </div>
     <div class="tech-spotlight-grid" id="homeTechSpotlight">
       <!-- Injected by JS -->
@@ -2955,10 +3650,10 @@ img, video, iframe {
   <section class="home-novels">
     <div class="section-header">
       <div>
-        <div class="section-label">Literary Work</div>
-        <h2 class="section-title">Novels &amp; <em>Published Works</em></h2>
+        <div class="section-label apple-section-label">Literary Catalogue</div>
+        <h2 class="section-title apple-section-title">Novels &amp; <em>Published Works</em></h2>
       </div>
-      <a class="section-link-tab" href="#" onclick="showPage('novels');return false">View All Novels <span class="arrow">&rarr;</span></a>
+      <a class="section-link-tab" href="#" onclick="showPage('novels');return false">View All Novels <span class="arrow">&rsaquo;</span></a>
     </div>
     <div class="novels-slider-track">
       <div class="novels-slider" id="novelSlider">
@@ -2977,10 +3672,10 @@ img, video, iframe {
   <section class="home-software">
     <div class="software-inner">
       <div class="software-left">
-        <div class="software-left-label">Tools &amp; Products</div>
-        <div class="software-big">Software &amp;<br><em style="font-style:italic;color:var(--ink3)">Add-ons</em></div>
+        <div class="software-left-label apple-section-label">Tools &amp; Products</div>
+        <div class="software-big apple-section-title">Software &amp; <em style="font-style:italic;color:var(--apple-subtext)">Add-ons</em></div>
         <p class="software-desc">Professional Blender add-ons and automation pipelines built from over a decade of 3D workflow expertise.</p>
-        <a class="section-link-tab" href="#" onclick="showPage('software');return false">Explore All Software <span class="arrow">&rarr;</span></a>
+        <a class="section-link-tab" href="#" onclick="showPage('software');return false">Explore All Software <span class="arrow">&rsaquo;</span></a>
       </div>
       <div class="software-right">
         <div class="sw-vertical-slider" id="swSlider">
@@ -2996,10 +3691,10 @@ img, video, iframe {
   <section class="home-projects">
     <div class="section-header">
       <div>
-        <div class="section-label">3D Art &amp; Visualization</div>
-        <h2 class="section-title">Visual <em>Works</em></h2>
+        <div class="section-label apple-section-label">3D Art &amp; Architectural Visualization</div>
+        <h2 class="section-title apple-section-title">Visual <em>Works</em></h2>
       </div>
-      <a class="section-link-tab" href="#" onclick="showPage('gallery');return false">View Full Gallery <span class="arrow">&rarr;</span></a>
+      <a class="section-link-tab" href="#" onclick="showPage('gallery');return false">View Full Gallery <span class="arrow">&rsaquo;</span></a>
     </div>
     <div class="projects-slider-wrap">
       <div class="projects-grid" id="projGrid">
@@ -3018,10 +3713,10 @@ img, video, iframe {
   <section class="home-articles">
     <div class="section-header">
       <div>
-        <div class="section-label">Articles &amp; Thought Leadership</div>
-        <h2 class="section-title">Essays &amp; <em>Insights</em></h2>
+        <div class="section-label apple-section-label">Articles &amp; Thought Leadership</div>
+        <h2 class="section-title apple-section-title">Essays &amp; <em>Insights</em></h2>
       </div>
-      <a class="section-link-tab" href="#" onclick="showPage('articles');return false">Read All Articles <span class="arrow">&rarr;</span></a>
+      <a class="section-link-tab" href="#" onclick="showPage('articles');return false">Read All Articles <span class="arrow">&rsaquo;</span></a>
     </div>
     <div class="articles-grid" id="homeArticlesGrid">
       <!-- Injected by JS -->
@@ -3034,8 +3729,8 @@ img, video, iframe {
   <section class="home-expertise">
     <div class="section-header">
       <div>
-        <div class="section-label">Creative Disciplines</div>
-        <h2 class="section-title">Areas of <em>Mastery</em></h2>
+        <div class="section-label apple-section-label">Creative Disciplines</div>
+        <h2 class="section-title apple-section-title">Areas of <em>Mastery</em></h2>
       </div>
     </div>
     <div class="expertise-grid">
@@ -6130,20 +6825,24 @@ function setGlobalTheme(theme, manual = true){
     lbl.style.color = 'var(--ink)';
   }
 
-  // 3. Update theme buttons UI
+  // 3. Update theme buttons UI (Apple Capsule Segmented Control)
   ['light', 'evening', 'dark'].forEach(st => {
     const btn = document.getElementById('btnTheme' + st.charAt(0).toUpperCase() + st.slice(1));
     if(btn){
       if(st === theme){
-        btn.style.background = 'var(--ink)';
-        btn.style.color = 'var(--bg)';
-        btn.style.borderColor = 'var(--ink)';
+        btn.style.background = 'var(--apple-pill-active-bg, #ffffff)';
+        btn.style.color = 'var(--apple-pill-active-color, #1d1d1f)';
+        btn.style.borderColor = 'transparent';
         btn.style.fontWeight = '600';
+        btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.14)';
+        btn.classList.add('active');
       } else {
-        btn.style.background = 'var(--bg-card)';
-        btn.style.color = 'var(--ink)';
-        btn.style.borderColor = 'var(--border)';
-        btn.style.fontWeight = '400';
+        btn.style.background = 'transparent';
+        btn.style.color = 'var(--apple-subtext, #86868b)';
+        btn.style.borderColor = 'transparent';
+        btn.style.fontWeight = '500';
+        btn.style.boxShadow = 'none';
+        btn.classList.remove('active');
       }
     }
   });
