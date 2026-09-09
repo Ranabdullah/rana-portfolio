@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T20:33:34.083Z",
+  "updatedAt": "2026-09-09T20:45:14.245Z",
   "version": "4.5",
   "novels": [
     {
@@ -585,7 +585,7 @@
   ],
   "gallery": [
     {
-      "title": "Children's Creative Studio & Narrative Visual Studies",
+      "title": "Creative Studio & Narrative Visual Studies",
       "cat": "environment",
       "pillar": "Personal",
       "path": "Photos & to upload/Instagram/Childrens_Room_Art_Study.jpg",
@@ -602,10 +602,24 @@
       "desc": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork.",
       "youtubeUrl": "",
       "subTitles": {
-        "0": "Creative Corner & Studio Study"
+        "0": "Creative Corner & Studio Study",
+        "1": "Memory at the Table",
+        "2": "Reflection of Ambition",
+        "3": "The Endless Ascent",
+        "4": "Echoes in the Corridor",
+        "5": "Guiding Shadows",
+        "6": "Beacon of the Unseen",
+        "7": "Strategic Alignment"
       },
       "subDescriptions": {
-        "0": "A warm 3D interior visualization capturing a child's art workspace, featuring handcrafted wall displays, pinboards, and natural morning light across warm wood textures."
+        "0": "A warm 3D interior visualization capturing a child's art workspace, featuring handcrafted wall displays, pinboards, and natural morning light across warm wood textures.",
+        "1": "An atmospheric monochrome narrative study depicting a shadowy family gathering, utilizing film grain and soft window backlighting to evoke nostalgia.",
+        "2": "A surreal composition exploring identity and hidden potential, featuring a wooden pawn observing the smoky reflection of a queen within a framed mirror.",
+        "3": "A stark visual concept on momentum and progress, featuring a lone silhouette climbing a floating, illuminated staircase into a fog-filled void.",
+        "4": "An eerie dark-fantasy character rendering featuring a slender, horned figure standing in a grainy, dimly lit corridor with analog noise effects.",
+        "5": "A haunting psychological illustration depicting a pale child in a dark woodland, enveloped by ghostly, reaching hands emerging from the background.",
+        "6": "A textured vignette artwork capturing a solitary figure channeling a stream of vibrant, swirling energy toward a distant tower on a dark ridge.",
+        "7": "A close-up material render showcasing detailed surface shaders, warm directional lighting, and perspective warping across an infinite checkerboard plane."
       },
       "subVideos": {}
     },
@@ -618,10 +632,12 @@
       "images": [
         "Photos & to upload/Japanese Building/All Work (26).jpg",
         "Photos & to upload/Japanese Building/All Work (7).png",
-        "Photos & to upload/Japanese Building/All Work (9).png",
-        "Photos & to upload/Exterior/All Work (3).jpg",
-        "Photos & to upload/Instagram/18046110724462208.jpg"
-      ]
+        "Photos & to upload/Japanese Building/All Work (9).png"
+      ],
+      "subTitles": {},
+      "subDescriptions": {},
+      "subVideos": {},
+      "youtubeUrl": ""
     },
     {
       "title": "Egyptian Mythology, Temple of Anubis & Osiris Sanctum",
@@ -643,7 +659,7 @@
     },
     {
       "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
-      "pillar": "Client",
+      "pillar": "Client Work",
       "cat": "environment",
       "desc": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
       "path": "Photos & to upload/Client/Eskimo/Interior/Final1.jpg",
@@ -654,28 +670,36 @@
         "Photos & to upload/Client/Eskimo/Interior/Final6.jpg",
         "Photos & to upload/Client/Eskimo/Eskimo Graystown/1.jpg",
         "Photos & to upload/Client/Eskimo/Eskimo Graystown/2.jpg",
+        "Photos & to upload/Instagram/17946121076087543.webp",
         "Photos & to upload/Client/Eskimo/Interior 2/1.jpg",
         "Photos & to upload/Client/Eskimo/Final/1.png",
         "Photos & to upload/Client/Eskimo/Final/2.png",
         "Photos & to upload/Client/Eskimo/Final/3.png",
-        "Photos & to upload/Client/Eskimo/Final/5.png",
-        "Photos & to upload/Instagram/17946121076087543.webp"
-      ]
+        "Photos & to upload/Client/Eskimo/Final/5.png"
+      ],
+      "subTitles": {},
+      "subDescriptions": {},
+      "subVideos": {},
+      "youtubeUrl": ""
     },
     {
       "title": "IDFL Kiosk: Retail Hardware & Service Center Architectural Visual",
-      "pillar": "Client",
+      "pillar": "Client Work",
       "cat": "environment",
       "desc": "Modular shopping mall service kiosk and repair diagnostic reception station designed with custom acrylic display cases and LED backlighting.",
       "path": "Photos & to upload/Client/IDFL/IDFL Kiosk/Final1.jpg",
       "images": [
         "Photos & to upload/Client/IDFL/IDFL Kiosk/Final1.jpg",
         "Photos & to upload/Client/IDFL/IDFL Kiosk/Final 2.jpg"
-      ]
+      ],
+      "subTitles": {},
+      "subDescriptions": {},
+      "subVideos": {},
+      "youtubeUrl": ""
     },
     {
       "title": "Get Connected: Executive Commercial Workspace & Acoustic Pods (Blender 3D)",
-      "pillar": "Client",
+      "pillar": "Client Work",
       "cat": "environment",
       "desc": "Full-scale modern corporate interior fit-out modeled in Blender 3D featuring acoustic breakout booths, open-plan workstations, and executive boardrooms.",
       "path": "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823343839673_1538841423_8.webp",
@@ -686,9 +710,12 @@
         "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823570403632_1538841423_5.webp",
         "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823528350189_1538841423_9.webp",
         "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823536846267_1538841423_1.webp",
-        "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823553459052_1538841423_2.webp",
-        "Photos & to upload/Instagram/17988884707656692.webp"
-      ]
+        "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823553459052_1538841423_2.webp"
+      ],
+      "subTitles": {},
+      "subDescriptions": {},
+      "subVideos": {},
+      "youtubeUrl": ""
     },
     {
       "title": "Rizpros: Commercial Workspace & Operations Logistics",
@@ -722,7 +749,7 @@
       "images": [
         "Photos & to upload/Kitchen/67748729_2470650796319052_4466508233967665152_o.jpg",
         "Photos & to upload/Kitchen/All Work (160).jpg",
-        "Photos & to upload/Kitchen/All Work (167).jpg",
+        "Photos & to upload/Instagram/17915681896934511.jpg",
         "Photos & to upload/YouTube/wvJ3n61oNlQ.jpg",
         "Photos & to upload/Church/4.jpg",
         "Photos & to upload/YouTube/AYk-BZrP6D0.jpg",
@@ -730,11 +757,12 @@
         "Photos & to upload/Bedroom/All Work (67).jpg",
         "Photos & to upload/YouTube/aniBOlBF1Ow.jpg",
         "Photos & to upload/Instagram/18328297867051721.webp",
-        "Photos & to upload/Instagram/17889489539305832.jpg",
-        "Photos & to upload/Instagram/17915681896934511.jpg"
+        "Photos & to upload/Instagram/17889489539305832.jpg"
       ],
       "subVideos": {},
-      "youtubeUrl": ""
+      "youtubeUrl": "",
+      "subTitles": {},
+      "subDescriptions": {}
     },
     {
       "title": "Urban Rain & Historic Street Corridor Study",
@@ -922,7 +950,8 @@
         "Photos & to upload/Instagram/17857249232533945.jpg",
         "Photos & to upload/Instagram/18031520548280063.jpg",
         "Photos & to upload/Instagram/17915254156167498.jpg",
-        "Photos & to upload/Instagram/17930780848117326.jpg"
+        "Photos & to upload/Instagram/17930780848117326.jpg",
+        "Photos & to upload/Exterior/All Work (3).jpg"
       ],
       "subVideos": {},
       "youtubeUrl": ""
