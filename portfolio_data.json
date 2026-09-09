@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T20:22:07.744Z",
+  "updatedAt": "2026-09-09T20:23:33.074Z",
   "version": "4.5",
   "novels": [
     {
@@ -599,8 +599,11 @@
         "Photos & to upload/Instagram/18131148718177645.jpg",
         "Photos & to upload/Instagram/17935025272142875.jpg"
       ],
-      "desc": "Rich spatial concept study capturing a warm sunlit creative room with children's pinboard illustrations, drawing table studies, and classical framed portrait artwork.",
-      "youtubeUrl": ""
+      "desc": "",
+      "youtubeUrl": "",
+      "subTitles": {},
+      "subDescriptions": {},
+      "subVideos": {}
     },
     {
       "title": "Japanese Traditional Estate & Shinjuku Architecture Study",
