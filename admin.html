@@ -3721,14 +3721,20 @@ function beRemoveSubImage(itemIdx, subIdx){
   const g = galleryItems[itemIdx];
   if(!g) return;
   const imgs = (g.images && g.images.length > 0) ? [...g.images] : (g.path ? [g.path] : []);
+  const photoLabel = imgs[subIdx] ? imgs[subIdx].split('/').pop() : `Photo #${subIdx+1}`;
+
+  // Always confirm before deleting any photo
+  if(!confirm(`Delete "${photoLabel}" from "${g.title || 'this project'}"?\n\nThis cannot be undone.`)){
+    return;
+  }
+
   if(imgs.length <= 1){
-    if(confirm('This is the only photo in this project. Deleting it will remove the project cover image. Continue?')){
-      g.images = [];
-      g.path = '';
-      saveData('rana_gallery_data', galleryItems);
-      renderBeGallery();
-      scheduleGitHubAutoSync();
-    }
+    g.images = [];
+    g.path = '';
+    saveData('rana_gallery_data', galleryItems);
+    renderBeGallery();
+    scheduleGitHubAutoSync();
+    showToast('Cover photo removed');
     return;
   }
   imgs.splice(subIdx, 1);
