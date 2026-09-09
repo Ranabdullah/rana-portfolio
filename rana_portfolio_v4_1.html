@@ -61,52 +61,71 @@ body { background:var(--bg); color:var(--ink); font-family:var(--sans); overflow
 
 
 
-/* Custom Cursor */
+/* Custom Cursor (Default & Light Backgrounds) */
 .cursor {
-  position:fixed; width:10px; height:10px; background:#0f1115; border-radius:50%; pointer-events:none; z-index:9999;
-  transform:translate(-50%,-50%); transition:transform .1s ease-out, width .2s, height .2s, background .2s;
-  box-shadow:0 0 0 1.5px rgba(255,255,255,0.9), 0 2px 8px rgba(0,0,0,0.3);
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: #0f1115 !important;
+  border-radius: 50%;
+  pointer-events: none !important;
+  z-index: 2147483647 !important;
+  transform: translate(-50%, -50%);
+  transition: transform .08s ease-out, width .2s, height .2s, background .2s;
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 .cursor-ring {
-  position:fixed; width:44px; height:44px; border:1.5px solid rgba(15,17,21,0.55); border-radius:50%; pointer-events:none;
-  z-index:9998; transform:translate(-50%,-50%); transition:all .28s cubic-bezier(.16,1,.3,1);
-  background:rgba(15,17,21,0.03); box-shadow:0 0 0 1px rgba(255,255,255,0.4);
+  position: fixed;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(15, 17, 21, 0.7) !important;
+  border-radius: 50%;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  transform: translate(-50%, -50%);
+  transition: all .24s cubic-bezier(.16, 1, .3, 1);
+  background: rgba(15, 17, 21, 0.03) !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4);
 }
-body:has(a:hover) .cursor, .cursor.hover { width:6px; height:6px; background:#000; box-shadow:0 0 0 2px #fff; }
-body:has(a:hover) .cursor-ring, .cursor-ring.hover { width:58px; height:58px; border-color:rgba(15,17,21,0.9); background:rgba(15,17,21,0.08); }
+body:has(a:hover) .cursor, .cursor.hover {
+  width: 6px !important;
+  height: 6px !important;
+  background: #0f1115 !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.95) !important;
+}
+body:has(a:hover) .cursor-ring, .cursor-ring.hover {
+  width: 58px !important;
+  height: 58px !important;
+  border-color: rgba(15, 17, 21, 0.95) !important;
+  background: rgba(15, 17, 21, 0.08) !important;
+}
 
-/* LUMINOUS LIGHT CURSOR FOR DARK LIGHTBOX MODAL & DARK THEMES */
+/* FULLSCREEN LIGHTBOX CURSOR (LUMINOUS LIGHT CURSOR OVER DARK MODAL) */
 body.has-lightbox-open .cursor,
-body:has(#lightbox.open) .cursor,
-#lightbox.open ~ .cursor,
-body.theme-dark .cursor {
+#lightbox.open ~ .cursor {
   background: #ffffff !important;
-  box-shadow: 0 0 12px rgba(255,255,255,0.95), 0 0 3px #ffffff !important;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.85), 0 0 12px rgba(255, 255, 255, 0.95), 0 0 3px #ffffff !important;
 }
 body.has-lightbox-open .cursor-ring,
-body:has(#lightbox.open) .cursor-ring,
-#lightbox.open ~ .cursor-ring,
-body.theme-dark .cursor-ring {
-  border-color: rgba(255,255,255,0.85) !important;
-  background: rgba(255,255,255,0.08) !important;
-  box-shadow: 0 0 16px rgba(255,255,255,0.25) !important;
+#lightbox.open ~ .cursor-ring {
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 255, 255, 0.3) !important;
 }
 body.has-lightbox-open .cursor.hover,
-body:has(#lightbox.open) .cursor.hover,
-body.theme-dark .cursor.hover {
+#lightbox.open ~ .cursor.hover {
   width: 7px !important;
   height: 7px !important;
   background: #00e5ff !important;
-  box-shadow: 0 0 16px #00e5ff, 0 0 4px #00e5ff !important;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.85), 0 0 16px #00e5ff, 0 0 4px #00e5ff !important;
 }
 body.has-lightbox-open .cursor-ring.hover,
-body:has(#lightbox.open) .cursor-ring.hover,
-body.theme-dark .cursor-ring.hover {
+#lightbox.open ~ .cursor-ring.hover {
   width: 58px !important;
   height: 58px !important;
   border-color: #00e5ff !important;
-  background: rgba(0,229,255,0.15) !important;
-  box-shadow: 0 0 20px rgba(0,229,255,0.45) !important;
+  background: rgba(0, 229, 255, 0.18) !important;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.5) !important;
 }
 
 /* Navigation */
@@ -2095,337 +2114,578 @@ footer .footer-links a:hover {
 
 
 /* ===================================================
-   MOBILE OPTIMISATION — FULL PHONE EXPERIENCE
-   Hides cursor on touch, hamburger nav, hero fixes,
-   proper tap targets, readable typography, no overflow
+   MOBILE & RESPONSIVE ENGINE (PIXEL-PERFECT PHONE VIEW)
    =================================================== */
 
-/* 1. HIDE CUSTOM CURSOR ON TOUCH/MOBILE DEVICES */
+/* 1. TOUCH & POINTER BEHAVIOR */
 @media (hover: none), (pointer: coarse) {
   .cursor, .cursor-ring {
     display: none !important;
     opacity: 0 !important;
     pointer-events: none !important;
   }
-  * { cursor: auto !important; }
+  * {
+    cursor: auto !important;
+  }
   a, button, [onclick], label, select, input, textarea, [role="button"] {
     cursor: pointer !important;
+    -webkit-tap-highlight-color: transparent !important;
   }
 }
 
-/* 2. MOBILE NAV — hamburger layout */
-@media (max-width: 767px) {
+/* 2. NAVBAR & MOBILE MENU OVERLAY */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  background: rgba(15, 17, 21, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 10001;
+  transition: all 0.25s ease;
+}
+.mobile-menu-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-menu-btn.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.mobile-menu-btn.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.mobile-menu-btn.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
-  /* Hide desktop nav links, show hamburger */
+.nav-mobile-close {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+
+  nav {
+    padding: 12px 20px !important;
+    height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .nav-logo {
+    font-size: 19px !important;
+  }
+
   .nav-links {
-    display: none !important;
+    display: flex !important;
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
+    height: 100vh !important;
+    height: 100dvh !important;
     background: var(--bg) !important;
+    backdrop-filter: blur(28px) !important;
+    -webkit-backdrop-filter: blur(28px) !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 28px !important;
-    z-index: 9998 !important;
-    font-size: 20px !important;
-    padding: 40px 20px !important;
+    gap: 20px !important;
+    z-index: 99998 !important;
+    padding: 40px 24px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(-20px) !important;
+    transition: opacity 0.3s ease, transform 0.3s ease !important;
   }
+
   .nav-links.mobile-open {
-    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
   }
+
   .nav-links a {
-    font-size: 18px !important;
     font-family: var(--serif) !important;
-    font-weight: 500 !important;
+    font-size: 22px !important;
+    font-weight: 400 !important;
     color: var(--ink) !important;
-    text-decoration: none !important;
-    padding: 10px 0 !important;
-    border-bottom: 1px solid var(--border) !important;
-    width: 100% !important;
     text-align: center !important;
+    padding: 10px 0 !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    border-bottom: 1px solid var(--border) !important;
+    text-decoration: none !important;
     letter-spacing: 0.04em !important;
   }
 
-  /* Hamburger button */
-  #mobileMenuBtn {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 5px !important;
-    cursor: pointer !important;
-    background: none !important;
-    border: none !important;
-    padding: 8px !important;
-    z-index: 9999 !important;
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--accent, #00e5ff) !important;
   }
-  #mobileMenuBtn span {
-    display: block !important;
-    width: 24px !important;
-    height: 2px !important;
-    background: var(--ink) !important;
-    border-radius: 2px !important;
-    transition: all 0.3s ease !important;
-  }
-  #mobileMenuBtn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
-  #mobileMenuBtn.open span:nth-child(2) { opacity: 0 !important; }
-  #mobileMenuBtn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
 
-  /* Mobile close overlay */
-  #navMobileClose {
+  .nav-mobile-close {
+    display: flex !important;
     position: absolute !important;
-    top: 20px !important;
-    right: 20px !important;
-    font-size: 28px !important;
+    top: 14px !important;
+    right: 18px !important;
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 32px !important;
+    line-height: 1 !important;
     background: none !important;
     border: none !important;
     color: var(--ink) !important;
     cursor: pointer !important;
-    line-height: 1 !important;
-    padding: 8px !important;
-  }
-
-  /* Compact nav bar */
-  nav {
-    padding: 12px 20px !important;
-    display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
+    justify-content: center !important;
   }
-  .nav-logo { font-size: 16px !important; }
+}
 
-  /* 3. HERO SECTION — mobile-first layout */
+/* 3. HERO SECTION ON MOBILE */
+@media (max-width: 768px) {
   .home-hero {
-    grid-template-columns: 1fr !important;
-    padding: 24px 20px 32px !important;
-    gap: 24px !important;
-    min-height: auto !important;
+    min-height: calc(100dvh - 60px) !important;
+    padding: 30px 20px 48px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    gap: 20px !important;
   }
+
   .hero-text-side {
-    order: 1 !important;
+    width: 100% !important;
     padding: 0 !important;
+    z-index: 2 !important;
   }
-  .hero-visual-side {
-    order: 2 !important;
-    height: 280px !important;
-    display: none !important; /* hide portrait on small phones */
+
+  .hero-eyebrow {
+    font-size: 10px !important;
+    gap: 8px !important;
+    margin-bottom: 14px !important;
+    flex-wrap: wrap !important;
   }
+
   .hero-name {
-    font-size: clamp(38px, 10vw, 56px) !important;
-    line-height: 1.0 !important;
-    margin-bottom: 6px !important;
+    font-size: clamp(38px, 11vw, 56px) !important;
+    line-height: 1.02 !important;
+    margin-bottom: 14px !important;
   }
-  .hero-name-italic {
-    font-size: clamp(34px, 9vw, 50px) !important;
-  }
-  .hero-tagline {
-    font-size: clamp(14px, 3.5vw, 18px) !important;
-    margin-bottom: 8px !important;
-  }
-  .hero-desc {
-    font-size: 14px !important;
-    line-height: 1.6 !important;
+
+  .hero-title {
+    font-size: 15px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 24px !important;
     max-width: 100% !important;
   }
-  .hero-label-row {
-    gap: 16px !important;
-    flex-wrap: wrap !important;
-    font-size: 11px !important;
+
+  .hero-title span {
+    font-size: 13.5px !important;
+    display: block !important;
+    margin-top: 4px !important;
   }
+
   .hero-cta-row {
+    display: flex !important;
     flex-direction: column !important;
-    gap: 10px !important;
-    align-items: stretch !important;
-  }
-  .hero-cta-row a, .hero-cta-row button {
-    text-align: center !important;
-    justify-content: center !important;
-    padding: 14px 20px !important;
-    font-size: 13px !important;
     width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .hero-cta-row a,
+  .hero-cta-row button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    padding: 12px 20px !important;
+    font-size: 12px !important;
+    letter-spacing: 0.12em !important;
+    border-radius: 6px !important;
+    text-align: center !important;
     box-sizing: border-box !important;
   }
-  .theme-switcher {
-    flex-wrap: wrap !important;
+
+  .hero-cta-row .btn-outline {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid var(--ink) !important;
+    color: var(--ink) !important;
+  }
+}
+
+/* 4. PROJECTS SLIDER ON HOME (FIX FOR SQUISHED CARDS IN SCREENSHOT 3) */
+.projects-slider-wrap {
+  position: relative;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 14px 4px;
+}
+.projects-slider-wrap::-webkit-scrollbar {
+  display: none;
+}
+.projects-grid {
+  display: flex !important;
+  gap: 22px !important;
+  width: max-content !important;
+}
+.projects-grid .g-card,
+.proj-card {
+  flex: 0 0 310px !important;
+  width: 310px !important;
+  min-width: 310px !important;
+  max-width: 310px !important;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 768px) {
+  .projects-slider-wrap {
+    margin: 0 -16px !important;
+    padding: 10px 16px !important;
+  }
+  .projects-grid {
+    gap: 16px !important;
+  }
+  .projects-grid .g-card,
+  .proj-card {
+    flex: 0 0 84vw !important;
+    width: 84vw !important;
+    min-width: 270px !important;
+    max-width: 340px !important;
+    scroll-snap-align: start;
+  }
+  .projects-grid .g-card img {
+    height: 190px !important;
+    object-fit: cover !important;
+  }
+}
+
+/* 5. NOVELS SLIDER ON HOME (FIX FOR CUTOFF CARDS IN SCREENSHOT 2) */
+.novels-slider-track {
+  position: relative;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 14px 4px;
+}
+.novels-slider-track::-webkit-scrollbar {
+  display: none;
+}
+.novels-slider {
+  display: flex !important;
+  gap: 24px !important;
+  width: max-content !important;
+}
+.novels-slider .novel-card {
+  flex: 0 0 240px !important;
+  width: 240px !important;
+  min-width: 240px !important;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 768px) {
+  .novels-slider-track {
+    margin: 0 -16px !important;
+    padding: 10px 16px !important;
+  }
+  .novels-slider {
+    gap: 16px !important;
+  }
+  .novels-slider .novel-card {
+    flex: 0 0 76vw !important;
+    width: 76vw !important;
+    min-width: 240px !important;
+    max-width: 290px !important;
+    scroll-snap-align: start;
+  }
+  .novels-slider .novel-card .novel-cover {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1.48 !important;
+  }
+}
+
+/* 6. CAREER TIMELINE / EXPERIENCE (FIX FOR CRAMPED COLUMN IN SCREENSHOT 4) */
+@media (max-width: 768px) {
+  .exp-row {
+    display: flex !important;
+    flex-direction: column !important;
     gap: 8px !important;
+    padding: 20px 0 !important;
   }
+  .exp-dates {
+    font-size: 11px !important;
+    color: var(--ink4) !important;
+    letter-spacing: 0.14em !important;
+    margin-bottom: 2px !important;
+  }
+  .exp-company {
+    font-size: 20px !important;
+    line-height: 1.25 !important;
+  }
+  .exp-role {
+    font-size: 13.5px !important;
+    color: var(--ink2) !important;
+    margin-top: 3px !important;
+  }
+  .exp-tags {
+    margin-top: 10px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+}
 
-  /* 4. GALLERY — mobile 1-column grid */
-  .gallery-grid, #galleryGrid {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
-    padding: 16px !important;
+/* 7. SECTION HEADERS ON MOBILE */
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    margin-bottom: 28px !important;
   }
-  .g-card img {
-    height: 160px !important;
+  .section-title {
+    font-size: clamp(28px, 8vw, 42px) !important;
+    line-height: 1.1 !important;
   }
-  .g-title { font-size: 12px !important; }
+  .section-link-tab {
+    font-size: 11px !important;
+    padding: 6px 0 !important;
+  }
+}
 
-  /* 5. SHOWCASE — mobile layout */
+/* 8. GALLERY PAGE & SHOWCASE ON MOBILE */
+@media (max-width: 768px) {
   .gallery-showcase-wrapper {
-    padding: 16px !important;
+    padding: 14px 12px !important;
   }
   .showcase-media-stage {
-    height: 50vw !important;
+    width: 100% !important;
+    height: 56vw !important;
     min-height: 220px !important;
-    max-height: 300px !important;
+    max-height: 320px !important;
   }
-  #showcaseActionsRow {
-    flex-direction: column !important;
-    gap: 10px !important;
+  .showcase-info-pane {
+    padding: 12px 2px !important;
   }
   #showcaseTitle {
-    font-size: 18px !important;
+    font-size: 20px !important;
+    line-height: 1.25 !important;
   }
   #showcaseDesc {
     font-size: 13px !important;
+    line-height: 1.55 !important;
   }
-  .sc-photo-card {
-    flex: 0 0 120px !important;
-    width: 120px !important;
-  }
-  .sc-card-thumb {
-    height: 52px !important;
-  }
-  .showcase-nav-btn {
-    width: 36px !important;
-    height: 36px !important;
-    font-size: 16px !important;
-  }
-
-  /* 6. LIGHTBOX — full-screen mobile */
-  .lightbox {
-    padding: 12px 10px !important;
-    overflow-y: auto !important;
-  }
-  .lightbox.open {
-    display: flex !important;
+  #showcaseActionsRow {
     flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  #showcaseActionsRow a,
+  #showcaseActionsRow button {
+    width: 100% !important;
+    min-height: 44px !important;
+    display: flex !important;
     align-items: center !important;
-    justify-content: flex-start !important;
-    min-height: 100vh !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  #showcaseThumbstripBar {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 6px 0 !important;
+    scrollbar-width: none !important;
+  }
+  #showcaseThumbstripBar::-webkit-scrollbar {
+    display: none !important;
+  }
+  .gallery-filters {
+    display: flex !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 8px !important;
+    padding: 10px 14px !important;
+  }
+  .gallery-filters::-webkit-scrollbar {
+    display: none !important;
+  }
+  .gf-btn {
+    flex-shrink: 0 !important;
+    font-size: 11px !important;
+    padding: 8px 14px !important;
+    white-space: nowrap !important;
+  }
+  .gallery-grid, #galleryGrid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding: 16px !important;
+  }
+  .g-card img {
+    height: 210px !important;
+  }
+}
+
+/* 9. LIGHTBOX MODAL ON MOBILE */
+@media (max-width: 768px) {
+  .lightbox {
+    padding: 8px !important;
   }
   .lb-img-wrap {
     display: flex !important;
     flex-direction: column !important;
-    padding: 0 !important;
     width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    gap: 14px !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    gap: 8px !important;
+    padding: 0 !important;
   }
   .lb-stage {
     width: 100% !important;
-    height: auto !important;
-    max-height: 50vh !important;
+    height: 52vh !important;
+    max-height: 52vh !important;
     min-height: 220px !important;
-    padding: 8px !important;
+    padding: 4px !important;
     position: relative !important;
   }
-  .lb-img-wrap #lbImg {
-    max-width: 100% !important;
-    max-height: 48vh !important;
+  .lb-stage img {
+    max-height: 50vh !important;
+    object-fit: contain !important;
   }
   #lbCaption {
     width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    padding: 16px 14px !important;
-    text-align: left !important;
-    box-sizing: border-box !important;
-    background: rgba(15, 18, 26, 0.92) !important;
-    border-radius: 10px !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  }
-  .lb-dock-container {
-    padding: 8px 10px !important;
-  }
-  .lb-dock-thumb {
-    width: 50px !important;
-    height: 38px !important;
+    max-height: 38vh !important;
+    overflow-y: auto !important;
+    padding: 14px !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
   }
   .lb-nav {
     width: 36px !important;
     height: 36px !important;
     font-size: 16px !important;
   }
-  .lb-prev { left: 8px !important; }
-  .lb-next { right: 8px !important; }
+  .lb-prev { left: 6px !important; }
+  .lb-next { right: 6px !important; }
   .lb-close {
     top: 8px !important;
     right: 8px !important;
     padding: 7px 14px !important;
     font-size: 11px !important;
+    z-index: 10001 !important;
   }
-
-  /* 7. TECH PROJECTS — single column */
-  .tech-page-scene {
-    padding: 16px !important;
-  }
-  .tech-card {
-    padding: 20px !important;
-  }
-  .tech-card-header { gap: 10px !important; }
-  .tech-card-title { font-size: 18px !important; }
-
-  /* 8. SECTION PADDING — consistent mobile gutter */
-  .home-novels, .home-tech, .home-projects, .home-articles,
-  .home-expertise, .novels-hero, .novels-grid, .gallery-hero,
-  .gallery-filters, .software-hero, .software-cat-section,
-  .articles-hero, .articles-page-grid, .about-hero,
-  .experience-section, .clients-section, footer {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  /* 9. FONTS — prevent overflow on narrow screens */
-  .section-title {
-    font-size: clamp(28px, 7vw, 42px) !important;
-    word-break: break-word !important;
-  }
-
-  /* 10. TAP TARGETS — minimum 44px touch area */
-  button, a, .gf-btn, .nav-links a, .tab-btn, .g-card, .sc-photo-card {
-    min-height: 44px !important;
-    touch-action: manipulation !important;
-  }
-  .gf-btn {
-    padding: 10px 16px !important;
-    font-size: 12px !important;
-  }
-  .gallery-filters {
+  .lb-dock {
     overflow-x: auto !important;
-    white-space: nowrap !important;
     -webkit-overflow-scrolling: touch !important;
-    padding-bottom: 8px !important;
-    display: flex !important;
-    gap: 8px !important;
     scrollbar-width: none !important;
   }
-  .gallery-filters::-webkit-scrollbar { display: none !important; }
-
-  /* 11. PREVENT HORIZONTAL SCROLL */
-  body, html { overflow-x: hidden !important; max-width: 100vw !important; }
-  * { box-sizing: border-box !important; }
-  img, video, iframe { max-width: 100% !important; }
-}
-
-/* Extra small phones (< 400px) */
-@media (max-width: 400px) {
-  .gallery-grid, #galleryGrid {
-    grid-template-columns: 1fr !important;
+  .lb-dock::-webkit-scrollbar {
+    display: none !important;
   }
-  .hero-name { font-size: 34px !important; }
 }
 
+/* 10. OTHER PAGES ON MOBILE (NOVELS, TECH, SOFTWARE, ARTICLES, ABOUT) */
+@media (max-width: 768px) {
+  .novels-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+    padding: 16px !important;
+  }
+  .novel-page-cover {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1.48 !important;
+  }
+  .tech-spotlight-grid,
+  .sw-products-grid,
+  .articles-page-grid,
+  .articles-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding: 16px !important;
+  }
+  .about-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    padding: 20px 16px !important;
+  }
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .about-stat {
+    padding: 16px 12px !important;
+  }
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  footer {
+    flex-direction: column !important;
+    gap: 20px !important;
+    align-items: flex-start !important;
+    padding: 36px 16px !important;
+  }
+  .footer-links {
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-novels, .home-tech, .home-projects, .home-articles,
+  .home-expertise, .novels-hero, .gallery-hero,
+  .software-hero, .software-cat-section,
+  .articles-hero, .about-hero,
+  .experience-section, .clients-section {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+  .novels-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 12px 0 !important;
+  }
+}
+
+/* 11. PREVENT UNWANTED HORIZONTAL OVERFLOW */
+body, html {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+* {
+  box-sizing: border-box !important;
+}
+img, video, iframe {
+  max-width: 100% !important;
+}
 </style>
 
 <!-- Vercel Web Analytics & Speed Insights -->
-<script defer src="/_vercel/insights/script.js">
-// ===================================================
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
 // SMART IMAGE FILTER ENGINE
 // Analyses brightness, saturation, and color temperature
 // of each image pixel-by-pixel via Canvas, then applies
@@ -2592,77 +2852,6 @@ footer .footer-links a:hover {
 
 
 // ===================================================
-// MOBILE HAMBURGER NAV
-// ===================================================
-(function(){
-  function initMobileNav(){
-    const nav = document.querySelector('nav');
-    if(!nav) return;
-    const navLinks = nav.querySelector('.nav-links');
-    if(!navLinks) return;
-
-    // Don't re-init
-    if(document.getElementById('mobileMenuBtn')) return;
-
-    // Create hamburger button
-    const btn = document.createElement('button');
-    btn.id = 'mobileMenuBtn';
-    btn.setAttribute('aria-label', 'Menu');
-    btn.innerHTML = '<span></span><span></span><span></span>';
-    btn.style.display = 'none';
-
-    // Create close button inside nav overlay
-    const closeBtn = document.createElement('button');
-    closeBtn.id = 'navMobileClose';
-    closeBtn.innerHTML = '&times;';
-    closeBtn.setAttribute('aria-label', 'Close menu');
-    navLinks.appendChild(closeBtn);
-
-    nav.appendChild(btn);
-
-    function openMenu(){
-      navLinks.classList.add('mobile-open');
-      btn.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeMenu(){
-      navLinks.classList.remove('mobile-open');
-      btn.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      if(navLinks.classList.contains('mobile-open')) closeMenu();
-      else openMenu();
-    });
-    closeBtn.addEventListener('click', closeMenu);
-
-    // Close on link click
-    navLinks.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', closeMenu);
-    });
-
-    // Check if mobile
-    function checkMobile(){
-      if(window.innerWidth <= 767){
-        btn.style.display = 'flex';
-      } else {
-        btn.style.display = 'none';
-        closeMenu();
-      }
-    }
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', initMobileNav);
-  } else {
-    initMobileNav();
-  }
-})();
-
 </script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
@@ -2670,23 +2859,25 @@ footer .footer-links a:hover {
   <canvas id="globalStarsCanvas"></canvas>
 
 <!-- INTERACTIVE COLORFUL BACKGROUND PARTICLES -->
-<!-- CURSOR -->
-<div class="cursor" id="cur"></div>
-<div class="cursor-ring" id="curRing"></div>
 
 <!-- NAVIGATION -->
 <nav id="mainNav">
-  <a class="nav-logo" href="#" onclick="showPage('home');return false">Rana <span>Abdullah</span></a>
-  <div class="nav-links">
-    <a href="#" onclick="showPage('home');return false" id="nav-home" class="active">Home</a>
-    <a href="#" onclick="showPage('novels');return false" id="nav-novels">Novels</a>
-    <a href="#" onclick="showPage('technical-projects');return false" id="nav-technical-projects">Technical Projects</a>
-    <a href="#" onclick="showPage('gallery');return false" id="nav-gallery">Gallery</a>
-    <a href="#" onclick="showPage('software');return false" id="nav-software">Software</a>
-    <a href="#" onclick="showPage('articles');return false" id="nav-articles">Articles</a>
-    <a href="#" onclick="showPage('about');return false" id="nav-about">About</a>
-    
+  <a class="nav-logo" href="#" onclick="showPage('home');closeMobileNav();return false">Rana <span>Abdullah</span></a>
+  <div class="nav-links" id="mainNavLinks">
+    <a href="#" onclick="showPage('home');closeMobileNav();return false" id="nav-home" class="active">Home</a>
+    <a href="#" onclick="showPage('novels');closeMobileNav();return false" id="nav-novels">Novels</a>
+    <a href="#" onclick="showPage('technical-projects');closeMobileNav();return false" id="nav-technical-projects">Technical Projects</a>
+    <a href="#" onclick="showPage('gallery');closeMobileNav();return false" id="nav-gallery">Gallery</a>
+    <a href="#" onclick="showPage('software');closeMobileNav();return false" id="nav-software">Software</a>
+    <a href="#" onclick="showPage('articles');closeMobileNav();return false" id="nav-articles">Articles</a>
+    <a href="#" onclick="showPage('about');closeMobileNav();return false" id="nav-about">About</a>
+    <button id="navMobileClose" class="nav-mobile-close" onclick="closeMobileNav()" aria-label="Close menu">&times;</button>
   </div>
+  <button id="mobileMenuBtn" class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Toggle Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
 
 <!-- TOAST -->
@@ -3131,6 +3322,10 @@ footer .footer-links a:hover {
 </div>
 
 <!-- ==================== 8. BACKEND PAGE ==================== -->
+<!-- CURSOR (PLACED AFTER ALL MODALS FOR GUARANTEED TOP-LEVEL LIGHTBOX STACKING) -->
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curRing"></div>
+
 <!-- ==================== JAVASCRIPT LOGIC ==================== -->
 <script>
 
@@ -4602,38 +4797,128 @@ let novels = loadData('rana_novels_data', NOVELS_DATA);
 let techProjects = loadData('rana_tech_data', TECH_PROJECTS_DATA);
 let articles = loadData('rana_articles_data', ARTICLES_DATA);
 let galleryItems = loadData('rana_gallery_data', GALLERY_DATA);
+let lbImages = galleryItems;
+let lbIdx = 0, curSubImgIdx = 0;
 let software = loadData('rana_software_data', SOFTWARE_DATA);
 let experience = loadData('rana_experience_data', EXPERIENCE_DATA);
 let clients = loadData('rana_clients_data', CLIENTS_DATA);
 
-// CURSOR
-const cur = document.getElementById('cur');
-const curRing = document.getElementById('curRing');
-let mx=-100,my=-100,rx=-100,ry=-100,curActive=false;
-document.addEventListener('mousemove',e=>{
-  if(!curActive){
+// CURSOR ENGINE (PRECISION ACCURACY & DUAL LIGHT/DARK CONTEXT SYNC)
+const cur = document.getElementById('cur') || document.querySelector('.cursor');
+const curRing = document.getElementById('curRing') || document.querySelector('.cursor-ring');
+let mx = -100, my = -100, rx = -100, ry = -100, curActive = false;
+
+document.addEventListener('mousemove', e => {
+  if(!curActive && cur && curRing){
     curActive = true;
     cur.classList.add('active');
     curRing.classList.add('active');
     rx = e.clientX;
     ry = e.clientY;
   }
-  mx=e.clientX;
-  my=e.clientY;
-  cur.style.left=mx+'px';
-  cur.style.top=my+'px';
+  mx = e.clientX;
+  my = e.clientY;
+  if(cur){
+    cur.style.left = mx + 'px';
+    cur.style.top = my + 'px';
+  }
 });
-function animRing(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;curRing.style.left=rx+'px';curRing.style.top=ry+'px';requestAnimationFrame(animRing)}
+
+function animRing(){
+  rx += (mx - rx) * 0.16;
+  ry += (my - ry) * 0.16;
+  if(curRing){
+    curRing.style.left = rx + 'px';
+    curRing.style.top = ry + 'px';
+  }
+  requestAnimationFrame(animRing);
+}
 animRing();
+
+// Universal interactive hover handling across all static and dynamic elements
+document.addEventListener('mouseover', e => {
+  if(!cur || !curRing) return;
+  const t = e.target;
+  if(t && t.closest && t.closest('a, button, [onclick], .g-card, .proj-card, .tech-spotlight-card, .novel-cover, .nv-cover, .dls-card, .article-card, .sw-item, .lb-dock-thumb, .showcase-nav-btn, .lb-nav, .lb-close, .lb-btn-play, .lb-btn-yt, .lb-btn-full, .clickable, input, select, textarea')){
+    cur.classList.add('hover');
+    curRing.classList.add('hover');
+  } else {
+    cur.classList.remove('hover');
+    curRing.classList.remove('hover');
+  }
+}, { passive: true });
+
 function setupCursorHover(){
-  document.querySelectorAll('a,button,.novel-cover,.nv-cover,.g-card,.proj-card,.tech-spotlight-card,.dls-card,.article-card,.sw-item').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{cur.classList.add('hover');curRing.classList.add('hover')});
-    el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');curRing.classList.remove('hover')});
+  // Maintained for backward compatibility with existing component calls
+}
+
+// Lightbox state observer to guarantee body.has-lightbox-open never lingers
+const lbObserverElement = document.getElementById('lightbox');
+if(lbObserverElement && window.MutationObserver){
+  const lbClassObserver = new MutationObserver(() => {
+    if(lbObserverElement.classList.contains('open')){
+      document.body.classList.add('has-lightbox-open');
+    } else {
+      document.body.classList.remove('has-lightbox-open');
+    }
   });
+  lbClassObserver.observe(lbObserverElement, { attributes: true, attributeFilter: ['class'] });
 }
 
 // PAGE ROUTING
+// MOBILE NAVIGATION CONTROLLER
+function toggleMobileNav(){
+  const navLinks = document.getElementById('mainNavLinks') || document.querySelector('.nav-links');
+  const btn = document.getElementById('mobileMenuBtn');
+  if(!navLinks) return;
+  if(navLinks.classList.contains('mobile-open')){
+    closeMobileNav();
+  } else {
+    openMobileNav();
+  }
+}
+window.toggleMobileNav = toggleMobileNav;
+
+function openMobileNav(){
+  const navLinks = document.getElementById('mainNavLinks') || document.querySelector('.nav-links');
+  const btn = document.getElementById('mobileMenuBtn');
+  if(navLinks) navLinks.classList.add('mobile-open');
+  if(btn) btn.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+window.openMobileNav = openMobileNav;
+
+function closeMobileNav(){
+  const navLinks = document.getElementById('mainNavLinks') || document.querySelector('.nav-links');
+  const btn = document.getElementById('mobileMenuBtn');
+  if(navLinks) navLinks.classList.remove('mobile-open');
+  if(btn) btn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+window.closeMobileNav = closeMobileNav;
+
+// SLIDER CONTROLLER (TOUCH & BUTTON SYNCED)
+function slideProjects(dir){
+  const wrap = document.querySelector('.projects-slider-wrap');
+  if(!wrap) return;
+  const card = wrap.querySelector('.g-card, .proj-card');
+  const scrollAmount = card ? (card.offsetWidth + 20) : 320;
+  wrap.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+}
+window.slideProjects = slideProjects;
+
+function slideNovels(dir){
+  const track = document.querySelector('.novels-slider-track');
+  if(!track) return;
+  const card = track.querySelector('.novel-card');
+  const scrollAmount = card ? (card.offsetWidth + 20) : 260;
+  track.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+}
+window.slideNovels = slideNovels;
+
 function showPage(name){
+  if(typeof closeLightbox === 'function') closeLightbox();
+  if(typeof closeMobileNav === 'function') closeMobileNav();
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
   const targetPage = document.getElementById('page-'+name);
@@ -5376,9 +5661,9 @@ function stopLightboxVideo(){
   if(wrap) wrap.style.display = 'none';
   if(closeBtn) closeBtn.style.display = 'none';
 
-  const g = lbImages[lbIdx];
-  if(g){
-    const vidUrl = getSubVideo(g, curSubImgIdx);
+  if(typeof lbIdx !== 'undefined' && typeof lbImages !== 'undefined' && lbImages && lbImages[lbIdx]){
+    const g = lbImages[lbIdx];
+    const vidUrl = getSubVideo(g, typeof curSubImgIdx !== 'undefined' ? curSubImgIdx : 0);
     if(lbPlayOverlay) lbPlayOverlay.style.display = vidUrl ? 'flex' : 'none';
   }
 }
@@ -5591,6 +5876,7 @@ function closeLightbox(){
   stopLightboxVideo();
   const lb = document.getElementById('lightbox');
   if(lb) lb.classList.remove('open');
+  document.body.classList.remove('has-lightbox-open');
   document.body.style.overflow = '';
 }
 window.closeLightbox = closeLightbox;
