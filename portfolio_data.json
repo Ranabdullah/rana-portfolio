@@ -328,10 +328,10 @@
       "id": "stock-manager",
       "title": "Supplier Ledger & Stock Management Engine",
       "subtitle": "Multi-Supplier Purchase Orders, OCR Invoicing & Excel/PDF Suite",
-      "status": "Enterprise Internal App",
-      "badgeClass": "badge-outline",
+      "status": "Live",
+      "badgeClass": "badge-live",
       "num": "04",
-      "liveUrl": "",
+      "liveUrl": "https://stock-manager.idigitalfun.workers.dev/",
       "desc": "A comprehensive commercial supplier and inventory management web application. Features multi-supplier purchase order tracking, real-time stock required calculations, return/faulty item logging, OCR invoice parsing with Tesseract.js, and automated XLSX/PDF export capabilities.",
       "features": [
         "Multi-supplier purchase order tracking & status monitoring",
@@ -347,18 +347,28 @@
         "SheetJS / XLSX",
         "Edge Storage"
       ],
-      "buttons": [],
-      "hasLinks": false,
-      "links": []
+      "buttons": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://stock-manager.idigitalfun.workers.dev/"
+        }
+      ],
+      "hasLinks": true,
+      "links": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://stock-manager.idigitalfun.workers.dev/"
+        }
+      ]
     },
     {
       "id": "phone-count",
       "title": "StockLine Multi-Branch Device Inventory",
       "subtitle": "Real-Time Retail Phone Count & Hardware Audit Platform",
-      "status": "Enterprise Internal App",
-      "badgeClass": "badge-outline",
+      "status": "Live",
+      "badgeClass": "badge-live",
       "num": "05",
-      "liveUrl": "",
+      "liveUrl": "https://phone-count.idigitalfun.workers.dev/",
       "desc": "A high-speed multi-location device inventory and phone stock audit web application deployed on Cloudflare Workers. Enables retail branches to perform rapid live device counts, track IMEI/serial hardware states, reconcile discrepancies in real time, and export consolidated audit sheets.",
       "features": [
         "Multi-shop live device count and hardware reconciliation",
@@ -372,18 +382,28 @@
         "Edge Storage",
         "HTML5 Canvas / DOM"
       ],
-      "buttons": [],
-      "hasLinks": false,
-      "links": []
+      "buttons": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://phone-count.idigitalfun.workers.dev/"
+        }
+      ],
+      "hasLinks": true,
+      "links": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://phone-count.idigitalfun.workers.dev/"
+        }
+      ]
     },
     {
       "id": "holidays",
       "title": "Staff Holidays & Hours Management Portal",
       "subtitle": "Automated Staff Hours, Accruals & Official PDF Statement Engine",
-      "status": "Enterprise Internal App",
-      "badgeClass": "badge-outline",
+      "status": "Live",
+      "badgeClass": "badge-live",
       "num": "06",
-      "liveUrl": "",
+      "liveUrl": "https://idfl-holidays.idigitalfun.workers.dev/",
       "desc": "An enterprise staff attendance, hours tracking, and leave management system deployed on Cloudflare Workers. Features automated holiday accrual calculations, weekly timesheet logging, single-employee official PDF statement generation, multi-branch summary reporting, and one-click GitHub cloud synchronization.",
       "features": [
         "Automated holiday & sick pay accrual calculation engine",
@@ -398,9 +418,19 @@
         "GitHub API Sync",
         "Edge Runtime"
       ],
-      "buttons": [],
-      "hasLinks": false,
-      "links": []
+      "buttons": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://idfl-holidays.idigitalfun.workers.dev/"
+        }
+      ],
+      "hasLinks": true,
+      "links": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://idfl-holidays.idigitalfun.workers.dev/"
+        }
+      ]
     },
     {
       "id": "timeline",
@@ -509,10 +539,10 @@
       "id": "repair",
       "title": "Retail Repair Price Matrix",
       "subtitle": "Real-Time Repair Quoting & Device Diagnostic Engine",
-      "status": "Live Engine",
-      "badgeClass": "badge-outline",
+      "status": "Live",
+      "badgeClass": "badge-live",
       "num": "11",
-      "liveUrl": "",
+      "liveUrl": "https://repair-prices.pages.dev/",
       "desc": "A multi-branch commercial repair price catalog and service quoting matrix. Features real-time part cost lookups, labor rate calculation, customer ticket generation, and automated WhatsApp/SMS quotation exports.",
       "features": [
         "Instant multi-brand device repair pricing engine",
@@ -526,9 +556,91 @@
         "HTML5",
         "CSS3"
       ],
-      "buttons": [],
-      "hasLinks": false,
-      "links": []
+      "buttons": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://repair-prices.pages.dev/"
+        }
+      ],
+      "hasLinks": true,
+      "links": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://repair-prices.pages.dev/"
+        }
+      ]
+    },
+    {
+      "id": "vat-invoice",
+      "title": "VAT Invoice Generator",
+      "subtitle": "Automated Retail VAT Invoice & Receipt Engine",
+      "status": "Live",
+      "badgeClass": "badge-live",
+      "num": "12",
+      "liveUrl": "https://vat-invoice.idigitalfun.workers.dev/",
+      "desc": "A commercial VAT invoice and receipt generation engine built for retail operations. Produces compliant, print-ready PDF invoices with itemized VAT breakdown, customer details, and company branding — all running on Cloudflare's edge network.",
+      "tech": [
+        "Cloudflare Workers",
+        "JavaScript (ES6+)",
+        "jsPDF",
+        "HTML5",
+        "CSS3"
+      ],
+      "features": [
+        "VAT-compliant invoice generation",
+        "PDF export and print-ready output",
+        "Itemized product & pricing engine",
+        "Company branding and header templates"
+      ],
+      "hasLinks": true,
+      "buttons": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://vat-invoice.idigitalfun.workers.dev/"
+        }
+      ],
+      "links": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://vat-invoice.idigitalfun.workers.dev/"
+        }
+      ]
+    },
+    {
+      "id": "vapesquantity",
+      "title": "Vapes Quantity & Stock Counter",
+      "subtitle": "Real-Time Vape Product Inventory & Quantity Tracker",
+      "status": "Live",
+      "badgeClass": "badge-live",
+      "num": "13",
+      "liveUrl": "https://vapesquantity.pages.dev/",
+      "desc": "A fast, mobile-optimized inventory tracking tool for vape retail operations. Enables real-time quantity counting, stock-level monitoring, and multi-SKU management across product lines — deployed on Cloudflare Pages.",
+      "tech": [
+        "Cloudflare Pages",
+        "JavaScript (ES6+)",
+        "HTML5",
+        "CSS3",
+        "LocalStorage"
+      ],
+      "features": [
+        "Real-time quantity tracking",
+        "Multi-SKU product management",
+        "Mobile-optimized interface",
+        "Offline-capable edge deployment"
+      ],
+      "hasLinks": true,
+      "buttons": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://vapesquantity.pages.dev/"
+        }
+      ],
+      "links": [
+        {
+          "label": "Launch Live App ↗",
+          "url": "https://vapesquantity.pages.dev/"
+        }
+      ]
     }
   ],
   "gallery": [
