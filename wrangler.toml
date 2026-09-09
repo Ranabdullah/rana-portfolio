@@ -1,4 +1,4 @@
-﻿name = "rana-portfolio"
+name = "rana-portfolio"
 compatibility_date = "2026-08-28"
 
 [observability]
@@ -6,14 +6,3 @@ enabled = true
 
 [assets]
 directory = "."
-exclude = [
-  ".git",
-  ".git/*",
-  ".git/**",
-  "*.py",
-  "*.mp4",
-  "*.mov",
-  "*.pdf",
-  "novels_content.txt",
-  "scratch"
-]
