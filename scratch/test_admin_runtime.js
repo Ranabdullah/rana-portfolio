@@ -343,7 +343,7 @@ const NOVELS_DATA = [{"id": "childs-world-1", "title": "The Child's World: How F
 const TECH_PROJECTS_DATA = [{"id": "velra", "title": "Vel Ra Perfumes 3D Twin & Handover Dossier", "subtitle": "Interactive Architectural Spatial Twin (Capel Street, Dublin 1)", "status": "Live", "badgeClass": "badge-live", "num": "01", "liveUrl": "https://velra-viewer.ranakaharian1.workers.dev/", "desc": "An interactive architectural photographic handover dossier and real-time WebGL 3D digital twin platform for a bespoke luxury fragrance boutique on Capel Street, Dublin 1. Built with millimetric CAD blueprint matrices, master materials board, high-CRI retail lighting compliance engine (CIBSE SLL), bespoke joinery passes, and digital client sign-off authorization.", "features": ["Interactive WebGL 3D space orbit & inspection", "Millimeter-accurate CAD blueprints & dimension matrix", "High-CRI 3000K retail lighting & photometric simulation", "Stage 04 fabrication-ready joinery & client sign-off"], "tech": ["Cloudflare Workers", "WebGL / 3D Twin", "Interactive CAD Engine", "Photometrics / Lighting", "Edge Runtime", "Vanilla ES6+"], "buttons": [{"label": "Launch 3D Handover Dossier \u2197", "url": "https://velra-viewer.ranakaharian1.workers.dev/", "primary": true}], "hasLinks": true, "links": [{"label": "Launch 3D Handover Dossier \u2197", "url": "https://velra-viewer.ranakaharian1.workers.dev/", "primary": true}]}, {"id": "launcher", "title": "DreamsLab Cyber Launcher", "subtitle": "Chrome Multi-Profile Link Vault", "status": "Live", "badgeClass": "badge-live", "num": "02", "liveUrl": "https://abdullahinayat24-lang.github.io/link-launcher/", "desc": "A standalone Windows desktop app that acts as an encrypted personal link vault with full multi-account Chrome profile management. Save your important links, notes and account context per Google profile, then launch any Chrome account in one click. Protected with AES-256-GCM encryption.", "features": ["Modular application dock & launcher", "Real-time system telemetry monitor", "Encrypted local vault storage", "Low-overhead native resource pipeline"], "tech": ["Electron", "Node.js", "AES-256-GCM", "Web Crypto API", "Chrome API", "Windows", "GitHub Pages"], "buttons": [{"label": "Download for Windows \u2197", "url": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe", "primary": true}, {"label": "Live Web App \u2197", "url": "https://abdullahinayat24-lang.github.io/link-launcher/", "primary": false}], "hasLinks": true, "links": [{"label": "Download for Windows \u2197", "url": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe", "primary": true}, {"label": "Live Web App \u2197", "url": "https://abdullahinayat24-lang.github.io/link-launcher/", "primary": false}]}, {"id": "mythos", "title": "Mythos Encyclopedia & Gods App", "subtitle": "Global Gods, World Myths & Folklore Platform", "status": "Live Web & Mobile", "badgeClass": "badge-live", "num": "03", "liveUrl": "https://mythos-mythology-app.vercel.app/", "desc": "A deep cross-platform encyclopedia cataloging 50+ world mythologies and thousands of deities from Greek, Norse, and Egyptian to Hindu, Celtic, Aztec, Japanese, African, and urban folklore. Features rich mythological dossiers, daily deity notifications, interactive world mythology atlas, sacred objects collection, and a 4-tier mythology quiz with global leaderboards.", "features": ["200+ authenticated mythological entities & pantheons", "Interactive world mythology map & sacred objects atlas", "Daily deity notifications & offline search indexing", "4-tier interactive mythology quiz engine with leaderboards"], "tech": ["Vercel", "Vue.js / Vite", "Ionic / Capacitor", "Android SDK / Google Play", "TypeScript", "SQLite", "Wikipedia API"], "buttons": [{"label": "Launch Web App \u2197", "url": "https://mythos-mythology-app.vercel.app/", "primary": true}, {"label": "Google Play Store \u2197", "url": "https://play.google.com/store/apps/details?id=com.mythos.app", "primary": false}], "hasLinks": true, "links": [{"label": "Launch Web App \u2197", "url": "https://mythos-mythology-app.vercel.app/", "primary": true}, {"label": "Google Play Store \u2197", "url": "https://play.google.com/store/apps/details?id=com.mythos.app", "primary": false}]}, {"id": "stock-manager", "title": "Supplier Ledger & Stock Management Engine", "subtitle": "Multi-Supplier Purchase Orders, OCR Invoicing & Excel/PDF Suite", "status": "Enterprise Internal App", "badgeClass": "badge-outline", "num": "04", "liveUrl": "", "desc": "A comprehensive commercial supplier and inventory management web application. Features multi-supplier purchase order tracking, real-time stock required calculations, return/faulty item logging, OCR invoice parsing with Tesseract.js, and automated XLSX/PDF export capabilities.", "features": ["Multi-supplier purchase order tracking & status monitoring", "Automated stock required calculations and priority matrix", "Built-in OCR invoice scanner (Tesseract.js) and PDF engine", "Full Excel (.xlsx) and JSON cloud backup synchronization"], "tech": ["Cloudflare Workers", "JavaScript (ES6+)", "Tesseract.js OCR", "jsPDF", "SheetJS / XLSX", "Edge Storage"], "buttons": [], "hasLinks": false, "links": []}, {"id": "phone-count", "title": "StockLine Multi-Branch Device Inventory", "subtitle": "Real-Time Retail Phone Count & Hardware Audit Platform", "status": "Enterprise Internal App", "badgeClass": "badge-outline", "num": "05", "liveUrl": "", "desc": "A high-speed multi-location device inventory and phone stock audit web application deployed on Cloudflare Workers. Enables retail branches to perform rapid live device counts, track IMEI/serial hardware states, reconcile discrepancies in real time, and export consolidated audit sheets.", "features": ["Multi-shop live device count and hardware reconciliation", "Real-time stock discrepancy audit and validation", "Category and model filtering with rapid barcode/search indexing", "Instant Cloudflare Edge sync with zero latency"], "tech": ["Cloudflare Workers", "JavaScript (ES6+)", "Edge Storage", "HTML5 Canvas / DOM"], "buttons": [], "hasLinks": false, "links": []}, {"id": "holidays", "title": "Staff Holidays & Hours Management Portal", "subtitle": "Automated Staff Hours, Accruals & Official PDF Statement Engine", "status": "Enterprise Internal App", "badgeClass": "badge-outline", "num": "06", "liveUrl": "", "desc": "An enterprise staff attendance, hours tracking, and leave management system deployed on Cloudflare Workers. Features automated holiday accrual calculations, weekly timesheet logging, single-employee official PDF statement generation, multi-branch summary reporting, and one-click GitHub cloud synchronization.", "features": ["Automated holiday & sick pay accrual calculation engine", "One-click official PDF statement generation for individual staff", "Multi-shop weekly hours breakdown & executive summary tables", "Real-time GitHub cloud sync with instant mobile worker deployment"], "tech": ["Cloudflare Workers", "JavaScript (ES6+)", "jsPDF / PDF Generation", "GitHub API Sync", "Edge Runtime"], "buttons": [], "hasLinks": false, "links": []}, {"id": "timeline", "title": "World History & Mythology Timeline", "subtitle": "Chronological Multi-Track Engine (10,000 BCE \u2013 1800 CE)", "status": "Web Platform", "badgeClass": "badge-outline", "num": "07", "liveUrl": "", "desc": "An interactive, high-contrast, multi-track chronological timeline connecting global civilizations, founding epics, and legendary writers across 12 millennia. Features cross-epoch zoom navigation, civilization filter matrices, epoch-anchored historical narratives, and instant literature cross-referencing.", "features": ["12,000-year multi-track chronological canvas", "Civilization filter matrices & cross-epoch zooming", "Epic literature cross-referencing & author dossiers", "Fluid 60fps pan/zoom visual engine"], "tech": ["JavaScript (ES6+)", "HTML5 Canvas / DOM", "CSS Grid", "JSON Data Engine"], "buttons": [], "hasLinks": false, "links": []}, {"id": "psych", "title": "Psychology Lecture Knowledge Platform", "subtitle": "University Research & Student Educational Portal", "status": "Production-Ready", "badgeClass": "badge-outline", "num": "08", "liveUrl": "", "desc": "A specialized academic portal built for university psychology students and researchers. Combines structured modular lecture pathways, clinical case study dossiers, interactive self-assessment quizzes, and downloadable PDF research summaries.", "features": ["Modular lecture pathway curriculum engine", "Clinical case study dossiers & diagnostic trees", "Interactive self-assessment quizzing system", "Responsive reading mode & bibliography manager"], "tech": ["JavaScript (ES6+)", "HTML5 / CSS3", "Local Storage", "PDF Generation"], "buttons": [], "hasLinks": false, "links": []}, {"id": "onboardflow", "title": "OnboardFlow", "subtitle": "Automated Client Onboarding & Intake System", "status": "Full-Stack SaaS", "badgeClass": "badge-outline", "num": "09", "liveUrl": "", "desc": "An enterprise client onboarding automation platform that eliminates administrative friction through dynamic multi-step intake flows, automated document collection, digital e-signatures, and instant client workspace provisioning.", "features": ["Dynamic conditional intake questionnaires", "Secure encrypted document upload pipeline", "Automated client milestone progress tracking", "Webhook integrations for CRM and billing systems"], "tech": ["TypeScript", "Next.js", "Node.js", "PostgreSQL", "Prisma", "Tailwind CSS"], "buttons": [], "hasLinks": false, "links": []}, {"id": "medicare", "title": "MediCare AI Companion", "subtitle": "Intelligent Patient Health Assistant", "status": "Healthcare Web App", "badgeClass": "badge-outline", "num": "10", "liveUrl": "", "desc": "A privacy-first healthcare web application designed to support patient wellness through intelligent symptom tracking, medication scheduling with reminders, medical report summarization, and emergency contact coordination.", "features": ["Natural-language health query assistant", "Medication schedule & adherence tracking", "Medical report plain-English summarizer", "Encrypted local health journal"], "tech": ["TypeScript", "Next.js", "Tailwind CSS", "Web Speech API", "IndexedDB"], "buttons": [], "hasLinks": false, "links": []}, {"id": "repair", "title": "Retail Repair Price Matrix", "subtitle": "Real-Time Repair Quoting & Device Diagnostic Engine", "status": "Live Engine", "badgeClass": "badge-outline", "num": "11", "liveUrl": "", "desc": "A multi-branch commercial repair price catalog and service quoting matrix. Features real-time part cost lookups, labor rate calculation, customer ticket generation, and automated WhatsApp/SMS quotation exports.", "features": ["Instant multi-brand device repair pricing engine", "Real-time part margin & labor calculation", "Customer receipt & printable service tickets", "Multi-store branch synchronization"], "tech": ["JavaScript (ES6+)", "Cloudflare Workers", "HTML5", "CSS3"], "buttons": [], "hasLinks": false, "links": []}];
 const GALLERY_DATA = [
   {
-    "title": "Children's Creative Studio & Art Illustration Study",
+    "title": "Creative Studio & Narrative Visual Studies",
     "cat": "environment",
     "pillar": "Personal",
     "path": "Photos & to upload/Instagram/Childrens_Room_Art_Study.jpg",
@@ -353,13 +353,33 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/17892336767838958.jpg",
       "Photos & to upload/Instagram/18266166148100937.jpg",
       "Photos & to upload/Instagram/17958012526650381.jpg",
-      "Photos & to upload/Instagram/17978168416366635.jpg",
       "Photos & to upload/Instagram/18173685229138105.jpg",
       "Photos & to upload/Instagram/18131148718177645.jpg",
       "Photos & to upload/Instagram/17935025272142875.jpg"
     ],
-    "desc": "Rich spatial concept study capturing a warm sunlit creative room with children's pinboard illustrations, drawing table studies, and classical framed portrait artwork.",
-    "youtubeUrl": ""
+    "desc": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork.",
+    "youtubeUrl": "",
+    "subTitles": {
+      "0": "Creative Corner & Studio Study",
+      "1": "Memory at the Table",
+      "2": "Reflection of Ambition",
+      "3": "The Endless Ascent",
+      "4": "Echoes in the Corridor",
+      "5": "Guiding Shadows",
+      "6": "Beacon of the Unseen",
+      "7": "Strategic Alignment"
+    },
+    "subDescriptions": {
+      "0": "A warm 3D interior visualization capturing a child's art workspace, featuring handcrafted wall displays, pinboards, and natural morning light across warm wood textures.",
+      "1": "An atmospheric monochrome narrative study depicting a shadowy family gathering, utilizing film grain and soft window backlighting to evoke nostalgia.",
+      "2": "A surreal composition exploring identity and hidden potential, featuring a wooden pawn observing the smoky reflection of a queen within a framed mirror.",
+      "3": "A stark visual concept on momentum and progress, featuring a lone silhouette climbing a floating, illuminated staircase into a fog-filled void.",
+      "4": "An eerie dark-fantasy character rendering featuring a slender, horned figure standing in a grainy, dimly lit corridor with analog noise effects.",
+      "5": "A haunting psychological illustration depicting a pale child in a dark woodland, enveloped by ghostly, reaching hands emerging from the background.",
+      "6": "A textured vignette artwork capturing a solitary figure channeling a stream of vibrant, swirling energy toward a distant tower on a dark ridge.",
+      "7": "A close-up material render showcasing detailed surface shaders, warm directional lighting, and perspective warping across an infinite checkerboard plane."
+    },
+    "subVideos": {}
   },
   {
     "title": "Japanese Traditional Estate & Shinjuku Architecture Study",
@@ -370,10 +390,20 @@ const GALLERY_DATA = [
     "images": [
       "Photos & to upload/Japanese Building/All Work (26).jpg",
       "Photos & to upload/Japanese Building/All Work (7).png",
-      "Photos & to upload/Japanese Building/All Work (9).png",
-      "Photos & to upload/Exterior/All Work (3).jpg",
-      "Photos & to upload/Instagram/18046110724462208.jpg"
-    ]
+      "Photos & to upload/Japanese Building/All Work (9).png"
+    ],
+    "subTitles": {
+      "0": "Japanese Traditional Estate & Shinjuku Architecture Study",
+      "1": "Japanese Traditional Estate & Shinjuku Architecture Study",
+      "2": "Japanese Traditional Estate & Shinjuku Architecture Study"
+    },
+    "subDescriptions": {
+      "0": "Comprehensive 3D architectural study combining traditional wooden joinery, Zen estate pavilions, tea house interiors, and Tokyo Shinjuku street elevations.",
+      "1": "Comprehensive 3D architectural study combining traditional wooden joinery, Zen estate pavilions, tea house interiors, and Tokyo Shinjuku street elevations.",
+      "2": "Comprehensive 3D architectural study combining traditional wooden joinery, Zen estate pavilions, tea house interiors, and Tokyo Shinjuku street elevations."
+    },
+    "subVideos": {},
+    "youtubeUrl": ""
   },
   {
     "title": "Egyptian Mythology, Temple of Anubis & Osiris Sanctum",
@@ -388,14 +418,26 @@ const GALLERY_DATA = [
       "Photos & to upload/Egyptian Mythology/All Work (105).jpg",
       "Photos & to upload/Egyptian Mythology/All Work (140).jpg"
     ],
-    "subTitles": {},
-    "subDescriptions": {},
+    "subTitles": {
+      "0": "Egyptian Mythology, Temple of Anubis & Osiris Sanctum",
+      "1": "Egyptian Mythology, Temple of Anubis & Osiris Sanctum",
+      "2": "Egyptian Mythology, Temple of Anubis & Osiris Sanctum",
+      "3": "Egyptian Mythology, Temple of Anubis & Osiris Sanctum",
+      "4": "Egyptian Mythology, Temple of Anubis & Osiris Sanctum"
+    },
+    "subDescriptions": {
+      "0": "High-detail cinematic Egyptian mythology collection featuring monumental sandstone monoliths, hieroglyphic reliefs, Pharaonic sanctums, and god sculptures.",
+      "1": "High-detail cinematic Egyptian mythology collection featuring monumental sandstone monoliths, hieroglyphic reliefs, Pharaonic sanctums, and god sculptures.",
+      "2": "High-detail cinematic Egyptian mythology collection featuring monumental sandstone monoliths, hieroglyphic reliefs, Pharaonic sanctums, and god sculptures.",
+      "3": "High-detail cinematic Egyptian mythology collection featuring monumental sandstone monoliths, hieroglyphic reliefs, Pharaonic sanctums, and god sculptures.",
+      "4": "High-detail cinematic Egyptian mythology collection featuring monumental sandstone monoliths, hieroglyphic reliefs, Pharaonic sanctums, and god sculptures."
+    },
     "subVideos": {},
     "youtubeUrl": ""
   },
   {
     "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
-    "pillar": "Client",
+    "pillar": "Client Work",
     "cat": "environment",
     "desc": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
     "path": "Photos & to upload/Client/Eskimo/Interior/Final1.jpg",
@@ -406,28 +448,68 @@ const GALLERY_DATA = [
       "Photos & to upload/Client/Eskimo/Interior/Final6.jpg",
       "Photos & to upload/Client/Eskimo/Eskimo Graystown/1.jpg",
       "Photos & to upload/Client/Eskimo/Eskimo Graystown/2.jpg",
+      "Photos & to upload/Instagram/17946121076087543.webp",
       "Photos & to upload/Client/Eskimo/Interior 2/1.jpg",
       "Photos & to upload/Client/Eskimo/Final/1.png",
       "Photos & to upload/Client/Eskimo/Final/2.png",
       "Photos & to upload/Client/Eskimo/Final/3.png",
-      "Photos & to upload/Client/Eskimo/Final/5.png",
-      "Photos & to upload/Instagram/17946121076087543.webp"
-    ]
+      "Photos & to upload/Client/Eskimo/Final/5.png"
+    ],
+    "subTitles": {
+      "0": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
+      "1": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
+      "2": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
+      "3": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
+      "4": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
+      "5": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
+      "6": "Shop Interior",
+      "7": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
+      "8": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
+      "9": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
+      "10": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
+      "11": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out"
+    },
+    "subDescriptions": {
+      "0": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
+      "1": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
+      "2": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
+      "3": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
+      "4": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
+      "5": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
+      "6": "Shop Interior Made in Blender",
+      "7": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
+      "8": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
+      "9": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
+      "10": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
+      "11": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
+    },
+    "subVideos": {},
+    "youtubeUrl": ""
   },
   {
     "title": "IDFL Kiosk: Retail Hardware & Service Center Architectural Visual",
-    "pillar": "Client",
+    "pillar": "Client Work",
     "cat": "environment",
     "desc": "Modular shopping mall service kiosk and repair diagnostic reception station designed with custom acrylic display cases and LED backlighting.",
     "path": "Photos & to upload/Client/IDFL/IDFL Kiosk/Final1.jpg",
     "images": [
       "Photos & to upload/Client/IDFL/IDFL Kiosk/Final1.jpg",
       "Photos & to upload/Client/IDFL/IDFL Kiosk/Final 2.jpg"
-    ]
+    ],
+    "subTitles": {
+      "0": "IDFL Kiosk: Retail Hardware & Service Center Architectural Visual",
+      "1": "IDFL Kiosk: Retail Hardware & Service Center Architectural Visual"
+    },
+    "subDescriptions": {
+      "0": "Modular shopping mall service kiosk and repair diagnostic reception station designed with custom acrylic display cases and LED backlighting.",
+      "1": "Modular shopping mall service kiosk and repair diagnostic reception station designed with custom acrylic display cases and LED backlighting."
+    },
+    "subVideos": {},
+    "youtubeUrl": ""
   },
   {
     "title": "Get Connected: Executive Commercial Workspace & Acoustic Pods (Blender 3D)",
-    "pillar": "Client",
+    "pillar": "Client Work",
     "cat": "environment",
     "desc": "Full-scale modern corporate interior fit-out modeled in Blender 3D featuring acoustic breakout booths, open-plan workstations, and executive boardrooms.",
     "path": "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823343839673_1538841423_8.webp",
@@ -438,9 +520,28 @@ const GALLERY_DATA = [
       "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823570403632_1538841423_5.webp",
       "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823528350189_1538841423_9.webp",
       "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823536846267_1538841423_1.webp",
-      "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823553459052_1538841423_2.webp",
-      "Photos & to upload/Instagram/17988884707656692.webp"
-    ]
+      "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823553459052_1538841423_2.webp"
+    ],
+    "subTitles": {
+      "0": "Get Connected: Executive Commercial Workspace & Acoustic Pods (Blender 3D)",
+      "1": "Get Connected: Executive Commercial Workspace & Acoustic Pods (Blender 3D)",
+      "2": "Get Connected: Executive Commercial Workspace & Acoustic Pods (Blender 3D)",
+      "3": "Get Connected: Executive Commercial Workspace & Acoustic Pods (Blender 3D)",
+      "4": "Get Connected: Executive Commercial Workspace & Acoustic Pods (Blender 3D)",
+      "5": "Get Connected: Executive Commercial Workspace & Acoustic Pods (Blender 3D)",
+      "6": "Get Connected: Executive Commercial Workspace & Acoustic Pods (Blender 3D)"
+    },
+    "subDescriptions": {
+      "0": "Full-scale modern corporate interior fit-out modeled in Blender 3D featuring acoustic breakout booths, open-plan workstations, and executive boardrooms.",
+      "1": "Full-scale modern corporate interior fit-out modeled in Blender 3D featuring acoustic breakout booths, open-plan workstations, and executive boardrooms.",
+      "2": "Full-scale modern corporate interior fit-out modeled in Blender 3D featuring acoustic breakout booths, open-plan workstations, and executive boardrooms.",
+      "3": "Full-scale modern corporate interior fit-out modeled in Blender 3D featuring acoustic breakout booths, open-plan workstations, and executive boardrooms.",
+      "4": "Full-scale modern corporate interior fit-out modeled in Blender 3D featuring acoustic breakout booths, open-plan workstations, and executive boardrooms.",
+      "5": "Full-scale modern corporate interior fit-out modeled in Blender 3D featuring acoustic breakout booths, open-plan workstations, and executive boardrooms.",
+      "6": "Full-scale modern corporate interior fit-out modeled in Blender 3D featuring acoustic breakout booths, open-plan workstations, and executive boardrooms."
+    },
+    "subVideos": {},
+    "youtubeUrl": ""
   },
   {
     "title": "Rizpros: Commercial Workspace & Operations Logistics",
@@ -451,7 +552,16 @@ const GALLERY_DATA = [
     "images": [
       "Photos & to upload/Client/Rizpros/Image_0010008.png",
       "Photos & to upload/Client/Rizpros/4.png"
-    ]
+    ],
+    "subVideos": {},
+    "subTitles": {
+      "0": "Rizpros: Commercial Workspace & Operations Logistics",
+      "1": "Rizpros: Commercial Workspace & Operations Logistics"
+    },
+    "subDescriptions": {
+      "0": "Dual-space 3D architectural renders exploring modern administrative office flow, warehouse inventory sorting zones, and delivery staging bays.",
+      "1": "Dual-space 3D architectural renders exploring modern administrative office flow, warehouse inventory sorting zones, and delivery staging bays."
+    }
   },
   {
     "title": "Luxury Fragrance & Noir Perfume Product Visualizations",
@@ -463,7 +573,18 @@ const GALLERY_DATA = [
       "Photos & to upload/Product Render/Perfume (1).png",
       "Photos & to upload/Product Render/Perfume (2).png",
       "Photos & to upload/Product Render/Perfume (3).png"
-    ]
+    ],
+    "subVideos": {},
+    "subTitles": {
+      "0": "Luxury Fragrance & Noir Perfume Product Visualizations",
+      "1": "Luxury Fragrance & Noir Perfume Product Visualizations",
+      "2": "Luxury Fragrance & Noir Perfume Product Visualizations"
+    },
+    "subDescriptions": {
+      "0": "Commercial perfume bottle visualization series featuring glass caustic simulations, frosted flacons, liquid meniscus, and studio rim lighting.",
+      "1": "Commercial perfume bottle visualization series featuring glass caustic simulations, frosted flacons, liquid meniscus, and studio rim lighting.",
+      "2": "Commercial perfume bottle visualization series featuring glass caustic simulations, frosted flacons, liquid meniscus, and studio rim lighting."
+    }
   },
   {
     "title": "Interior Volumes: A Study in Architectural Light & Materiality",
@@ -474,7 +595,7 @@ const GALLERY_DATA = [
     "images": [
       "Photos & to upload/Kitchen/67748729_2470650796319052_4466508233967665152_o.jpg",
       "Photos & to upload/Kitchen/All Work (160).jpg",
-      "Photos & to upload/Kitchen/All Work (167).jpg",
+      "Photos & to upload/Instagram/17915681896934511.jpg",
       "Photos & to upload/YouTube/wvJ3n61oNlQ.jpg",
       "Photos & to upload/Church/4.jpg",
       "Photos & to upload/YouTube/AYk-BZrP6D0.jpg",
@@ -482,11 +603,40 @@ const GALLERY_DATA = [
       "Photos & to upload/Bedroom/All Work (67).jpg",
       "Photos & to upload/YouTube/aniBOlBF1Ow.jpg",
       "Photos & to upload/Instagram/18328297867051721.webp",
-      "Photos & to upload/Instagram/17889489539305832.jpg",
-      "Photos & to upload/Instagram/17915681896934511.jpg"
+      "Photos & to upload/Instagram/17889489539305832.jpg"
     ],
-    "subVideos": {},
-    "youtubeUrl": ""
+    "subVideos": {
+      "3": "https://www.youtube.com/watch?v=wvJ3n61oNlQ",
+      "5": "https://www.youtube.com/watch?v=AYk-BZrP6D0",
+      "8": "https://www.youtube.com/watch?v=aniBOlBF1Ow"
+    },
+    "youtubeUrl": "",
+    "subTitles": {
+      "0": "Interior Volumes: A Study in Architectural Light & Materiality",
+      "1": "Interior Volumes: A Study in Architectural Light & Materiality",
+      "2": "Which looks better?",
+      "3": "Interior Volumes: A Study in Architectural Light & Materiality",
+      "4": "Interior Volumes: A Study in Architectural Light & Materiality",
+      "5": "Interior Volumes: A Study in Architectural Light & Materiality",
+      "6": "Interior Volumes: A Study in Architectural Light & Materiality",
+      "7": "Interior Volumes: A Study in Architectural Light & Materiality",
+      "8": "Ann's Delight Sweet Paradise: Commercial Store",
+      "9": "Saw this amazing photograph (2nd photo) by @zakia_ta...",
+      "10": "Interior Design"
+    },
+    "subDescriptions": {
+      "0": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
+      "1": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
+      "2": "Which looks better?",
+      "3": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
+      "4": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
+      "5": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
+      "6": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
+      "7": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
+      "8": "Unreal Engine 5 virtual walkthrough and 3D architectural retail visualization for Ann's Delight confectionary brand.",
+      "9": "Saw this amazing photograph (2nd photo) by @zakia_takreem So I created this render (1st photo) in Blender",
+      "10": "Interior Design Made in 3ds Max, Unreal Engine and Blender"
+    }
   },
   {
     "title": "Urban Rain & Historic Street Corridor Study",
@@ -499,7 +649,20 @@ const GALLERY_DATA = [
       "Photos & to upload/Streets/Street (2).jpg",
       "Photos & to upload/Instagram/17944520716748771.webp",
       "Photos & to upload/Instagram/17939292163943085.webp"
-    ]
+    ],
+    "subVideos": {},
+    "subTitles": {
+      "0": "Urban Rain & Historic Street Corridor Study",
+      "1": "Urban Rain & Historic Street Corridor Study",
+      "2": "Street Art in Blender",
+      "3": "Dark Street #blender #d #dart #art #render #digitala..."
+    },
+    "subDescriptions": {
+      "0": "Atmospheric moody street scene with wet cobblestone puddles, reflective store windows, and warm street lamp illumination.",
+      "1": "Atmospheric moody street scene with wet cobblestone puddles, reflective store windows, and warm street lamp illumination.",
+      "2": "Street Art in Blender",
+      "3": "Dark Street #blender #d #dart #art #render #digitalart #dmodeling #blendercommunity #animation #design #cgi #dmodel #cinema #dartist #rendering #dr..."
+    }
   },
   {
     "title": "Mythology",
@@ -530,8 +693,56 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/17881760798115414.jpg",
       "Photos & to upload/Instagram/17858904386497517.jpg"
     ],
-    "subVideos": {},
-    "youtubeUrl": ""
+    "subVideos": {
+      "3": "https://www.youtube.com/watch?v=PJ1i1nk43Zo"
+    },
+    "youtubeUrl": "",
+    "subTitles": {
+      "0": "Mythology",
+      "1": "Mythology",
+      "2": "Mythology",
+      "3": "Mythology",
+      "4": "Mythology",
+      "5": "Mythology",
+      "6": "A sculpture with a painting",
+      "7": "Viking ship passing through a gap",
+      "8": "Ancient Ruins",
+      "9": "From Sketch to 3d render",
+      "10": "Different versions",
+      "11": "Norse Mythology- Valkyrie Created and Rendered in Bl...",
+      "12": "Valkyrie in Norse Mythology #render #d #3dart #3dmod...",
+      "13": "Thor from Norse Mythology #render #d #3dart #3dmodel...",
+      "14": "Make love not war",
+      "15": "Statue Render",
+      "16": "New video coming...",
+      "17": "Home made in Blender with a pre-made model from Sket...",
+      "18": "Nun & Apep, a giant serpent",
+      "19": "Trio #marvel #movies #moonknight",
+      "20": "Osiris Sculpture"
+    },
+    "subDescriptions": {
+      "0": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
+      "1": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
+      "2": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
+      "3": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
+      "4": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
+      "5": "Hand-hewn timber longhouse with central stone hearth, authentic shields, volumetric wood smoke, and historic Nordic architectural details.",
+      "6": "A sculpture with a painting Which art medium do you prefer?",
+      "7": "Viking ship passing through a gap",
+      "8": "Ancient Ruins",
+      "9": "From Sketch to 3d render",
+      "10": "Different versions",
+      "11": "Norse Mythology- Valkyrie Created and Rendered in Blender #blender #artwork #bhfyp #digitalart #gaming #graphicdesign #fortnite #photoshop #cinema ...",
+      "12": "Valkyrie in Norse Mythology #render #d #3dart #3dmodeling #concept #blender3d #robot #vfx #cgi #3dsmax #motiondesign #3dmodel #3drender #cinema4d #...",
+      "13": "Thor from Norse Mythology #render #d #3dart #3dmodeling #concept #blender3d #robot #vfx #cgi #3dsmax #motiondesign #3dmodel #3drender #cinema4d #3d...",
+      "14": "Make love not war Made in Blender 3d",
+      "15": "Statue Render",
+      "16": "New video coming... Follow my youtube channel for updates...",
+      "17": "Home made in Blender with a pre-made model from Sketchfab. Showing how sculpting and details captures the focus over modern architecture.",
+      "18": "Nun & Apep, a giant serpent",
+      "19": "Trio #marvel #movies #moonknight",
+      "20": "Osiris Sculpture"
+    }
   },
   {
     "title": "Surreal Geometric Dreamscape & Abstract Spatial Horizons",
@@ -544,7 +755,20 @@ const GALLERY_DATA = [
       "Photos & to upload/Surrealism/All Work (35).png",
       "Photos & to upload/Surrealism/All Work (36).png",
       "Photos & to upload/Instagram/17924379833335959.webp"
-    ]
+    ],
+    "subVideos": {},
+    "subTitles": {
+      "0": "Surreal Geometric Dreamscape & Abstract Spatial Horizons",
+      "1": "Surreal Geometric Dreamscape & Abstract Spatial Horizons",
+      "2": "Surreal Geometric Dreamscape & Abstract Spatial Horizons",
+      "3": "Abstract architecture"
+    },
+    "subDescriptions": {
+      "0": "Mind-bending metaphysical compositions exploring impossible geometries, floating monoliths, and infinite perspective horizon lines.",
+      "1": "Mind-bending metaphysical compositions exploring impossible geometries, floating monoliths, and infinite perspective horizon lines.",
+      "2": "Mind-bending metaphysical compositions exploring impossible geometries, floating monoliths, and infinite perspective horizon lines.",
+      "3": "Abstract architecture"
+    }
   },
   {
     "title": "Sketches: Character Studies in Anatomy, Gesture, and Form",
@@ -569,8 +793,36 @@ const GALLERY_DATA = [
     ],
     "subVideos": {},
     "youtubeUrl": "",
-    "subTitles": {},
-    "subDescriptions": {}
+    "subTitles": {
+      "0": "Sketches: Character Studies in Anatomy, Gesture, and Form",
+      "1": "Sketches: Character Studies in Anatomy, Gesture, and Form",
+      "2": "Sketches: Character Studies in Anatomy, Gesture, and Form",
+      "3": "Sketches: Character Studies in Anatomy, Gesture, and Form",
+      "4": "Sketches: Character Studies in Anatomy, Gesture, and Form",
+      "5": "Sketches: Character Studies in Anatomy, Gesture, and Form",
+      "6": "Save the whales",
+      "7": "My effort to create an art which showcased the proce...",
+      "8": "Red Alert",
+      "9": "A small project",
+      "10": "Concept Art course - Day 2",
+      "11": "Concept Art course - Day 1",
+      "12": "Futuristic Art"
+    },
+    "subDescriptions": {
+      "0": "Traditional hand-drawn anatomical studies examining dynamic silhouette weight distribution, skull plane transitions, and gestural momentum.",
+      "1": "Traditional hand-drawn anatomical studies examining dynamic silhouette weight distribution, skull plane transitions, and gestural momentum.",
+      "2": "Traditional hand-drawn anatomical studies examining dynamic silhouette weight distribution, skull plane transitions, and gestural momentum.",
+      "3": "Traditional hand-drawn anatomical studies examining dynamic silhouette weight distribution, skull plane transitions, and gestural momentum.",
+      "4": "Traditional hand-drawn anatomical studies examining dynamic silhouette weight distribution, skull plane transitions, and gestural momentum.",
+      "5": "Traditional hand-drawn anatomical studies examining dynamic silhouette weight distribution, skull plane transitions, and gestural momentum.",
+      "6": "Save the whales",
+      "7": "My effort to create an art which showcased the process of purchasing a slave in Paris",
+      "8": "Red Alert",
+      "9": "A small project",
+      "10": "Concept Art course - Day 2",
+      "11": "Concept Art course - Day 1",
+      "12": "Futuristic Art"
+    }
   },
   {
     "title": "Speculative Worldbuilding: Environmental Architecture & Hard Surface Design",
@@ -583,7 +835,15 @@ const GALLERY_DATA = [
       "Photos & to upload/Plane/25542788_1949128395101535_7558624210513976664_o.jpg"
     ],
     "subVideos": {},
-    "youtubeUrl": ""
+    "youtubeUrl": "",
+    "subTitles": {
+      "0": "Speculative Worldbuilding: Environmental Architecture & Hard Surface Design",
+      "1": "Speculative Worldbuilding: Environmental Architecture & Hard Surface Design"
+    },
+    "subDescriptions": {
+      "0": "Massive monolithic desert metropolis and orbital transport vessel navigating atmospheric sand haze and harsh desert sunlight.",
+      "1": "Massive monolithic desert metropolis and orbital transport vessel navigating atmospheric sand haze and harsh desert sunlight."
+    }
   },
   {
     "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
@@ -611,7 +871,51 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/17860437881274324.jpg"
     ],
     "subVideos": {
-      "0": "https://www.youtube.com/watch?v=jN-SOF7No1Q"
+      "0": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
+      "1": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
+      "2": "https://www.youtube.com/watch?v=L6NKHuSGThA",
+      "3": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
+      "4": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
+      "5": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
+      "6": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
+      "7": "https://www.youtube.com/watch?v=jN-SOF7No1Q",
+      "8": "https://www.youtube.com/watch?v=jN-SOF7No1Q"
+    },
+    "subTitles": {
+      "0": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
+      "1": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
+      "2": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
+      "3": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
+      "4": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
+      "5": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
+      "6": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
+      "7": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
+      "8": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
+      "9": "I had a dream where I was in a jungle and a tiger wa...",
+      "10": "Forest Render",
+      "11": "Insects collage",
+      "12": "Animal hunting",
+      "13": "Night Owl 3d render",
+      "14": "Blender 3.0 Render",
+      "15": "Just 1864 pandas left in the world"
+    },
+    "subDescriptions": {
+      "0": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
+      "1": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
+      "2": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
+      "3": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
+      "4": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
+      "5": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
+      "6": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
+      "7": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
+      "8": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
+      "9": "I had a dream where I was in a jungle and a tiger was watching me from afar. He didn't attack but the image was stuck in my mind. So, I used Blende...",
+      "10": "Forest Render",
+      "11": "Insects collage Made in Blender",
+      "12": "Animal hunting",
+      "13": "Night Owl 3d render",
+      "14": "Blender 3.0 Render",
+      "15": "Just 1864 pandas left in the world"
     }
   },
   {
@@ -641,7 +945,59 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/17960877817493647.jpg",
       "Photos & to upload/Instagram/17930139391772432.jpg",
       "Photos & to upload/Instagram/17916258841067694.jpg"
-    ]
+    ],
+    "subVideos": {
+      "0": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
+      "1": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
+      "2": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
+      "3": "https://www.youtube.com/watch?v=sc7N1vtVA8M",
+      "4": "https://www.youtube.com/watch?v=8zlzhEICw-w",
+      "5": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
+      "6": "https://www.youtube.com/watch?v=Tkke1L5bGyM",
+      "7": "https://www.youtube.com/watch?v=Tkke1L5bGyM"
+    },
+    "subTitles": {
+      "0": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study)",
+      "1": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study)",
+      "2": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study)",
+      "3": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study)",
+      "4": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study)",
+      "5": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study)",
+      "6": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study)",
+      "7": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study)",
+      "8": "Spaceship",
+      "9": "Step into the neon-lit future of my cyberpunk dreams...",
+      "10": "Created a random render of a cyberpunk corridor",
+      "11": "City in the sky",
+      "12": "City in the Sky",
+      "13": "Zombie Apocalypse scene",
+      "14": "Scifi scene",
+      "15": "The era beyond wars #render #d #3dart #3dmodeling #c...",
+      "16": "Robot & a creature",
+      "17": "Robot in a cave",
+      "18": "Spaceship... blender file render online"
+    },
+    "subDescriptions": {
+      "0": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
+      "1": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
+      "2": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
+      "3": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
+      "4": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
+      "5": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
+      "6": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
+      "7": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
+      "8": "Spaceship",
+      "9": "Step into the neon-lit future of my cyberpunk dreams ✨🌃 Immerse yourself in the breathtaking intricacies of this meticulously crafted cityscape, wh...",
+      "10": "Created a random render of a cyberpunk corridor",
+      "11": "City in the sky Challenge by @cg_boost",
+      "12": "City in the Sky Challenge by @cg_boost",
+      "13": "Zombie Apocalypse scene With a new concept what if a robot instead of a human needs to survive in a zombie apocalypse.",
+      "14": "Scifi scene",
+      "15": "The era beyond wars #render #d #3dart #3dmodeling #concept #blender3d #robot #vfx #cgi #3dsmax #motiondesign #3dmodel #3drender #cinema4d #3dartist...",
+      "16": "Robot & a creature Blender Exercise",
+      "17": "Robot in a cave",
+      "18": "Spaceship... blender file render online"
+    }
   },
   {
     "title": "Contemporary Architectural Visualization",
@@ -674,10 +1030,67 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/17857249232533945.jpg",
       "Photos & to upload/Instagram/18031520548280063.jpg",
       "Photos & to upload/Instagram/17915254156167498.jpg",
-      "Photos & to upload/Instagram/17930780848117326.jpg"
+      "Photos & to upload/Instagram/17930780848117326.jpg",
+      "Photos & to upload/Exterior/All Work (3).jpg"
     ],
     "subVideos": {},
-    "youtubeUrl": ""
+    "youtubeUrl": "",
+    "subTitles": {
+      "0": "Contemporary Architectural Visualization",
+      "1": "Contemporary Architectural Visualization",
+      "2": "Contemporary Architectural Visualization",
+      "3": "Contemporary Architectural Visualization",
+      "4": "Contemporary Architectural Visualization",
+      "5": "Stepping into a world where nature embraces craftsma...",
+      "6": "Castle made in Blender and edited in Photoshop",
+      "7": "Monumental Marvel - 3D Minar-e-Pakistan Tribute 🏰",
+      "8": "Yale Center for British Art Exterior",
+      "9": "Yale center for British Art",
+      "10": "A nuclear family",
+      "11": "Underwater Temple",
+      "12": "Lighthouse render",
+      "13": "House with a boat",
+      "14": "Apartments",
+      "15": "Blue door",
+      "16": "Today I was working on a secret project. I was bored...",
+      "17": "Tower Render",
+      "18": "Architecture",
+      "19": "Architecture render in Sketchup, Unreal Engine and B...",
+      "20": "Forest barn #blender #d #dart #art #render #digitala...",
+      "21": "Story Images",
+      "22": "Futuristic Hall",
+      "23": "Museum in NY . Render",
+      "24": "Exterior Render",
+      "25": "Japanese Traditional Estate & Shinjuku Architecture Study"
+    },
+    "subDescriptions": {
+      "0": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting.",
+      "1": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting.",
+      "2": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting.",
+      "3": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting.",
+      "4": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting.",
+      "5": "Stepping into a world where nature embraces craftsmanship 🌿🚪✨ Loving how this 3D masterpiece turned out! 🏞️🪟 Bringing the charm of a village door s...",
+      "6": "Castle made in Blender and edited in Photoshop",
+      "7": "Monumental Marvel - 3D Minar-e-Pakistan Tribute 🏰 Witness the splendor of my latest creation - a meticulous 3D rendition of Minar-e-Pakistan, an ic...",
+      "8": "Yale Center for British Art Exterior Made in Blender 3D",
+      "9": "Yale center for British Art Made in Blender",
+      "10": "A nuclear family",
+      "11": "Underwater Temple Made in Blender and edited in Photoshop",
+      "12": "Lighthouse render Made in Blender 3D",
+      "13": "House with a boat",
+      "14": "Apartments @blenderartists",
+      "15": "Blue door From painting to 3d",
+      "16": "Today I was working on a secret project. I was bored so I thought maybe I could make something. Yesterday, I was in another city and I saw a water ...",
+      "17": "Tower Render Made in Blender",
+      "18": "Architecture",
+      "19": "Architecture render in Sketchup, Unreal Engine and Blender. Used @quixelofficial",
+      "20": "Forest barn #blender #d #dart #art #render #digitalart #animation #blendercommunity #dmodeling #design #cgi #blendermurah #rendering #dmodel #gfx #...",
+      "21": "Story Images",
+      "22": "Futuristic Hall",
+      "23": "Museum in NY . Render",
+      "24": "Exterior Render",
+      "25": "Comprehensive 3D architectural study combining traditional wooden joinery, Zen estate pavilions, tea house interiors, and Tokyo Shinjuku street elevations."
+    }
   },
   {
     "title": "Atmospheric Interior Lighting & Volumetric Illumination Study",
@@ -703,7 +1116,46 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/17992328569397170.jpg",
       "Photos & to upload/Instagram/17937269368567565.jpg",
       "Photos & to upload/Instagram/17886878243076992.jpg"
-    ]
+    ],
+    "subVideos": {},
+    "subTitles": {
+      "0": "Atmospheric Interior Lighting & Volumetric Illumination Study",
+      "1": "Atmospheric Interior Lighting & Volumetric Illumination Study",
+      "2": "Atmospheric Interior Lighting & Volumetric Illumination Study",
+      "3": "Atmospheric Interior Lighting & Volumetric Illumination Study",
+      "4": "Atmospheric Interior Lighting & Volumetric Illumination Study",
+      "5": "Atmospheric Interior Lighting & Volumetric Illumination Study",
+      "6": "Atmospheric Interior Lighting & Volumetric Illumination Study",
+      "7": "A 3D door inspired by a photo taken by a friend",
+      "8": "A bathroom made in Blender",
+      "9": "Scifi Room",
+      "10": "Scifi Room",
+      "11": "Japanese Shoji",
+      "12": "Make WHATEVER you want!!! Live Stream on YouTube \"En...",
+      "13": "Bathroom made in Unreal Engine, Blender and Megascan...",
+      "14": "As they say, light is everything",
+      "15": "Practising",
+      "16": "3drender #blender #d #dart #art #render #digitalart ..."
+    },
+    "subDescriptions": {
+      "0": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
+      "1": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
+      "2": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
+      "3": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
+      "4": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
+      "5": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
+      "6": "Deep dive into indirect bounce light, volumetric dust rays, dynamic color temperature calibration, and physical camera exposure in 3D interiors.",
+      "7": "A 3D door inspired by a photo taken by a friend",
+      "8": "A bathroom made in Blender",
+      "9": "Scifi Room Made in Blender",
+      "10": "Scifi Room",
+      "11": "Japanese Shoji",
+      "12": "Make WHATEVER you want!!! Live Stream on YouTube \"Entertaindo\" @blender.official @blender.community @blenderartists",
+      "13": "Bathroom made in Unreal Engine, Blender and Megascans #blender #d #dart #art #render #digitalart #dmodeling #blendercommunity #animation #design #c...",
+      "14": "As they say, light is everything",
+      "15": "Practising",
+      "16": "3drender #blender #d #dart #art #render #digitalart #animation #blendercommunity #dmodeling #design #cgi #blendermurah #rendering #dmodel #gfx #rob..."
+    }
   },
   {
     "title": "Complete: Emotional Short Animated Film",
@@ -715,7 +1167,18 @@ const GALLERY_DATA = [
     "images": [
       "Photos & to upload/YouTube/b8_h72abWqM.jpg",
       "Photos & to upload/Instagram/17903299933565896.jpg"
-    ]
+    ],
+    "subVideos": {
+      "0": "https://www.youtube.com/watch?v=b8_h72abWqM"
+    },
+    "subTitles": {
+      "0": "Complete: Emotional Short Animated Film",
+      "1": "Complete\" A short film.."
+    },
+    "subDescriptions": {
+      "0": "Complete character animation short exploring human memory, emotional connection, and poignant cinematic pacing.",
+      "1": "Complete\" A short film.. https://youtu.be/b8_h72abWqM"
+    }
   },
   {
     "title": "Cinematic Environments & Scenes",
@@ -724,11 +1187,97 @@ const GALLERY_DATA = [
     "desc": "Lush mossy ancient ruins beside a dynamic mountain stream with Nanite geometry, Lumen global illumination, and high-fidelity Megascans assets.",
     "path": "Photos & to upload/YouTube/XbsGhjGriEE.jpg",
     "youtubeUrl": "https://www.youtube.com/watch?v=XbsGhjGriEE",
-    "subTitles": {},
-    "subDescriptions": {},
+    "subTitles": {
+      "0": "Cinematic Environments & Scenes",
+      "1": "Cinematic Environments & Scenes",
+      "2": "Cinematic Environments & Scenes",
+      "3": "Cinematic Environments & Scenes",
+      "4": "Cinematic Environments & Scenes",
+      "5": "Cinematic Environments & Scenes",
+      "6": "Cinematic Environments & Scenes",
+      "7": "Cinematic Environments & Scenes",
+      "8": "Inspiration from a post, I saw on Instagram",
+      "9": "Lighthouse render",
+      "10": "The multiverse is depicted as tree branches.",
+      "11": "Childhood Dreams Come True! ✨🌟",
+      "12": "Painting to 3D",
+      "13": "Roaring in the heart of nature's beauty! 🌿🏞️ Immerse...",
+      "14": "Castle made in Blender 3D",
+      "15": "City in the desert",
+      "16": "Strange house in a forest - 3D Render - Unreal Engin...",
+      "17": "Architecture",
+      "18": "A forest scene made in Blender",
+      "19": "Serene Sandstone Mosque: A Tranquil Oasis 🌾✨",
+      "20": "Step into the enchanting world of the Arabian bazaar...",
+      "21": "Bus station",
+      "22": "Fields of dreams 🌾🌻\"",
+      "23": "If you are living a colorless life, it doesn't matte...",
+      "24": "Sambrial Canal",
+      "25": "Recreating my old artwork",
+      "26": "Just a castle",
+      "27": "From Painting to 3D",
+      "28": "Created artwork for a challenge by @phase_runner and...",
+      "29": "Checkout full video on",
+      "30": "Art is a line around your thoughts”",
+      "31": "Girl kissing a child",
+      "32": "Stylized house",
+      "33": "Underwater Betta Fish",
+      "34": "Rendering",
+      "35": "Indoor lighting need to be fixed",
+      "36": "Unreal Engine 5 WIP",
+      "37": "Concept #blender #d #dart #art #render #digitalart #...",
+      "38": "Hope and Resilience"
+    },
+    "subDescriptions": {
+      "0": "Lush mossy ancient ruins beside a dynamic mountain stream with Nanite geometry, Lumen global illumination, and high-fidelity Megascans assets.",
+      "1": "Lush mossy ancient ruins beside a dynamic mountain stream with Nanite geometry, Lumen global illumination, and high-fidelity Megascans assets.",
+      "2": "Lush mossy ancient ruins beside a dynamic mountain stream with Nanite geometry, Lumen global illumination, and high-fidelity Megascans assets.",
+      "3": "Lush mossy ancient ruins beside a dynamic mountain stream with Nanite geometry, Lumen global illumination, and high-fidelity Megascans assets.",
+      "4": "Lush mossy ancient ruins beside a dynamic mountain stream with Nanite geometry, Lumen global illumination, and high-fidelity Megascans assets.",
+      "5": "Lush mossy ancient ruins beside a dynamic mountain stream with Nanite geometry, Lumen global illumination, and high-fidelity Megascans assets.",
+      "6": "Lush mossy ancient ruins beside a dynamic mountain stream with Nanite geometry, Lumen global illumination, and high-fidelity Megascans assets.",
+      "7": "Lush mossy ancient ruins beside a dynamic mountain stream with Nanite geometry, Lumen global illumination, and high-fidelity Megascans assets.",
+      "8": "Inspiration from a post, I saw on Instagram",
+      "9": "Lighthouse render",
+      "10": "The multiverse is depicted as tree branches.",
+      "11": "Childhood Dreams Come True! ✨🌟 Swipe left to witness the magic! 👉",
+      "12": "Painting to 3D Created in Blender",
+      "13": "Roaring in the heart of nature's beauty! 🌿🏞️ Immerse yourself in the enchanting world of this fiery red dragon amidst lush greenery, ancient ruins,...",
+      "14": "Castle made in Blender 3D",
+      "15": "City in the desert",
+      "16": "Strange house in a forest - 3D Render - Unreal Engine 5 #unrealengine5 #Blender3DRender #forest",
+      "17": "Architecture",
+      "18": "A forest scene made in Blender",
+      "19": "Serene Sandstone Mosque: A Tranquil Oasis 🌾✨ Escape to tranquility with this stunning sandstone 3D render featuring a white mosque that exudes peac...",
+      "20": "Step into the enchanting world of the Arabian bazaar! ✨🌴 Immerse yourself in the rich colors, intricate textures, and vibrant atmosphere of this 3D...",
+      "21": "Bus station",
+      "22": "Fields of dreams 🌾🌻\" Rendered in Blender 3D",
+      "23": "If you are living a colorless life, it doesn't matter whether the world is colorful or not!” - Some Random Person Created in Blender 3D with heart...",
+      "24": "Sambrial Canal Made in Blender 3D",
+      "25": "Recreating my old artwork",
+      "26": "Just a castle",
+      "27": "From Painting to 3D @blenderartists",
+      "28": "Created artwork for a challenge by @phase_runner and @huioncanada. After many years, I participated in any challenge. #phaserunnercommunity @photoshop",
+      "29": "Checkout full video on https://youtu.be/NOFS6gQ8Zfk",
+      "30": "Art is a line around your thoughts”",
+      "31": "Girl kissing a child",
+      "32": "Stylized house",
+      "33": "Underwater Betta Fish",
+      "34": "Rendering",
+      "35": "Indoor lighting need to be fixed What do you suggest?",
+      "36": "Unreal Engine 5 WIP Animation coming soon",
+      "37": "Concept #blender #d #dart #art #render #digitalart #animation #blendercommunity #dmodeling #design #cgi #blendermurah #rendering #dmodel #gfx #robl...",
+      "38": "Hope and Resilience"
+    },
     "subVideos": {
       "0": "https://www.youtube.com/watch?v=XbsGhjGriEE",
-      "1": "https://www.youtube.com/watch?v=yEWTwD7XMjw"
+      "1": "https://www.youtube.com/watch?v=yEWTwD7XMjw",
+      "2": "https://www.youtube.com/watch?v=x9p50UJI_NU",
+      "3": "https://www.youtube.com/watch?v=UYgf9MlZ2iY",
+      "4": "https://www.youtube.com/watch?v=BWPjtiNJSr4",
+      "5": "https://www.youtube.com/watch?v=NOFS6gQ8Zfk",
+      "6": "https://www.youtube.com/watch?v=XbsGhjGriEE",
+      "7": "https://www.youtube.com/watch?v=XbsGhjGriEE"
     },
     "images": [
       "Photos & to upload/YouTube/XbsGhjGriEE.jpg",
@@ -786,7 +1335,21 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/17861239659097287.jpg",
       "Photos & to upload/Instagram/18027156172444171.jpg",
       "Photos & to upload/Instagram/17883650021416002.jpg"
-    ]
+    ],
+    "subTitles": {
+      "0": "Locomotive: Industrial & Commercial",
+      "1": "Locomotive: Industrial & Commercial",
+      "2": "A visit to Japan",
+      "3": "Rendered in Blender 3D, inspired by \"Spirited Away\",...",
+      "4": "Ship Render #blender #d #dart #art #render #digitala..."
+    },
+    "subDescriptions": {
+      "0": "Atmospheric underground train carriage interior with distressed stainless steel textures and fluorescent flicker.",
+      "1": "Atmospheric underground train carriage interior with distressed stainless steel textures and fluorescent flicker.",
+      "2": "A visit to Japan",
+      "3": "Rendered in Blender 3D, inspired by \"Spirited Away\", Rendered in 1080 x 1080, 1000 frames. Smoke simulation, fog and clouds in @blender.official . ...",
+      "4": "Ship Render #blender #d #dart #art #render #digitalart #animation #dmodeling #blendercommunity #design #cgi #dmodel #rendering #cinema #dartist #dr..."
+    }
   },
   {
     "title": "Diorama: Architectural Scale Model",
@@ -802,7 +1365,21 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/18123427993286303.webp",
       "Photos & to upload/Instagram/17911473037897064.jpg",
       "Photos & to upload/Instagram/17912983441871207.jpg"
-    ]
+    ],
+    "subTitles": {
+      "0": "Diorama: Architectural Scale Model",
+      "1": "The last of us inspired",
+      "2": "Look at usual things with unusual eyes.” –Vico Magis...",
+      "3": "Resting tower",
+      "4": "Low poly artwork. Made in blender."
+    },
+    "subDescriptions": {
+      "0": "Charming isometric miniature building block with tilt-shift depth of field and soft ambient occlusion.",
+      "1": "The last of us inspired",
+      "2": "Look at usual things with unusual eyes.” –Vico Magistretti 😬🫡",
+      "3": "Resting tower All the models are made in Blender but the statue is made with photogrammetry downloaded from Sketchfab.",
+      "4": "Low poly artwork. Made in blender."
+    }
   },
   {
     "title": "Make Whatever You Want: Blender 3D Concept Showreel",
@@ -810,28 +1387,58 @@ const GALLERY_DATA = [
     "cat": "animation",
     "desc": "High-octane concept art montage demonstrating creative speed-modeling, hard-surface detailing, and stylistic shader experimentation.",
     "path": "Photos & to upload/YouTube/IYL4UTTOkdk.jpg",
-    "youtubeUrl": "https://www.youtube.com/watch?v=IYL4UTTOkdk"
+    "youtubeUrl": "https://www.youtube.com/watch?v=IYL4UTTOkdk",
+    "subVideos": {
+      "0": "https://www.youtube.com/watch?v=IYL4UTTOkdk"
+    },
+    "subTitles": {
+      "0": "Make Whatever You Want: Blender 3D Concept Showreel"
+    },
+    "subDescriptions": {
+      "0": "High-octane concept art montage demonstrating creative speed-modeling, hard-surface detailing, and stylistic shader experimentation."
+    }
   },
   {
     "title": "Underground Metro Tunnel",
     "cat": "environment",
     "pillar": "Personal",
     "path": "Photos & to upload/Underground/7.jpg",
-    "desc": "Subterranean corridor and moody fixtures"
+    "desc": "Subterranean corridor and moody fixtures",
+    "subVideos": {},
+    "subTitles": {
+      "0": "Underground Metro Tunnel"
+    },
+    "subDescriptions": {
+      "0": "Subterranean corridor and moody fixtures"
+    }
   },
   {
     "title": "Brand Identity Visual",
     "cat": "logo",
     "pillar": "Client",
     "path": "Photos & to upload/Logo/All Work (17).png",
-    "desc": "Commercial typography and mark design"
+    "desc": "Commercial typography and mark design",
+    "subVideos": {},
+    "subTitles": {
+      "0": "Brand Identity Visual"
+    },
+    "subDescriptions": {
+      "0": "Commercial typography and mark design"
+    }
   },
   {
     "title": "Brand Emblem Concept",
     "cat": "logo",
     "pillar": "Client",
     "path": "Photos & to upload/Logo/2.PNG",
-    "desc": "Vector identity and corporate symbol"
+    "desc": "Vector identity and corporate symbol",
+    "subVideos": {},
+    "subTitles": {
+      "0": "Brand Emblem Concept"
+    },
+    "subDescriptions": {
+      "0": "Vector identity and corporate symbol"
+    }
   },
   {
     "title": "Book Writing - Renders",
@@ -844,8 +1451,16 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/18099304982030601.webp",
       "Photos & to upload/Instagram/18039197083541844.jpg"
     ],
-    "subTitles": {},
-    "subDescriptions": {},
+    "subTitles": {
+      "0": "Because witnessing matters. Because if you look at s...",
+      "1": "This novel is about a boy who learns to see before h...",
+      "2": "New Story"
+    },
+    "subDescriptions": {
+      "0": "Because witnessing matters. Because if you look at something and then record that you looked, you’ve done something to it.” A quiet passage from my...",
+      "1": "This novel is about a boy who learns to see before he learns to speak. It is about what happens when the thing that saves you. The capacity to obse...",
+      "2": "New Story Origin"
+    },
     "subVideos": {},
     "youtubeUrl": ""
   },
@@ -855,8 +1470,14 @@ const GALLERY_DATA = [
     "cat": "animation",
     "desc": "A red table with artifacts",
     "path": "Photos & to upload/Instagram/17973355136364556.jpg",
-    "subTitles": {},
-    "subDescriptions": {},
+    "subTitles": {
+      "0": "A red table with artifacts",
+      "1": "A Still Life render in Blender 3D"
+    },
+    "subDescriptions": {
+      "0": "A red table with artifacts",
+      "1": "A Still Life render in Blender 3D"
+    },
     "subVideos": {},
     "youtubeUrl": "",
     "images": [
@@ -880,8 +1501,26 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/17927177324251710.webp",
       "Photos & to upload/Instagram/17911261604543261.webp"
     ],
-    "subTitles": {},
-    "subDescriptions": {},
+    "subTitles": {
+      "0": "One Piece Wallpaper",
+      "1": "Painting to 3D",
+      "2": "Whisper of the heart scenery",
+      "3": "From painting to 3d in unreal engine 5",
+      "4": "Saw this photo captured by @zakia_takreem",
+      "5": "From painting to 3d",
+      "6": "From Sketch to 3D",
+      "7": "From Drawing to 3D"
+    },
+    "subDescriptions": {
+      "0": "One Piece Wallpaper Made in Blender",
+      "1": "Painting to 3D",
+      "2": "Whisper of the heart scenery Demon Slayer - Inspiration from Artstation",
+      "3": "From painting to 3d in unreal engine 5",
+      "4": "Saw this photo captured by @zakia_takreem There were hundreds of images came to my mind. This monochromatic photo with just a single light source i...",
+      "5": "From painting to 3d",
+      "6": "From Sketch to 3D",
+      "7": "From Drawing to 3D Drawing by @djanedimotte"
+    },
     "subVideos": {},
     "youtubeUrl": ""
   },
@@ -890,7 +1529,14 @@ const GALLERY_DATA = [
     "pillar": "Personal",
     "cat": "animation",
     "desc": "Year 2022 Artworks",
-    "path": "Photos & to upload/Instagram/17965931513090724.webp"
+    "path": "Photos & to upload/Instagram/17965931513090724.webp",
+    "subVideos": {},
+    "subTitles": {
+      "0": "Year 2022"
+    },
+    "subDescriptions": {
+      "0": "Year 2022 Artworks"
+    }
   },
   {
     "title": "Electronics",
@@ -898,8 +1544,14 @@ const GALLERY_DATA = [
     "cat": "animation",
     "desc": "Some shots from my incomplete latest work",
     "path": "Photos & to upload/Instagram/17918832755036879.jpg",
-    "subTitles": {},
-    "subDescriptions": {},
+    "subTitles": {
+      "0": "Some shots from my incomplete latest work",
+      "1": "Scifi Substance Designer Practice"
+    },
+    "subDescriptions": {
+      "0": "Some shots from my incomplete latest work",
+      "1": "Scifi Substance Designer Practice"
+    },
     "subVideos": {},
     "youtubeUrl": "",
     "images": [
@@ -913,8 +1565,18 @@ const GALLERY_DATA = [
     "cat": "3d",
     "desc": "My father's likeness",
     "path": "Photos & to upload/Instagram/17860934531409034.jpg",
-    "subTitles": {},
-    "subDescriptions": {},
+    "subTitles": {
+      "0": "My father's likeness",
+      "1": "Sing to the cosmos",
+      "2": "Enjoying weekend",
+      "3": "Amazing Aurora"
+    },
+    "subDescriptions": {
+      "0": "My father's likeness",
+      "1": "Sing to the cosmos",
+      "2": "Enjoying weekend",
+      "3": "Amazing Aurora"
+    },
     "subVideos": {},
     "youtubeUrl": "",
     "images": [
@@ -1644,7 +2306,7 @@ function beBuildProjectCardHtml(g, realIdx, cachedOptions){
       <div>
         <label style="font-size:9px;color:#e50914;font-weight:700;text-transform:uppercase;display:block;margin-bottom:2px">&#9654; YouTube Link:</label>
         <input id="be-subvid-${realIdx}-${sIdx}" placeholder="https://youtube.com/..."
-          value="${(subVids[sIdx] || (sIdx===0 ? g.youtubeUrl : '') || '').replace(/"/g,'&quot;')}"
+          value="${(subVids[sIdx] || subVids[String(sIdx)] || (sIdx===0 ? g.youtubeUrl : '') || (String(imgSrc).match(/YouTube\/([a-zA-Z0-9_-]{11})\./i) ? 'https://www.youtube.com/watch?v=' + String(imgSrc).match(/YouTube\/([a-zA-Z0-9_-]{11})\./i)[1] : '') || '').replace(/"/g,'&quot;')}"
           oninput="beUpdateGalleryItem(${realIdx}, true)"
           style="width:100%;padding:4px 6px;font-size:11px;border:1px solid var(--border);background:var(--bg-card);color:var(--ink);border-radius:2px;box-sizing:border-box">
       </div>
@@ -2086,28 +2748,43 @@ function renderBeSoftware(){
   const c = document.getElementById('be-software-list');
   if(!c) return;
   c.innerHTML = software.map((s,i) => {
-    const linkUrl = s.link || s.url || '';
+    const linkUrl = s.link || s.url || s.gumroadUrl || '';
+    const imgUrl = s.img || s.image || '';
 
     return `
     <div class="backend-item" style="flex-direction:column;gap:14px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;margin-bottom:16px">
-      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px">
-        <div>
-          <label class="form-label">Software / Addon Name</label>
-          <input id="be-soft-t-${i}" value="${(s.name||s.title||'').replace(/"/g,'&quot;')}"
-            style="width:100%;padding:8px 12px;font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
-        </div>
-        <div>
-          <label class="form-label">Category / Platform</label>
-          <input id="be-soft-plat-${i}" value="${(s.cat||s.platform||'Blender Addon').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
-        </div>
-        <div>
-          <label class="form-label">Price</label>
-          <input id="be-soft-p-${i}" value="${(s.price||'Free').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        ${imgUrl ? `
+          <div style="position:relative;flex-shrink:0">
+            <img src="${safeImgSrc(imgUrl)}" style="width:72px;height:72px;object-fit:cover;border-radius:6px;border:1px solid var(--border);display:block">
+            <span style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,0.8);color:#fff;font-size:9px;padding:1px 4px;border-radius:2px;font-weight:700">#${i+1}</span>
+          </div>
+        ` : ''}
+        <div style="flex:1;display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px">
+          <div>
+            <label class="form-label">Software / Addon Name</label>
+            <input id="be-soft-t-${i}" value="${(s.name||s.title||'').replace(/"/g,'&quot;')}"
+              style="width:100%;padding:8px 12px;font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          </div>
+          <div>
+            <label class="form-label">Category / Platform</label>
+            <input id="be-soft-plat-${i}" value="${(s.cat||s.platform||'Blender Addon').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          </div>
+          <div>
+            <label class="form-label">Price</label>
+            <input id="be-soft-p-${i}" value="${(s.price||'Free').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          </div>
         </div>
       </div>
-      <div>
-        <label class="form-label">Product / Download / Gumroad Link</label>
-        <input id="be-soft-url-${i}" value="${linkUrl.replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:10px">
+        <div>
+          <label class="form-label">Product / Download / Gumroad Link</label>
+          <input id="be-soft-url-${i}" value="${linkUrl.replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+        </div>
+        <div>
+          <label class="form-label">Product Image Path</label>
+          <input id="be-soft-img-${i}" value="${imgUrl.replace(/"/g,'&quot;')}" placeholder="Photos & to upload/..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+        </div>
       </div>
       <div>
         <label class="form-label">Description &amp; Workflow Capabilities</label>
@@ -2128,13 +2805,15 @@ function beUpdateSoftware(i, silent = false){
   const name = document.getElementById(`be-soft-t-${i}`)?.value;
   const cat = document.getElementById(`be-soft-plat-${i}`)?.value;
   const price = document.getElementById(`be-soft-p-${i}`)?.value;
-  const link = document.getElementById(`be-soft-l-${i}`)?.value;
+  const link = document.getElementById(`be-soft-url-${i}`)?.value;
+  const img = document.getElementById(`be-soft-img-${i}`)?.value;
   const desc = document.getElementById(`be-soft-desc-${i}`)?.value;
 
   if(name !== undefined && name.trim()) { software[i].name = name.trim(); software[i].title = name.trim(); }
   if(cat !== undefined) { software[i].category = cat.trim(); software[i].cat = cat.trim(); software[i].platform = cat.trim(); }
   if(price !== undefined) software[i].price = price.trim();
   if(link !== undefined) { software[i].link = link.trim(); software[i].gumroadUrl = link.trim(); software[i].url = link.trim(); }
+  if(img !== undefined) { software[i].img = img.trim(); software[i].image = img.trim(); }
   if(desc !== undefined) software[i].desc = desc.trim();
 
   saveData('rana_software_data', software);
@@ -2186,7 +2865,11 @@ window.addSoftware = addSoftware;
 function renderBeExp(){
   const c = document.getElementById('be-exp-list');
   if(!c) return;
-  c.innerHTML = experience.map((e,i) => `
+  c.innerHTML = experience.map((e,i) => {
+    const periodVal = e.period || (e.start && e.end ? `${e.start} - ${e.end}` : e.start || e.end || '');
+    const tagsVal = Array.isArray(e.tags) ? e.tags.join(', ') : (e.tags || '');
+
+    return `
     <div class="backend-item" style="flex-direction:column;gap:12px;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;margin-bottom:14px">
       <div style="display:grid;grid-template-columns:1.5fr 1.5fr 1fr;gap:10px">
         <div>
@@ -2198,9 +2881,13 @@ function renderBeExp(){
           <input id="be-exp-comp-${i}" value="${(e.company||'').replace(/"/g,'&quot;')}" placeholder="Company" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
         <div>
-          <label class="form-label">Period</label>
-          <input id="be-exp-per-${i}" value="${(e.period||'').replace(/"/g,'&quot;')}" placeholder="2023 - Present" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+          <label class="form-label">Period / Timeline</label>
+          <input id="be-exp-per-${i}" value="${periodVal.replace(/"/g,'&quot;')}" placeholder="2023 - Present" style="width:100%;padding:8px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
         </div>
+      </div>
+      <div>
+        <label class="form-label">Skills &amp; Technology Tags (comma-separated)</label>
+        <input id="be-exp-tags-${i}" value="${tagsVal.replace(/"/g,'&quot;')}" placeholder="Python, JavaScript, Blender 3D, Video Editing..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
       </div>
       <div>
         <label class="form-label">Description &amp; Commercial Deliverables</label>
@@ -2211,7 +2898,8 @@ function renderBeExp(){
         <button onclick="beUpdateExp(${i})" class="submit-btn" style="padding:6px 18px;font-size:11.5px">Save Role</button>
       </div>
     </div>
-  `).join('');
+    `;
+  }).join('');
 }
 window.renderBeExp = renderBeExp;
 
@@ -2219,12 +2907,18 @@ function beUpdateExp(i){
   const comp = document.getElementById('be-exp-comp-'+i)?.value;
   const role = document.getElementById('be-exp-role-'+i)?.value;
   const per = document.getElementById('be-exp-per-'+i)?.value;
+  const tags = document.getElementById('be-exp-tags-'+i)?.value;
   const desc = document.getElementById('be-exp-desc-'+i)?.value;
   if(experience[i]){
-    if(comp) experience[i].company = comp.trim();
-    if(role) experience[i].role = role.trim();
-    if(per) experience[i].period = per.trim();
-    if(desc) experience[i].desc = desc.trim();
+    if(comp !== undefined) experience[i].company = comp.trim();
+    if(role !== undefined) experience[i].role = role.trim();
+    if(per !== undefined) {
+      experience[i].period = per.trim();
+      const parts = per.split('-').map(p=>p.trim());
+      if(parts.length === 2){ experience[i].start = parts[0]; experience[i].end = parts[1]; }
+    }
+    if(tags !== undefined) experience[i].tags = tags.split(',').map(t=>t.trim()).filter(Boolean);
+    if(desc !== undefined) experience[i].desc = desc.trim();
   }
   saveData('rana_experience_data', experience);
   renderBeExp();
@@ -2369,7 +3063,10 @@ window.addClient = addClient;
 function renderBeArticles(){
   const c = document.getElementById('be-articles-list');
   if(!c) return;
-  c.innerHTML = articles.map((a,i) => `
+  c.innerHTML = articles.map((a,i) => {
+    const tagsVal = Array.isArray(a.tags) ? a.tags.join(', ') : (a.tags || '');
+
+    return `
     <div class="backend-item" style="flex-direction:column;gap:14px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;margin-bottom:16px">
       <div>
         <label class="form-label">Article / Essay Title</label>
@@ -2395,6 +3092,10 @@ function renderBeArticles(){
         <input id="be-art-url-${i}" value="${(a.url||a.link||'').replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
       </div>
       <div>
+        <label class="form-label">Tags &amp; Topics (comma-separated)</label>
+        <input id="be-art-tags-${i}" value="${tagsVal.replace(/"/g,'&quot;')}" placeholder="Writing, Personal Essay, Philosophy, 3D Design..." style="width:100%;padding:8px 12px;font-size:12px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">
+      </div>
+      <div>
         <label class="form-label">Excerpt / Summary</label>
         <textarea id="be-art-desc-${i}" oninput="beUpdateArticle(${i},true)" onchange="beUpdateArticle(${i},true)" rows="3" style="width:100%;padding:8px 12px;font-size:13px;line-height:1.5;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:4px;box-sizing:border-box">${a.desc||a.excerpt||''}</textarea>
       </div>
@@ -2403,7 +3104,8 @@ function renderBeArticles(){
         <button onclick="beUpdateArticle(${i})" class="submit-btn" style="padding:8px 22px;font-size:12px">Save Changes</button>
       </div>
     </div>
-  `).join('');
+    `;
+  }).join('');
 }
 window.renderBeArticles = renderBeArticles;
 
@@ -2414,6 +3116,7 @@ function beUpdateArticle(i, silent = false){
   const date = document.getElementById(`be-art-date-${i}`)?.value;
   const time = document.getElementById(`be-art-time-${i}`)?.value;
   const url = document.getElementById(`be-art-url-${i}`)?.value;
+  const tags = document.getElementById(`be-art-tags-${i}`)?.value;
   const desc = document.getElementById(`be-art-desc-${i}`)?.value;
 
   if(title !== undefined && title.trim()) articles[i].title = title.trim();
@@ -2421,6 +3124,7 @@ function beUpdateArticle(i, silent = false){
   if(date !== undefined) articles[i].date = date.trim();
   if(time !== undefined) { articles[i].readTime = time.trim(); articles[i].time = time.trim(); }
   if(url !== undefined) { articles[i].url = url.trim(); articles[i].link = url.trim(); }
+  if(tags !== undefined) articles[i].tags = tags.split(',').map(t=>t.trim()).filter(Boolean);
   if(desc !== undefined) { articles[i].desc = desc.trim(); articles[i].excerpt = desc.trim(); }
 
   saveData('rana_articles_data', articles);
