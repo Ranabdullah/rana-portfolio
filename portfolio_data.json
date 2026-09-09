@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T20:23:33.074Z",
+  "updatedAt": "2026-09-09T20:33:34.083Z",
   "version": "4.5",
   "novels": [
     {
@@ -585,7 +585,7 @@
   ],
   "gallery": [
     {
-      "title": "Children's Creative Studio & Art Illustration Study",
+      "title": "Children's Creative Studio & Narrative Visual Studies",
       "cat": "environment",
       "pillar": "Personal",
       "path": "Photos & to upload/Instagram/Childrens_Room_Art_Study.jpg",
@@ -599,10 +599,14 @@
         "Photos & to upload/Instagram/18131148718177645.jpg",
         "Photos & to upload/Instagram/17935025272142875.jpg"
       ],
-      "desc": "",
+      "desc": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork.",
       "youtubeUrl": "",
-      "subTitles": {},
-      "subDescriptions": {},
+      "subTitles": {
+        "0": "Creative Corner & Studio Study"
+      },
+      "subDescriptions": {
+        "0": "A warm 3D interior visualization capturing a child's art workspace, featuring handcrafted wall displays, pinboards, and natural morning light across warm wood textures."
+      },
       "subVideos": {}
     },
     {
