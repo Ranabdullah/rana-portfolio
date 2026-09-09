@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T20:45:14.245Z",
+  "updatedAt": "2026-09-09T21:05:32.884Z",
   "version": "4.5",
   "novels": [
     {
@@ -593,8 +593,8 @@
         "Photos & to upload/Instagram/Childrens_Room_Art_Study.jpg",
         "Photos & to upload/Instagram/17970979794109163.jpg",
         "Photos & to upload/Instagram/17892336767838958.jpg",
-        "Photos & to upload/Instagram/18266166148100937.jpg",
         "Photos & to upload/Instagram/17958012526650381.jpg",
+        "Photos & to upload/Instagram/18266166148100937.jpg",
         "Photos & to upload/Instagram/18173685229138105.jpg",
         "Photos & to upload/Instagram/18131148718177645.jpg",
         "Photos & to upload/Instagram/17935025272142875.jpg"
@@ -754,13 +754,13 @@
       "pillar": "Client Work",
       "cat": "environment",
       "desc": "Full-scale modern corporate interior fit-out modeled in Blender 3D featuring acoustic breakout booths, open-plan workstations, and executive boardrooms.",
-      "path": "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823343839673_1538841423_8.webp",
+      "path": "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823528350189_1538841423_9.webp",
       "images": [
+        "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823528350189_1538841423_9.webp",
         "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823343839673_1538841423_8.webp",
         "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823352218021_1538841423_4.webp",
         "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823520009597_1538841423_6.webp",
         "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823570403632_1538841423_5.webp",
-        "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823528350189_1538841423_9.webp",
         "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823536846267_1538841423_1.webp",
         "Photos & to upload/Get Connected Interior/abdullahinayatart_1670237709_2986492823553459052_1538841423_2.webp"
       ],
@@ -833,26 +833,26 @@
       "pillar": "Personal",
       "cat": "environment",
       "desc": "Clean contemporary kitchen interior exploration highlighting monolithic marble island counters, recessed task lighting, and matte cabinetry finishes.",
-      "path": "Photos & to upload/Kitchen/67748729_2470650796319052_4466508233967665152_o.jpg",
+      "path": "Photos & to upload/YouTube/wvJ3n61oNlQ.jpg",
       "images": [
+        "Photos & to upload/YouTube/wvJ3n61oNlQ.jpg",
+        "Photos & to upload/YouTube/aniBOlBF1Ow.jpg",
+        "Photos & to upload/YouTube/AYk-BZrP6D0.jpg",
         "Photos & to upload/Kitchen/67748729_2470650796319052_4466508233967665152_o.jpg",
         "Photos & to upload/Kitchen/All Work (160).jpg",
         "Photos & to upload/Instagram/17915681896934511.jpg",
-        "Photos & to upload/YouTube/wvJ3n61oNlQ.jpg",
         "Photos & to upload/Church/4.jpg",
-        "Photos & to upload/YouTube/AYk-BZrP6D0.jpg",
         "Photos & to upload/Living Room/Final1.png",
         "Photos & to upload/Bedroom/All Work (67).jpg",
-        "Photos & to upload/YouTube/aniBOlBF1Ow.jpg",
         "Photos & to upload/Instagram/18328297867051721.webp",
         "Photos & to upload/Instagram/17889489539305832.jpg"
       ],
       "subVideos": {
-        "3": "https://www.youtube.com/watch?v=wvJ3n61oNlQ",
-        "5": "https://www.youtube.com/watch?v=AYk-BZrP6D0",
-        "8": "https://www.youtube.com/watch?v=aniBOlBF1Ow"
+        "0": "https://www.youtube.com/watch?v=wvJ3n61oNlQ",
+        "1": "https://www.youtube.com/watch?v=aniBOlBF1Ow",
+        "2": "https://www.youtube.com/watch?v=AYk-BZrP6D0"
       },
-      "youtubeUrl": "",
+      "youtubeUrl": "https://www.youtube.com/watch?v=wvJ3n61oNlQ",
       "subTitles": {
         "0": "Interior Volumes: A Study in Architectural Light & Materiality",
         "1": "Interior Volumes: A Study in Architectural Light & Materiality",
@@ -889,7 +889,6 @@
       "images": [
         "Photos & to upload/Streets/Street (1).jpg",
         "Photos & to upload/Streets/Street (2).jpg",
-        "Photos & to upload/Instagram/17944520716748771.webp",
         "Photos & to upload/Instagram/17939292163943085.webp"
       ],
       "subVideos": {},
