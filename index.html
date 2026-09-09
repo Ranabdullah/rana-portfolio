@@ -5370,7 +5370,12 @@ window.openShowcaseInLightbox = openShowcaseInLightbox;
 
 function filterGallery(cat, btn){
   document.querySelectorAll('.gf-btn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
+  if(btn){
+    btn.classList.add('on');
+  } else {
+    const matchingBtn = document.querySelector(`.gf-btn[onclick*="'${cat}'"]`) || Array.from(document.querySelectorAll('.gf-btn')).find(b => b.textContent.trim().toLowerCase() === cat.toLowerCase());
+    if(matchingBtn) matchingBtn.classList.add('on');
+  }
   showcaseProjIdx = 0;
   showcasePhotoIdx = 0;
   stopShowcaseVideo();
