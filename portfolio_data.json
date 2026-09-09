@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T19:51:13.888Z",
+  "updatedAt": "2026-09-09T20:10:00.000Z",
   "version": "4.5",
   "novels": [
     {
@@ -182,465 +182,6 @@
       "excerpt": "Memory is not a record. It is a weapon.\n\nAwakening in an immaculate mountain estate with no recollection of how he arrived, Nathan is told he has survived a catastrophic trauma. But with each passing hour, the fractures in his surroundings begin to reveal a chilling truth.",
       "amazonUrl": "",
       "amzLink": ""
-    }
-  ],
-  "tech": [
-    {
-      "id": "velra",
-      "title": "Vel Ra Perfumes 3D Twin & Handover Dossier",
-      "subtitle": "Interactive Architectural Spatial Twin (Capel Street, Dublin 1)",
-      "status": "Live",
-      "badgeClass": "badge-live",
-      "num": "01",
-      "liveUrl": "https://velra-viewer.ranakaharian1.workers.dev/",
-      "desc": "An interactive architectural photographic handover dossier and real-time WebGL 3D digital twin platform for a bespoke luxury fragrance boutique on Capel Street, Dublin 1. Built with millimetric CAD blueprint matrices, master materials board, high-CRI retail lighting compliance engine (CIBSE SLL), bespoke joinery passes, and digital client sign-off authorization.",
-      "features": [
-        "Interactive WebGL 3D space orbit & inspection",
-        "Millimeter-accurate CAD blueprints & dimension matrix",
-        "High-CRI 3000K retail lighting & photometric simulation",
-        "Stage 04 fabrication-ready joinery & client sign-off"
-      ],
-      "tech": [
-        "Cloudflare Workers",
-        "WebGL / 3D Twin",
-        "Interactive CAD Engine",
-        "Photometrics / Lighting",
-        "Edge Runtime",
-        "Vanilla ES6+"
-      ],
-      "buttons": [
-        {
-          "label": "Launch 3D Handover Dossier ↗",
-          "url": "https://velra-viewer.ranakaharian1.workers.dev/",
-          "primary": true
-        }
-      ],
-      "hasLinks": true,
-      "links": [
-        {
-          "label": "Launch 3D Handover Dossier ↗",
-          "url": "https://velra-viewer.ranakaharian1.workers.dev/",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "id": "launcher",
-      "title": "DreamsLab Cyber Launcher",
-      "subtitle": "Chrome Multi-Profile Link Vault",
-      "status": "Live",
-      "badgeClass": "badge-live",
-      "num": "02",
-      "liveUrl": "https://abdullahinayat24-lang.github.io/link-launcher/",
-      "desc": "A standalone Windows desktop app that acts as an encrypted personal link vault with full multi-account Chrome profile management. Save your important links, notes and account context per Google profile, then launch any Chrome account in one click. Protected with AES-256-GCM encryption.",
-      "features": [
-        "Modular application dock & launcher",
-        "Real-time system telemetry monitor",
-        "Encrypted local vault storage",
-        "Low-overhead native resource pipeline"
-      ],
-      "tech": [
-        "Electron",
-        "Node.js",
-        "AES-256-GCM",
-        "Web Crypto API",
-        "Chrome API",
-        "Windows",
-        "GitHub Pages"
-      ],
-      "buttons": [
-        {
-          "label": "Download for Windows ↗",
-          "url": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe",
-          "primary": true
-        },
-        {
-          "label": "Live Web App ↗",
-          "url": "https://abdullahinayat24-lang.github.io/link-launcher/",
-          "primary": false
-        }
-      ],
-      "hasLinks": true,
-      "links": [
-        {
-          "label": "Download for Windows ↗",
-          "url": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe",
-          "primary": true
-        },
-        {
-          "label": "Live Web App ↗",
-          "url": "https://abdullahinayat24-lang.github.io/link-launcher/",
-          "primary": false
-        }
-      ]
-    },
-    {
-      "id": "mythos",
-      "title": "Mythos Encyclopedia & Gods App",
-      "subtitle": "Global Gods, World Myths & Folklore Platform",
-      "status": "Live Web & Mobile",
-      "badgeClass": "badge-live",
-      "num": "03",
-      "liveUrl": "https://mythos-mythology-app.vercel.app/",
-      "desc": "A deep cross-platform encyclopedia cataloging 50+ world mythologies and thousands of deities from Greek, Norse, and Egyptian to Hindu, Celtic, Aztec, Japanese, African, and urban folklore. Features rich mythological dossiers, daily deity notifications, interactive world mythology atlas, sacred objects collection, and a 4-tier mythology quiz with global leaderboards.",
-      "features": [
-        "200+ authenticated mythological entities & pantheons",
-        "Interactive world mythology map & sacred objects atlas",
-        "Daily deity notifications & offline search indexing",
-        "4-tier interactive mythology quiz engine with leaderboards"
-      ],
-      "tech": [
-        "Vercel",
-        "Vue.js / Vite",
-        "Ionic / Capacitor",
-        "Android SDK / Google Play",
-        "TypeScript",
-        "SQLite",
-        "Wikipedia API"
-      ],
-      "buttons": [
-        {
-          "label": "Launch Web App ↗",
-          "url": "https://mythos-mythology-app.vercel.app/",
-          "primary": true
-        },
-        {
-          "label": "Google Play Store ↗",
-          "url": "https://play.google.com/store/apps/details?id=com.mythos.app",
-          "primary": false
-        }
-      ],
-      "hasLinks": true,
-      "links": [
-        {
-          "label": "Launch Web App ↗",
-          "url": "https://mythos-mythology-app.vercel.app/",
-          "primary": true
-        },
-        {
-          "label": "Google Play Store ↗",
-          "url": "https://play.google.com/store/apps/details?id=com.mythos.app",
-          "primary": false
-        }
-      ]
-    },
-    {
-      "id": "stock-manager",
-      "title": "Supplier Ledger & Stock Management Engine",
-      "subtitle": "Multi-Supplier Purchase Orders, OCR Invoicing & Excel/PDF Suite",
-      "status": "Live",
-      "badgeClass": "badge-live",
-      "num": "04",
-      "liveUrl": "https://stock-manager.idigitalfun.workers.dev/",
-      "desc": "A comprehensive commercial supplier and inventory management web application. Features multi-supplier purchase order tracking, real-time stock required calculations, return/faulty item logging, OCR invoice parsing with Tesseract.js, and automated XLSX/PDF export capabilities.",
-      "features": [
-        "Multi-supplier purchase order tracking & status monitoring",
-        "Automated stock required calculations and priority matrix",
-        "Built-in OCR invoice scanner (Tesseract.js) and PDF engine",
-        "Full Excel (.xlsx) and JSON cloud backup synchronization"
-      ],
-      "tech": [
-        "Cloudflare Workers",
-        "JavaScript (ES6+)",
-        "Tesseract.js OCR",
-        "jsPDF",
-        "SheetJS / XLSX",
-        "Edge Storage"
-      ],
-      "buttons": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://stock-manager.idigitalfun.workers.dev/"
-        }
-      ],
-      "hasLinks": true,
-      "links": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://stock-manager.idigitalfun.workers.dev/"
-        }
-      ]
-    },
-    {
-      "id": "phone-count",
-      "title": "StockLine Multi-Branch Device Inventory",
-      "subtitle": "Real-Time Retail Phone Count & Hardware Audit Platform",
-      "status": "Live",
-      "badgeClass": "badge-live",
-      "num": "05",
-      "liveUrl": "https://phone-count.idigitalfun.workers.dev/",
-      "desc": "A high-speed multi-location device inventory and phone stock audit web application deployed on Cloudflare Workers. Enables retail branches to perform rapid live device counts, track IMEI/serial hardware states, reconcile discrepancies in real time, and export consolidated audit sheets.",
-      "features": [
-        "Multi-shop live device count and hardware reconciliation",
-        "Real-time stock discrepancy audit and validation",
-        "Category and model filtering with rapid barcode/search indexing",
-        "Instant Cloudflare Edge sync with zero latency"
-      ],
-      "tech": [
-        "Cloudflare Workers",
-        "JavaScript (ES6+)",
-        "Edge Storage",
-        "HTML5 Canvas / DOM"
-      ],
-      "buttons": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://phone-count.idigitalfun.workers.dev/"
-        }
-      ],
-      "hasLinks": true,
-      "links": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://phone-count.idigitalfun.workers.dev/"
-        }
-      ]
-    },
-    {
-      "id": "holidays",
-      "title": "Staff Holidays & Hours Management Portal",
-      "subtitle": "Automated Staff Hours, Accruals & Official PDF Statement Engine",
-      "status": "Live",
-      "badgeClass": "badge-live",
-      "num": "06",
-      "liveUrl": "https://idfl-holidays.idigitalfun.workers.dev/",
-      "desc": "An enterprise staff attendance, hours tracking, and leave management system deployed on Cloudflare Workers. Features automated holiday accrual calculations, weekly timesheet logging, single-employee official PDF statement generation, multi-branch summary reporting, and one-click GitHub cloud synchronization.",
-      "features": [
-        "Automated holiday & sick pay accrual calculation engine",
-        "One-click official PDF statement generation for individual staff",
-        "Multi-shop weekly hours breakdown & executive summary tables",
-        "Real-time GitHub cloud sync with instant mobile worker deployment"
-      ],
-      "tech": [
-        "Cloudflare Workers",
-        "JavaScript (ES6+)",
-        "jsPDF / PDF Generation",
-        "GitHub API Sync",
-        "Edge Runtime"
-      ],
-      "buttons": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://idfl-holidays.idigitalfun.workers.dev/"
-        }
-      ],
-      "hasLinks": true,
-      "links": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://idfl-holidays.idigitalfun.workers.dev/"
-        }
-      ]
-    },
-    {
-      "id": "timeline",
-      "title": "World History & Mythology Timeline",
-      "subtitle": "Chronological Multi-Track Engine (10,000 BCE – 1800 CE)",
-      "status": "Web Platform",
-      "badgeClass": "badge-outline",
-      "num": "07",
-      "liveUrl": "",
-      "desc": "An interactive, high-contrast, multi-track chronological timeline connecting global civilizations, founding epics, and legendary writers across 12 millennia. Features cross-epoch zoom navigation, civilization filter matrices, epoch-anchored historical narratives, and instant literature cross-referencing.",
-      "features": [
-        "12,000-year multi-track chronological canvas",
-        "Civilization filter matrices & cross-epoch zooming",
-        "Epic literature cross-referencing & author dossiers",
-        "Fluid 60fps pan/zoom visual engine"
-      ],
-      "tech": [
-        "JavaScript (ES6+)",
-        "HTML5 Canvas / DOM",
-        "CSS Grid",
-        "JSON Data Engine"
-      ],
-      "buttons": [],
-      "hasLinks": false,
-      "links": []
-    },
-    {
-      "id": "psych",
-      "title": "Psychology Lecture Knowledge Platform",
-      "subtitle": "University Research & Student Educational Portal",
-      "status": "Production-Ready",
-      "badgeClass": "badge-outline",
-      "num": "08",
-      "liveUrl": "",
-      "desc": "A specialized academic portal built for university psychology students and researchers. Combines structured modular lecture pathways, clinical case study dossiers, interactive self-assessment quizzes, and downloadable PDF research summaries.",
-      "features": [
-        "Modular lecture pathway curriculum engine",
-        "Clinical case study dossiers & diagnostic trees",
-        "Interactive self-assessment quizzing system",
-        "Responsive reading mode & bibliography manager"
-      ],
-      "tech": [
-        "JavaScript (ES6+)",
-        "HTML5 / CSS3",
-        "Local Storage",
-        "PDF Generation"
-      ],
-      "buttons": [],
-      "hasLinks": false,
-      "links": []
-    },
-    {
-      "id": "onboardflow",
-      "title": "OnboardFlow",
-      "subtitle": "Automated Client Onboarding & Intake System",
-      "status": "Full-Stack SaaS",
-      "badgeClass": "badge-outline",
-      "num": "09",
-      "liveUrl": "",
-      "desc": "An enterprise client onboarding automation platform that eliminates administrative friction through dynamic multi-step intake flows, automated document collection, digital e-signatures, and instant client workspace provisioning.",
-      "features": [
-        "Dynamic conditional intake questionnaires",
-        "Secure encrypted document upload pipeline",
-        "Automated client milestone progress tracking",
-        "Webhook integrations for CRM and billing systems"
-      ],
-      "tech": [
-        "TypeScript",
-        "Next.js",
-        "Node.js",
-        "PostgreSQL",
-        "Prisma",
-        "Tailwind CSS"
-      ],
-      "buttons": [],
-      "hasLinks": false,
-      "links": []
-    },
-    {
-      "id": "medicare",
-      "title": "MediCare AI Companion",
-      "subtitle": "Intelligent Patient Health Assistant",
-      "status": "Healthcare Web App",
-      "badgeClass": "badge-outline",
-      "num": "10",
-      "liveUrl": "",
-      "desc": "A privacy-first healthcare web application designed to support patient wellness through intelligent symptom tracking, medication scheduling with reminders, medical report summarization, and emergency contact coordination.",
-      "features": [
-        "Natural-language health query assistant",
-        "Medication schedule & adherence tracking",
-        "Medical report plain-English summarizer",
-        "Encrypted local health journal"
-      ],
-      "tech": [
-        "TypeScript",
-        "Next.js",
-        "Tailwind CSS",
-        "Web Speech API",
-        "IndexedDB"
-      ],
-      "buttons": [],
-      "hasLinks": false,
-      "links": []
-    },
-    {
-      "id": "repair",
-      "title": "Retail Repair Price Matrix",
-      "subtitle": "Real-Time Repair Quoting & Device Diagnostic Engine",
-      "status": "Live",
-      "badgeClass": "badge-live",
-      "num": "11",
-      "liveUrl": "https://repair-prices.pages.dev/",
-      "desc": "A multi-branch commercial repair price catalog and service quoting matrix. Features real-time part cost lookups, labor rate calculation, customer ticket generation, and automated WhatsApp/SMS quotation exports.",
-      "features": [
-        "Instant multi-brand device repair pricing engine",
-        "Real-time part margin & labor calculation",
-        "Customer receipt & printable service tickets",
-        "Multi-store branch synchronization"
-      ],
-      "tech": [
-        "JavaScript (ES6+)",
-        "Cloudflare Workers",
-        "HTML5",
-        "CSS3"
-      ],
-      "buttons": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://repair-prices.pages.dev/"
-        }
-      ],
-      "hasLinks": true,
-      "links": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://repair-prices.pages.dev/"
-        }
-      ]
-    },
-    {
-      "id": "vat-invoice",
-      "title": "VAT Invoice Generator",
-      "subtitle": "Automated Retail VAT Invoice & Receipt Engine",
-      "status": "Live",
-      "badgeClass": "badge-live",
-      "num": "12",
-      "liveUrl": "https://vat-invoice.idigitalfun.workers.dev/",
-      "desc": "A commercial VAT invoice and receipt generation engine built for retail operations. Produces compliant, print-ready PDF invoices with itemized VAT breakdown, customer details, and company branding — all running on Cloudflare's edge network.",
-      "tech": [
-        "Cloudflare Workers",
-        "JavaScript (ES6+)",
-        "jsPDF",
-        "HTML5",
-        "CSS3"
-      ],
-      "features": [
-        "VAT-compliant invoice generation",
-        "PDF export and print-ready output",
-        "Itemized product & pricing engine",
-        "Company branding and header templates"
-      ],
-      "hasLinks": true,
-      "buttons": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://vat-invoice.idigitalfun.workers.dev/"
-        }
-      ],
-      "links": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://vat-invoice.idigitalfun.workers.dev/"
-        }
-      ]
-    },
-    {
-      "id": "vapesquantity",
-      "title": "Vapes Quantity & Stock Counter",
-      "subtitle": "Real-Time Vape Product Inventory & Quantity Tracker",
-      "status": "Live",
-      "badgeClass": "badge-live",
-      "num": "13",
-      "liveUrl": "https://vapesquantity.pages.dev/",
-      "desc": "A fast, mobile-optimized inventory tracking tool for vape retail operations. Enables real-time quantity counting, stock-level monitoring, and multi-SKU management across product lines — deployed on Cloudflare Pages.",
-      "tech": [
-        "Cloudflare Pages",
-        "JavaScript (ES6+)",
-        "HTML5",
-        "CSS3",
-        "LocalStorage"
-      ],
-      "features": [
-        "Real-time quantity tracking",
-        "Multi-SKU product management",
-        "Mobile-optimized interface",
-        "Offline-capable edge deployment"
-      ],
-      "hasLinks": true,
-      "buttons": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://vapesquantity.pages.dev/"
-        }
-      ],
-      "links": [
-        {
-          "label": "Launch Live App ↗",
-          "url": "https://vapesquantity.pages.dev/"
-        }
-      ]
     }
   ],
   "gallery": [
@@ -1225,1176 +766,405 @@
         "Photos & to upload/Instagram/18177267772010132.jpg",
         "Photos & to upload/Instagram/17881130971770142.jpg"
       ]
-    },
-    {
-      "title": "Ann's Delight Sweet Paradise: Commercial Store",
-      "pillar": "Client",
-      "cat": "animation",
-      "desc": "Unreal Engine 5 virtual walkthrough and 3D architectural retail visualization for Ann's Delight confectionary brand.",
-      "path": "Photos & to upload/YouTube/aniBOlBF1Ow.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=aniBOlBF1Ow"
-    },
-    {
-      "title": "Architectural Perspective: Line & Vanishing Grid",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Freehand spatial drawing mapping multi-point perspective grids, orthogonal depth, and structural framing.",
-      "path": "Photos & to upload/Sketch/118810718_3409648209085968_5021566996847498841_o.jpg"
-    },
-    {
-      "title": "Some houses aren't empty when the people leave.",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Some houses aren't empty when the people leave. The chairs remain.",
-      "path": "Photos & to upload/Instagram/17970979794109163.jpg"
-    },
-    {
-      "title": "Because witnessing matters. Because if you look at s...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Because witnessing matters. Because if you look at something and then record that you looked, youÔÇÖve done something to it.ÔÇØ A quiet passage from my...",
-      "path": "Photos & to upload/Instagram/18134535064492978.webp"
-    },
-    {
-      "title": "This novel is about a boy who learns to see before h...",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "This novel is about a boy who learns to see before he learns to speak. It is about what happens when the thing that saves you. The capacity to obse...",
-      "path": "Photos & to upload/Instagram/18099304982030601.webp"
-    },
-    {
-      "title": "A visit to Japan",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "A visit to Japan",
-      "path": "Photos & to upload/Instagram/17861239659097287.jpg"
-    },
-    {
-      "title": "A little test render with Nvidia Canvas",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "A little test render with Nvidia Canvas",
-      "path": "Photos & to upload/Instagram/17845421031111594.jpg"
-    },
-    {
-      "title": "Inspiration from a post, I saw on Instagram",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Inspiration from a post, I saw on Instagram",
-      "path": "Photos & to upload/Instagram/18065207518458125.jpg"
-    },
-    {
-      "title": "New Story",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "New Story Origin",
-      "path": "Photos & to upload/Instagram/18039197083541844.jpg"
-    },
-    {
-      "title": "Lighthouse render",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Lighthouse render",
-      "path": "Photos & to upload/Instagram/18015665518901571.jpg"
-    },
-    {
-      "title": "The multiverse is depicted as tree branches.",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "The multiverse is depicted as tree branches.",
-      "path": "Photos & to upload/Instagram/18002318024475867.jpg"
-    },
-    {
-      "title": "A red table with artifacts",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "A red table with artifacts",
-      "path": "Photos & to upload/Instagram/17973355136364556.jpg"
-    },
-    {
-      "title": "A Still Life render in Blender 3D",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "A Still Life render in Blender 3D",
-      "path": "Photos & to upload/Instagram/17949189482562838.jpg"
-    },
-    {
-      "title": "A 3D door inspired by a photo taken by a friend",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "A 3D door inspired by a photo taken by a friend",
-      "path": "Photos & to upload/Instagram/18036113920542329.jpg"
-    },
-    {
-      "title": "Childhood Dreams Come True! Ô£¿­ƒîƒ",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Childhood Dreams Come True! Ô£¿­ƒîƒ Swipe left to witness the magic! ­ƒæë",
-      "path": "Photos & to upload/Instagram/17987574743510340.jpg"
-    },
-    {
-      "title": "Painting to 3D",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Painting to 3D Created in Blender",
-      "path": "Photos & to upload/Instagram/18276847624148108.jpg"
-    },
-    {
-      "title": "A bathroom made in Blender",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "A bathroom made in Blender",
-      "path": "Photos & to upload/Instagram/17842254753061661.jpg"
-    },
-    {
-      "title": "Roaring in the heart of nature's beauty! ­ƒî┐­ƒÅ×´©Å Immerse...",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Roaring in the heart of nature's beauty! ­ƒî┐­ƒÅ×´©Å Immerse yourself in the enchanting world of this fiery red dragon amidst lush greenery, ancient ruins,...",
-      "path": "Photos & to upload/Instagram/17971821890589186.jpg"
-    },
-    {
-      "title": "Stepping into a world where nature embraces craftsma...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Stepping into a world where nature embraces craftsmanship ­ƒî┐­ƒÜ¬Ô£¿ Loving how this 3D masterpiece turned out! ­ƒÅ×´©Å­ƒ¬ƒ Bringing the charm of a village door s...",
-      "path": "Photos & to upload/Instagram/17880861773865566.jpg"
-    },
-    {
-      "title": "Scifi Room",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Scifi Room Made in Blender",
-      "path": "Photos & to upload/Instagram/18292951363191483.jpg"
-    },
-    {
-      "title": "Castle made in Blender 3D",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Castle made in Blender 3D",
-      "path": "Photos & to upload/Instagram/17982912593132329.jpg"
-    },
-    {
-      "title": "Castle made in Blender and edited in Photoshop",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Castle made in Blender and edited in Photoshop",
-      "path": "Photos & to upload/Instagram/17979484217163045.jpg"
-    },
-    {
-      "title": "Spaceship",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Spaceship",
-      "path": "Photos & to upload/Instagram/18019952902627974.jpg"
-    },
-    {
-      "title": "City in the desert",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "City in the desert",
-      "path": "Photos & to upload/Instagram/17966647691361917.jpg"
-    },
-    {
-      "title": "Monumental Marvel - 3D Minar-e-Pakistan Tribute ­ƒÅ░",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Monumental Marvel - 3D Minar-e-Pakistan Tribute ­ƒÅ░ Witness the splendor of my latest creation - a meticulous 3D rendition of Minar-e-Pakistan, an ic...",
-      "path": "Photos & to upload/Instagram/17987288981035521.jpg"
-    },
-    {
-      "title": "Strange house in a forest - 3D Render - Unreal Engin...",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Strange house in a forest - 3D Render - Unreal Engine 5 #unrealengine5 #Blender3DRender #forest",
-      "path": "Photos & to upload/Instagram/18022650475542477.jpg"
-    },
-    {
-      "title": "Yasuyo Building at Shinjuku, Tokyo, built by Nobumic...",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Yasuyo Building at Shinjuku, Tokyo, built by Nobumichi Akashi with amazing original interiors by Yoshiro Taniguchi, 1969. #modernism #modernarchite...",
-      "path": "Photos & to upload/Instagram/18046110724462208.jpg"
-    },
-    {
-      "title": "Architecture",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Architecture",
-      "path": "Photos & to upload/Instagram/18004810399897282.jpg"
-    },
-    {
-      "title": "Scifi Room",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Scifi Room",
-      "path": "Photos & to upload/Instagram/18025581433512587.jpg"
-    },
-    {
-      "title": "Which one are you?",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Which one are you?",
-      "path": "Photos & to upload/Instagram/17892336767838958.jpg"
-    },
-    {
-      "title": "Step into the neon-lit future of my cyberpunk dreams...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Step into the neon-lit future of my cyberpunk dreams Ô£¿­ƒîâ Immerse yourself in the breathtaking intricacies of this meticulously crafted cityscape, wh...",
-      "path": "Photos & to upload/Instagram/18372087865057475.jpg"
-    },
-    {
-      "title": "A forest scene made in Blender",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "A forest scene made in Blender",
-      "path": "Photos & to upload/Instagram/18001925125897000.jpg"
-    },
-    {
-      "title": "Serene Sandstone Mosque: A Tranquil Oasis ­ƒî¥Ô£¿",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Serene Sandstone Mosque: A Tranquil Oasis ­ƒî¥Ô£¿ Escape to tranquility with this stunning sandstone 3D render featuring a white mosque that exudes peac...",
-      "path": "Photos & to upload/Instagram/18183854143282940.jpg"
-    },
-    {
-      "title": "Step into the enchanting world of the Arabian bazaar...",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Step into the enchanting world of the Arabian bazaar! Ô£¿­ƒî┤ Immerse yourself in the rich colors, intricate textures, and vibrant atmosphere of this 3D...",
-      "path": "Photos & to upload/Instagram/17925974102712346.jpg"
-    },
-    {
-      "title": "Bus station",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Bus station",
-      "path": "Photos & to upload/Instagram/17932527950695918.jpg"
-    },
-    {
-      "title": "Japanese Shoji",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Japanese Shoji",
-      "path": "Photos & to upload/Instagram/17918320694746097.jpg"
-    },
-    {
-      "title": "Yale Center for British Art Exterior",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Yale Center for British Art Exterior Made in Blender 3D",
-      "path": "Photos & to upload/Instagram/18012089863639845.jpg"
-    },
-    {
-      "title": "Yale center for British Art",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Yale center for British Art Made in Blender",
-      "path": "Photos & to upload/Instagram/18295629523108479.jpg"
-    },
-    {
-      "title": "One Piece Wallpaper",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "One Piece Wallpaper Made in Blender",
-      "path": "Photos & to upload/Instagram/18291521089116027.jpg"
-    },
-    {
-      "title": "Painting to 3D",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Painting to 3D",
-      "path": "Photos & to upload/Instagram/17948723546505741.jpg"
-    },
-    {
-      "title": "Whisper of the heart scenery",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Whisper of the heart scenery Demon Slayer - Inspiration from Artstation",
-      "path": "Photos & to upload/Instagram/18029192512488307.webp"
-    },
-    {
-      "title": "From painting to 3d in unreal engine 5",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "From painting to 3d in unreal engine 5",
-      "path": "Photos & to upload/Instagram/18348098413062091.webp"
-    },
-    {
-      "title": "A nuclear family",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "A nuclear family",
-      "path": "Photos & to upload/Instagram/17987753311837309.webp"
-    },
-    {
-      "title": "The last of us inspired",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "The last of us inspired",
-      "path": "Photos & to upload/Instagram/17886144434731868.webp"
-    },
-    {
-      "title": "A sculpture with a painting",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "A sculpture with a painting Which art medium do you prefer?",
-      "path": "Photos & to upload/Instagram/17875494869798035.webp"
-    },
-    {
-      "title": "Rendered in Blender 3D, inspired by \"Spirited Away\",...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Rendered in Blender 3D, inspired by \"Spirited Away\", Rendered in 1080 x 1080, 1000 frames. Smoke simulation, fog and clouds in @blender.official . ...",
-      "path": "Photos & to upload/Instagram/18027156172444171.jpg"
-    },
-    {
-      "title": "Created a random render of a cyberpunk corridor",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Created a random render of a cyberpunk corridor",
-      "path": "Photos & to upload/Instagram/18267657793129426.webp"
-    },
-    {
-      "title": "Fields of dreams ­ƒî¥­ƒî╗\"",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Fields of dreams ­ƒî¥­ƒî╗\" Rendered in Blender 3D",
-      "path": "Photos & to upload/Instagram/18006495826522628.jpg"
-    },
-    {
-      "title": "Made in Blender",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Made in Blender Interior for a shop",
-      "path": "Photos & to upload/Instagram/17988884707656692.webp"
-    },
-    {
-      "title": "If you are living a colorless life, it doesn't matte...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "If you are living a colorless life, it doesn't matter whether the world is colorful or not!ÔÇØ - Some Random Person Created in Blender 3D with heart...",
-      "path": "Photos & to upload/Instagram/17929421876558831.jpg"
-    },
-    {
-      "title": "Saw this photo captured by @zakia_takreem",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Saw this photo captured by @zakia_takreem There were hundreds of images came to my mind. This monochromatic photo with just a single light source i...",
-      "path": "Photos & to upload/Instagram/17942425073390425.jpg"
-    },
-    {
-      "title": "Saw this amazing photograph (2nd photo) by @zakia_ta...",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Saw this amazing photograph (2nd photo) by @zakia_takreem So I created this render (1st photo) in Blender",
-      "path": "Photos & to upload/Instagram/18328297867051721.webp"
-    },
-    {
-      "title": "The Stairways to Heaven",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "The Stairways to Heaven",
-      "path": "Photos & to upload/Instagram/18266166148100937.jpg"
-    },
-    {
-      "title": "I had a dream where I was in a jungle and a tiger wa...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "I had a dream where I was in a jungle and a tiger was watching me from afar. He didn't attack but the image was stuck in my mind. So, I used Blende...",
-      "path": "Photos & to upload/Instagram/17971009390877238.jpg"
-    },
-    {
-      "title": "Sambrial Canal",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Sambrial Canal Made in Blender 3D",
-      "path": "Photos & to upload/Instagram/18049081636363176.webp"
-    },
-    {
-      "title": "Viking ship passing through a gap",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Viking ship passing through a gap",
-      "path": "Photos & to upload/Instagram/17948748053224548.webp"
-    },
-    {
-      "title": "Underwater Temple",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Underwater Temple Made in Blender and edited in Photoshop",
-      "path": "Photos & to upload/Instagram/17942528642351143.jpg"
-    },
-    {
-      "title": "Mystical creature in a forest",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Mystical creature in a forest It's just a 3D forest created with saplings Addon in Blender and used grass from Megascans.",
-      "path": "Photos & to upload/Instagram/17956250800952809.webp"
-    },
-    {
-      "title": "Shop Interior",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Shop Interior Made in Blender",
-      "path": "Photos & to upload/Instagram/17946121076087543.webp"
-    },
-    {
-      "title": "Lighthouse render",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Lighthouse render Made in Blender 3D",
-      "path": "Photos & to upload/Instagram/17885028770695263.webp"
-    },
-    {
-      "title": "House with a boat",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "House with a boat",
-      "path": "Photos & to upload/Instagram/18310428316003251.webp"
-    },
-    {
-      "title": "House near a water stream with a boat",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "House near a water stream with a boat",
-      "path": "Photos & to upload/Instagram/17908074617621289.webp"
-    },
-    {
-      "title": "Recreating my old artwork",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Recreating my old artwork",
-      "path": "Photos & to upload/Instagram/17935797755485339.webp"
-    },
-    {
-      "title": "Just a castle",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Just a castle",
-      "path": "Photos & to upload/Instagram/17989732810479951.webp"
-    },
-    {
-      "title": "Abstract architecture",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Abstract architecture",
-      "path": "Photos & to upload/Instagram/17924379833335959.webp"
-    },
-    {
-      "title": "Forest Render",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Forest Render",
-      "path": "Photos & to upload/Instagram/17938940090277064.webp"
-    },
-    {
-      "title": "City in the sky",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "City in the sky Challenge by @cg_boost",
-      "path": "Photos & to upload/Instagram/17943628076142996.webp"
-    },
-    {
-      "title": "City in the Sky",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "City in the Sky Challenge by @cg_boost",
-      "path": "Photos & to upload/Instagram/17951123800970317.webp"
-    },
-    {
-      "title": "Zombie Apocalypse scene",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Zombie Apocalypse scene With a new concept what if a robot instead of a human needs to survive in a zombie apocalypse.",
-      "path": "Photos & to upload/Instagram/17945249119965026.webp"
-    },
-    {
-      "title": "Apartments",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Apartments @blenderartists",
-      "path": "Photos & to upload/Instagram/18030720565372249.webp"
-    },
-    {
-      "title": "Blue door",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Blue door From painting to 3d",
-      "path": "Photos & to upload/Instagram/17936559101230824.webp"
-    },
-    {
-      "title": "From painting to 3d",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "From painting to 3d",
-      "path": "Photos & to upload/Instagram/17930158619202544.webp"
-    },
-    {
-      "title": "From Sketch to 3D",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "From Sketch to 3D",
-      "path": "Photos & to upload/Instagram/17927177324251710.webp"
-    },
-    {
-      "title": "From Drawing to 3D",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "From Drawing to 3D Drawing by @djanedimotte",
-      "path": "Photos & to upload/Instagram/17911261604543261.webp"
-    },
-    {
-      "title": "From Painting to 3D",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "From Painting to 3D @blenderartists",
-      "path": "Photos & to upload/Instagram/17926111835458141.webp"
-    },
-    {
-      "title": "Insects collage",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Insects collage Made in Blender",
-      "path": "Photos & to upload/Instagram/17934767282102397.webp"
-    },
-    {
-      "title": "Make WHATEVER you want!!! Live Stream on YouTube \"En...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Make WHATEVER you want!!! Live Stream on YouTube \"Entertaindo\" @blender.official @blender.community @blenderartists",
-      "path": "Photos & to upload/Instagram/17843690153794060.webp"
-    },
-    {
-      "title": "Created artwork for a challenge by @phase_runner and...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Created artwork for a challenge by @phase_runner and @huioncanada. After many years, I participated in any challenge. #phaserunnercommunity @photoshop",
-      "path": "Photos & to upload/Instagram/17944114145061519.jpg"
-    },
-    {
-      "title": "Checkout full video on",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Checkout full video on https://youtu.be/NOFS6gQ8Zfk",
-      "path": "Photos & to upload/Instagram/18201618208088220.webp"
-    },
-    {
-      "title": "Ancient Ruins",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Ancient Ruins",
-      "path": "Photos & to upload/Instagram/17937922127129796.webp"
-    },
-    {
-      "title": "Scifi scene",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Scifi scene",
-      "path": "Photos & to upload/Instagram/17945758312966190.jpg"
-    },
-    {
-      "title": "From Sketch to 3d render",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "From Sketch to 3d render",
-      "path": "Photos & to upload/Instagram/17921090666306065.webp"
-    },
-    {
-      "title": "Different versions",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Different versions",
-      "path": "Photos & to upload/Instagram/18161220241244824.webp"
-    },
-    {
-      "title": "Art is a line around your thoughtsÔÇØ",
-      "pillar": "Personal",
-      "cat": "character",
-      "desc": "Art is a line around your thoughtsÔÇØ",
-      "path": "Photos & to upload/Instagram/17952722794855779.jpg"
-    },
-    {
-      "title": "Look at usual things with unusual eyes.ÔÇØ ÔÇôVico Magis...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Look at usual things with unusual eyes.ÔÇØ ÔÇôVico Magistretti ­ƒÿ¼­ƒ½í",
-      "path": "Photos & to upload/Instagram/18123427993286303.webp"
-    },
-    {
-      "title": "Animal hunting",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Animal hunting",
-      "path": "Photos & to upload/Instagram/17963484634584183.webp"
-    },
-    {
-      "title": "Norse Mythology- Valkyrie Created and Rendered in Bl...",
-      "pillar": "Personal",
-      "cat": "character",
-      "desc": "Norse Mythology- Valkyrie Created and Rendered in Blender #blender #artwork #bhfyp #digitalart #gaming #graphicdesign #fortnite #photoshop #cinema ...",
-      "path": "Photos & to upload/Instagram/17967146002602452.jpg"
-    },
-    {
-      "title": "Today I was working on a secret project. I was bored...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Today I was working on a secret project. I was bored so I thought maybe I could make something. Yesterday, I was in another city and I saw a water ...",
-      "path": "Photos & to upload/Instagram/17948203363843416.webp"
-    },
-    {
-      "title": "Bathroom made in Unreal Engine, Blender and Megascan...",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Bathroom made in Unreal Engine, Blender and Megascans #blender #d #dart #art #render #digitalart #dmodeling #blendercommunity #animation #design #c...",
-      "path": "Photos & to upload/Instagram/17972403880526915.jpg"
-    },
-    {
-      "title": "The horrors and an unpredictable life is like a ghos...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "The horrors and an unpredictable life is like a ghost in the darkness. #blender #d #dart #art #render #digitalart #dmodeling #blendercommunity #ani...",
-      "path": "Photos & to upload/Instagram/17958012526650381.jpg"
-    },
-    {
-      "title": "A warrior standing in a cave waiting for the enemy t...",
-      "pillar": "Personal",
-      "cat": "character",
-      "desc": "A warrior standing in a cave waiting for the enemy to pass",
-      "path": "Photos & to upload/Instagram/17991230494423171.webp"
-    },
-    {
-      "title": "Moon Knight made in Procreate #likes #like #follow #...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Moon Knight made in Procreate #likes #like #follow #likeforlikes #love #instagood #instagram #followforfollowback #followme #photooftheday #photogr...",
-      "path": "Photos & to upload/Instagram/17916153383255212.jpg"
-    },
-    {
-      "title": "Street Art in Blender",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Street Art in Blender",
-      "path": "Photos & to upload/Instagram/17944520716748771.webp"
-    },
-    {
-      "title": "Dark Street #blender #d #dart #art #render #digitala...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Dark Street #blender #d #dart #art #render #digitalart #dmodeling #blendercommunity #animation #design #cgi #dmodel #cinema #dartist #rendering #dr...",
-      "path": "Photos & to upload/Instagram/17939292163943085.webp"
-    },
-    {
-      "title": "Valkyrie in Norse Mythology #render #d #3dart #3dmod...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Valkyrie in Norse Mythology #render #d #3dart #3dmodeling #concept #blender3d #robot #vfx #cgi #3dsmax #motiondesign #3dmodel #3drender #cinema4d #...",
-      "path": "Photos & to upload/Instagram/17933423207010554.jpg"
-    },
-    {
-      "title": "Thor from Norse Mythology #render #d #3dart #3dmodel...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Thor from Norse Mythology #render #d #3dart #3dmodeling #concept #blender3d #robot #vfx #cgi #3dsmax #motiondesign #3dmodel #3drender #cinema4d #3d...",
-      "path": "Photos & to upload/Instagram/17901243131461875.jpg"
-    },
-    {
-      "title": "The era beyond wars #render #d #3dart #3dmodeling #c...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "The era beyond wars #render #d #3dart #3dmodeling #concept #blender3d #robot #vfx #cgi #3dsmax #motiondesign #3dmodel #3drender #cinema4d #3dartist...",
-      "path": "Photos & to upload/Instagram/17917385177186112.jpg"
-    },
-    {
-      "title": "Make love not war",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Make love not war Made in Blender 3d",
-      "path": "Photos & to upload/Instagram/17919733238255779.webp"
-    },
-    {
-      "title": "Girl kissing a child",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Girl kissing a child",
-      "path": "Photos & to upload/Instagram/17908652861307783.jpg"
-    },
-    {
-      "title": "House artwork",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "House artwork",
-      "path": "Photos & to upload/Instagram/17983747621451648.webp"
-    },
-    {
-      "title": "Stylized house",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Stylized house",
-      "path": "Photos & to upload/Instagram/17961822577553154.webp"
-    },
-    {
-      "title": "Underwater Betta Fish",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Underwater Betta Fish",
-      "path": "Photos & to upload/Instagram/17883073064599924.jpg"
-    },
-    {
-      "title": "Night Owl 3d render",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Night Owl 3d render",
-      "path": "Photos & to upload/Instagram/17959157011526618.jpg"
-    },
-    {
-      "title": "Bear statue",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Bear statue Made in Blender",
-      "path": "Photos & to upload/Instagram/17943123175663796.jpg"
-    },
-    {
-      "title": "Blender 3.0 Render",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Blender 3.0 Render",
-      "path": "Photos & to upload/Instagram/17908107983332904.jpg"
-    },
-    {
-      "title": "Tower Render",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Tower Render Made in Blender",
-      "path": "Photos & to upload/Instagram/18137175004219843.jpg"
-    },
-    {
-      "title": "As they say, light is everything",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "As they say, light is everything",
-      "path": "Photos & to upload/Instagram/17992328569397170.jpg"
-    },
-    {
-      "title": "Some shots from my incomplete latest work",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Some shots from my incomplete latest work",
-      "path": "Photos & to upload/Instagram/17918832755036879.jpg"
-    },
-    {
-      "title": "Architecture",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Architecture",
-      "path": "Photos & to upload/Instagram/17910612287185587.jpg"
-    },
-    {
-      "title": "Architecture render in Sketchup, Unreal Engine and B...",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Architecture render in Sketchup, Unreal Engine and Blender. Used @quixelofficial",
-      "path": "Photos & to upload/Instagram/17915849900104283.jpg"
-    },
-    {
-      "title": "Statue Render",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Statue Render",
-      "path": "Photos & to upload/Instagram/17914716772998399.jpg"
-    },
-    {
-      "title": "Robot & a creature",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Robot & a creature Blender Exercise",
-      "path": "Photos & to upload/Instagram/17960877817493647.jpg"
-    },
-    {
-      "title": "Robot in a cave",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Robot in a cave",
-      "path": "Photos & to upload/Instagram/17930139391772432.jpg"
-    },
-    {
-      "title": "Rendering",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Rendering",
-      "path": "Photos & to upload/Instagram/18254561107034242.webp"
-    },
-    {
-      "title": "Indoor lighting need to be fixed",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Indoor lighting need to be fixed What do you suggest?",
-      "path": "Photos & to upload/Instagram/18017367577330879.webp"
-    },
-    {
-      "title": "Unreal Engine 5 WIP",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Unreal Engine 5 WIP Animation coming soon",
-      "path": "Photos & to upload/Instagram/17945737477514793.jpg"
-    },
-    {
-      "title": "Practising",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Practising",
-      "path": "Photos & to upload/Instagram/17937269368567565.jpg"
-    },
-    {
-      "title": "Interior Design",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Interior Design Made in 3ds Max, Unreal Engine and Blender",
-      "path": "Photos & to upload/Instagram/17889489539305832.jpg"
-    },
-    {
-      "title": "Which looks better?",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Which looks better?",
-      "path": "Photos & to upload/Instagram/17915681896934511.jpg"
-    },
-    {
-      "title": "New video coming...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "New video coming... Follow my youtube channel for updates...",
-      "path": "Photos & to upload/Instagram/18247370446047156.jpg"
-    },
-    {
-      "title": "Resting tower",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Resting tower All the models are made in Blender but the statue is made with photogrammetry downloaded from Sketchfab.",
-      "path": "Photos & to upload/Instagram/17911473037897064.jpg"
-    },
-    {
-      "title": "Home made in Blender with a pre-made model from Sket...",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Home made in Blender with a pre-made model from Sketchfab. Showing how sculpting and details captures the focus over modern architecture.",
-      "path": "Photos & to upload/Instagram/17844828329636556.jpg"
-    },
-    {
-      "title": "Ship Render #blender #d #dart #art #render #digitala...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Ship Render #blender #d #dart #art #render #digitalart #animation #dmodeling #blendercommunity #design #cgi #dmodel #rendering #cinema #dartist #dr...",
-      "path": "Photos & to upload/Instagram/17883650021416002.jpg"
-    },
-    {
-      "title": "Forest barn #blender #d #dart #art #render #digitala...",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "Forest barn #blender #d #dart #art #render #digitalart #animation #blendercommunity #dmodeling #design #cgi #blendermurah #rendering #dmodel #gfx #...",
-      "path": "Photos & to upload/Instagram/17914216750884681.jpg"
-    },
-    {
-      "title": "Low poly artwork. Made in blender.",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Low poly artwork. Made in blender.",
-      "path": "Photos & to upload/Instagram/17912983441871207.jpg"
-    },
-    {
-      "title": "Which one looks better?",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Which one looks better?",
-      "path": "Photos & to upload/Instagram/17899949645096486.jpg"
-    },
-    {
-      "title": "Finally, uploaded my story after the hardwork of 5 y...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Finally, uploaded my story after the hardwork of 5 years. Go checkout the link below, https://www.amazon.co.uk/dp/B096H8G52Y",
-      "path": "Photos & to upload/Instagram/17978168416366635.jpg"
-    },
-    {
-      "title": "Story cover - Took inspiration from Natalia Drepina ...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Story cover - Took inspiration from Natalia Drepina \"Insomnia\" artwork",
-      "path": "Photos & to upload/Instagram/18173685229138105.jpg"
-    },
-    {
-      "title": "Concept #blender #d #dart #art #render #digitalart #...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Concept #blender #d #dart #art #render #digitalart #animation #blendercommunity #dmodeling #design #cgi #blendermurah #rendering #dmodel #gfx #robl...",
-      "path": "Photos & to upload/Instagram/17854398092569660.jpg"
-    },
-    {
-      "title": "Story Images",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Story Images",
-      "path": "Photos & to upload/Instagram/17857249232533945.jpg"
-    },
-    {
-      "title": "3drender #blender #d #dart #art #render #digitalart ...",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "3drender #blender #d #dart #art #render #digitalart #animation #blendercommunity #dmodeling #design #cgi #blendermurah #rendering #dmodel #gfx #rob...",
-      "path": "Photos & to upload/Instagram/17886878243076992.jpg"
-    },
-    {
-      "title": "Nun & Apep, a giant serpent",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Nun & Apep, a giant serpent",
-      "path": "Photos & to upload/Instagram/17938299772463929.jpg"
-    },
-    {
-      "title": "My father's likeness",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "My father's likeness",
-      "path": "Photos & to upload/Instagram/17860934531409034.jpg"
-    },
-    {
-      "title": "Hope and Resilience",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Hope and Resilience",
-      "path": "Photos & to upload/Instagram/17875278170181393.jpg"
-    },
-    {
-      "title": "Trio #marvel #movies #moonknight",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Trio #marvel #movies #moonknight",
-      "path": "Photos & to upload/Instagram/17881760798115414.jpg"
-    },
-    {
-      "title": "Osiris Sculpture",
-      "pillar": "Personal",
-      "cat": "character",
-      "desc": "Osiris Sculpture",
-      "path": "Photos & to upload/Instagram/17858904386497517.jpg"
-    },
-    {
-      "title": "Bye ­ƒæï­ƒæï 2020...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Bye ­ƒæï­ƒæï 2020...",
-      "path": "Photos & to upload/Instagram/17920280221509612.jpg"
-    },
-    {
-      "title": "The flare - The monk who absorbs light",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "The flare - The monk who absorbs light",
-      "path": "Photos & to upload/Instagram/18131148718177645.jpg"
-    },
-    {
-      "title": "Just 1864 pandas left in the world",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Just 1864 pandas left in the world",
-      "path": "Photos & to upload/Instagram/17860437881274324.jpg"
-    },
-    {
-      "title": "Save the whales",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Save the whales",
-      "path": "Photos & to upload/Instagram/17860277381321133.jpg"
-    },
-    {
-      "title": "Sing to the cosmos",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Sing to the cosmos",
-      "path": "Photos & to upload/Instagram/18089210236209355.jpg"
-    },
-    {
-      "title": "My effort to create an art which showcased the proce...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "My effort to create an art which showcased the process of purchasing a slave in Paris",
-      "path": "Photos & to upload/Instagram/17878470466970028.jpg"
-    },
-    {
-      "title": "Red Alert",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Red Alert",
-      "path": "Photos & to upload/Instagram/18128080651083957.jpg"
-    },
-    {
-      "title": "Enjoying weekend",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Enjoying weekend",
-      "path": "Photos & to upload/Instagram/18177267772010132.jpg"
-    },
-    {
-      "title": "A small project",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "A small project",
-      "path": "Photos & to upload/Instagram/17913534727512064.jpg"
-    },
-    {
-      "title": "Concept Art course - Day 2",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Concept Art course - Day 2",
-      "path": "Photos & to upload/Instagram/17880509302844034.jpg"
-    },
-    {
-      "title": "Concept Art course - Day 1",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Concept Art course - Day 1",
-      "path": "Photos & to upload/Instagram/17858022551271196.jpg"
-    },
-    {
-      "title": "Complete\" A short film..",
-      "pillar": "Personal",
-      "cat": "animation",
-      "desc": "Complete\" A short film.. https://youtu.be/b8_h72abWqM",
-      "path": "Photos & to upload/Instagram/17903299933565896.jpg"
-    },
-    {
-      "title": "Futuristic Hall",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Futuristic Hall",
-      "path": "Photos & to upload/Instagram/18031520548280063.jpg"
-    },
-    {
-      "title": "Amazing Aurora",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Amazing Aurora",
-      "path": "Photos & to upload/Instagram/17881130971770142.jpg"
-    },
-    {
-      "title": "People covered in their beliefs",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "People covered in their beliefs",
-      "path": "Photos & to upload/Instagram/17855680640176315.jpg"
-    },
-    {
-      "title": "An old client's sketch",
-      "pillar": "Client",
-      "cat": "3d",
-      "desc": "An old client's sketch",
-      "path": "Photos & to upload/Instagram/17847916043272721.jpg"
-    },
-    {
-      "title": "Now, they can talk for eternity",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Now, they can talk for eternity",
-      "path": "Photos & to upload/Instagram/17847875717203035.jpg"
-    },
-    {
-      "title": "Red in Green",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Red in Green",
-      "path": "Photos & to upload/Instagram/17846848604218243.jpg"
-    },
-    {
-      "title": "Futuristic Art",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Futuristic Art",
-      "path": "Photos & to upload/Instagram/17853368626922088.jpg"
-    },
-    {
-      "title": "Anyone remember this... made in blender",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Anyone remember this... made in blender",
-      "path": "Photos & to upload/Instagram/18136824679035503.jpg"
-    },
-    {
-      "title": "A friend's picture into concept art.",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "A friend's picture into concept art.",
-      "path": "Photos & to upload/Instagram/17983044850207328.jpg"
-    },
-    {
-      "title": "Render - Learning something new...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Render - Learning something new...",
-      "path": "Photos & to upload/Instagram/17908642864269519.jpg"
-    },
-    {
-      "title": "Scifi Substance Designer Practice",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Scifi Substance Designer Practice",
-      "path": "Photos & to upload/Instagram/17940129337081173.jpg"
-    },
-    {
-      "title": "Substance Designer Practice",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Substance Designer Practice",
-      "path": "Photos & to upload/Instagram/17934013207186131.jpg"
-    },
-    {
-      "title": "Happy Family..",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Happy Family..",
-      "path": "Photos & to upload/Instagram/17935025272142875.jpg"
-    },
-    {
-      "title": "Museum in NY . Render",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Museum in NY . Render",
-      "path": "Photos & to upload/Instagram/17915254156167498.jpg"
-    },
-    {
-      "title": "Exterior Render",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Exterior Render",
-      "path": "Photos & to upload/Instagram/17930780848117326.jpg"
-    },
-    {
-      "title": "Spaceship... blender file render online",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Spaceship... blender file render online",
-      "path": "Photos & to upload/Instagram/17916258841067694.jpg"
-    },
-    {
-      "title": "My niece got first position in All Pakistan Arts Com...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "My niece got first position in All Pakistan Arts Competition. May the legacy continues.",
-      "path": "Photos & to upload/Instagram/17867472817198892.jpg"
-    },
-    {
-      "title": "Other 2 minutes",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Other 2 minutes",
-      "path": "Photos & to upload/Instagram/17849280781115328.jpg"
-    },
-    {
-      "title": "Draw in 2 minutes...",
-      "pillar": "Personal",
-      "cat": "3d",
-      "desc": "Draw in 2 minutes...",
-      "path": "Photos & to upload/Instagram/17858479444014704.jpg"
+    }
+  ],
+  "tech": [
+    {
+      "id": "velra",
+      "title": "Vel Ra Perfumes 3D Twin & Handover Dossier",
+      "subtitle": "Interactive Architectural Spatial Twin (Capel Street, Dublin 1)",
+      "status": "Live",
+      "badgeClass": "badge-live",
+      "num": "01",
+      "liveUrl": "https://velra-viewer.ranakaharian1.workers.dev/",
+      "desc": "An interactive architectural photographic handover dossier and real-time WebGL 3D digital twin platform for a bespoke luxury fragrance boutique on Capel Street, Dublin 1. Built with millimetric CAD blueprint matrices, master materials board, high-CRI retail lighting compliance engine (CIBSE SLL), bespoke joinery passes, and digital client sign-off authorization.",
+      "features": [
+        "Interactive WebGL 3D space orbit & inspection",
+        "Millimeter-accurate CAD blueprints & dimension matrix",
+        "High-CRI 3000K retail lighting & photometric simulation",
+        "Stage 04 fabrication-ready joinery & client sign-off"
+      ],
+      "tech": [
+        "Cloudflare Workers",
+        "WebGL / 3D Twin",
+        "Interactive CAD Engine",
+        "Photometrics / Lighting",
+        "Edge Runtime",
+        "Vanilla ES6+"
+      ],
+      "buttons": [
+        {
+          "label": "Launch 3D Handover Dossier ↗",
+          "url": "https://velra-viewer.ranakaharian1.workers.dev/",
+          "primary": true
+        }
+      ],
+      "hasLinks": true,
+      "links": [
+        {
+          "label": "Launch 3D Handover Dossier ↗",
+          "url": "https://velra-viewer.ranakaharian1.workers.dev/",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "id": "launcher",
+      "title": "DreamsLab Cyber Launcher",
+      "subtitle": "Chrome Multi-Profile Link Vault",
+      "status": "Live",
+      "badgeClass": "badge-live",
+      "num": "02",
+      "liveUrl": "https://abdullahinayat24-lang.github.io/link-launcher/",
+      "desc": "A standalone Windows desktop app that acts as an encrypted personal link vault with full multi-account Chrome profile management. Save your important links, notes and account context per Google profile, then launch any Chrome account in one click. Protected with AES-256-GCM encryption.",
+      "features": [
+        "Modular application dock & launcher",
+        "Real-time system telemetry monitor",
+        "Encrypted local vault storage",
+        "Low-overhead native resource pipeline"
+      ],
+      "tech": [
+        "Electron",
+        "Node.js",
+        "AES-256-GCM",
+        "Web Crypto API",
+        "Chrome API",
+        "Windows",
+        "GitHub Pages"
+      ],
+      "buttons": [
+        {
+          "label": "Download for Windows ↗",
+          "url": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe",
+          "primary": true
+        },
+        {
+          "label": "Live Web App ↗",
+          "url": "https://abdullahinayat24-lang.github.io/link-launcher/",
+          "primary": false
+        }
+      ],
+      "hasLinks": true,
+      "links": [
+        {
+          "label": "Download for Windows ↗",
+          "url": "https://github.com/abdullahinayat24-lang/link-launcher/releases/download/v1.0.0/DreamsLab-Cyber-Launcher-Setup.exe",
+          "primary": true
+        },
+        {
+          "label": "Live Web App ↗",
+          "url": "https://abdullahinayat24-lang.github.io/link-launcher/",
+          "primary": false
+        }
+      ]
+    },
+    {
+      "id": "mythos",
+      "title": "Mythos Encyclopedia & Gods App",
+      "subtitle": "Global Gods, World Myths & Folklore Platform",
+      "status": "Live Web & Mobile",
+      "badgeClass": "badge-live",
+      "num": "03",
+      "liveUrl": "https://mythos-mythology-app.vercel.app/",
+      "desc": "A deep cross-platform encyclopedia cataloging 50+ world mythologies and thousands of deities from Greek, Norse, and Egyptian to Hindu, Celtic, Aztec, Japanese, African, and urban folklore. Features rich mythological dossiers, daily deity notifications, interactive world mythology atlas, sacred objects collection, and a 4-tier mythology quiz with global leaderboards.",
+      "features": [
+        "200+ authenticated mythological entities & pantheons",
+        "Interactive world mythology map & sacred objects atlas",
+        "Daily deity notifications & offline search indexing",
+        "4-tier interactive mythology quiz engine with leaderboards"
+      ],
+      "tech": [
+        "Vercel",
+        "Vue.js / Vite",
+        "Ionic / Capacitor",
+        "Android SDK / Google Play",
+        "TypeScript",
+        "SQLite",
+        "Wikipedia API"
+      ],
+      "buttons": [
+        {
+          "label": "Launch Web App ↗",
+          "url": "https://mythos-mythology-app.vercel.app/",
+          "primary": true
+        },
+        {
+          "label": "Google Play Store ↗",
+          "url": "https://play.google.com/store/apps/details?id=com.mythos.app",
+          "primary": false
+        }
+      ],
+      "hasLinks": true,
+      "links": [
+        {
+          "label": "Launch Web App ↗",
+          "url": "https://mythos-mythology-app.vercel.app/",
+          "primary": true
+        },
+        {
+          "label": "Google Play Store ↗",
+          "url": "https://play.google.com/store/apps/details?id=com.mythos.app",
+          "primary": false
+        }
+      ]
+    },
+    {
+      "id": "stock-manager",
+      "title": "Supplier Ledger & Stock Management Engine",
+      "subtitle": "Multi-Supplier Purchase Orders, OCR Invoicing & Excel/PDF Suite",
+      "status": "Enterprise Internal App",
+      "badgeClass": "badge-outline",
+      "num": "04",
+      "liveUrl": "",
+      "desc": "A comprehensive commercial supplier and inventory management web application. Features multi-supplier purchase order tracking, real-time stock required calculations, return/faulty item logging, OCR invoice parsing with Tesseract.js, and automated XLSX/PDF export capabilities.",
+      "features": [
+        "Multi-supplier purchase order tracking & status monitoring",
+        "Automated stock required calculations and priority matrix",
+        "Built-in OCR invoice scanner (Tesseract.js) and PDF engine",
+        "Full Excel (.xlsx) and JSON cloud backup synchronization"
+      ],
+      "tech": [
+        "Cloudflare Workers",
+        "JavaScript (ES6+)",
+        "Tesseract.js OCR",
+        "jsPDF",
+        "SheetJS / XLSX",
+        "Edge Storage"
+      ],
+      "buttons": [],
+      "hasLinks": false,
+      "links": []
+    },
+    {
+      "id": "phone-count",
+      "title": "StockLine Multi-Branch Device Inventory",
+      "subtitle": "Real-Time Retail Phone Count & Hardware Audit Platform",
+      "status": "Enterprise Internal App",
+      "badgeClass": "badge-outline",
+      "num": "05",
+      "liveUrl": "",
+      "desc": "A high-speed multi-location device inventory and phone stock audit web application deployed on Cloudflare Workers. Enables retail branches to perform rapid live device counts, track IMEI/serial hardware states, reconcile discrepancies in real time, and export consolidated audit sheets.",
+      "features": [
+        "Multi-shop live device count and hardware reconciliation",
+        "Real-time stock discrepancy audit and validation",
+        "Category and model filtering with rapid barcode/search indexing",
+        "Instant Cloudflare Edge sync with zero latency"
+      ],
+      "tech": [
+        "Cloudflare Workers",
+        "JavaScript (ES6+)",
+        "Edge Storage",
+        "HTML5 Canvas / DOM"
+      ],
+      "buttons": [],
+      "hasLinks": false,
+      "links": []
+    },
+    {
+      "id": "holidays",
+      "title": "Staff Holidays & Hours Management Portal",
+      "subtitle": "Automated Staff Hours, Accruals & Official PDF Statement Engine",
+      "status": "Enterprise Internal App",
+      "badgeClass": "badge-outline",
+      "num": "06",
+      "liveUrl": "",
+      "desc": "An enterprise staff attendance, hours tracking, and leave management system deployed on Cloudflare Workers. Features automated holiday accrual calculations, weekly timesheet logging, single-employee official PDF statement generation, multi-branch summary reporting, and one-click GitHub cloud synchronization.",
+      "features": [
+        "Automated holiday & sick pay accrual calculation engine",
+        "One-click official PDF statement generation for individual staff",
+        "Multi-shop weekly hours breakdown & executive summary tables",
+        "Real-time GitHub cloud sync with instant mobile worker deployment"
+      ],
+      "tech": [
+        "Cloudflare Workers",
+        "JavaScript (ES6+)",
+        "jsPDF / PDF Generation",
+        "GitHub API Sync",
+        "Edge Runtime"
+      ],
+      "buttons": [],
+      "hasLinks": false,
+      "links": []
+    },
+    {
+      "id": "timeline",
+      "title": "World History & Mythology Timeline",
+      "subtitle": "Chronological Multi-Track Engine (10,000 BCE – 1800 CE)",
+      "status": "Web Platform",
+      "badgeClass": "badge-outline",
+      "num": "07",
+      "liveUrl": "",
+      "desc": "An interactive, high-contrast, multi-track chronological timeline connecting global civilizations, founding epics, and legendary writers across 12 millennia. Features cross-epoch zoom navigation, civilization filter matrices, epoch-anchored historical narratives, and instant literature cross-referencing.",
+      "features": [
+        "12,000-year multi-track chronological canvas",
+        "Civilization filter matrices & cross-epoch zooming",
+        "Epic literature cross-referencing & author dossiers",
+        "Fluid 60fps pan/zoom visual engine"
+      ],
+      "tech": [
+        "JavaScript (ES6+)",
+        "HTML5 Canvas / DOM",
+        "CSS Grid",
+        "JSON Data Engine"
+      ],
+      "buttons": [],
+      "hasLinks": false,
+      "links": []
+    },
+    {
+      "id": "psych",
+      "title": "Psychology Lecture Knowledge Platform",
+      "subtitle": "University Research & Student Educational Portal",
+      "status": "Production-Ready",
+      "badgeClass": "badge-outline",
+      "num": "08",
+      "liveUrl": "",
+      "desc": "A specialized academic portal built for university psychology students and researchers. Combines structured modular lecture pathways, clinical case study dossiers, interactive self-assessment quizzes, and downloadable PDF research summaries.",
+      "features": [
+        "Modular lecture pathway curriculum engine",
+        "Clinical case study dossiers & diagnostic trees",
+        "Interactive self-assessment quizzing system",
+        "Responsive reading mode & bibliography manager"
+      ],
+      "tech": [
+        "JavaScript (ES6+)",
+        "HTML5 / CSS3",
+        "Local Storage",
+        "PDF Generation"
+      ],
+      "buttons": [],
+      "hasLinks": false,
+      "links": []
+    },
+    {
+      "id": "onboardflow",
+      "title": "OnboardFlow",
+      "subtitle": "Automated Client Onboarding & Intake System",
+      "status": "Full-Stack SaaS",
+      "badgeClass": "badge-outline",
+      "num": "09",
+      "liveUrl": "",
+      "desc": "An enterprise client onboarding automation platform that eliminates administrative friction through dynamic multi-step intake flows, automated document collection, digital e-signatures, and instant client workspace provisioning.",
+      "features": [
+        "Dynamic conditional intake questionnaires",
+        "Secure encrypted document upload pipeline",
+        "Automated client milestone progress tracking",
+        "Webhook integrations for CRM and billing systems"
+      ],
+      "tech": [
+        "TypeScript",
+        "Next.js",
+        "Node.js",
+        "PostgreSQL",
+        "Prisma",
+        "Tailwind CSS"
+      ],
+      "buttons": [],
+      "hasLinks": false,
+      "links": []
+    },
+    {
+      "id": "medicare",
+      "title": "MediCare AI Companion",
+      "subtitle": "Intelligent Patient Health Assistant",
+      "status": "Healthcare Web App",
+      "badgeClass": "badge-outline",
+      "num": "10",
+      "liveUrl": "",
+      "desc": "A privacy-first healthcare web application designed to support patient wellness through intelligent symptom tracking, medication scheduling with reminders, medical report summarization, and emergency contact coordination.",
+      "features": [
+        "Natural-language health query assistant",
+        "Medication schedule & adherence tracking",
+        "Medical report plain-English summarizer",
+        "Encrypted local health journal"
+      ],
+      "tech": [
+        "TypeScript",
+        "Next.js",
+        "Tailwind CSS",
+        "Web Speech API",
+        "IndexedDB"
+      ],
+      "buttons": [],
+      "hasLinks": false,
+      "links": []
+    },
+    {
+      "id": "repair",
+      "title": "Retail Repair Price Matrix",
+      "subtitle": "Real-Time Repair Quoting & Device Diagnostic Engine",
+      "status": "Enterprise Internal App",
+      "badgeClass": "badge-outline",
+      "num": "11",
+      "liveUrl": "",
+      "desc": "A multi-branch commercial repair price catalog and service quoting matrix. Features real-time part cost lookups, labor rate calculation, customer ticket generation, and automated WhatsApp/SMS quotation exports.",
+      "features": [
+        "Instant multi-brand device repair pricing engine",
+        "Real-time part margin & labor calculation",
+        "Customer receipt & printable service tickets",
+        "Multi-store branch synchronization"
+      ],
+      "tech": [
+        "JavaScript (ES6+)",
+        "Cloudflare Workers",
+        "HTML5",
+        "CSS3"
+      ],
+      "buttons": [],
+      "hasLinks": false,
+      "links": []
+    },
+    {
+      "id": "vat-invoice",
+      "title": "VAT Invoice Generator",
+      "subtitle": "Automated Retail VAT Invoice & Receipt Engine",
+      "status": "Enterprise Internal App",
+      "badgeClass": "badge-outline",
+      "num": "12",
+      "liveUrl": "",
+      "desc": "A commercial VAT invoice and receipt generation engine built for retail operations. Produces compliant, print-ready PDF invoices with itemized VAT breakdown, customer details, and company branding — all running on Cloudflare's edge network.",
+      "tech": [
+        "Cloudflare Workers",
+        "JavaScript (ES6+)",
+        "jsPDF",
+        "HTML5",
+        "CSS3"
+      ],
+      "features": [
+        "VAT-compliant invoice generation",
+        "PDF export and print-ready output",
+        "Itemized product & pricing engine",
+        "Company branding and header templates"
+      ],
+      "hasLinks": false,
+      "buttons": [],
+      "links": []
+    },
+    {
+      "id": "vapesquantity",
+      "title": "Vapes Quantity & Stock Counter",
+      "subtitle": "Real-Time Vape Product Inventory & Quantity Tracker",
+      "status": "Enterprise Internal App",
+      "badgeClass": "badge-outline",
+      "num": "13",
+      "liveUrl": "",
+      "desc": "A fast, mobile-optimized inventory tracking tool for vape retail operations. Enables real-time quantity counting, stock-level monitoring, and multi-SKU management across product lines — deployed on Cloudflare Pages.",
+      "tech": [
+        "Cloudflare Pages",
+        "JavaScript (ES6+)",
+        "HTML5",
+        "CSS3",
+        "LocalStorage"
+      ],
+      "features": [
+        "Real-time quantity tracking",
+        "Multi-SKU product management",
+        "Mobile-optimized interface",
+        "Offline-capable edge deployment"
+      ],
+      "hasLinks": false,
+      "buttons": [],
+      "links": []
     }
   ],
   "software": [
@@ -2469,211 +1239,6 @@
       "desc": "Automated mesh cleanup, polygon reduction, non-manifold geometry fixing, and batch asset export pipeline designed for real-time game engines.",
       "link": "https://superhivemarket.com/products/quick-decimator--optimizer",
       "img": "Photos & to upload/Superhive/quick-decimator-optimizer.jpg"
-    }
-  ],
-  "experience": [
-    {
-      "id": 1,
-      "company": "IDFL International Ltd",
-      "role": "Software Engineer",
-      "start": "Sep 2023",
-      "end": "Present",
-      "tags": [
-        "Python",
-        "JavaScript",
-        "Software",
-        "3D Automation"
-      ]
-    },
-    {
-      "id": 2,
-      "company": "Hashage Ireland",
-      "role": "Senior Video Editor & Motion Designer",
-      "start": "Feb 2023",
-      "end": "Present",
-      "tags": [
-        "Video",
-        "Post-Production",
-        "Brand Strategy"
-      ]
-    },
-    {
-      "id": 3,
-      "company": "Dublin Branding Agency",
-      "role": "Video & Creative Specialist",
-      "start": "Jun 2020",
-      "end": "Present",
-      "tags": [
-        "Video",
-        "Creative Direction",
-        "Motion"
-      ]
-    },
-    {
-      "id": 4,
-      "company": "RizPros LTD",
-      "role": "Supply Chain Manager",
-      "start": "Nov 2021",
-      "end": "Aug 2023",
-      "tags": [
-        "Supply Chain",
-        "Inventory Ops",
-        "Process Automation"
-      ]
-    },
-    {
-      "id": 5,
-      "company": "Digiworld Ireland",
-      "role": "Digital Media Manager",
-      "start": "Feb 2021",
-      "end": "Aug 2022",
-      "tags": [
-        "Digital Media",
-        "Content",
-        "Marketing"
-      ]
-    },
-    {
-      "id": 6,
-      "company": "GH Industry",
-      "role": "Assistant Procurement Manager",
-      "start": "May 2016",
-      "end": "Jun 2018",
-      "tags": [
-        "Procurement",
-        "Operations",
-        "Logistics"
-      ]
-    },
-    {
-      "id": 7,
-      "company": "UET Taxila",
-      "role": "Graphic Design & Visualization Freelance",
-      "start": "Jun 2012",
-      "end": "Sep 2016",
-      "tags": [
-        "3D Modeling",
-        "Graphic Design",
-        "Illustration"
-      ]
-    }
-  ],
-  "clients": [
-    "IDFL",
-    "Hashage",
-    "Rizpros",
-    "Eskimo Pizza",
-    "Subway",
-    "Wayback Burgers",
-    "Get Connected",
-    "Digiworld",
-    "Apache",
-    "IPPA",
-    "Zouq",
-    "Dera",
-    "Chick City",
-    "Chickn Lickn",
-    "Biryani Box",
-    "R24 News",
-    "IT-Fix",
-    "FSK Solicitors",
-    "I&C Law",
-    "IMK Law",
-    "IK & Co",
-    "QR Accounting",
-    "FAMS",
-    "Fast Premium",
-    "Wonderlicious",
-    "Eurasia",
-    "Laura Dowling",
-    "Madia Street",
-    "Quality Food",
-    "Motokraft",
-    "Chronic Pain"
-  ],
-  "articles": [
-    {
-      "id": 1,
-      "title": "My Father Said One Word. He Left the Kitchen. I Spent Fifteen Years Inside It.",
-      "slug": "my-father-said",
-      "cat": "Personal Essay",
-      "category": "Personal Essay",
-      "date": "August 2026",
-      "readTime": "7 min read",
-      "desc": "A meditation on inheritance, labour, and the unspoken language of fathers who communicate through work rather than words.",
-      "url": "https://medium.com/@rana.abdullah.inayat/my-father-said-one-word-he-left-the-kitchen-i-spent-fifteen-years-inside-it-b0a793a3bb07",
-      "tags": [
-        "Writing",
-        "Personal Essay",
-        "Memory"
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Project Concept: Contract Killers",
-      "slug": "contract-killers",
-      "cat": "Game Design & Tactics",
-      "category": "Game Design & Tactics",
-      "date": "May 3, 2026",
-      "readTime": "6 min read",
-      "desc": "A top-down real-time tactics and strategy game inspired by Commandos and cyberpunk stealth infiltration mechanics. Managing specialist operatives across high-stakes tactical contracts.",
-      "url": "HTML/blog-contract-killers.html",
-      "tags": [
-        "Unreal Engine",
-        "Tactics",
-        "Game Design",
-        "Story Branching"
-      ]
-    },
-    {
-      "id": 3,
-      "title": "Why Every Aspiring Game Developer Should Start Small",
-      "slug": "start-small",
-      "cat": "Development Philosophy",
-      "category": "Development Philosophy",
-      "date": "June 3, 2026",
-      "readTime": "5 min read",
-      "desc": "Starting small allows developers to focus on core mechanics, finish rapidly, build confidence, and discover gameplay viability before investing months or years into complex systems.",
-      "url": "HTML/blog-start-small.html",
-      "tags": [
-        "Game Dev",
-        "Philosophy",
-        "Prototyping",
-        "Scope Control"
-      ]
-    },
-    {
-      "id": 4,
-      "title": "Why I Started Writing and Creating Games and Apps",
-      "slug": "why-i-started",
-      "cat": "Creative Origins",
-      "category": "Creative Origins",
-      "date": "May 31, 2026",
-      "readTime": "7 min read",
-      "desc": "From playing classic PC games in childhood to exploring the fascination with how interactive worlds work behind the scenes. On why blending narrative fiction, 3D art, and software forms a unified creative drive.",
-      "url": "HTML/blog-why-i-started-writing.html",
-      "tags": [
-        "Creative Journey",
-        "Origins",
-        "Cross-Disciplinary",
-        "Technology"
-      ]
-    },
-    {
-      "id": 5,
-      "title": "The Architecture of Solitude: Lighting & Spatial Emotion in Digital Worlds",
-      "slug": "architecture-of-solitude",
-      "cat": "3D & Design",
-      "category": "3D & Design",
-      "date": "June 2026",
-      "readTime": "5 min read",
-      "desc": "How volumetric daylighting, concrete brut textures, and negative space evoke visceral psychological resonance in digital environments.",
-      "url": "https://medium.com",
-      "tags": [
-        "3D Art",
-        "Unreal Engine 5",
-        "Environment Design"
-      ]
     }
   ]
 }
