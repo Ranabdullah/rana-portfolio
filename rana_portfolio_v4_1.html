@@ -6713,7 +6713,25 @@ async function autoFetchCloudDatabaseOnBoot(){
       const data = await res.json();
       if(data.novels && Array.isArray(data.novels)) novels = data.novels;
       if(data.tech && Array.isArray(data.tech)) techProjects = data.tech;
-      if(data.gallery && Array.isArray(data.gallery)) galleryItems = data.gallery;
+      if(data.gallery && Array.isArray(data.gallery)){
+        const map = new Map();
+        galleryItems.forEach(item => { if(item && item.title) map.set(item.title, item); });
+        data.gallery.forEach(cloudItem => {
+          if(!cloudItem || !cloudItem.title) return;
+          const existing = map.get(cloudItem.title);
+          if(!existing){
+            map.set(cloudItem.title, cloudItem);
+          } else {
+            const cloudImgs = (cloudItem.images && cloudItem.images.length) || 0;
+            const exImgs = (existing.images && existing.images.length) || 0;
+            if(cloudImgs >= exImgs){
+              map.set(cloudItem.title, cloudItem);
+            }
+          }
+        });
+        galleryItems = Array.from(map.values());
+        try { localStorage.setItem('rana_gallery_data', JSON.stringify(galleryItems)); } catch(e){}
+      }
       if(data.software && Array.isArray(data.software)) software = data.software;
       if(data.experience && Array.isArray(data.experience)) experience = data.experience;
       if(data.clients && Array.isArray(data.clients)) clients = data.clients;

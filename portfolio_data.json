@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-09T23:05:00.000Z",
-  "version": "4.6",
+  "updatedAt": "2026-09-10T21:10:00.000Z",
+  "version": "4.7",
   "novels": [
     {
       "id": "childs-world-1",
@@ -738,19 +738,37 @@
       "title": "IDFL Kiosk: Retail Hardware & Service Center Architectural Visual",
       "pillar": "Client Work",
       "cat": "environment",
-      "desc": "Modular shopping mall service kiosk and repair diagnostic reception station designed with custom acrylic display cases and LED backlighting.",
+      "desc": "Modular shopping mall service kiosk and repair diagnostic reception station designed with custom acrylic display cases, LED backlighting, and contextual architectural atrium visualization.",
       "path": "Photos & to upload/Client/IDFL/IDFL Kiosk/Final1.jpg",
       "images": [
         "Photos & to upload/Client/IDFL/IDFL Kiosk/Final1.jpg",
-        "Photos & to upload/Client/IDFL/IDFL Kiosk/Final 2.jpg"
+        "Photos & to upload/Client/IDFL/IDFL Kiosk/Final 2.jpg",
+        "Photos & to upload/Client/IDFL/IDFL Kiosk/Final 3.jpg",
+        "Photos & to upload/Client/IDFL/IDFL Kiosk/Final 4.jpg",
+        "Photos & to upload/Client/IDFL/IDFL Kiosk/Insidemall (2).png",
+        "Photos & to upload/Client/IDFL/IDFL Kiosk/Insidemall (1).png",
+        "Photos & to upload/Client/IDFL/IDFL Kiosk/Insidemall (4).png",
+        "Photos & to upload/Client/IDFL/IDFL Kiosk/Insidemall (7).png"
       ],
       "subTitles": {
-        "0": "IDFL Retail Service Kiosk: Front Elevation & Counter Display",
-        "1": "IDFL Retail Service Kiosk: Rear Technician Workspace & Secure Storage"
+        "0": "Front Elevation & Illuminated Showcase Counter",
+        "1": "Rear Technician Workspace & Secure Storage",
+        "2": "Full Studio Showcase & Retail Display Shelving",
+        "3": "Elevated Plan View & Service Counter Layout",
+        "4": "Mall Atrium Environment: Front Symmetry Elevation",
+        "5": "Mall Atrium Environment: Diagonal Escalator Perspective",
+        "6": "Countertop Perspective & POS Terminal Workstation",
+        "7": "Technician Interior View & Chalkboard Atrium Backdrop"
       },
       "subDescriptions": {
         "0": "Modern freestanding mall kiosk featuring secure glass display vitrines, illuminated acrylic logo fascia, and integrated POS terminals.",
-        "1": "Functional reverse view highlighting modular repair tool drawer units, cable management channels, and lockable inventory compartments."
+        "1": "Functional reverse view highlighting modular repair tool drawer units, cable management channels, and lockable inventory compartments.",
+        "2": "Studio product visualization highlighting multi-tier modular accessory shelves, backlit displays, and perimeter showcase counters.",
+        "3": "High-angle architectural perspective showing customer circulation paths, service counter clearances, and interior workstation geometry.",
+        "4": "Contextual architectural rendering placing the kiosk in a vibrant multi-story shopping mall atrium with escalators, glass elevators, and natural wood accents.",
+        "5": "Dynamic angled view capturing illuminated display shelves against polished atrium hardwood floors and ambient commercial lighting.",
+        "6": "Close-up perspective emphasizing clean minimalist joinery, bevelled counter edges, and integrated digital display diagnostics.",
+        "7": "Reverse vantage from within the service counter looking out toward decorative café wall murals and customer access lanes."
       },
       "subVideos": {},
       "youtubeUrl": ""
