@@ -4027,40 +4027,58 @@ footer {
 // ==================== RESILIENT DATA STORAGE & AUTO-RECOVERY ENGINE ====================
 function loadData(key, def){
   try {
+    let parsed = null;
     // 1. Direct key lookup
     const direct = localStorage.getItem(key);
     if(direct){
-      try { return JSON.parse(direct); } catch(e){}
+      try { parsed = JSON.parse(direct); } catch(e){}
     }
 
-    // 2. Extract base prefix (e.g. 'rana_gallery' from 'rana_gallery_v35' or 'rana_gallery_data')
-    const prefix = key.replace(/_(?:data|v\d+|bw)$/, '');
-    
-    // 3. Scan all keys in localStorage to auto-recover from any previous version
-    let bestKey = null;
-    let maxVer = -1;
-    
-    for(let i = 0; i < localStorage.length; i++){
-      const k = localStorage.key(i);
-      if(k && (k.startsWith(prefix) || (prefix==='rana_experience' && k.startsWith('rana_exp')))){
-        const match = k.match(/_v(\d+)$/);
-        const ver = match ? parseInt(match[1], 10) : 0;
-        if(ver >= maxVer){
-          maxVer = ver;
-          bestKey = k;
+    // 2. Scan previous keys if not found
+    if(!parsed){
+      const prefix = key.replace(/_(?:data|v\d+|bw)$/, '');
+      let bestKey = null;
+      let maxVer = -1;
+      for(let i = 0; i < localStorage.length; i++){
+        const k = localStorage.key(i);
+        if(k && (k.startsWith(prefix) || (prefix==='rana_experience' && k.startsWith('rana_exp')))){
+          const match = k.match(/_v(\d+)$/);
+          const ver = match ? parseInt(match[1], 10) : 0;
+          if(ver >= maxVer){
+            maxVer = ver;
+            bestKey = k;
+          }
+        }
+      }
+      if(bestKey){
+        const saved = localStorage.getItem(bestKey);
+        if(saved){
+          try { parsed = JSON.parse(saved); } catch(e){}
         }
       }
     }
 
-    if(bestKey){
-      const saved = localStorage.getItem(bestKey);
-      if(saved){
-        const parsed = JSON.parse(saved);
-        // Automatically migrate forward to the standard key
-        localStorage.setItem(key, saved);
-        console.log(`[Auto-Recovered] Restored data for ${key} from ${bestKey}`);
-        return parsed;
+    if(parsed){
+      if(Array.isArray(def) && Array.isArray(parsed)){
+        const map = new Map();
+        parsed.forEach(item => { if(item && item.title) map.set(item.title, item); });
+        def.forEach(defItem => {
+          if(!defItem || !defItem.title) return;
+          const existing = map.get(defItem.title);
+          if(!existing){
+            map.set(defItem.title, defItem);
+          } else {
+            const defImgs = (defItem.images && defItem.images.length) || 0;
+            const exImgs = (existing.images && existing.images.length) || 0;
+            if(defImgs > exImgs){
+              map.set(defItem.title, defItem);
+            }
+          }
+        });
+        parsed = Array.from(map.values());
       }
+      try { localStorage.setItem(key, JSON.stringify(parsed)); } catch(e){}
+      return parsed;
     }
 
     return def;
@@ -4239,19 +4257,37 @@ const GALLERY_DATA = [
     "title": "IDFL Kiosk: Retail Hardware & Service Center Architectural Visual",
     "pillar": "Client Work",
     "cat": "environment",
-    "desc": "Modular shopping mall service kiosk and repair diagnostic reception station designed with custom acrylic display cases and LED backlighting.",
+    "desc": "Modular shopping mall service kiosk and repair diagnostic reception station designed with custom acrylic display cases, LED backlighting, and contextual architectural atrium visualization.",
     "path": "Photos & to upload/Client/IDFL/IDFL Kiosk/Final1.jpg",
     "images": [
       "Photos & to upload/Client/IDFL/IDFL Kiosk/Final1.jpg",
-      "Photos & to upload/Client/IDFL/IDFL Kiosk/Final 2.jpg"
+      "Photos & to upload/Client/IDFL/IDFL Kiosk/Final 2.jpg",
+      "Photos & to upload/Client/IDFL/IDFL Kiosk/Final 3.jpg",
+      "Photos & to upload/Client/IDFL/IDFL Kiosk/Final 4.jpg",
+      "Photos & to upload/Client/IDFL/IDFL Kiosk/Insidemall (2).png",
+      "Photos & to upload/Client/IDFL/IDFL Kiosk/Insidemall (1).png",
+      "Photos & to upload/Client/IDFL/IDFL Kiosk/Insidemall (4).png",
+      "Photos & to upload/Client/IDFL/IDFL Kiosk/Insidemall (7).png"
     ],
     "subTitles": {
-      "0": "IDFL Retail Service Kiosk: Front Elevation & Counter Display",
-      "1": "IDFL Retail Service Kiosk: Rear Technician Workspace & Secure Storage"
+      "0": "Front Elevation & Illuminated Showcase Counter",
+      "1": "Rear Technician Workspace & Secure Storage",
+      "2": "Full Studio Showcase & Retail Display Shelving",
+      "3": "Elevated Plan View & Service Counter Layout",
+      "4": "Mall Atrium Environment: Front Symmetry Elevation",
+      "5": "Mall Atrium Environment: Diagonal Escalator Perspective",
+      "6": "Countertop Perspective & POS Terminal Workstation",
+      "7": "Technician Interior View & Chalkboard Atrium Backdrop"
     },
     "subDescriptions": {
       "0": "Modern freestanding mall kiosk featuring secure glass display vitrines, illuminated acrylic logo fascia, and integrated POS terminals.",
-      "1": "Functional reverse view highlighting modular repair tool drawer units, cable management channels, and lockable inventory compartments."
+      "1": "Functional reverse view highlighting modular repair tool drawer units, cable management channels, and lockable inventory compartments.",
+      "2": "Studio product visualization highlighting multi-tier modular accessory shelves, backlit displays, and perimeter showcase counters.",
+      "3": "High-angle architectural perspective showing customer circulation paths, service counter clearances, and interior workstation geometry.",
+      "4": "Contextual architectural rendering placing the kiosk in a vibrant multi-story shopping mall atrium with escalators, glass elevators, and natural wood accents.",
+      "5": "Dynamic angled view capturing illuminated display shelves against polished atrium hardwood floors and ambient commercial lighting.",
+      "6": "Close-up perspective emphasizing clean minimalist joinery, bevelled counter edges, and integrated digital display diagnostics.",
+      "7": "Reverse vantage from within the service counter looking out toward decorative café wall murals and customer access lanes."
     },
     "subVideos": {},
     "youtubeUrl": ""
