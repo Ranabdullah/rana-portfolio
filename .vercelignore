@@ -1,0 +1,19 @@
+﻿# Ignore large raw archives and source directories
+instagram-abdullahinayatart-*/
+New Photos/
+scratch/
+.git/
+
+# Video files (all portfolio videos are streamed via YouTube)
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# Documents and non-web binaries
+*.pdf
+*.docx
+*.zip
+*.tar.gz
+*.exe
+*.py
