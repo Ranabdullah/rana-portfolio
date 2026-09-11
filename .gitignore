@@ -1,4 +1,4 @@
-﻿# Large videos and files over 25MB (Cloudflare limit)
+# Large videos and files over 25MB (Cloudflare limit)
 *.mp4
 *.mov
 *.avi
@@ -15,3 +15,7 @@ Photos & to upload/Scifi/All Work (18).jpg
 instagram-abdullahinayatart-*/
 
 scratch/
+Portfolio_Media_Workspace/
+__pycache__/
+
+

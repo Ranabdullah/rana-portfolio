@@ -1,7 +1,8 @@
-﻿# Ignore large raw archives and source directories
+# Ignore large raw archives and source directories
 instagram-abdullahinayatart-*/
 New Photos/
 scratch/
+Portfolio_Media_Workspace/
 .git/
 
 # Video files (all portfolio videos are streamed via YouTube)
