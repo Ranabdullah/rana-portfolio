@@ -1,6 +1,6 @@
 {
   "updatedAt": "2026-09-12T23:19:14.352Z",
-  "version": "4.5",
+  "version": "6.0",
   "novels": [
     {
       "id": "childs-world-1",
@@ -591,8 +591,9 @@
       "cat": "animation",
       "desc": "A dedicated showcase of personal animated short films, commercial 3D motion reels, and brand promotional campaigns.",
       "cover": {
-        "type": "image",
-        "src": "Photos & to upload/Videos_Thumbnails/b8_h72abWqM.jpg"
+        "type": "video",
+        "thumbnail": "Photos & to upload/Videos_Thumbnails/b8_h72abWqM.jpg",
+        "url": "https://www.youtube.com/watch?v=b8_h72abWqM"
       },
       "media": [
         {
@@ -666,12 +667,6 @@
           "title": "Christmas: Holiday 3D Animated Short",
           "description": "A dedicated showcase of personal animated short films, commercial 3D motion reels, and brand promotional campaigns.",
           "provider": "youtube"
-        },
-        {
-          "type": "image",
-          "src": "\"F:\\AntiGravity\\Apps Data\\Website Portfolio Work\\Portfolio_Media_Workspace\\00 - Personal Projects & Others\\photos\\2.PNG\"",
-          "title": "Personal Projects, Short Films & Commercial Motion - Study 10",
-          "description": "A dedicated showcase of personal animated short films, commercial 3D motion reels, and brand promotional campaigns."
         }
       ]
     },
@@ -850,12 +845,6 @@
           "type": "image",
           "src": "Photos & to upload/Client/Eskimo/Eskimo and Lams Front.png",
           "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 9",
-          "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
-        },
-        {
-          "type": "image",
-          "src": "Portfolio_Media_Workspace/00 - Personal Projects & Others/photos/2.PNG",
-          "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 10",
           "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
         }
       ]
