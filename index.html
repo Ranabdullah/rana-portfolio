@@ -3863,10 +3863,15 @@ footer {
           <iframe id="showcaseVideoIframe" src="" style="width: 100%; height: 100%; border: none; display: block;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
-        <!-- Switch Back to Photo Button (Active during video playback) -->
-        <button id="showcaseCloseVideoBtn" onclick="stopShowcaseVideo()" style="display: none; position: absolute; top: 16px; right: 16px; background: rgba(0,0,0,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 8px 18px; border-radius: 20px; font-family: var(--mono); font-size: 11.5px; cursor: pointer; z-index: 30; font-weight: 700; box-shadow: 0 4px 14px rgba(0,0,0,0.6); backdrop-filter: blur(8px);">
-          📷 Switch to Photo
-        </button>
+        <!-- Showcase Video Controls (Active during video playback) -->
+        <div id="showcaseVideoControls" style="display: none; position: absolute; top: 16px; right: 16px; z-index: 30; gap: 8px; align-items: center;">
+          <button id="showcaseRotateVideoBtn" onclick="toggleShowcaseVideoRotation()" title="Rotate video orientation" style="background: rgba(0,0,0,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 8px 18px; border-radius: 20px; font-family: var(--mono); font-size: 11.5px; cursor: pointer; font-weight: 700; box-shadow: 0 4px 14px rgba(0,0,0,0.6); backdrop-filter: blur(8px); display: inline-flex; align-items: center; gap: 6px;">
+            &#8635; Rotate Video
+          </button>
+          <button id="showcaseCloseVideoBtn" onclick="stopShowcaseVideo()" style="background: rgba(0,0,0,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 8px 18px; border-radius: 20px; font-family: var(--mono); font-size: 11.5px; cursor: pointer; font-weight: 700; box-shadow: 0 4px 14px rgba(0,0,0,0.6); backdrop-filter: blur(8px); display: inline-flex; align-items: center; gap: 6px;">
+            &#128247; Switch to Photo
+          </button>
+        </div>
 
         <!-- Project Left / Right Slider Navigation -->
         <button onclick="stepShowcaseProject(-1)" class="showcase-nav-btn prev" title="Previous Project">&larr;</button>
@@ -3932,9 +3937,15 @@ footer {
       <div id="lbVideoPlayerWrap" style="display: none; width: 100%; height: 100%; position: absolute; inset: 0; background: #000; border-radius: 6px; overflow: hidden; z-index: 10;">
         <iframe id="lbVideoIframe" src="" style="width: 100%; height: 100%; border: none; display: block;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <button id="lbCloseVideoBtn" onclick="stopLightboxVideo()" style="display: none; position: absolute; top: 14px; right: 14px; background: rgba(0,0,0,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 7px 16px; border-radius: 20px; font-family: var(--mono); font-size: 11px; cursor: pointer; z-index: 30; font-weight: 700;">
-        📷 Switch to Photo
-      </button>
+      <!-- Lightbox Video Controls (Active during video playback) -->
+      <div id="lbVideoControls" style="display: none; position: absolute; top: 14px; right: 14px; z-index: 30; gap: 8px; align-items: center;">
+        <button id="lbRotateVideoBtn" onclick="toggleLightboxVideoRotation()" title="Rotate video orientation" style="background: rgba(0,0,0,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 7px 16px; border-radius: 20px; font-family: var(--mono); font-size: 11px; cursor: pointer; font-weight: 700; box-shadow: 0 4px 14px rgba(0,0,0,0.6); backdrop-filter: blur(8px); display: inline-flex; align-items: center; gap: 6px;">
+          &#8635; Rotate Video
+        </button>
+        <button id="lbCloseVideoBtn" onclick="stopLightboxVideo()" style="background: rgba(0,0,0,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 7px 16px; border-radius: 20px; font-family: var(--mono); font-size: 11px; cursor: pointer; font-weight: 700; box-shadow: 0 4px 14px rgba(0,0,0,0.6); backdrop-filter: blur(8px); display: inline-flex; align-items: center; gap: 6px;">
+          &#128247; Switch to Photo
+        </button>
+      </div>
       <button class="lb-nav lb-next" onclick="event.stopPropagation(); lbNav(1)" title="Next Project">&rarr;</button>
     </div>
     <div class="lb-caption" id="lbCaption"></div>
@@ -4104,67 +4115,27 @@ const TECH_PROJECTS_DATA = [{"id": "velra", "title": "Vel Ra Perfumes 3D Twin & 
 
 const GALLERY_DATA = [
   {
-    "title": "Personal Projects, Short Films & Commercial Motion",
+    "title": "Complete: Emotional Animated Short Film",
     "pillar": "Personal",
     "cat": "animation",
-    "desc": "A dedicated showcase of personal animated short films, commercial 3D motion reels, and brand promotional campaigns.",
-    "path": "Photos & to upload/Client/2.png",
+    "desc": "An original animated short film exploring emotional connection, stylized low-poly art direction, and character narrative.",
+    "path": "Photos & to upload/Videos_Thumbnails/b8_h72abWqM.jpg",
     "images": [
-      "Photos & to upload/Client/2.png",
-      "Photos & to upload/Logo/All Work (17).png"
+      "Photos & to upload/Videos_Thumbnails/b8_h72abWqM.jpg"
     ],
     "youtubeUrl": "https://www.youtube.com/watch?v=b8_h72abWqM",
     "subVideos": {
-      "0": "https://www.youtube.com/watch?v=b8_h72abWqM",
-      "1": "https://www.youtube.com/watch?v=IYL4UTTOkdk",
-      "2": "https://youtube.com/shorts/KLLLqW6as54",
-      "3": "https://youtu.be/OnytqGqLiVc",
-      "4": "https://youtu.be/mWXYYwiqIyg",
-      "5": "https://youtu.be/QpmrxcfdMrk",
-      "6": "https://youtu.be/W1kjg_HRzD0",
-      "7": "https://youtu.be/tFgkYNRFOaA",
-      "8": "https://youtube.com/shorts/C4PRIVUandE"
+      "0": "https://www.youtube.com/watch?v=b8_h72abWqM"
+    },
+    "subTitles": {
+      "0": "Complete: Emotional Animated Short Film"
     }
-  },
-  {
-    "title": "Creative Studio & Narrative Visual Studies",
-    "pillar": "Personal",
-    "cat": "environment",
-    "desc": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork.",
-    "path": "Photos & to upload/Instagram/17892336767838958.jpg",
-    "images": [
-      "Photos & to upload/Instagram/17892336767838958.jpg",
-      "Photos & to upload/Instagram/17908652861307783.png",
-      "Photos & to upload/Instagram/17935025272142875.jpg",
-      "Photos & to upload/Instagram/17958012526650381.jpg",
-      "Photos & to upload/Instagram/17970979794109163.jpg",
-      "Photos & to upload/Instagram/18131148718177645.jpg",
-      "Photos & to upload/Instagram/18173685229138105.jpg",
-      "Photos & to upload/Instagram/18266166148100937.png",
-      "Photos & to upload/Instagram/Childrens_Room_Art_Study.png"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
-  },
-  {
-    "title": "Japanese Traditional Estate & Shinjuku Architecture Study",
-    "pillar": "Personal",
-    "cat": "environment",
-    "desc": "Comprehensive 3D architectural study combining traditional wooden joinery, Zen estate pavilions, tea house interiors, and Tokyo Shinjuku street elevations.",
-    "path": "Photos & to upload/Japanese Building/All Work (26).jpg",
-    "images": [
-      "Photos & to upload/Japanese Building/All Work (26).jpg",
-      "Photos & to upload/Japanese Building/All Work (7).png",
-      "Photos & to upload/Japanese Building/All Work (9).png"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
   },
   {
     "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out",
     "pillar": "Client Work",
     "cat": "environment",
-    "desc": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
+    "desc": "Full commercial interior fit-out visualization for Eskimo Pizza dining lounge, detailing bespoke seating, ambient lighting, and counter architecture.",
     "path": "Photos & to upload/Client/Eskimo/Eskimo - Ice cream.png",
     "images": [
       "Photos & to upload/Client/Eskimo/Eskimo - Ice cream.png",
@@ -4176,6 +4147,22 @@ const GALLERY_DATA = [
       "Photos & to upload/Client/Eskimo/Eskimo Pizza Front.png",
       "Photos & to upload/Client/Eskimo/Eskimo Pizza Shop Front.png",
       "Photos & to upload/Client/Eskimo/Eskimo and Lams Front.png"
+    ]
+  },
+  {
+    "title": "Eskimo Pizza: Commercial Motion Campaign & Social Ads",
+    "pillar": "Client Work",
+    "cat": "animation",
+    "desc": "Complete commercial motion campaign and social media promotional reels created for Eskimo Pizza.",
+    "path": "Photos & to upload/Videos_Thumbnails/FqSKkXn9EvM.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/FqSKkXn9EvM.jpg",
+      "Photos & to upload/Videos_Thumbnails/kbV7s_IZWSs.jpg",
+      "Photos & to upload/Videos_Thumbnails/G-_kTK2VXRM.jpg",
+      "Photos & to upload/Videos_Thumbnails/tTXfZOWMFyM.jpg",
+      "Photos & to upload/Videos_Thumbnails/84oIQXENC60.jpg",
+      "Photos & to upload/Videos_Thumbnails/VjjbWoWqMrk.jpg",
+      "Photos & to upload/Videos_Thumbnails/N9xFHPGHJ1g.jpg"
     ],
     "youtubeUrl": "https://youtu.be/FqSKkXn9EvM",
     "subVideos": {
@@ -4186,13 +4173,39 @@ const GALLERY_DATA = [
       "4": "https://youtu.be/84oIQXENC60",
       "5": "https://youtube.com/shorts/VjjbWoWqMrk",
       "6": "https://youtube.com/shorts/N9xFHPGHJ1g"
+    },
+    "subTitles": {
+      "0": "Eskimo Christmas Commercial 1",
+      "1": "Eskimo Christmas Commercial 2",
+      "2": "Eskimo Christmas Commercial 3",
+      "3": "Eskimo Christmas 3D Render",
+      "4": "Eskimo 3D Brand Visualization",
+      "5": "Eskimo February Deal (Short)",
+      "6": "Eskimo Fast Motion Reel (Short)"
+    }
+  },
+  {
+    "title": "Wayback Burger: Commercial Brand 3D Reel",
+    "pillar": "Client Work",
+    "cat": "animation",
+    "desc": "Dynamic commercial 3D animation and promotional motion reel created for the Wayback Burgers brand campaign.",
+    "path": "Photos & to upload/Videos_Thumbnails/KLLLqW6as54.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/KLLLqW6as54.jpg"
+    ],
+    "youtubeUrl": "https://youtube.com/shorts/KLLLqW6as54",
+    "subVideos": {
+      "0": "https://youtube.com/shorts/KLLLqW6as54"
+    },
+    "subTitles": {
+      "0": "Wayback Burger: Commercial 3D Brand Reel"
     }
   },
   {
     "title": "IDFL Kiosk: Retail Hardware & Service Center Architectural Visual",
     "pillar": "Client Work",
     "cat": "environment",
-    "desc": "Modular shopping mall service kiosk and repair diagnostic reception station designed with custom acrylic display cases, LED backlighting, and contextual architectural atrium visualization.",
+    "desc": "Commercial retail kiosk architecture and hardware service center concept designed for modern high-traffic shopping environments.",
     "path": "Photos & to upload/Client/IDFL/IDFL Kiosk/Kiosk Design (1).jpg",
     "images": [
       "Photos & to upload/Client/IDFL/IDFL Kiosk/Kiosk Design (1).jpg",
@@ -4201,15 +4214,13 @@ const GALLERY_DATA = [
       "Photos & to upload/Client/IDFL/IDFL Kiosk/Kiosk Design (2).png",
       "Photos & to upload/Client/IDFL/IDFL Kiosk/Kiosk Design (3).png",
       "Photos & to upload/Client/IDFL/IDFL Kiosk/Kiosk Design (4).png"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
+    ]
   },
   {
-    "title": "Get Connected: Executive Commercial Workspace & Acoustic Pods (Blender 3D)",
+    "title": "Get Connected: Executive Commercial Workspace & Acoustic Pods",
     "pillar": "Client Work",
     "cat": "environment",
-    "desc": "Full-scale modern corporate interior fit-out modeled in Blender 3D featuring acoustic breakout booths, open-plan workstations, and executive boardrooms.",
+    "desc": "Corporate interior design featuring acoustic meeting pods, executive work lounges, and modern open-plan office layouts.",
     "path": "Photos & to upload/Get Connected Interior/Get Connected Interior (1).webp",
     "images": [
       "Photos & to upload/Get Connected Interior/Get Connected Interior (1).webp",
@@ -4219,219 +4230,75 @@ const GALLERY_DATA = [
       "Photos & to upload/Get Connected Interior/Get Connected Interior (5).webp",
       "Photos & to upload/Get Connected Interior/Get Connected Interior (6).webp",
       "Photos & to upload/Get Connected Interior/Get Connected Interior (7).webp"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
+    ]
   },
   {
     "title": "Rizpros & FAST: Commercial Workspace & Operations Logistics",
     "pillar": "Client Work",
     "cat": "3d",
-    "desc": "Comprehensive 3D visual study and design collection for Rizpros & FAST: Commercial Workspace & Operations Logistics.",
+    "desc": "Commercial interior visualization, operational logistics, and electronic hardware showcase for Rizpros and FAST operations.",
     "path": "Photos & to upload/Client/Rizpros/0000.png",
     "images": [
       "Photos & to upload/Client/Rizpros/0000.png",
       "Photos & to upload/Client/Rizpros/0001.png",
       "Photos & to upload/Client/Rizpros/17918832755036879.jpg",
-      "Photos & to upload/Client/Rizpros/2.png",
-      "Photos & to upload/Client/Rizpros/FINAL2.jpg",
+      "Photos & to upload/Client/2.png",
+      "Photos & to upload/Client/Eskimo/Eskimo Interior 3/FINAL2.jpg",
       "Photos & to upload/Client/Rizpros/Horse - Copy (2).png",
       "Photos & to upload/Client/Rizpros/Image_0010008.png",
       "Photos & to upload/Client/Rizpros/Image_0010010.png",
       "Photos & to upload/Client/Rizpros/Poster copy 2.jpg",
       "Photos & to upload/Client/Rizpros/mmexport1652364150677.jpg"
+    ]
+  },
+  {
+    "title": "FAST & Rizpros: Commercial 3D Product Reels",
+    "pillar": "Client Work",
+    "cat": "animation",
+    "desc": "Commercial 3D product animations and interactive screen visuals showcasing electronic hardware and phone case accessories.",
+    "path": "Photos & to upload/Videos_Thumbnails/IK-cqxmjEXg.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/IK-cqxmjEXg.jpg",
+      "Photos & to upload/Videos_Thumbnails/QVhHd7Doep0.jpg"
     ],
     "youtubeUrl": "https://youtube.com/shorts/IK-cqxmjEXg",
     "subVideos": {
       "0": "https://youtube.com/shorts/IK-cqxmjEXg",
       "1": "https://youtu.be/QVhHd7Doep0"
+    },
+    "videoRotations": {
+      "1": 90
+    },
+    "subTitles": {
+      "0": "Electronic Products Render",
+      "1": "FAST Screen Final 2: Phone Cases Motion (Vertical Upright)"
     }
   },
   {
-    "title": "Luxury Fragrance & Noir Perfume Product Visualizations",
-    "pillar": "Personal",
-    "cat": "product",
-    "desc": "Commercial perfume bottle visualization series featuring glass caustic simulations, frosted flacons, liquid meniscus, and studio rim lighting.",
-    "path": "Photos & to upload/Product Render/Perfume (1).png",
-    "images": [
-      "Photos & to upload/Product Render/Perfume (1).png",
-      "Photos & to upload/Product Render/Perfume (2).png",
-      "Photos & to upload/Product Render/Perfume (3).png"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
-  },
-  {
-    "title": "Interior Volumes: Architectural Light & Materiality",
-    "pillar": "Personal",
-    "cat": "environment",
-    "desc": "A comprehensive 3D interior visualization series exploring the interplay between atmospheric light, shadow projections, and diverse material textures. This collection spans modern residential environments, high-contrast kitchen concepts, and dramatic, sacral interior spaces to study spatial depth and surface reactivity.",
-    "path": "Photos & to upload/Client/Eskimo/Final/10.png",
-    "images": [
-      "Photos & to upload/Client/Eskimo/Final/10.png",
-      "Photos & to upload/Kitchen/17842254753061661.png",
-      "Photos & to upload/Kitchen/17843690153794060.png",
-      "Photos & to upload/Kitchen/17889489539305832.png",
-      "Photos & to upload/Kitchen/17918320694746097.png",
-      "Photos & to upload/Kitchen/17937269368567565.png",
-      "Photos & to upload/Kitchen/17972403880526915.png",
-      "Photos & to upload/Kitchen/17992328569397170.png",
-      "Photos & to upload/Kitchen/18025581433512587.png",
-      "Photos & to upload/Kitchen/18036113920542329.png",
-      "Photos & to upload/Kitchen/18292951363191483.png",
-      "Photos & to upload/Kitchen/18328297867051721.png",
-      "Photos & to upload/Client/Rizpros/4.png",
-      "Photos & to upload/Kitchen/67748729_2470650796319052_4466508233967665152_o.png",
-      "Photos & to upload/Kitchen/All Work (160).png",
-      "Photos & to upload/Living Room/Final1.png",
-      "Photos & to upload/Kitchen/Living Room (1).png",
-      "Photos & to upload/Bathroom/Toilet 2.png"
-    ],
-    "youtubeUrl": "https://www.youtube.com/watch?v=wvJ3n61oNlQ",
-    "subVideos": {
-      "0": "https://www.youtube.com/watch?v=wvJ3n61oNlQ",
-      "1": "https://youtu.be/AYk-BZrP6D0",
-      "2": "https://youtu.be/aniBOlBF1Ow",
-      "3": "https://youtu.be/AK6Ets4VplM"
-    }
-  },
-  {
-    "title": "Mythos: Legends in Light & Stone",
-    "pillar": "Personal",
-    "cat": "environment",
-    "desc": "A digital visualization and 3D modeling study reinterpreting mythological figures, classical sculptures, and heroic lore across dramatic lighting setups and immersive digital environments.",
-    "path": "Photos & to upload/Instagram/17844828329636556.jpg",
-    "images": [
-      "Photos & to upload/Instagram/17844828329636556.jpg",
-      "Photos & to upload/Instagram/17875494869798035.webp",
-      "Photos & to upload/Instagram/17914716772998399.jpg",
-      "Photos & to upload/Instagram/17919733238255779.webp",
-      "Photos & to upload/Instagram/17921090666306065.webp",
-      "Photos & to upload/Instagram/17937922127129796.webp",
-      "Photos & to upload/Instagram/17948748053224548.webp",
-      "Photos & to upload/Instagram/18161220241244824.webp",
-      "Photos & to upload/Instagram/18201618208088220.webp",
-      "Photos & to upload/Instagram/18247370446047156.jpg",
-      "Photos & to upload/Sculptures/59936823_2311572272226906_5318835216729505792_o.jpg",
-      "Photos & to upload/Viking/All Work (14).jpg",
-      "Photos & to upload/Sculptures/All Work (180).jpg",
-      "Photos & to upload/Sculptures/All Work (55).PNG",
-      "Photos & to upload/Viking/All Work (65).png",
-      "Photos & to upload/Sculptures/Anubis Explainer.jpg",
-      "Photos & to upload/Sculptures/Anubis Poster.jpg",
-      "Photos & to upload/Sculptures/Apep & Nun.png",
-      "Photos & to upload/Sculptures/Isis Poster.jpg",
-      "Photos & to upload/Sculptures/Major Dieties.jpg",
-      "Photos & to upload/Sculptures/Osiris Poster.jpg"
-    ],
-    "youtubeUrl": "https://youtu.be/PJ1i1nk43Zo",
-    "subVideos": {
-      "0": "https://youtu.be/PJ1i1nk43Zo",
-      "1": "https://youtube.com/shorts/LrhpF-M9B6w",
-      "2": "https://youtube.com/shorts/yCBE1Pp4wRM"
-    }
-  },
-  {
-    "title": "Surreal Geometric Dreamscape & Abstract Spatial Horizons",
-    "pillar": "Personal",
-    "cat": "3d",
-    "desc": "Mind-bending metaphysical compositions exploring impossible geometries, floating monoliths, and infinite perspective horizon lines.",
-    "path": "Photos & to upload/Instagram/17924379833335959.webp",
-    "images": [
-      "Photos & to upload/Instagram/17924379833335959.webp",
-      "Photos & to upload/Surrealism/All Work (34).png",
-      "Photos & to upload/Surrealism/All Work (35).png",
-      "Photos & to upload/Surrealism/All Work (36).png"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
-  },
-  {
-    "title": "Sketches & Paintings: Character Studies in Anatomy, Gesture, and Form",
-    "pillar": "Personal",
-    "cat": "character",
-    "desc": "Comprehensive 3D visual study and design collection for Sketches & Paintings: Character Studies in Anatomy, Gesture, and Form.",
-    "path": "Photos & to upload/Sketch/10519193_752125604838255_4807372730966501183_o.png",
-    "images": [
-      "Photos & to upload/Sketch/10519193_752125604838255_4807372730966501183_o.png",
-      "Photos & to upload/Sketch/11053043_919157774801703_4563455775003564932_n.jpg",
-      "Photos & to upload/Sketch/11202825_919018721482275_3884168732202231454_o.jpg",
-      "Photos & to upload/Sketch/12.png",
-      "Photos & to upload/Sketch/17853368626922088.png",
-      "Photos & to upload/Sketch/17858022551271196.png",
-      "Photos & to upload/Instagram/17860934531409034.jpg",
-      "Photos & to upload/Instagram/17878470466970028.jpg",
-      "Photos & to upload/Instagram/17880509302844034.jpg",
-      "Photos & to upload/Instagram/18089210236209355.jpg",
-      "Photos & to upload/Sketch/18128080651083957.png",
-      "Photos & to upload/Sketch/All Work (2).jpeg",
-      "Photos & to upload/Sketch/All Work (63).png"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
-  },
-  {
-    "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
-    "pillar": "Personal",
+    "title": "Apache Dunboyne: Commercial Video Campaign",
+    "pillar": "Client Work",
     "cat": "animation",
-    "desc": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
-    "path": "Photos & to upload/Instagram/17860437881274324.jpg",
+    "desc": "Commercial intro animations and delivery promotional motion created for Apache Dunboyne.",
+    "path": "Photos & to upload/Videos_Thumbnails/mWXYYwiqIyg.jpg",
     "images": [
-      "Photos & to upload/Instagram/17860437881274324.jpg",
-      "Photos & to upload/Nature/17908107983332904.png",
-      "Photos & to upload/Instagram/17938940090277064.webp",
-      "Photos & to upload/Nature/17963484634584183.png",
-      "Photos & to upload/Instagram/17971009390877238.jpg",
-      "Photos & to upload/Instagram/18022650475542477.jpg",
-      "Photos & to upload/Nature/All Work (113).png",
-      "Photos & to upload/Nature/All Work (12).png",
-      "Photos & to upload/Nature/All Work (122).png",
-      "Photos & to upload/Nature/All Work (123).jpg",
-      "Photos & to upload/Nature/All Work (145).jpg",
-      "Photos & to upload/Nature/All Work (41).png"
+      "Photos & to upload/Videos_Thumbnails/mWXYYwiqIyg.jpg",
+      "Photos & to upload/Videos_Thumbnails/QpmrxcfdMrk.jpg"
     ],
-    "youtubeUrl": "https://www.youtube.com/watch?v=L6NKHuSGThA",
+    "youtubeUrl": "https://youtu.be/mWXYYwiqIyg",
     "subVideos": {
-      "0": "https://www.youtube.com/watch?v=L6NKHuSGThA",
-      "1": "https://youtube.com/shorts/ge5N4vNkJZ4",
-      "2": "https://youtu.be/jN-SOF7No1Q",
-      "3": "https://youtu.be/UYgf9MlZ2iY"
-    }
-  },
-  {
-    "title": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study)",
-    "pillar": "Personal",
-    "cat": "3d",
-    "desc": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
-    "path": "Photos & to upload/Scifi/17917385177186112.png",
-    "images": [
-      "Photos & to upload/Scifi/17917385177186112.png",
-      "Photos & to upload/Scifi/17930139391772432.png",
-      "Photos & to upload/Scifi/17943628076142996.png",
-      "Photos & to upload/Scifi/17960877817493647.png",
-      "Photos & to upload/Scifi/18019952902627974.png",
-      "Photos & to upload/Scifi/18267657793129426.png",
-      "Photos & to upload/Scifi/18372087865057475.png",
-      "Photos & to upload/Scifi/27356343_1713224235395049_6194616003068163822_o.png",
-      "Photos & to upload/Scifi/5.jpg",
-      "Photos & to upload/Scifi/All Work (11).png",
-      "Photos & to upload/Bathroom/All Work (13).png",
-      "Photos & to upload/Scifi/All Work (175).png",
-      "Photos & to upload/Scifi/All Work (45).png",
-      "Photos & to upload/Scifi/All Work (6).png"
-    ],
-    "youtubeUrl": "https://youtu.be/sc7N1vtVA8M",
-    "subVideos": {
-      "0": "https://youtu.be/sc7N1vtVA8M",
-      "1": "https://youtu.be/Tkke1L5bGyM",
-      "2": "https://youtu.be/8zlzhEICw-w"
+      "0": "https://youtu.be/mWXYYwiqIyg",
+      "1": "https://youtu.be/QpmrxcfdMrk"
+    },
+    "subTitles": {
+      "0": "Special Intro Commercial Video",
+      "1": "Delivery Promotional Motion"
     }
   },
   {
     "title": "Contemporary Architecture: Residential & Facade Studies",
     "pillar": "Personal",
     "cat": "environment",
-    "desc": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting.",
+    "desc": "Extensive architectural rendering collection featuring modern residential residences, glass facades, and cantilevered volumes.",
     "path": "Photos & to upload/Client/Rizpros/0000.png",
     "images": [
       "Photos & to upload/Client/Rizpros/0000.png",
@@ -4471,20 +4338,265 @@ const GALLERY_DATA = [
       "Photos & to upload/Exterior/abdullahinayatart_1702240242_3254949530809202470_1538841423_1.png",
       "Photos & to upload/Exterior/abdullahinayatart_1705446484_3281845433797079633_1538841423_1.png",
       "Photos & to upload/Exterior/abdullahinayatart_1709764949_3318071349187365006_1538841423_1.png"
+    ]
+  },
+  {
+    "title": "Interior Cinematics: Unreal Engine 5 Real-Time Walkthroughs",
+    "pillar": "Personal",
+    "cat": "animation",
+    "desc": "Real-time interior lighting and cinematic architectural walkthroughs rendered in Unreal Engine 5.",
+    "path": "Photos & to upload/Videos_Thumbnails/wvJ3n61oNlQ.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/wvJ3n61oNlQ.jpg",
+      "Photos & to upload/Videos_Thumbnails/AYk-BZrP6D0.jpg",
+      "Photos & to upload/Videos_Thumbnails/aniBOlBF1Ow.jpg",
+      "Photos & to upload/Videos_Thumbnails/AK6Ets4VplM.jpg"
     ],
-    "youtubeUrl": "",
+    "youtubeUrl": "https://www.youtube.com/watch?v=wvJ3n61oNlQ",
     "subVideos": {
-      "25": "https://www.youtube.com/watch?v=XbsGhjGriEE",
-      "26": "https://www.youtube.com/watch?v=NOFS6gQ8Zfk",
-      "27": "https://www.youtube.com/watch?v=BWPjtiNJSr4",
-      "29": "https://www.youtube.com/watch?v=XbsGhjGriEE"
+      "0": "https://www.youtube.com/watch?v=wvJ3n61oNlQ",
+      "1": "https://youtu.be/AYk-BZrP6D0",
+      "2": "https://youtu.be/aniBOlBF1Ow",
+      "3": "https://youtu.be/AK6Ets4VplM"
+    },
+    "subTitles": {
+      "0": "Unreal Engine Interior Cinematic Walkthrough",
+      "1": "Unreal Engine Interior Architectural Design",
+      "2": "Ann's Delight Sweet Paradise Virtual Shop",
+      "3": "Faisal Interior Real-Time Walkthrough"
     }
+  },
+  {
+    "title": "Interior Volumes: Architectural Light & Materiality",
+    "pillar": "Personal",
+    "cat": "environment",
+    "desc": "Interior architectural volume exploration focusing on warm daylight propagation, refined joinery, and minimalist textures.",
+    "path": "Photos & to upload/Client/Eskimo/Final/10.png",
+    "images": [
+      "Photos & to upload/Client/Eskimo/Final/10.png",
+      "Photos & to upload/Kitchen/17842254753061661.png",
+      "Photos & to upload/Kitchen/17843690153794060.png",
+      "Photos & to upload/Kitchen/17889489539305832.png",
+      "Photos & to upload/Kitchen/17918320694746097.png",
+      "Photos & to upload/Kitchen/17937269368567565.png",
+      "Photos & to upload/Kitchen/17972403880526915.png",
+      "Photos & to upload/Kitchen/17992328569397170.png",
+      "Photos & to upload/Kitchen/18025581433512587.png",
+      "Photos & to upload/Kitchen/18036113920542329.png",
+      "Photos & to upload/Kitchen/18292951363191483.png",
+      "Photos & to upload/Kitchen/18328297867051721.png",
+      "Photos & to upload/Client/Rizpros/4.png",
+      "Photos & to upload/Kitchen/67748729_2470650796319052_4466508233967665152_o.png",
+      "Photos & to upload/Kitchen/All Work (160).png",
+      "Photos & to upload/Living Room/Final1.png",
+      "Photos & to upload/Kitchen/Living Room (1).png",
+      "Photos & to upload/Bathroom/Toilet 2.png"
+    ]
+  },
+  {
+    "title": "Timeless: Sci-Fi Short Film",
+    "pillar": "Personal",
+    "cat": "animation",
+    "desc": "An original sci-fi short film combining complex hard-surface environments and narrative cinematography created with Unreal Engine and Blender.",
+    "path": "Photos & to upload/Videos_Thumbnails/sc7N1vtVA8M.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/sc7N1vtVA8M.jpg"
+    ],
+    "youtubeUrl": "https://youtu.be/sc7N1vtVA8M",
+    "subVideos": {
+      "0": "https://youtu.be/sc7N1vtVA8M"
+    },
+    "subTitles": {
+      "0": "Timeless: Sci-Fi Short Film"
+    }
+  },
+  {
+    "title": "Sci-Fi Command Chamber: Modular Hard-Surface Environment",
+    "pillar": "Personal",
+    "cat": "3d",
+    "desc": "Hard-surface environment design study detailing modular metallic corridors, tactical command consoles, and emissive lighting grids.",
+    "path": "Photos & to upload/Scifi/17917385177186112.png",
+    "images": [
+      "Photos & to upload/Scifi/17917385177186112.png",
+      "Photos & to upload/Scifi/17930139391772432.png",
+      "Photos & to upload/Scifi/17943628076142996.png",
+      "Photos & to upload/Scifi/17960877817493647.png",
+      "Photos & to upload/Scifi/18019952902627974.png",
+      "Photos & to upload/Scifi/18267657793129426.png",
+      "Photos & to upload/Scifi/18372087865057475.png",
+      "Photos & to upload/Scifi/27356343_1713224235395049_6194616003068163822_o.png",
+      "Photos & to upload/Scifi/5.jpg",
+      "Photos & to upload/Scifi/All Work (11).png",
+      "Photos & to upload/Bathroom/All Work (13).png",
+      "Photos & to upload/Scifi/All Work (175).png",
+      "Photos & to upload/Scifi/All Work (45).png",
+      "Photos & to upload/Scifi/All Work (6).png"
+    ]
+  },
+  {
+    "title": "Sci-Fi Command Chamber: Real-Time Breakdown & Evolution Reel",
+    "pillar": "Personal",
+    "cat": "animation",
+    "desc": "Evolution reel and modular breakdown of hard-surface sci-fi command chamber assets.",
+    "path": "Photos & to upload/Videos_Thumbnails/Tkke1L5bGyM.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/Tkke1L5bGyM.jpg",
+      "Photos & to upload/Videos_Thumbnails/8zlzhEICw-w.jpg"
+    ],
+    "youtubeUrl": "https://youtu.be/Tkke1L5bGyM",
+    "subVideos": {
+      "0": "https://youtu.be/Tkke1L5bGyM",
+      "1": "https://youtu.be/8zlzhEICw-w"
+    },
+    "subTitles": {
+      "0": "Blender Model Evolution & Recreation",
+      "1": "Sci-Fi Chamber 3D Renders Reel"
+    }
+  },
+  {
+    "title": "Mythos: Legends in Light & Stone",
+    "pillar": "Personal",
+    "cat": "environment",
+    "desc": "Epic classical sculpts and mythic architecture rendered with dramatic volumetric lighting and tactile weathered masonry.",
+    "path": "Photos & to upload/Instagram/17844828329636556.jpg",
+    "images": [
+      "Photos & to upload/Instagram/17844828329636556.jpg",
+      "Photos & to upload/Instagram/17875494869798035.webp",
+      "Photos & to upload/Instagram/17914716772998399.jpg",
+      "Photos & to upload/Instagram/17919733238255779.webp",
+      "Photos & to upload/Instagram/17921090666306065.webp",
+      "Photos & to upload/Instagram/17937922127129796.webp",
+      "Photos & to upload/Instagram/17948748053224548.webp",
+      "Photos & to upload/Instagram/18161220241244824.webp",
+      "Photos & to upload/Instagram/18201618208088220.webp",
+      "Photos & to upload/Instagram/18247370446047156.jpg",
+      "Photos & to upload/59936823_2311572272226906_5318835216729505792_o.jpg",
+      "Photos & to upload/Viking/All Work (14).jpg",
+      "Photos & to upload/Sculptures/All Work (180).jpg",
+      "Photos & to upload/Sculptures/All Work (55).PNG",
+      "Photos & to upload/Viking/All Work (65).png",
+      "Photos & to upload/Sculptures/Anubis Explainer.jpg",
+      "Photos & to upload/Sculptures/Anubis Poster.jpg",
+      "Photos & to upload/Sculptures/Apep & Nun.png",
+      "Photos & to upload/Sculptures/Isis Poster.jpg",
+      "Photos & to upload/Sculptures/Major Dieties.jpg",
+      "Photos & to upload/Sculptures/Osiris Poster.jpg"
+    ]
+  },
+  {
+    "title": "Mythology & Sculpting: Unreal Engine 5 Cinematic Studies",
+    "pillar": "Personal",
+    "cat": "animation",
+    "desc": "Unreal Engine 5 cinematic room environment and digital sculpting motion studies.",
+    "path": "Photos & to upload/Videos_Thumbnails/PJ1i1nk43Zo.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/PJ1i1nk43Zo.jpg",
+      "Photos & to upload/Videos_Thumbnails/LrhpF-M9B6w.jpg",
+      "Photos & to upload/Videos_Thumbnails/yCBE1Pp4wRM.jpg"
+    ],
+    "youtubeUrl": "https://youtu.be/PJ1i1nk43Zo",
+    "subVideos": {
+      "0": "https://youtu.be/PJ1i1nk43Zo",
+      "1": "https://youtube.com/shorts/LrhpF-M9B6w",
+      "2": "https://youtube.com/shorts/yCBE1Pp4wRM"
+    },
+    "subTitles": {
+      "0": "A Mythology Researcher Room (UE5)",
+      "1": "Digital Sculpting Exercise",
+      "2": "Buddha Sculpture Study"
+    }
+  },
+  {
+    "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes",
+    "pillar": "Personal",
+    "cat": "environment",
+    "desc": "Dense natural biomes and terrain studies featuring dynamic foliage distribution, rock formations, and realistic atmospheric haze.",
+    "path": "Photos & to upload/Instagram/17860437881274324.jpg",
+    "images": [
+      "Photos & to upload/Instagram/17860437881274324.jpg",
+      "Photos & to upload/Nature/17908107983332904.png",
+      "Photos & to upload/Instagram/17938940090277064.webp",
+      "Photos & to upload/Nature/17963484634584183.png",
+      "Photos & to upload/Instagram/17971009390877238.jpg",
+      "Photos & to upload/Instagram/18022650475542477.jpg",
+      "Photos & to upload/Nature/All Work (113).png",
+      "Photos & to upload/Nature/All Work (12).png",
+      "Photos & to upload/Nature/All Work (122).png",
+      "Photos & to upload/Nature/All Work (123).jpg",
+      "Photos & to upload/Nature/All Work (145).jpg",
+      "Photos & to upload/Nature/All Work (41).png"
+    ]
+  },
+  {
+    "title": "Organic Biomes: Unreal Engine 5 Environmental Cinematics",
+    "pillar": "Personal",
+    "cat": "animation",
+    "desc": "Photorealistic nature biomes, storm atmospheres, and real-time foliage systems created in Unreal Engine 5.",
+    "path": "Photos & to upload/Videos_Thumbnails/L6NKHuSGThA.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/L6NKHuSGThA.jpg",
+      "Photos & to upload/Videos_Thumbnails/ge5N4vNkJZ4.jpg",
+      "Photos & to upload/Videos_Thumbnails/jN-SOF7No1Q.jpg",
+      "Photos & to upload/Videos_Thumbnails/yEWTwD7XMjw.jpg",
+      "Photos & to upload/Videos_Thumbnails/UYgf9MlZ2iY.jpg",
+      "Photos & to upload/Videos_Thumbnails/x9p50UJI_NU.jpg",
+      "Photos & to upload/Videos_Thumbnails/XbsGhjGriEE.jpg"
+    ],
+    "youtubeUrl": "https://www.youtube.com/watch?v=L6NKHuSGThA",
+    "subVideos": {
+      "0": "https://www.youtube.com/watch?v=L6NKHuSGThA",
+      "1": "https://youtube.com/shorts/ge5N4vNkJZ4",
+      "2": "https://youtu.be/jN-SOF7No1Q",
+      "3": "https://youtu.be/yEWTwD7XMjw",
+      "4": "https://youtu.be/UYgf9MlZ2iY",
+      "5": "https://youtu.be/x9p50UJI_NU",
+      "6": "https://www.youtube.com/watch?v=XbsGhjGriEE"
+    },
+    "subTitles": {
+      "0": "Forest Render in Unreal Engine 5",
+      "1": "Forest Biome Short",
+      "2": "Widescreen Forest Cinematic",
+      "3": "The Tunnel Of Love",
+      "4": "Tunnel Of Love Breakdown Tutorial",
+      "5": "Coastline in a Windy Storm (Megascans)",
+      "6": "Stream & Ancient Ruins (UE5)"
+    }
+  },
+  {
+    "title": "Creative Studio & Narrative Visual Studies",
+    "pillar": "Personal",
+    "cat": "environment",
+    "desc": "Narrative environment design and cinematic spatial compositions visualizing creative workspaces and architectural atmospheres.",
+    "path": "Photos & to upload/Instagram/17892336767838958.jpg",
+    "images": [
+      "Photos & to upload/Instagram/17892336767838958.jpg",
+      "Photos & to upload/Instagram/17908652861307783.png",
+      "Photos & to upload/Instagram/17935025272142875.jpg",
+      "Photos & to upload/Instagram/17958012526650381.jpg",
+      "Photos & to upload/Instagram/17970979794109163.jpg",
+      "Photos & to upload/Instagram/18131148718177645.jpg",
+      "Photos & to upload/Instagram/18173685229138105.jpg",
+      "Photos & to upload/Instagram/18266166148100937.png",
+      "Photos & to upload/Instagram/Childrens_Room_Art_Study.png"
+    ]
+  },
+  {
+    "title": "Japanese Traditional Estate & Shinjuku Architecture Study",
+    "pillar": "Personal",
+    "cat": "environment",
+    "desc": "High-fidelity architectural study contrasting traditional Japanese timber joinery with dense urban Shinjuku alleyways.",
+    "path": "Photos & to upload/Japanese Building/All Work (26).jpg",
+    "images": [
+      "Photos & to upload/Japanese Building/All Work (26).jpg",
+      "Photos & to upload/Japanese Building/All Work (7).png",
+      "Photos & to upload/Japanese Building/All Work (9).png"
+    ]
   },
   {
     "title": "Cinematic Scenes, Environments & Atmospheric Vistas",
     "pillar": "Personal",
     "cat": "environment",
-    "desc": "Comprehensive 3D visual study and design collection for Cinematic Scenes, Environments & Atmospheric Vistas.",
+    "desc": "Cinematic vistas capturing dynamic time of day, atmospheric scattering, and large-scale spatial worldbuilding.",
     "path": "Photos & to upload/Instagram/17854398092569660.png",
     "images": [
       "Photos & to upload/Instagram/17854398092569660.png",
@@ -4503,19 +4615,33 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/18065207518458125.png",
       "Photos & to upload/Instagram/18254561107034242.png",
       "Photos & to upload/Instagram/18276847624148108.png"
+    ]
+  },
+  {
+    "title": "Architectural Cinematics: City of Gold & Canyon Level Design",
+    "pillar": "Personal",
+    "cat": "animation",
+    "desc": "Real-time level design showcases and cinematic landscape environments built in Unreal Engine 5.",
+    "path": "Photos & to upload/Videos_Thumbnails/NOFS6gQ8Zfk.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/NOFS6gQ8Zfk.jpg",
+      "Photos & to upload/Videos_Thumbnails/BWPjtiNJSr4.jpg"
     ],
-    "youtubeUrl": "https://www.youtube.com/watch?v=XbsGhjGriEE",
+    "youtubeUrl": "https://www.youtube.com/watch?v=NOFS6gQ8Zfk",
     "subVideos": {
-      "0": "https://www.youtube.com/watch?v=XbsGhjGriEE",
-      "1": "https://www.youtube.com/watch?v=yEWTwD7XMjw",
-      "2": "https://www.youtube.com/watch?v=x9p50UJI_NU"
+      "0": "https://www.youtube.com/watch?v=NOFS6gQ8Zfk",
+      "1": "https://www.youtube.com/watch?v=BWPjtiNJSr4"
+    },
+    "subTitles": {
+      "0": "The City of Gold (Unreal Engine & Megascans)",
+      "1": "Canyon Speed Level Design (UE5)"
     }
   },
   {
     "title": "Locomotive & Transit Environments: Industrial 3D Visualizations",
     "pillar": "Personal",
     "cat": "3d",
-    "desc": "Industrial transit and transportation visualization studies exploring underground subway carriages, rail infrastructure, and civil aviation monument architecture.",
+    "desc": "Industrial rail transit modeling featuring historical steam locomotives, freight wagons, and railway junction environments.",
     "path": "Photos & to upload/Train/17861239659097287.png",
     "images": [
       "Photos & to upload/Train/17861239659097287.png",
@@ -4524,56 +4650,196 @@ const GALLERY_DATA = [
       "Photos & to upload/Car/550237818_18527373967025424_2167346014008595452_n.jpeg",
       "Photos & to upload/Train/All Work (1).png",
       "Photos & to upload/Train/All Work (183).png"
+    ]
+  },
+  {
+    "title": "Giant Angora Rabbit: Heritage Breed Exhibition & Visual Campaign",
+    "pillar": "Personal",
+    "cat": "product",
+    "desc": "A comprehensive visual branding and exhibition campaign for the Giant Angora Rabbit heritage breed. Features photorealistic 3D product renders, exhibition displays, environmental staging, and packaging concepts highlighting pure fiber textures and architectural presentation.",
+    "path": "Photos & to upload/Brand/Angora Rabbit/1.jpg",
+    "images": [
+      "Photos & to upload/Brand/Angora Rabbit/1.jpg",
+      "Photos & to upload/Brand/Angora Rabbit/2.jpg",
+      "Photos & to upload/Brand/Angora Rabbit/3.jpg",
+      "Photos & to upload/Brand/Angora Rabbit/4.jpg",
+      "Photos & to upload/Brand/Angora Rabbit/5.jpg",
+      "Photos & to upload/Brand/Angora Rabbit/6.jpg",
+      "Photos & to upload/Brand/Angora Rabbit/7.jpg"
+    ]
+  },
+  {
+    "title": "Make WHATEVER You Want: Creative 3D Short",
+    "pillar": "Personal",
+    "cat": "animation",
+    "desc": "A high-energy creative 3D motion short celebrating artistic freedom and digital experimentation.",
+    "path": "Photos & to upload/Videos_Thumbnails/IYL4UTTOkdk.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/IYL4UTTOkdk.jpg"
     ],
-    "youtubeUrl": "",
-    "subVideos": {}
+    "youtubeUrl": "https://www.youtube.com/watch?v=IYL4UTTOkdk",
+    "subVideos": {
+      "0": "https://www.youtube.com/watch?v=IYL4UTTOkdk"
+    },
+    "subTitles": {
+      "0": "Make WHATEVER You Want"
+    }
+  },
+  {
+    "title": "Life Story Animation: 3D Character Narrative",
+    "pillar": "Personal",
+    "cat": "animation",
+    "desc": "Expressive character animation and storytelling study capturing personal narrative moments in 3D.",
+    "path": "Photos & to upload/Videos_Thumbnails/OnytqGqLiVc.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/OnytqGqLiVc.jpg"
+    ],
+    "youtubeUrl": "https://youtu.be/OnytqGqLiVc",
+    "subVideos": {
+      "0": "https://youtu.be/OnytqGqLiVc"
+    },
+    "subTitles": {
+      "0": "Life Story: 3D Character Narrative Short"
+    }
+  },
+  {
+    "title": "Sketches & Paintings: Character Studies in Anatomy, Gesture, and Form",
+    "pillar": "Personal",
+    "cat": "character",
+    "desc": "Traditional and digital drawings exploring anatomical structure, expressive gestures, tonal values, and character concepts.",
+    "path": "Photos & to upload/Sketch/10519193_752125604838255_4807372730966501183_o.png",
+    "images": [
+      "Photos & to upload/Sketch/10519193_752125604838255_4807372730966501183_o.png",
+      "Photos & to upload/Sketch/11053043_919157774801703_4563455775003564932_n.jpg",
+      "Photos & to upload/Sketch/11202825_919018721482275_3884168732202231454_o.jpg",
+      "Photos & to upload/Sketch/12.png",
+      "Photos & to upload/Sketch/17853368626922088.png",
+      "Photos & to upload/Sketch/17858022551271196.png",
+      "Photos & to upload/Instagram/17860934531409034.jpg",
+      "Photos & to upload/Instagram/17878470466970028.jpg",
+      "Photos & to upload/Instagram/17880509302844034.jpg",
+      "Photos & to upload/Instagram/18089210236209355.jpg",
+      "Photos & to upload/Sketch/18128080651083957.png",
+      "Photos & to upload/Sketch/All Work (2).jpeg",
+      "Photos & to upload/Sketch/All Work (63).png"
+    ]
+  },
+  {
+    "title": "Christmas: Holiday 3D Animated Short",
+    "pillar": "Personal",
+    "cat": "animation",
+    "desc": "Festive holiday 3D animated short film featuring cozy seasonal lighting and character motion.",
+    "path": "Photos & to upload/Videos_Thumbnails/C4PRIVUandE.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/C4PRIVUandE.jpg"
+    ],
+    "youtubeUrl": "https://youtube.com/shorts/C4PRIVUandE",
+    "subVideos": {
+      "0": "https://youtube.com/shorts/C4PRIVUandE"
+    },
+    "subTitles": {
+      "0": "Christmas Holiday 3D Short"
+    }
+  },
+  {
+    "title": "Rana Profile: 3D Motion Identity Reel",
+    "pillar": "Personal",
+    "cat": "animation",
+    "desc": "Personal creative motion reel showcasing stylistic 3D visual identities and branding.",
+    "path": "Photos & to upload/Videos_Thumbnails/W1kjg_HRzD0.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/W1kjg_HRzD0.jpg"
+    ],
+    "youtubeUrl": "https://youtu.be/W1kjg_HRzD0",
+    "subVideos": {
+      "0": "https://youtu.be/W1kjg_HRzD0"
+    },
+    "subTitles": {
+      "0": "Rana Profile Motion Reel"
+    }
+  },
+  {
+    "title": "Mythology Chronicles: 3D Animated Logo Reveal",
+    "pillar": "Personal",
+    "cat": "logo",
+    "desc": "Dynamic 3D title sequence and logo animation designed for the Mythology Chronicles universe.",
+    "path": "Photos & to upload/Videos_Thumbnails/tFgkYNRFOaA.jpg",
+    "images": [
+      "Photos & to upload/Videos_Thumbnails/tFgkYNRFOaA.jpg"
+    ],
+    "youtubeUrl": "https://youtu.be/tFgkYNRFOaA",
+    "subVideos": {
+      "0": "https://youtu.be/tFgkYNRFOaA"
+    },
+    "subTitles": {
+      "0": "Mythology Chronicles Logo Reveal"
+    }
   },
   {
     "title": "Architectural Scale Dioramas & Isometric Studies",
     "pillar": "Personal",
     "cat": "3d",
-    "desc": "Charming isometric miniature building block with tilt-shift depth of field and soft ambient occlusion.",
+    "desc": "Intricate cross-sectional cutaways and miniature isometric models revealing interior layouts and architectural hierarchy.",
     "path": "Photos & to upload/Instagram/17886144434731868.webp",
     "images": [
       "Photos & to upload/Instagram/17886144434731868.webp",
       "Photos & to upload/Instagram/17911473037897064.jpg",
       "Photos & to upload/Instagram/17912983441871207.jpg",
       "Photos & to upload/Instagram/18123427993286303.webp"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
+    ]
+  },
+  {
+    "title": "Surreal Geometric Dreamscape & Abstract Spatial Horizons",
+    "pillar": "Personal",
+    "cat": "3d",
+    "desc": "Surrealist architectural spatial study exploring infinite arches, monolithic solids, and dreamlike atmospheric perspective.",
+    "path": "Photos & to upload/Instagram/17924379833335959.webp",
+    "images": [
+      "Photos & to upload/Instagram/17924379833335959.webp",
+      "Photos & to upload/Surrealism/All Work (34).png",
+      "Photos & to upload/Surrealism/All Work (35).png",
+      "Photos & to upload/Surrealism/All Work (36).png"
+    ]
   },
   {
     "title": "Narrative Worldbuilding: 3D Visuals for Literary Works",
     "pillar": "Personal",
     "cat": "3d",
-    "desc": "Because witnessing matters. Because if you look at something and then record that you looked, youÔÇÖve done something to it.ÔÇØ A quiet passage from my...",
+    "desc": "Visual storytelling environments and props created to accompany narrative worldbuilding and literary projects.",
     "path": "Photos & to upload/Instagram/18039197083541844.png",
     "images": [
       "Photos & to upload/Instagram/18039197083541844.png",
       "Photos & to upload/Instagram/18134535064492978.webp"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
+    ]
+  },
+  {
+    "title": "Luxury Fragrance & Noir Perfume Product Visualizations",
+    "pillar": "Personal",
+    "cat": "product",
+    "desc": "High-end commercial product visualization for luxury perfume bottles with physical refractive glass and caustic lighting.",
+    "path": "Photos & to upload/Product Render/Perfume (1).png",
+    "images": [
+      "Photos & to upload/Product Render/Perfume (1).png",
+      "Photos & to upload/Product Render/Perfume (2).png",
+      "Photos & to upload/Product Render/Perfume (3).png"
+    ]
   },
   {
     "title": "Classical Still Life: Form, Artifact & Light Studies",
     "pillar": "Personal",
-    "cat": "animation",
-    "desc": "A red table with artifacts",
+    "cat": "3d",
+    "desc": "Still life compositions exploring physical form, historic artifacts, and controlled studio illumination.",
     "path": "Photos & to upload/Instagram/17949189482562838.jpg",
     "images": [
       "Photos & to upload/Instagram/17949189482562838.jpg",
       "Photos & to upload/Instagram/17973355136364556.jpg"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
+    ]
   },
   {
     "title": "Photo-to-3D Reconstruction & Spatial Concept Art",
     "pillar": "Personal",
-    "cat": "animation",
-    "desc": "One Piece Wallpaper Made in Blender",
+    "cat": "3d",
+    "desc": "Photogrammetry and projection studies reconstructing physical locations into digital 3D spatial environments.",
     "path": "Photos & to upload/Instagram/17911261604543261.webp",
     "images": [
       "Photos & to upload/Instagram/17911261604543261.webp",
@@ -4584,27 +4850,7 @@ const GALLERY_DATA = [
       "Photos & to upload/Instagram/18029192512488307.webp",
       "Photos & to upload/Instagram/18291521089116027.jpg",
       "Photos & to upload/Instagram/18348098413062091.webp"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
-  },
-  {
-    "title": "Giant Angora Rabbit: Heritage Breed Exhibition & Visual Campaign",
-    "pillar": "Personal",
-    "cat": "product",
-    "desc": "Promotional campaign, exhibition visual identity, and heritage breed presentation posters for Giant Angora Rabbits.",
-    "path": "Photos & to upload/Brand/Angora Rabbit/1.jpg",
-    "images": [
-      "Photos & to upload/Brand/Angora Rabbit/1.jpg",
-      "Photos & to upload/Brand/Angora Rabbit/2.jpg",
-      "Photos & to upload/Brand/Angora Rabbit/3.jpg",
-      "Photos & to upload/Brand/Angora Rabbit/4.jpg",
-      "Photos & to upload/Brand/Angora Rabbit/5.jpg",
-      "Photos & to upload/Brand/Angora Rabbit/6.jpg",
-      "Photos & to upload/Brand/Angora Rabbit/7.jpg"
-    ],
-    "youtubeUrl": "",
-    "subVideos": {}
+    ]
   }
 ];
 
@@ -4894,7 +5140,7 @@ const CLIENTS_DATA = [
 let novels = loadData('rana_novels_data', NOVELS_DATA);
 let techProjects = loadData('rana_tech_data', TECH_PROJECTS_DATA);
 let articles = loadData('rana_articles_data', ARTICLES_DATA);
-let galleryItems = loadData('rana_gallery_data', GALLERY_DATA);
+let galleryItems = loadData('rana_gallery_data_v5_4', GALLERY_DATA);
 let lbImages = galleryItems;
 let lbIdx = 0, curSubImgIdx = 0;
 let software = loadData('rana_software_data', SOFTWARE_DATA);
@@ -5384,18 +5630,29 @@ function renderGallery(filter){
   renderShowcaseViewer();
 
   c.innerHTML = filtered.map((g,i)=>{
-    const hasAnyVid = g.youtubeUrl || (g.images && g.images.some((_, sI)=>Boolean(getSubVideo(g, sI))));
+    const hasAnyVid = Boolean(g.youtubeUrl || (g.subVideos && Object.keys(g.subVideos).length > 0) || (g.images && g.images.some((_, sI)=>Boolean(getSubVideo(g, sI)))));
+    const imgCount = (g.images && g.images.length) ? g.images.length : 1;
     return `
     <div class="g-card ${i === showcaseProjIdx ? 'active-showcase-card' : ''}" id="gcard-${i}" onclick="selectShowcaseProject(${i})" style="position:relative">
       <div style="position:relative;overflow:hidden">
         <img src="${safeImgSrc(g.path)}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#e2e6eb';this.style.display='none'">
-        ${(g.images && g.images.length > 1) ? `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.85);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.3)">⊞ ${g.images.length} Photos</span>` : ''}
-        ${hasAnyVid ? `<span class="g-video-badge" style="position:absolute;top:10px;right:10px;background:#e50914;color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.4)">▶ Video</span>` : ''}
+        ${imgCount > 1 ? (hasAnyVid ?
+          `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.88);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.4)">&#9654; ${imgCount} Videos</span>` :
+          `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.88);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.4)">&#128247; ${imgCount} Photos</span>`
+        ) : ''}
+        ${hasAnyVid ? `
+          <span class="g-video-badge" style="position:absolute;top:10px;right:10px;background:#e50914;color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 9px;border-radius:3px;font-weight:700;box-shadow:0 2px 8px rgba(229,9,20,0.45);display:flex;align-items:center;gap:4px">&#9654; Video</span>
+          <div class="g-card-play-icon" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none">
+            <div style="width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,0.65);border:1.5px solid rgba(255,255,255,0.75);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.6);backdrop-filter:blur(4px)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" style="margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+        ` : ''}
       </div>
       <div class="g-card-info">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <div class="g-cat-label">${g.cat || '3D'} · ${g.pillar || 'Personal'}</div>
-          <button onclick="event.stopPropagation(); openLightbox(${i})" style="background:transparent;border:none;color:var(--ink3);cursor:pointer;font-family:var(--mono);font-size:10px;padding:0" title="Open Lightbox">⤢ View ↗</button>
+          <div class="g-cat-label">${g.cat || '3D'} &bull; ${g.pillar || 'Personal'}</div>
+          <button onclick="event.stopPropagation(); ${hasAnyVid ? `selectShowcaseProject(${i}); playShowcaseVideo();` : `openLightbox(${i});`}" style="background:transparent;border:none;color:var(--ink3);cursor:pointer;font-family:var(--mono);font-size:10.5px;padding:0;font-weight:600" title="${hasAnyVid ? 'Play Video' : 'Open Lightbox'}">${hasAnyVid ? '&#9654; Play Video' : '&#128247; View Photos &nearr;'}</button>
         </div>
         <div class="g-title">${g.title}</div>
       </div>
@@ -5599,6 +5856,51 @@ function stepShowcasePhoto(dir){
 }
 window.stepShowcasePhoto = stepShowcasePhoto;
 
+let lbVideoRotation = 0;
+let showcaseVideoRotation = 0;
+
+function applyVideoRotation(iframe, wrap, angle){
+  if(!iframe || !wrap) return;
+  if(angle === 0){
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.transform = 'none';
+    iframe.style.position = 'static';
+    iframe.style.left = 'auto';
+    iframe.style.top = 'auto';
+  } else if(angle === 90 || angle === 270){
+    const rect = wrap.getBoundingClientRect();
+    const w = rect.width || 800;
+    const h = rect.height || 450;
+    const visualH = Math.min(h, w * (16 / 9));
+    const visualW = visualH * (9 / 16);
+    iframe.style.width = visualH + 'px';
+    iframe.style.height = visualW + 'px';
+    iframe.style.position = 'absolute';
+    iframe.style.left = '50%';
+    iframe.style.top = '50%';
+    iframe.style.transform = 'translate(-50%, -50%) rotate(' + angle + 'deg)';
+  } else if(angle === 180){
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.position = 'absolute';
+    iframe.style.left = '0';
+    iframe.style.top = '0';
+    iframe.style.transform = 'rotate(180deg)';
+  }
+}
+
+function getDefaultVideoRotation(g, idx, vidUrl){
+  if(vidUrl && vidUrl.includes('QVhHd7Doep0')) return 90;
+  if(g && g.videoRotations){
+    if(typeof g.videoRotations === 'object'){
+      if(g.videoRotations[String(idx)] !== undefined) return Number(g.videoRotations[String(idx)]);
+      if(g.videoRotations[idx] !== undefined) return Number(g.videoRotations[idx]);
+    }
+  }
+  return 0;
+}
+
 function playShowcaseVideo(){
   const g = lbImages[showcaseProjIdx];
   if(!g) return;
@@ -5608,7 +5910,9 @@ function playShowcaseVideo(){
   const ytid = getYouTubeId(vidUrl);
   const wrap = document.getElementById('showcaseVideoWrap');
   const iframe = document.getElementById('showcaseVideoIframe');
+  const controls = document.getElementById('showcaseVideoControls');
   const closeBtn = document.getElementById('showcaseCloseVideoBtn');
+  const rotateBtn = document.getElementById('showcaseRotateVideoBtn');
   const playOverlay = document.getElementById('showcasePlayOverlay');
 
   if(wrap && iframe){
@@ -5618,19 +5922,40 @@ function playShowcaseVideo(){
       iframe.src = vidUrl;
     }
     wrap.style.display = 'block';
+    if(controls) controls.style.display = 'flex';
     if(closeBtn) closeBtn.style.display = 'block';
     if(playOverlay) playOverlay.style.display = 'none';
+
+    showcaseVideoRotation = getDefaultVideoRotation(g, showcasePhotoIdx, vidUrl);
+    applyVideoRotation(iframe, wrap, showcaseVideoRotation);
+    if(rotateBtn) rotateBtn.innerHTML = '&#8635; Rotate ' + (showcaseVideoRotation ? '(' + showcaseVideoRotation + '&deg;)' : 'Video');
   }
 }
 window.playShowcaseVideo = playShowcaseVideo;
 
+function toggleShowcaseVideoRotation(){
+  showcaseVideoRotation = (showcaseVideoRotation + 90) % 360;
+  const iframe = document.getElementById('showcaseVideoIframe');
+  const wrap = document.getElementById('showcaseVideoWrap');
+  applyVideoRotation(iframe, wrap, showcaseVideoRotation);
+  const rotateBtn = document.getElementById('showcaseRotateVideoBtn');
+  if(rotateBtn) rotateBtn.innerHTML = '&#8635; Rotate ' + (showcaseVideoRotation ? '(' + showcaseVideoRotation + '&deg;)' : 'Video');
+}
+window.toggleShowcaseVideoRotation = toggleShowcaseVideoRotation;
+
 function stopShowcaseVideo(){
   const wrap = document.getElementById('showcaseVideoWrap');
   const iframe = document.getElementById('showcaseVideoIframe');
+  const controls = document.getElementById('showcaseVideoControls');
   const closeBtn = document.getElementById('showcaseCloseVideoBtn');
   const playOverlay = document.getElementById('showcasePlayOverlay');
-  if(iframe) iframe.src = '';
+  if(iframe) {
+    iframe.src = '';
+    applyVideoRotation(iframe, wrap, 0);
+  }
+  showcaseVideoRotation = 0;
   if(wrap) wrap.style.display = 'none';
+  if(controls) controls.style.display = 'none';
   if(closeBtn) closeBtn.style.display = 'none';
 
   const g = lbImages[showcaseProjIdx];
@@ -5734,7 +6059,9 @@ function playLightboxVideo(){
   const ytid = getYouTubeId(vidUrl);
   const wrap = document.getElementById('lbVideoPlayerWrap');
   const iframe = document.getElementById('lbVideoIframe');
+  const controls = document.getElementById('lbVideoControls');
   const closeBtn = document.getElementById('lbCloseVideoBtn');
+  const rotateBtn = document.getElementById('lbRotateVideoBtn');
   const lbPlayOverlay = document.getElementById('lbPlayOverlay');
 
   if(wrap && iframe){
@@ -5744,19 +6071,40 @@ function playLightboxVideo(){
       iframe.src = vidUrl;
     }
     wrap.style.display = 'block';
+    if(controls) controls.style.display = 'flex';
     if(closeBtn) closeBtn.style.display = 'block';
     if(lbPlayOverlay) lbPlayOverlay.style.display = 'none';
+
+    lbVideoRotation = getDefaultVideoRotation(g, curSubImgIdx, vidUrl);
+    applyVideoRotation(iframe, wrap, lbVideoRotation);
+    if(rotateBtn) rotateBtn.innerHTML = '&#8635; Rotate ' + (lbVideoRotation ? '(' + lbVideoRotation + '&deg;)' : 'Video');
   }
 }
 window.playLightboxVideo = playLightboxVideo;
 
+function toggleLightboxVideoRotation(){
+  lbVideoRotation = (lbVideoRotation + 90) % 360;
+  const iframe = document.getElementById('lbVideoIframe');
+  const wrap = document.getElementById('lbVideoPlayerWrap');
+  applyVideoRotation(iframe, wrap, lbVideoRotation);
+  const rotateBtn = document.getElementById('lbRotateVideoBtn');
+  if(rotateBtn) rotateBtn.innerHTML = '&#8635; Rotate ' + (lbVideoRotation ? '(' + lbVideoRotation + '&deg;)' : 'Video');
+}
+window.toggleLightboxVideoRotation = toggleLightboxVideoRotation;
+
 function stopLightboxVideo(){
   const wrap = document.getElementById('lbVideoPlayerWrap');
   const iframe = document.getElementById('lbVideoIframe');
+  const controls = document.getElementById('lbVideoControls');
   const closeBtn = document.getElementById('lbCloseVideoBtn');
   const lbPlayOverlay = document.getElementById('lbPlayOverlay');
-  if(iframe) iframe.src = '';
+  if(iframe) {
+    iframe.src = '';
+    applyVideoRotation(iframe, wrap, 0);
+  }
+  lbVideoRotation = 0;
   if(wrap) wrap.style.display = 'none';
+  if(controls) controls.style.display = 'none';
   if(closeBtn) closeBtn.style.display = 'none';
 
   if(typeof lbIdx !== 'undefined' && typeof lbImages !== 'undefined' && lbImages && lbImages[lbIdx]){
@@ -5942,6 +6290,7 @@ function lbStepSubImg(dir){
 window.lbStepSubImg = lbStepSubImg;
 
 function lbNav(dir){
+  stopLightboxVideo();
   const g = lbImages[lbIdx];
   if(!g) return;
   const allImgs = (g.images && g.images.length > 0) ? g.images : (g.path ? [g.path] : []);
@@ -6080,24 +6429,14 @@ async function autoFetchCloudDatabaseOnBoot(){
       const data = await res.json();
       if(data.novels && Array.isArray(data.novels)) novels = data.novels;
       if(data.tech && Array.isArray(data.tech)) techProjects = data.tech;
-      if(data.gallery && Array.isArray(data.gallery)){
-        const map = new Map();
-        galleryItems.forEach(item => { if(item && item.title) map.set(item.title, item); });
-        data.gallery.forEach(cloudItem => {
-          if(!cloudItem || !cloudItem.title) return;
-          const existing = map.get(cloudItem.title);
-          if(!existing){
-            map.set(cloudItem.title, cloudItem);
-          } else {
-            const cloudImgs = (cloudItem.images && cloudItem.images.length) || 0;
-            const exImgs = (existing.images && existing.images.length) || 0;
-            if(cloudImgs >= exImgs){
-              map.set(cloudItem.title, cloudItem);
-            }
-          }
-        });
-        galleryItems = Array.from(map.values());
-        try { localStorage.setItem('rana_gallery_data', JSON.stringify(galleryItems)); } catch(e){}
+      if(data.gallery && Array.isArray(data.gallery) && data.gallery.length > 0){
+        galleryItems = data.gallery;
+        lbImages = galleryItems;
+        try { localStorage.setItem('rana_gallery_data_v5_4', JSON.stringify(galleryItems)); } catch(e){}
+        const activePageEl = document.querySelector('.page.active');
+        if(activePageEl && activePageEl.id === 'page-gallery'){
+          renderGallery('all');
+        }
       }
       if(data.software && Array.isArray(data.software)) software = data.software;
       if(data.experience && Array.isArray(data.experience)) experience = data.experience;
@@ -6325,16 +6664,26 @@ function setupGlobalThemeEngine(){
 }
 
 // Final Boot Sequence on Window Load
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', function(){
-    setupGlobalThemeEngine();
-    autoFetchCloudDatabaseOnBoot();
-    renderHome();
-  });
-} else {
+function initPageBoot(){
   setupGlobalThemeEngine();
   autoFetchCloudDatabaseOnBoot();
-  renderHome();
+  const initialHash = window.location.hash.replace('#', '').trim();
+  if(initialHash && document.getElementById('page-' + initialHash)){
+    showPage(initialHash);
+  } else {
+    renderHome();
+  }
+}
+window.addEventListener('hashchange', function(){
+  const h = window.location.hash.replace('#', '').trim();
+  if(h && document.getElementById('page-' + h)){
+    showPage(h);
+  }
+});
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initPageBoot);
+} else {
+  initPageBoot();
 }
 
 
