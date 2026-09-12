@@ -169,9 +169,7 @@ def export_workspace():
         title = item.get("title", f"Project {idx}")
         cat = item.get("cat", "3d")
         pillar = item.get("pillar", "Personal")
-        images = item.get("images", [])
-        yt_url = item.get("youtubeUrl", "")
-        sub_videos = item.get("subVideos", {}) or {}
+        media = item.get("media", [])
 
         folder_name = f"{idx:02d} - {sanitize_folder_name(title)}"
         project_dir = os.path.join(WORKSPACE_DIR, folder_name)
@@ -181,17 +179,19 @@ def export_workspace():
         os.makedirs(photos_dir, exist_ok=True)
         os.makedirs(videos_dir, exist_ok=True)
 
-        # 1. Copy photos
+        # 1. Copy photos & video thumbnails
         copied_photos = []
-        for img_rel in images:
-            src = os.path.join(SCRIPT_DIR, img_rel.replace('/', os.sep))
-            if os.path.exists(src):
-                filename = os.path.basename(src)
-                dst = os.path.join(photos_dir, filename)
-                if not os.path.exists(dst) or os.path.getsize(src) != os.path.getsize(dst):
-                    shutil.copy2(src, dst)
-                copied_photos.append(filename)
-                total_photos_copied += 1
+        for m in media:
+            img_rel = m.get("src") if m.get("type") == "image" else m.get("thumbnail")
+            if img_rel:
+                src = os.path.join(SCRIPT_DIR, img_rel.replace('/', os.sep))
+                if os.path.exists(src):
+                    filename = os.path.basename(src)
+                    dst = os.path.join(photos_dir, filename)
+                    if not os.path.exists(dst) or os.path.getsize(src) != os.path.getsize(dst):
+                        shutil.copy2(src, dst)
+                    copied_photos.append(filename)
+                    total_photos_copied += 1
 
         # 2. Copy videos
         copied_videos = []
@@ -212,15 +212,17 @@ def export_workspace():
             f.write(f"Index: {idx:02d}\n")
             f.write(f"Category: {cat}\n")
             f.write(f"Pillar: {pillar}\n\n")
+            yt_items = [(i, m) for i, m in enumerate(media) if m.get("type") == "video" and m.get("url")]
+            prim_url = yt_items[0][1].get("url") if yt_items else ""
             f.write(f"[YOUTUBE VIDEOS]\n")
             f.write(f"# Paste your YouTube video link below (or tell me in chat):\n")
-            f.write(f"Primary YouTube URL: {yt_url if yt_url else ''}\n\n")
-            f.write(f"# Slide-specific YouTube URLs (optional):\n")
-            if sub_videos:
-                for s_idx, s_url in sorted(sub_videos.items(), key=lambda x: int(x[0]) if x[0].isdigit() else 99):
-                    f.write(f"Slide {s_idx}: {s_url}\n")
+            f.write(f"Primary YouTube URL: {prim_url}\n\n")
+            f.write(f"# Item-specific YouTube URLs:\n")
+            if yt_items:
+                for s_idx, s_m in yt_items:
+                    f.write(f"Item {s_idx}: {s_m.get('url')} ({s_m.get('title', '')})\n")
             else:
-                f.write(f"# Slide 0: \n")
+                f.write(f"# Item 0: \n")
             f.write(f"\n[LOCAL VIDEOS TO UPLOAD TO YOUTUBE]\n")
             if copied_videos:
                 for cv in copied_videos:
@@ -334,20 +336,32 @@ def sync_back():
         # Check if project is in gallery list
         if 1 <= idx <= len(gallery):
             item = gallery[idx - 1]
-            # 1. Update YouTube URLs if changed
-            if primary_yt and item.get("youtubeUrl") != primary_yt:
-                item["youtubeUrl"] = primary_yt
-                yt_updates_count += 1
-                print(f"[{idx:02d}] Updated primary YouTube URL: {primary_yt}")
+            media = item.get("media", [])
             
+            # 1. Update YouTube URLs if changed
             if slide_vids:
-                cur_sv = item.get("subVideos", {}) or {}
                 for s_k, s_v in slide_vids.items():
-                    if cur_sv.get(s_k) != s_v:
-                        cur_sv[s_k] = s_v
+                    try:
+                        s_num = int(s_k)
+                        if 0 <= s_num < len(media):
+                            m_item = media[s_num]
+                            if m_item.get("url") != s_v or m_item.get("type") != "video":
+                                m_item["type"] = "video"
+                                m_item["url"] = s_v
+                                m_item["provider"] = "youtube"
+                                yt_updates_count += 1
+                                print(f"[{idx:02d}] Updated item #{s_k} YouTube URL: {s_v}")
+                    except ValueError:
+                        pass
+            elif primary_yt:
+                if media:
+                    first_vid = next((m for m in media if m.get("type") == "video"), media[0])
+                    if first_vid.get("url") != primary_yt:
+                        first_vid["type"] = "video"
+                        first_vid["url"] = primary_yt
+                        first_vid["provider"] = "youtube"
                         yt_updates_count += 1
-                        print(f"[{idx:02d}] Updated slide {s_k} YouTube URL: {s_v}")
-                item["subVideos"] = cur_sv
+                        print(f"[{idx:02d}] Updated primary YouTube URL: {primary_yt}")
 
             # 2. Check for photo modifications
             if os.path.exists(photos_dir):
@@ -355,9 +369,10 @@ def sync_back():
                     if not p_file.lower().endswith(('.jpg', '.jpeg', '.png', '.webp')):
                         continue
                     p_src = os.path.join(photos_dir, p_file)
-                    # Find corresponding original file in images
-                    for img_rel in item.get("images", []):
-                        if os.path.basename(img_rel).lower() == p_file.lower():
+                    # Find corresponding original file in media
+                    for m_item in media:
+                        img_rel = m_item.get("src") if m_item.get("type") == "image" else m_item.get("thumbnail")
+                        if img_rel and os.path.basename(img_rel).lower() == p_file.lower():
                             orig_path = os.path.join(SCRIPT_DIR, img_rel.replace('/', os.sep))
                             if os.path.exists(orig_path):
                                 # Check if workspace photo has newer mtime and differing size
@@ -399,14 +414,28 @@ def set_youtube_url(project_query, url, slide_idx=None):
         print(f"Error: Could not find project matching '{project_query}'")
         return False
 
+    media = matched_item.get("media", [])
     if slide_idx is not None:
-        if "subVideos" not in matched_item or not isinstance(matched_item["subVideos"], dict):
-            matched_item["subVideos"] = {}
-        matched_item["subVideos"][str(slide_idx)] = url
-        print(f"Set Project #{matched_idx} ({matched_item['title']}) Slide {slide_idx} YouTube URL to: {url}")
+        if 0 <= slide_idx < len(media):
+            m = media[slide_idx]
+            m["type"] = "video"
+            m["url"] = url
+            m["provider"] = "youtube"
+            if "src" in m and "thumbnail" not in m:
+                m["thumbnail"] = m.pop("src")
+            print(f"Set Project #{matched_idx} ({matched_item['title']}) Item #{slide_idx} YouTube URL to: {url}")
+        else:
+            print(f"Error: Invalid media index {slide_idx}")
+            return False
     else:
-        matched_item["youtubeUrl"] = url
-        print(f"Set Project #{matched_idx} ({matched_item['title']}) Primary YouTube URL to: {url}")
+        if media:
+            first_vid = next((m for m in media if m.get("type") == "video"), media[0])
+            first_vid["type"] = "video"
+            first_vid["url"] = url
+            first_vid["provider"] = "youtube"
+            if "src" in first_vid and "thumbnail" not in first_vid:
+                first_vid["thumbnail"] = first_vid.pop("src")
+            print(f"Set Project #{matched_idx} ({matched_item['title']}) Primary YouTube URL to: {url}")
 
     save_portfolio_json(pdata)
     sync_html_gallery_data(gallery)
@@ -441,9 +470,9 @@ def print_status():
 
     for idx, item in enumerate(gallery, 1):
         title = item.get("title", "")
-        imgs = len(item.get("images", []))
-        yt = item.get("youtubeUrl", "")
-        sv = item.get("subVideos", {}) or {}
+        media = item.get("media", [])
+        imgs = sum(1 for m in media if m.get("type") == "image")
+        vids = sum(1 for m in media if m.get("type") == "video")
         
         # Check workspace folder
         local_vids = 0
@@ -454,11 +483,12 @@ def print_status():
                     local_vids = len([x for x in os.listdir(v_dir) if x.lower().endswith(('.mp4', '.mov'))])
                 break
 
-        yt_status = yt if yt else (f"Slides: {list(sv.keys())}" if sv else "-")
+        yt_urls = [m.get("url") for m in media if m.get("type") == "video" and m.get("url")]
+        yt_status = yt_urls[0] if len(yt_urls) == 1 else (f"{len(yt_urls)} YouTube videos" if yt_urls else "-")
         if len(yt_status) > 35:
             yt_status = yt_status[:32] + "..."
 
-        print(f"{idx:02d}  | {title[:48]:<50} | {imgs:<6} | {local_vids:<7} | {yt_status}")
+        print(f"{idx:02d}  | {title[:48]:<50} | {imgs:<6} | {vids:<7} | {yt_status}")
 
     print("-" * 105 + "\n")
 
@@ -561,11 +591,17 @@ class ManagerHTTPHandler(BaseHTTPRequestHandler):
             title = item.get("title", "")
             cat = item.get("cat", "")
             pillar = item.get("pillar", "")
-            images = item.get("images", [])
-            yt_url = item.get("youtubeUrl", "")
-            sub_videos = item.get("subVideos", {}) or {}
+            media = item.get("media", [])
+            cover = item.get("cover", {})
             
-            thumb_url = f"/thumb/{urllib.parse.quote(images[0])}" if images else ""
+            img_count = sum(1 for m in media if m.get("type") == "image")
+            vid_count = sum(1 for m in media if m.get("type") == "video")
+            
+            cover_src = cover.get("src") or (media[0].get("thumbnail") if media and media[0].get("type") == "video" else (media[0].get("src") if media else ""))
+            thumb_url = f"/thumb/{urllib.parse.quote(cover_src)}" if cover_src else ""
+            
+            first_yt = next((m.get("url") for m in media if m.get("type") == "video" and m.get("url")), "")
+            yt_url = first_yt
 
             # Check local videos in workspace
             local_vids_count = 0
@@ -576,7 +612,7 @@ class ManagerHTTPHandler(BaseHTTPRequestHandler):
                         local_vids_count = len([x for x in os.listdir(v_dir) if x.lower().endswith(('.mp4', '.mov'))])
                     break
 
-            yt_badge = f'<span class="badge badge-yt">▶ YouTube Connected</span>' if yt_url or sub_videos else '<span class="badge badge-none">No Video Link</span>'
+            yt_badge = f'<span class="badge badge-yt">▶ {vid_count} YouTube Video(s)</span>' if vid_count > 0 else '<span class="badge badge-none">No Video Link</span>'
             vids_badge = f'<span class="badge badge-local">{local_vids_count} Local Video(s)</span>' if local_vids_count > 0 else ''
 
             card = f"""

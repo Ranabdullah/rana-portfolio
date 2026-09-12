@@ -1,3 +1,18 @@
+"""
+===============================================================================
+[DEPRECATED / ARCHIVED SCRIPT]
+This script was created for legacy experiments with previous portfolio versions (v3/v4).
+DO NOT RUN THIS SCRIPT against the current portfolio codebase.
+The authoritative data model is in portfolio_data.json using the explicit media[] architecture.
+Use portfolio_manager.py for managing portfolio assets and syncing.
+===============================================================================
+"""
+import sys
+if __name__ == "__main__":
+    print("[ERROR] This script is deprecated and must not be run on the active portfolio.")
+    print("Please use portfolio_manager.py instead.")
+    sys.exit(1)
+
 import re, sys, os
 sys.stdout.reconfigure(encoding='utf-8')
 
