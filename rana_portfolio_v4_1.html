@@ -4980,10 +4980,12 @@ async function renderGallery(filter){
           </div>
         </div>`;
       actionBtn = `<button onclick="event.stopPropagation(); selectShowcaseProject(${i}); playShowcaseVideo();" style="background:transparent;border:none;color:var(--ink3);cursor:pointer;font-family:var(--mono);font-size:10.5px;padding:0;font-weight:600" title="Play Video">&#9654; Play Video</button>`;
-      badgeHtml = `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.88);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.4)">&#9654; ${mediaList.length === 1 ? '1 Video' : mediaList.length + ' Videos'}</span>`;
+      const vidCount = mediaList.filter(m => m.type === 'video').length;
+      badgeHtml = `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.88);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.4)">&#9654; ${vidCount === 1 ? '1 Video' : vidCount + ' Videos'}</span>`;
     } else {
-      if(mediaList.length > 1){
-        badgeHtml = `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.88);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.4)">&#128247; ${mediaList.length} Photos</span>`;
+      const imgCount = mediaList.filter(m => m.type === 'image').length;
+      if(imgCount > 1){
+        badgeHtml = `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.88);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.4)">&#128247; ${imgCount} Photos</span>`;
       }
       actionBtn = `<button onclick="event.stopPropagation(); openLightbox(${i});" style="background:transparent;border:none;color:var(--ink3);cursor:pointer;font-family:var(--mono);font-size:10.5px;padding:0;font-weight:600" title="View Photos">&#128247; View Photos &nearr;</button>`;
     }

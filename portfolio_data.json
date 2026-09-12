@@ -667,6 +667,18 @@
           "title": "Christmas: Holiday 3D Animated Short",
           "description": "A dedicated showcase of personal animated short films, commercial 3D motion reels, and brand promotional campaigns.",
           "provider": "youtube"
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Logo/2.PNG",
+          "title": "Personal Projects: Rana Profile & Brand Identity",
+          "description": "Creative motion identity, personal 3D logo design, and animated character short film branding."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Logo/All Work (17).png",
+          "title": "Personal Projects: Cinematic 3D Concept Artwork",
+          "description": "A dedicated showcase of personal animated short films, commercial 3D motion reels, and brand promotional campaigns."
         }
       ]
     },
@@ -845,6 +857,48 @@
           "type": "image",
           "src": "Photos & to upload/Client/Eskimo/Eskimo and Lams Front.png",
           "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 9",
+          "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Client/Eskimo/Eskimo - Ice cream.png",
+          "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 1",
+          "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Client/Eskimo/Eskimo - Milk Shake.png",
+          "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 2",
+          "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Client/Eskimo/Eskimo Interior Chairs.webp",
+          "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 3",
+          "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Client/Eskimo/Eskimo Interior Poster.png",
+          "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 4",
+          "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Client/Eskimo/Eskimo Interior.png",
+          "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 5",
+          "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Client/Eskimo/Eskimo Pizza Front Banner.png",
+          "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 6",
+          "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Client/Eskimo/Eskimo Pizza Front.png",
+          "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 7",
           "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
         }
       ]
@@ -1028,6 +1082,18 @@
           "src": "Photos & to upload/Client/Rizpros/mmexport1652364150677.jpg",
           "title": "Rizpros & FAST: Commercial Workspace & Operations Logistics - Study 10",
           "description": "Comprehensive 3D visual study and design collection for Rizpros & FAST: Commercial Workspace & Operations Logistics."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Client/Rizpros/0000.png",
+          "title": "Rizpros & FAST: Commercial Workspace & Operations Logistics - Study 1",
+          "description": "Comprehensive 3D visual study and design collection for Rizpros & FAST commercial workspaces."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Client/Rizpros/0001.png",
+          "title": "Rizpros & FAST: Commercial Workspace & Operations Logistics - Study 2",
+          "description": "Comprehensive 3D visual study and design collection for Rizpros & FAST commercial workspaces."
         }
       ]
     },
@@ -1188,6 +1254,30 @@
           "src": "Photos & to upload/Bathroom/Toilet 2.png",
           "title": "Interior Volumes: Architectural Light & Materiality - Study 18",
           "description": "A comprehensive 3D interior visualization series exploring the interplay between atmospheric light, shadow projections, and diverse material textures. This collection spans modern residential environments, high-contrast kitchen concepts, and dramatic, sacral interior spaces to study spatial depth and surface reactivity."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Client/Eskimo/Final/10.png",
+          "title": "Interior Volumes: Architectural Light & Materiality - Study 1",
+          "description": "A comprehensive 3D interior visualization series exploring light diffusion, surface texturing, and contemporary residential space planning."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Kitchen/17842254753061661.png",
+          "title": "Interior Volumes: Architectural Light & Materiality - Study 2",
+          "description": "A comprehensive 3D interior visualization series exploring light diffusion, surface texturing, and contemporary residential space planning."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Kitchen/17843690153794060.png",
+          "title": "Interior Volumes: Architectural Light & Materiality - Study 3",
+          "description": "A comprehensive 3D interior visualization series exploring light diffusion, surface texturing, and contemporary residential space planning."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Kitchen/17889489539305832.png",
+          "title": "Interior Volumes: Architectural Light & Materiality - Study 4",
+          "description": "A comprehensive 3D interior visualization series exploring light diffusion, surface texturing, and contemporary residential space planning."
         }
       ]
     },
@@ -1332,6 +1422,24 @@
           "type": "image",
           "src": "Photos & to upload/Sculptures/Osiris Poster.jpg",
           "title": "Mythos: Legends in Light & Stone - Study 21",
+          "description": "A digital visualization and 3D modeling study reinterpreting mythological figures, classical sculptures, and heroic lore across dramatic lighting setups and immersive digital environments."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17844828329636556.jpg",
+          "title": "Mythos: Legends in Light & Stone - Study 1",
+          "description": "A digital visualization and 3D modeling study reinterpreting mythological figures, classical sculptures, and heroic lore across dramatic lighting setups and immersive digital environments."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17875494869798035.webp",
+          "title": "Mythos: Legends in Light & Stone - Study 2",
+          "description": "A digital visualization and 3D modeling study reinterpreting mythological figures, classical sculptures, and heroic lore across dramatic lighting setups and immersive digital environments."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17914716772998399.jpg",
+          "title": "Mythos: Legends in Light & Stone - Study 3",
           "description": "A digital visualization and 3D modeling study reinterpreting mythological figures, classical sculptures, and heroic lore across dramatic lighting setups and immersive digital environments."
         }
       ]
@@ -1554,6 +1662,30 @@
           "src": "Photos & to upload/Nature/All Work (41).png",
           "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes - Study 12",
           "description": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17860437881274324.jpg",
+          "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes - Study 1",
+          "description": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Nature/17908107983332904.png",
+          "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes - Study 2",
+          "description": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17938940090277064.webp",
+          "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes - Study 3",
+          "description": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Nature/17963484634584183.png",
+          "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes - Study 4",
+          "description": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage."
         }
       ]
     },
@@ -1656,6 +1788,24 @@
           "type": "image",
           "src": "Photos & to upload/Scifi/All Work (6).png",
           "title": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study) - Study 14",
+          "description": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Scifi/17917385177186112.png",
+          "title": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study) - Study 1",
+          "description": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Scifi/17930139391772432.png",
+          "title": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study) - Study 2",
+          "description": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Scifi/17943628076142996.png",
+          "title": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study) - Study 3",
           "description": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture."
         }
       ]
@@ -1900,6 +2050,30 @@
           "src": "Photos & to upload/Exterior/abdullahinayatart_1709764949_3318071349187365006_1538841423_1.png",
           "title": "Contemporary Architecture: Residential & Facade Studies - Study 37",
           "description": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Exterior/All Work (134).png",
+          "title": "Contemporary Architecture: Residential & Facade Studies - Study 34",
+          "description": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Exterior/All Work (135).png",
+          "title": "Contemporary Architecture: Residential & Facade Studies - Study 35",
+          "description": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Exterior/All Work (147).png",
+          "title": "Contemporary Architecture: Residential & Facade Studies - Study 36",
+          "description": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/All Work (3).png",
+          "title": "Contemporary Architecture: Residential & Facade Studies - Study 37",
+          "description": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting."
         }
       ]
     },
@@ -2014,6 +2188,24 @@
           "type": "image",
           "src": "Photos & to upload/Instagram/18276847624148108.png",
           "title": "Cinematic Scenes, Environments & Atmospheric Vistas - Study 16",
+          "description": "Comprehensive 3D visual study and design collection for Cinematic Scenes, Environments & Atmospheric Vistas."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17854398092569660.png",
+          "title": "Cinematic Scenes, Environments & Atmospheric Vistas - Study 1",
+          "description": "Comprehensive 3D visual study and design collection for Cinematic Scenes, Environments & Atmospheric Vistas."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17875278170181393.png",
+          "title": "Cinematic Scenes, Environments & Atmospheric Vistas - Study 2",
+          "description": "Comprehensive 3D visual study and design collection for Cinematic Scenes, Environments & Atmospheric Vistas."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17883073064599924.png",
+          "title": "Cinematic Scenes, Environments & Atmospheric Vistas - Study 3",
           "description": "Comprehensive 3D visual study and design collection for Cinematic Scenes, Environments & Atmospheric Vistas."
         }
       ]
