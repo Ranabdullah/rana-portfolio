@@ -71,24 +71,8 @@ def save_portfolio_json(data):
     with open(PORTFOLIO_JSON, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-def sync_html_gallery_data(gallery_list):
-    """Sync gallery list into index.html and duplicate to rana_portfolio_v4_1.html."""
-    with open(INDEX_HTML, "r", encoding="utf-8") as f:
-        html = f.read()
-
-    # Find GALLERY_DATA in index.html
-    pattern = r'(const GALLERY_DATA\s*=\s*)(\[[\s\S]*?\])(;\s*const)'
-    match = re.search(pattern, html)
-    if not match:
-        raise RuntimeError("Could not locate GALLERY_DATA in index.html")
-
-    new_json_str = json.dumps(gallery_list, indent=2, ensure_ascii=False)
-    new_html = html[:match.start(2)] + new_json_str + html[match.end(2):]
-
-    with open(INDEX_HTML, "w", encoding="utf-8") as f:
-        f.write(new_html)
-
-    # Copy 100% byte-for-byte identical to twin
+def sync_html_gallery_data(gallery_list=None):
+    """portfolio_data.json is single authoritative source; ensure twin parity."""
     shutil.copy2(INDEX_HTML, TWIN_HTML)
     if not filecmp.cmp(INDEX_HTML, TWIN_HTML, shallow=False):
         raise RuntimeError("CRITICAL ERROR: Twin HTML parity check failed!")
