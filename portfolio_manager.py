@@ -21,6 +21,8 @@ import shutil
 import filecmp
 import subprocess
 import urllib.parse
+import io
+import base64
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from datetime import datetime, timezone
 
@@ -32,6 +34,35 @@ TWIN_HTML = os.path.join(SCRIPT_DIR, "rana_portfolio_v4_1.html")
 PORTFOLIO_JSON = os.path.join(SCRIPT_DIR, "portfolio_data.json")
 PHOTOS_ROOT = os.path.join(SCRIPT_DIR, "Photos & to upload")
 NEW_PHOTOS_ROOT = os.path.join(SCRIPT_DIR, "New Photos")
+
+def convert_to_webp(input_data, output_path, max_dim=2560, quality=84):
+    """Convert any image (bytes, file path) to optimized WebP format with optional downscaling."""
+    from PIL import Image, ImageOps
+    if isinstance(input_data, (bytes, bytearray)):
+        img = Image.open(io.BytesIO(input_data))
+    else:
+        img = Image.open(input_data)
+    
+    # Auto-orient based on EXIF if present
+    try:
+        img = ImageOps.exif_transpose(img)
+    except Exception:
+        pass
+
+    # Downscale if exceeding max_dim
+    w, h = img.size
+    if w > max_dim or h > max_dim:
+        ratio = min(max_dim / w, max_dim / h)
+        new_size = (int(w * ratio), int(h * ratio))
+        img = img.resize(new_size, Image.Resampling.LANCZOS)
+
+    # Convert modes to RGB/RGBA
+    if img.mode not in ('RGB', 'RGBA'):
+        img = img.convert('RGBA' if 'A' in img.mode else 'RGB')
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    img.save(output_path, 'WEBP', quality=quality, method=6)
+    return os.path.getsize(output_path)
 
 def sanitize_folder_name(name):
     """Sanitize title for safe Windows folder names."""
@@ -359,8 +390,8 @@ def sync_back():
                         if img_rel and os.path.basename(img_rel).lower() == p_file.lower():
                             orig_path = os.path.join(SCRIPT_DIR, img_rel.replace('/', os.sep))
                             if os.path.exists(orig_path):
-                                # Check if workspace photo has newer mtime and differing size
-                                if os.path.getmtime(p_src) > os.path.getmtime(orig_path) and os.path.getsize(p_src) != os.path.getsize(orig_path):
+                                # Check if workspace photo differs in size or binary content
+                                if os.path.getsize(p_src) != os.path.getsize(orig_path) and not filecmp.cmp(p_src, orig_path, shallow=False):
                                     shutil.copy2(p_src, orig_path)
                                     updates_count += 1
                                     print(f"[{idx:02d}] Updated modified photo: {p_file}")
@@ -509,6 +540,13 @@ class ManagerHTTPHandler(BaseHTTPRequestHandler):
             self.send_response(404)
             self.end_headers()
 
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+        self.end_headers()
+
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
         length = int(self.headers.get('content-length', 0))
@@ -541,6 +579,66 @@ class ManagerHTTPHandler(BaseHTTPRequestHandler):
                 self.send_json_response({"success": True, "message": "Synchronized successfully!"})
             except Exception as e:
                 self.send_json_response({"success": False, "error": str(e)})
+        elif parsed.path == "/api/upload-photo":
+            try:
+                project_idx = int(params.get("index", 0))
+                b64_data = params.get("image_data", "")
+                filename = params.get("filename", "photo.webp")
+                title = params.get("title", "").strip()
+                desc = params.get("description", "").strip()
+
+                if "," in b64_data:
+                    b64_data = b64_data.split(",", 1)[1]
+                raw_bytes = base64.b64decode(b64_data)
+                orig_size = len(raw_bytes)
+
+                # Clean filename to .webp
+                base_name = re.sub(r'[^a-zA-Z0-9_-]', '_', os.path.splitext(filename)[0])
+                clean_filename = f"{base_name}.webp"
+
+                pdata = load_portfolio_json()
+                gallery = pdata.get("gallery", [])
+                if not (0 <= project_idx < len(gallery)):
+                    self.send_json_response({"success": False, "error": f"Invalid project index {project_idx}"})
+                    return
+
+                proj = gallery[project_idx]
+                proj_folder = sanitize_folder_name(proj.get("title", f"Project_{project_idx+1}"))
+                rel_dir = os.path.join("Photos & to upload", proj_folder)
+                abs_dir = os.path.join(SCRIPT_DIR, rel_dir)
+                os.makedirs(abs_dir, exist_ok=True)
+
+                dest_abs = os.path.join(abs_dir, clean_filename)
+                counter = 1
+                while os.path.exists(dest_abs):
+                    dest_abs = os.path.join(abs_dir, f"{base_name}_{counter}.webp")
+                    clean_filename = f"{base_name}_{counter}.webp"
+                    counter += 1
+
+                webp_size = convert_to_webp(raw_bytes, dest_abs)
+                rel_src = os.path.join(rel_dir, clean_filename).replace("\\", "/")
+
+                proj.setdefault("media", []).append({
+                    "type": "image",
+                    "src": rel_src,
+                    "title": title or f"{proj.get('title', '')} - Study {len(proj['media']) + 1}",
+                    "description": desc or proj.get("desc", "")
+                })
+
+                save_portfolio_json(pdata)
+                sync_html_gallery_data(gallery)
+
+                savings = round((1 - webp_size / orig_size) * 100, 1) if orig_size > 0 else 0
+                self.send_json_response({
+                    "success": True,
+                    "src": rel_src,
+                    "orig_size": orig_size,
+                    "webp_size": webp_size,
+                    "savings_pct": savings,
+                    "media_index": len(proj["media"]) - 1
+                })
+            except Exception as e:
+                self.send_json_response({"success": False, "error": str(e)})
         else:
             self.send_response(404)
             self.end_headers()
@@ -548,6 +646,7 @@ class ManagerHTTPHandler(BaseHTTPRequestHandler):
     def send_json_response(self, data):
         self.send_response(200)
         self.send_header("Content-Type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
         self.wfile.write(json.dumps(data).encode("utf-8"))
 

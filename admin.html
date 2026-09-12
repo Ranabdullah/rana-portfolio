@@ -269,8 +269,9 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.6);
     }
 
-    /* Transfer Modal */
-    #be-transfer-modal {
+    /* Transfer & Upload Modals */
+    #be-transfer-modal,
+    #be-upload-modal {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.85);
@@ -281,7 +282,8 @@
       z-index: 99999;
       padding: 20px;
     }
-    #be-transfer-modal.open { display: flex; }
+    #be-transfer-modal.open,
+    #be-upload-modal.open { display: flex; }
   
     @keyframes loginShake {
       0%, 100% { transform: translateX(0); }
@@ -683,6 +685,65 @@
       <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:20px">
         <button onclick="beCloseTransferModal()" class="btn">Cancel</button>
         <button onclick="beExecutePhotoTransfer()" class="submit-btn">&#10003; Execute Transfer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. PHOTO UPLOAD & WEBP CONVERTER MODAL -->
+  <div id="be-upload-modal">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:24px;max-width:520px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,0.6)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <h3 style="font-size:17px;font-weight:700;margin:0;display:flex;align-items:center;gap:8px">
+          <span>📷</span> Upload Photo &amp; Convert to WebP
+        </h3>
+        <button onclick="beCloseUploadModal()" style="background:transparent;border:none;color:var(--ink3);font-size:22px;cursor:pointer;line-height:1;padding:0 4px">&times;</button>
+      </div>
+
+      <p style="color:var(--ink3);font-size:12px;margin-bottom:16px;line-height:1.45">
+        Select or drag &amp; drop any image. It will be converted to compact <strong>WebP</strong> (typically 80–95% smaller) to keep deployment storage low while preserving crystal clear quality.
+      </p>
+
+      <!-- Dropzone -->
+      <div id="be-upload-dropzone" onclick="document.getElementById('be-upload-file-input').click()"
+        style="border:2px dashed var(--border);border-radius:8px;padding:24px 16px;text-align:center;cursor:pointer;background:var(--bg);transition:all 0.2s;margin-bottom:14px">
+        <input type="file" id="be-upload-file-input" accept="image/*" style="display:none" onchange="beHandleFileSelected(event)">
+        <div style="font-size:32px;margin-bottom:6px">📁</div>
+        <div style="font-size:13.5px;font-weight:600;color:var(--ink)">Click to choose an image or drag &amp; drop here</div>
+        <div style="font-size:11px;color:var(--ink4);margin-top:4px">Supports PNG, JPG, JPEG, WEBP, GIF, etc.</div>
+      </div>
+
+      <!-- Compression / Preview Stats -->
+      <div id="be-upload-preview-wrap" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;margin-bottom:14px">
+        <div style="display:flex;gap:12px;align-items:center">
+          <img id="be-upload-preview-img" src="" style="width:85px;height:85px;object-fit:cover;border-radius:4px;border:1px solid var(--border);background:#111">
+          <div style="flex:1;min-width:0">
+            <div id="be-upload-filename" style="font-weight:700;font-size:12.5px;color:var(--ink);margin-bottom:4px;word-break:break-all"></div>
+            <div style="font-size:11.5px;display:flex;flex-direction:column;gap:2px">
+              <span id="be-upload-orig-size" style="color:var(--ink3)"></span>
+              <span id="be-upload-webp-size" style="color:#10b981;font-weight:700"></span>
+              <span id="be-upload-savings" style="font-size:11px;color:#00e5ff;font-weight:600"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Title & Description Fields -->
+      <div class="form-group" style="margin-bottom:10px">
+        <label class="form-label" style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink3);margin-bottom:3px">Photo Title</label>
+        <input id="be-upload-title-input" class="form-input" placeholder="Title for this photo..." style="width:100%;box-sizing:border-box">
+      </div>
+
+      <div class="form-group" style="margin-bottom:16px">
+        <label class="form-label" style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink3);margin-bottom:3px">Description (Optional)</label>
+        <textarea id="be-upload-desc-input" rows="2" class="form-input" placeholder="Brief visual description..." style="width:100%;box-sizing:border-box"></textarea>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button onclick="beCloseUploadModal()" class="btn" style="padding:7px 14px;font-size:11.5px">Cancel</button>
+        <button id="be-upload-submit-btn" onclick="beSubmitUploadedPhoto()" disabled
+          style="padding:7px 18px;font-size:11.5px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:4px;cursor:pointer;font-weight:700;opacity:0.4">
+          &#10003; Save &amp; Add Photo
+        </button>
       </div>
     </div>
   </div>
@@ -2087,9 +2148,9 @@ function beBuildProjectCardHtml(g, realIdx, cachedOptions){
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <label class="form-label" style="margin-bottom:0">Project Media Items (${g.media.length}):</label>
         <div style="display:flex;gap:6px">
-          <button onclick="beAddMediaItem(${realIdx}, 'image')"
-            style="padding:5px 12px;font-size:11px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700">
-            + Add Photo
+          <button onclick="beOpenUploadModal(${realIdx})"
+            style="padding:5px 12px;font-size:11px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:3px;cursor:pointer;font-weight:700" title="Upload and convert image to WebP">
+            📷 + Upload Photo (WebP)
           </button>
           <button onclick="beAddMediaItem(${realIdx}, 'video')"
             style="padding:5px 12px;font-size:11px;background:#e50914;color:#fff;border:1px solid #e50914;border-radius:3px;cursor:pointer;font-weight:700">
@@ -2166,6 +2227,10 @@ function beAddMediaItem(itemIdx, type){
   if(!g) return;
   beUpdateGalleryItem(itemIdx, true);
   g.media = g.media || [];
+  if(type === 'image'){
+    beOpenUploadModal(itemIdx);
+    return;
+  }
   if(type === 'video'){
     const url = prompt('Enter YouTube Video URL:');
     if(!url || !url.trim()) return;
@@ -2177,15 +2242,6 @@ function beAddMediaItem(itemIdx, type){
       title: `${g.title} - Video ${g.media.length + 1}`,
       description: g.desc || '',
       provider: 'youtube'
-    });
-  } else {
-    const src = prompt('Enter Photo Path (e.g. Photos & to upload/...):');
-    if(!src || !src.trim()) return;
-    g.media.push({
-      type: 'image',
-      src: src.trim(),
-      title: `${g.title} - Study ${g.media.length + 1}`,
-      description: g.desc || ''
     });
   }
   saveData('rana_gallery_data', galleryItems);
@@ -2417,6 +2473,279 @@ function beMoveImageToProject(fromProjIdx, photoIdx, toProjIdx){
   showToast(`✓ Moved "${movedMedia.title || 'Media'}" to "${destProj.title}"`);
 }
 window.beMoveImageToProject = beMoveImageToProject;
+
+// ==================== WEBP PHOTO UPLOADER & CONVERTER ====================
+let beActiveUploadProjIdx = null;
+let beActiveWebpBlob = null;
+let beActiveWebpDataUrl = null;
+let beActiveOrigFile = null;
+
+function beFormatBytes(bytes){
+  if(!bytes || bytes === 0) return '0 B';
+  const k = 1024;
+  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+function beOpenUploadModal(itemIdx){
+  const g = galleryItems[itemIdx];
+  if(!g) return;
+  beActiveUploadProjIdx = itemIdx;
+  beActiveWebpBlob = null;
+  beActiveWebpDataUrl = null;
+  beActiveOrigFile = null;
+
+  const modal = document.getElementById('be-upload-modal');
+  if(!modal) return;
+
+  const fileInp = document.getElementById('be-upload-file-input');
+  if(fileInp) fileInp.value = '';
+
+  const prevWrap = document.getElementById('be-upload-preview-wrap');
+  if(prevWrap) prevWrap.style.display = 'none';
+
+  const dropzone = document.getElementById('be-upload-dropzone');
+  if(dropzone){
+    dropzone.style.display = 'block';
+    dropzone.style.borderColor = 'var(--border)';
+    dropzone.style.background = 'var(--bg)';
+  }
+
+  const submitBtn = document.getElementById('be-upload-submit-btn');
+  if(submitBtn){
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.4';
+    submitBtn.innerHTML = '&#10003; Save &amp; Add Photo';
+  }
+
+  const titleInp = document.getElementById('be-upload-title-input');
+  if(titleInp) titleInp.value = `${g.title} - Study ${(g.media || []).length + 1}`;
+
+  const descInp = document.getElementById('be-upload-desc-input');
+  if(descInp) descInp.value = g.desc || '';
+
+  modal.classList.add('open');
+}
+window.beOpenUploadModal = beOpenUploadModal;
+
+function beCloseUploadModal(){
+  const modal = document.getElementById('be-upload-modal');
+  if(modal) modal.classList.remove('open');
+  beActiveUploadProjIdx = null;
+  beActiveWebpBlob = null;
+  beActiveWebpDataUrl = null;
+  beActiveOrigFile = null;
+}
+window.beCloseUploadModal = beCloseUploadModal;
+
+function beHandleFileSelected(e){
+  const file = e.target.files && e.target.files[0];
+  if(file) beProcessImageFile(file);
+}
+window.beHandleFileSelected = beHandleFileSelected;
+
+function beProcessImageFile(file){
+  if(!file || !file.type || !file.type.startsWith('image/')){
+    alert('Please select a valid image file (PNG, JPG, JPEG, WEBP, etc.).');
+    return;
+  }
+  beActiveOrigFile = file;
+
+  const submitBtn = document.getElementById('be-upload-submit-btn');
+  if(submitBtn){
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.5';
+    submitBtn.innerHTML = 'Converting to WebP...';
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(evt){
+    const img = new Image();
+    img.onload = function(){
+      const MAX_DIM = 2560;
+      let w = img.width;
+      let h = img.height;
+      if(w > MAX_DIM || h > MAX_DIM){
+        const ratio = Math.min(MAX_DIM / w, MAX_DIM / h);
+        w = Math.round(w * ratio);
+        h = Math.round(h * ratio);
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+
+      canvas.toBlob(function(blob){
+        if(!blob){
+          alert('Could not convert image to WebP in this browser.');
+          if(submitBtn) submitBtn.innerHTML = '&#10003; Save &amp; Add Photo';
+          return;
+        }
+        beActiveWebpBlob = blob;
+        beActiveWebpDataUrl = canvas.toDataURL('image/webp', 0.84);
+
+        const previewImg = document.getElementById('be-upload-preview-img');
+        const filenameEl = document.getElementById('be-upload-filename');
+        const origSizeEl = document.getElementById('be-upload-orig-size');
+        const webpSizeEl = document.getElementById('be-upload-webp-size');
+        const savingsEl = document.getElementById('be-upload-savings');
+
+        if(previewImg) previewImg.src = beActiveWebpDataUrl;
+        if(filenameEl) filenameEl.innerText = file.name.replace(/\.[^.]+$/, '') + '.webp';
+        if(origSizeEl) origSizeEl.innerText = `Original: ${beFormatBytes(file.size)} (${file.type || 'image'})`;
+        if(webpSizeEl) webpSizeEl.innerText = `Converted WebP: ${beFormatBytes(blob.size)}`;
+
+        const savingsPct = Math.max(0, Math.round((1 - blob.size / file.size) * 100));
+        if(savingsEl) savingsEl.innerText = `⚡ ${savingsPct}% smaller! Ultra-fast WebP ready.`;
+
+        const prevWrap = document.getElementById('be-upload-preview-wrap');
+        if(prevWrap) prevWrap.style.display = 'block';
+
+        if(submitBtn){
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          submitBtn.innerHTML = '&#10003; Save &amp; Add Photo';
+        }
+      }, 'image/webp', 0.84);
+    };
+    img.src = evt.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+window.beProcessImageFile = beProcessImageFile;
+
+async function beSubmitUploadedPhoto(){
+  if(beActiveUploadProjIdx === null || !beActiveWebpBlob || !beActiveOrigFile) return;
+  const itemIdx = beActiveUploadProjIdx;
+  const g = galleryItems[itemIdx];
+  if(!g) return;
+
+  const submitBtn = document.getElementById('be-upload-submit-btn');
+  if(submitBtn){
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Saving Photo...';
+  }
+
+  const cleanBase = beActiveOrigFile.name.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9_-]/g, '_');
+  const targetFilename = `${cleanBase}.webp`;
+  const titleInp = document.getElementById('be-upload-title-input');
+  const title = (titleInp ? titleInp.value.trim() : '') || `${g.title} - Study ${(g.media || []).length + 1}`;
+  const descInp = document.getElementById('be-upload-desc-input');
+  const desc = (descInp ? descInp.value.trim() : '') || g.desc || '';
+
+  const folderSlug = (g.title || 'General').replace(/[\\/*?:"<>|]/g, ' - ').replace(/\s+/g, ' ').trim();
+  const relPath = `Photos & to upload/${folderSlug}/${targetFilename}`;
+
+  let savedOnDisk = false;
+
+  try {
+    const res = await fetch('/api/upload-photo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        index: itemIdx,
+        image_data: beActiveWebpDataUrl,
+        filename: targetFilename,
+        title: title,
+        description: desc
+      })
+    });
+    if(res.ok){
+      const data = await res.json();
+      if(data.success){
+        savedOnDisk = true;
+        showToast(`✓ Uploaded & converted to WebP: ${data.src} (${data.savings_pct}% saved)`);
+      }
+    }
+  } catch(e){}
+
+  if(!savedOnDisk){
+    const token = getGitHubToken();
+    let uploadedToGh = false;
+    if(token){
+      try {
+        const base64Content = beActiveWebpDataUrl.split(',')[1];
+        const ghUrl = `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${encodeURIComponent(relPath).replace(/%2F/g, '/')}`;
+        const ghRes = await fetch(ghUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify({
+            message: `Upload photo: ${targetFilename} for ${g.title}`,
+            content: base64Content,
+            branch: 'main'
+          })
+        });
+        if(ghRes.ok){
+          uploadedToGh = true;
+          showToast(`✓ Uploaded ${targetFilename} directly to GitHub!`);
+        }
+      } catch(err){
+        console.warn('GitHub direct photo commit notice:', err);
+      }
+    }
+
+    g.media = g.media || [];
+    g.media.push({
+      type: 'image',
+      src: relPath,
+      title: title,
+      description: desc
+    });
+
+    saveData('rana_gallery_data', galleryItems);
+    beRefreshSingleGalleryCard(itemIdx);
+    markUnsavedChanges();
+
+    if(!uploadedToGh){
+      const a = document.createElement('a');
+      a.href = beActiveWebpDataUrl;
+      a.download = targetFilename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast(`✓ Converted WebP downloaded! Save to: ${relPath}`);
+    }
+  } else {
+    await loadGalleryData();
+    beRefreshSingleGalleryCard(itemIdx);
+  }
+
+  beCloseUploadModal();
+}
+window.beSubmitUploadedPhoto = beSubmitUploadedPhoto;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const dropzone = document.getElementById('be-upload-dropzone');
+  if(dropzone){
+    ['dragenter', 'dragover'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        dropzone.style.borderColor = '#10b981';
+        dropzone.style.background = 'rgba(16,185,129,0.08)';
+      });
+    });
+    ['dragleave', 'drop'].forEach(name => {
+      dropzone.addEventListener(name, (e) => {
+        e.preventDefault();
+        dropzone.style.borderColor = 'var(--border)';
+        dropzone.style.background = 'var(--bg)';
+      });
+    });
+    dropzone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      if(dt && dt.files && dt.files[0]){
+        beProcessImageFile(dt.files[0]);
+      }
+    });
+  }
+});
 
 // 4. SOFTWARE & ADDONS BACKEND (100% CLEAN NATURAL SANS-SERIF UI)
 function renderBeSoftware(){
