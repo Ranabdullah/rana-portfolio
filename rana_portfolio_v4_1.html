@@ -2,6 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+try {
+  if(typeof localStorage !== 'undefined'){
+    for(var i = localStorage.length - 1; i >= 0; i--){
+      var k = localStorage.key(i);
+      if(k && k.startsWith('rana_gallery')){
+        localStorage.removeItem(k);
+      }
+    }
+  }
+} catch(e){}
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
@@ -5140,7 +5153,20 @@ const CLIENTS_DATA = [
 let novels = loadData('rana_novels_data', NOVELS_DATA);
 let techProjects = loadData('rana_tech_data', TECH_PROJECTS_DATA);
 let articles = loadData('rana_articles_data', ARTICLES_DATA);
-let galleryItems = loadData('rana_gallery_data_v5_4', GALLERY_DATA);
+// Ensure authoritative GALLERY_DATA is always used and wipe legacy cached galleries
+(function purgeLegacyGalleryCache(){
+  try {
+    if(typeof localStorage !== 'undefined'){
+      for(let i = localStorage.length - 1; i >= 0; i--){
+        const k = localStorage.key(i);
+        if(k && k.startsWith('rana_gallery')){
+          localStorage.removeItem(k);
+        }
+      }
+    }
+  } catch(e){}
+})();
+let galleryItems = GALLERY_DATA;
 let lbImages = galleryItems;
 let lbIdx = 0, curSubImgIdx = 0;
 let software = loadData('rana_software_data', SOFTWARE_DATA);
@@ -6432,7 +6458,7 @@ async function autoFetchCloudDatabaseOnBoot(){
       if(data.gallery && Array.isArray(data.gallery) && data.gallery.length > 0){
         galleryItems = data.gallery;
         lbImages = galleryItems;
-        try { localStorage.setItem('rana_gallery_data_v5_4', JSON.stringify(galleryItems)); } catch(e){}
+        // Gallery is authoritative and static
         const activePageEl = document.querySelector('.page.active');
         if(activePageEl && activePageEl.id === 'page-gallery'){
           renderGallery('all');
@@ -6458,7 +6484,7 @@ window.addEventListener('storage', function(e){
     if(typeof loadData === 'function'){
       novels = loadData('rana_novels_data', novels);
       techProjects = loadData('rana_tech_data', techProjects);
-      galleryItems = loadData('rana_gallery_data', galleryItems);
+      // galleryItems is authoritative; not reloaded from stale localStorage
       software = loadData('rana_software_data', software);
       experience = loadData('rana_experience_data', experience);
       clients = loadData('rana_clients_data', clients);
@@ -6504,7 +6530,7 @@ function restoreDataJson(e){
       const data = JSON.parse(evt.target.result);
       if(data.novels) { novels = data.novels; saveData('rana_novels_data', novels); }
       if(data.tech) { techProjects = data.tech; saveData('rana_tech_data', techProjects); }
-      if(data.gallery) { galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
+      if(data.gallery) { galleryItems = data.gallery; }
       if(data.software) { software = data.software; saveData('rana_software_data', software); }
       if(data.experience) { experience = data.experience; saveData('rana_experience_data', experience); }
       if(data.clients) { clients = data.clients; saveData('rana_clients_data', clients); }
