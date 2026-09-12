@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-12T23:14:42.991Z",
+  "updatedAt": "2026-09-12T23:17:12.033Z",
   "version": "4.5",
   "novels": [
     {
@@ -850,6 +850,12 @@
           "type": "image",
           "src": "Photos & to upload/Client/Eskimo/Eskimo and Lams Front.png",
           "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 9",
+          "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
+        },
+        {
+          "type": "image",
+          "src": "Portfolio_Media_Workspace/00 - Personal Projects & Others/photos/2.PNG",
+          "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Study 10",
           "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork."
         }
       ]
