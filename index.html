@@ -4739,7 +4739,8 @@ function renderHome(){
     if(galleryItems.length > 0){
       projGrid.innerHTML = galleryItems.slice(0,8).map((g,i)=>{
         const col = RAINBOW_PALETTE[i % RAINBOW_PALETTE.length];
-        const coverSrc = g.cover?.src || (g.media && g.media[0]?.type === 'video' ? g.media[0].thumbnail : g.media && g.media[0]?.src) || '';
+        const cover = g.cover || { type: 'image', src: '' };
+        const coverSrc = (cover.type === 'video') ? (cover.thumbnail || cover.src || '') : (cover.src || '');
         return `
           <div class="g-card" onclick="showPage('gallery')" style="position:relative;${getCardGlowStyle(i)}">
             <div style="position:relative;overflow:hidden;border-radius:4px">
@@ -4961,28 +4962,16 @@ async function renderGallery(filter){
 
   c.innerHTML = filtered.map((g,i)=>{
     const mediaList = getProjectMedia(g);
-    const vidCount = mediaList.filter(m => m.type === 'video').length;
-    const imgCount = mediaList.filter(m => m.type === 'image').length;
-    const totalCount = mediaList.length;
-    const isVideoOnly = (vidCount > 0 && imgCount === 0);
-    const isPhotoOnly = (imgCount > 0 && vidCount === 0);
-    const isMixed = (vidCount > 0 && imgCount > 0);
-
-    const coverSrc = g.cover?.src || (mediaList[0]?.type === 'video' ? mediaList[0].thumbnail : mediaList[0]?.src) || '';
-
-    let badgeHtml = '';
-    if(isVideoOnly){
-      badgeHtml = `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.88);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.4)">&#9654; ${totalCount === 1 ? '1 Video' : totalCount + ' Videos'}</span>`;
-    } else if(isPhotoOnly && totalCount > 1){
-      badgeHtml = `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.88);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.4)">&#128247; ${totalCount} Photos</span>`;
-    } else if(isMixed){
-      badgeHtml = `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.88);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.4)">&#128247; ${imgCount} Photos &bull; &#9654; ${vidCount} Videos</span>`;
-    }
+    const cover = g.cover || { type: 'image', src: '' };
+    const coverIsVideo = (cover.type === 'video');
+    const coverSrc = coverIsVideo ? (cover.thumbnail || cover.src || '') : (cover.src || '');
 
     let topBadge = '';
     let playOverlay = '';
     let actionBtn = '';
-    if(isVideoOnly){
+    let badgeHtml = '';
+
+    if(coverIsVideo){
       topBadge = `<span class="g-video-badge" style="position:absolute;top:10px;right:10px;background:#e50914;color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 9px;border-radius:3px;font-weight:700;box-shadow:0 2px 8px rgba(229,9,20,0.45);display:flex;align-items:center;gap:4px">&#9654; Video</span>`;
       playOverlay = `
         <div class="g-card-play-icon" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none">
@@ -4991,9 +4980,11 @@ async function renderGallery(filter){
           </div>
         </div>`;
       actionBtn = `<button onclick="event.stopPropagation(); selectShowcaseProject(${i}); playShowcaseVideo();" style="background:transparent;border:none;color:var(--ink3);cursor:pointer;font-family:var(--mono);font-size:10.5px;padding:0;font-weight:600" title="Play Video">&#9654; Play Video</button>`;
-    } else if(isMixed){
-      actionBtn = `<button onclick="event.stopPropagation(); openLightbox(${i});" style="background:transparent;border:none;color:var(--ink3);cursor:pointer;font-family:var(--mono);font-size:10.5px;padding:0;font-weight:600" title="Explore Media">&#128247; Explore Media &nearr;</button>`;
+      badgeHtml = `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.88);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.4)">&#9654; ${mediaList.length === 1 ? '1 Video' : mediaList.length + ' Videos'}</span>`;
     } else {
+      if(mediaList.length > 1){
+        badgeHtml = `<span style="position:absolute;bottom:10px;left:10px;background:rgba(17,20,26,0.88);color:#fff;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:3px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.4)">&#128247; ${mediaList.length} Photos</span>`;
+      }
       actionBtn = `<button onclick="event.stopPropagation(); openLightbox(${i});" style="background:transparent;border:none;color:var(--ink3);cursor:pointer;font-family:var(--mono);font-size:10.5px;padding:0;font-weight:600" title="View Photos">&#128247; View Photos &nearr;</button>`;
     }
 

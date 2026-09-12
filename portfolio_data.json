@@ -591,8 +591,9 @@
       "cat": "animation",
       "desc": "A dedicated showcase of personal animated short films, commercial 3D motion reels, and brand promotional campaigns.",
       "cover": {
-        "type": "image",
-        "src": "Photos & to upload/Videos_Thumbnails/b8_h72abWqM.jpg"
+        "type": "video",
+        "thumbnail": "Photos & to upload/Videos_Thumbnails/b8_h72abWqM.jpg",
+        "url": "https://www.youtube.com/watch?v=b8_h72abWqM"
       },
       "media": [
         {
@@ -781,7 +782,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/FqSKkXn9EvM",
-          "thumbnail": "Photos & to upload/Client/Eskimo/Eskimo - Ice cream.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/FqSKkXn9EvM.jpg",
           "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Video 1",
           "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
           "provider": "youtube"
@@ -789,7 +790,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/kbV7s_IZWSs",
-          "thumbnail": "Photos & to upload/Client/Eskimo/Eskimo - Milk Shake.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/kbV7s_IZWSs.jpg",
           "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Video 2",
           "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
           "provider": "youtube"
@@ -797,7 +798,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/G-_kTK2VXRM",
-          "thumbnail": "Photos & to upload/Client/Eskimo/Eskimo Interior Chairs.webp",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/G-_kTK2VXRM.jpg",
           "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Video 3",
           "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
           "provider": "youtube"
@@ -805,7 +806,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/tTXfZOWMFyM",
-          "thumbnail": "Photos & to upload/Client/Eskimo/Eskimo Interior Poster.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/tTXfZOWMFyM.jpg",
           "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Video 4",
           "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
           "provider": "youtube"
@@ -813,7 +814,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/84oIQXENC60",
-          "thumbnail": "Photos & to upload/Client/Eskimo/Eskimo Interior.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/84oIQXENC60.jpg",
           "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Video 5",
           "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
           "provider": "youtube"
@@ -821,7 +822,7 @@
         {
           "type": "video",
           "url": "https://youtube.com/shorts/VjjbWoWqMrk",
-          "thumbnail": "Photos & to upload/Client/Eskimo/Eskimo Pizza Front Banner.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/VjjbWoWqMrk.jpg",
           "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Video 6",
           "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
           "provider": "youtube"
@@ -829,7 +830,7 @@
         {
           "type": "video",
           "url": "https://youtube.com/shorts/N9xFHPGHJ1g",
-          "thumbnail": "Photos & to upload/Client/Eskimo/Eskimo Pizza Front.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/N9xFHPGHJ1g.jpg",
           "title": "Eskimo Pizza: Commercial Dining Suite & Interior Fit-Out - Video 7",
           "description": "Complete commercial architectural visualization and interior design presentation for Eskimo Pizza dining floor, service counter, and rustic brickwork.",
           "provider": "youtube"
@@ -966,7 +967,7 @@
         {
           "type": "video",
           "url": "https://youtube.com/shorts/IK-cqxmjEXg",
-          "thumbnail": "Photos & to upload/Client/Rizpros/0000.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/IK-cqxmjEXg.jpg",
           "title": "Electronic Products Render (FAST Commercial)",
           "description": "Comprehensive 3D visual study and design collection for Rizpros & FAST: Commercial Workspace & Operations Logistics.",
           "provider": "youtube"
@@ -974,7 +975,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/QVhHd7Doep0",
-          "thumbnail": "Photos & to upload/Client/Rizpros/0001.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/QVhHd7Doep0.jpg",
           "title": "FAST Screen Final 2: Phone Cases Motion (Vertical Upright)",
           "description": "Comprehensive 3D visual study and design collection for Rizpros & FAST: Commercial Workspace & Operations Logistics.",
           "provider": "youtube",
@@ -1075,7 +1076,7 @@
         {
           "type": "video",
           "url": "https://www.youtube.com/watch?v=wvJ3n61oNlQ",
-          "thumbnail": "Photos & to upload/Client/Eskimo/Final/10.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/wvJ3n61oNlQ.jpg",
           "title": "Interior Volumes: Architectural Light & Materiality - Video 1",
           "description": "A comprehensive 3D interior visualization series exploring the interplay between atmospheric light, shadow projections, and diverse material textures. This collection spans modern residential environments, high-contrast kitchen concepts, and dramatic, sacral interior spaces to study spatial depth and surface reactivity.",
           "provider": "youtube"
@@ -1083,7 +1084,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/AYk-BZrP6D0",
-          "thumbnail": "Photos & to upload/Kitchen/17842254753061661.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/AYk-BZrP6D0.jpg",
           "title": "Interior Volumes: Architectural Light & Materiality - Video 2",
           "description": "A comprehensive 3D interior visualization series exploring the interplay between atmospheric light, shadow projections, and diverse material textures. This collection spans modern residential environments, high-contrast kitchen concepts, and dramatic, sacral interior spaces to study spatial depth and surface reactivity.",
           "provider": "youtube"
@@ -1091,7 +1092,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/aniBOlBF1Ow",
-          "thumbnail": "Photos & to upload/Kitchen/17843690153794060.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/aniBOlBF1Ow.jpg",
           "title": "Interior Volumes: Architectural Light & Materiality - Video 3",
           "description": "A comprehensive 3D interior visualization series exploring the interplay between atmospheric light, shadow projections, and diverse material textures. This collection spans modern residential environments, high-contrast kitchen concepts, and dramatic, sacral interior spaces to study spatial depth and surface reactivity.",
           "provider": "youtube"
@@ -1099,7 +1100,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/AK6Ets4VplM",
-          "thumbnail": "Photos & to upload/Kitchen/17889489539305832.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/AK6Ets4VplM.jpg",
           "title": "Interior Volumes: Architectural Light & Materiality - Video 4",
           "description": "A comprehensive 3D interior visualization series exploring the interplay between atmospheric light, shadow projections, and diverse material textures. This collection spans modern residential environments, high-contrast kitchen concepts, and dramatic, sacral interior spaces to study spatial depth and surface reactivity.",
           "provider": "youtube"
@@ -1204,7 +1205,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/PJ1i1nk43Zo",
-          "thumbnail": "Photos & to upload/Instagram/17844828329636556.jpg",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/PJ1i1nk43Zo.jpg",
           "title": "Mythos: Legends in Light & Stone - Video 1",
           "description": "A digital visualization and 3D modeling study reinterpreting mythological figures, classical sculptures, and heroic lore across dramatic lighting setups and immersive digital environments.",
           "provider": "youtube"
@@ -1212,7 +1213,7 @@
         {
           "type": "video",
           "url": "https://youtube.com/shorts/LrhpF-M9B6w",
-          "thumbnail": "Photos & to upload/Instagram/17875494869798035.webp",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/LrhpF-M9B6w.jpg",
           "title": "Mythos: Legends in Light & Stone - Video 2",
           "description": "A digital visualization and 3D modeling study reinterpreting mythological figures, classical sculptures, and heroic lore across dramatic lighting setups and immersive digital environments.",
           "provider": "youtube"
@@ -1220,7 +1221,7 @@
         {
           "type": "video",
           "url": "https://youtube.com/shorts/yCBE1Pp4wRM",
-          "thumbnail": "Photos & to upload/Instagram/17914716772998399.jpg",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/yCBE1Pp4wRM.jpg",
           "title": "Mythos: Legends in Light & Stone - Video 3",
           "description": "A digital visualization and 3D modeling study reinterpreting mythological figures, classical sculptures, and heroic lore across dramatic lighting setups and immersive digital environments.",
           "provider": "youtube"
@@ -1477,7 +1478,7 @@
         {
           "type": "video",
           "url": "https://www.youtube.com/watch?v=L6NKHuSGThA",
-          "thumbnail": "Photos & to upload/Instagram/17860437881274324.jpg",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/L6NKHuSGThA.jpg",
           "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes - Video 1",
           "description": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
           "provider": "youtube"
@@ -1485,7 +1486,7 @@
         {
           "type": "video",
           "url": "https://youtube.com/shorts/ge5N4vNkJZ4",
-          "thumbnail": "Photos & to upload/Nature/17908107983332904.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/ge5N4vNkJZ4.jpg",
           "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes - Video 2",
           "description": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
           "provider": "youtube"
@@ -1493,7 +1494,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/jN-SOF7No1Q",
-          "thumbnail": "Photos & to upload/Instagram/17938940090277064.webp",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/jN-SOF7No1Q.jpg",
           "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes - Video 3",
           "description": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
           "provider": "youtube"
@@ -1501,7 +1502,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/UYgf9MlZ2iY",
-          "thumbnail": "Photos & to upload/Nature/17963484634584183.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/UYgf9MlZ2iY.jpg",
           "title": "Organic Ecosystems: Photorealistic Biomes & Natural Landscapes - Video 4",
           "description": "High-fidelity Unreal Engine 5 forest biome and architectural cabin featuring Nanite geometry, Lumen sunbeams, and dynamic wind foliage.",
           "provider": "youtube"
@@ -1570,7 +1571,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/sc7N1vtVA8M",
-          "thumbnail": "Photos & to upload/Scifi/17917385177186112.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/sc7N1vtVA8M.jpg",
           "title": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study) - Video 1",
           "description": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
           "provider": "youtube"
@@ -1578,7 +1579,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/Tkke1L5bGyM",
-          "thumbnail": "Photos & to upload/Scifi/17930139391772432.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/Tkke1L5bGyM.jpg",
           "title": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study) - Video 2",
           "description": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
           "provider": "youtube"
@@ -1586,7 +1587,7 @@
         {
           "type": "video",
           "url": "https://youtu.be/8zlzhEICw-w",
-          "thumbnail": "Photos & to upload/Scifi/17943628076142996.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/8zlzhEICw-w.jpg",
           "title": "Sci-Fi Command Chamber: Modular Hard-Surface Environment (Evolution Study) - Video 3",
           "description": "Side-by-side progression analysis showcasing modern re-topology workflows, emissive interface terminals, and modular sci-fi interior architecture.",
           "provider": "youtube"
@@ -1823,7 +1824,7 @@
         {
           "type": "video",
           "url": "https://www.youtube.com/watch?v=XbsGhjGriEE",
-          "thumbnail": "Photos & to upload/Exterior/All Work (134).png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/XbsGhjGriEE.jpg",
           "title": "Contemporary Architecture: Residential & Facade Studies - Video 26",
           "description": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting.",
           "provider": "youtube"
@@ -1831,7 +1832,7 @@
         {
           "type": "video",
           "url": "https://www.youtube.com/watch?v=NOFS6gQ8Zfk",
-          "thumbnail": "Photos & to upload/Exterior/All Work (135).png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/NOFS6gQ8Zfk.jpg",
           "title": "Contemporary Architecture: Residential & Facade Studies - Video 27",
           "description": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting.",
           "provider": "youtube"
@@ -1839,7 +1840,7 @@
         {
           "type": "video",
           "url": "https://www.youtube.com/watch?v=BWPjtiNJSr4",
-          "thumbnail": "Photos & to upload/Exterior/All Work (147).png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/BWPjtiNJSr4.jpg",
           "title": "Contemporary Architecture: Residential & Facade Studies - Video 28",
           "description": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting.",
           "provider": "youtube"
@@ -1853,7 +1854,7 @@
         {
           "type": "video",
           "url": "https://www.youtube.com/watch?v=XbsGhjGriEE",
-          "thumbnail": "Photos & to upload/All Work (3).png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/XbsGhjGriEE.jpg",
           "title": "Contemporary Architecture: Residential & Facade Studies - Video 30",
           "description": "Modern multi-storey residential building visualization analyzing exterior louvers, glass reflectivity, and real-time environment lighting.",
           "provider": "youtube"
@@ -1916,7 +1917,7 @@
         {
           "type": "video",
           "url": "https://www.youtube.com/watch?v=XbsGhjGriEE",
-          "thumbnail": "Photos & to upload/Instagram/17854398092569660.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/XbsGhjGriEE.jpg",
           "title": "Cinematic Scenes, Environments & Atmospheric Vistas - Video 1",
           "description": "Comprehensive 3D visual study and design collection for Cinematic Scenes, Environments & Atmospheric Vistas.",
           "provider": "youtube"
@@ -1924,7 +1925,7 @@
         {
           "type": "video",
           "url": "https://www.youtube.com/watch?v=yEWTwD7XMjw",
-          "thumbnail": "Photos & to upload/Instagram/17875278170181393.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/yEWTwD7XMjw.jpg",
           "title": "Cinematic Scenes, Environments & Atmospheric Vistas - Video 2",
           "description": "Comprehensive 3D visual study and design collection for Cinematic Scenes, Environments & Atmospheric Vistas.",
           "provider": "youtube"
@@ -1932,7 +1933,7 @@
         {
           "type": "video",
           "url": "https://www.youtube.com/watch?v=x9p50UJI_NU",
-          "thumbnail": "Photos & to upload/Instagram/17883073064599924.png",
+          "thumbnail": "Photos & to upload/Videos_Thumbnails/x9p50UJI_NU.jpg",
           "title": "Cinematic Scenes, Environments & Atmospheric Vistas - Video 3",
           "description": "Comprehensive 3D visual study and design collection for Cinematic Scenes, Environments & Atmospheric Vistas.",
           "provider": "youtube"

@@ -1928,8 +1928,8 @@ function beRefreshSingleGalleryCard(realIdx){
 window.beRefreshSingleGalleryCard = beRefreshSingleGalleryCard;
 
 function beBuildProjectCardHtml(g, realIdx, cachedOptions){
-  g.media = g.media || [];
-  const coverSrc = g.cover?.src || (g.media[0]?.type === 'video' ? g.media[0].thumbnail : g.media[0]?.src) || '';
+  const cover = g.cover || { type: 'image', src: '' };
+  const coverSrc = (cover.type === 'video') ? (cover.thumbnail || cover.src || '') : (cover.src || '');
 
   const thumbs = g.media.map((m, sIdx) => {
     const isVideo = (m.type === 'video');
