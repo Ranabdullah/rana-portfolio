@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-12T23:45:20.417Z",
+  "updatedAt": "2026-09-13T21:45:36.515Z",
   "version": "4.5",
   "novels": [
     {
@@ -591,9 +591,8 @@
       "cat": "animation",
       "desc": "A dedicated showcase of personal animated short films, commercial 3D motion reels, and brand promotional campaigns.",
       "cover": {
-        "type": "video",
-        "thumbnail": "Photos & to upload/Videos_Thumbnails/b8_h72abWqM.jpg",
-        "url": "https://www.youtube.com/watch?v=b8_h72abWqM"
+        "type": "image",
+        "src": "Photos & to upload/Videos_Thumbnails/b8_h72abWqM.jpg"
       },
       "media": [
         {
