@@ -1568,7 +1568,13 @@ function renderBeNovels(){
 
       <!-- ACTION BUTTONS -->
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border)">
-        <button onclick="beDeleteNovel(${i})" style="padding:6px 14px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Book</button>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button onclick="beMoveNovel(${i}, -1)" ${i === 0 ? 'disabled' : ''}
+            style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:${i === 0 ? 'not-allowed' : 'pointer'};font-weight:700;opacity:${i === 0 ? '0.35' : '1'}">&#9650; Move Up</button>
+          <button onclick="beMoveNovel(${i}, 1)" ${i === novels.length - 1 ? 'disabled' : ''}
+            style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:${i === novels.length - 1 ? 'not-allowed' : 'pointer'};font-weight:700;opacity:${i === novels.length - 1 ? '0.35' : '1'}">&#9660; Move Down</button>
+          <button onclick="beDeleteNovel(${i})" style="padding:6px 14px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Book</button>
+        </div>
         <button onclick="beUpdateNovel(${i})" class="submit-btn" style="padding:8px 22px;font-size:12px">Save Changes</button>
       </div>
     </div>
@@ -1618,6 +1624,24 @@ function beDeleteNovel(i){
   }
 }
 window.beDeleteNovel = beDeleteNovel;
+
+function beMoveNovel(i, dir){
+  if(!novels || novels.length <= 1) return;
+  const target = i + dir;
+  if(target < 0 || target >= novels.length) return;
+  beUpdateNovel(i, true);
+  if(document.getElementById(`be-nt-${target}`)) beUpdateNovel(target, true);
+  const temp = novels[i];
+  novels[i] = novels[target];
+  novels[target] = temp;
+  saveData('rana_novels_data', novels);
+  renderBeNovels();
+  markUnsavedChanges();
+  const movedTitle = novels[target]?.title || 'Book';
+  const shortTitle = movedTitle.length > 28 ? movedTitle.slice(0, 28) + '...' : movedTitle;
+  showToast(`✓ Moved "${shortTitle}" ${dir < 0 ? 'up' : 'down'}`);
+}
+window.beMoveNovel = beMoveNovel;
 
 function addNovel(){
   const title = (document.getElementById('b-nv-title')?.value || '').trim();
@@ -1725,7 +1749,13 @@ function renderBeTech(){
 
       <!-- ACTION BUTTONS -->
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border)">
-        <button onclick="beDeleteTech(${i})" style="padding:6px 14px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Project</button>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button onclick="beMoveTech(${i}, -1)" ${i === 0 ? 'disabled' : ''}
+            style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:${i === 0 ? 'not-allowed' : 'pointer'};font-weight:700;opacity:${i === 0 ? '0.35' : '1'}">&#9650; Move Up</button>
+          <button onclick="beMoveTech(${i}, 1)" ${i === techProjects.length - 1 ? 'disabled' : ''}
+            style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:${i === techProjects.length - 1 ? 'not-allowed' : 'pointer'};font-weight:700;opacity:${i === techProjects.length - 1 ? '0.35' : '1'}">&#9660; Move Down</button>
+          <button onclick="beDeleteTech(${i})" style="padding:6px 14px;font-size:12px;background:transparent;color:#e50914;border:1px solid #e50914;border-radius:4px;cursor:pointer;font-weight:600">Delete Project</button>
+        </div>
         <button onclick="beUpdateTech(${i})" class="submit-btn" style="padding:8px 22px;font-size:12px">Save Changes</button>
       </div>
     </div>
@@ -1789,6 +1819,24 @@ function beDeleteTech(i){
   }
 }
 window.beDeleteTech = beDeleteTech;
+
+function beMoveTech(i, dir){
+  if(!techProjects || techProjects.length <= 1) return;
+  const target = i + dir;
+  if(target < 0 || target >= techProjects.length) return;
+  beUpdateTech(i, true);
+  if(document.getElementById('be-tech-title-'+target)) beUpdateTech(target, true);
+  const temp = techProjects[i];
+  techProjects[i] = techProjects[target];
+  techProjects[target] = temp;
+  saveData('rana_tech_data', techProjects);
+  renderBeTech();
+  markUnsavedChanges();
+  const movedTitle = techProjects[target]?.title || 'Project';
+  const shortTitle = movedTitle.length > 28 ? movedTitle.slice(0, 28) + '...' : movedTitle;
+  showToast(`✓ Moved "${shortTitle}" ${dir < 0 ? 'up' : 'down'}`);
+}
+window.beMoveTech = beMoveTech;
 
 function addTechProject(){
   const title = (document.getElementById('b-tp-title')?.value || '').trim();
@@ -2010,11 +2058,11 @@ function beBuildProjectCardHtml(g, realIdx, cachedOptions){
       </div>
       
       <div style="display:flex;gap:4px;align-items:center;justify-content:center;width:100%">
-        <button onclick="beMoveSubImageOrder(${realIdx}, ${sIdx}, -1)" ${sIdx === 0 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''} title="Move left"
-          style="padding:3px 7px;font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9664;</button>
+        <button onclick="beMoveSubImageOrder(${realIdx}, ${sIdx}, -1)" ${sIdx === 0 ? 'disabled' : ''} title="Move left"
+          style="padding:3px 7px;font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:${sIdx === 0 ? 'not-allowed' : 'pointer'};opacity:${sIdx === 0 ? '0.35' : '1'}">&#9664;</button>
         <span style="font-size:10px;color:var(--ink3);font-weight:600">#${sIdx + 1}</span>
-        <button onclick="beMoveSubImageOrder(${realIdx}, ${sIdx}, 1)" ${sIdx === g.media.length - 1 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''} title="Move right"
-          style="padding:3px 7px;font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer">&#9654;</button>
+        <button onclick="beMoveSubImageOrder(${realIdx}, ${sIdx}, 1)" ${sIdx === g.media.length - 1 ? 'disabled' : ''} title="Move right"
+          style="padding:3px 7px;font-size:10px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:${sIdx === g.media.length - 1 ? 'not-allowed' : 'pointer'};opacity:${sIdx === g.media.length - 1 ? '0.35' : '1'}">&#9654;</button>
       </div>
 
       <div>
@@ -2088,10 +2136,10 @@ function beBuildProjectCardHtml(g, realIdx, cachedOptions){
   <div class="backend-item" style="flex-direction:column;align-items:stretch;gap:14px;padding:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;margin-bottom:18px" id="beg-${realIdx}">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--border);padding-bottom:12px">
       <div style="display:flex;align-items:center;gap:8px">
-        <button onclick="beMoveProject(${realIdx}, -1)" ${realIdx === 0 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''}
-          style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-weight:700">&#9650; Move Up</button>
-        <button onclick="beMoveProject(${realIdx}, 1)" ${realIdx === galleryItems.length - 1 ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''}
-          style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-weight:700">&#9660; Move Down</button>
+        <button onclick="beMoveProject(${realIdx}, -1)" ${realIdx === 0 ? 'disabled' : ''}
+          style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:${realIdx === 0 ? 'not-allowed' : 'pointer'};font-weight:700;opacity:${realIdx === 0 ? '0.35' : '1'}">&#9650; Move Up</button>
+        <button onclick="beMoveProject(${realIdx}, 1)" ${realIdx === galleryItems.length - 1 ? 'disabled' : ''}
+          style="padding:5px 12px;font-size:11px;background:var(--bg-card);color:var(--ink);border:1px solid var(--border);border-radius:4px;cursor:${realIdx === galleryItems.length - 1 ? 'not-allowed' : 'pointer'};font-weight:700;opacity:${realIdx === galleryItems.length - 1 ? '0.35' : '1'}">&#9660; Move Down</button>
         <span style="font-size:11px;padding:4px 10px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:12px;font-weight:700">[ ${String(realIdx + 1).padStart(2, '0')} / ${galleryItems.length} ]</span>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
@@ -2166,6 +2214,55 @@ function beBuildProjectCardHtml(g, realIdx, cachedOptions){
   `;
 }
 window.beBuildProjectCardHtml = beBuildProjectCardHtml;
+
+function beMoveProject(realIdx, dir){
+  if(!galleryItems || galleryItems.length <= 1) return;
+  const targetIdx = realIdx + dir;
+  if(targetIdx < 0 || targetIdx >= galleryItems.length) return;
+
+  // Flush any pending unsaved text input changes in DOM before swapping
+  beUpdateGalleryItem(realIdx, true);
+  if(document.getElementById(`beg-${targetIdx}`)){
+    beUpdateGalleryItem(targetIdx, true);
+  }
+
+  // Swap projects in array
+  const temp = galleryItems[realIdx];
+  galleryItems[realIdx] = galleryItems[targetIdx];
+  galleryItems[targetIdx] = temp;
+
+  // Persist to localStorage and data layer
+  saveData('rana_gallery_data', galleryItems);
+
+  // If moving across page boundaries, adjust page so user stays focused on the moved card
+  const targetPage = Math.floor(targetIdx / BE_GALLERY_PAGE_SIZE) + 1;
+  beGalleryCurrentPage = targetPage;
+
+  // Re-render the gallery
+  renderBeGallery();
+
+  // Scroll into view and highlight the moved card
+  setTimeout(() => {
+    const movedCard = document.getElementById(`beg-${targetIdx}`);
+    if(movedCard){
+      movedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      movedCard.style.transition = 'box-shadow 0.3s ease, border-color 0.3s ease';
+      movedCard.style.borderColor = 'var(--accent, #58a6ff)';
+      movedCard.style.boxShadow = '0 0 18px var(--accent-glow, rgba(88, 166, 255, 0.45))';
+      setTimeout(() => {
+        movedCard.style.borderColor = '';
+        movedCard.style.boxShadow = '';
+      }, 1600);
+    }
+  }, 60);
+
+  // Mark unsaved changes for auto-sync and GitHub sync button
+  markUnsavedChanges();
+  const movedTitle = galleryItems[targetIdx]?.title || 'Project';
+  const shortTitle = movedTitle.length > 28 ? movedTitle.slice(0, 28) + '...' : movedTitle;
+  showToast(`✓ Moved "${shortTitle}" ${dir < 0 ? 'up' : 'down'} to [${String(targetIdx + 1).padStart(2, '0')}/${galleryItems.length}]`);
+}
+window.beMoveProject = beMoveProject;
 
 function beMoveSubImageOrder(itemIdx, subIdx, dir){
   const g = galleryItems[itemIdx];
