@@ -19,5 +19,11 @@ Portfolio_Media_Workspace/
 __pycache__/
 backups/
 New Photos/
+Photos & to upload/**/*.png
+Photos & to upload/**/*.PNG
+Photos & to upload/**/*.jpg
+Photos & to upload/**/*.JPG
+Photos & to upload/**/*.jpeg
+Photos & to upload/**/*.JPEG
 
 
