@@ -3481,21 +3481,69 @@ window.pullDataFromGitHub = pullDataFromGitHub;
 
 async function autoFetchCloudDatabaseOnBoot(){
   try {
-    const res = await fetch(`portfolio_data.json?_t=${Date.now()}`);
+    // IMPORTANT: Fetch from GitHub raw URL (always the latest committed version)
+    // NOT from the relative portfolio_data.json (which is served from the current Vercel
+    // build and may be stale for up to 60-90 seconds after a save while Vercel rebuilds).
+    const GITHUB_RAW_URL = `https://raw.githubusercontent.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/main/${GITHUB_DATA_FILE}?_t=${Date.now()}`;
+    const res = await fetch(GITHUB_RAW_URL);
     if(res.ok){
       const data = await res.json();
-      if(data.novels && Array.isArray(data.novels)) { novels = data.novels; saveData('rana_novels_data', novels); }
-      if(data.tech && Array.isArray(data.tech)) { techProjects = data.tech; saveData('rana_tech_data', techProjects); }
-      if(data.gallery && Array.isArray(data.gallery)) { galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
-      if(data.software && Array.isArray(data.software)) { software = data.software; saveData('rana_software_data', software); }
-      if(data.experience && Array.isArray(data.experience)) { experience = data.experience; saveData('rana_experience_data', experience); }
-      if(data.clients && Array.isArray(data.clients)) { clients = data.clients; saveData('rana_clients_data', clients); }
-      if(data.articles && Array.isArray(data.articles)) { articles = data.articles; saveData('rana_articles_data', articles); }
+
+      // Timestamp comparison: only overwrite localStorage if the remote data is NEWER.
+      // This prevents a stale cached fetch from wiping out local reorder changes.
+      const remoteUpdatedAt = data.updatedAt ? new Date(data.updatedAt).getTime() : 0;
+      const localUpdatedAt = (() => {
+        try {
+          const stored = localStorage.getItem('rana_updatedAt');
+          return stored ? new Date(stored).getTime() : 0;
+        } catch(e){ return 0; }
+      })();
+
+      if(remoteUpdatedAt >= localUpdatedAt){
+        // Remote is same or newer — load it and update localStorage
+        if(data.novels && Array.isArray(data.novels)) { novels = data.novels; saveData('rana_novels_data', novels); }
+        if(data.tech && Array.isArray(data.tech)) { techProjects = data.tech; saveData('rana_tech_data', techProjects); }
+        if(data.gallery && Array.isArray(data.gallery)) { galleryItems = data.gallery; saveData('rana_gallery_data', galleryItems); }
+        if(data.software && Array.isArray(data.software)) { software = data.software; saveData('rana_software_data', software); }
+        if(data.experience && Array.isArray(data.experience)) { experience = data.experience; saveData('rana_experience_data', experience); }
+        if(data.clients && Array.isArray(data.clients)) { clients = data.clients; saveData('rana_clients_data', clients); }
+        if(data.articles && Array.isArray(data.articles)) { articles = data.articles; saveData('rana_articles_data', articles); }
+        if(data.updatedAt) localStorage.setItem('rana_updatedAt', data.updatedAt);
+        console.log('[Admin Boot] Synced from GitHub raw. Remote timestamp:', data.updatedAt || 'unknown');
+      } else {
+        // Local data is NEWER (i.e. local edits saved to GitHub but Vercel hasn't rebuilt yet)
+        // Restore data from localStorage instead so local reorders are preserved
+        const storedGallery = loadData('rana_gallery_data', null);
+        if(storedGallery && Array.isArray(storedGallery)) galleryItems = storedGallery;
+        const storedNovels = loadData('rana_novels_data', null);
+        if(storedNovels && Array.isArray(storedNovels)) novels = storedNovels;
+        const storedTech = loadData('rana_tech_data', null);
+        if(storedTech && Array.isArray(storedTech)) techProjects = storedTech;
+        console.log('[Admin Boot] Local data is newer — keeping local edits. Local:', new Date(localUpdatedAt).toISOString(), 'Remote:', new Date(remoteUpdatedAt).toISOString());
+      }
+
       if(typeof renderBackend === 'function') renderBackend();
-      console.log('✓ Synced admin with live portfolio_data.json');
+    } else {
+      // GitHub raw fetch failed — fall back to localStorage
+      const storedGallery = loadData('rana_gallery_data', null);
+      if(storedGallery && Array.isArray(storedGallery)) galleryItems = storedGallery;
+      const storedNovels = loadData('rana_novels_data', null);
+      if(storedNovels && Array.isArray(storedNovels)) novels = storedNovels;
+      const storedTech = loadData('rana_tech_data', null);
+      if(storedTech && Array.isArray(storedTech)) techProjects = storedTech;
+      if(typeof renderBackend === 'function') renderBackend();
+      console.warn('[Admin Boot] GitHub raw fetch failed — using localStorage fallback.');
     }
   } catch(e){
-    console.warn('Auto-fetch local data fallback:', e);
+    // Network error — fall back to localStorage
+    const storedGallery = loadData('rana_gallery_data', null);
+    if(storedGallery && Array.isArray(storedGallery)) galleryItems = storedGallery;
+    const storedNovels = loadData('rana_novels_data', null);
+    if(storedNovels && Array.isArray(storedNovels)) novels = storedNovels;
+    const storedTech = loadData('rana_tech_data', null);
+    if(storedTech && Array.isArray(storedTech)) techProjects = storedTech;
+    if(typeof renderBackend === 'function') renderBackend();
+    console.warn('[Admin Boot] Network error, using localStorage fallback:', e.message);
   }
 }
 window.autoFetchCloudDatabaseOnBoot = autoFetchCloudDatabaseOnBoot;
