@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-13T21:45:36.515Z",
+  "updatedAt": "2026-09-13T21:54:36.240Z",
   "version": "4.5",
   "novels": [
     {
@@ -585,6 +585,73 @@
   ],
   "gallery": [
     {
+      "id": "proj_02",
+      "title": "Creative Studio & Narrative Visual Studies",
+      "pillar": "Personal",
+      "cat": "environment",
+      "desc": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork.",
+      "cover": {
+        "type": "image",
+        "src": "Photos & to upload/Instagram/17892336767838958.webp"
+      },
+      "media": [
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17892336767838958.webp",
+          "title": "Creative Studio & Narrative Visual Studies - Study 1",
+          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17908652861307783.webp",
+          "title": "Creative Studio & Narrative Visual Studies - Study 2",
+          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17935025272142875.webp",
+          "title": "Creative Studio & Narrative Visual Studies - Study 3",
+          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17958012526650381.webp",
+          "title": "Creative Studio & Narrative Visual Studies - Study 4",
+          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/17970979794109163.webp",
+          "title": "Creative Studio & Narrative Visual Studies - Study 5",
+          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/18131148718177645.webp",
+          "title": "Creative Studio & Narrative Visual Studies - Study 6",
+          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/18173685229138105.webp",
+          "title": "Creative Studio & Narrative Visual Studies - Study 7",
+          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/18266166148100937.webp",
+          "title": "Creative Studio & Narrative Visual Studies - Study 8",
+          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
+        },
+        {
+          "type": "image",
+          "src": "Photos & to upload/Instagram/Childrens_Room_Art_Study.webp",
+          "title": "Creative Studio & Narrative Visual Studies - Study 9",
+          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
+        }
+      ]
+    },
+    {
       "id": "proj_01",
       "title": "Personal Projects, Short Films & Commercial Motion",
       "pillar": "Personal",
@@ -678,73 +745,6 @@
           "src": "Photos & to upload/Logo/All Work (17).webp",
           "title": "Personal Projects: Cinematic 3D Concept Artwork",
           "description": "A dedicated showcase of personal animated short films, commercial 3D motion reels, and brand promotional campaigns."
-        }
-      ]
-    },
-    {
-      "id": "proj_02",
-      "title": "Creative Studio & Narrative Visual Studies",
-      "pillar": "Personal",
-      "cat": "environment",
-      "desc": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork.",
-      "cover": {
-        "type": "image",
-        "src": "Photos & to upload/Instagram/17892336767838958.webp"
-      },
-      "media": [
-        {
-          "type": "image",
-          "src": "Photos & to upload/Instagram/17892336767838958.webp",
-          "title": "Creative Studio & Narrative Visual Studies - Study 1",
-          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
-        },
-        {
-          "type": "image",
-          "src": "Photos & to upload/Instagram/17908652861307783.webp",
-          "title": "Creative Studio & Narrative Visual Studies - Study 2",
-          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
-        },
-        {
-          "type": "image",
-          "src": "Photos & to upload/Instagram/17935025272142875.webp",
-          "title": "Creative Studio & Narrative Visual Studies - Study 3",
-          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
-        },
-        {
-          "type": "image",
-          "src": "Photos & to upload/Instagram/17958012526650381.webp",
-          "title": "Creative Studio & Narrative Visual Studies - Study 4",
-          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
-        },
-        {
-          "type": "image",
-          "src": "Photos & to upload/Instagram/17970979794109163.webp",
-          "title": "Creative Studio & Narrative Visual Studies - Study 5",
-          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
-        },
-        {
-          "type": "image",
-          "src": "Photos & to upload/Instagram/18131148718177645.webp",
-          "title": "Creative Studio & Narrative Visual Studies - Study 6",
-          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
-        },
-        {
-          "type": "image",
-          "src": "Photos & to upload/Instagram/18173685229138105.webp",
-          "title": "Creative Studio & Narrative Visual Studies - Study 7",
-          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
-        },
-        {
-          "type": "image",
-          "src": "Photos & to upload/Instagram/18266166148100937.webp",
-          "title": "Creative Studio & Narrative Visual Studies - Study 8",
-          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
-        },
-        {
-          "type": "image",
-          "src": "Photos & to upload/Instagram/Childrens_Room_Art_Study.webp",
-          "title": "Creative Studio & Narrative Visual Studies - Study 9",
-          "description": "A visual exploration study bridging warm interior spaces, surreal atmospheric concepts, high-contrast lighting, and dark narrative artwork."
         }
       ]
     },
