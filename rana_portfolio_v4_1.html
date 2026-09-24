@@ -21,6 +21,7 @@ try {
   <meta http-equiv="Expires" content="0">
 <title>Rana Abdullah — Novelist, 3D Artist &amp; Software Engineer</title>
 <link rel="icon" type="image/png" href="rana_logo.png">
+<link rel="stylesheet" href="ranova-loader.css">
 <meta name="description" content="Official portfolio of Rana Abdullah — Novelist, 3D Artist, and Software Developer based in Dublin, Ireland. Exploring narrative fiction, 3D rendering pipelines, and technical applications.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -3575,6 +3576,102 @@ if (typeof window !== 'undefined' && window.location.hostname.endsWith('vercel.a
 
 </head>
 <body>
+<!-- ==================== RANOVA STORYBOARD SCREEN LOADER ==================== -->
+<div id="ranova-screen-loader">
+  <div class="rnv-central-glow"></div>
+  <div class="rnv-pinpoint-star"></div>
+  <div class="rnv-stage">
+    <div class="rnv-logo-box">
+      <div class="rnv-light-sweep" id="rnvLightSweep"></div>
+      <svg class="rnv-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="rnvChromeFill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="30%" stop-color="#e2e8f0"/>
+            <stop offset="55%" stop-color="#94a3b8"/>
+            <stop offset="78%" stop-color="#cbd5e1"/>
+            <stop offset="100%" stop-color="#64748b"/>
+          </linearGradient>
+          <linearGradient id="rnvSlashFill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="25%" stop-color="#e0f2fe"/>
+            <stop offset="60%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#0284c7"/>
+          </linearGradient>
+          <radialGradient id="rnvRimGlow" cx="80%" cy="20%" r="50%">
+            <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- 02: THE SIGNATURE SLASH (Draws from top-left to bottom-right) -->
+        <path class="rnv-slash"
+              d="M 16 19 L 81 81 L 63 81 L 16 34 Z"
+              fill="url(#rnvSlashFill)"
+              stroke="#ffffff"
+              stroke-width="0.8"/>
+
+        <!-- 03: LEFT STRUCTURE (Slides up into place) -->
+        <path class="rnv-left"
+              d="M 16 40 L 29 53 L 29 83 L 16 70 Z"
+              fill="url(#rnvChromeFill)"
+              stroke="rgba(255,255,255,0.75)"
+              stroke-width="0.8"/>
+
+        <!-- 04: RIGHT FORMATION (Forms outward from center) -->
+        <path class="rnv-right"
+              d="M 21 17 L 76 17 L 83 26 L 83 48 L 78 56 L 83 63 L 83 75 L 59 51 L 64 51 C 70 51 72 45 72 39 C 72 33 70 29 64 29 L 32 29 Z"
+              fill="url(#rnvChromeFill)"
+              stroke="rgba(255,255,255,0.75)"
+              stroke-width="0.8"/>
+
+        <circle cx="80" cy="22" r="14" fill="url(#rnvRimGlow)" pointer-events="none"/>
+      </svg>
+    </div>
+
+    <div class="rnv-text-box">
+      <!-- Chevron Typography: R Λ N O V Λ -->
+      <div class="rnv-wordmark">
+        <span class="rnv-wordmark-letter">R</span>
+        <svg viewBox="0 0 16 20" class="rnv-chevron-a">
+          <path d="M 1.5 19 L 8 2.5 L 14.5 19"/>
+        </svg>
+        <span class="rnv-wordmark-letter">N</span>
+        <span class="rnv-wordmark-letter">O</span>
+        <span class="rnv-wordmark-letter">V</span>
+        <svg viewBox="0 0 16 20" class="rnv-chevron-a">
+          <path d="M 1.5 19 L 8 2.5 L 14.5 19"/>
+        </svg>
+      </div>
+      <span class="rnv-signature">MADE BY RANA ABDULLAH</span>
+    </div>
+  </div>
+
+  <!-- Rocky Horizon & Reflective Water Surface -->
+  <div class="rnv-horizon">
+    <div class="rnv-rock-left"></div>
+    <div class="rnv-rock-right"></div>
+    <div class="rnv-water-reflect"></div>
+  </div>
+</div>
+
+<!-- ==================== RANOVA SIDE TASK HUD PILL ==================== -->
+<div id="ranova-side-loader" role="status" aria-live="polite">
+  <div class="rnv-side-icon-wrap">
+    <div class="rnv-side-ring"></div>
+    <svg class="rnv-side-logo-svg" viewBox="0 0 100 100" fill="none">
+      <path d="M 16 19 L 81 81 L 63 81 L 16 34 Z" fill="#00e5ff"/>
+      <path d="M 16 40 L 29 53 L 29 83 L 16 70 Z" fill="#ffffff"/>
+      <path d="M 21 17 L 76 17 L 83 26 L 83 48 L 78 56 L 83 63 L 83 75 L 59 51 L 64 51 C 70 51 72 45 72 39 C 72 33 70 29 64 29 L 32 29 Z" fill="#cbd5e1"/>
+    </svg>
+  </div>
+  <div class="rnv-side-content">
+    <span class="rnv-side-label" id="rnvSideLabel">Loading...</span>
+    <span class="rnv-side-sub" id="rnvSideSub">RANOVA ENGINE</span>
+  </div>
+  <div class="rnv-side-pip"></div>
+</div>
+
   <canvas id="globalStarsCanvas"></canvas>
 
 <!-- INTERACTIVE COLORFUL BACKGROUND PARTICLES -->
@@ -4606,6 +4703,20 @@ window.slideNovels = slideNovels;
 function showPage(name){
   if(typeof closeLightbox === 'function') closeLightbox();
   if(typeof closeMobileNav === 'function') closeMobileNav();
+  const pageLabels = {
+    'home': 'Home Portfolio',
+    'novels': 'Novels & Books',
+    'technical-projects': 'Technical Projects',
+    'gallery': '3D Visual Gallery',
+    'software': 'Software & Tools',
+    'articles': 'Essays & Articles',
+    'about': 'About Rana Abdullah',
+    'backend': 'Command Vault'
+  };
+  if(window.RanovaLoader && name !== 'home'){
+    window.RanovaLoader.showSide(`Loading ${pageLabels[name] || name}...`, 'NAVIGATION');
+    setTimeout(() => { if(window.RanovaLoader) window.RanovaLoader.hideSide(200); }, 400);
+  }
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
   const targetPage = document.getElementById('page-'+name);
@@ -4952,6 +5063,10 @@ async function renderGallery(filter){
   }
 
   const activeFilter = filter || 'all';
+  if(window.RanovaLoader && activeFilter !== 'all'){
+    window.RanovaLoader.showSide(`Filtering ${activeFilter.toUpperCase()}...`, 'GALLERY');
+    setTimeout(() => { if(window.RanovaLoader) window.RanovaLoader.hideSide(200); }, 350);
+  }
   const filtered = activeFilter === 'all' ? galleryItems : galleryItems.filter(g => g.cat === activeFilter || g.pillar?.toLowerCase() === activeFilter || (activeFilter === 'client' && g.pillar?.toLowerCase().includes('client')));
   lbImages = filtered;
 
@@ -5410,10 +5525,20 @@ function openLightbox(i, mediaIdx = 0){
   const isVideo = (m && m.type === 'video');
   const targetSrc = isVideo ? m.thumbnail : m.src;
 
+  if(window.RanovaLoader){
+    window.RanovaLoader.showSide(isVideo ? 'Loading Video Asset...' : 'Loading High-Res Image...', 'LIGHTBOX');
+  }
+
   const lbImg = document.getElementById('lbImg');
   const lbPlayOverlay = document.getElementById('lbPlayOverlay');
 
   if(lbImg){
+    lbImg.onload = function(){
+      if(window.RanovaLoader) window.RanovaLoader.hideSide(120);
+    };
+    lbImg.onerror = function(){
+      if(window.RanovaLoader) window.RanovaLoader.hideSide(120);
+    };
     lbImg.src = safeImgSrc(targetSrc);
     lbImg.style.boxShadow = `0 0 35px ${activeColor.glow}, 0 20px 60px rgba(0,0,0,0.8)`;
     lbImg.style.borderColor = activeColor.border;
@@ -6035,6 +6160,9 @@ async function initPageBoot(){
   } else {
     renderHome();
   }
+  if(window.RanovaLoader){
+    window.RanovaLoader.markReady();
+  }
 }
 window.addEventListener('hashchange', function(){
   const h = window.location.hash.replace('#', '').trim();
@@ -6094,8 +6222,7 @@ if(document.readyState === 'loading'){
   };
 })();
 </script>
-<!-- DEDICATED PHOTO TRANSFER TO ANOTHER PROJECT MODAL -->
-  
-
+<!-- RANOVA MOTION DESIGN STORYBOARD LOADER & SIDE TASK INDICATOR -->
+<script src="ranova-loader.js"></script>
 </body>
 </html>
