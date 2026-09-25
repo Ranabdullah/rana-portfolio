@@ -23,9 +23,13 @@
 - Firestore denied unauthenticated writes and administrator enumeration. A temporary verification user could not publish without membership, could publish with enabled membership, and was denied again after revocation. Temporary test account and records were removed.
 - A forged old localStorage authentication flag did not unlock the admin. Unauthenticated SDK publishing was denied.
 
+## Follow-up verified
+
+The user chose to keep the free plan. Billing remains unlinked and direct Storage uploads stay disabled. No paid upgrade was made.
+
 ## Remaining limits
 
 - Direct CMS photo uploads are disabled because the project is on Spark with no Storage bucket. Enable Blaze, create Storage, deploy the supplied Storage rules, and enable uploads in site-config.js to use this feature. Existing media, external image URLs and YouTube embeds remain usable.
-- The owner's interactive Google/password sign-in and publish flow needs an owner session; provider configuration and server authorization were verified independently.
-- The old exposed GitHub token must be revoked; any reused old password should be changed. Neither repository history nor old deployments were erased.
+- The owner session was observed signed in on the live admin, and publishing through its button returned "Published successfully to Firebase."
+- The specific exposed GitHub token was revoked through GitHub's credential revocation API, then confirmed rejected with HTTP 401. Any reused old password should still be changed. Repository history and old deployments were not erased.
 - This is a focused migration and functional audit, not a claim that every possible legacy rendering, accessibility or content issue has been eliminated.

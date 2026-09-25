@@ -31,6 +31,6 @@ The build copies only web files and local media into `dist`; it excludes backup 
 
 The maintenance helper `scripts/firebase-admin.py` is scoped to the original Ranova project and uses the local Firebase CLI session. It is not a browser/backend endpoint. Do not use it unchanged for a client project.
 
-## Outstanding security action
+## Security follow-up
 
-The previous admin page included a GitHub access token and hardcoded passwords. They were removed from the current code, but historical commits and older deployments may retain them. Revoke the exposed GitHub token and replace any reused password. History has not been rewritten.
+The previous admin page included a GitHub access token and hardcoded passwords. They were removed from the current code, but historical commits and older deployments may retain them. The specific exposed token was revoked on 25 September 2026 and verified rejected by GitHub (HTTP 401). Replace any reused old password. History has not been rewritten.
