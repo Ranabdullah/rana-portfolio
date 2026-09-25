@@ -18,6 +18,22 @@ scratch/
 Portfolio_Media_Workspace/
 __pycache__/
 backups/
+dist/
+.firebase/
+.firecrawl/
+firebase-debug.log
+firestore-debug.log
+node_modules/
+.env*
+Additional/
+assets/
+Hero Image/
+Photos & to upload/
+Novels/
+portfolio_data.json
+novels_content.txt
+*.local.json
+scratch/
 New Photos/
 Photos & to upload/**/*.png
 Photos & to upload/**/*.PNG
@@ -27,3 +43,9 @@ Photos & to upload/**/*.jpeg
 Photos & to upload/**/*.JPEG
 
 
+
+/rana_logo.png
+/shavings.html
+/*.py
+/*.bat
+/HTML/

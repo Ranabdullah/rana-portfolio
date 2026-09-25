@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function admin(site) {
+      return request.auth != null && get(/databases/$(database)/documents/sites/$(site)/admins/$(request.auth.uid)).data.enabled == true;
+    }
+    match /sites/{site}/admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+    match /sites/{site}/content/published {
+      allow read: if true;
+      allow create, update: if admin(site) && request.resource.data.keys().hasAll(['novels','tech','gallery','software','experience','clients','articles','revision','updatedAt'])
+        && request.resource.data.novels is list && request.resource.data.tech is list
+        && request.resource.data.gallery is list && request.resource.data.software is list
+        && request.resource.data.experience is list && request.resource.data.clients is list
+        && request.resource.data.articles is list && request.resource.data.revision is int;
+      allow delete: if false;
+    }
+  }
+}
